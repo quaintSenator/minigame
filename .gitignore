@@ -10,5 +10,3 @@ obj/
 *.csproj
 *.sln
 *.iml
-Assets/Scripts/LocalTest/
-Assets/Scripts/LocalTest.meta
