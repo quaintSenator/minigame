@@ -16,3 +16,4 @@ Assets/Scripts/LocalTest.meta
 //Wwise
  */Assets/Wwise/Editor/ProjectData/AkWwiseProjectData.asset
  
+*.iml
