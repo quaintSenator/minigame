@@ -1,40 +1,75 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace miniEvent
+// 事件类型
+public enum EventType
 {
-    public enum EventType
+    GameStartEvent,
+}
+
+// 事件数据参数基类，具体使用时可以继承该类，添加自己需要的参数
+public class EventData
+{
+}
+
+public class EventManager : MonoBehaviour
+{
+    private Dictionary<EventType, Action<EventData>> eventDictionary;
+
+    public static EventManager Instance;
+
+    private void Awake()
     {
-        
+        Debug.Log("Awake");
+        Instance = this;
+        Init();
     }
 
-    public enum EventToWhom
+    void Init()
     {
-        ToView,
-        ToModel,
-        ToBoth
-    }
-    public class EventManager
-    {
-        public void onRegister()
+        if (eventDictionary == null)
         {
-            
-        }
-        public void InvokeEvent(EventType eventType)
-        {
-            
-        }
-
-        public void registerEvent()
-        {
-            
+            eventDictionary = new Dictionary<EventType, Action<EventData>>();
         }
     }
+    
+    public static void AddListener(EventType eventType, Action<EventData> listener)
+    {
+        Debug.Log("AddListener");
+        Action<EventData> myEvent;
+        if (Instance.eventDictionary.TryGetValue(eventType, out myEvent))
+        {
+            myEvent += listener;
+            Instance.eventDictionary[eventType] = myEvent;
+        }
+        else
+        {
+            myEvent += listener;
+            Instance.eventDictionary.Add(eventType, myEvent);
+        }
+    }
 
-/*
- * 使用EventManager的一个例子：
- * 当玩家撞到墙壁，玩家行为类持有collider并在collider碰撞时调用：
- * miniEvent.EventManager.registerEvent(miniEvent.EventType.PlayerCollideIntoWallEvent, )
- */
+    public static void RemoveListener(EventType eventType, Action<EventData> listener)
+    {
+        if (Instance == null) return;
+        Action<EventData> thisEvent;
+        if (Instance.eventDictionary.TryGetValue(eventType, out thisEvent))
+        {
+            thisEvent -= listener;
+            Instance.eventDictionary[eventType] = thisEvent;
+        }
+        Debug.Log("RemoveListener");
+    }
+
+    public static void InvokeEvent(EventType eventType, EventData eventData = null)
+    {
+        Action<EventData> thisEvent = null;
+        if (Instance.eventDictionary.TryGetValue(eventType, out thisEvent))
+        {
+            thisEvent.Invoke(eventData);
+        }
+        Debug.Log("InvokeEvent");
+    }
 }
