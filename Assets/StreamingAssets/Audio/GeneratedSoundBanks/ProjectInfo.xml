@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectInfo>
+	<Project Name="SpiritDashAudio" GUID="{1D9FCA6C-627A-4222-AFC8-348B9AA39153}" Generator="2023.1.5.8522"/>
+	<CacheRoot>../../../../WwiseProject/SpiritDashAudio/.cache</CacheRoot>
+	<Platforms>
+		<Platform Name="Windows" GUID="{0514192D-8198-4641-BD4B-55BE0E4DC9F9}" BasePlatform="Windows" BasePlatformGUID="{6E0CB257-C6C8-4C5C-8366-2740DFC441EB}" Path="../../../../WwiseProject/SpiritDashAudio/GeneratedSoundBanks/Windows"/>
+	</Platforms>
+	<Languages>
+		<Language Name="English(US)" Id="684519430" GUID="{9490DA8D-C66B-4B30-8D21-ED6AB0F4279E}" Default="true" UseAsStandIn="true"/>
+	</Languages>
+	<FileHash>{1F8C7CC0-5B9C-D181-05E1-95239230293E}</FileHash>
+</ProjectInfo>

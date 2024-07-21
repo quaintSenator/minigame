@@ -12,3 +12,7 @@ obj/
 *.iml
 Assets/Scripts/LocalTest/
 Assets/Scripts/LocalTest.meta
+
+//Wwise
+ */Assets/Wwise/Editor/ProjectData/AkWwiseProjectData.asset
+ 

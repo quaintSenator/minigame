@@ -1,0 +1,6 @@
+Event	ID	Name			Wwise Object Path	Notes
+	2990968617	Test_RIP			\TestForYeniao\Test_RIP	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	695210998	TestTrack	E:\WorkRepository\UnityProject\SpiritDash\UnityProject\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\RIP_4832_FBC78EF0.wem		\Interactive Music Hierarchy\TestForYeniao\TestSegment\TestTrack		28800096
+

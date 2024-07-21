@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <WwiseSettings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <CopySoundBanksAsPreBuildStep>true</CopySoundBanksAsPreBuildStep>
-  <GenerateSoundBanksAsPreBuildStep>false</GenerateSoundBanksAsPreBuildStep>
-  <SoundbankPath>Audio\GeneratedSoundBanks</SoundbankPath>
+  <GenerateSoundBanksAsPreBuildStep>true</GenerateSoundBanksAsPreBuildStep>
+  <SoundbankPath>Audio/GeneratedSoundBanks</SoundbankPath>
   <CreatedPicker>true</CreatedPicker>
   <CreateWwiseGlobal>true</CreateWwiseGlobal>
   <CreateWwiseListener>true</CreateWwiseListener>
@@ -11,7 +11,7 @@
   <ShowMissingRigidBodyWarning>true</ShowMissingRigidBodyWarning>
   <ShowSpatialAudioWarningMsg>true</ShowSpatialAudioWarningMsg>
   <WwiseInstallationPathWindows>E:\Wwise\Wwise2023.1.5.8522</WwiseInstallationPathWindows>
-  <WwiseProjectPath>../../SpiritDashAudio/SpiritDashAudio/SpiritDashAudio.wproj</WwiseProjectPath>
+  <WwiseProjectPath>../WwiseProject/SpiritDashAudio/SpiritDashAudio.wproj</WwiseProjectPath>
   <UseWaapi>true</UseWaapi>
   <WaapiPort>8080</WaapiPort>
   <WaapiIP>127.0.0.1</WaapiIP>

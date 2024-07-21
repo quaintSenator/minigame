@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="150">
+	<SoundBanks>
+		<SoundBank Id="1528500215" Type="User" Language="SFX" Hash="{D35D1501-37F3-7B79-DACC-471F9D0E5261}">
+			<ShortName>TestForYeniao</ShortName>
+			<Path>TestForYeniao.bnk</Path>
+			<Media>
+				<File Id="695210998" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>RIP_4832.wav</ShortName>
+					<CachePath>SFX/RIP_4832_FBC78EF0.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="2990968617" Name="Test_RIP" DurationType="OneShot" DurationMin="150.34874" DurationMax="150.34874">
+					<MediaRefs>
+						<MediaRef Id="695210998"/>
+					</MediaRefs>
+				</Event>
+			</Events>
+		</SoundBank>
+	</SoundBanks>
+	<FileHash>{12749EA4-5C96-75A8-09DA-C127DBCE4FC0}</FileHash>
+</SoundBanksInfo>
