@@ -15,6 +15,8 @@ enum JumpMode
 
 public class PlayerController : MonoBehaviour
 {
+    //角色的重力系数
+    [SerializeField] private float gravityScale = 4.0f;
     //角色自动前进的速度
     [SerializeField] private float speed = 5.0f;
     //角色跳跃的模式
@@ -36,13 +38,15 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
-        
     }
 
     private void FixedUpdate()
     {
-        //角色自动向右前进
-        transform.Translate(Vector3.right * speed * Time.deltaTime);
+        //角色一直受一个向下的重力，世界坐标系
+        GetComponent<Rigidbody2D>().AddForce(Vector2.down * gravityScale * GameConsts.gravity);
+        
+        //角色自动向右前进，世界坐标系
+        transform.Translate(Vector3.right * speed * Time.fixedDeltaTime, Space.World);
         
         //角色跳跃，如果是Force模式，且在跳跃中，给与一个力
         if (jumpMode == JumpMode.Force && jumping)
@@ -51,9 +55,9 @@ public class PlayerController : MonoBehaviour
         }
         
         //角色旋转
-        if (Input.GetKey(KeyCode.A))
+        if (!isGrounded)
         {
-            Rotate(1);
+            Rotate();
         }
     }
     
@@ -77,6 +81,10 @@ public class PlayerController : MonoBehaviour
     
     public void SetIsGrounded(bool value)
     {
+        if (isGrounded == false && value == true)
+        {
+            Rotate(true);
+        }
         isGrounded = value;
     }
     
@@ -88,8 +96,25 @@ public class PlayerController : MonoBehaviour
     }
     
     //旋转角色
-    public void Rotate(float angle)
+    public void Rotate(bool end = false)
     {
+        if (end)
+        {
+            //如果此时角色旋转接近-180度，就旋转到-180度，否则旋转到0度
+            if (Mathf.Abs(transform.rotation.eulerAngles.z) > 5f && Mathf.Abs(transform.rotation.eulerAngles.z) < 185f)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, -180);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            return;
+        }
+        
+        float time = speed / (GetComponent<Rigidbody2D>().gravityScale / GameConsts.gravity) * 2;
+        Debug.Log("Time: " + time);
+        float angle = -Mathf.PI / 0.68f;
         transform.Rotate(Vector3.forward, angle);
     }
 }

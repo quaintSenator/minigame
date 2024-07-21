@@ -188,7 +188,7 @@ Transform:
   m_Children:
   - {fileID: 1281293814}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &204775366
 PrefabInstance:
@@ -388,7 +388,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &341226011
 GameObject:
@@ -480,7 +480,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &341226015
 MonoBehaviour:
@@ -626,7 +626,7 @@ Transform:
   m_Children:
   - {fileID: 1065803745}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &544648804
 GameObject:
@@ -657,7 +657,7 @@ Transform:
   m_Children:
   - {fileID: 1275374715}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &601903017
 GameObject:
@@ -7858,7 +7858,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1977704558
 MonoBehaviour:
@@ -8048,7 +8048,7 @@ Transform:
   - {fileID: 1645488932}
   - {fileID: 384066716}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2097531636
 BoxCollider2D:
@@ -8091,11 +8091,11 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 4
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &2097531638
 MonoBehaviour:
@@ -8109,6 +8109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96930f94afaa5b149abcb3f78f9ba9e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gravityScale: 4
   speed: 13
   jumpMode: 1
   jumpForce: 60
