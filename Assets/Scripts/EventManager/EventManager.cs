@@ -7,11 +7,13 @@ using UnityEngine;
 public enum EventType
 {
     GameStartEvent,
+    PlayerHitGroundEvent
 }
 
 // 事件数据参数基类，具体使用时可以继承该类，添加自己需要的参数
 public class EventData
 {
+    
 }
 
 public class EventManager : MonoBehaviour

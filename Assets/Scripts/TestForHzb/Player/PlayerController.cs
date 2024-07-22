@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 enum JumpMode
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpSpeed = 5.0f;
     //角色是否在地面上
     private bool isGrounded = true;
+    //角色撞击地面事件
 
     private void Update()
     {
@@ -40,6 +42,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void onRegister()
+    {
+        EventManager.AddListener(EventType.PlayerHitGroundEvent, onPlayerHitGround);
+    }
+
+    private void onPlayerHitGround(EventData data)
+    {
+        
+    }
     private void FixedUpdate()
     {
         //角色一直受一个向下的重力，世界坐标系
@@ -85,6 +96,11 @@ public class PlayerController : MonoBehaviour
         {
             Rotate(true);
         }
+
+        if (!isGrounded && value)
+        {
+            EventManager.InvokeEvent(EventType.PlayerHitGroundEvent);
+        }
         isGrounded = value;
     }
     
@@ -94,7 +110,6 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(jumpTime);
         jumping = false;
     }
-    
     //旋转角色
     public void Rotate(bool end = false)
     {
@@ -116,5 +131,10 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Time: " + time);
         float angle = -Mathf.PI / 0.68f;
         transform.Rotate(Vector3.forward, angle);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.RemoveListener(EventType.GameStartEvent, onPlayerHitGround);
     }
 }

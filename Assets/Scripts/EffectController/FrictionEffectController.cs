@@ -7,7 +7,7 @@ public class FrictionEffectController : MonoBehaviour
 {
     [SerializeField]
     private ParticleSystem myParticleSystem;
-
+    [SerializeField] private float minimumPlayerYDecidedAsOnGround;
     [SerializeField] private Color particleRandomColorRangeL;
     [SerializeField] private Color particleRandomColorRangeR;
     // Start is called before the first frame update
@@ -21,8 +21,7 @@ public class FrictionEffectController : MonoBehaviour
     {
         selfPSInit();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         
