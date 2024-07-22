@@ -41,16 +41,7 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
     }
-
-    private void onRegister()
-    {
-        EventManager.AddListener(EventType.PlayerHitGroundEvent, onPlayerHitGround);
-    }
-
-    private void onPlayerHitGround(EventData data)
-    {
-        
-    }
+    
     private void FixedUpdate()
     {
         //角色一直受一个向下的重力，世界坐标系
@@ -80,6 +71,7 @@ public class PlayerController : MonoBehaviour
             switch (jumpMode)
             {
                 case JumpMode.Force:
+                    EventManager.InvokeEvent(EventType.PlayerJumpoffGroundEvent);
                     jumping = true;
                     StartCoroutine(JumpForce());
                     break;
@@ -131,10 +123,5 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Time: " + time);
         float angle = -Mathf.PI / 0.68f;
         transform.Rotate(Vector3.forward, angle);
-    }
-
-    private void OnDisable()
-    {
-        EventManager.RemoveListener(EventType.GameStartEvent, onPlayerHitGround);
     }
 }
