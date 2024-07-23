@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class BuildableObjectButton : MonoBehaviour
 {
+    [SerializeField] BuildableObjectBase buildableObject;
     private Button btn;
 
     private void Awake()
@@ -16,6 +17,6 @@ public class BuildableObjectButton : MonoBehaviour
 
     private void OnClick()
     {
-        Debug.Log("Click " + this.gameObject.name);
+        Debug.Log("Click " + buildableObject.Tile.name);
     }
 }
