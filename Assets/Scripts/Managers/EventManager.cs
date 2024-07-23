@@ -17,16 +17,12 @@ public class EventData
     
 }
 
-public class EventManager : MonoBehaviour
+public class EventManager : Singleton<EventManager>
 {
     private Dictionary<EventType, Action<EventData>> eventDictionary;
 
-    public static EventManager Instance;
-
-    private void Awake()
+    protected override void OnAwake()
     {
-        Debug.Log("Awake");
-        Instance = this;
         Init();
     }
 
