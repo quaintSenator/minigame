@@ -6,9 +6,17 @@ using UnityEngine;
 // 事件类型
 public enum EventType
 {
+    //输入事件
+    OnMouseMove,
+    OnMouseLeftClick,
+    OnMouseRightClick,
+    OnMiddleClick,
+    OnHorizontalInput,
+    OnSpacebarDown,
+    
     GameStartEvent,
     PlayerHitGroundEvent,
-    PlayerJumpoffGroundEvent
+    PlayerJumpoffGroundEvent,
 }
 
 // 事件数据参数基类，具体使用时可以继承该类，添加自己需要的参数
@@ -67,7 +75,7 @@ public class EventManager : Singleton<EventManager>
         Action<EventData> thisEvent = null;
         if (Instance.eventDictionary.TryGetValue(eventType, out thisEvent))
         {
-            thisEvent.Invoke(eventData);
+            thisEvent?.Invoke(eventData);
         }
         Debug.Log("InvokeEvent");
     }
