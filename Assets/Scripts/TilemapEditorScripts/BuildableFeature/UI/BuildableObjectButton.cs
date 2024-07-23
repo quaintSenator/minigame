@@ -18,5 +18,6 @@ public class BuildableObjectButton : MonoBehaviour
     private void OnClick()
     {
         Debug.Log("Click " + buildableObject.Tile.name);
+        BuildableCreator.Instance.SetSelectedObject(buildableObject);
     }
 }

@@ -13,6 +13,7 @@ public enum EventType
     OnMiddleClick,
     OnHorizontalInput,
     OnSpacebarDown,
+    OnEscDown,
     
     GameStartEvent,
     PlayerHitGroundEvent,

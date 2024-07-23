@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class InputManager : Singleton<InputManager>
-{
+{   
     void Update()
     {
         // 鼠标移动事件
@@ -44,13 +44,24 @@ public class InputManager : Singleton<InputManager>
         {
             EventManager.InvokeEvent(EventType.OnSpacebarDown);
         }
+        
+        // Esc键按下事件
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            EventManager.InvokeEvent(EventType.OnEscDown);
+        }
+    }
+    
+    public Vector3 GetMousePosition()
+    {
+        return Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 }
 
 // 鼠标事件数据
 public class MouseMovementEventData : EventData
 {
-    Vector2 mouseMovement;
+    public Vector2 mouseMovement;
     public MouseMovementEventData(Vector2 mouseMovement)
     {
         this.mouseMovement = mouseMovement;
@@ -60,7 +71,7 @@ public class MouseMovementEventData : EventData
 // 水平输入事件数据
 public class HorizontalInputEventData : EventData
 {
-    float horizontalInput;
+    public float horizontalInput;
     public HorizontalInputEventData(float horizontalInput)
     {
         this.horizontalInput = horizontalInput;
