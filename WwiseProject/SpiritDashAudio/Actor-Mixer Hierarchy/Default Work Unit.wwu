@@ -1,6 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{063EC53F-169E-4F8D-B68F-38D4E7B511D3}" SchemaVersion="119">
 	<AudioObjects>
-		<WorkUnit Name="Default Work Unit" ID="{063EC53F-169E-4F8D-B68F-38D4E7B511D3}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{063EC53F-169E-4F8D-B68F-38D4E7B511D3}" PersistMode="Standalone">
+			<ChildrenList>
+				<ActorMixer Name="TestDrum" ID="{E32369B7-9896-47AC-9500-E49CBE1810CC}" ShortID="755540268">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C3C1FC5D-DE89-438F-A755-093D0E1407FE}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5EE85173-7F1A-46EF-BB21-DFDCE1BA22BC}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<Sound Name="Drum_Bpm100" ID="{7D30ACB0-0E4E-4073-9A58-4E49F5066F03}" ShortID="287540787">
+							<PropertyList>
+								<Property Name="Highpass" Type="int16">
+									<ValueList>
+										<Value>4</Value>
+									</ValueList>
+								</Property>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>20</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-10</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C3C1FC5D-DE89-438F-A755-093D0E1407FE}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5EE85173-7F1A-46EF-BB21-DFDCE1BA22BC}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Drum_100bpm" ID="{E4ABA354-E025-4DB5-96A1-CAC55D3E3B32}">
+									<Language>SFX</Language>
+									<AudioFile>Drum_100bpm.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="459520497"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="Drum_100bpm" ID="{E4ABA354-E025-4DB5-96A1-CAC55D3E3B32}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+				</ActorMixer>
+			</ChildrenList>
+		</WorkUnit>
 	</AudioObjects>
 </WwiseDocument>

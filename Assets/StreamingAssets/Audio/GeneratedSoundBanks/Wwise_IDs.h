@@ -13,6 +13,7 @@ namespace AK
 {
     namespace EVENTS
     {
+        static const AkUniqueID TEST_DRUM_BPM100 = 1049805147U;
         static const AkUniqueID TEST_RIP = 2990968617U;
     } // namespace EVENTS
 

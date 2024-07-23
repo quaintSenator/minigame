@@ -14,6 +14,17 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Test_Drum_Bpm100" ID="{26E8BCCF-81E1-4027-969A-965541BC57AE}">
+					<ChildrenList>
+						<Action Name="" ID="{3F25D691-9DFA-4077-BD4F-3AB4FD40D61D}" ShortID="999643844">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Drum_Bpm100" ID="{7D30ACB0-0E4E-4073-9A58-4E49F5066F03}" WorkUnitID="{063EC53F-169E-4F8D-B68F-38D4E7B511D3}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

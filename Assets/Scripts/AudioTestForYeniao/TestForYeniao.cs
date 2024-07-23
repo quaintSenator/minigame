@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class TestForYeniao : MonoBehaviour
 {
+
+    public string TestBankName = "TestForYeniao";
+
+    public string TestEventName = "Test_Drum_Bpm100";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,8 +24,8 @@ public class TestForYeniao : MonoBehaviour
     void PlayTest()
     {
         //加载对应SoundBank
-        AkBankManager.LoadBank("TestForYeniao", false, false);
+        AkBankManager.LoadBank(TestBankName, false, false);
         //触发播放事件
-        AkSoundEngine.PostEvent("Test_RIP", gameObject);      
+        AkSoundEngine.PostEvent(TestEventName, gameObject);      
     }
 }
