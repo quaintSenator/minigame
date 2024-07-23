@@ -114,16 +114,6 @@ public class PlayerController : MonoBehaviour
         Quaternion spriteRotate = cubeSprites.rotation;
         if (end)
         {
-            //如果此时角色旋转接近-180度，就旋转到-180度，否则旋转到0度
-            /*if (Mathf.Abs(transform.rotation.eulerAngles.z) > 5f && Mathf.Abs(transform.rotation.eulerAngles.z) < 185f)
-            {
-                transform.rotation = Quaternion.Euler(0, 0, -180);
-            }
-            else
-            {
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
-            return;*/
             if (Mathf.Abs(selfAngle - 270) <= 45.0f)
             {
                 spriteRotate = Quaternion.Euler(0,0,270);
