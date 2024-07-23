@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2809465117777778865}
-  - component: {fileID: 2809465117777778870}
   - component: {fileID: 2809465117777778868}
   - component: {fileID: 2809465117777778871}
   - component: {fileID: 2809465117777778869}
@@ -34,20 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &2809465117777778870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2809465117777778864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da4a896be6fce6741b9032fa89057dfd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sphereTransform: {fileID: 2809465117777778865}
-  moveSpeed: 2
 --- !u!198 &2809465117777778868
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4833,5 +4818,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myParticleSystem: {fileID: 2809465117777778868}
+  minimumPlayerYDecidedAsOnGround: 0
   particleRandomColorRangeL: {r: 1, g: 1, b: 1, a: 1}
   particleRandomColorRangeR: {r: 0, g: 0.38204694, b: 1, a: 1}

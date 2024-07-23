@@ -76,10 +76,10 @@ public class PlayerController : MonoBehaviour
     {
         if (isGrounded)
         {
+            EventManager.InvokeEvent(EventType.PlayerJumpoffGroundEvent);
             switch (jumpMode)
             {
                 case JumpMode.Force:
-                    EventManager.InvokeEvent(EventType.PlayerJumpoffGroundEvent);
                     jumping = true;
                     StartCoroutine(JumpForce());
                     break;
