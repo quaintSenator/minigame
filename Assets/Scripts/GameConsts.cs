@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class GameConsts
 {
-    public static readonly float gravity = 9.8f;
+    public static readonly float GRAVITY = 9.8f;
 }

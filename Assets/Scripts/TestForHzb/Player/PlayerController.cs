@@ -34,9 +34,16 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded = true;
     //角色撞击地面事件
 
+    //一些初始化
+    private Transform cubeSprites;
+
+    private void Awake(){
+        cubeSprites = transform.Find("Visual");
+    }
+
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             Jump();
         }
@@ -45,24 +52,25 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         //角色一直受一个向下的重力，世界坐标系
-        GetComponent<Rigidbody2D>().AddForce(Vector2.down * gravityScale * GameConsts.gravity);
-        
+        GetComponent<Rigidbody2D>().AddForce(Vector2.down * gravityScale * GameConsts.GRAVITY);
+
         //角色自动向右前进，世界坐标系
         transform.Translate(Vector3.right * speed * Time.fixedDeltaTime, Space.World);
-        
+
         //角色跳跃，如果是Force模式，且在跳跃中，给与一个力
         if (jumpMode == JumpMode.Force && jumping)
         {
             GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpForce);
         }
-        
+
         //角色旋转
         if (!isGrounded)
         {
             Rotate();
         }
+        Debug.Log("isGrounded:"+isGrounded);
     }
-    
+
     //角色跳跃
     public void Jump()
     {
@@ -81,34 +89,33 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    
+
     public void SetIsGrounded(bool value)
     {
-        if (isGrounded == false && value == true)
-        {
-            Rotate(true);
-        }
-
         if (!isGrounded && value)
         {
+            Rotate(true);
             EventManager.InvokeEvent(EventType.PlayerHitGroundEvent);
         }
         isGrounded = value;
     }
-    
+
     //协程，在jumpTime时间内持续给与一个力
     private IEnumerator JumpForce()
     {
         yield return new WaitForSeconds(jumpTime);
         jumping = false;
     }
+
     //旋转角色
     public void Rotate(bool end = false)
     {
+        float selfAngle = cubeSprites.eulerAngles.z;
+        Quaternion spriteRotate = cubeSprites.rotation;
         if (end)
         {
             //如果此时角色旋转接近-180度，就旋转到-180度，否则旋转到0度
-            if (Mathf.Abs(transform.rotation.eulerAngles.z) > 5f && Mathf.Abs(transform.rotation.eulerAngles.z) < 185f)
+            /*if (Mathf.Abs(transform.rotation.eulerAngles.z) > 5f && Mathf.Abs(transform.rotation.eulerAngles.z) < 185f)
             {
                 transform.rotation = Quaternion.Euler(0, 0, -180);
             }
@@ -116,12 +123,36 @@ public class PlayerController : MonoBehaviour
             {
                 transform.rotation = Quaternion.Euler(0, 0, 0);
             }
+            return;*/
+            if (Mathf.Abs(selfAngle - 0) < 45f)
+            {
+                spriteRotate = Quaternion.Euler(0,0,0);
+            }
+            else if (Mathf.Abs(selfAngle - (-90)) < 45f){
+                spriteRotate = Quaternion.Euler(0,0,-90);
+            }
+            else if (180 - Mathf.Abs(selfAngle) <= 45.0f){
+                spriteRotate = Quaternion.Euler(0,0,-180);
+            }
+            else {
+                spriteRotate = Quaternion.Euler(0,0,90);
+            }
+            cubeSprites.rotation = spriteRotate;
             return;
         }
-        
-        float time = speed / (GetComponent<Rigidbody2D>().gravityScale / GameConsts.gravity) * 2;
-        Debug.Log("Time: " + time);
-        float angle = -Mathf.PI / 0.68f;
-        transform.Rotate(Vector3.forward, angle);
+
+        float time = 1.0f;
+        if (jumpMode == JumpMode.Speed)
+        {
+            time = jumpSpeed / (GameConsts.GRAVITY * gravityScale) * 2;
+        }
+        else if (jumpMode == JumpMode.Force)
+        {
+            time = speed / (GetComponent<Rigidbody2D>().gravityScale / GameConsts.GRAVITY) * 2;
+        }
+
+        //Debug.Log("Time: " + time);
+        float angle = 180 / time * Time.fixedDeltaTime;
+        cubeSprites.Rotate(-Vector3.forward, angle);
     }
 }
