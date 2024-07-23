@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
         {
             Rotate();
         }
-        Debug.Log("isGrounded:"+isGrounded);
+        Debug.Log("angle:"+cubeSprites.eulerAngles.z);
     }
 
     //角色跳跃
@@ -124,18 +124,18 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0, 0, 0);
             }
             return;*/
-            if (Mathf.Abs(selfAngle - 0) < 45f)
+            if (Mathf.Abs(selfAngle - 270) <= 45.0f)
             {
-                spriteRotate = Quaternion.Euler(0,0,0);
+                spriteRotate = Quaternion.Euler(0,0,270);
             }
-            else if (Mathf.Abs(selfAngle - (-90)) < 45f){
-                spriteRotate = Quaternion.Euler(0,0,-90);
+            else if (Mathf.Abs(selfAngle - 180) <= 45.0f){
+                spriteRotate = Quaternion.Euler(0,0,180);
             }
-            else if (180 - Mathf.Abs(selfAngle) <= 45.0f){
-                spriteRotate = Quaternion.Euler(0,0,-180);
+            else if (Mathf.Abs(selfAngle - 90) <= 45.0f){
+                spriteRotate = Quaternion.Euler(0,0,90);
             }
             else {
-                spriteRotate = Quaternion.Euler(0,0,90);
+                spriteRotate = Quaternion.Euler(0,0,0);
             }
             cubeSprites.rotation = spriteRotate;
             return;
