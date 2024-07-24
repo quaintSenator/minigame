@@ -42,11 +42,29 @@
 							</ReferenceList>
 							<ChildrenList>
 								<AudioFileSource Name="Drum_100bpm" ID="{E4ABA354-E025-4DB5-96A1-CAC55D3E3B32}">
+									<PropertyList>
+										<Property Name="MarkerInputMode" Type="int16" Value="2"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+									</PropertyList>
 									<Language>SFX</Language>
 									<AudioFile>Drum_100bpm.wav</AudioFile>
 									<MediaIDList>
 										<MediaID ID="459520497"/>
 									</MediaIDList>
+									<ObjectLists>
+										<ObjectList Name="Markers">
+											<Reference>
+												<Local>
+													<Marker Name="" ID="{6B02E617-6582-4A87-B252-190DD0171C7F}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="Test"/>
+															<Property Name="Time" Type="Real64" Value="0.6"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+										</ObjectList>
+									</ObjectLists>
 								</AudioFileSource>
 							</ChildrenList>
 							<ActiveSourceList>
