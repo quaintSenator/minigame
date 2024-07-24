@@ -16,6 +16,7 @@ public enum EventType
     EscDownEvent,
     
     GameStartEvent,
+    GameRestartEvent,
     PlayerHitGroundEvent,
     PlayerJumpoffGroundEvent,
     TimerDieEvent

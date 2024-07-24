@@ -40,7 +40,7 @@ public class PlayerOrbit : MonoBehaviour{
             if(points==null){
                 return Vector3.zero;
             }
-            return (points[points.Count-1]);
+            return points[points.Count-1];
         }
     }
 

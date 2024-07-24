@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
@@ -45,11 +46,16 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         cubeSprites = transform.Find("Visual");
-        if (jumpMode==JumpMode.Speed){
+        if (jumpMode == JumpMode.Speed){
             jumpSpeed = Mathf.Sqrt(2 * GameConsts.GRAVITY * gravityScale * verticalBlockNum * transform.localScale.x);
             jumpTime = jumpSpeed / (GameConsts.GRAVITY * gravityScale) * 2;
             speed = horizontalBlockNum / jumpTime * transform.localScale.x ;
         }
+    }
+
+    private void Start()
+    {
+        registerEvents();
     }
 
     private void Update()
@@ -79,6 +85,13 @@ public class PlayerController : MonoBehaviour
         {
             Rotate();
         }
+    }
+
+    //注册事件统一函数
+    private void registerEvents()
+    {
+        EventManager.AddListener(EventType.GameRestartEvent, OnGameRestart);
+        EventManager.AddListener(EventType.MouseRightClickEvent, OnDead);
     }
 
     //角色跳跃
@@ -159,8 +172,15 @@ public class PlayerController : MonoBehaviour
         cubeSprites.Rotate(-Vector3.forward, angle);
     }
 
-    public void OnDead()
+    public void OnDead(EventData data)
     {
+        EventManager.InvokeEvent(EventType.GameRestartEvent);
+        
+    }
+
+    public void OnGameRestart(EventData data)
+    {
+        transform.position = GameConsts.START_POSITION;
 
     }
 

@@ -18,7 +18,7 @@ using UnityEngine;
 public class TimerManager : Singleton<TimerManager>
 {
     private static Timer[] _timers;
-    private static readonly int TIMER_LIST_INITIAL_CAPACITY = 10;
+    private static readonly int TIMER_LIST_INITIAL_CAPACITY = 50;
     private static int _timerListCapacity = TIMER_LIST_INITIAL_CAPACITY;
     private readonly int SWEEP_FREQUENCY = 3;
     private static Action<EventData>[] _timerCallBacks;
@@ -52,9 +52,9 @@ public class TimerManager : Singleton<TimerManager>
     private void OnTimerDie(EventData eventData)
     {
         var timerDieEventData = (TimerDieEventData)eventData;
-        var timerID = timerDieEventData.GetTimerID();
+        var timerID = timerDieEventData.TimerID;
         var timerCallBack = _timerCallBacks[timerID];
-        timerCallBack?.Invoke(eventData);
+        timerCallBack?.Invoke(timerDieEventData);
         sweepCount++;
         if (sweepCount >= SWEEP_FREQUENCY)
         {
@@ -79,7 +79,7 @@ public class TimerManager : Singleton<TimerManager>
         {
             if (TimerTick._timerListTail + 1 >= _timerListCapacity)
             {
-                ResetCapacity();
+                Resize();
             }
             TimerTick._timerListTail++;
             return TimerTick._timerListTail - 1;
@@ -114,8 +114,9 @@ public class TimerManager : Singleton<TimerManager>
         //因此_timers会一直增长
         return bestFitIndex;
     }
-    private static void ResetCapacity()
+    private static void Resize()
     {
+        Debug.LogError("sf::Resize was called");
         _timerListCapacity = (int)(_timerListCapacity * 1.5);
         var afterResize = new Timer[_timerListCapacity];
         Array.Copy(_timers, afterResize, _timers.Length);

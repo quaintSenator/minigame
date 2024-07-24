@@ -6,16 +6,10 @@ using UnityEngine;
 
 public class TimerDieEventData : EventData
 {
-    private int TimerID;
-
-    public void SetTimerID(int i)
+    public int TimerID;
+    public TimerDieEventData(int i)
     {
         TimerID = i;
-    }
-
-    public int GetTimerID()
-    {
-        return TimerID;
     }
 }
 public class Timer
@@ -44,9 +38,7 @@ public class Timer
     }
     protected void Die()
     {
-        TimerDieEventData eventData = new TimerDieEventData();
-        eventData.SetTimerID(_timerID);
-        EventManager.InvokeEvent(EventType.TimerDieEvent, eventData);
+        EventManager.InvokeEvent(EventType.TimerDieEvent, new TimerDieEventData(_timerID));
         this._isTimerDead = true;
     }
 
