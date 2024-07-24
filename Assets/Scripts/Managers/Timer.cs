@@ -4,14 +4,26 @@ using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
+public class TimerDieEventData : EventData
+{
+    private int TimerID;
+
+    public void SetTimerID(int i)
+    {
+        TimerID = i;
+    }
+
+    public int GetTimerID()
+    {
+        return TimerID;
+    }
+}
 public class Timer
 {
-    private float _timeEverStart;
-
-    private float _timeSet;
-
-    private int _timerID;
-    private bool _isTimerDead = false;
+    protected float _timeEverStart;
+    protected float _timeSet;
+    protected int _timerID;
+    protected bool _isTimerDead = false;
     
     public void Init(int timerID, float time)
     {
@@ -19,7 +31,7 @@ public class Timer
         _timeEverStart = 0.0f;
         _timeSet = time;
     }
-    public void UpdateTimer()
+    public virtual void UpdateTimer()
     {
         if (!_isTimerDead)
         {
@@ -30,9 +42,9 @@ public class Timer
             }
         }
     }
-    void Die()
+    protected void Die()
     {
-        EventData eventData = new EventData();
+        TimerDieEventData eventData = new TimerDieEventData();
         eventData.SetTimerID(_timerID);
         EventManager.InvokeEvent(EventType.TimerDieEvent, eventData);
         this._isTimerDead = true;
@@ -41,5 +53,22 @@ public class Timer
     public Boolean isDead()
     {
         return this._isTimerDead;
+    }
+}
+public class FrameTimer : Timer
+{
+    private float _frameEverStart;
+
+    private float _frameSet;
+     public override void UpdateTimer()
+    {
+        if (!_isTimerDead)
+        {
+            _timeEverStart ++;
+            if (_timeEverStart > _timeSet)
+            {
+                Die();
+            }
+        }
     }
 }

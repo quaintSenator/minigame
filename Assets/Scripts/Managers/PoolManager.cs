@@ -8,7 +8,8 @@ using Object = System.Object;
 
 public enum PoolItemType
 {
-    GameObject
+    GameObject,
+    BoxMeFadingShadowCopy
 }
 public class PoolManager : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class PoolManager : MonoBehaviour
     private Dictionary<PoolItemType, Stack<GameObject>> _dict = new Dictionary<PoolItemType, Stack<GameObject>>();
     private Dictionary<PoolItemType, GameObject> _copy_dict = new Dictionary<PoolItemType, GameObject>();
     [SerializeField] public GameObject copy4PoolItemTypeGameObject;
+    [SerializeField] public GameObject copy4PoolItemTypeBoxMeFadingShadowCopy;
     [SerializeField]public Transform poolManagerRootTransform;
     readonly int POOL_CAPACITY = 5;
 
@@ -23,6 +25,11 @@ public class PoolManager : MonoBehaviour
     {
         var copyGameObject = Instantiate(copy4PoolItemTypeGameObject, this.transform);
         _copy_dict[PoolItemType.GameObject] = copyGameObject;
+        copyGameObject.SetActive(false);
+        
+        var copyBoxMeFadingShadowCopy = Instantiate(copy4PoolItemTypeBoxMeFadingShadowCopy, this.transform);
+        _copy_dict[PoolItemType.BoxMeFadingShadowCopy] = copyBoxMeFadingShadowCopy;
+        copyBoxMeFadingShadowCopy.SetActive(false);
         //new PoolItemType must provide copy here.
         //Use Inspector GameObject Reference to pass value to _copy_dict
     }
@@ -34,6 +41,7 @@ public class PoolManager : MonoBehaviour
             _Instance = this;
         }
         GeneratePool(PoolItemType.GameObject, _copy_dict[PoolItemType.GameObject]);
+        GeneratePool(PoolItemType.BoxMeFadingShadowCopy, _copy_dict[PoolItemType.BoxMeFadingShadowCopy]);
         if (_dict.Count < 1)
         {
             Debug.LogError("PoolGenerate Fail.");
@@ -86,6 +94,7 @@ public class PoolManager : MonoBehaviour
                 top.SetActive(true);
                 top.transform.SetParent(parent);
                 pool.Pop();
+                return top;
             }
             else
             {
@@ -98,7 +107,9 @@ public class PoolManager : MonoBehaviour
                 {
                     //pool count == 1
                     var leftObj = pool.Peek();//返回就地构造的一个新对象，保留栈顶元素
-                    return Instantiate(leftObj, parent);
+                    var newCopy = Instantiate(leftObj, parent);
+                    newCopy.SetActive(true);
+                    return newCopy;
                 }
             }
         }

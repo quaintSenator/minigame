@@ -13,9 +13,6 @@ using UnityEngine;
  ```
  void myAsk(EventData eventData){}
  ```
- 注意，EventData现在已经被改写，含有一个TimerID，这是必要的改动，若需规避日后
- 将会把EventData改为TimerEventData
- 
  只经过了初步测试，并不robust
  */
 public class TimerManager : Singleton<TimerManager>
@@ -54,7 +51,8 @@ public class TimerManager : Singleton<TimerManager>
 
     private void OnTimerDie(EventData eventData)
     {
-        var timerID = eventData.GetTimerID();
+        var timerDieEventData = (TimerDieEventData)eventData;
+        var timerID = timerDieEventData.GetTimerID();
         var timerCallBack = _timerCallBacks[timerID];
         timerCallBack?.Invoke(eventData);
         sweepCount++;
@@ -98,13 +96,24 @@ public class TimerManager : Singleton<TimerManager>
         generatedTimer.Init(bestFitIndex, time);
         _timers[bestFitIndex] = generatedTimer;
         _timerCallBacks[bestFitIndex] = action;
-        
         //_timers[0] 的 id 就是 0
         //即便0计时器死亡，此后0这个id也在也不会分配
         //因此_timers会一直增长
         return bestFitIndex;
     }
 
+    public static int Ask4FrameTimer(int frames, Action<EventData> action)
+    {
+        var bestFitIndex = GetBestFit();
+        FrameTimer generatedTimer = new FrameTimer();
+        generatedTimer.Init(bestFitIndex, frames);
+        _timers[bestFitIndex] = (FrameTimer)generatedTimer;
+        _timerCallBacks[bestFitIndex] = action;
+        //_timers[0] 的 id 就是 0
+        //即便0计时器死亡，此后0这个id也在也不会分配
+        //因此_timers会一直增长
+        return bestFitIndex;
+    }
     private static void ResetCapacity()
     {
         _timerListCapacity = (int)(_timerListCapacity * 1.5);
