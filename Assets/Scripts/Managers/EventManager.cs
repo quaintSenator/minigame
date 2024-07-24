@@ -18,12 +18,23 @@ public enum EventType
     GameStartEvent,
     PlayerHitGroundEvent,
     PlayerJumpoffGroundEvent,
+    TimerDieEvent
 }
 
 // 事件数据参数基类，具体使用时可以继承该类，添加自己需要的参数
 public class EventData
 {
-    
+    private int TimerID;
+
+    public void SetTimerID(int i)
+    {
+        TimerID = i;
+    }
+
+    public int GetTimerID()
+    {
+        return TimerID;
+    }
 }
 
 public class EventManager : Singleton<EventManager>
@@ -42,7 +53,6 @@ public class EventManager : Singleton<EventManager>
             eventDictionary = new Dictionary<EventType, Action<EventData>>();
         }
     }
-    
     public static void AddListener(EventType eventType, Action<EventData> listener)
     {
         Debug.Log("AddListener");
