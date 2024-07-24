@@ -20,12 +20,6 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
                 if (instance == null)
                 {
                     GameObject obj = new GameObject();
-                    if (managerObject == null)
-                    {
-                        managerObject = new GameObject("Managers").transform;
-                        DontDestroyOnLoad(managerObject);
-                    }
-                    obj.transform.parent = managerObject.transform;
                     obj.name = typeof(T).Name;
                     instance = obj.AddComponent<T>();
                 }
@@ -47,6 +41,21 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
         }
         else { DontDestroyOnLoad(gameObject); }
         
+        if (managerObject == null)
+        {
+            GameObject obj = GameObject.Find("Managers");
+            if (obj == null)
+            {
+                managerObject = new GameObject("Managers").transform;
+                DontDestroyOnLoad(managerObject);
+            }
+            else
+            {
+                managerObject = obj.transform;
+            
+            }
+        }
+        transform.parent = managerObject.transform;
         OnAwake();
     }
     
