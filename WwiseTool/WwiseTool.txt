@@ -1,0 +1,144 @@
+void AddMarkerByBpm(float Bpm);
+
+
+bool GetPathAllSoundSourceInfo(AkJson& GetResult)
+{
+	//TODO
+	string WwisePath="";
+	
+	string GetPathAllSoundSourceInfoWaql=
+	"\"" + WwisePath + "\"" +
+	"select descendants " +
+	"where type =\"AudioFileSource\" ";
+	
+	AkJson* ReturnOptionArgs=new AkJson*(AkJson::Map
+	{
+		{"return",AkJson::Array
+			{
+				AkVariant("id"),
+				AkVariant("duration"),
+				AkVariant("path"),
+				AkVariant("@Markers"),
+			}
+		}
+	});
+	
+	if(!wwise->GetByWaql(GetPathAllSoundSourceInfoWaql,*ReturnOptionArgs,GetResult)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+
+}
+
+void AddMarker
+{
+	float Time=0.0f;//TODO
+	string ObejectPath="";//TODO
+	
+	AkJson* ObjectsArgs=new AkJson（ AkJson::Array{} );
+	
+	AkJson* MarkerSetArgs=new AkJson*(AkJson::Map
+	{
+		{"@Markers",AkJson::Array
+			{
+				AkJson::Map
+				{
+					{"type",AkVariant("Marker")},
+					{"name",AkVariant("Added by yeniao wwise tool")},
+					{"@Time",AkVariant(Time)},
+					{"@Label",AkVariant("Added by yeniao wwise tool")}
+				},
+			}
+		},
+		{"@MarkerInputMode",AkVariant(2)},
+		{"listMode",AkVariant("replaceAll")},
+		{"object",AkVariant()},
+	});
+	
+	ObjectsArgs->GetArray().push_back(*MarkerSetArgs)
+}
+
+
+bool Wwise::TryConnect(const string& IpAddress, const string& PortNumber)
+{
+	//由于工具不会主动去监听来自wwise的消息，所以每次调用都直接尝试Connect
+	if(!Client.Connect(IpAddress.c_str(),stoi(PortNumber)))
+	{
+		ConnectState=true;
+		return true;
+		
+	}
+	else
+	{
+		ConnectState=false;
+		return false;
+	}
+	
+
+}
+
+	
+bool Wwise::Set(const AkJson& ObjectsArgs,const AkJson& ReturnOptionArgs,AkJson& ReturnArgs)
+{
+	AkJson* SetArgs=new AkJson(AkJson::Map
+	{
+		{"object",objects},
+	});
+	
+	if(!client.Call(ak::wwise::core::object::set,*SetArgs,ReturnOptionArgs,ReturnArgs))
+	{
+		delete SetArgs;
+		SetArgs=nullptr;
+		return false;
+	}
+	else
+	{
+		delete SetArgs;
+		SetArgs=nullptr;
+		return true;
+	}
+}
+
+bool Wwise::GetByWaql(const string& Waql,const AkJson& ReturnOptionArgs,AkJson& ReturnArgs)
+{
+	AkJson* GetArgs=new AkJson(AkJson::Map
+	{
+		{"waql",AkVariant(Waql)},
+	});
+	
+	if(!client.Call(ak::wwise::core::object::get,*GetArgs,ReturnOptionArgs,ReturnArgs))
+	{
+		delete GetArgs;
+		GetArgs=nullptr;
+		return false;
+	}
+	else
+	{
+		delete GetArgs;
+		GetArgs=nullptr;
+		return true;
+	}
+}
+
+
+
+#include<AK/WwiseAuthoringAPI/AkAutobahn/Client.h>
+
+Class Wwise
+{
+public:
+	bool TryConnect(const string& IpAddress, const string& PortNumber);
+	
+	bool Set(const AkJson& ObjectsArgs,const AkJson& ReturnOptionArgs,AkJson& ReturnArgs);
+	
+	bool GetByWaql(const string& Waql,const AkJson& ReturnOptionArgs,AkJson& ReturnArgs);
+	
+private:
+	Client Client=Client();
+	bool ConnectState=false;
+}
+
