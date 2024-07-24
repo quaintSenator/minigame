@@ -7,13 +7,13 @@ using UnityEngine;
 public enum EventType
 {
     //输入事件
-    OnMouseMove,
-    OnMouseLeftClick,
-    OnMouseRightClick,
-    OnMiddleClick,
-    OnHorizontalInput,
-    OnSpacebarDown,
-    OnEscDown,
+    MouseMoveEvent,
+    MouseLeftClickEvent,
+    MouseRightClickEvent,
+    MiddleClickEvent,
+    HorizontalInputEvent,
+    SpacebarDownEvent,
+    EscDownEvent,
     
     GameStartEvent,
     PlayerHitGroundEvent,

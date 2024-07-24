@@ -11,44 +11,44 @@ public class InputManager : Singleton<InputManager>
         Vector2 mouseMovement = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         if (mouseMovement != Vector2.zero)
         {
-            EventManager.InvokeEvent(EventType.OnMouseMove, new MouseMovementEventData(mouseMovement));
+            EventManager.InvokeEvent(EventType.MouseMoveEvent, new MouseMovementEventData(mouseMovement));
         }
 
         // 鼠标左键点击事件
         if (Input.GetMouseButtonDown(0))
         {
-            EventManager.InvokeEvent(EventType.OnMouseLeftClick);
+            EventManager.InvokeEvent(EventType.MouseLeftClickEvent);
         }
 
         // 鼠标右键点击事件
         if (Input.GetMouseButtonDown(1))
         {
-            EventManager.InvokeEvent(EventType.OnMouseRightClick);
+            EventManager.InvokeEvent(EventType.MouseRightClickEvent);
         }
 
         // 鼠标中键点击事件
         if (Input.GetMouseButtonDown(2))
         {
-            EventManager.InvokeEvent(EventType.OnMiddleClick);
+            EventManager.InvokeEvent(EventType.MiddleClickEvent);
         }
 
         // 水平输入事件
         float horizontalInput = Input.GetAxis("Horizontal");
         if (horizontalInput != 0)
         {
-            EventManager.InvokeEvent(EventType.OnHorizontalInput, new HorizontalInputEventData(horizontalInput));
+            EventManager.InvokeEvent(EventType.HorizontalInputEvent, new HorizontalInputEventData(horizontalInput));
         }
 
         // 空格键按下事件
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            EventManager.InvokeEvent(EventType.OnSpacebarDown);
+            EventManager.InvokeEvent(EventType.SpacebarDownEvent);
         }
         
         // Esc键按下事件
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            EventManager.InvokeEvent(EventType.OnEscDown);
+            EventManager.InvokeEvent(EventType.EscDownEvent);
         }
     }
     

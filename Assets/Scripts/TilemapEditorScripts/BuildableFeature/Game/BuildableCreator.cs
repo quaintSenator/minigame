@@ -16,14 +16,14 @@ public class BuildableCreator : Singleton<BuildableCreator>
 
     private void OnEnable()
     {
-        EventManager.AddListener(EventType.OnEscDown,OnEscDown);
-        EventManager.AddListener(EventType.OnMouseMove, OnMouseMove);
+        EventManager.AddListener(EventType.EscDownEvent,OnEscDown);
+        EventManager.AddListener(EventType.MouseMoveEvent, OnMouseMove);
     }
     
     private void OnDisable()
     {
-        EventManager.RemoveListener(EventType.OnEscDown,OnEscDown);
-        EventManager.RemoveListener(EventType.OnMouseMove, OnMouseMove);
+        EventManager.RemoveListener(EventType.EscDownEvent,OnEscDown);
+        EventManager.RemoveListener(EventType.MouseMoveEvent, OnMouseMove);
     }
     
     public void SetSelectedObject(BuildableObjectBase obj)
