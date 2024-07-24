@@ -9,8 +9,11 @@ public enum EventType
     //输入事件
     MouseMoveEvent,
     MouseLeftClickEvent,
+    MouseLeftReleaseEvent,
     MouseRightClickEvent,
+    MouseRightReleaseEvent,
     MiddleClickEvent,
+    MiddleScrollEvent,
     HorizontalInputEvent,
     SpacebarDownEvent,
     EscDownEvent,
@@ -46,7 +49,7 @@ public class EventManager : Singleton<EventManager>
     }
     public static void AddListener(EventType eventType, Action<EventData> listener)
     {
-        Debug.Log("AddListener");
+        Debug.Log("AddListener" + eventType);
         Action<EventData> myEvent;
         if (Instance.eventDictionary.TryGetValue(eventType, out myEvent))
         {
@@ -69,7 +72,7 @@ public class EventManager : Singleton<EventManager>
             thisEvent -= listener;
             Instance.eventDictionary[eventType] = thisEvent;
         }
-        Debug.Log("RemoveListener");
+        Debug.Log("RemoveListener" + eventType);
     }
 
     public static void InvokeEvent(EventType eventType, EventData eventData = null)
@@ -79,6 +82,5 @@ public class EventManager : Singleton<EventManager>
         {
             thisEvent?.Invoke(eventData);
         }
-        Debug.Log("InvokeEvent");
     }
 }
