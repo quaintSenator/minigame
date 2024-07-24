@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     //角色的重力系数
     [SerializeField] private float gravityScale = 4.0f;
     //角色自动前进的速度
-    [SerializeField] private float speed = 5.0f;
+    private float speed = 5.0f;
     //角色跳跃的模式
     [SerializeField] private JumpMode jumpMode = JumpMode.Force;
     //角色跳跃的力
@@ -29,26 +29,37 @@ public class PlayerController : MonoBehaviour
     //角色是否在跳跃
     private bool jumping = false;
     //角色跳跃的初始速度
-    [SerializeField] private float jumpSpeed = 5.0f;
+    private float jumpSpeed = 5.0f;
     //角色是否在地面上
     private bool isGrounded = true;
     //角色撞击地面事件
 
+    //一次跳跃水平移动距离
+    [SerializeField] private float horizontalBlockNum = 4.5f;
+    //一次跳跃垂直移动距离
+    [SerializeField] private float verticalBlockNum = 2.5f;
+
     //一些初始化
     private Transform cubeSprites;
 
-    private void Awake(){
+    private void Awake()
+    {
         cubeSprites = transform.Find("Visual");
+        if (jumpMode==JumpMode.Speed){
+            jumpSpeed = Mathf.Sqrt(2 * GameConsts.GRAVITY * gravityScale * verticalBlockNum * transform.localScale.x);
+            jumpTime = jumpSpeed / (GameConsts.GRAVITY * gravityScale) * 2;
+            speed = horizontalBlockNum / jumpTime * transform.localScale.x ;
+        }
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        if (Input.GetKey(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             Jump();
         }
     }
-    
+
     private void FixedUpdate()
     {
         //角色一直受一个向下的重力，世界坐标系
@@ -68,7 +79,6 @@ public class PlayerController : MonoBehaviour
         {
             Rotate();
         }
-        Debug.Log("angle:"+cubeSprites.eulerAngles.z);
     }
 
     //角色跳跃
@@ -116,16 +126,19 @@ public class PlayerController : MonoBehaviour
         {
             if (Mathf.Abs(selfAngle - 270) <= 45.0f)
             {
-                spriteRotate = Quaternion.Euler(0,0,270);
+                spriteRotate = Quaternion.Euler(0, 0, 270);
             }
-            else if (Mathf.Abs(selfAngle - 180) <= 45.0f){
-                spriteRotate = Quaternion.Euler(0,0,180);
+            else if (Mathf.Abs(selfAngle - 180) <= 45.0f)
+            {
+                spriteRotate = Quaternion.Euler(0, 0, 180);
             }
-            else if (Mathf.Abs(selfAngle - 90) <= 45.0f){
-                spriteRotate = Quaternion.Euler(0,0,90);
+            else if (Mathf.Abs(selfAngle - 90) <= 45.0f)
+            {
+                spriteRotate = Quaternion.Euler(0, 0, 90);
             }
-            else {
-                spriteRotate = Quaternion.Euler(0,0,0);
+            else
+            {
+                spriteRotate = Quaternion.Euler(0, 0, 0);
             }
             cubeSprites.rotation = spriteRotate;
             return;
@@ -145,4 +158,11 @@ public class PlayerController : MonoBehaviour
         float angle = 180 / time * Time.fixedDeltaTime;
         cubeSprites.Rotate(-Vector3.forward, angle);
     }
+
+    public void OnDead()
+    {
+
+    }
+
+    
 }
