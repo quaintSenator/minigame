@@ -13,6 +13,10 @@ namespace AK
 {
     namespace EVENTS
     {
+        static const AkUniqueID PAUSE_LEVELTEST = 1903092602U;
+        static const AkUniqueID PLAY_LEVELTEST = 265406176U;
+        static const AkUniqueID RESUME_LEVELTEST = 2369008827U;
+        static const AkUniqueID STOP_LEVELTEST = 566154274U;
         static const AkUniqueID TEST_DRUM_BPM100 = 1049805147U;
         static const AkUniqueID TEST_RIP = 2990968617U;
     } // namespace EVENTS
@@ -34,6 +38,7 @@ namespace AK
     namespace BANKS
     {
         static const AkUniqueID INIT = 1355168291U;
+        static const AkUniqueID LEVELTEST = 4048373417U;
         static const AkUniqueID TESTFORYENIAO = 1528500215U;
     } // namespace BANKS
 
