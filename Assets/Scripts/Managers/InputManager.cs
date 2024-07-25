@@ -97,6 +97,25 @@ public class InputManager : Singleton<InputManager>
         {
             EventManager.InvokeEvent(EventType.LDownEvent);
         }
+
+        #region 数字键按下
+        
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            EventManager.InvokeEvent(EventType.NumDownEvent, new NumDownEventData(1));
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            EventManager.InvokeEvent(EventType.NumDownEvent, new NumDownEventData(2));
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            EventManager.InvokeEvent(EventType.NumDownEvent, new NumDownEventData(3));
+        }
+
+        #endregion
     }
     
     public Vector3 GetMousePosition()
@@ -147,5 +166,15 @@ public class MiddleScrollEventData : EventData
     public MiddleScrollEventData(float scroll)
     {
         this.scroll = scroll;
+    }
+}
+
+// 数字键按下事件数据
+public class NumDownEventData : EventData
+{
+    public int num;
+    public NumDownEventData(int num)
+    {
+        this.num = num;
     }
 }

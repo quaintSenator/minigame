@@ -8,10 +8,26 @@ public class TilemapSaver : Singleton<TilemapSaver>
 {
     private Dictionary<string, Tilemap> tilemaps = new Dictionary<string, Tilemap>();
 
-    private string tempSave = "";
+    private Dictionary<string,TilemapData> allSaveMapsDic;
+    
+    public List<SaveBridgeData> allSaveMapsList;
 
     protected override void OnAwake()
     {
+        allSaveMapsDic = new Dictionary<string, TilemapData>();
+        string data = PlayerPrefs.GetString(GameConsts.TILEMAP_SAVE_DATA);
+        if (data != "")
+        {
+            allSaveMapsList = JsonUtility.FromJson<List<SaveBridgeData>>(data);
+        }
+        else
+        {
+            allSaveMapsList = new List<SaveBridgeData>();
+        }
+        foreach (var saveData in allSaveMapsList)
+        {
+            allSaveMapsDic.Add(saveData.key, saveData.tilemapData);
+        }
         initTilemaps();
     }
 
@@ -46,47 +62,66 @@ public class TilemapSaver : Singleton<TilemapSaver>
                     {
                         Vector3Int localPlace = (new Vector3Int(bounds.xMin, bounds.yMin, bounds.z) + new Vector3Int(x, y, 0));
                         Vector3 place = tilemapComponent.CellToWorld(localPlace);
-                        tilemapData.tileInfos.Add(new TileInfo(tile, place));
+                        tilemapData.tileInfos.Add(new TileInfo(tilemap.Key, tile, place));
                     }
                 }
             }
         }
-        tempSave = JsonUtility.ToJson(tilemapData);
-        Debug.Log(tempSave);
+        string key = (allSaveMapsDic.Count + 1).ToString();
+        allSaveMapsDic.Add(key, tilemapData);
+        allSaveMapsList.Add(new SaveBridgeData(key, tilemapData));
+        PlayerPrefs.SetString(GameConsts.TILEMAP_SAVE_DATA, JsonUtility.ToJson(allSaveMapsList));
     }
     
-    public void LoadTilemap()
+    public void LoadTilemap(string key)
     {
-        if (tempSave != "")
+        if (key != null)
         {
-            TilemapData tilemapData = JsonUtility.FromJson<TilemapData>(tempSave);
-            foreach (var tilemap in tilemaps)
+            TilemapData tilemapData = allSaveMapsDic[key];
+            foreach (var tileInfo in tilemapData.tileInfos)
             {
-                Tilemap tilemapComponent = tilemap.Value;
-                foreach (var tileInfo in tilemapData.tileInfos)
-                {
-                    tilemapComponent.SetTile(tilemapComponent.WorldToCell(tileInfo.wolrdPosition), tileInfo.tile);
-                }
+                Tilemap tilemapComponent = tilemaps[tileInfo.tilemapName];
+                tilemapComponent.SetTile(tilemapComponent.WorldToCell(tileInfo.wolrdPosition), tileInfo.tile);
             }
         }
+    }
+    
+    //在菜单栏 Tools/HZB/ClearAllTilemaps 中调用
+    [UnityEditor.MenuItem("Tools/HZB/ClearAllTilemaps")]
+    public static void ClearAllTilemaps()
+    {
+        PlayerPrefs.DeleteKey(GameConsts.TILEMAP_SAVE_DATA);
     }
 }
 
 [Serializable]
 public class TilemapData
 {
-    public string tilemapName;
     public List<TileInfo> tileInfos = new List<TileInfo>();
 }
 
 [Serializable]
 public class TileInfo
 {
+    public string tilemapName;
     public TileBase tile;
     public Vector3 wolrdPosition;
-    public TileInfo(TileBase tile, Vector3 position)
+    public TileInfo(string tilemapName, TileBase tile, Vector3 position)
     {
+        this.tilemapName = tilemapName;
         this.tile = tile;
         this.wolrdPosition = position;
+    }
+}
+
+[Serializable]
+public class SaveBridgeData
+{
+    public string key;
+    public TilemapData tilemapData;
+    public SaveBridgeData(string key, TilemapData tilemapData)
+    {
+        this.key = key;
+        this.tilemapData = tilemapData;
     }
 }

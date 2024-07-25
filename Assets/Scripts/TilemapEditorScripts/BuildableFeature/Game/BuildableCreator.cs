@@ -40,6 +40,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         EventManager.AddListener(EventType.EDownEvent, OnEDown); //切换擦除
         EventManager.AddListener(EventType.KDownEvent, OnKDown); //保存地图
         EventManager.AddListener(EventType.LDownEvent, OnLDown); //加载地图
+        EventManager.AddListener(EventType.NumDownEvent, OnNumDown); //加载地图
     }
 
     private void OnDisable()
@@ -51,6 +52,13 @@ public class BuildableCreator : Singleton<BuildableCreator>
         EventManager.RemoveListener(EventType.KDownEvent, OnKDown);
         EventManager.RemoveListener(EventType.LDownEvent, OnLDown);
     }
+    
+    private void OnNumDown(EventData data)
+    {
+        var numData = data as NumDownEventData;
+        ClearAllTilemaps();
+        TilemapSaver.Instance.LoadTilemap(numData.num.ToString());
+    }
 
     private void OnKDown(EventData obj)
     {
@@ -61,7 +69,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
     private void OnLDown(EventData obj)
     {
         ClearAllTilemaps();
-        TilemapSaver.Instance.LoadTilemap();
+        TilemapSaver.Instance.LoadTilemap(1.ToString());
     }
 
     private void OnEDown(EventData obj)
