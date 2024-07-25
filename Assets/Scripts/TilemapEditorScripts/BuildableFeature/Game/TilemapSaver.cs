@@ -44,7 +44,9 @@ public class TilemapSaver : Singleton<TilemapSaver>
                     TileBase tile = allTiles[x + y * bounds.size.x];
                     if (tile != null)
                     {
-                        tilemapData.tileInfos.Add(new TileInfo(tile, new Vector3Int(x, y, 0)));
+                        Vector3Int localPlace = (new Vector3Int(bounds.xMin, bounds.yMin, bounds.z) + new Vector3Int(x, y, 0));
+                        Vector3 place = tilemapComponent.CellToWorld(localPlace);
+                        tilemapData.tileInfos.Add(new TileInfo(tile, place));
                     }
                 }
             }
@@ -63,7 +65,7 @@ public class TilemapSaver : Singleton<TilemapSaver>
                 Tilemap tilemapComponent = tilemap.Value;
                 foreach (var tileInfo in tilemapData.tileInfos)
                 {
-                    tilemapComponent.SetTile(tileInfo.position, tileInfo.tile);
+                    tilemapComponent.SetTile(tilemapComponent.WorldToCell(tileInfo.wolrdPosition), tileInfo.tile);
                 }
             }
         }
@@ -81,10 +83,10 @@ public class TilemapData
 public class TileInfo
 {
     public TileBase tile;
-    public Vector3Int position;
-    public TileInfo(TileBase tile, Vector3Int position)
+    public Vector3 wolrdPosition;
+    public TileInfo(TileBase tile, Vector3 position)
     {
         this.tile = tile;
-        this.position = position;
+        this.wolrdPosition = position;
     }
 }
