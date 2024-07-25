@@ -570,7 +570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 585073038}
-  moveSpeed: 50
+  moveSpeed: 60
   zoomSpeed: 5
   maxZoom: 10
   minZoom: 4

@@ -17,6 +17,7 @@ public enum EventType
     HorizontalInputEvent,
     SpacebarDownEvent,
     EscDownEvent,
+    EDownEvent,
     
     GameStartEvent,
     GameRestartEvent,

@@ -77,7 +77,15 @@ public class InputManager : Singleton<InputManager>
         // Esc键按下事件
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            Debug.Log("ESC");
             EventManager.InvokeEvent(EventType.EscDownEvent);
+        }
+        
+        // E键按下事件
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("E");
+            EventManager.InvokeEvent(EventType.EDownEvent);
         }
     }
     

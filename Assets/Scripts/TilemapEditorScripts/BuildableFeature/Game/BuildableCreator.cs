@@ -6,6 +6,13 @@ using UnityEngine.Tilemaps;
 
 
 
+public enum TileMode
+{
+    None,
+    Build,
+    Destroy,
+}
+
 public class BuildableCreator : Singleton<BuildableCreator>
 {
     [Serializable]
@@ -19,6 +26,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
     [SerializeField] private Tilemap priviewTilemap;
     private TileBase tileBase;
     private BuildableObjectBase selectedObj;
+    private TileMode currentTileMode = TileMode.None; 
     
     private Vector2 mousePosition;
     private Vector3Int currentCellPosition;
@@ -28,21 +36,41 @@ public class BuildableCreator : Singleton<BuildableCreator>
     {
         EventManager.AddListener(EventType.EscDownEvent,OnEscDown);
         EventManager.AddListener(EventType.MouseMoveEvent, OnMouseMove);
-        EventManager.AddListener(EventType.MouseRightClickEvent, OnRightClick);
         EventManager.AddListener(EventType.MouseLeftClickEvent, OnMouseLeftClick);
+        EventManager.AddListener(EventType.EDownEvent, OnEDown);
     }
 
     private void OnDisable()
     {
         EventManager.RemoveListener(EventType.EscDownEvent,OnEscDown);
         EventManager.RemoveListener(EventType.MouseMoveEvent, OnMouseMove);
-        EventManager.RemoveListener(EventType.MouseRightClickEvent, OnRightClick);
         EventManager.RemoveListener(EventType.MouseLeftClickEvent, OnMouseLeftClick);
+        EventManager.RemoveListener(EventType.EDownEvent, OnEDown);
     }
 
-    private void OnMouseLeftClick(EventData data)
+    private void OnEDown(EventData obj)
     {
-        DrawTileMap();
+        if(currentTileMode != TileMode.Destroy)
+        {
+            SetSelectedObject(null);
+            currentTileMode = TileMode.Destroy;
+        }
+        else
+        {
+            SetSelectedObject(null);
+        }
+    }
+
+    private void OnMouseLeftClick(EventData data = null)
+    {
+        if (currentTileMode == TileMode.Build)
+        {
+            DrawTileMap();   
+        }
+        else if(currentTileMode == TileMode.Destroy)
+        {
+            EraseTileMap();
+        }
     }
 
 
@@ -55,44 +83,35 @@ public class BuildableCreator : Singleton<BuildableCreator>
     {
         UpdateTilemap();
     }
-
-    private void OnRightClick(EventData obj)
-    {
-        EraseTileMap();
-    }
     
     public void SetSelectedObject(BuildableObjectBase obj)
     {
         selectedObj = obj;
+        currentTileMode = selectedObj == null ? TileMode.None : TileMode.Build;
         UpdateTilemap();
     }
 
     private void UpdateTilemap()
     {
-        if(selectedObj == null)
-        {
-            priviewTilemap.ClearAllTiles();
-            return;
-        } 
         mousePosition = InputManager.Instance.GetMousePosition();
         currentCellPosition = priviewTilemap.WorldToCell(mousePosition);
         if (currentCellPosition != lastCellPosition)
         {
             priviewTilemap.ClearAllTiles();
-            priviewTilemap.SetTile(currentCellPosition, selectedObj.Tile);
+            if (selectedObj == null)
+            {
+                priviewTilemap.ClearAllTiles();
+            }
+            else
+            {
+                priviewTilemap.SetTile(currentCellPosition, selectedObj.Tile);
+            }
             lastCellPosition = currentCellPosition;
-            
-            //如果鼠标还在按着左键，继续绘制
-            if (InputManager.Instance.IsMouseLeftPressing())
-            {
-                DrawTileMap();
-            }
-            
-            //如果鼠标还在按着右键，继续擦除
-            if (InputManager.Instance.IsMouseRightPressing())
-            {
-                EraseTileMap();
-            }
+        }
+        //如果鼠标还在按着左键，继续操作
+        if (InputManager.Instance.IsMouseLeftPressing())
+        {
+            OnMouseLeftClick();
         }
     }
 
