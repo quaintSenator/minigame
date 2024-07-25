@@ -53,21 +53,44 @@ public class TilemapEditor : Editor
                 }
             }
         }
-        // 保存地图数据到 Assets/Scripts/TilemapEditorScripts/BuildableFeature/MapForDesigner
+        // 保存地图数据
         TilemapSaveLocalFile saveData = ScriptableObject.CreateInstance<TilemapSaveLocalFile>();
         saveData.saveTime = System.DateTime.Now.ToString();
         saveData.tilemapData = JsonUtility.ToJson(tilemapData);
-        AssetDatabase.CreateAsset(saveData, "Assets/Scripts/TilemapEditorScripts/BuildableFeature/MapForDesigner/TilemapSaveData.asset");
+        
+        //读取路径里面有多少文件
+        string path = "Assets/Scripts/TilemapEditorScripts/BuildableFeature/MapForDesigner";
+        string[] files = System.IO.Directory.GetFiles(path);
+        string saveName = "TilemapSaveData_" + (files.Length/2) + ".asset";
+        AssetDatabase.CreateAsset(saveData, path + "/" + saveName);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         Debug.Log("Saved tilemaps to Assets/Scripts/TilemapEditorScripts/BuildableFeature/MapForDesigner/TilemapSaveData.asset");
     }
     
+    //在菜单栏 Tools/HZB/Get Auto Save File 中调用
+    [MenuItem("Tools/HZB/Get Auto Save File")]
+    private static void GetAutoSaveFile()
+    {
+        string data = PlayerPrefs.GetString(GameConsts.AUTO_TILEMAP_SAVE_DATA);
+        TilemapData tilemapData = JsonUtility.FromJson<TilemapData>(data);
+        // 保存地图数据
+        TilemapSaveLocalFile saveData = ScriptableObject.CreateInstance<TilemapSaveLocalFile>();
+        saveData.saveTime = System.DateTime.Now.ToString();
+        saveData.tilemapData = JsonUtility.ToJson(tilemapData);
+        string path = "Assets/Scripts/TilemapEditorScripts/BuildableFeature/AutoSave";
+        string saveName = "TilemapSaveData_auto" + ".asset";
+        AssetDatabase.CreateAsset(saveData, path + "/" + saveName);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+        Debug.Log("save as asset");
+    }
+    
     //选择 TilemapSaveLocalFile.asset 文件，选择菜单栏 Tools/HZB/LoadTilemaps 来调用
     [MenuItem("Tools/HZB/Load Tilemaps")]
-    public static void LoadTilemaps(TilemapSaveLocalFile data)
+    public static void LoadTilemaps()
     {
-        TilemapSaveLocalFile saveData = data ? data : Selection.activeObject as TilemapSaveLocalFile;
+        TilemapSaveLocalFile saveData = Selection.activeObject as TilemapSaveLocalFile;
         if (saveData == null)
         {
             Debug.LogError("Please select a TilemapSaveLocalFile.asset file.");
@@ -86,9 +109,6 @@ public class TilemapEditor : Editor
     {
         return Selection.activeObject != null && Selection.activeObject.GetType() == typeof(TilemapSaveLocalFile);
     }
-
-    
-    
     
     public static List<Tilemap> GetAllTilemaps()
     {

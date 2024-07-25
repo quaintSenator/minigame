@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -31,6 +32,13 @@ public class TilemapSaver : Singleton<TilemapSaver>
         initTilemaps();
     }
 
+    private void OnDisable()
+    {
+#if UNITY_EDITOR
+        AutoSaveTilemap();
+#endif
+    }
+
     public void initTilemaps()
     {
         Transform tilemapParent = GameObject.Find("all_tilemaps").transform;
@@ -46,6 +54,15 @@ public class TilemapSaver : Singleton<TilemapSaver>
     }
     
     public void SaveTilemap()
+    {
+        TilemapData tilemapData = CopyCurrentTilempydata();
+        string key = (allSaveMapsDic.Count + 1).ToString();
+        allSaveMapsDic.Add(key, tilemapData);
+        allSaveMapsList.Add(new SaveBridgeData(key, tilemapData));
+        PlayerPrefs.SetString(GameConsts.TILEMAP_SAVE_DATA, JsonUtility.ToJson(allSaveMapsList));
+    }
+
+    public TilemapData CopyCurrentTilempydata()
     {
         TilemapData tilemapData = new TilemapData();
         foreach (var tilemap in tilemaps)
@@ -67,10 +84,14 @@ public class TilemapSaver : Singleton<TilemapSaver>
                 }
             }
         }
-        string key = (allSaveMapsDic.Count + 1).ToString();
-        allSaveMapsDic.Add(key, tilemapData);
-        allSaveMapsList.Add(new SaveBridgeData(key, tilemapData));
-        PlayerPrefs.SetString(GameConsts.TILEMAP_SAVE_DATA, JsonUtility.ToJson(allSaveMapsList));
+        return tilemapData;
+    }
+    
+    public void AutoSaveTilemap()
+    {
+        TilemapData tilemapData = CopyCurrentTilempydata();
+        PlayerPrefs.SetString(GameConsts.AUTO_TILEMAP_SAVE_DATA, JsonUtility.ToJson(tilemapData));
+        Debug.Log("Auto save tilemap");
     }
     
     public void LoadTilemap(string key)
@@ -85,7 +106,6 @@ public class TilemapSaver : Singleton<TilemapSaver>
             }
         }
     }
-    
 }
 
 [Serializable]

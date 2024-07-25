@@ -21,7 +21,7 @@ public class TilemapSaveLocalFileEditor : Editor
         GUILayout.Space(inspectorWidth / 2 - 100);
         if (GUILayout.Button("读取该地图", centeredStyle, GUILayout.Height(50), GUILayout.Width(150)))
         {
-            TilemapEditor.LoadTilemaps(scriptableObject);
+            TilemapEditor.LoadTilemaps();
         }
         EditorGUILayout.EndHorizontal();
     }
