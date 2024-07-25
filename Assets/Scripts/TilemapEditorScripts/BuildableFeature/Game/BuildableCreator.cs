@@ -34,10 +34,12 @@ public class BuildableCreator : Singleton<BuildableCreator>
 
     private void OnEnable()
     {
-        EventManager.AddListener(EventType.EscDownEvent,OnEscDown);
-        EventManager.AddListener(EventType.MouseMoveEvent, OnMouseMove);
-        EventManager.AddListener(EventType.MouseLeftClickEvent, OnMouseLeftClick);
-        EventManager.AddListener(EventType.EDownEvent, OnEDown);
+        EventManager.AddListener(EventType.EscDownEvent,OnEscDown); //取消当前选择
+        EventManager.AddListener(EventType.MouseMoveEvent, OnMouseMove); //鼠标移动
+        EventManager.AddListener(EventType.MouseLeftClickEvent, OnMouseLeftClick); //绘制或者擦除
+        EventManager.AddListener(EventType.EDownEvent, OnEDown); //切换擦除
+        EventManager.AddListener(EventType.KDownEvent, OnKDown); //保存地图
+        EventManager.AddListener(EventType.LDownEvent, OnLDown); //加载地图
     }
 
     private void OnDisable()
@@ -46,6 +48,20 @@ public class BuildableCreator : Singleton<BuildableCreator>
         EventManager.RemoveListener(EventType.MouseMoveEvent, OnMouseMove);
         EventManager.RemoveListener(EventType.MouseLeftClickEvent, OnMouseLeftClick);
         EventManager.RemoveListener(EventType.EDownEvent, OnEDown);
+        EventManager.RemoveListener(EventType.KDownEvent, OnKDown);
+        EventManager.RemoveListener(EventType.LDownEvent, OnLDown);
+    }
+
+    private void OnKDown(EventData obj)
+    {
+        TilemapSaver.Instance.SaveTilemap();
+        ClearAllTilemaps();
+    }
+
+    private void OnLDown(EventData obj)
+    {
+        ClearAllTilemaps();
+        TilemapSaver.Instance.LoadTilemap();
     }
 
     private void OnEDown(EventData obj)
@@ -154,5 +170,13 @@ public class BuildableCreator : Singleton<BuildableCreator>
             tilemapList.Add(item.tilemap);
         }
         return tilemapList;
+    }
+    
+    public void ClearAllTilemaps()
+    {
+        foreach (var tilemap in GetAllTilemaps())
+        {
+            tilemap.ClearAllTiles();
+        }
     }
 }

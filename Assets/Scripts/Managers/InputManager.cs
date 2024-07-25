@@ -77,15 +77,25 @@ public class InputManager : Singleton<InputManager>
         // Esc键按下事件
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("ESC");
             EventManager.InvokeEvent(EventType.EscDownEvent);
         }
         
         // E键按下事件
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("E");
             EventManager.InvokeEvent(EventType.EDownEvent);
+        }
+        
+        // K键按下事件
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            EventManager.InvokeEvent(EventType.KDownEvent);
+        }
+        
+        // L键按下事件
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            EventManager.InvokeEvent(EventType.LDownEvent);
         }
     }
     
