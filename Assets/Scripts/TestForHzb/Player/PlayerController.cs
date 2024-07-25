@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using Sirenix.OdinInspector;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -42,10 +43,12 @@ public class PlayerController : MonoBehaviour
 
     //一些初始化
     private Transform cubeSprites;
+    private BoxCollider2D boxCollider;
 
     private void Awake()
     {
         cubeSprites = transform.Find("Visual");
+        boxCollider = GetComponent<BoxCollider2D>();
         if (jumpMode == JumpMode.Speed){
             jumpSpeed = Mathf.Sqrt(2 * GameConsts.GRAVITY * gravityScale * verticalBlockNum * transform.localScale.x);
             jumpTime = jumpSpeed / (GameConsts.GRAVITY * gravityScale) * 2;
@@ -90,7 +93,7 @@ public class PlayerController : MonoBehaviour
     //注册事件统一函数
     private void registerEvents()
     {
-        EventManager.AddListener(EventType.GameRestartEvent, OnGameRestart);
+        EventManager.AddListener(EventType.GameRestartEvent, OnReset);
         EventManager.AddListener(EventType.MouseRightClickEvent, OnDead);
     }
 
@@ -174,14 +177,18 @@ public class PlayerController : MonoBehaviour
 
     public void OnDead(EventData data)
     {
+        boxCollider.enabled = false;
         EventManager.InvokeEvent(EventType.GameRestartEvent);
         
     }
 
-    public void OnGameRestart(EventData data)
+    public void OnReset(EventData data)
     {
         transform.position = GameConsts.START_POSITION;
-
+        cubeSprites.rotation = GameConsts.ZERO_ROTATION;
+        GetComponent<Rigidbody2D>().velocity = GameConsts.START_VELOCITY;
+        isGrounded = true;
+        boxCollider.enabled = true;
     }
 
     

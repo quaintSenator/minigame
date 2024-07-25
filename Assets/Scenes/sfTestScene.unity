@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b317914d2872014468c148ed9151d358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FadingShadowItemLifeTime: 0
+  FadingShadowItemLifeTime: 0.5
 --- !u!4 &377489220
 Transform:
   m_ObjectHideFlags: 0
@@ -350,7 +350,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 949698248}
-  - component: {fileID: 949698250}
   - component: {fileID: 949698249}
   m_Layer: 0
   m_Name: TimerMgr
@@ -382,21 +381,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 949698247}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 320446f8f15876d429706649d745c1f2, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ea62f4232822a6428d7beae691390c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &949698250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 949698247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bbb51d97e0ab94429aafb4431d7b872, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  frame2Wait_test: 0
 --- !u!114 &1572451267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,6 +486,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stillParent: {fileID: 148967963}
+  FadingShadowLifetime: 1
+  frameBuildString: 13 33 53 73 93 113 133 163 193 253
 --- !u!4 &1860015982
 Transform:
   m_ObjectHideFlags: 0

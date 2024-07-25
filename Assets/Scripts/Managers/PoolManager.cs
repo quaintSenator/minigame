@@ -19,7 +19,7 @@ public class PoolManager : MonoBehaviour
     [SerializeField] public GameObject copy4PoolItemTypeGameObject;
     [SerializeField] public GameObject copy4PoolItemTypeBoxMeFadingShadowCopy;
     [SerializeField]public Transform poolManagerRootTransform;
-    readonly int POOL_CAPACITY = 5;
+    readonly int POOL_CAPACITY = 20;
 
     private void InitCopyDict()
     {

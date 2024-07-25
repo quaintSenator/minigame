@@ -183,7 +183,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7540998}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.323179, y: 0.5900004, z: -10}
+  m_LocalPosition: {x: -1.2867742, y: 0.5900004, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1281293814}
@@ -199,7 +199,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 227335141}
-  - component: {fileID: 227335143}
   - component: {fileID: 227335142}
   m_Layer: 0
   m_Name: TimerManager
@@ -231,21 +230,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 227335140}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 320446f8f15876d429706649d745c1f2, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ea62f4232822a6428d7beae691390c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &227335143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 227335140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bbb51d97e0ab94429aafb4431d7b872, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  frame2Wait_test: 600
 --- !u!1 &307433520
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,7 +519,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 341226011}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.323179, y: 0.5900004, z: -10}
+  m_LocalPosition: {x: -1.2867742, y: 0.5900004, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7926,6 +7914,10 @@ PrefabInstance:
       propertyPath: stillParent
       value: 
       objectReference: {fileID: 1751742319}
+    - target: {fileID: 3832072421744281546, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: frameBuildString
+      value: 13 33 53 73 93 113 133 163 193 253
+      objectReference: {fileID: 0}
     - target: {fileID: 3931848181877765676, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: m_RootOrder
       value: 2

@@ -15,7 +15,7 @@ using UnityEngine;
  ```
  只经过了初步测试，并不robust
  */
-public class TimerManager : Singleton<TimerManager>
+/*public class TimerManager : Singleton<TimerManager>
 {
     private static Timer[] _timers;
     private static readonly int TIMER_LIST_INITIAL_CAPACITY = 50;
@@ -52,7 +52,7 @@ public class TimerManager : Singleton<TimerManager>
     private void OnTimerDie(EventData eventData)
     {
         var timerDieEventData = (TimerDieEventData)eventData;
-        var timerID = timerDieEventData.TimerID;
+        var timerID = timerDieEventData.absoluteFrame;
         var timerCallBack = _timerCallBacks[timerID];
         timerCallBack?.Invoke(timerDieEventData);
         sweepCount++;
@@ -160,4 +160,4 @@ public class TimerManager : Singleton<TimerManager>
 #endif
         sweepCount = 0;
     }
-}
+}*/
