@@ -18,13 +18,13 @@ public class CameraController : MonoBehaviour
     private void OnEnable()
     {
         EventManager.AddListener(EventType.GameStartEvent, OnGameStart);
-        EventManager.AddListener(EventType.GameRestartEvent, OnGameRestart);
+        EventManager.AddListener(EventType.GameRestartEvent, OnReset);
     }
     
     private void OnDisable()
     {
         EventManager.RemoveListener(EventType.GameStartEvent, OnGameStart);
-        EventManager.RemoveListener(EventType.GameRestartEvent, OnGameRestart);
+        EventManager.RemoveListener(EventType.GameRestartEvent, OnReset);
     }
     
     private void OnGameStart(EventData data)
@@ -33,7 +33,7 @@ public class CameraController : MonoBehaviour
         Debug.Log("OnGameStart");
     }
 
-    private void OnGameRestart(EventData data)
+    private void OnReset(EventData data)
     {
        // cinemachine.transform.position= new Vector3(0.0f,cinemachine.transform.position.y,cinemachine.transform.position.z);
     }

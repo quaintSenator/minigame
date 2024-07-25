@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using Sirenix.OdinInspector;
+using Sirenix.OdinInspector.Editor;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
@@ -34,7 +35,8 @@ public class PlayerController : MonoBehaviour
     private float jumpSpeed = 5.0f;
     //角色是否在地面上
     private bool isGrounded = true;
-    //角色撞击地面事件
+    //角色是否再跳
+    private bool willJump = false;
 
     //一次跳跃水平移动距离
     [SerializeField] private float horizontalBlockNum = 4.5f;
@@ -44,11 +46,13 @@ public class PlayerController : MonoBehaviour
     //一些初始化
     private Transform cubeSprites;
     private BoxCollider2D boxCollider;
+    private Rigidbody2D rigidBody;
 
     private void Awake()
     {
         cubeSprites = transform.Find("Visual");
         boxCollider = GetComponent<BoxCollider2D>();
+        rigidBody = GetComponent<Rigidbody2D>();
         if (jumpMode == JumpMode.Speed){
             jumpSpeed = Mathf.Sqrt(2 * GameConsts.GRAVITY * gravityScale * verticalBlockNum * transform.localScale.x);
             jumpTime = jumpSpeed / (GameConsts.GRAVITY * gravityScale) * 2;
@@ -56,6 +60,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        EventManager.AddListener(EventType.GameRestartEvent, OnReset);
+        EventManager.AddListener(EventType.MouseRightClickEvent, OnDead);
+        EventManager.AddListener(EventType.PlayerHitGroundEvent,OnHitGround);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.RemoveListener(EventType.GameRestartEvent, OnReset);
+        EventManager.RemoveListener(EventType.MouseRightClickEvent, OnDead);
+        EventManager.RemoveListener(EventType.PlayerHitGroundEvent,OnHitGround);
+    }
     private void Start()
     {
         registerEvents();
@@ -63,16 +80,21 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             Jump();
+        }
+        if(Input.GetKey(KeyCode.Space) && rigidBody.velocity.y <= 0)
+        {
+            Debug.Log("willJump");
+            willJump = true;
         }
     }
 
     private void FixedUpdate()
     {
         //角色一直受一个向下的重力，世界坐标系
-        GetComponent<Rigidbody2D>().AddForce(Vector2.down * gravityScale * GameConsts.GRAVITY);
+        rigidBody.AddForce(Vector2.down * gravityScale * GameConsts.GRAVITY);
 
         //角色自动向右前进，世界坐标系
         transform.Translate(Vector3.right * speed * Time.fixedDeltaTime, Space.World);
@@ -80,7 +102,7 @@ public class PlayerController : MonoBehaviour
         //角色跳跃，如果是Force模式，且在跳跃中，给与一个力
         if (jumpMode == JumpMode.Force && jumping)
         {
-            GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpForce);
+            rigidBody.AddForce(Vector2.up * jumpForce);
         }
 
         //角色旋转
@@ -93,8 +115,7 @@ public class PlayerController : MonoBehaviour
     //注册事件统一函数
     private void registerEvents()
     {
-        EventManager.AddListener(EventType.GameRestartEvent, OnReset);
-        EventManager.AddListener(EventType.MouseRightClickEvent, OnDead);
+
     }
 
     //角色跳跃
@@ -110,7 +131,7 @@ public class PlayerController : MonoBehaviour
                     StartCoroutine(JumpForce());
                     break;
                 case JumpMode.Speed:
-                    GetComponent<Rigidbody2D>().velocity = Vector2.up * jumpSpeed;
+                    rigidBody.velocity = Vector2.up * jumpSpeed;
                     break;
             }
         }
@@ -121,9 +142,17 @@ public class PlayerController : MonoBehaviour
         if (!isGrounded && value)
         {
             Rotate(true);
+            isGrounded = value;
             EventManager.InvokeEvent(EventType.PlayerHitGroundEvent);
         }
         isGrounded = value;
+    }
+
+    public void OnHitGround(EventData data){
+        if(willJump){
+            willJump = false;
+            Jump();
+        }
     }
 
     //协程，在jumpTime时间内持续给与一个力
@@ -137,9 +166,9 @@ public class PlayerController : MonoBehaviour
     public void Rotate(bool end = false)
     {
         float selfAngle = cubeSprites.eulerAngles.z;
-        Quaternion spriteRotate = cubeSprites.rotation;
         if (end)
         {
+            Quaternion spriteRotate = cubeSprites.rotation;
             if (Mathf.Abs(selfAngle - 270) <= 45.0f)
             {
                 spriteRotate = Quaternion.Euler(0, 0, 270);
@@ -167,7 +196,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (jumpMode == JumpMode.Force)
         {
-            time = speed / (GetComponent<Rigidbody2D>().gravityScale / GameConsts.GRAVITY) * 2;
+            time = speed / (rigidBody.gravityScale / GameConsts.GRAVITY) * 2;
         }
 
         //Debug.Log("Time: " + time);
@@ -186,7 +215,7 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = GameConsts.START_POSITION;
         cubeSprites.rotation = GameConsts.ZERO_ROTATION;
-        GetComponent<Rigidbody2D>().velocity = GameConsts.START_VELOCITY;
+        rigidBody.velocity = GameConsts.START_VELOCITY;
         isGrounded = true;
         boxCollider.enabled = true;
     }
