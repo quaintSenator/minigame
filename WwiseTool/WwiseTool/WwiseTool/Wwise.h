@@ -21,7 +21,7 @@ public:
 
 	bool TryConnect(const string& IpAddress, const string& PortNumber);
 
-	bool Set(const AkJson& ObjectsArgs, const AkJson& ReturnOptionArgs, AkJson& ReturnArgs);
+	bool Set( AkJson& ObjectsArgs, AkJson& ReturnOptionArgs, AkJson& ReturnArgs);
 
 	bool GetByWaql(const string& Waql, const AkJson& ReturnOptionArgs, AkJson& ReturnArgs);
 

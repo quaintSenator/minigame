@@ -16,12 +16,14 @@ public:
 
 	void Init();
 
+	void Menu();
+
 	bool TryConnect();
 
 
-	bool GetPathAllSoundSourceInfo(AkJson& GetResult);
+	bool GetPathAllSoundSourceInfo(string WwisePath, AkJson& GetResult);
 
-	bool AddMarker();
+	bool AddMarkerBasedOnBpm();
 private:
 	Wwise WwiseInstance = Wwise();
 

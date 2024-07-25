@@ -6,7 +6,7 @@
 bool Wwise::TryConnect(const string& IpAddress, const string& PortNumber)
 {
 	//由于工具不会主动去监听来自wwise的消息，所以每次调用都直接尝试Connect
-	if (!ClientInstance.Connect(IpAddress.c_str(), stoi(PortNumber)))
+	if (ClientInstance.Connect(IpAddress.c_str(), stoi(PortNumber)))
 	{
 		ConnectState = true;
 		return true;
@@ -19,11 +19,11 @@ bool Wwise::TryConnect(const string& IpAddress, const string& PortNumber)
 	}
 }
 
-bool Wwise::Set(const AkJson& ObjectsArgs, const AkJson& ReturnOptionArgs, AkJson& ReturnArgs)
+bool Wwise::Set( AkJson& ObjectsArgs,  AkJson& ReturnOptionArgs, AkJson& ReturnArgs)
 {
 	AkJson* SetArgs = new AkJson(AkJson::Map
 		{
-			{"object",ObjectsArgs},
+			{"objects",ObjectsArgs},
 		});
 
 	if (!ClientInstance.Call(ak::wwise::core::object::set, *SetArgs, ReturnOptionArgs, ReturnArgs))
