@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{FB78CDA5-D1B9-4F48-8912-C37AF4B84146}" SchemaVersion="119">
+	<AudioObjects>
+		<WorkUnit Name="InteractionSFX" ID="{FB78CDA5-D1B9-4F48-8912-C37AF4B84146}" PersistMode="Standalone"/>
+	</AudioObjects>
+</WwiseDocument>

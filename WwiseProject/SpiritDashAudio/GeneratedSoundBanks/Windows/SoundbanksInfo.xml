@@ -5,7 +5,7 @@
 		<SourceFilesRoot>../../.cache/Windows</SourceFilesRoot>
 		<SoundBanksRoot>.</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
-		<ExternalSourcesOutputRoot>../../../../Assets/StreamingAssets/Audio/GeneratedSoundBanks/Windows</ExternalSourcesOutputRoot>
+		<ExternalSourcesOutputRoot>E:/WorkRepository/UnityProject/SpiritDash/UnityProject/minigame/Assets/StreamingAssets/Audio/GeneratedSoundBanks/Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
 	<DialogueEvents/>
 	<SoundBanks>
@@ -162,13 +162,13 @@
 				</AcousticTexture>
 			</AcousticTextures>
 		</SoundBank>
-		<SoundBank Id="1528500215" Type="User" Language="SFX" Hash="{CCC1EFE2-65CF-9AB5-91DA-1BD4336162A9}">
+		<SoundBank Id="1528500215" Type="User" Language="SFX" Hash="{954FA6D7-D79B-C6FB-09CA-C271621CE2D8}">
 			<ShortName>TestForYeniao</ShortName>
 			<Path>TestForYeniao.bnk</Path>
 			<Media>
 				<File Id="459520497" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Drum_100bpm.wav</ShortName>
-					<CachePath>SFX/Drum_100bpm_FBC78EF0.wem</CachePath>
+					<CachePath>SFX/Drum_100bpm_7B9A9841.wem</CachePath>
 				</File>
 				<File Id="695210998" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>RIP_4832.wav</ShortName>
@@ -188,6 +188,26 @@
 				</Event>
 			</Events>
 		</SoundBank>
+		<SoundBank Id="4048373417" Type="User" Language="SFX" Hash="{F3BB3AE4-A32C-37E9-CBD4-AB1A31E0364D}">
+			<ShortName>LevelTest</ShortName>
+			<Path>LevelTest.bnk</Path>
+			<Media>
+				<File Id="559928222" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Destination_Unknown_100bpm.wav</ShortName>
+					<CachePath>SFX/Destination_Unknown_100bpm_682EDB2F.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="1903092602" Name="Pause_LevelTest" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="265406176" Name="Play_LevelTest" DurationType="Infinite">
+					<MediaRefs>
+						<MediaRef Id="559928222"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2369008827" Name="Resume_LevelTest" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="566154274" Name="Stop_LevelTest" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+			</Events>
+		</SoundBank>
 	</SoundBanks>
-	<FileHash>{294B8555-2530-0D52-AB2A-17606182D3D1}</FileHash>
+	<FileHash>{5E18B9E7-84C5-0184-7934-98E831BAF0A8}</FileHash>
 </SoundBanksInfo>

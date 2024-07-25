@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="150">
+	<SoundBanks>
+		<SoundBank Id="4048373417" Type="User" Language="SFX" Hash="{F3BB3AE4-A32C-37E9-CBD4-AB1A31E0364D}">
+			<ShortName>LevelTest</ShortName>
+			<Path>LevelTest.bnk</Path>
+			<Media>
+				<File Id="559928222" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Destination_Unknown_100bpm.wav</ShortName>
+					<CachePath>SFX/Destination_Unknown_100bpm_682EDB2F.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="1903092602" Name="Pause_LevelTest" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="265406176" Name="Play_LevelTest" DurationType="Infinite">
+					<MediaRefs>
+						<MediaRef Id="559928222"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2369008827" Name="Resume_LevelTest" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="566154274" Name="Stop_LevelTest" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+			</Events>
+		</SoundBank>
+	</SoundBanks>
+	<FileHash>{758F4692-CC5B-8802-7083-8E6D63C84BA0}</FileHash>
+</SoundBanksInfo>

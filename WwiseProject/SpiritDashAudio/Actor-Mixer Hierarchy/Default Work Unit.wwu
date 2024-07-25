@@ -55,10 +55,39 @@
 										<ObjectList Name="Markers">
 											<Reference>
 												<Local>
-													<Marker Name="" ID="{6B02E617-6582-4A87-B252-190DD0171C7F}">
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{0A2D8960-BB43-4AC1-8552-30C44AD7724C}">
 														<PropertyList>
-															<Property Name="Label" Type="string" Value="Test"/>
-															<Property Name="Time" Type="Real64" Value="0.6"/>
+															<Property Name="Label" Type="string" Value="Added by yeniao wwise tool based on bpm"/>
+															<Property Name="Time" Type="Real64" Value="0.600000023841858"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{78CDEC96-850F-41D0-A800-EEC6A72E616F}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="Added by yeniao wwise tool based on bpm"/>
+															<Property Name="Time" Type="Real64" Value="0.600000023841858"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{540F9BBF-3F0E-42F4-95FC-0805C05E812B}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="Added by yeniao wwise tool based on bpm"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{152B8C1B-8C87-45CE-A8E3-1530CFAFD1E1}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="Added by yeniao wwise tool based on bpm"/>
+															<Property Name="Time" Type="Real64" Value="0.600000023841858"/>
 														</PropertyList>
 													</Marker>
 												</Local>
