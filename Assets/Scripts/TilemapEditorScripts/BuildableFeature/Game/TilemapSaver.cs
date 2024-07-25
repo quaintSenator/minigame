@@ -86,12 +86,6 @@ public class TilemapSaver : Singleton<TilemapSaver>
         }
     }
     
-    //在菜单栏 Tools/HZB/ClearAllTilemaps 中调用
-    [UnityEditor.MenuItem("Tools/HZB/ClearAllTilemaps")]
-    public static void ClearAllTilemaps()
-    {
-        PlayerPrefs.DeleteKey(GameConsts.TILEMAP_SAVE_DATA);
-    }
 }
 
 [Serializable]
