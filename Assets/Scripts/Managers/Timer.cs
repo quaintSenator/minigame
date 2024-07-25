@@ -6,10 +6,19 @@ using UnityEngine;
 
 public class TimerDieEventData : EventData
 {
-    public int TimerID;
-    public TimerDieEventData(int i)
+    public double absoluteTime;
+    public TimerDieEventData(double i)
     {
-        TimerID = i;
+        absoluteTime = i;
+    }
+}
+
+public class FrameTimerDieEventData : EventData
+{
+    public int absoluteFrame;
+    public FrameTimerDieEventData(int i)
+    {
+        absoluteFrame = i;
     }
 }
 public class Timer

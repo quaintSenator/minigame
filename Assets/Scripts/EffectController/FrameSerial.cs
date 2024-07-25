@@ -7,11 +7,33 @@ public class FrameSerial
 {
     private List<int> framesToCall;
     private Action<EventData> _frameHitCallback;
-    public FrameSerial(string buildSerialString, Action<EventData> FrameHitCallback)
+    private List<EventData> _eventArgs;
+
+    public FrameSerial(string buildSerialString, Action<EventData> frameHitCallback)
     {
         framesToCall = new List<int>();
         buildframeListByString(buildSerialString);
-        _frameHitCallback = FrameHitCallback;
+        _frameHitCallback = frameHitCallback;
+        _eventArgs = new List<EventData>();
+    }
+    public FrameSerial(string buildSerialString, Action<EventData> frameHitCallback, List<EventData> callbackParams)
+    :this(buildSerialString,frameHitCallback)
+    {
+        _eventArgs = callbackParams;
+    }
+    public FrameSerial(string buildSerialString, Action<EventData> frameHitCallback, EventData callbackParam)
+        :this(buildSerialString, frameHitCallback)
+    {
+        _eventArgs.Add(callbackParam);
+    }
+
+    public void setSerialEventDataList(List<EventData> list)
+    {
+        _eventArgs = new List<EventData>();
+        foreach (var eventData in list)
+        {
+            _eventArgs.Add(eventData);
+        }
     }
     private void buildframeListByString(string buildSerialString)
     {
@@ -25,11 +47,17 @@ public class FrameSerial
             }
         }
     }
-    public void callBySerial()
+    public void CallBySerial()
     {
-        foreach (var bit in framesToCall)
+        if (_eventArgs == null)
         {
-            TimerManager.Ask4FrameTimer(bit, _frameHitCallback);
+            Debug.LogError("FrameSerial._eventArgs = null");
+            return;
+        }
+        for (var i = 0; i < framesToCall.Count; i++)
+        {
+            var frame = framesToCall[i];
+            var id = CleverTimerManager.Ask4FrameTimer(frame, _frameHitCallback, null);
         }
     }
 }
