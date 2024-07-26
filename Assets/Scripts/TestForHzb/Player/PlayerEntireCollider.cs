@@ -3,10 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBottomLine : MonoBehaviour
-{
-    [SerializeField] private PlayerController player;
+
+public class PlayerEntireCollider : MonoBehaviour{
     private BoxCollider2D boxCollider;
+
+    public PlayerController player;
+
+    private void Awake(){
+        boxCollider = GetComponent<BoxCollider2D>();
+    }
 
     private void OnEnable()
     {
@@ -20,32 +25,20 @@ public class PlayerBottomLine : MonoBehaviour
         EventManager.RemoveListener(EventType.GameRestartEvent,OnReset);
     }
 
+    private void OnTriggerEnter2D(Collider2D other) {
+        if(other.gameObject.CompareTag("Safe")){
 
-    private void Start()
-    {
-        boxCollider = GetComponent<BoxCollider2D>();
-    }
-    
-    //碰撞地面
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Ground"))
-        {
-            player.SetIsGrounded(true);
-            Debug.Log("cubeTransDrop:"+this.transform.position);
         }
-    }
-    
-    //离开地面
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Ground"))
-        {
-            player.SetIsGrounded(false);
-            Debug.Log("cubeTransUp:"+transform.position);
+        else if(other.gameObject.CompareTag("Unsafe")){
+            player.SetIsDead(true);
         }
+        Debug.Log("isCollidsion"+other.gameObject.tag);
+    }
+    private void OnTriggerExit2D(Collider2D other) {
+        
     }
 
+    
     private void OnDead(EventData data=null){
         boxCollider.enabled =false;
     }
@@ -53,4 +46,5 @@ public class PlayerBottomLine : MonoBehaviour
     private void OnReset(EventData data = null){
         boxCollider.enabled = true;
     }
+
 }

@@ -4821,6 +4821,77 @@ MonoBehaviour:
   minimumPlayerYDecidedAsOnGround: 0
   particleRandomColorRangeL: {r: 1, g: 1, b: 1, a: 1}
   particleRandomColorRangeR: {r: 0, g: 0.38204694, b: 1, a: 1}
+--- !u!1 &2426603820123445343
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2722495892022012283}
+  - component: {fileID: 3148207353568283233}
+  - component: {fileID: 6482713067612073454}
+  m_Layer: 0
+  m_Name: deathCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2722495892022012283
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2426603820123445343}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3931848180994807022}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &3148207353568283233
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2426603820123445343}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &6482713067612073454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2426603820123445343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f110481e5842482479ce3dc90a05b892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 3931848181877765673}
 --- !u!1 &3832072421744281556
 GameObject:
   m_ObjectHideFlags: 0
@@ -4866,6 +4937,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stillParent: {fileID: 0}
   FadingShadowLifetime: 0.3
+  frameBuildString: 13 33 53 73 93 113 133 163 193 253
 --- !u!1 &3931848180080531524
 GameObject:
   m_ObjectHideFlags: 0
@@ -4881,7 +4953,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3931848180080531523
 Transform:
   m_ObjectHideFlags: 0
@@ -5442,7 +5514,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3931848180994807022}
   m_Layer: 0
-  m_Name: Lines
+  m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5460,6 +5532,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3931848181627620474}
+  - {fileID: 2722495892022012283}
   m_Father: {fileID: 3931848181877765676}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5489,7 +5562,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3931848181627620475}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.002, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3931848180994807022}
@@ -5508,7 +5581,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.411559, y: -0.552516}
+  m_Offset: {x: -0.411559, y: -0.49561507}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -5519,7 +5592,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.017543316, y: 0.21344718}
+  m_Size: {x: 0.017543316, y: 0.099645615}
   m_EdgeRadius: 0
 --- !u!114 &3931848181627620472
 MonoBehaviour:

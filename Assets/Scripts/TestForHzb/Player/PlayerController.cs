@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -35,6 +34,8 @@ public class PlayerController : MonoBehaviour
     private float jumpSpeed = 5.0f;
     //角色是否在地面上
     private bool isGrounded = true;
+    //角色是否已经死亡
+    private bool isDead = false;
     //角色是否再跳
     private bool willJump = false;
     //角色是否进行回正
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour
     private float returnTimer;
     //回正角度
     private float selfAngle;
+
 
     //一次跳跃水平移动距离
     [SerializeField] private float horizontalBlockNum = 4.5f;
@@ -71,17 +73,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.AddListener(EventType.GameRestartEvent, OnReset);
         EventManager.AddListener(EventType.MouseRightClickEvent, OnDead);
-        EventManager.AddListener(EventType.PlayerHitGroundEvent, OnHitGround);
         EventManager.AddListener(EventType.PlayerJumpoffGroundEvent, OnOffGround);
     }
 
     private void OnDisable()
     {
-        EventManager.RemoveListener(EventType.GameRestartEvent, OnReset);
         EventManager.RemoveListener(EventType.MouseRightClickEvent, OnDead);
-        EventManager.RemoveListener(EventType.PlayerHitGroundEvent, OnHitGround);
+        EventManager.RemoveListener(EventType.PlayerJumpoffGroundEvent, OnOffGround);
     }
     private void Start()
     {
@@ -95,7 +94,7 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
-        if (Input.GetKey(KeyCode.Space) && rigidBody.velocity.y <= 0)
+        if (Input.GetKey(KeyCode.Space) && rigidBody.velocity.y <= 0 && !isGrounded)
         {
             //Debug.Log("willJump");
             willJump = true;
@@ -160,9 +159,21 @@ public class PlayerController : MonoBehaviour
         if (!isGrounded && value)
         {
             isGrounded = value;
-            EventManager.InvokeEvent(EventType.PlayerHitGroundEvent);
+            OnHitGround();
         }
         isGrounded = value;
+    }
+
+    public void SetIsDead(bool value)
+    {
+        if(!isDead && value)
+        {
+            isDead = value;
+            OnDead();
+        }
+        else {
+            isDead = value;
+        }
     }
 
     public void OnHitGround(EventData data = null)
@@ -171,9 +182,12 @@ public class PlayerController : MonoBehaviour
         {
             willJump = false;
             Jump();
+            Debug.Log("jump");
         }
         isReturn = true;
         selfAngle = cubeSprites.eulerAngles.z;
+        Debug.Log("OnHitGround");
+        EventManager.InvokeEvent(EventType.PlayerHitGroundEvent);
     }
 
     public void OnOffGround(EventData data = null)
@@ -213,8 +227,6 @@ public class PlayerController : MonoBehaviour
                 else
                     cubeSprites.Rotate(-Vector3.forward, (selfAngle - 360) / RETURN_TIME * Time.deltaTime);
             }
-            Debug.Log("selfAngle:" + selfAngle);
-            Debug.Log("selfAngle1:" + cubeSprites.eulerAngles.z);
             return;
         }
 
@@ -261,20 +273,24 @@ public class PlayerController : MonoBehaviour
     public void OnDead(EventData data = null)
     {
         boxCollider.enabled = false;
-        EventManager.InvokeEvent(EventType.GameRestartEvent);
-
+        EventManager.InvokeEvent(EventType.PlayerDeadEvent);
+        OnReset();
     }
 
     public void OnReset(EventData data = null)
     {
+        isGrounded = true;
         transform.position = GameConsts.START_POSITION;
         cubeSprites.rotation = GameConsts.ZERO_ROTATION;
         rigidBody.velocity = GameConsts.START_VELOCITY;
 
-        isGrounded = true;
+        isDead = false;
+        isReturn = false;
+        returnTimer = 0;
         boxCollider.enabled = true;
-        OnOffGround();
-
+        willJump = false;
+        Debug.Log("isReset");
+        EventManager.InvokeEvent(EventType.GameRestartEvent);
     }
 
 
