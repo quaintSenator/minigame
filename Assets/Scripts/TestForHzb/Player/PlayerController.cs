@@ -40,9 +40,11 @@ public class PlayerController : MonoBehaviour
     //角色是否进行回正
     private bool isReturn = false;
     //回正时间
-    private readonly float RETURN_TIME = 0.02f;
+    private readonly float RETURN_TIME = 0.1f;
     //回正计时器
     private float returnTimer;
+    //回正角度
+    private float selfAngle;
 
     //一次跳跃水平移动距离
     [SerializeField] private float horizontalBlockNum = 4.5f;
@@ -98,13 +100,16 @@ public class PlayerController : MonoBehaviour
             //Debug.Log("willJump");
             willJump = true;
         }
-        if(isReturn){
-            returnTimer +=Time.deltaTime;
+        if (isReturn)
+        {
+            returnTimer += Time.deltaTime;
         }
-        if(returnTimer>=RETURN_TIME){
+        if (returnTimer >= RETURN_TIME)
+        {
             returnTimer = 0;
             isReturn = false;
-            Debug.Log("isReturn:"+isReturn);
+            SetCorrect();
+            Debug.Log("isReturn:" + isReturn);
         }
         Rotate();
 
@@ -123,9 +128,6 @@ public class PlayerController : MonoBehaviour
         {
             rigidBody.AddForce(Vector2.up * jumpForce);
         }
-
-        //角色旋转
-
     }
 
     //注册事件统一函数
@@ -163,7 +165,7 @@ public class PlayerController : MonoBehaviour
         isGrounded = value;
     }
 
-    public void OnHitGround(EventData data)
+    public void OnHitGround(EventData data = null)
     {
         if (willJump)
         {
@@ -171,10 +173,10 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
         isReturn = true;
-
+        selfAngle = cubeSprites.eulerAngles.z;
     }
 
-    public void OnOffGround(EventData data)
+    public void OnOffGround(EventData data = null)
     {
         isReturn = false;
         returnTimer = 0;
@@ -190,24 +192,19 @@ public class PlayerController : MonoBehaviour
     //旋转角色
     public void Rotate()
     {
-        float selfAngle = cubeSprites.eulerAngles.z;
         if (isReturn)
         {
-            Quaternion spriteRotate = cubeSprites.rotation;
             if (Mathf.Abs(selfAngle - 270) <= 45.0f)
             {
                 cubeSprites.Rotate(-Vector3.forward, (selfAngle - 270) / RETURN_TIME * Time.deltaTime);
-                spriteRotate = Quaternion.Euler(0, 0, 270);
             }
             else if (Mathf.Abs(selfAngle - 180) <= 45.0f)
             {
                 cubeSprites.Rotate(-Vector3.forward, (selfAngle - 180) / RETURN_TIME * Time.deltaTime);
-                spriteRotate = Quaternion.Euler(0, 0, 180);
             }
             else if (Mathf.Abs(selfAngle - 90) <= 45.0f)
             {
                 cubeSprites.Rotate(-Vector3.forward, (selfAngle - 90) / RETURN_TIME * Time.deltaTime);
-                spriteRotate = Quaternion.Euler(0, 0, 90);
             }
             else
             {
@@ -215,11 +212,9 @@ public class PlayerController : MonoBehaviour
                     cubeSprites.Rotate(-Vector3.forward, (selfAngle - 0) / RETURN_TIME * Time.deltaTime);
                 else
                     cubeSprites.Rotate(-Vector3.forward, (selfAngle - 360) / RETURN_TIME * Time.deltaTime);
-                spriteRotate = Quaternion.Euler(0, 0, 0);
             }
-            Debug.Log("selfAngle:"+selfAngle);
-            Debug.Log("selfAngle1:"+cubeSprites.eulerAngles.z);
-            cubeSprites.rotation = spriteRotate;
+            Debug.Log("selfAngle:" + selfAngle);
+            Debug.Log("selfAngle1:" + cubeSprites.eulerAngles.z);
             return;
         }
 
@@ -241,20 +236,45 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnDead(EventData data)
+    private void SetCorrect()
+    {
+        Quaternion spriteRotate = cubeSprites.rotation;
+        if (Mathf.Abs(selfAngle - 270) <= 45.0f)
+        {
+            spriteRotate = Quaternion.Euler(0, 0, 270);
+        }
+        else if (Mathf.Abs(selfAngle - 180) <= 45.0f)
+        {
+            spriteRotate = Quaternion.Euler(0, 0, 180);
+        }
+        else if (Mathf.Abs(selfAngle - 90) <= 45.0f)
+        {
+            spriteRotate = Quaternion.Euler(0, 0, 90);
+        }
+        else
+        {
+            spriteRotate = Quaternion.Euler(0, 0, 0);
+        }
+        cubeSprites.rotation = spriteRotate;
+    }
+
+    public void OnDead(EventData data = null)
     {
         boxCollider.enabled = false;
         EventManager.InvokeEvent(EventType.GameRestartEvent);
 
     }
 
-    public void OnReset(EventData data)
+    public void OnReset(EventData data = null)
     {
         transform.position = GameConsts.START_POSITION;
         cubeSprites.rotation = GameConsts.ZERO_ROTATION;
         rigidBody.velocity = GameConsts.START_VELOCITY;
+
         isGrounded = true;
         boxCollider.enabled = true;
+        OnOffGround();
+
     }
 
 
