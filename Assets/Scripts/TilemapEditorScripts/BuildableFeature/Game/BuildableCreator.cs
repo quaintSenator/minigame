@@ -15,20 +15,14 @@ public enum TileMode
 
 public class BuildableCreator : Singleton<BuildableCreator>
 {
-    [Serializable]
-    class Type2Tilemap
-    {
-        public BuildableObjectType type;
-        public Tilemap tilemap;
-    }
-
-    [SerializeField] private List<Type2Tilemap> tilemaps;
-    [SerializeField] private Tilemap priviewTilemap;
-    private TileBase tileBase;
-    private BuildableObjectBase selectedObj;
+    private BuildableType selectedType = BuildableType.none;
+    private BuildableBase previewObj;
+    [SerializeField] private BuildableList buildableList; 
+    [SerializeField] private Transform mapParent; 
     private TileMode currentTileMode = TileMode.None; 
     
-    private Vector2 mousePosition;
+    [SerializeField] private Transform mapStartPoint;
+    private Vector3 mousePosition;
     private Vector3Int currentCellPosition;
     private Vector3Int lastCellPosition;
 
@@ -76,12 +70,12 @@ public class BuildableCreator : Singleton<BuildableCreator>
     {
         if(currentTileMode != TileMode.Destroy)
         {
-            SetSelectedObject(null);
+            SetSelectedObject(BuildableType.none);
             currentTileMode = TileMode.Destroy;
         }
         else
         {
-            SetSelectedObject(null);
+            SetSelectedObject(BuildableType.none);
         }
     }
 
@@ -100,7 +94,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
 
     private void OnEscDown(EventData data)
     {
-        SetSelectedObject(null);
+        SetSelectedObject(BuildableType.none);
     }
 
     private void OnMouseMove(EventData data)
@@ -108,27 +102,36 @@ public class BuildableCreator : Singleton<BuildableCreator>
         UpdateTilemap();
     }
     
-    public void SetSelectedObject(BuildableObjectBase obj)
+    public void SetSelectedObject(BuildableType type)
     {
-        selectedObj = obj;
-        currentTileMode = selectedObj == null ? TileMode.None : TileMode.Build;
+        Debug.Log("SetSelectedObject " + type);
+        selectedType = type;
+        currentTileMode = selectedType == null ? TileMode.None : TileMode.Build;
         UpdateTilemap();
     }
 
     private void UpdateTilemap()
     {
         mousePosition = InputManager.Instance.GetMousePosition();
-        currentCellPosition = priviewTilemap.WorldToCell(mousePosition);
+        Vector3 offset = GetStartPositionOffset();
+        int nearestX = Mathf.RoundToInt((mousePosition.x-offset.x) / GameConsts.TILE_SIZE); // 计算最近的 tile X 坐标
+        int nearestY = Mathf.RoundToInt((mousePosition.y-offset.y) / GameConsts.TILE_SIZE); // 计算最近的 tile Y 坐标
+        currentCellPosition = new Vector3Int(nearestX, nearestY, 0); // 计算最近的 tile 坐标
+        Debug.Log("currentCellPosition " + currentCellPosition);
         if (currentCellPosition != lastCellPosition)
         {
-            priviewTilemap.ClearAllTiles();
-            if (selectedObj == null)
+            if (selectedType != BuildableType.none)
             {
-                priviewTilemap.ClearAllTiles();
-            }
-            else
-            {
-                priviewTilemap.SetTile(currentCellPosition, selectedObj.Tile);
+                if (previewObj != null)
+                {
+                    previewObj.SetPosition(currentCellPosition);
+                }
+                else
+                {
+                    previewObj = Instantiate(buildableList.GetPrefab(selectedType)).GetComponent<BuildableBase>();
+                    previewObj.transform.SetParent(mapParent);
+                    previewObj.SetPosition(currentCellPosition);
+                }
             }
             lastCellPosition = currentCellPosition;
         }
@@ -141,51 +144,22 @@ public class BuildableCreator : Singleton<BuildableCreator>
 
     private void DrawTileMap()
     {
-        if(selectedObj == null || InputManager.Instance.IsMouseOverUI())
-        {
-            return;
-        }
-        EraseTileMap();
-        Tilemap tilemap = GetTilemap(selectedObj.Type);
-        tilemap.SetTile(currentCellPosition, selectedObj.Tile);
+        //TODO 绘制
     }
     
     private void EraseTileMap()
     {
-        foreach (var tilemap in GetAllTilemaps())
-        {
-            tilemap.SetTile(currentCellPosition, null);
-        }
-    }
-    
-    private Tilemap GetTilemap(BuildableObjectType type)
-    {
-        foreach (var item in tilemaps)
-        {
-            if (item.type == type)
-            {
-                return item.tilemap;
-            }
-        }
-        return null;
-    }
-    
-    private List<Tilemap> GetAllTilemaps()
-    {
-        List<Tilemap> tilemapList = new List<Tilemap>();
-        foreach (var item in tilemaps)
-        {
-            tilemapList.Add(item.tilemap);
-        }
-        return tilemapList;
+        //TODO 擦除
     }
     
     public void ClearAllTilemaps()
     {
-        foreach (var tilemap in GetAllTilemaps())
-        {
-            tilemap.ClearAllTiles();
-        }
+        //TODO 清除所有地图
+    }
+    
+    public Vector3 GetStartPositionOffset()
+    {
+        return new Vector3(mapStartPoint.position.x + GameConsts.TILE_SIZE / 2, mapStartPoint.position.y + GameConsts.TILE_SIZE / 2, 0);
     }
     
 }

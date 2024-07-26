@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da37e8abf0c82674798c43e21e054c0b, type: 3}
   m_Name: floor_2
   m_EditorClassIdentifier: 
-  buildableObjectType: 0
-  tileBase: {fileID: 11400000, guid: d0d8f53ce3e3ded48b9ae21bc30c2645, type: 2}
+  buildableObjectType: 2
+  prefab: {fileID: 6749960979790524736, guid: 46c8cf4c875ad5243893b8d7b9b480d7, type: 3}
