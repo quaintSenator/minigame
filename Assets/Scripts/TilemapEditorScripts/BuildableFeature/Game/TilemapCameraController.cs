@@ -52,6 +52,8 @@ public class TilemapCameraController : MonoBehaviour
         {
             zoomDirection = 0;
         }
+        //缩放摄像机
+        virtualCamera.m_Lens.OrthographicSize -= zoomDirection * zoomSpeed;
     }
 
     private void OnMiddleClick(EventData data)
@@ -78,7 +80,5 @@ public class TilemapCameraController : MonoBehaviour
     {
         //移动摄像机
         transform.Translate(moveDirection * Time.deltaTime * moveSpeed);
-        //缩放摄像机
-        virtualCamera.m_Lens.OrthographicSize -= zoomDirection * zoomSpeed;
     }
 }

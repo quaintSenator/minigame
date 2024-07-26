@@ -6,7 +6,17 @@ using UnityEngine;
 // 事件类型
 public enum EventType
 {
-    //输入事件
+    
+    GameStartEvent,
+    GameRestartEvent,
+    PlayerHitGroundEvent,
+    PlayerJumpoffGroundEvent,
+    TimerDieEvent,
+
+
+
+    #region 输入事件在此添加
+    
     MouseMoveEvent,
     MouseLeftClickEvent,
     MouseLeftReleaseEvent,
@@ -17,12 +27,12 @@ public enum EventType
     HorizontalInputEvent,
     SpacebarDownEvent,
     EscDownEvent,
+    EDownEvent,
+    KDownEvent,
+    LDownEvent,
+    NumDownEvent,
     
-    GameStartEvent,
-    GameRestartEvent,
-    PlayerHitGroundEvent,
-    PlayerJumpoffGroundEvent,
-    TimerDieEvent
+    #endregion
 }
 
 // 事件数据参数基类，具体使用时可以继承该类，添加自己需要的参数
