@@ -7,6 +7,7 @@ public class FrictionEffectController : MonoBehaviour, ICloneable
 {
     [SerializeField]
     private ParticleSystem myParticleSystem;
+    [SerializeField] public Transform playerTransform;
     [SerializeField] private float minimumPlayerYDecidedAsOnGround;
     [SerializeField] private Color particleRandomColorRangeL;
     [SerializeField] private Color particleRandomColorRangeR;

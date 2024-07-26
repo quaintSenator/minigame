@@ -2,20 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CleverTimeDieEventData : EventData
-{
-    private GameObject go_shall_die;
-    public CleverTimeDieEventData(GameObject go)
-    {
-        go_shall_die = go;
-    }
-}
+
 public class FadingShadowEffectController : MonoBehaviour
 {
     [SerializeField] public Transform stillParent;
-
     [SerializeField] public float FadingShadowLifetime;
-
     [SerializeField] public string frameBuildString;
     private FrameSerial _shadowSpawnFrameSerial;
 
