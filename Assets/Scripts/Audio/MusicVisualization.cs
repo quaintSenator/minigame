@@ -1,31 +1,31 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AK.Wwise;
 
 public class MusicVisualization : MonoBehaviour
 {
-    //�ؿ�Bank�б�
+    //关卡Bank列表
     [SerializeField] 
     private string[] BankNames = { "LevelTest" };
 
-    //�ؿ�����Event�б�
-/*    [SerializeField] 
-    private Event[] LevelMusicPlayEvent = { };*/
+    //关卡音乐Event列表
+    [SerializeField] 
+    private AK.Wwise.Event[] LevelMusicPlayEvent = { };
 
-    //�ؿ����
+    //关卡序号
     [SerializeField] 
     private int LevelIndex = 0;
 
-    //�ص�����
+    //回调类型
     [SerializeField]
     private AkCallbackType CallbackType = AkCallbackType.AK_Marker;
 
-    //�Ƿ��Զ��ڹؿ���ʼʱ���ű�������
+    //是否自动在关卡开始时播放背景音乐
     [SerializeField] 
     private bool IfPlayMusicWhenStart = true;
 
-    //������ӻ�����
+    //节奏可视化开关
     [SerializeField] 
     private bool IfUseVisualization = true;
 
@@ -47,31 +47,43 @@ public class MusicVisualization : MonoBehaviour
     {
         if(IfPlayMusicWhenStart)
         {
-/*            if(!(LevelIndex< BankNames.Length) 
-                || !(LevelIndex<LevelMusicPlayEvent.Length))
+            if (!(LevelIndex < BankNames.Length)
+                || !(LevelIndex < LevelMusicPlayEvent.Length))
             {
                 Debug.LogWarning("The LevelIndex out of length of LevelMusicPlayEvent or LevelMusicPlayEvent");
                 return;
             }
-            AkBankManager.LoadBank(BankNames[LevelIndex]);
+            AkBankManager.LoadBank(BankNames[LevelIndex], false, false);
 
             if (IfUseVisualization)
             {
-                AkSoundEngine.PostEvent(LevelMusicPlayEvent[LevelIndex], gameObject,(uint)CallbackType, CallbackFunctionMarker);
+                LevelMusicPlayEvent[LevelIndex].Post( gameObject, (uint)CallbackType, CallbackFunctionMarker);
             }
             else
             {
-                AkSoundEngine.PostEvent(LevelMusicPlayEvent[LevelIndex], gameObject);
-            }*/
+                LevelMusicPlayEvent[LevelIndex].Post(gameObject);
+            }
 
 
         }
     }
 
-
-    private void CallbackFunctionMarker(object InCookies, AkCallbackType in_type, object in_info)
+    //播放声音的回调函数
+    //目前打的Marker会在节拍点前提前一定时间，可视化需要计算出正确的位置
+    private void CallbackFunctionMarker(object InCookies, AkCallbackType InCallbackType, object InInfo)
     {
+        if (InCallbackType == AkCallbackType.AK_Marker)
+        {
+            var MarkerInfo = InInfo as AkMarkerCallbackInfo;
+            if (MarkerInfo != null)
+            {
+                //获取Controller移动速度
 
+                //计算位置
+
+                //延迟播放播放动画
+            }
+        }
     }
 
 

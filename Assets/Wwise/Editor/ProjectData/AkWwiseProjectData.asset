@@ -24,7 +24,7 @@ MonoBehaviour:
     ParentPath: Virtual Acoustics\Default Work Unit
     guid: 7bc1de8f6b8540429f8c40f1d6fd53c3
     GuidInternal: 
-    m_lastTime: -8584799666877969229
+    m_lastTime: -8584797958206374676
     List: []
   - PhysicalPath: Virtual Acoustics\Factory Acoustic Textures.wwu
     PathAndIcons:
@@ -37,7 +37,7 @@ MonoBehaviour:
     ParentPath: Virtual Acoustics\Factory Acoustic Textures
     guid: 6b663d46a83ca54f8b4a5fef12b883f6
     GuidInternal: 
-    m_lastTime: -8584799666877969229
+    m_lastTime: -8584797958206374676
     List:
     - name: Acoustic_Banner
       guid: f2532d2fccda8e408b8898b1b52a26d6
@@ -303,7 +303,7 @@ MonoBehaviour:
     ParentPath: Master-Mixer Hierarchy\Default Work Unit
     guid: 7351e85e1a7fef46bb21dfdce1ba22bc
     GuidInternal: 
-    m_lastTime: -8584799666882887492
+    m_lastTime: -8584797958212704638
     List:
     - name: Master Audio Bus
       guid: d8a41415a61d2a41a17e75ca0c2149f3
@@ -331,8 +331,22 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: c470e9f5dd22be41893f629373ebf5aa
     GuidInternal: 
-    m_lastTime: -8584799666877999440
+    m_lastTime: -8584796948876851134
     List:
+    - name: LevelTest
+      guid: a5fe61cd54e2824ebb8394a5c87e4a32
+      id: 4048373417
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: c470e9f5dd22be41893f629373ebf5aa
+      - ElementName: LevelTest
+        ObjectType: 7
+        guid: a5fe61cd54e2824ebb8394a5c87e4a32
+      Path: SoundBanks\Default Work Unit\LevelTest
     - name: TestForYeniao
       guid: 68512d932f305845979d771fbd5014dc
       id: 1528500215
@@ -359,8 +373,118 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 35cab8445c131b4fa4e8550b2232a5b9
     GuidInternal: 
-    m_lastTime: -8584799666885111420
+    m_lastTime: -8584797958216066466
     List: []
+  - PhysicalPath: Events\LevelMusic.wwu
+    PathAndIcons:
+    - ElementName: Events
+      ObjectType: 5
+      guid: 00000000000000000000000000000000
+    - ElementName: LevelMusic
+      ObjectType: 12
+      guid: aaeb73d98601b84494e198693fb906e2
+    ParentPath: Events\LevelMusic
+    guid: aaeb73d98601b84494e198693fb906e2
+    GuidInternal: 
+    m_lastTime: -8584796953096862692
+    List:
+    - name: LevelTest
+      guid: 4331e5b8f4f38446b03aa716acac4613
+      id: 4048373417
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: LevelMusic
+        ObjectType: 12
+        guid: aaeb73d98601b84494e198693fb906e2
+      - ElementName: LevelTest
+        ObjectType: 4
+        guid: 4331e5b8f4f38446b03aa716acac4613
+      Path: Events\LevelMusic\LevelTest
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Pause_LevelTest
+      guid: db626d3fe78acd4f867b3f5de973710d
+      id: 1903092602
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: LevelMusic
+        ObjectType: 12
+        guid: aaeb73d98601b84494e198693fb906e2
+      - ElementName: LevelTest
+        ObjectType: 4
+        guid: 4331e5b8f4f38446b03aa716acac4613
+      - ElementName: Pause_LevelTest
+        ObjectType: 3
+        guid: db626d3fe78acd4f867b3f5de973710d
+      Path: Events\LevelMusic\LevelTest\Pause_LevelTest
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Play_LevelTest
+      guid: 5fa0ea6e9a32b84d96ba1747ae08422d
+      id: 265406176
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: LevelMusic
+        ObjectType: 12
+        guid: aaeb73d98601b84494e198693fb906e2
+      - ElementName: LevelTest
+        ObjectType: 4
+        guid: 4331e5b8f4f38446b03aa716acac4613
+      - ElementName: Play_LevelTest
+        ObjectType: 3
+        guid: 5fa0ea6e9a32b84d96ba1747ae08422d
+      Path: Events\LevelMusic\LevelTest\Play_LevelTest
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Resume_LevelTest
+      guid: a76d824869a24f4aad8b0c801e472100
+      id: 2369008827
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: LevelMusic
+        ObjectType: 12
+        guid: aaeb73d98601b84494e198693fb906e2
+      - ElementName: LevelTest
+        ObjectType: 4
+        guid: 4331e5b8f4f38446b03aa716acac4613
+      - ElementName: Resume_LevelTest
+        ObjectType: 3
+        guid: a76d824869a24f4aad8b0c801e472100
+      Path: Events\LevelMusic\LevelTest\Resume_LevelTest
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Stop_LevelTest
+      guid: 81f5b12ddb1cc4469818d536bb7b53ce
+      id: 566154274
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: LevelMusic
+        ObjectType: 12
+        guid: aaeb73d98601b84494e198693fb906e2
+      - ElementName: LevelTest
+        ObjectType: 4
+        guid: 4331e5b8f4f38446b03aa716acac4613
+      - ElementName: Stop_LevelTest
+        ObjectType: 3
+        guid: 81f5b12ddb1cc4469818d536bb7b53ce
+      Path: Events\LevelMusic\LevelTest\Stop_LevelTest
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
   - PhysicalPath: Events\TestForYeniao.wwu
     PathAndIcons:
     - ElementName: Events
@@ -372,7 +496,7 @@ MonoBehaviour:
     ParentPath: Events\TestForYeniao
     guid: 984d1539623249458096db490ca566b5
     GuidInternal: 
-    m_lastTime: -8584798009599454680
+    m_lastTime: -8584797958216066466
     List:
     - name: Test_Drum_Bpm100
       guid: cfbce826e1812740969a965541bc57ae
@@ -420,7 +544,7 @@ MonoBehaviour:
     ParentPath: Game Parameters\Default Work Unit
     guid: 1f4695e4c7ee2643a45912df1e970c07
     GuidInternal: 
-    m_lastTime: -8584799666885111420
+    m_lastTime: -8584797958216066466
     List: []
   - PhysicalPath: Game Parameters\Factory Soundseed Air Game Syncs.wwu
     PathAndIcons:
@@ -433,7 +557,7 @@ MonoBehaviour:
     ParentPath: Game Parameters\Factory Soundseed Air Game Syncs
     guid: 5577163b42fb8b4598bf96f557afb3b9
     GuidInternal: 
-    m_lastTime: -8584799666885101480
+    m_lastTime: -8584797958216056462
     List:
     - name: SS_Air_Fear
       guid: 59062ef746431c4ea1b1dab46a05101e
@@ -587,7 +711,7 @@ MonoBehaviour:
     ParentPath: States\Default Work Unit
     guid: e9ba440bc537f24f888c2eaa0240a105
     GuidInternal: 
-    m_lastTime: -8584799666877979178
+    m_lastTime: -8584797958206374676
     List: []
   SwitchWwu:
   - PhysicalPath: Switches\Default Work Unit.wwu
@@ -601,7 +725,7 @@ MonoBehaviour:
     ParentPath: Switches\Default Work Unit
     guid: b4bcc398bb8d2d458c4b04244d09808d
     GuidInternal: 
-    m_lastTime: -8584799666877979178
+    m_lastTime: -8584797958206374676
     List: []
   TriggerWwu:
   - PhysicalPath: Triggers\Default Work Unit.wwu
@@ -615,11 +739,11 @@ MonoBehaviour:
     ParentPath: Triggers\Default Work Unit
     guid: a401817d58ebda42929e7be78b9a728c
     GuidInternal: 
-    m_lastTime: -8584799666877969229
+    m_lastTime: -8584797958206374676
     List: []
-  ExpandedFileSystemItemIds: 020000000400000006000000080000000a0000000b0000000c0000000d00000017000000a2000000a30000006101000063010000e0010000e1010000
-  ExpandedWaapiItemIds: 020000000400000006000000080000000a0000000b0000000c0000000d00000017000000a2000000a30000006101000063010000e0010000e1010000
+  ExpandedFileSystemItemIds: 02000000040000000500000006000000080000000a0000000b0000000c0000000d00000017000000700000007200000073000000a2000000a30000006101000063010000e0010000e1010000
+  ExpandedWaapiItemIds: 0200000003000000040000000500000006000000080000000a0000000b0000000c0000000d0000000e0000000f00000017000000700000007200000073000000a2000000a30000006101000063010000e0010000e1010000
   AutoSyncSelection: 0
   autoPopulateEnabled: 1
-  currentDataSource: 1
+  currentDataSource: 0
   CurrentPluginConfig: 
