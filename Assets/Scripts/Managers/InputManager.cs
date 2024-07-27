@@ -118,9 +118,14 @@ public class InputManager : Singleton<InputManager>
         #endregion
     }
     
-    public Vector3 GetMousePosition()
+    public Vector3 GetMouseWolrdPosition()
     {
         return Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    }
+    
+    public Ray RaycastMouseRay()
+    {
+        return Camera.main.ScreenPointToRay(Input.mousePosition);
     }
     
     public bool IsMouseOverUI()
