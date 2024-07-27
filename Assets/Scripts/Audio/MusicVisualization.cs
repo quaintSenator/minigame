@@ -2,19 +2,110 @@
 using System.Collections.Generic;
 using UnityEngine;
 using AK.Wwise;
+using System.Drawing;
+
+[System.Serializable]
+struct RhythmVisualizationPerfabParameter
+{
+
+
+    public RhythmVisualizationPerfabParameter(
+        float _CircleMaxRadium,
+        float _OuterCircleWidth,
+        UnityEngine.Color _OuterCircleColor,
+        UnityEngine.Color _GrowingCircleColor,
+        UnityEngine.Color _NormalColor,
+        UnityEngine.Color _PerfectColor, 
+        float _BeatStartTime,
+        float _PerfectRangeStartTime,
+        float _PerfectRangeEndTime,
+        float _NormalRangeStartTime,
+        float _NormalRangeEndTime,
+        float _BeatEndTime,
+        float _IntervalTimeB2WBeats)
+    {
+        this.CircleMaxRadium = _CircleMaxRadium;
+        this.OuterCircleWidth = _OuterCircleWidth;
+        this.OuterCircleColor = _OuterCircleColor;
+        this.GrowingCircleColor = _GrowingCircleColor;
+        this.NormalColor = _NormalColor;
+        this.PerfectColor = _PerfectColor;
+
+        this.BeatStartTime = _BeatStartTime;
+        this.NormalRangeStartTime = _NormalRangeStartTime;
+        this.NormalRangeEndTime = _NormalRangeEndTime;
+        this.PerfectRangeStartTime = _PerfectRangeStartTime;
+        this.PerfectRangeEndTime = _PerfectRangeEndTime;
+        this.BeatEndTime = _BeatEndTime;
+        this.IntervalTimeB2WBeats = _IntervalTimeB2WBeats;
+    }
+
+    public static RhythmVisualizationPerfabParameter DefaultParameter => 
+        new RhythmVisualizationPerfabParameter(
+            0.48f, 
+            0.02f,
+            UnityEngine.Color.blue, 
+            UnityEngine.Color.green,
+            UnityEngine.Color.yellow,
+            UnityEngine.Color.red,
+            0.0f,
+            0.4f,
+            0.8f,
+            0.5f,
+            0.7f,
+            1.2f,
+            0.0f);
+
+    public float CircleMaxRadium;
+
+    public float OuterCircleWidth;
+
+    public UnityEngine.Color OuterCircleColor;
+
+    public UnityEngine.Color GrowingCircleColor ;
+
+    public UnityEngine.Color NormalColor;
+
+    public UnityEngine.Color PerfectColor ;
+
+    public float BeatStartTime;
+
+    public float NormalRangeStartTime;
+
+    public float NormalRangeEndTime;
+
+    public float PerfectRangeStartTime ;
+
+    public float PerfectRangeEndTime ;
+
+    public float BeatEndTime ;
+
+    public float IntervalTimeB2WBeats;
+
+
+
+}
+
 
 public class MusicVisualization : MonoBehaviour
 {
+    [SerializeField]
+    private PlayerController PlayerControllerInstance = null;
+
     //关卡Bank列表
-    [SerializeField] 
-    private string[] BankNames = { "LevelTest" };
+    [SerializeField]
+    private List<string> BankNames = new List<string> { "LevelTest" };
 
     //关卡音乐Event列表
-    [SerializeField] 
-    private AK.Wwise.Event[] LevelMusicPlayEvent = { };
+    [SerializeField]
+    private List<AK.Wwise.Event> LevelMusicPlayEvent = new List<AK.Wwise.Event>() { };
+
+    //关卡音乐Bpm列表
+    [SerializeField]
+    private List<float> LevelMusicBpmList = new List<float>() { 100 };
 
     //关卡序号
-    [SerializeField] 
+    [SerializeField]
     private int LevelIndex = 0;
 
     //回调类型
@@ -22,42 +113,155 @@ public class MusicVisualization : MonoBehaviour
     private AkCallbackType CallbackType = AkCallbackType.AK_Marker;
 
     //是否自动在关卡开始时播放背景音乐
-    [SerializeField] 
+    [SerializeField]
     private bool IfPlayMusicWhenStart = true;
 
     //节奏可视化开关
-    [SerializeField] 
+    [SerializeField]
     private bool IfUseVisualization = true;
+
+    [SerializeField]
+    private GameObject RhythmVisualizationPerfabType = null;
+
+    [SerializeField]
+    [Header("RhythmVisualization")]
+    int NumberOfRhythmVisualizationPerfabInstance = 5;
+
+    [SerializeField]
+    private List<GameObject> RhythmVisualizationPerfabInstanceList = new List<GameObject>();
+
+    private bool IfInitRhythmVisualizationList = false;
+
+    private bool IfInitRhythmVisualizationPosition = false;
+
+    [SerializeField]
+    private RhythmVisualizationPerfabParameter RhythmVisualizationPerfabParameterInstance = RhythmVisualizationPerfabParameter.DefaultParameter;
+
+    private float PlayerSpeed = 0;
+
+    [SerializeField]
+    private float BeatTimeInterval = 0.6f;
+
+    [SerializeField]
+    private Vector3 RhythmVisualzationStartPositionWithPlayerController = new Vector3(100,100.0f,0);
+
+    private Vector3 RhythmVisualzationPosition = Vector3.zero;
+
+    [SerializeField]
+    private float NextVisualPositionXOffset = 0.0f;
+
+/*    [SerializeField]
+    private float VisualPositionYOffset = 10f;*/
+
+    private int IndexOfLastRhythmVisualzationInstance = 0;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (IfPlayMusicWhenStart)
+        {
+            PlayLevelMusic();
+
+            if (IfUseVisualization)
+            {
+                GetPlayerControllerSpeed();
+                InitRhythmVisualizationPerfabList();
+            }
+
+
+        }
+
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    private void InitRhythmVisualizationPerfabList()
+    {
+        if (RhythmVisualizationPerfabType != null && IfUseVisualization)
+        {
+            for (int IndexOfPerfab = 0; IndexOfPerfab < NumberOfRhythmVisualizationPerfabInstance; IndexOfPerfab++)
+            {
+                GameObject InstanceOfRhythmVisualizationPerfab = GameObject.Instantiate(RhythmVisualizationPerfabType);
+
+                Renderer RendererInstance = InstanceOfRhythmVisualizationPerfab.GetComponent<Renderer>();
+
+                if (RendererInstance != null)
+                {
+                    InitSingleRhythmVisualizationPerfabParameter(RendererInstance);
+                    RendererInstance.enabled = false;
+                }
+
+                RhythmVisualizationPerfabInstanceList.Add(InstanceOfRhythmVisualizationPerfab);
+            }
+            IfInitRhythmVisualizationList = true;
+        }
+    }
+
+    private void GetPlayerControllerSpeed()
+    {
+        if (PlayerControllerInstance != null)
+        {
+            PlayerSpeed = PlayerControllerInstance.GetSpeed();
+            return;
+        }
+        else
+        {
+            Debug.LogWarning("Can not get the PlayerInstance!");
+            return;
+        }
+    }
+
+
+    private void InitSingleRhythmVisualizationPerfabParameter(Renderer RendererInstance)
+    {
+        Material MaterialInstance = RendererInstance.material;
+        if (MaterialInstance != null)
+        {
+            MaterialInstance.SetFloat("CircleMaxRadium", RhythmVisualizationPerfabParameterInstance.CircleMaxRadium);
+            MaterialInstance.SetFloat("OuterCircleWidth", RhythmVisualizationPerfabParameterInstance.OuterCircleWidth);
+
+            MaterialInstance.SetColor("GrowingCircleColor", RhythmVisualizationPerfabParameterInstance.GrowingCircleColor);
+            MaterialInstance.SetColor("NormalColor", RhythmVisualizationPerfabParameterInstance.NormalColor);
+            MaterialInstance.SetColor("PerfectColor", RhythmVisualizationPerfabParameterInstance.PerfectColor);
+
+            MaterialInstance.SetFloat("BeatStartTime", RhythmVisualizationPerfabParameterInstance.BeatStartTime);
+            MaterialInstance.SetFloat("BeatEndTime", RhythmVisualizationPerfabParameterInstance.BeatEndTime);
+
+            MaterialInstance.SetFloat("NormalRangeStartTime", RhythmVisualizationPerfabParameterInstance.NormalRangeStartTime);
+            MaterialInstance.SetFloat("NormalRangeEndTime", RhythmVisualizationPerfabParameterInstance.NormalRangeEndTime);
+
+            MaterialInstance.SetFloat("PerfectRangeStartTime", RhythmVisualizationPerfabParameterInstance.PerfectRangeStartTime);
+            MaterialInstance.SetFloat("PerfectRangeEndTime", RhythmVisualizationPerfabParameterInstance.PerfectRangeEndTime);
+
+            MaterialInstance.SetFloat("IntervalTimeB2WBeats", RhythmVisualizationPerfabParameterInstance.IntervalTimeB2WBeats);
+        }
     }
 
 
     void PlayLevelMusic()
     {
-        if(IfPlayMusicWhenStart)
+        //TODO:补充延时播放相关
+        if (IfPlayMusicWhenStart)
         {
-            if (!(LevelIndex < BankNames.Length)
-                || !(LevelIndex < LevelMusicPlayEvent.Length))
+            if (!(LevelIndex < BankNames.Count)
+                || !(LevelIndex < LevelMusicPlayEvent.Count))
             {
                 Debug.LogWarning("The LevelIndex out of length of LevelMusicPlayEvent or LevelMusicPlayEvent");
                 return;
             }
             AkBankManager.LoadBank(BankNames[LevelIndex], false, false);
 
-            if (IfUseVisualization)
+            if (IfUseVisualization )
             {
-                LevelMusicPlayEvent[LevelIndex].Post( gameObject, (uint)CallbackType, CallbackFunctionMarker);
+                LevelMusicPlayEvent[LevelIndex].Post(gameObject, (uint)CallbackType, CallbackFunctionMarker);
             }
             else
             {
@@ -72,18 +276,91 @@ public class MusicVisualization : MonoBehaviour
     //目前打的Marker会在节拍点前提前一定时间，可视化需要计算出正确的位置
     private void CallbackFunctionMarker(object InCookies, AkCallbackType InCallbackType, object InInfo)
     {
-        if (InCallbackType == AkCallbackType.AK_Marker)
+        if (InCallbackType == AkCallbackType.AK_Marker  && IfUseVisualization)
         {
             var MarkerInfo = InInfo as AkMarkerCallbackInfo;
             if (MarkerInfo != null)
             {
-                //获取Controller移动速度
-
-                //计算位置
-
-                //延迟播放播放动画
+                if (!IfInitRhythmVisualizationPosition)
+                {
+                    InitRhythmVisualizationPerfabInstanceListPosition();
+                }
+                else
+                {
+                    UpdateRhythmVisualizationPerfabInstanceListLocation();
+                }
             }
         }
+    }
+
+    private void ComputeRhythmVisualizationPerfabNextVisualPositionXOffset()
+    {
+        NextVisualPositionXOffset= (Vector3.right * PlayerSpeed * BeatTimeInterval).x;
+        return ;
+    }
+
+
+    private void InitRhythmVisualizationPerfabInstanceListPosition()
+    {
+        if (PlayerControllerInstance == null)
+        {
+            return;
+        }
+        ComputeRhythmVisualizationPerfabNextVisualPositionXOffset();
+
+
+        Vector3 PlayerControllerPosition = PlayerControllerInstance.transform.position;
+
+        for (int IndexOfRhythmVisualzationInstance = 0; IndexOfRhythmVisualzationInstance < RhythmVisualizationPerfabInstanceList.Count; IndexOfRhythmVisualzationInstance++)
+        {
+            if (IndexOfRhythmVisualzationInstance == 0)
+            {
+                //TODO.目前使用玩家的初始位置
+                RhythmVisualizationPerfabInstanceList[IndexOfRhythmVisualzationInstance].transform.position = 
+                    PlayerControllerPosition + 
+                    RhythmVisualzationStartPositionWithPlayerController;
+            }
+            else
+            {
+                RhythmVisualizationPerfabInstanceList[IndexOfRhythmVisualzationInstance].transform.position =
+                    RhythmVisualizationPerfabInstanceList[IndexOfRhythmVisualzationInstance - 1].transform.position
+                    + new Vector3(NextVisualPositionXOffset, 0, 0);
+            }
+
+            Renderer RendererInstance = RhythmVisualizationPerfabInstanceList[IndexOfRhythmVisualzationInstance].GetComponent<Renderer>();
+
+            if (RendererInstance != null)
+            {
+                //InitSingleRhythmVisualizationPerfabParameter(RendererInstance);
+                RendererInstance.enabled = true;
+            }
+
+        }
+        IndexOfLastRhythmVisualzationInstance = 0;
+        IfInitRhythmVisualizationPosition = true;
+
+    }
+    private void UpdateRhythmVisualizationPerfabInstanceListLocation()
+    {
+        int CountOfRhythmVisualizationPerfabInstanceList = RhythmVisualizationPerfabInstanceList.Count;
+        if (CountOfRhythmVisualizationPerfabInstanceList == 0 )
+        {
+            return;
+        }
+        if(IndexOfLastRhythmVisualzationInstance>= CountOfRhythmVisualizationPerfabInstanceList)
+        {
+            Debug.LogWarning("Index out of the RhythmVisualizationPerfabInstanceList range");
+            return;
+        }
+
+        RhythmVisualizationPerfabInstanceList[IndexOfLastRhythmVisualzationInstance].transform.position
+            += new Vector3(NextVisualPositionXOffset * CountOfRhythmVisualizationPerfabInstanceList, 0, 0);
+
+        IndexOfLastRhythmVisualzationInstance +=1;
+
+        IndexOfLastRhythmVisualzationInstance %= CountOfRhythmVisualizationPerfabInstanceList;
+
+
     }
 
 

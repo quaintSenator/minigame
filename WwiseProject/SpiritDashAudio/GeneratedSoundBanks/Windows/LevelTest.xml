@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="150">
 	<SoundBanks>
-		<SoundBank Id="4048373417" Type="User" Language="SFX" Hash="{F3BB3AE4-A32C-37E9-CBD4-AB1A31E0364D}">
+		<SoundBank Id="4048373417" Type="User" Language="SFX" Hash="{BF9CF065-8951-AC7E-C4EC-902957BAC7F6}">
 			<ShortName>LevelTest</ShortName>
 			<Path>LevelTest.bnk</Path>
 			<Media>
 				<File Id="559928222" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Destination_Unknown_100bpm.wav</ShortName>
-					<CachePath>SFX/Destination_Unknown_100bpm_682EDB2F.wem</CachePath>
+					<CachePath>SFX/Destination_Unknown_100bpm_740040C9.wem</CachePath>
 				</File>
 			</Media>
 			<Events>
@@ -22,5 +22,5 @@
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{758F4692-CC5B-8802-7083-8E6D63C84BA0}</FileHash>
+	<FileHash>{B91873E4-A3C4-DC06-109B-2DBDC9A1ED6A}</FileHash>
 </SoundBanksInfo>

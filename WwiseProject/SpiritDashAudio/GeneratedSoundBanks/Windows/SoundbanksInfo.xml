@@ -5,7 +5,7 @@
 		<SourceFilesRoot>../../.cache/Windows</SourceFilesRoot>
 		<SoundBanksRoot>.</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
-		<ExternalSourcesOutputRoot>E:/WorkRepository/UnityProject/SpiritDash/UnityProject/minigame/Assets/StreamingAssets/Audio/GeneratedSoundBanks/Windows</ExternalSourcesOutputRoot>
+		<ExternalSourcesOutputRoot>../../../../Assets/StreamingAssets/Audio/GeneratedSoundBanks/Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
 	<DialogueEvents/>
 	<SoundBanks>
@@ -188,13 +188,13 @@
 				</Event>
 			</Events>
 		</SoundBank>
-		<SoundBank Id="4048373417" Type="User" Language="SFX" Hash="{F3BB3AE4-A32C-37E9-CBD4-AB1A31E0364D}">
+		<SoundBank Id="4048373417" Type="User" Language="SFX" Hash="{BF9CF065-8951-AC7E-C4EC-902957BAC7F6}">
 			<ShortName>LevelTest</ShortName>
 			<Path>LevelTest.bnk</Path>
 			<Media>
 				<File Id="559928222" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Destination_Unknown_100bpm.wav</ShortName>
-					<CachePath>SFX/Destination_Unknown_100bpm_682EDB2F.wem</CachePath>
+					<CachePath>SFX/Destination_Unknown_100bpm_740040C9.wem</CachePath>
 				</File>
 			</Media>
 			<Events>
@@ -209,5 +209,5 @@
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{5E18B9E7-84C5-0184-7934-98E831BAF0A8}</FileHash>
+	<FileHash>{F30D5D51-FC44-A671-336A-296FD65F082C}</FileHash>
 </SoundBanksInfo>
