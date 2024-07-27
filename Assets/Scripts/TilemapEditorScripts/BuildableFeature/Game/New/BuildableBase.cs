@@ -56,7 +56,7 @@ public class BuildableBase : MonoBehaviour
     {
         //计算TILE_SIZE 和 起始位置偏移 和 以左下角为锚点 得到实际位置
         m_position = position;
-        Vector3 offset = BuildableCreator.Instance.GetStartPositionOffset();
+        Vector3 offset = BuildableCreator.GetStartPositionOffset();
         Vector3 realPosition = new Vector3(position.x * GameConsts.TILE_SIZE + offset.x, position.y * GameConsts.TILE_SIZE + offset.y, 0);
         transform.position = realPosition;
         SetSortingOrder(sortingOrder);

@@ -15,18 +15,54 @@ public enum TileMode
 
 public class BuildableCreator : Singleton<BuildableCreator>
 {
+    private TilemapSaveLocalFile selectedMapdata;
+    
     private BuildableType selectedType = BuildableType.none;
     private BuildableBase previewObj;
     [SerializeField] private BuildableList buildableList;
     [SerializeField] private Transform mapParent; 
     private TileMode currentTileMode = TileMode.None; 
     
-    [SerializeField] private Transform mapStartPoint;
     private Vector3 mousePosition;
     private Vector3Int currentCellPosition;
     private Vector3Int lastCellPosition;
     
     private Dictionary<Vector3Int, BuildableBase> currentBuildableMap = new Dictionary<Vector3Int, BuildableBase>();
+
+    protected override void OnAwake()
+    {
+        LoadSelectedData();
+    }
+    
+    private void LoadSelectedData()
+    {
+        MapData mapData = null;
+        string dataString = PlayerPrefs.GetString(GameConsts.CURRENT_SELECTED_MAPDATA);
+        if (dataString != "")
+        {
+            Debug.Log("Load selected map data from PlayerPrefs");
+            
+            mapData = JsonUtility.FromJson<MapData>(dataString);
+        }
+        if (selectedMapdata != null)
+        {
+            mapData = JsonUtility.FromJson<MapData>(selectedMapdata.mapData);
+        }
+        if (mapData != null)
+        {
+            foreach (var buildableInfo in mapData.buildableInfos)
+            {
+                BuildableBase buildable = BuildableBase.SpawnBuildable(buildableInfo.type, buildableInfo.position, 0);
+                buildable.transform.SetParent(mapParent);
+                currentBuildableMap.Add(buildableInfo.position, buildable);
+            }
+            Debug.Log("Mapdata loaded!");
+        }
+        else
+        {
+            Debug.Log("No mapdata loaded!");
+        }
+    }
 
     private void OnEnable()
     {
@@ -222,8 +258,9 @@ public class BuildableCreator : Singleton<BuildableCreator>
         currentBuildableMap.Clear();
     }
     
-    public Vector3 GetStartPositionOffset()
+    public static Vector3 GetStartPositionOffset()
     {
+        Transform mapStartPoint = GameObject.Find("map").transform;
         return new Vector3(mapStartPoint.position.x + GameConsts.TILE_SIZE / 2, mapStartPoint.position.y + GameConsts.TILE_SIZE / 2, 0);
     }
     
