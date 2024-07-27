@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d32fae6ae98bc046a342996c6984ac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildableName: Floor_1
+  buildableName: Floor_3
 --- !u!1 &6749960980242080338
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,7 +147,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2442267203115704014, guid: 2d793ef19453d644fa7eca5f1730a4e6, type: 3}
+  m_Sprite: {fileID: -3276664830246787460, guid: bfc11e20033f52140b4141c8be98813b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

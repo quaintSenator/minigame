@@ -104,9 +104,25 @@ public class BuildableCreator : Singleton<BuildableCreator>
     
     public void SetSelectedObject(BuildableType type)
     {
-        Debug.Log("SetSelectedObject " + type);
         selectedType = type;
-        currentTileMode = selectedType == null ? TileMode.None : TileMode.Build;
+        currentTileMode = selectedType == BuildableType.none ? TileMode.None : TileMode.Build;
+        if (selectedType != BuildableType.none)
+        {
+            if (previewObj != null)
+            {
+                Debug.Log("Destroy previewObj");
+                Destroy(previewObj.gameObject);
+                previewObj = null;
+            }
+            previewObj = Instantiate(buildableList.GetPrefab(selectedType)).GetComponent<BuildableBase>();
+            previewObj.SetPosition(currentCellPosition);
+            previewObj.transform.SetParent(transform);
+        }
+        else
+        {
+            Destroy(previewObj);
+            previewObj = null;
+        }
         UpdateTilemap();
     }
 
@@ -117,21 +133,11 @@ public class BuildableCreator : Singleton<BuildableCreator>
         int nearestX = Mathf.RoundToInt((mousePosition.x-offset.x) / GameConsts.TILE_SIZE); // 计算最近的 tile X 坐标
         int nearestY = Mathf.RoundToInt((mousePosition.y-offset.y) / GameConsts.TILE_SIZE); // 计算最近的 tile Y 坐标
         currentCellPosition = new Vector3Int(nearestX, nearestY, 0); // 计算最近的 tile 坐标
-        Debug.Log("currentCellPosition " + currentCellPosition);
         if (currentCellPosition != lastCellPosition)
         {
-            if (selectedType != BuildableType.none)
+            if (previewObj != null)
             {
-                if (previewObj != null)
-                {
-                    previewObj.SetPosition(currentCellPosition);
-                }
-                else
-                {
-                    previewObj = Instantiate(buildableList.GetPrefab(selectedType)).GetComponent<BuildableBase>();
-                    previewObj.transform.SetParent(mapParent);
-                    previewObj.SetPosition(currentCellPosition);
-                }
+                previewObj.SetPosition(currentCellPosition);
             }
             lastCellPosition = currentCellPosition;
         }

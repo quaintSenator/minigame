@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuildableObjectButton : MonoBehaviour
+public class BuildableSelectButton : MonoBehaviour
 {
     [SerializeField] BuildableType buildableType;
     private Button btn;
