@@ -7,17 +7,31 @@ using UnityEngine.Tilemaps;
 
 public class TilemapSaver : Singleton<TilemapSaver>
 {
+    private bool isInit = false;
     private Dictionary<string, MapData> allSaveMapsDic;
     public List<MapData> allSaveMapsList;
-    public Transform mapParent;
+    public Dictionary<Vector3Int, BuildableInfo> currentBuildableInfosDic;
 
     protected override void OnAwake()
     {
+        if (!isInit)
+        {
+            Init();
+        }
+    }
+
+    private void OnDisable()
+    {
+        AutoSaveMap();
+    }
+
+    public void Init()
+    {
+        isInit = true;
         allSaveMapsDic = new Dictionary<string, MapData>();
         string data = PlayerPrefs.GetString(GameConsts.TILEMAP_SAVE_DATA);
         if (data != "")
         {
-            
             allSaveMapsList = JsonUtility.FromJson<SerializeBridge<MapData>>(data).list;
         }
         else
@@ -28,43 +42,49 @@ public class TilemapSaver : Singleton<TilemapSaver>
         {
             allSaveMapsDic.Add(saveData.key, saveData);
         }
-        mapParent = GameObject.Find("map").transform;
-    }
-
-    private void OnDisable()
-    {
-#if UNITY_EDITOR
-        //AutoSaveTilemap();
-#endif
+        currentBuildableInfosDic = new Dictionary<Vector3Int, BuildableInfo>();
     }
     
+    public void AddThisBuildable(BuildableType type, Vector3Int position)
+    {
+        Debug.Log("Record this buildable");
+        currentBuildableInfosDic.Add(position, new BuildableInfo(type, position));
+    }
+    
+    public void RemoveThisBuildable(Vector3Int position)
+    {
+        Debug.Log("Remove this buildable");
+        currentBuildableInfosDic.Remove(position);
+    }
+
     public void SaveTilemap()
     {
-        MapData mapData = CopyCurrentTilempydata();
-        string key = mapData.key;
+        string key = (allSaveMapsList.Count+1).ToString();
+        List<BuildableInfo> buildableInfos = new List<BuildableInfo>();
+        foreach (var buildableInfo in currentBuildableInfosDic.Values)
+        {
+            buildableInfos.Add(buildableInfo);
+        }
+        MapData mapData = new MapData(key, buildableInfos);
         allSaveMapsDic.Add(key, mapData);
         allSaveMapsList.Add(mapData);
-        PlayerPrefs.SetString(GameConsts.TILEMAP_SAVE_DATA, JsonUtility.ToJson(new SerializeBridge<MapData>(allSaveMapsList)));
-    }
-
-    public MapData CopyCurrentTilempydata()
-    {
-        List<BuildableInfo> buildableInfos = new List<BuildableInfo>();
-        string key = (allSaveMapsList.Count+1).ToString();
-        foreach (var buildableInfo in BuildableCreator.Instance.GetCurrentBuildableMap())
-        {
-            Vector3Int position = buildableInfo.Value.Position;
-            BuildableType type = buildableInfo.Value.Type;
-            buildableInfos.Add(new BuildableInfo(type, position));
-        }
-        return new MapData(key, buildableInfos);
+        string data = JsonUtility.ToJson(new SerializeBridge<MapData>(allSaveMapsList));
+        PlayerPrefs.SetString(GameConsts.TILEMAP_SAVE_DATA, data);
+        Debug.Log(data);
     }
     
-    public void AutoSaveTilemap()
+    public void AutoSaveMap()
     {
-        MapData mapData = CopyCurrentTilempydata();
+        string key = "auto_save";
+        List<BuildableInfo> buildableInfos = new List<BuildableInfo>();
+        foreach (var buildableInfo in currentBuildableInfosDic.Values)
+        {
+            buildableInfos.Add(buildableInfo);
+        }
+        Debug.Log("currentBuildableInfosDic.Count : " + currentBuildableInfosDic.Count);
+        MapData mapData = new MapData(key, buildableInfos);
         PlayerPrefs.SetString(GameConsts.AUTO_TILEMAP_SAVE_DATA, JsonUtility.ToJson(mapData));
-        Debug.Log("Auto save tilemap");
+        Debug.Log("Auto save tilemap : " + JsonUtility.ToJson(new MapData(key, buildableInfos)));
     }
     
     public List<BuildableInfo> LoadTilemap(string key)
