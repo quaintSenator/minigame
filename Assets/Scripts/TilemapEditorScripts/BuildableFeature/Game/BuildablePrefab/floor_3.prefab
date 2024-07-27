@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d32fae6ae98bc046a342996c6984ac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildableName: Floor_3
+  type: 3
 --- !u!1 &6749960980242080338
 GameObject:
   m_ObjectHideFlags: 0

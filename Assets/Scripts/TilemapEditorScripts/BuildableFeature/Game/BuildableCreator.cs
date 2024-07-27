@@ -17,7 +17,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
 {
     private BuildableType selectedType = BuildableType.none;
     private BuildableBase previewObj;
-    [SerializeField] private BuildableList buildableList; 
+    [SerializeField] private BuildableList buildableList;
     [SerializeField] private Transform mapParent; 
     private TileMode currentTileMode = TileMode.None; 
     
@@ -25,9 +25,13 @@ public class BuildableCreator : Singleton<BuildableCreator>
     private Vector3 mousePosition;
     private Vector3Int currentCellPosition;
     private Vector3Int lastCellPosition;
+    
+    private Dictionary<Vector3Int, BuildableBase> currentBuildableMap = new Dictionary<Vector3Int, BuildableBase>();
 
     private void OnEnable()
     {
+        Debug.Log("Buildable list" + buildableList.ToString());
+        
         EventManager.AddListener(EventType.EscDownEvent,OnEscDown); //取消当前选择
         EventManager.AddListener(EventType.MouseMoveEvent, OnMouseMove); //鼠标移动
         EventManager.AddListener(EventType.MouseLeftClickEvent, OnMouseLeftClick); //绘制或者擦除
@@ -81,6 +85,11 @@ public class BuildableCreator : Singleton<BuildableCreator>
 
     private void OnMouseLeftClick(EventData data = null)
     {
+        if (InputManager.Instance.IsMouseOverUI())
+        {
+            return;
+        }
+        
         if (currentTileMode == TileMode.Build)
         {
             DrawTileMap();   
@@ -115,7 +124,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
                 previewObj = null;
             }
             previewObj = Instantiate(buildableList.GetPrefab(selectedType)).GetComponent<BuildableBase>();
-            previewObj.SetPosition(currentCellPosition);
+            previewObj.SetPosition(new Vector3Int(currentCellPosition.x, currentCellPosition.y, 1));
             previewObj.transform.SetParent(transform);
         }
         else
@@ -137,20 +146,41 @@ public class BuildableCreator : Singleton<BuildableCreator>
         {
             if (previewObj != null)
             {
-                previewObj.SetPosition(currentCellPosition);
+                previewObj.SetPosition(currentCellPosition, 1);
             }
             lastCellPosition = currentCellPosition;
-        }
-        //如果鼠标还在按着左键，继续操作
-        if (InputManager.Instance.IsMouseLeftPressing())
-        {
-            OnMouseLeftClick();
+            //如果鼠标还在按着左键，继续操作
+            if (InputManager.Instance.IsMouseLeftPressing())
+            {
+                OnMouseLeftClick();
+            }
         }
     }
 
     private void DrawTileMap()
     {
-        //TODO 绘制
+        //如果当前鼠标位置上有物体并且和当前选择的不一样，Destroy
+        if (currentBuildableMap.ContainsKey(currentCellPosition))
+        {
+            if (currentBuildableMap[currentCellPosition].type != selectedType)
+            {
+                Destroy(currentBuildableMap[currentCellPosition].gameObject);
+                currentBuildableMap.Remove(currentCellPosition);
+            }
+            else
+            {
+                return;
+            }
+        }
+        
+        //生成选择的物体
+        if (selectedType != BuildableType.none)
+        {
+            BuildableBase buildable = Instantiate(buildableList.GetPrefab(selectedType)).GetComponent<BuildableBase>();
+            buildable.SetPosition(currentCellPosition);
+            buildable.transform.SetParent(mapParent);
+            currentBuildableMap.Add(currentCellPosition, buildable);
+        }
     }
     
     private void EraseTileMap()
