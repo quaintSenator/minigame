@@ -129,7 +129,8 @@ public class BuildableCreator : Singleton<BuildableCreator>
         }
         else
         {
-            Destroy(previewObj);
+            Debug.Log("Destroy previewObj");
+            Destroy(previewObj.gameObject);
             previewObj = null;
         }
         UpdateTilemap();
@@ -137,7 +138,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
 
     private void UpdateTilemap()
     {
-        mousePosition = InputManager.Instance.GetMousePosition();
+        mousePosition = InputManager.Instance.GetMouseWolrdPosition();
         Vector3 offset = GetStartPositionOffset();
         int nearestX = Mathf.RoundToInt((mousePosition.x-offset.x) / GameConsts.TILE_SIZE); // 计算最近的 tile X 坐标
         int nearestY = Mathf.RoundToInt((mousePosition.y-offset.y) / GameConsts.TILE_SIZE); // 计算最近的 tile Y 坐标
@@ -185,7 +186,21 @@ public class BuildableCreator : Singleton<BuildableCreator>
     
     private void EraseTileMap()
     {
-        //TODO 擦除
+        //从当前位置射出射线
+        Ray ray = InputManager.Instance.RaycastMouseRay();
+        RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
+        //如果射线没有碰到任何物体，返回
+        if (!hit)
+        {
+            Debug.Log("No hit");
+            return;
+        }
+        if(hit.collider.TryGetComponent(out BuildableBase buildable))
+        {
+            Destroy(buildable.gameObject);
+            currentBuildableMap.Remove(buildable.Position);
+        }
+        
     }
     
     public void ClearAllTilemaps()

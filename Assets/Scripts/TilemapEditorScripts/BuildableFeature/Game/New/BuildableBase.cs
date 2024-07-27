@@ -6,6 +6,8 @@ using UnityEngine.Serialization;
 
 public class BuildableBase : MonoBehaviour
 {
+    private Vector3Int m_position;
+    public Vector3Int Position => m_position;
     public static BuildableList buildableList;
     [FormerlySerializedAs("buildableName")] public BuildableType type;
     
@@ -39,6 +41,7 @@ public class BuildableBase : MonoBehaviour
     public void SetPosition(Vector3Int position, int sortingOrder = 0)
     {
         //计算TILE_SIZE 和 起始位置偏移 和 以左下角为锚点 得到实际位置
+        m_position = position;
         Vector3 offset = BuildableCreator.Instance.GetStartPositionOffset();
         Vector3 realPosition = new Vector3(position.x * GameConsts.TILE_SIZE + offset.x, position.y * GameConsts.TILE_SIZE + offset.y, 0);
         transform.position = realPosition;

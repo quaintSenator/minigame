@@ -124,4 +124,46 @@ public class TilemapEditor : Editor
         }
         return tilemapList;
     }
+    
+    //在菜单栏 Tools/HZB/Fix BoxCollider2D Size 中调用，调整 BoxCollider2D 的大小为子物体中最大的 SpriteRenderer 的大小
+    [MenuItem("Tools/HZB/Fix BoxCollider2D Size")]
+    public static void FixBoxCollider2DSize()
+    {
+        GameObject selectedObject = Selection.activeGameObject;
+        GameObject prefabRoot = PrefabUtility.GetOutermostPrefabInstanceRoot(selectedObject);
+
+        if (prefabRoot != null)
+        {
+            BoxCollider2D boxCollider2D = prefabRoot.GetComponent<BoxCollider2D>();
+            if (boxCollider2D != null)
+            {
+                SpriteRenderer[] spriteRenderers = prefabRoot.GetComponentsInChildren<SpriteRenderer>();
+                if (spriteRenderers.Length > 0)
+                {
+                    Bounds bounds = spriteRenderers[0].bounds;
+                    foreach (var spriteRenderer in spriteRenderers)
+                    {
+                        bounds.Encapsulate(spriteRenderer.bounds);
+                    }
+                    boxCollider2D.size = bounds.size;
+                    boxCollider2D.offset = bounds.center - prefabRoot.transform.position;
+
+                    PrefabUtility.ApplyPrefabInstance(prefabRoot, InteractionMode.UserAction);
+                    Debug.Log("Fixed BoxCollider2D size and saved to Prefab.");
+                }
+                else
+                {
+                    Debug.LogError("No SpriteRenderer found in the selected Prefab.");
+                }
+            }
+            else
+            {
+                Debug.LogError("Prefab does not contain BoxCollider2D component.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Please select a Prefab instance.");
+        }
+    }
 }
