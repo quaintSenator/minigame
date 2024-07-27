@@ -129,6 +129,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+    public float GetSpeed()
+    {
+        return speed;
+    }
+
     //注册事件统一函数
     private void registerEvents()
     {

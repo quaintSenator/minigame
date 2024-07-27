@@ -10,7 +10,7 @@
   <LoadSoundEngineInEditMode>true</LoadSoundEngineInEditMode>
   <ShowMissingRigidBodyWarning>true</ShowMissingRigidBodyWarning>
   <ShowSpatialAudioWarningMsg>true</ShowSpatialAudioWarningMsg>
-  <WwiseInstallationPathWindows>D:\software\Wwise</WwiseInstallationPathWindows>
+  <WwiseInstallationPathWindows>E:\Wwise\Wwise2023.1.5.8522</WwiseInstallationPathWindows>
   <WwiseProjectPath>../WwiseProject/SpiritDashAudio/SpiritDashAudio.wproj</WwiseProjectPath>
   <UseWaapi>true</UseWaapi>
   <WaapiPort>8080</WaapiPort>
