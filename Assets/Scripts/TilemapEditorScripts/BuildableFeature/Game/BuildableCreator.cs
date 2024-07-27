@@ -55,7 +55,17 @@ public class BuildableCreator : Singleton<BuildableCreator>
     {
         var numData = data as NumDownEventData;
         ClearAllTilemaps();
-        TilemapSaver.Instance.LoadTilemap(numData.num.ToString());
+        List<BuildableInfo> buildableInfos = TilemapSaver.Instance.LoadTilemap(numData.num.ToString());
+        if (buildableInfos == null)
+        {
+            return;
+        }
+        foreach (var buildableInfo in buildableInfos)
+        {
+            BuildableBase buildable = BuildableBase.SpawnBuildable(buildableInfo.type, buildableInfo.position, 0);
+            buildable.transform.SetParent(mapParent);
+            currentBuildableMap.Add(buildableInfo.position, buildable);
+        }
     }
 
     private void OnKDown(EventData obj)
@@ -120,17 +130,16 @@ public class BuildableCreator : Singleton<BuildableCreator>
             if (previewObj != null)
             {
                 Debug.Log("Destroy previewObj");
-                Destroy(previewObj.gameObject);
+                previewObj.DestroyBuildable();
                 previewObj = null;
             }
-            previewObj = Instantiate(buildableList.GetPrefab(selectedType)).GetComponent<BuildableBase>();
-            previewObj.SetPosition(new Vector3Int(currentCellPosition.x, currentCellPosition.y, 1));
+            previewObj = BuildableBase.SpawnBuildable(selectedType, currentCellPosition, 1);
             previewObj.transform.SetParent(transform);
         }
         else
         {
             Debug.Log("Destroy previewObj");
-            Destroy(previewObj.gameObject);
+            previewObj.DestroyBuildable();
             previewObj = null;
         }
         UpdateTilemap();
@@ -163,9 +172,9 @@ public class BuildableCreator : Singleton<BuildableCreator>
         //如果当前鼠标位置上有物体并且和当前选择的不一样，Destroy
         if (currentBuildableMap.ContainsKey(currentCellPosition))
         {
-            if (currentBuildableMap[currentCellPosition].type != selectedType)
+            if (currentBuildableMap[currentCellPosition].Type != selectedType)
             {
-                Destroy(currentBuildableMap[currentCellPosition].gameObject);
+                currentBuildableMap[currentCellPosition].DestroyBuildable();
                 currentBuildableMap.Remove(currentCellPosition);
             }
             else
@@ -177,8 +186,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         //生成选择的物体
         if (selectedType != BuildableType.none)
         {
-            BuildableBase buildable = Instantiate(buildableList.GetPrefab(selectedType)).GetComponent<BuildableBase>();
-            buildable.SetPosition(currentCellPosition);
+            BuildableBase buildable = BuildableBase.SpawnBuildable(selectedType, currentCellPosition, 0);
             buildable.transform.SetParent(mapParent);
             currentBuildableMap.Add(currentCellPosition, buildable);
         }
@@ -197,7 +205,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         }
         if(hit.collider.TryGetComponent(out BuildableBase buildable))
         {
-            Destroy(buildable.gameObject);
+            buildable.DestroyBuildable();
             currentBuildableMap.Remove(buildable.Position);
         }
         
@@ -205,12 +213,24 @@ public class BuildableCreator : Singleton<BuildableCreator>
     
     public void ClearAllTilemaps()
     {
-        //TODO 清除所有地图
+        Debug.Log("Clear all tilemaps");
+        foreach (var buildableInfo in currentBuildableMap)
+        {
+            BuildableBase buildable = buildableInfo.Value;
+            buildable.DestroyBuildable();
+        }
+        currentBuildableMap.Clear();
     }
     
     public Vector3 GetStartPositionOffset()
     {
         return new Vector3(mapStartPoint.position.x + GameConsts.TILE_SIZE / 2, mapStartPoint.position.y + GameConsts.TILE_SIZE / 2, 0);
+    }
+    
+    public Dictionary<Vector3Int, BuildableBase> GetCurrentBuildableMap()
+    {
+        Debug.Log(currentBuildableMap.Count);
+        return currentBuildableMap;
     }
     
 }

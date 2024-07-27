@@ -7,135 +7,115 @@ using UnityEngine.Tilemaps;
 
 public class TilemapSaver : Singleton<TilemapSaver>
 {
-    private Dictionary<string, Tilemap> tilemaps = new Dictionary<string, Tilemap>();
-
-    private Dictionary<string,TilemapData> allSaveMapsDic;
-    
-    public List<SaveBridgeData> allSaveMapsList;
+    private Dictionary<string, MapData> allSaveMapsDic;
+    public List<MapData> allSaveMapsList;
+    public Transform mapParent;
 
     protected override void OnAwake()
     {
-        allSaveMapsDic = new Dictionary<string, TilemapData>();
+        allSaveMapsDic = new Dictionary<string, MapData>();
         string data = PlayerPrefs.GetString(GameConsts.TILEMAP_SAVE_DATA);
         if (data != "")
         {
-            allSaveMapsList = JsonUtility.FromJson<List<SaveBridgeData>>(data);
+            
+            allSaveMapsList = JsonUtility.FromJson<SerializeBridge<MapData>>(data).list;
         }
         else
         {
-            allSaveMapsList = new List<SaveBridgeData>();
+            allSaveMapsList = new List<MapData>();
         }
         foreach (var saveData in allSaveMapsList)
         {
-            allSaveMapsDic.Add(saveData.key, saveData.tilemapData);
+            allSaveMapsDic.Add(saveData.key, saveData);
         }
-        initTilemaps();
+        mapParent = GameObject.Find("map").transform;
     }
 
     private void OnDisable()
     {
 #if UNITY_EDITOR
-        AutoSaveTilemap();
+        //AutoSaveTilemap();
 #endif
-    }
-
-    public void initTilemaps()
-    {
-        Transform tilemapParent = GameObject.Find("all_tilemaps").transform;
-        foreach (Transform child in tilemapParent)
-        {
-            Tilemap tilemap = child.GetComponent<Tilemap>();
-            if (tilemap != null && child.name != "preview" && child.name != "background")
-            {
-                tilemaps.Add(child.name, tilemap);
-                Debug.Log("Add tilemap: " + child.name);
-            }
-        }
     }
     
     public void SaveTilemap()
     {
-        TilemapData tilemapData = CopyCurrentTilempydata();
-        string key = (allSaveMapsDic.Count + 1).ToString();
-        allSaveMapsDic.Add(key, tilemapData);
-        allSaveMapsList.Add(new SaveBridgeData(key, tilemapData));
-        PlayerPrefs.SetString(GameConsts.TILEMAP_SAVE_DATA, JsonUtility.ToJson(allSaveMapsList));
+        MapData mapData = CopyCurrentTilempydata();
+        string key = mapData.key;
+        allSaveMapsDic.Add(key, mapData);
+        allSaveMapsList.Add(mapData);
+        PlayerPrefs.SetString(GameConsts.TILEMAP_SAVE_DATA, JsonUtility.ToJson(new SerializeBridge<MapData>(allSaveMapsList)));
     }
 
-    public TilemapData CopyCurrentTilempydata()
+    public MapData CopyCurrentTilempydata()
     {
-        TilemapData tilemapData = new TilemapData();
-        foreach (var tilemap in tilemaps)
+        List<BuildableInfo> buildableInfos = new List<BuildableInfo>();
+        string key = (allSaveMapsList.Count+1).ToString();
+        foreach (var buildableInfo in BuildableCreator.Instance.GetCurrentBuildableMap())
         {
-            Tilemap tilemapComponent = tilemap.Value;
-            BoundsInt bounds = tilemapComponent.cellBounds;
-            TileBase[] allTiles = tilemapComponent.GetTilesBlock(bounds);
-            for (int x = 0; x < bounds.size.x; x++)
-            {
-                for (int y = 0; y < bounds.size.y; y++)
-                {
-                    TileBase tile = allTiles[x + y * bounds.size.x];
-                    if (tile != null)
-                    {
-                        Vector3Int localPlace = (new Vector3Int(bounds.xMin, bounds.yMin, bounds.z) + new Vector3Int(x, y, 0));
-                        Vector3 place = tilemapComponent.CellToWorld(localPlace);
-                        tilemapData.tileInfos.Add(new TileInfo(tilemap.Key, tile, place));
-                    }
-                }
-            }
+            Vector3Int position = buildableInfo.Value.Position;
+            BuildableType type = buildableInfo.Value.Type;
+            buildableInfos.Add(new BuildableInfo(type, position));
         }
-        return tilemapData;
+        return new MapData(key, buildableInfos);
     }
     
     public void AutoSaveTilemap()
     {
-        TilemapData tilemapData = CopyCurrentTilempydata();
-        PlayerPrefs.SetString(GameConsts.AUTO_TILEMAP_SAVE_DATA, JsonUtility.ToJson(tilemapData));
+        MapData mapData = CopyCurrentTilempydata();
+        PlayerPrefs.SetString(GameConsts.AUTO_TILEMAP_SAVE_DATA, JsonUtility.ToJson(mapData));
         Debug.Log("Auto save tilemap");
     }
     
-    public void LoadTilemap(string key)
+    public List<BuildableInfo> LoadTilemap(string key)
     {
         if (key != null)
         {
-            TilemapData tilemapData = allSaveMapsDic[key];
-            foreach (var tileInfo in tilemapData.tileInfos)
+            if (allSaveMapsDic.ContainsKey(key))
             {
-                Tilemap tilemapComponent = tilemaps[tileInfo.tilemapName];
-                tilemapComponent.SetTile(tilemapComponent.WorldToCell(tileInfo.wolrdPosition), tileInfo.tile);
+                return allSaveMapsDic[key].buildableInfos;
             }
         }
+        return null;
     }
 }
 
 [Serializable]
-public class TilemapData
+public class MapData
 {
-    public List<TileInfo> tileInfos = new List<TileInfo>();
-}
-
-[Serializable]
-public class TileInfo
-{
-    public string tilemapName;
-    public TileBase tile;
-    public Vector3 wolrdPosition;
-    public TileInfo(string tilemapName, TileBase tile, Vector3 position)
-    {
-        this.tilemapName = tilemapName;
-        this.tile = tile;
-        this.wolrdPosition = position;
-    }
-}
-
-[Serializable]
-public class SaveBridgeData
-{
-    public string key;
-    public TilemapData tilemapData;
-    public SaveBridgeData(string key, TilemapData tilemapData)
+    public string key; 
+    public List<BuildableInfo> buildableInfos;
+    public MapData(string key, List<BuildableInfo> buildableInfos)
     {
         this.key = key;
-        this.tilemapData = tilemapData;
+        this.buildableInfos = buildableInfos;
+    }
+    
+    public MapData()
+    {
+        buildableInfos = new List<BuildableInfo>();
+    }
+}
+
+[Serializable]
+public class BuildableInfo
+{
+    public BuildableType type;
+    public Vector3Int position;
+    
+    public BuildableInfo(BuildableType type, Vector3Int position)
+    {
+        this.type = type;
+        this.position = position;
+    }
+}
+
+[Serializable]
+public class SerializeBridge<T>
+{
+    [SerializeField] public List<T> list;
+    public SerializeBridge(List<T> list)
+    {
+        this.list = list;
     }
 }

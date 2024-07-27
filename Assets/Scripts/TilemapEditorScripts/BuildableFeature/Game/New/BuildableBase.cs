@@ -9,11 +9,23 @@ public class BuildableBase : MonoBehaviour
     private Vector3Int m_position;
     public Vector3Int Position => m_position;
     public static BuildableList buildableList;
-    [FormerlySerializedAs("buildableName")] public BuildableType type;
+    private BuildableType type;
+    public BuildableType Type => type;
     
     private void OnEnable()
     {
         SetSortingOrder();
+    }
+
+    public virtual void Init()
+    {
+        //TODO 初始化
+    }
+    
+    public virtual void DestroyBuildable()
+    {
+        Destroy(gameObject);
+        //TODO 销毁需要做的事
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,9 +38,10 @@ public class BuildableBase : MonoBehaviour
     
     protected virtual void TriggerThisBuildable()
     {
-        Debug.Log("Triggered " + type);
+        //TODO 触发功能
     }
     
+    //设置渲染层级
     private void SetSortingOrder(int sortingOrder = 0)
     {
         Renderer[] renderers = GetComponentsInChildren<Renderer>();
@@ -38,6 +51,7 @@ public class BuildableBase : MonoBehaviour
         }
     }
     
+    //设置位置
     public void SetPosition(Vector3Int position, int sortingOrder = 0)
     {
         //计算TILE_SIZE 和 起始位置偏移 和 以左下角为锚点 得到实际位置
@@ -48,13 +62,16 @@ public class BuildableBase : MonoBehaviour
         SetSortingOrder(sortingOrder);
     }
 
+    
+    //生成地块
     public static BuildableBase SpawnBuildable(BuildableType type, Vector3Int position, int sortingOrder = 0)
     {
         if(buildableList == null)
         {
-            buildableList = Resources.Load<BuildableList>("BuildableList");
+            buildableList = Resources.Load<BuildableList>("AllBuildableList");
         }
         BuildableBase buildable = Instantiate(buildableList.GetPrefab(type)).GetComponent<BuildableBase>();
+        buildable.type = type;
         buildable.SetPosition(position, sortingOrder);
         return buildable;
     }

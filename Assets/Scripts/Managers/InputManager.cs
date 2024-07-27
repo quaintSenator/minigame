@@ -125,7 +125,6 @@ public class InputManager : Singleton<InputManager>
     
     public Ray RaycastMouseRay()
     {
-        Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         return Camera.main.ScreenPointToRay(Input.mousePosition);
     }
     
