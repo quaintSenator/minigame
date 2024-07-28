@@ -107,6 +107,11 @@ public class BuildableCreator : Singleton<BuildableCreator>
 
     private void OnKDown(EventData obj)
     {
+        if(currentBuildableMap.Count == 0)
+        {
+            Debug.Log("No buildable to save");
+            return;
+        }
         TilemapSaver.Instance.SaveTilemap();
         ClearAllTilemaps();
     }
@@ -211,8 +216,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         {
             if (currentBuildableMap[currentCellPosition].Type != selectedType)
             {
-                currentBuildableMap[currentCellPosition].DestroyBuildable();
-                currentBuildableMap.Remove(currentCellPosition);
+                DestoryBuildable(currentCellPosition);
             }
             else
             {
