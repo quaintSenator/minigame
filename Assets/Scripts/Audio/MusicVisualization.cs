@@ -10,6 +10,7 @@ struct RhythmVisualizationPerfabParameter
 
 
     public RhythmVisualizationPerfabParameter(
+        float _StartTimeOffset,
         float _CircleMaxRadium,
         float _OuterCircleWidth,
         UnityEngine.Color _OuterCircleColor,
@@ -17,13 +18,14 @@ struct RhythmVisualizationPerfabParameter
         UnityEngine.Color _NormalColor,
         UnityEngine.Color _PerfectColor, 
         float _BeatStartTime,
-        float _PerfectRangeStartTime,
-        float _PerfectRangeEndTime,
         float _NormalRangeStartTime,
         float _NormalRangeEndTime,
+        float _PerfectRangeStartTime,
+        float _PerfectRangeEndTime,
         float _BeatEndTime,
         float _IntervalTimeB2WBeats)
     {
+        this.StartTimeOffset = _StartTimeOffset;
         this.CircleMaxRadium = _CircleMaxRadium;
         this.OuterCircleWidth = _OuterCircleWidth;
         this.OuterCircleColor = _OuterCircleColor;
@@ -42,6 +44,7 @@ struct RhythmVisualizationPerfabParameter
 
     public static RhythmVisualizationPerfabParameter DefaultParameter => 
         new RhythmVisualizationPerfabParameter(
+            0.0f,
             0.48f, 
             0.02f,
             UnityEngine.Color.blue, 
@@ -56,6 +59,7 @@ struct RhythmVisualizationPerfabParameter
             1.2f,
             0.0f);
 
+    public float StartTimeOffset;
     public float CircleMaxRadium;
 
     public float OuterCircleWidth;
@@ -223,25 +227,27 @@ public class MusicVisualization : MonoBehaviour
     private void InitSingleRhythmVisualizationPerfabParameter(Renderer RendererInstance)
     {
         Material MaterialInstance = RendererInstance.material;
+        RhythmVisualizationPerfabParameterInstance.StartTimeOffset= Time.realtimeSinceStartup;
         if (MaterialInstance != null)
         {
-            MaterialInstance.SetFloat("CircleMaxRadium", RhythmVisualizationPerfabParameterInstance.CircleMaxRadium);
-            MaterialInstance.SetFloat("OuterCircleWidth", RhythmVisualizationPerfabParameterInstance.OuterCircleWidth);
+            MaterialInstance.SetFloat("_StartTimeOffset", RhythmVisualizationPerfabParameterInstance.StartTimeOffset);
+            MaterialInstance.SetFloat("_CircleMaxRadium", RhythmVisualizationPerfabParameterInstance.CircleMaxRadium);
+            MaterialInstance.SetFloat("_OuterCircleWidth", RhythmVisualizationPerfabParameterInstance.OuterCircleWidth);
 
-            MaterialInstance.SetColor("GrowingCircleColor", RhythmVisualizationPerfabParameterInstance.GrowingCircleColor);
-            MaterialInstance.SetColor("NormalColor", RhythmVisualizationPerfabParameterInstance.NormalColor);
-            MaterialInstance.SetColor("PerfectColor", RhythmVisualizationPerfabParameterInstance.PerfectColor);
+            MaterialInstance.SetColor("_GrowingCircleColor", RhythmVisualizationPerfabParameterInstance.GrowingCircleColor);
+            MaterialInstance.SetColor("_NormalColor", RhythmVisualizationPerfabParameterInstance.NormalColor);
+            MaterialInstance.SetColor("_PerfectColor", RhythmVisualizationPerfabParameterInstance.PerfectColor);
 
-            MaterialInstance.SetFloat("BeatStartTime", RhythmVisualizationPerfabParameterInstance.BeatStartTime);
-            MaterialInstance.SetFloat("BeatEndTime", RhythmVisualizationPerfabParameterInstance.BeatEndTime);
+            MaterialInstance.SetFloat("_BeatStartTime", RhythmVisualizationPerfabParameterInstance.BeatStartTime);
+            MaterialInstance.SetFloat("_BeatEndTime", RhythmVisualizationPerfabParameterInstance.BeatEndTime);
 
-            MaterialInstance.SetFloat("NormalRangeStartTime", RhythmVisualizationPerfabParameterInstance.NormalRangeStartTime);
-            MaterialInstance.SetFloat("NormalRangeEndTime", RhythmVisualizationPerfabParameterInstance.NormalRangeEndTime);
+            MaterialInstance.SetFloat("_NormalRangeStartTime", RhythmVisualizationPerfabParameterInstance.NormalRangeStartTime);
+            MaterialInstance.SetFloat("_NormalRangeEndTime", RhythmVisualizationPerfabParameterInstance.NormalRangeEndTime);
 
-            MaterialInstance.SetFloat("PerfectRangeStartTime", RhythmVisualizationPerfabParameterInstance.PerfectRangeStartTime);
-            MaterialInstance.SetFloat("PerfectRangeEndTime", RhythmVisualizationPerfabParameterInstance.PerfectRangeEndTime);
+            MaterialInstance.SetFloat("_PerfectRangeStartTime", RhythmVisualizationPerfabParameterInstance.PerfectRangeStartTime);
+            MaterialInstance.SetFloat("_PerfectRangeEndTime", RhythmVisualizationPerfabParameterInstance.PerfectRangeEndTime);
 
-            MaterialInstance.SetFloat("IntervalTimeB2WBeats", RhythmVisualizationPerfabParameterInstance.IntervalTimeB2WBeats);
+            MaterialInstance.SetFloat("_IntervalTimeB2WBeats", RhythmVisualizationPerfabParameterInstance.IntervalTimeB2WBeats);
         }
     }
 

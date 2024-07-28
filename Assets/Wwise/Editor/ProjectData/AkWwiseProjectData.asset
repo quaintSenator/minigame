@@ -331,7 +331,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: c470e9f5dd22be41893f629373ebf5aa
     GuidInternal: 
-    m_lastTime: -8584795914477578472
+    m_lastTime: -8584795467372073535
     List:
     - name: LevelTest
       guid: a5fe61cd54e2824ebb8394a5c87e4a32
@@ -386,7 +386,7 @@ MonoBehaviour:
     ParentPath: Events\LevelMusic
     guid: aaeb73d98601b84494e198693fb906e2
     GuidInternal: 
-    m_lastTime: -8584795914483024881
+    m_lastTime: -8584795467376997067
     List:
     - name: LevelTest
       guid: 4331e5b8f4f38446b03aa716acac4613
@@ -745,5 +745,5 @@ MonoBehaviour:
   ExpandedWaapiItemIds: 
   AutoSyncSelection: 0
   autoPopulateEnabled: 1
-  currentDataSource: 0
+  currentDataSource: 1
   CurrentPluginConfig: 

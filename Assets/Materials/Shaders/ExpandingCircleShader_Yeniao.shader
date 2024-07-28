@@ -3,6 +3,10 @@ Shader "SF/ExpandingCircle"
     Properties
     {
         _MainTex ("Texture", 2D) = "blue" {}
+
+        _StartTimeOffset("StartTimeOffset",float)=0
+
+
         _CircleMaxRadium("CircleMaxRadium", float) = 0.48
         _OuterCircleWidth("OuterCircleWidth", float) = 0.02
         _OuterCircleColor("OuterCircleColor", color) = (0, 0, 0, 1)
@@ -11,6 +15,7 @@ Shader "SF/ExpandingCircle"
         ///Start added by yeniao 
         _NormalColor("NormalColor", color) = (0.0, 0.0, 0.0,1.0)
         ///End
+
         _PerfectColor("PerfectColor", color) = (0.3, 0.85, 0.2, 1)
         
          ///Start added by yeniao 
@@ -53,6 +58,7 @@ Shader "SF/ExpandingCircle"
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
             };
+            float _StartTimeOffset;
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
@@ -104,14 +110,14 @@ Shader "SF/ExpandingCircle"
                 float isAtOuterCircle = isInRange(_CircleMaxRadium, outerR, r);
                 
                 float totalPeriod = _BeatEndTime + _IntervalTimeB2WBeats;
-                float timeInPeriod = fmod(_Time.y, totalPeriod);      
+                float timeInPeriod = fmod(_Time.y-_StartTimeOffset, totalPeriod);      
               
                 float clamptTimeInPeriodToNormalRangeStartTime=clamp(timeInPeriod - _BeatStartTime,0,_NormalRangeStartTime);
                 //Modify by yeniao
                 //Source:float innerCircleR = _CircleMaxRadium * (timeInPeriod - _BeatStartTime) / (_BeatEndTime - _BeatStartTime);
                 float innerCircleR=_CircleMaxRadium *  clamptTimeInPeriodToNormalRangeStartTime/(_NormalRangeStartTime - _BeatStartTime);
 
-                float ifNormal=isInRange(_NormalRangeStartTime, _NormalRangeEndTime, timeInPeriod);
+                float isNormal=isInRange(_NormalRangeStartTime, _NormalRangeEndTime, timeInPeriod);
 
                 float isPerfect = isInRange(_PerfectRangeStartTime, _PerfectRangeEndTime, timeInPeriod);
                 
@@ -119,13 +125,13 @@ Shader "SF/ExpandingCircle"
                 float isAtOutsideGrowingCircle = isInRange(innerCircleR, _CircleMaxRadium, r);
                 float isAtGrowingCircle = step(r, innerCircleR);
 
-                fixed4 growingColor = lerp(_NormalColor, _GrowingCircleColor, isPerfect);
-                fixed4 normalLerpToPerfectColor=lerp(_NormalColor,_PerfectColor,ifNormal);
+                fixed4 growingColor = lerp(_GrowingCircleColor,_NormalColor, isNormal);
+                growingColor=lerp(growingColor,_PerfectColor, isPerfect);
+                //fixed4 normalLerpToPerfectColor=lerp(_NormalColor,_PerfectColor,isPerfect);
                 
                 fixed4 col = _OuterCircleColor * isAtOuterCircle +
                     transparentColor * (isAtCorner + isAtOutsideGrowingCircle) + 
-                    isAtGrowingCircle * growingColor +
-                    normalLerpToPerfectColor;
+                    isAtGrowingCircle * growingColor ;
                 return col;
             }
             ENDCG
