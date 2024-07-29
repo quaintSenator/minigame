@@ -31,6 +31,8 @@ public class PoolManager : Singleton<PoolManager>
         {
             GameObject obj;
             obj = Instantiate(prefab);
+            obj.name = prefab.name;
+            obj.transform.SetParent(transform);
             obj.SetActive(false);
             poolDictionary[key].Enqueue(obj);
         }
