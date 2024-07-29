@@ -5,30 +5,15 @@ using UnityEngine;
 
 public class PoolManager : Singleton<PoolManager>
 {
-    GameObject,
-    BoxMeFadingShadowCopy
-}
-public class PoolManager : MonoBehaviour
-{
-    private static PoolManager _Instance;
-    private Dictionary<PoolItemType, Stack<GameObject>> _dict = new Dictionary<PoolItemType, Stack<GameObject>>();
-    private Dictionary<PoolItemType, GameObject> _copy_dict = new Dictionary<PoolItemType, GameObject>();
-    [SerializeField] public GameObject copy4PoolItemTypeGameObject;
-    [SerializeField] public GameObject copy4PoolItemTypeBoxMeFadingShadowCopy;
-    [SerializeField]public Transform poolManagerRootTransform;
-    readonly int POOL_CAPACITY = 20;
+    //空物体
+    private GameObject emptyGameObject;
+    
+    //用来存储不同类型的对象池
+    private Dictionary<string, Queue<GameObject>> poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
-    private void InitCopyDict()
+    protected override void OnAwake()
     {
-        var copyGameObject = Instantiate(copy4PoolItemTypeGameObject, this.transform);
-        _copy_dict[PoolItemType.GameObject] = copyGameObject;
-        copyGameObject.SetActive(false);
-        
-        var copyBoxMeFadingShadowCopy = Instantiate(copy4PoolItemTypeBoxMeFadingShadowCopy, this.transform);
-        _copy_dict[PoolItemType.BoxMeFadingShadowCopy] = copyBoxMeFadingShadowCopy;
-        copyBoxMeFadingShadowCopy.SetActive(false);
-        //new PoolItemType must provide copy here.
-        //Use Inspector GameObject Reference to pass value to _copy_dict
+        emptyGameObject = new GameObject();
         emptyGameObject.name = "EmptyGameObject";
         emptyGameObject.transform.SetParent(transform);
         emptyGameObject.SetActive(false);
