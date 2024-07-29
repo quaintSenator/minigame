@@ -1,4 +1,4 @@
-Shader "SF/ExpandingCircle"
+Shader "SF/ExpandingCircle_Y"
 {
     Properties
     {
