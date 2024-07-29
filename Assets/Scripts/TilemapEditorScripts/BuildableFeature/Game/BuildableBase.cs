@@ -63,15 +63,17 @@ public class BuildableBase : MonoBehaviour
 
     
     //生成地块
-    public static BuildableBase SpawnBuildable(BuildableType type, Vector3Int position, int sortingOrder = 0)
+    public static BuildableBase SpawnBuildable(BuildableType type, Vector3Int position, Transform parent, int sortingOrder = 0)
     {
         if(buildableList == null)
         {
             buildableList = Resources.Load<BuildableList>("AllBuildableList");
         }
-        BuildableBase buildable = Instantiate(buildableList.GetPrefab(type)).GetComponent<BuildableBase>();
+        GameObject obj = PoolManager.Instance.SpawnFromPool(type.ToString(), buildableList.GetPrefab(type), parent);
+        BuildableBase buildable = obj.GetComponent<BuildableBase>();
         buildable.type = type;
         buildable.SetPosition(position, sortingOrder);
+        buildable.Init();
         return buildable;
     }
     
@@ -82,6 +84,6 @@ public class BuildableBase : MonoBehaviour
             return;
         }
         buildable.Dispose();
-        Destroy(buildable.gameObject);
+        PoolManager.Instance.ReturnToPool(buildable.Type.ToString(), buildable.gameObject);
     }
 }

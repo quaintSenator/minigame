@@ -1,12 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEditor;
 using UnityEngine;
-using Object = System.Object;
 
-public enum PoolItemType
+public class PoolManager : Singleton<PoolManager>
 {
     GameObject,
     BoxMeFadingShadowCopy
@@ -32,103 +29,113 @@ public class PoolManager : MonoBehaviour
         copyBoxMeFadingShadowCopy.SetActive(false);
         //new PoolItemType must provide copy here.
         //Use Inspector GameObject Reference to pass value to _copy_dict
+        emptyGameObject.name = "EmptyGameObject";
+        emptyGameObject.transform.SetParent(transform);
+        emptyGameObject.SetActive(false);
     }
-    private void Start()
+
+    //扩展对象池
+    public void ExpandPool(string key, GameObject prefab, int size = 5)
     {
-        InitCopyDict();
-        if (_Instance == null)
+        if (!poolDictionary.ContainsKey(key))
         {
-            _Instance = this;
+            poolDictionary.Add(key, new Queue<GameObject>());
         }
-        GeneratePool(PoolItemType.GameObject, _copy_dict[PoolItemType.GameObject]);
-        GeneratePool(PoolItemType.BoxMeFadingShadowCopy, _copy_dict[PoolItemType.BoxMeFadingShadowCopy]);
-        if (_dict.Count < 1)
+
+        for (int i = 0; i < size; i++)
         {
-            Debug.LogError("PoolGenerate Fail.");
-        }
-    }
-    public static PoolManager Instance()
-    {
-        return _Instance;
-    }
-    private void GeneratePool(PoolItemType itemType, GameObject firstCopy)
-    {
-        if (!_dict.ContainsKey(itemType))
-        {
-            var stack2make = new Stack<GameObject>();
-            stack2make.Push(firstCopy);
-            _dict.Add(itemType, stack2make);
+            GameObject obj;
+            obj = Instantiate(prefab);
+            obj.SetActive(false);
+            poolDictionary[key].Enqueue(obj);
         }
     }
-    public void ReturnToPool(GameObject go, PoolItemType itemType = PoolItemType.GameObject)
+    
+    //检查池子不会太大，并且prefab一致
+    public void CheckPool(string key, GameObject prefab, int maxSize = 30)
     {
-        //回收时，transform树不剪
-        if (_dict[itemType].Count >= POOL_CAPACITY - 1)
+        if(poolDictionary.ContainsKey(key))
         {
-            Debug.Log("pool overflow, Destroy.");
-            Destroy(go);
-        }
-        else
-        {
-            _dict[itemType].Push(go);
-            go.SetActive(false);
-        }
-    }
-    public GameObject Spawn(PoolItemType objectType)
-    {
-        return Spawn(objectType, poolManagerRootTransform);
-    }
-    public GameObject Spawn(PoolItemType objectType, Transform parent)
-    {
-        foreach (var pair in _dict)
-        {
-            Debug.Log(pair.Key);
-        }
-        var pool = _dict[objectType];
-        Debug.Log("beform Spawn, Pool Count = " + pool.Count.ToString());
-        if (_dict.ContainsKey(objectType))
-        {
-            if (pool.Count > 1)
+            //检查池子是否与prefab一致
+            if (poolDictionary[key].Count > 0)
             {
-                var top = pool.Peek();
-                top.SetActive(true);
-                top.transform.SetParent(parent);
-                pool.Pop();
-                return top;
-            }
-            else
-            {
-                if (pool.Count == 0)
+                if (poolDictionary[key].Peek().name != prefab.name)
                 {
-                    //pool count == 0 is not permitted
-                    Debug.LogError("Fatal error, spawn fail due to empty pool");
-                }
-                else
-                {
-                    //pool count == 1
-                    var leftObj = pool.Peek();//返回就地构造的一个新对象，保留栈顶元素
-                    var newCopy = Instantiate(leftObj, parent);
-                    newCopy.SetActive(true);
-                    return newCopy;
+                    Debug.LogWarning("Pool with tag " + key + " doesn't match prefab.");
+                    return;
                 }
             }
+            
+            //检查池子不会太大
+            while (poolDictionary[key].Count > maxSize)
+            {
+                GameObject obj = poolDictionary[key].Dequeue();
+                Destroy(obj);
+            }
         }
-        return null;
+    }
+    
+    //是否有对象可用
+    public bool HasObjectsAvailable(string key)
+    {
+        if (!poolDictionary.ContainsKey(key) || poolDictionary[key].Count == 0)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    //从对象池中取出对象 (有给prefab的版本)
+    public GameObject SpawnFromPool(string key, GameObject prefab, Transform parent = null)
+    {
+        if (!HasObjectsAvailable(key))
+        {
+            ExpandPool(key, prefab);
+        }
+
+        GameObject objectToSpawn = poolDictionary[key].Dequeue();
+        objectToSpawn.SetActive(true);
+        if (parent != null)
+        {
+            objectToSpawn.transform.SetParent(parent);
+        }
+        return objectToSpawn;
+    }
+    
+    //从对象池中取出空物体对象 (无给prefab的版本)
+    public GameObject SpawnFromPool(string key, Transform parent = null)
+    {
+        if (!HasObjectsAvailable(key))
+        {
+            ExpandPool(key, emptyGameObject);
+        }
+
+        GameObject objectToSpawn = poolDictionary[key].Dequeue();
+        objectToSpawn.SetActive(true);
+        if (parent != null)
+        {
+            objectToSpawn.transform.SetParent(parent);
+        }
+        return objectToSpawn;
+    }
+
+    //将对象放回对象池
+    public void ReturnToPool(string key, GameObject objectToReturn)
+    {
+        if (!poolDictionary.ContainsKey(key))
+        {
+            Debug.LogWarning("Pool with tag " + key + " doesn't exist.");
+            return;
+        }
+        
+        objectToReturn.SetActive(false);
+        objectToReturn.transform.SetParent(transform);
+        poolDictionary[key].Enqueue(objectToReturn);
+        
+        //暂时只想到通过检查名字来检查是否是同一个prefab
+        //但是如果后面预制体的名字被改了，这个方法就会出问题
+        //所以暂时先不检查是否时同一个prefab
+        //CheckPool(key, objectToReturn);
     }
 }
-/*
- * 用池生成物体
- * PoolManager.Instance().Spawn(PoolItemType.GameObject);
- *
- * 用池回收物体
- * PoolManager.Instance().ReturnToPool(go);
- * 注意，回收后go成为一个临时值；仍然使用go将可能造成未定义错误
- *
- * 注册新池子（封装暂时较差，必须修改PoolManager部分代码，也可通知suifeng描述需求帮你改）
- * 1. 在PoolManager中新增成员：
- * [SerializeField] public GameObject copy4PoolItemTypeXXX;
-   2. 在InitCopyDict部分增添代码：
-   var copyGameObject = Instantiate(copy4PoolItemTypeXXX, this.transform);
-        _copy_dict[PoolItemType.GameObject] = copyGameObject;
-    3. 为PoolManager Inspector中拖引用，一看就知道拖什么
- */

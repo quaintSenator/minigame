@@ -174,8 +174,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
                 BuildableBase.DestroyBuildable(previewObj);
                 previewObj = null;
             }
-            previewObj = BuildableBase.SpawnBuildable(selectedType, currentCellPosition, 1);
-            previewObj.transform.SetParent(transform);
+            previewObj = BuildableBase.SpawnBuildable(selectedType, currentCellPosition, transform, 1);
         }
         else
         {
@@ -265,8 +264,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
     private void SpawnBuildable(BuildableType type, Vector3Int position)
     {
         TilemapSaver.Instance.AddThisBuildable(type, position);
-        BuildableBase buildable = BuildableBase.SpawnBuildable(type, position);
-        buildable.transform.SetParent(mapParent);
+        BuildableBase buildable = BuildableBase.SpawnBuildable(type, position, mapParent);
         currentBuildableMap.Add(position, buildable);
     }
     

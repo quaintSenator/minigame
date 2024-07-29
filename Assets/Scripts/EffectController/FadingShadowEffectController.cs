@@ -29,27 +29,27 @@ public class FadingShadowEffectController : MonoBehaviour
 
     public void spawnSnapShot(EventData eventData)
     {
-        #region Step1::makeShadowStill
-        var spawnResult = PoolManager.Instance().Spawn(PoolItemType.BoxMeFadingShadowCopy, transform);
-        var position = transform.position;
-        var rotation = transform.rotation;
-        spawnResult.transform.SetParent(stillParent);
-        spawnResult.transform.SetPositionAndRotation(position, rotation);
-        #endregion
-        
-        #region Step2:SetTimerAndGetAbsoluteTimeID
-        var absoluteTimeID = CleverTimerManager.Ask4Timer(FadingShadowLifetime, eventData =>
-        {
-            //回忆ref，并交还pool
-            var timerData = (TimerDieEventData)eventData;
-            var goRef2Return = dictTimerID2GOref[timerData.absoluteTime];
-            PoolManager.Instance().ReturnToPool(goRef2Return, PoolItemType.BoxMeFadingShadowCopy);
-        });
-        #endregion
-        
-        #region Step3:RecordRefIndict
-        dictTimerID2GOref[absoluteTimeID] = spawnResult;
-
-        #endregion
+        // #region Step1::makeShadowStill
+        // var spawnResult = PoolManager.Instance().Spawn(PoolItemType.BoxMeFadingShadowCopy, transform);
+        // var position = transform.position;
+        // var rotation = transform.rotation;
+        // spawnResult.transform.SetParent(stillParent);
+        // spawnResult.transform.SetPositionAndRotation(position, rotation);
+        // #endregion
+        //
+        // #region Step2:SetTimerAndGetAbsoluteTimeID
+        // var absoluteTimeID = CleverTimerManager.Ask4Timer(FadingShadowLifetime, eventData =>
+        // {
+        //     //回忆ref，并交还pool
+        //     var timerData = (TimerDieEventData)eventData;
+        //     var goRef2Return = dictTimerID2GOref[timerData.absoluteTime];
+        //     PoolManager.Instance().ReturnToPool(goRef2Return, PoolItemType.BoxMeFadingShadowCopy);
+        // });
+        // #endregion
+        //
+        // #region Step3:RecordRefIndict
+        // dictTimerID2GOref[absoluteTimeID] = spawnResult;
+        //
+        // #endregion
     }
 }
