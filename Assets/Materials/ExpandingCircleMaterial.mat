@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ExpandingCircleMaterial
-  m_Shader: {fileID: 4800000, guid: 1250491164abbd946a5d92c3afa073db, type: 3}
+  m_Shader: {fileID: 4800000, guid: 43fc70383a44a31428d73576344abbbd, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -29,12 +29,13 @@ Material:
     - _CircleMaxRadium: 0.4
     - _Cutoff: 0.5
     - _IntervalTimeB2WBeats: 0.2
-    - _NormalRangeEndTime: 0.8
+    - _NormalRangeEndTime: 1
     - _NormalRangeStartTime: 0.4
     - _OuterCircleWidth: 0.05
     - _PerfectRangeEndTime: 1.5
-    - _PerfectRangeStartTime: 1
+    - _PerfectRangeStartTime: 1.2
     - _PerfectTime: 0
+    - _StartTimeOffset: 0
     m_Colors:
     - _GrowingCircleColor: {r: 0.9622642, g: 0.15772915, b: 0.13980061, a: 1}
     - _NormalColor: {r: 0, g: 0, b: 0, a: 1}

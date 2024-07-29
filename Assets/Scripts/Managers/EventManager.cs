@@ -6,7 +6,6 @@ using UnityEngine;
 // 事件类型
 public enum EventType
 {
-    
     GameStartEvent,
     GameRestartEvent,
     PlayerHitGroundEvent,

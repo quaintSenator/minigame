@@ -3,7 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FrictionEffectController : MonoBehaviour, ICloneable
+
+public class HitGroundEventData : EventData
+{
+    public Vector2 velocityDir;
+
+    public HitGroundEventData(Vector2 vec)
+    {
+        velocityDir = vec;
+    }
+}
+public class FrictionEffectController : MonoBehaviour
 {
     [SerializeField]
     private ParticleSystem myParticleSystem;
@@ -11,6 +21,7 @@ public class FrictionEffectController : MonoBehaviour, ICloneable
     [SerializeField] private float minimumPlayerYDecidedAsOnGround;
     [SerializeField] private Color particleRandomColorRangeL;
     [SerializeField] private Color particleRandomColorRangeR;
+    [SerializeField] private float fricThrowAngle = 15.0f;
     void SelfPSInit()
     {
         var myPSMain = myParticleSystem.main;
@@ -23,11 +34,6 @@ public class FrictionEffectController : MonoBehaviour, ICloneable
         EventManager.AddListener(EventType.PlayerHitGroundEvent, OnPlayerHitGround);
     }
 
-    public object Clone()
-    {
-        return this.MemberwiseClone();
-    }
-
     private void OnPlayerJumpOff(EventData ed)
     {
         Debug.Log("SF::OnPlayerJumpOff");
@@ -36,25 +42,16 @@ public class FrictionEffectController : MonoBehaviour, ICloneable
     }
     private void OnPlayerHitGround(EventData ed)
     {
-        Debug.Log("SF::OnPlayerHitGround");
+        var fmanager = ForceManager.Instance;
+        HitGroundEventData hitGroundEventData = (HitGroundEventData)ed;
+        float rotationX = fmanager.getFrictionThrowingRotationAngle(
+            hitGroundEventData.velocityDir, fmanager.getGravityDir(), fricThrowAngle);
+        transform.rotation = Quaternion.Euler(rotationX, -90.0f, 0);
         var emit = myParticleSystem.emission;
         emit.enabled = true;
     }
     private void OnEnable()
     {
-        if (typeof(FrictionEffectController).IsAssignableFrom(typeof(ICloneable)))
-        {
-            Debug.Log("SF::FrictionEffectController is ICloneable.");
-        }
-        else
-        {
-            Debug.Log("SF::FrictionEffectController is not                                                                    ICloneable.");
-        }
-        if (typeof(FrictionEffectController).IsAssignableFrom(typeof(MonoBehaviour)))
-        {
-            Debug.Log("SF::FrictionEffectController is MonoBehaviour.");
-        }
-        
         OnRegister();
         SelfPSInit();
     }
@@ -65,8 +62,23 @@ public class FrictionEffectController : MonoBehaviour, ICloneable
         EventManager.RemoveListener(EventType.PlayerHitGroundEvent, OnPlayerHitGround);
     }
 
-    void Update()
+    //在重力改变、跳跃或飞行落地等情况下，通过设定发射体的rotation调整抛射角度
+    private void setEmittorShapeRotation()
     {
         
+    }
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.Q))
+        {
+            
+            EventManager.InvokeEvent(EventType.PlayerHitGroundEvent, new HitGroundEventData(Vector2.right));
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            ForceManager.Instance.switchGravityDir();
+            EventManager.InvokeEvent(EventType.PlayerHitGroundEvent, new HitGroundEventData(Vector2.right));
+        }
     }
 }

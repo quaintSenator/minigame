@@ -58,6 +58,10 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D boxCollider;
     private Rigidbody2D rigidBody;
 
+    //为减少FixUp开销保存ForceManager引用
+    private ForceManager _forceManager;
+    //为减少FixUp开销保存HeadingDir的常态，仅在事件下切换
+    private Vector3 playerHeadingDir;
     private void Awake()
     {
         cubeSprites = transform.Find("Visual");
@@ -69,6 +73,8 @@ public class PlayerController : MonoBehaviour
             jumpTime = jumpSpeed / (GameConsts.GRAVITY * gravityScale) * 2;
             speed = horizontalBlockNum / jumpTime * transform.localScale.x;
         }
+        _forceManager = ForceManager.Instance;
+        playerHeadingDir = Vector3.right;
     }
 
     private void OnEnable()
@@ -87,7 +93,7 @@ public class PlayerController : MonoBehaviour
         returnTimer = 0;
         registerEvents();
     }
-
+    
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
@@ -111,16 +117,15 @@ public class PlayerController : MonoBehaviour
             Debug.Log("isReturn:" + isReturn);
         }
         Rotate();
-
     }
 
     private void FixedUpdate()
     {
         //角色一直受一个向下的重力，世界坐标系
-        rigidBody.AddForce(Vector2.down * gravityScale * GameConsts.GRAVITY);
+        rigidBody.AddForce(ForceManager.Instance.getGravityDir() * gravityScale * GameConsts.GRAVITY);
 
         //角色自动向右前进，世界坐标系
-        transform.Translate(Vector3.right * speed * Time.fixedDeltaTime, Space.World);
+        transform.Translate(playerHeadingDir * speed * Time.fixedDeltaTime, Space.World);
 
         //角色跳跃，如果是Force模式，且在跳跃中，给与一个力
         if (jumpMode == JumpMode.Force && jumping)
@@ -193,7 +198,8 @@ public class PlayerController : MonoBehaviour
         isReturn = true;
         selfAngle = cubeSprites.eulerAngles.z;
         Debug.Log("OnHitGround");
-        EventManager.InvokeEvent(EventType.PlayerHitGroundEvent);
+        HitGroundEventData hitdata = new HitGroundEventData(playerHeadingDir);
+        EventManager.InvokeEvent(EventType.PlayerHitGroundEvent, hitdata);
     }
 
     public void OnOffGround(EventData data = null)
@@ -299,5 +305,8 @@ public class PlayerController : MonoBehaviour
         EventManager.InvokeEvent(EventType.GameRestartEvent);
     }
 
-
+    public Vector3 getPlayerVelocity()
+    {
+        return rigidBody.velocity;
+    }
 }
