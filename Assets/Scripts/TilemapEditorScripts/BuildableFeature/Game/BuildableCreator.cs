@@ -171,7 +171,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         {
             if (previewObj != null)
             {
-                previewObj.DestroyBuildable();
+                BuildableBase.DestroyBuildable(previewObj);
                 previewObj = null;
             }
             previewObj = BuildableBase.SpawnBuildable(selectedType, currentCellPosition, 1);
@@ -179,8 +179,11 @@ public class BuildableCreator : Singleton<BuildableCreator>
         }
         else
         {
-            previewObj.DestroyBuildable();
-            previewObj = null;
+            if (previewObj != null)
+            {
+                BuildableBase.DestroyBuildable(previewObj);
+                previewObj = null;
+            }
         }
         UpdateTilemap();
     }
@@ -251,7 +254,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         Debug.Log("Clear all tilemaps");
         foreach (var buildableInfo in currentBuildableMap)
         {
-            buildableInfo.Value.DestroyBuildable();
+            BuildableBase.DestroyBuildable(buildableInfo.Value);
             TilemapSaver.Instance.RemoveThisBuildable(buildableInfo.Key);
         }
         currentBuildableMap.Clear();
@@ -271,7 +274,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
     {
         if (currentBuildableMap.ContainsKey(position))
         {
-            currentBuildableMap[position].DestroyBuildable();
+            BuildableBase.DestroyBuildable(currentBuildableMap[position]);
             currentBuildableMap.Remove(position);
             TilemapSaver.Instance.RemoveThisBuildable(position);
         }

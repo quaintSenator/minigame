@@ -22,10 +22,9 @@ public class BuildableBase : MonoBehaviour
         //TODO 初始化
     }
     
-    public virtual void DestroyBuildable()
+    public virtual void Dispose()
     {
-        Destroy(gameObject);
-        //TODO 销毁需要做的事
+        //TODO 销毁
     }
 
     private void OnTriggerEnter(Collider other)
@@ -74,5 +73,15 @@ public class BuildableBase : MonoBehaviour
         buildable.type = type;
         buildable.SetPosition(position, sortingOrder);
         return buildable;
+    }
+    
+    public static void DestroyBuildable(BuildableBase buildable)
+    {
+        if (buildable == null)
+        {
+            return;
+        }
+        buildable.Dispose();
+        Destroy(buildable.gameObject);
     }
 }
