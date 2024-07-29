@@ -171,7 +171,6 @@ public class BuildableCreator : Singleton<BuildableCreator>
         {
             if (previewObj != null)
             {
-                Debug.Log("Destroy previewObj");
                 previewObj.DestroyBuildable();
                 previewObj = null;
             }
@@ -180,7 +179,6 @@ public class BuildableCreator : Singleton<BuildableCreator>
         }
         else
         {
-            Debug.Log("Destroy previewObj");
             previewObj.DestroyBuildable();
             previewObj = null;
         }
@@ -239,7 +237,6 @@ public class BuildableCreator : Singleton<BuildableCreator>
         //如果射线没有碰到任何物体，返回
         if (!hit)
         {
-            Debug.Log("No hit");
             return;
         }
         if(hit.collider.TryGetComponent(out BuildableBase buildable))

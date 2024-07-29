@@ -44,7 +44,6 @@ public class TilemapCameraController : MonoBehaviour
 
     private void OnMiddleScroll(EventData data)
     {
-        Debug.Log("OnMiddleScroll");
         var middleScrollData = data as MiddleScrollEventData;
         zoomDirection = middleScrollData.scroll;
         //如果摄像机缩放到达最大最小值，停止缩放
@@ -58,7 +57,6 @@ public class TilemapCameraController : MonoBehaviour
 
     private void OnMiddleClick(EventData data)
     {
-        Debug.Log("OnMiddleClick");
         virtualCamera.m_Lens.OrthographicSize = originalZoom;
     }
 

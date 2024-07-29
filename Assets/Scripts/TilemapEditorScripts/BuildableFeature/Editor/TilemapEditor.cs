@@ -30,7 +30,7 @@ public class TilemapEditor : Editor
     [MenuItem("Tools/HZB/清理暂存的地图数据 （数字键123的）")]
     public static void ClearAllSavePlayerPrefs()
     {
-        Debug.Log("Cleared all save player prefs : " + PlayerPrefs.GetString(GameConsts.TILEMAP_SAVE_DATA));
+        Debug.Log("Cleared all save player prefs");
         PlayerPrefs.DeleteKey(GameConsts.TILEMAP_SAVE_DATA);
     }
     
@@ -83,7 +83,7 @@ public class TilemapEditor : Editor
         AssetDatabase.CreateAsset(saveData, path + "/" + saveName);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
-        Debug.Log("save as asset : " + data);
+        Debug.Log("Get the auto save file");
     }
     
     //选择 TilemapSaveLocalFile.asset 文件，选择菜单栏 Tools/HZB/LoadTilemaps 来调用

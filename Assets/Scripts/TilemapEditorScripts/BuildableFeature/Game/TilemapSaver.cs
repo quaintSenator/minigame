@@ -47,13 +47,13 @@ public class TilemapSaver : Singleton<TilemapSaver>
     
     public void AddThisBuildable(BuildableType type, Vector3Int position)
     {
-        Debug.Log("Record this buildable");
+        Debug.Log("TilemapSaver record this buildable");
         currentBuildableInfosDic.Add(position, new BuildableInfo(type, position));
     }
     
     public void RemoveThisBuildable(Vector3Int position)
     {
-        Debug.Log("Remove this buildable");
+        Debug.Log("TilemapSaver remove this buildable");
         currentBuildableInfosDic.Remove(position);
     }
 
@@ -81,10 +81,9 @@ public class TilemapSaver : Singleton<TilemapSaver>
         {
             buildableInfos.Add(buildableInfo);
         }
-        Debug.Log("currentBuildableInfosDic.Count : " + currentBuildableInfosDic.Count);
         MapData mapData = new MapData(key, buildableInfos);
         PlayerPrefs.SetString(GameConsts.AUTO_TILEMAP_SAVE_DATA, JsonUtility.ToJson(mapData));
-        Debug.Log("Auto save tilemap : " + JsonUtility.ToJson(new MapData(key, buildableInfos)));
+        Debug.Log("Auto save tilemap data");
     }
     
     public List<BuildableInfo> LoadTilemap(string key)
