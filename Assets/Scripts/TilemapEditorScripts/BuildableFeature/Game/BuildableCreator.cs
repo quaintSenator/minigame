@@ -19,14 +19,14 @@ public class BuildableCreator : Singleton<BuildableCreator>
     
     private BuildableType selectedType = BuildableType.none;
     private BuildableBase previewObj;
-    [SerializeField] private BuildableList buildableList;
     [SerializeField] private Transform mapParent; 
     private TileMode currentTileMode = TileMode.None; 
     
     private Vector3 mousePosition;
     private Vector3Int currentCellPosition;
     private Vector3Int lastCellPosition;
-    
+
+    private List<BuildableInfo> buildableInfos = new List<BuildableInfo>();
     private Dictionary<Vector3Int, BuildableBase> currentBuildableMap = new Dictionary<Vector3Int, BuildableBase>();
 
     protected override void OnAwake()
@@ -53,9 +53,14 @@ public class BuildableCreator : Singleton<BuildableCreator>
         }
         if (mapData != null)
         {
-            foreach (var buildableInfo in mapData.buildableInfos)
+            buildableInfos = mapData.buildableInfos;
+            foreach (var buildableInfo in buildableInfos)
             {
-                SpawnBuildable(buildableInfo.type, buildableInfo.position);
+                if (BuildableBase.IsBuildableViewport(buildableInfo.position, Camera.main))
+                {
+                    SpawnBuildable(buildableInfo.type, buildableInfo.position);
+                }
+                TilemapSaver.Instance.AddThisBuildable(buildableInfo.type, buildableInfo.position);
             }
             Debug.Log("Mapdata loaded!");
         }
@@ -227,6 +232,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         //生成选择的物体
         if (selectedType != BuildableType.none)
         {
+            TilemapSaver.Instance.AddThisBuildable(selectedType, currentCellPosition);
             SpawnBuildable(selectedType, currentCellPosition);
         }
     }
@@ -244,6 +250,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         if(hit.collider.TryGetComponent(out BuildableBase buildable))
         {
             DestoryBuildable(buildable.Position);
+            TilemapSaver.Instance.RemoveThisBuildable(buildable.Position);
         }
         
     }
@@ -259,11 +266,8 @@ public class BuildableCreator : Singleton<BuildableCreator>
         currentBuildableMap.Clear();
     }
     
-    
-    
     private void SpawnBuildable(BuildableType type, Vector3Int position)
     {
-        TilemapSaver.Instance.AddThisBuildable(type, position);
         BuildableBase buildable = BuildableBase.SpawnBuildable(type, position, mapParent);
         currentBuildableMap.Add(position, buildable);
     }
@@ -274,7 +278,6 @@ public class BuildableCreator : Singleton<BuildableCreator>
         {
             BuildableBase.DestroyBuildable(currentBuildableMap[position]);
             currentBuildableMap.Remove(position);
-            TilemapSaver.Instance.RemoveThisBuildable(position);
         }
     }
     
@@ -283,4 +286,5 @@ public class BuildableCreator : Singleton<BuildableCreator>
         Transform mapStartPoint = GameObject.Find("map").transform;
         return new Vector3(mapStartPoint.position.x + GameConsts.TILE_SIZE / 2, mapStartPoint.position.y + GameConsts.TILE_SIZE / 2, 0);
     }
+    
 }

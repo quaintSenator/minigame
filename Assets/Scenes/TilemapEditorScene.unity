@@ -6801,8 +6801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9309d17fe7ab9824c9fd7874f91dbe66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedMapdata: {fileID: 0}
-  buildableList: {fileID: 11400000, guid: 182d6a17f7e5e9143922dc108b73292f, type: 2}
+  selectedMapdata: {fileID: 11400000, guid: b117e1fcd09f1e44f90ef137e1b274ff, type: 2}
   mapParent: {fileID: 1270504054}
 --- !u!4 &1956386139
 Transform:
