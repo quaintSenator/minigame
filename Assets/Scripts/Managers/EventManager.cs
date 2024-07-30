@@ -30,6 +30,7 @@ public enum EventType
     EDownEvent,
     KDownEvent,
     LDownEvent,
+    JDownEvent,
     NumDownEvent,
     
     #endregion

@@ -98,6 +98,11 @@ public class InputManager : Singleton<InputManager>
             EventManager.InvokeEvent(EventType.LDownEvent);
         }
 
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            EventManager.InvokeEvent(EventType.JDownEvent);
+        }
+
         #region 数字键按下
         
         if (Input.GetKeyDown(KeyCode.Alpha1))
