@@ -119,6 +119,11 @@ public class InputManager : Singleton<InputManager>
         {
             EventManager.InvokeEvent(EventType.NumDownEvent, new NumDownEventData(3));
         }
+        
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            EventManager.InvokeEvent(EventType.NumDownEvent, new NumDownEventData(4));
+        }
 
         #endregion
     }

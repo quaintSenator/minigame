@@ -70,6 +70,7 @@ public class TilemapSaver : Singleton<TilemapSaver>
         allSaveMapsList.Add(mapData);
         string data = JsonUtility.ToJson(new SerializeBridge<MapData>(allSaveMapsList));
         PlayerPrefs.SetString(GameConsts.TILEMAP_SAVE_DATA, data);
+        Debug.Log("allSaveMapsList count : " + buildableInfos.Count);
         Debug.Log(data);
     }
     
@@ -96,6 +97,17 @@ public class TilemapSaver : Singleton<TilemapSaver>
             }
         }
         return null;
+    }
+    
+    public List<BuildableInfo> GetCurrentBuildableInfos()
+    {
+        List<BuildableInfo> buildableInfos = new List<BuildableInfo>();
+        foreach (var buildableInfo in currentBuildableInfosDic.Values)
+        {
+            buildableInfos.Add(buildableInfo);
+        }
+
+        return buildableInfos;
     }
 }
 

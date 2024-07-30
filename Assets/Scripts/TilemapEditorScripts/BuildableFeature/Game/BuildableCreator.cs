@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -35,6 +36,8 @@ public class BuildableCreator : Singleton<BuildableCreator>
         TilemapSaver.Instance.Init();
         
         LoadSelectedData();
+        
+        StartCoroutine(CheckBuildableVisibleCoroutine());
     }
     
     private void LoadSelectedData()
@@ -53,20 +56,23 @@ public class BuildableCreator : Singleton<BuildableCreator>
         }
         if (mapData != null)
         {
-            buildableInfos = mapData.buildableInfos;
-            foreach (var buildableInfo in buildableInfos)
-            {
-                if (BuildableBase.IsBuildableViewport(buildableInfo.position, Camera.main))
-                {
-                    SpawnBuildable(buildableInfo.type, buildableInfo.position);
-                }
-                TilemapSaver.Instance.AddThisBuildable(buildableInfo.type, buildableInfo.position);
-            }
+            ReadDataFromBuildableInfos(mapData.buildableInfos);
             Debug.Log("Mapdata loaded!");
         }
         else
         {
             Debug.Log("No mapdata loaded!");
+        }
+    }
+    
+    private void ReadDataFromBuildableInfos(List<BuildableInfo> infos)
+    {
+        Debug.Log(infos);
+        foreach (var buildableInfo in infos)
+        {
+            Debug.Log(buildableInfo);
+            buildableInfos.Add(new BuildableInfo(buildableInfo.type, buildableInfo.position));
+            TilemapSaver.Instance.AddThisBuildable(buildableInfo.type, buildableInfo.position);
         }
     }
 
@@ -96,23 +102,14 @@ public class BuildableCreator : Singleton<BuildableCreator>
     private void OnNumDown(EventData data)
     {
         var numData = data as NumDownEventData;
+        Debug.Log("Load map data from num : " + numData.num);
         ClearAllTilemaps();
-        List<BuildableInfo> buildableInfos = TilemapSaver.Instance.LoadTilemap(numData.num.ToString());
-        if (buildableInfos == null)
-        {
-            return;
-        }
-        foreach (var buildableInfo in buildableInfos)
-        {
-            Debug.Log(buildableInfo.type);
-            Debug.Log(buildableInfo.position);
-            SpawnBuildable(buildableInfo.type, buildableInfo.position);
-        }
+        ReadDataFromBuildableInfos(TilemapSaver.Instance.LoadTilemap(numData.num.ToString()));
     }
 
     private void OnKDown(EventData obj)
     {
-        if(currentBuildableMap.Count == 0)
+        if(buildableInfos.Count == 0)
         {
             Debug.Log("No buildable to save");
             return;
@@ -233,6 +230,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         if (selectedType != BuildableType.none)
         {
             TilemapSaver.Instance.AddThisBuildable(selectedType, currentCellPosition);
+            buildableInfos.Add(new BuildableInfo(selectedType, currentCellPosition));
             SpawnBuildable(selectedType, currentCellPosition);
         }
     }
@@ -250,6 +248,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         if(hit.collider.TryGetComponent(out BuildableBase buildable))
         {
             DestoryBuildable(buildable.Position);
+            buildableInfos.Remove(buildableInfos.Find(info => info.position == buildable.Position));
             TilemapSaver.Instance.RemoveThisBuildable(buildable.Position);
         }
         
@@ -261,15 +260,23 @@ public class BuildableCreator : Singleton<BuildableCreator>
         foreach (var buildableInfo in currentBuildableMap)
         {
             BuildableBase.DestroyBuildable(buildableInfo.Value);
-            TilemapSaver.Instance.RemoveThisBuildable(buildableInfo.Key);
         }
+
+        foreach (var buildableInfo in buildableInfos)
+        {
+            TilemapSaver.Instance.RemoveThisBuildable(buildableInfo.position);
+        }
+        buildableInfos.Clear();
         currentBuildableMap.Clear();
     }
     
     private void SpawnBuildable(BuildableType type, Vector3Int position)
     {
-        BuildableBase buildable = BuildableBase.SpawnBuildable(type, position, mapParent);
-        currentBuildableMap.Add(position, buildable);
+        if (!currentBuildableMap.ContainsKey(position))
+        {
+            BuildableBase buildable = BuildableBase.SpawnBuildable(type, position, mapParent);
+            currentBuildableMap.Add(position, buildable);
+        }
     }
     
     private void DestoryBuildable(Vector3Int position)
@@ -287,4 +294,32 @@ public class BuildableCreator : Singleton<BuildableCreator>
         return new Vector3(mapStartPoint.position.x + GameConsts.TILE_SIZE / 2, mapStartPoint.position.y + GameConsts.TILE_SIZE / 2, 0);
     }
     
+    //协程，每隔一段时间刷新一次地图，检查是否在摄像机视野内
+    private IEnumerator CheckBuildableVisibleCoroutine()
+    {
+        WaitForSeconds wait = new WaitForSeconds(GameConsts.TILE_CHECK_GAP);
+        while (true)
+        {
+            foreach (var buildableInfo in buildableInfos)
+            {
+                if (BuildableBase.IsBuildableViewport(buildableInfo.position, Camera.main))
+                {
+                    SpawnBuildable(buildableInfo.type, buildableInfo.position);
+                }
+                else
+                {
+                    DestoryBuildable(buildableInfo.position);
+                }
+            }
+            yield return wait;
+        }
+    }
+
+
+    [Button]
+    public void PrintListAndDic()
+    {
+        Debug.Log("currentBuildableMap count : " + currentBuildableMap.Count);
+        Debug.Log("buildableInfos count : " + buildableInfos.Count);
+    }
 }

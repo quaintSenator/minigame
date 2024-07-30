@@ -39,17 +39,24 @@ public class TilemapEditor : Editor
     public static void SaveTilemaps()
     {
         MapData mapData = new MapData();
-        Transform mapParent = GameObject.Find("map").transform;
-        foreach (Transform child in mapParent)
+        if (Application.isPlaying)
         {
-            Vector3 buildablePos = child.position;
-            Vector3 offset = BuildableCreator.GetStartPositionOffset();
-            int nearestX = Mathf.RoundToInt((buildablePos.x-offset.x) / GameConsts.TILE_SIZE); // 计算最近的 tile X 坐标
-            int nearestY = Mathf.RoundToInt((buildablePos.y-offset.y) / GameConsts.TILE_SIZE); // 计算最近的 tile Y 坐标
-            Vector3Int realPos = new Vector3Int(nearestX, nearestY, 0); // 计算最近的 tile 坐标
-            BuildableType type = child.GetComponent<BuildableBase>().Type;
-            BuildableInfo buildableInfo = new BuildableInfo(type, realPos);
-            mapData.buildableInfos.Add(buildableInfo);
+            mapData.buildableInfos = TilemapSaver.Instance.GetCurrentBuildableInfos();
+        }
+        else
+        {
+            Transform mapParent = GameObject.Find("map").transform;
+            foreach (Transform child in mapParent)
+            {
+                Vector3 buildablePos = child.position;
+                Vector3 offset = BuildableCreator.GetStartPositionOffset();
+                int nearestX = Mathf.RoundToInt((buildablePos.x-offset.x) / GameConsts.TILE_SIZE); // 计算最近的 tile X 坐标
+                int nearestY = Mathf.RoundToInt((buildablePos.y-offset.y) / GameConsts.TILE_SIZE); // 计算最近的 tile Y 坐标
+                Vector3Int realPos = new Vector3Int(nearestX, nearestY, 0); // 计算最近的 tile 坐标
+                BuildableType type = child.GetComponent<BuildableBase>().Type;
+                BuildableInfo buildableInfo = new BuildableInfo(type, realPos);
+                mapData.buildableInfos.Add(buildableInfo);
+            }
         }
         
         // 保存地图数据
