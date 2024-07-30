@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 
@@ -30,6 +31,9 @@ public class PlayerEntireCollider : MonoBehaviour{
 
         }
         else if(other.gameObject.CompareTag("Unsafe")){
+            player.SetIsDead(true);
+        }
+        else if(other.gameObject.CompareTag("Enemy")){
             player.SetIsDead(true);
         }
         Debug.Log("isCollidsion"+other.gameObject.tag);

@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     //角色跳跃的力
     [SerializeField] private float jumpForce = 5.0f;
     //力的作用时间
-    [SerializeField] private float jumpTime = 0.5f;
+    private float jumpTime = 0.5f;
     //角色是否在跳跃
     private bool jumping = false;
     //角色跳跃的初始速度
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
     //一次跳跃水平移动距离
     [SerializeField] private float horizontalBlockNum = 4.5f;
     //一次跳跃垂直移动距离
-    [SerializeField] private float verticalBlockNum = 2.5f;
+    [SerializeField] private float verticalBlockNum = 3f;
 
     //一些初始化
     private Transform cubeSprites;
@@ -81,12 +81,19 @@ public class PlayerController : MonoBehaviour
     {
         EventManager.AddListener(EventType.MouseRightClickEvent, OnDead);
         EventManager.AddListener(EventType.PlayerJumpoffGroundEvent, OnOffGround);
+
+        EventManager.AddListener(EventType.SpacebarDownEvent,OnSpacebarDown);
+        EventManager.AddListener(EventType.MouseLeftClickEvent,OnMouseLeftClick);
+        EventManager.AddListener(EventType.JDownEvent,OnAttack);
     }
 
     private void OnDisable()
     {
         EventManager.RemoveListener(EventType.MouseRightClickEvent, OnDead);
         EventManager.RemoveListener(EventType.PlayerJumpoffGroundEvent, OnOffGround);
+
+        EventManager.RemoveListener(EventType.SpacebarDownEvent,OnSpacebarDown);
+        EventManager.RemoveListener(EventType.MouseLeftClickEvent,OnMouseLeftClick);
     }
     private void Start()
     {
@@ -96,10 +103,6 @@ public class PlayerController : MonoBehaviour
     
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-        {
-            Jump();
-        }
         if (Input.GetKey(KeyCode.Space) && rigidBody.velocity.y <= 0 && !isGrounded)
         {
             //Debug.Log("willJump");
@@ -114,7 +117,6 @@ public class PlayerController : MonoBehaviour
             returnTimer = 0;
             isReturn = false;
             SetCorrect();
-            Debug.Log("isReturn:" + isReturn);
         }
         Rotate();
     }
@@ -132,6 +134,21 @@ public class PlayerController : MonoBehaviour
         {
             rigidBody.AddForce(Vector2.up * jumpForce);
         }
+    }
+
+    private void OnSpacebarDown(EventData data=null)
+    {
+        Jump();
+    }
+
+    private void OnMouseLeftClick(EventData data=null)
+    {
+        Jump();
+    }
+
+    private void OnAttack(EventData data = null)
+    {
+        
     }
 
 

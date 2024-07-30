@@ -9,6 +9,7 @@ TagManager:
   - Obstacle
   - Safe
   - Unsafe
+  - Enemy
   layers:
   - Default
   - TransparentFX
