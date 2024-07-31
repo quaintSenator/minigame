@@ -17,39 +17,30 @@ public class ForceManager : Singleton<ForceManager>
         isheadingRight = true;
     }
 
+    private void OnEnable()
+    {
+        EventManager.AddListener(EventType.GravityInverseEvent, OnGravityInversed);
+    }
+    
+    private void OnDisable()
+    {
+        EventManager.RemoveListener(EventType.GravityInverseEvent, OnGravityInversed);
+    }
+
+    private void OnGravityInversed(EventData ed)
+    {
+        gravityDir = -gravityDir;
+    }
     public Vector2 getGravityDir()
     {
         return gravityDir;
     }
-    public void switchGravityDir()
+    private void switchGravityDir()
     {
         gravityDir = -gravityDir;
     }
-
-    public float getFrictionThrowingRotationAngle(Vector2 v, Vector2 g, float realAngle)
+    public void InverseGravityManually()
     {
-        if (v.x > 0)
-        {
-            if (g.y < 0)
-            {
-                return -realAngle;
-            }
-            else
-            {
-                return realAngle;
-            }
-        }
-        else
-        {
-            if (g.y > 0)
-            {
-                return 180.0f - realAngle;
-            }
-            else
-            {
-                return -(90.0f + realAngle);
-            }
-        }
-        
+        EventManager.InvokeEvent(EventType.GravityInverseEvent);
     }
 }
