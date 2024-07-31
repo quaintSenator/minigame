@@ -73,6 +73,11 @@ public class InputManager : Singleton<InputManager>
         {
             EventManager.InvokeEvent(EventType.SpacebarDownEvent);
         }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            EventManager.InvokeEvent(EventType.SpacebarUpEvent);
+        }
         
         // Esc键按下事件
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -101,6 +106,11 @@ public class InputManager : Singleton<InputManager>
         if (Input.GetKeyDown(KeyCode.J))
         {
             EventManager.InvokeEvent(EventType.JDownEvent);
+        }
+
+        if(Input.GetKeyUp(KeyCode.J))
+        {
+            EventManager.InvokeEvent(EventType.JUpEvent);
         }
 
         #region 数字键按下

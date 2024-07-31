@@ -7729,9 +7729,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04989456d2166834d8967f26fed7cd73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  copy4PoolItemTypeGameObject: {fileID: 1830764577}
-  copy4PoolItemTypeBoxMeFadingShadowCopy: {fileID: 5895793851727213560, guid: c168ea4e5ac340b4e94f75e561c7a604, type: 3}
-  poolManagerRootTransform: {fileID: 1699263498}
 --- !u!1 &1751742318
 GameObject:
   m_ObjectHideFlags: 0
@@ -7762,11 +7759,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1830764577 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3931848182145514750, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
-  m_PrefabInstance: {fileID: 3931848180317240543}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1841056266
 GameObject:
   m_ObjectHideFlags: 0
@@ -8192,10 +8184,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 368977363481154082, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1320013365611895014, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433576563816030983, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3832072421744281546, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: stillParent
       value: 
       objectReference: {fileID: 1751742319}
+    - target: {fileID: 3931848181877765673, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: bufferTime
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 3931848181877765676, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -8243,6 +8251,10 @@ PrefabInstance:
     - target: {fileID: 3931848181877765677, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6711620692673762207, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}

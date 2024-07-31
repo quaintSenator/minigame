@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private JumpMode jumpMode = JumpMode.Force;
     //角色跳跃的力
     [SerializeField] private float jumpForce = 5.0f;
+    //角色按键缓冲时长
+    [SerializeField] private double bufferTime = 0.1f;
     //力的作用时间
     private float jumpTime = 0.5f;
     //角色是否在跳跃
@@ -38,6 +40,14 @@ public class PlayerController : MonoBehaviour
     private bool isDead = false;
     //角色是否再跳
     private bool willJump = false;
+    //缓冲计时器是否生效
+    private bool isBufferActive = false;
+    //缓冲计时器计数
+    private int bufferTimerCount = 0;
+    //废弃计时器个数（起跳后废弃）
+    private int disableTimerCount = 0;
+    //角色是否可以连跳
+    private bool isContinueJump = false;
     //角色是否进行回正
     private bool isReturn = false;
     //回正时间
@@ -82,9 +92,10 @@ public class PlayerController : MonoBehaviour
         EventManager.AddListener(EventType.MouseRightClickEvent, OnDead);
         EventManager.AddListener(EventType.PlayerJumpoffGroundEvent, OnOffGround);
 
-        EventManager.AddListener(EventType.SpacebarDownEvent,OnSpacebarDown);
-        EventManager.AddListener(EventType.MouseLeftClickEvent,OnMouseLeftClick);
-        EventManager.AddListener(EventType.JDownEvent,OnAttack);
+        EventManager.AddListener(EventType.SpacebarDownEvent, OnSpacebarDown);
+        EventManager.AddListener(EventType.SpacebarUpEvent, OnSpacebarUp);
+        EventManager.AddListener(EventType.MouseLeftClickEvent, OnMouseLeftClick);
+
     }
 
     private void OnDisable()
@@ -92,22 +103,24 @@ public class PlayerController : MonoBehaviour
         EventManager.RemoveListener(EventType.MouseRightClickEvent, OnDead);
         EventManager.RemoveListener(EventType.PlayerJumpoffGroundEvent, OnOffGround);
 
-        EventManager.RemoveListener(EventType.SpacebarDownEvent,OnSpacebarDown);
-        EventManager.RemoveListener(EventType.MouseLeftClickEvent,OnMouseLeftClick);
+        EventManager.RemoveListener(EventType.SpacebarDownEvent, OnSpacebarDown);
+        EventManager.RemoveListener(EventType.SpacebarUpEvent, OnSpacebarUp);
+        EventManager.RemoveListener(EventType.MouseLeftClickEvent, OnMouseLeftClick);
+
     }
     private void Start()
     {
         returnTimer = 0;
         registerEvents();
     }
-    
+
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Space) && rigidBody.velocity.y <= 0 && !isGrounded)
-        {
-            //Debug.Log("willJump");
-            willJump = true;
-        }
+        /* if (Input.GetKey(KeyCode.Space) && rigidBody.velocity.y <= 0 && !isGrounded)
+         {
+             //Debug.Log("willJump");
+             willJump = true;
+         }*/
         if (isReturn)
         {
             returnTimer += Time.deltaTime;
@@ -136,25 +149,49 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnSpacebarDown(EventData data=null)
+    private void OnSpacebarDown(EventData data = null)
+    {
+        Jump();
+        willJump = true;
+        isContinueJump = true;
+    }
+
+    private void OnSpacebarUp(EventData DATA = null)
+    {
+        CleverTimerManager.Ask4Timer(bufferTime, OnBufferTimeEnd);
+        bufferTimerCount++;
+        isBufferActive = true;
+        isContinueJump = false;
+    }
+
+    private void OnMouseLeftClick(EventData data = null)
     {
         Jump();
     }
-
-    private void OnMouseLeftClick(EventData data=null)
-    {
-        Jump();
-    }
-
-    private void OnAttack(EventData data = null)
-    {
-        
-    }
-
 
     public float GetSpeed()
     {
         return speed;
+    }
+
+    private void OnBufferTimeEnd(EventData data)
+    {
+        if (disableTimerCount > 0)
+        {
+            disableTimerCount--;
+            return;
+        }
+
+        bufferTimerCount--;
+        if (bufferTimerCount == 1)
+        {
+            isBufferActive = true;
+        }
+        else if (isBufferActive)
+        {
+            willJump = false;
+            isBufferActive = false;
+        }
     }
 
     //注册事件统一函数
@@ -168,6 +205,8 @@ public class PlayerController : MonoBehaviour
     {
         if (isGrounded)
         {
+            disableTimerCount = bufferTimerCount;
+            bufferTimerCount = 0;
             EventManager.InvokeEvent(EventType.PlayerJumpoffGroundEvent);
             switch (jumpMode)
             {
@@ -194,12 +233,13 @@ public class PlayerController : MonoBehaviour
 
     public void SetIsDead(bool value)
     {
-        if(!isDead && value)
+        if (!isDead && value)
         {
             isDead = value;
             OnDead();
         }
-        else {
+        else
+        {
             isDead = value;
         }
     }
@@ -208,7 +248,8 @@ public class PlayerController : MonoBehaviour
     {
         if (willJump)
         {
-            willJump = false;
+            if (!isContinueJump)
+                willJump = false;
             Jump();
             Debug.Log("jump");
         }

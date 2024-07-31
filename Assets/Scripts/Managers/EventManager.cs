@@ -26,11 +26,13 @@ public enum EventType
     MiddleScrollEvent,
     HorizontalInputEvent,
     SpacebarDownEvent,
+    SpacebarUpEvent,
     EscDownEvent,
     EDownEvent,
     KDownEvent,
     LDownEvent,
     JDownEvent,
+    JUpEvent,
     NumDownEvent,
     
     #endregion
