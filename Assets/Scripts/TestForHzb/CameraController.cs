@@ -11,8 +11,9 @@ public class CameraController : MonoBehaviour
 
     private void Awake()
     {
-        cinemachineBrain = GetComponent<CinemachineBrain>();
-        cinemachine = transform.parent.gameObject.GetComponent<CinemachineVirtualCamera>();
+        //cinemachineBrain = GetComponent<CinemachineBrain>();
+        cinemachine = GetComponent<CinemachineVirtualCamera>();
+        Debug.Log("cinemachine"+cinemachine);
     }
 
     private void OnEnable()
@@ -29,7 +30,7 @@ public class CameraController : MonoBehaviour
     
     private void OnGameStart(EventData data)
     {
-        //cinemachineBrain.enabled = true;
+        cinemachine.enabled = true;
         Debug.Log("OnGameStart");
     }
 
