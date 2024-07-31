@@ -30,6 +30,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
     private List<BuildableInfo> buildableInfos = new List<BuildableInfo>();
     private Dictionary<Vector3Int, BuildableBase> currentBuildableMap = new Dictionary<Vector3Int, BuildableBase>();
 
+    [SerializeField] private bool showAllBuildable = false;
     protected override void OnAwake()
     {
         //唤醒TilemapSaver
@@ -302,7 +303,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         {
             foreach (var buildableInfo in buildableInfos)
             {
-                if (BuildableBase.IsBuildableViewport(buildableInfo.position, Camera.main))
+                if (BuildableBase.IsBuildableViewport(buildableInfo.position, Camera.main) || showAllBuildable)
                 {
                     SpawnBuildable(buildableInfo.type, buildableInfo.position);
                 }
