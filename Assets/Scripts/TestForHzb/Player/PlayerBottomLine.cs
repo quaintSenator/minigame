@@ -31,8 +31,7 @@ public class PlayerBottomLine : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ground"))
         {
-            player.SetIsGrounded(true);
-            Debug.Log("cubeTransDrop:"+transform.position);
+            player.OnHitGround();
         }
     }
     
@@ -41,8 +40,7 @@ public class PlayerBottomLine : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ground"))
         {
-            player.SetIsGrounded(false);
-            Debug.Log("cubeTransUp:"+transform.position);
+            player.OnOffGround();
         }
     }
 

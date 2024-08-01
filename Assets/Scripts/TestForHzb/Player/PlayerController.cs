@@ -90,7 +90,6 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         EventManager.AddListener(EventType.MouseRightClickEvent, OnDead);
-        EventManager.AddListener(EventType.PlayerJumpoffGroundEvent, OnOffGround);
 
         EventManager.AddListener(EventType.SpacebarDownEvent, OnSpacebarDown);
         EventManager.AddListener(EventType.SpacebarUpEvent, OnSpacebarUp);
@@ -101,7 +100,6 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         EventManager.RemoveListener(EventType.MouseRightClickEvent, OnDead);
-        EventManager.RemoveListener(EventType.PlayerJumpoffGroundEvent, OnOffGround);
 
         EventManager.RemoveListener(EventType.SpacebarDownEvent, OnSpacebarDown);
         EventManager.RemoveListener(EventType.SpacebarUpEvent, OnSpacebarUp);
@@ -151,8 +149,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnSpacebarDown(EventData data = null)
     {
-        Jump();
-        willJump = true;
+        if(isGrounded){
+            Jump();
+        }
+        else{
+            willJump = true;
+        }
         isContinueJump = true;
     }
 
@@ -166,7 +168,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnMouseLeftClick(EventData data = null)
     {
-        Jump();
+        //Jump();
     }
 
     public float GetSpeed()
@@ -201,23 +203,19 @@ public class PlayerController : MonoBehaviour
     }
 
     //角色跳跃
-    public void Jump()
+    private void Jump()
     {
-        if (isGrounded)
+        disableTimerCount = bufferTimerCount;
+        bufferTimerCount = 0;
+        switch (jumpMode)
         {
-            disableTimerCount = bufferTimerCount;
-            bufferTimerCount = 0;
-            EventManager.InvokeEvent(EventType.PlayerJumpoffGroundEvent);
-            switch (jumpMode)
-            {
-                case JumpMode.Force:
-                    jumping = true;
-                    StartCoroutine(JumpForce());
-                    break;
-                case JumpMode.Speed:
-                    rigidBody.velocity = Vector2.up * jumpSpeed;
-                    break;
-            }
+            case JumpMode.Force:
+                jumping = true;
+                StartCoroutine(JumpForce());
+                break;
+            case JumpMode.Speed:
+                rigidBody.velocity = Vector2.up * jumpSpeed;
+                break;
         }
     }
 
@@ -246,24 +244,25 @@ public class PlayerController : MonoBehaviour
 
     public void OnHitGround(EventData data = null)
     {
-        if (willJump)
+        isGrounded = true;
+        isReturn = true;
+        selfAngle = cubeSprites.eulerAngles.z;
+        HitGroundEventData hitdata = new HitGroundEventData(playerHeadingDir);
+        EventManager.InvokeEvent(EventType.PlayerHitGroundEvent, hitdata);
+        if (willJump || isContinueJump)
         {
             if (!isContinueJump)
                 willJump = false;
             Jump();
-            Debug.Log("jump");
         }
-        isReturn = true;
-        selfAngle = cubeSprites.eulerAngles.z;
-        Debug.Log("OnHitGround");
-        HitGroundEventData hitdata = new HitGroundEventData(playerHeadingDir);
-        EventManager.InvokeEvent(EventType.PlayerHitGroundEvent, hitdata);
     }
 
     public void OnOffGround(EventData data = null)
     {
+        isGrounded = false;
         isReturn = false;
         returnTimer = 0;
+        EventManager.InvokeEvent(EventType.PlayerJumpoffGroundEvent);
     }
 
     //协程，在jumpTime时间内持续给与一个力
