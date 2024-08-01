@@ -4,7 +4,23 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using Random = System.Random;
+public class TimerDieEventData : EventData
+{
+    public double absoluteTime;
+    public TimerDieEventData(double i)
+    {
+        absoluteTime = i;
+    }
+}
 
+public class FrameTimerDieEventData : EventData
+{
+    public int absoluteFrame;
+    public FrameTimerDieEventData(int i)
+    {
+        absoluteFrame = i;
+    }
+}
 public class TimerPElement : PElement
 {
     private readonly Action<EventData> _timeupCallback;
