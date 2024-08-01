@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -16,10 +17,30 @@ enum JumpMode
     Speed,
 }
 
+[System.Serializable]
+public class JumpSettings: System.Object
+{
+    public float gravityScale;
+    public float horizontalBlockNum;
+    public float verticalBlockNum;
+
+    public JumpSettings()
+    {
+        gravityScale = 12.0f;
+        horizontalBlockNum = 4.5f;
+        verticalBlockNum = 3.0f;
+    }
+    public JumpSettings(float gravityScale, float horizontalBlockNum, float verticalBlockNum)
+    {
+        this.gravityScale = gravityScale;
+        this.horizontalBlockNum = horizontalBlockNum;
+        this.verticalBlockNum = verticalBlockNum;
+    }
+}
+
 public class PlayerController : MonoBehaviour
 {
-    //角色的重力系数
-    [SerializeField] private float gravityScale = 4.0f;
+    [SerializeField] public JumpSettings jumpSettings; 
     //角色自动前进的速度
     private float speed = 5.0f;
     //角色跳跃的模式
@@ -57,12 +78,6 @@ public class PlayerController : MonoBehaviour
     //回正角度
     private float selfAngle;
 
-
-    //一次跳跃水平移动距离
-    [SerializeField] private float horizontalBlockNum = 4.5f;
-    //一次跳跃垂直移动距离
-    [SerializeField] private float verticalBlockNum = 3f;
-
     //一些初始化
     private Transform cubeSprites;
     private BoxCollider2D boxCollider;
@@ -79,9 +94,7 @@ public class PlayerController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         if (jumpMode == JumpMode.Speed)
         {
-            jumpSpeed = Mathf.Sqrt(2 * GameConsts.GRAVITY * gravityScale * verticalBlockNum * transform.localScale.x);
-            jumpTime = jumpSpeed / (GameConsts.GRAVITY * gravityScale) * 2;
-            speed = horizontalBlockNum / jumpTime * transform.localScale.x;
+            CalSettings();
         }
         _forceManager = ForceManager.Instance;
         playerHeadingDir = Vector3.right;
@@ -135,7 +148,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         //角色一直受一个向下的重力，世界坐标系
-        rigidBody.AddForce(ForceManager.Instance.getGravityDir() * gravityScale * GameConsts.GRAVITY);
+        rigidBody.AddForce(ForceManager.Instance.getGravityDir() * jumpSettings.gravityScale * GameConsts.GRAVITY);
 
         //角色自动向右前进，世界坐标系
         transform.Translate(playerHeadingDir * speed * Time.fixedDeltaTime, Space.World);
@@ -149,10 +162,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnSpacebarDown(EventData data = null)
     {
-        if(isGrounded){
-            Jump();
+        if (isGrounded)
+        {
+            TryJump();
         }
-        else{
+        else
+        {
             willJump = true;
         }
         isContinueJump = true;
@@ -169,11 +184,6 @@ public class PlayerController : MonoBehaviour
     private void OnMouseLeftClick(EventData data = null)
     {
         //Jump();
-    }
-
-    public float GetSpeed()
-    {
-        return speed;
     }
 
     private void OnBufferTimeEnd(EventData data)
@@ -219,6 +229,32 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //对外跳跃接口，设置跳跃参数，不传为默认参数
+    public void TryJump(JumpSettings data = null, bool mustJump = false)
+    {
+        if (isGrounded || mustJump)
+        {
+            CalSettings(data);
+            Jump();
+        }
+    }
+
+    private void CalSettings(JumpSettings data=null)
+    {
+        if(data==null)
+        {
+            jumpSettings = GameConsts.DEFAULT_JUMP;            
+        }
+        else
+        {
+            jumpSettings = data;
+        }
+
+        jumpSpeed = Mathf.Sqrt(2 * GameConsts.GRAVITY * jumpSettings.gravityScale * jumpSettings.verticalBlockNum * transform.localScale.x);
+        jumpTime = jumpSpeed / (GameConsts.GRAVITY * jumpSettings.gravityScale) * 2;
+        speed = jumpSettings.horizontalBlockNum / jumpTime * transform.localScale.x;
+    }
+
     public void SetIsGrounded(bool value)
     {
         if (!isGrounded && value)
@@ -253,7 +289,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!isContinueJump)
                 willJump = false;
-            Jump();
+            TryJump();
         }
     }
 
@@ -304,7 +340,7 @@ public class PlayerController : MonoBehaviour
             float time = 1.0f;
             if (jumpMode == JumpMode.Speed)
             {
-                time = jumpSpeed / (GameConsts.GRAVITY * gravityScale) * 2;
+                time = jumpSpeed / (GameConsts.GRAVITY * jumpSettings.gravityScale) * 2;
             }
             else if (jumpMode == JumpMode.Force)
             {
@@ -365,5 +401,10 @@ public class PlayerController : MonoBehaviour
     public Vector3 getPlayerVelocity()
     {
         return rigidBody.velocity;
+    }
+
+    public float GetSpeed()
+    {
+        return speed;
     }
 }

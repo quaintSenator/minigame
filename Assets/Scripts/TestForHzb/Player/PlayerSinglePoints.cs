@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//此代码已被废弃***********************************************************************************
 public class PlayerSinglePoints : MonoBehaviour
 {
     [SerializeField] private PlayerController player;
