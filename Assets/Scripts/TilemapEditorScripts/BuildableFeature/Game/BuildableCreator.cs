@@ -291,7 +291,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
     
     public static Vector3 GetStartPositionOffset()
     {
-        Transform mapStartPoint = GameObject.Find("map").transform;
+        Transform mapStartPoint = GameObject.Find("start_point").transform;
         return new Vector3(mapStartPoint.position.x + GameConsts.TILE_SIZE / 2, mapStartPoint.position.y + GameConsts.TILE_SIZE / 2, 0);
     }
     
