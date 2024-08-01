@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         //角色一直受一个向下的重力，世界坐标系
-        rigidBody.AddForce(ForceManager.Instance.getGravityDir() * gravityScale * GameConsts.GRAVITY);
+        rigidBody.AddForce(ForceManager.Instance.GetGravityDir() * gravityScale * GameConsts.GRAVITY);
 
         //角色自动向右前进，世界坐标系
         transform.Translate(playerHeadingDir * speed * Time.fixedDeltaTime, Space.World);

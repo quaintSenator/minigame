@@ -21,6 +21,7 @@ public class FrictionEffectController : MonoBehaviour
     [SerializeField] private Color particleRandomColorRangeL;
     [SerializeField] private Color particleRandomColorRangeR;
     [SerializeField] private float fricThrowAngle = 15.0f;
+    [SerializeField] private float cubeEdgeLen = 0.45f;
     public bool test_is_moving_right;
     void SelfPSInit()
     {
@@ -31,7 +32,7 @@ public class FrictionEffectController : MonoBehaviour
     
     private void OnGravityInverse(EventData ed)
     {
-        setPSGravity(ForceManager.Instance.getGravityDir());
+        setPSGravity(ForceManager.Instance.GetGravityDir());
     }
     
     //根据重力和摩擦力计算抛洒例子方向
@@ -62,23 +63,30 @@ public class FrictionEffectController : MonoBehaviour
     }
     private void OnPlayerJumpOff(EventData ed)
     {
-        Debug.Log("SF::OnPlayerJumpOff");
+        //断喷
         var emit = myParticleSystem.emission;
         emit.enabled = false;
     }
     private void OnPlayerHitGround(EventData ed)
     {
+        //设置transform.rotation, 用于调整喷射方向
         var fmanager = ForceManager.Instance;
         HitGroundEventData hitGroundEventData = (HitGroundEventData)ed;
         float rotationX = GetFrictionThrowingRotationAngle(
-            hitGroundEventData.velocityDir, fmanager.getGravityDir(), fricThrowAngle);
+            hitGroundEventData.velocityDir, fmanager.GetGravityDir(), fricThrowAngle);
         transform.rotation = Quaternion.Euler(rotationX, -90.0f, 0);
         
+        //调节相对顶层节点位置
+        Vector3 localPosition2Set = new Vector3();
+        
+        
+        localPosition2Set.x = -cubeEdgeLen;
+        localPosition2Set.y = -cubeEdgeLen;
+        transform.localPosition = localPosition2Set;
         //开喷
         var emit = myParticleSystem.emission;
         emit.enabled = true;
     }
-    
     private void setPSGravity(Vector2 gravity)
     {
         var forceModule = myParticleSystem.forceOverLifetime;
@@ -97,19 +105,5 @@ public class FrictionEffectController : MonoBehaviour
         EventManager.RemoveListener(EventType.PlayerJumpoffGroundEvent, OnPlayerJumpOff);
         EventManager.RemoveListener(EventType.PlayerHitGroundEvent, OnPlayerHitGround);
         EventManager.RemoveListener(EventType.GravityInverseEvent, OnGravityInverse);
-    }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            test_is_moving_right = !test_is_moving_right;
-            EventManager.InvokeEvent(EventType.PlayerHitGroundEvent, 
-                new HitGroundEventData(test_is_moving_right? Vector2.right : Vector2.left));
-        }
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            EventManager.InvokeEvent(EventType.GravityInverseEvent, null);
-        }
     }
 }

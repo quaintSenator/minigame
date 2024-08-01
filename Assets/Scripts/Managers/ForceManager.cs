@@ -31,11 +31,11 @@ public class ForceManager : Singleton<ForceManager>
     {
         gravityDir = -gravityDir;
     }
-    public Vector2 getGravityDir()
+    public Vector2 GetGravityDir()
     {
         return gravityDir;
     }
-    private void switchGravityDir()
+    private void SwitchGravityDir()
     {
         gravityDir = -gravityDir;
     }
