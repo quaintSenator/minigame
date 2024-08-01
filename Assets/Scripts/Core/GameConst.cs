@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class GameConsts
@@ -13,4 +14,7 @@ public class GameConsts
     public static readonly string CURRENT_SELECTED_MAPDATA = "__current_selected_mapdata__";
     public static readonly float TILE_SIZE = 1.35f;
     public static readonly float TILE_CHECK_GAP = 0.5f;
+
+    public static readonly JumpSettings DEFAULT_JUMP = new JumpSettings();
+    public static readonly JumpSettings SPRING_JUMP = new JumpSettings(12.0f, 6.8f, 4.8f);
 }

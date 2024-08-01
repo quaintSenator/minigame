@@ -27,15 +27,15 @@ public class BuildableBase : MonoBehaviour
         //TODO 销毁
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent(out PlayerController player))
         {
-            TriggerThisBuildable();
+            TriggerThisBuildable(player);
         }
     }
     
-    protected virtual void TriggerThisBuildable()
+    protected virtual void TriggerThisBuildable(PlayerController player)
     {
         //TODO 触发功能
     }
