@@ -4823,6 +4823,7 @@ MonoBehaviour:
   particleRandomColorRangeL: {r: 1, g: 1, b: 1, a: 1}
   particleRandomColorRangeR: {r: 0, g: 0.38204694, b: 1, a: 1}
   fricThrowAngle: 15
+  test_is_moving_right: 0
 --- !u!1 &1320013365611895014
 GameObject:
   m_ObjectHideFlags: 0
@@ -5614,7 +5615,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.411559, y: -0.49561507}
+  m_Offset: {x: -0.411559, y: -0.5185653}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -5625,7 +5626,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.017543316, y: 0.099645615}
+  m_Size: {x: 0.017543316, y: 0.14554521}
   m_EdgeRadius: 0
 --- !u!114 &3931848181627620472
 MonoBehaviour:
@@ -5961,11 +5962,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96930f94afaa5b149abcb3f78f9ba9e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityScale: 12
+  jumpSettings:
+    gravityScale: 12
+    horizontalBlockNum: 4.5
+    verticalBlockNum: 3
   jumpMode: 1
   jumpForce: 60
-  horizontalBlockNum: 4.5
-  verticalBlockNum: 3
+  bufferTime: 0.1
 --- !u!1 &3931848181893502972
 GameObject:
   m_ObjectHideFlags: 0
@@ -6327,6 +6330,7 @@ GameObject:
   - component: {fileID: 368977363481154082}
   - component: {fileID: 1433576563816030983}
   - component: {fileID: 6919333483264501423}
+  - component: {fileID: 1390855068}
   m_Layer: 0
   m_Name: sword
   m_TagString: Untagged
@@ -6343,7 +6347,7 @@ Transform:
   m_GameObject: {fileID: 6711620692673762207}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0.97, y: 0, z: 0}
-  m_LocalScale: {x: 0.19875002, y: 0.68875, z: 1}
+  m_LocalScale: {x: 0.19875, y: 0.68875, z: 1}
   m_Children: []
   m_Father: {fileID: 720426652733263593}
   m_RootOrder: 0
@@ -6437,3 +6441,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07e6e83d50ce74641b6bc99f4f5f498e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coldDownTime: 0.4
+--- !u!95 &1390855068
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6711620692673762207}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 62825a131d889054b9adccb665cf3944, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

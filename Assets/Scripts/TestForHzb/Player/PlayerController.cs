@@ -18,7 +18,7 @@ enum JumpMode
 }
 
 [System.Serializable]
-public class JumpSettings: System.Object
+public class JumpSettings : System.Object
 {
     public float gravityScale;
     public float horizontalBlockNum;
@@ -40,7 +40,7 @@ public class JumpSettings: System.Object
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] public JumpSettings jumpSettings; 
+    [SerializeField] public JumpSettings jumpSettings;
     //角色自动前进的速度
     private float speed = 5.0f;
     //角色跳跃的模式
@@ -215,7 +215,7 @@ public class PlayerController : MonoBehaviour
     //角色跳跃
     private void Jump()
     {
-        disableTimerCount = bufferTimerCount;
+        disableTimerCount = bufferTimerCount > 0 ? bufferTimerCount : 0;
         bufferTimerCount = 0;
         switch (jumpMode)
         {
@@ -232,18 +232,23 @@ public class PlayerController : MonoBehaviour
     //对外跳跃接口，设置跳跃参数，不传为默认参数
     public void TryJump(JumpSettings data = null, bool mustJump = false)
     {
-        if (isGrounded || mustJump)
+        if (isGrounded)
+        {
+            CalSettings(data);
+            Jump();
+        }
+        else if (mustJump)
         {
             CalSettings(data);
             Jump();
         }
     }
 
-    private void CalSettings(JumpSettings data=null)
+    private void CalSettings(JumpSettings data = null)
     {
-        if(data==null)
+        if (data == null)
         {
-            jumpSettings = GameConsts.DEFAULT_JUMP;            
+            jumpSettings = GameConsts.DEFAULT_JUMP;
         }
         else
         {
@@ -291,6 +296,7 @@ public class PlayerController : MonoBehaviour
                 willJump = false;
             TryJump();
         }
+        Debug.Log("OnHitGround");
     }
 
     public void OnOffGround(EventData data = null)
@@ -394,7 +400,10 @@ public class PlayerController : MonoBehaviour
         returnTimer = 0;
         boxCollider.enabled = true;
         willJump = false;
-        Debug.Log("isReset");
+        isContinueJump = false;
+        disableTimerCount = bufferTimerCount > 0 ? bufferTimerCount : 0;
+        bufferTimerCount = 0;
+        jumpSettings = GameConsts.DEFAULT_JUMP;
         EventManager.InvokeEvent(EventType.GameRestartEvent);
     }
 
