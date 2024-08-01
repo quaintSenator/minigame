@@ -167,6 +167,7 @@ public class MusicVisualization : MonoBehaviour
         if (IfPlayMusicWhenStart)
         {
             PlayLevelMusic();
+            RhythmDataRecorder.Instance.StartRecordTime();
 
             if (IfUseVisualization)
             {
@@ -282,6 +283,7 @@ public class MusicVisualization : MonoBehaviour
     //目前打的Marker会在节拍点前提前一定时间，可视化需要计算出正确的位置
     private void CallbackFunctionMarker(object InCookies, AkCallbackType InCallbackType, object InInfo)
     {
+        RhythmDataRecorder.Instance.RecordTime();
         if (InCallbackType == AkCallbackType.AK_Marker  && IfUseVisualization)
         {
             var MarkerInfo = InInfo as AkMarkerCallbackInfo;

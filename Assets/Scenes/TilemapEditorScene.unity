@@ -6845,6 +6845,96 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1860919565
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1860919567}
+  - component: {fileID: 1860919566}
+  - component: {fileID: 1860919568}
+  m_Layer: 0
+  m_Name: audio_recorder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1860919566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1860919565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 770928883baa81c4d8ff7570109d49d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerControllerInstance: {fileID: 0}
+  BankNames:
+  - LevelTest
+  LevelMusicPlayEvent:
+  - idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 2f4d39d70a1afc94c91ea8ed2de40e9a, type: 2}
+  LevelMusicBpmList:
+  - 100
+  LevelIndex: 0
+  CallbackType: 4
+  IfPlayMusicWhenStart: 1
+  IfUseVisualization: 1
+  RhythmVisualizationPerfabType: {fileID: 0}
+  NumberOfRhythmVisualizationPerfabInstance: 5
+  RhythmVisualizationPerfabInstanceList: []
+  RhythmVisualizationPerfabParameterInstance:
+    StartTimeOffset: 0
+    CircleMaxRadium: 0.48
+    OuterCircleWidth: 0.02
+    OuterCircleColor: {r: 0, g: 0, b: 1, a: 1}
+    GrowingCircleColor: {r: 0, g: 1, b: 0, a: 1}
+    NormalColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    PerfectColor: {r: 1, g: 0, b: 0, a: 1}
+    BeatStartTime: 0
+    NormalRangeStartTime: 0.4
+    NormalRangeEndTime: 0.8
+    PerfectRangeStartTime: 0.5
+    PerfectRangeEndTime: 0.7
+    BeatEndTime: 1.2
+    IntervalTimeB2WBeats: 0
+  BeatTimeInterval: 0.6
+  RhythmVisualzationStartPositionWithPlayerController: {x: 100, y: 100, z: 0}
+  NextVisualPositionXOffset: 0
+--- !u!4 &1860919567
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1860919565}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 19.307116, y: 1.81037, z: -1.5228713}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1860919568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1860919565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bf04b067efc9d440b6a3068be32b2ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1956386137
 GameObject:
   m_ObjectHideFlags: 0
