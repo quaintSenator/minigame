@@ -4,14 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using UnityEngine;
 
-public class CleverTimeDieEventData : EventData
-{
-    private GameObject go_shall_die;
-    public CleverTimeDieEventData(GameObject go)
-    {
-        go_shall_die = go;
-    }
-}
+
 public class PElement
 {
     public Action<EventData> callback;
