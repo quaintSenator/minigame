@@ -16,5 +16,5 @@ public class GameConsts
     public static readonly float TILE_CHECK_GAP = 0.5f;
 
     public static readonly JumpSettings DEFAULT_JUMP = new JumpSettings();
-    public static readonly JumpSettings SPRING_JUMP = new JumpSettings(12.0f, 6.8f, 4.8f);
+    public static readonly JumpSettings SPRING_JUMP = new JumpSettings(0.3f, 6.8f, 4.8f);
 }

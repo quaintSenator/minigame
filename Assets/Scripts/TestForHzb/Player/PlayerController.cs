@@ -20,19 +20,19 @@ enum JumpMode
 [System.Serializable]
 public class JumpSettings : System.Object
 {
-    public float gravityScale;
+    public float jumpTime;
     public float horizontalBlockNum;
     public float verticalBlockNum;
 
     public JumpSettings()
     {
-        gravityScale = 12.0f;
+        jumpTime = 0.25f;
         horizontalBlockNum = 4.5f;
         verticalBlockNum = 3.0f;
     }
-    public JumpSettings(float gravityScale, float horizontalBlockNum, float verticalBlockNum)
+    public JumpSettings(float jumpTime, float horizontalBlockNum, float verticalBlockNum)
     {
-        this.gravityScale = gravityScale;
+        this.jumpTime = jumpTime;
         this.horizontalBlockNum = horizontalBlockNum;
         this.verticalBlockNum = verticalBlockNum;
     }
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     //角色按键缓冲时长
     [SerializeField] private double bufferTime = 0.1f;
     //力的作用时间
-    private float jumpTime = 0.5f;
+    private float gravityScale = 12.0f;
     //角色是否在跳跃
     private bool jumping = false;
     //角色跳跃的初始速度
@@ -148,7 +148,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         //角色一直受一个向下的重力，世界坐标系
-        rigidBody.AddForce(ForceManager.Instance.GetGravityDir() * jumpSettings.gravityScale * GameConsts.GRAVITY);
+        rigidBody.AddForce(ForceManager.Instance.GetGravityDir() * gravityScale * GameConsts.GRAVITY);
 
         //角色自动向右前进，世界坐标系
         transform.Translate(playerHeadingDir * speed * Time.fixedDeltaTime, Space.World);
@@ -255,9 +255,9 @@ public class PlayerController : MonoBehaviour
             jumpSettings = data;
         }
 
-        jumpSpeed = Mathf.Sqrt(2 * GameConsts.GRAVITY * jumpSettings.gravityScale * jumpSettings.verticalBlockNum * transform.localScale.x);
-        jumpTime = jumpSpeed / (GameConsts.GRAVITY * jumpSettings.gravityScale) * 2;
-        speed = jumpSettings.horizontalBlockNum / jumpTime * transform.localScale.x;
+        gravityScale = 2 * jumpSettings.verticalBlockNum * transform.localScale.x / Mathf.Pow(jumpSettings.jumpTime,2.0f) / GameConsts.GRAVITY;
+        jumpSpeed = Mathf.Sqrt(2 * GameConsts.GRAVITY * gravityScale * jumpSettings.verticalBlockNum * transform.localScale.x);
+        speed = (jumpSettings.horizontalBlockNum * transform.localScale.x) / (jumpSettings.jumpTime * 2) ;
     }
 
     public void SetIsGrounded(bool value)
@@ -305,7 +305,7 @@ public class PlayerController : MonoBehaviour
     //协程，在jumpTime时间内持续给与一个力
     private IEnumerator JumpForce()
     {
-        yield return new WaitForSeconds(jumpTime);
+        yield return new WaitForSeconds(jumpSettings.jumpTime);
         jumping = false;
     }
 
@@ -341,7 +341,7 @@ public class PlayerController : MonoBehaviour
             float time = 1.0f;
             if (jumpMode == JumpMode.Speed)
             {
-                time = jumpSpeed / (GameConsts.GRAVITY * jumpSettings.gravityScale) * 2;
+                time = jumpSpeed / (GameConsts.GRAVITY * gravityScale) * 2;
             }
             else if (jumpMode == JumpMode.Force)
             {
