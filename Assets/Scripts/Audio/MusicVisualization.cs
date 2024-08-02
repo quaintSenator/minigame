@@ -90,6 +90,15 @@ struct RhythmVisualizationPerfabParameter
 
 }
 
+[System.Serializable]
+struct LevelMusic
+{
+    public AK.Wwise.Event LevelMusicPlayEvent;
+    public AK.Wwise.Event LevelMusicStopEvent;
+    public AK.Wwise.Event LevelMusicPauseEvent;
+    public AK.Wwise.Event LevelMusicResumeEvent;
+}
+
 
 public class MusicVisualization : MonoBehaviour
 {
@@ -102,7 +111,7 @@ public class MusicVisualization : MonoBehaviour
 
     //关卡音乐Event列表
     [SerializeField]
-    private List<AK.Wwise.Event> LevelMusicPlayEvent = new List<AK.Wwise.Event>() { };
+    private List<LevelMusic> LevelMusicEvents = new List<LevelMusic>() { };
 
     //关卡音乐Bpm列表
     [SerializeField]
@@ -259,7 +268,7 @@ public class MusicVisualization : MonoBehaviour
         if (IfPlayMusicWhenStart)
         {
             if (!(LevelIndex < BankNames.Count)
-                || !(LevelIndex < LevelMusicPlayEvent.Count))
+                || !(LevelIndex < LevelMusicEvents.Count))
             {
                 Debug.LogWarning("The LevelIndex out of length of LevelMusicPlayEvent or LevelMusicPlayEvent");
                 return;
@@ -268,16 +277,42 @@ public class MusicVisualization : MonoBehaviour
 
             if (IfUseVisualization )
             {
-                LevelMusicPlayEvent[LevelIndex].Post(gameObject, (uint)CallbackType, CallbackFunctionMarker);
+                LevelMusicEvents[LevelIndex].LevelMusicPlayEvent.Post(gameObject, (uint)CallbackType, CallbackFunctionMarker);
             }
             else
             {
-                LevelMusicPlayEvent[LevelIndex].Post(gameObject);
+                LevelMusicEvents[LevelIndex].LevelMusicPlayEvent.Post(gameObject);
             }
 
 
         }
     }
+
+
+    void StopLevelMusic()
+    {
+        if (!(LevelIndex < BankNames.Count) || !(LevelIndex < LevelMusicEvents.Count))
+        {
+            LevelMusicEvents[LevelIndex].LevelMusicStopEvent.Post(gameObject);
+        }
+    }
+
+    void PauseLevelMusic()
+    {
+        if (!(LevelIndex < BankNames.Count) || !(LevelIndex < LevelMusicEvents.Count))
+        {
+            LevelMusicEvents[LevelIndex].LevelMusicPauseEvent.Post(gameObject);
+        }
+    }
+
+    void ResumeLevelMusic()
+    {
+        if (!(LevelIndex < BankNames.Count) || !(LevelIndex < LevelMusicEvents.Count))
+        {
+            LevelMusicEvents[LevelIndex].LevelMusicResumeEvent.Post(gameObject);
+        }
+    }
+
 
     //播放声音的回调函数
     //目前打的Marker会在节拍点前提前一定时间，可视化需要计算出正确的位置

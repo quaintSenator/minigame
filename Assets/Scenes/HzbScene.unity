@@ -7566,83 +7566,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1514776141
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1514776143}
-  - component: {fileID: 1514776142}
-  m_Layer: 0
-  m_Name: MusicVisualization
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1514776142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1514776141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 770928883baa81c4d8ff7570109d49d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerControllerInstance: {fileID: 869874842}
-  BankNames:
-  - LevelTest
-  LevelMusicPlayEvent:
-  - idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 2f4d39d70a1afc94c91ea8ed2de40e9a, type: 2}
-  LevelMusicBpmList:
-  - 100
-  LevelIndex: 0
-  CallbackType: 4
-  IfPlayMusicWhenStart: 1
-  IfUseVisualization: 1
-  RhythmVisualizationPerfabType: {fileID: 3572308572721115921, guid: 5bef602dc79ab5944b7409d7d77898d2, type: 3}
-  NumberOfRhythmVisualizationPerfabInstance: 5
-  RhythmVisualizationPerfabInstanceList: []
-  RhythmVisualizationPerfabParameterInstance:
-    StartTimeOffset: 0
-    CircleMaxRadium: 0.48
-    OuterCircleWidth: 0.02
-    OuterCircleColor: {r: 1, g: 1, b: 1, a: 1}
-    GrowingCircleColor: {r: 0, g: 1, b: 0, a: 1}
-    NormalColor: {r: 1, g: 0.963803, b: 0.3150943, a: 1}
-    PerfectColor: {r: 1, g: 0, b: 0.009989262, a: 1}
-    BeatStartTime: 0
-    NormalRangeStartTime: 0.4
-    NormalRangeEndTime: 0.8
-    PerfectRangeStartTime: 0.5
-    PerfectRangeEndTime: 0.7
-    BeatEndTime: 1.2
-    IntervalTimeB2WBeats: 0
-  BeatTimeInterval: 0.6
-  RhythmVisualzationStartPositionWithPlayerController: {x: 0, y: 5, z: 0}
-  NextVisualPositionXOffset: 0
---- !u!4 &1514776143
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1514776141}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.094256, y: 0.9883972, z: -6.024275}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1695701368
 GameObject:
   m_ObjectHideFlags: 0
@@ -8177,6 +8100,67 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2252913726483935958
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2252913727729079448, guid: dc9dd7ea8bf023b44a8c32117b6f7d63, type: 3}
+      propertyPath: PlayerControllerInstance
+      value: 
+      objectReference: {fileID: 869874842}
+    - target: {fileID: 2252913727729079449, guid: dc9dd7ea8bf023b44a8c32117b6f7d63, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2252913727729079449, guid: dc9dd7ea8bf023b44a8c32117b6f7d63, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.094256
+      objectReference: {fileID: 0}
+    - target: {fileID: 2252913727729079449, guid: dc9dd7ea8bf023b44a8c32117b6f7d63, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.9883972
+      objectReference: {fileID: 0}
+    - target: {fileID: 2252913727729079449, guid: dc9dd7ea8bf023b44a8c32117b6f7d63, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.024275
+      objectReference: {fileID: 0}
+    - target: {fileID: 2252913727729079449, guid: dc9dd7ea8bf023b44a8c32117b6f7d63, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2252913727729079449, guid: dc9dd7ea8bf023b44a8c32117b6f7d63, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2252913727729079449, guid: dc9dd7ea8bf023b44a8c32117b6f7d63, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2252913727729079449, guid: dc9dd7ea8bf023b44a8c32117b6f7d63, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2252913727729079449, guid: dc9dd7ea8bf023b44a8c32117b6f7d63, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2252913727729079449, guid: dc9dd7ea8bf023b44a8c32117b6f7d63, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2252913727729079449, guid: dc9dd7ea8bf023b44a8c32117b6f7d63, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2252913727729079451, guid: dc9dd7ea8bf023b44a8c32117b6f7d63, type: 3}
+      propertyPath: m_Name
+      value: MusicVisualization
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dc9dd7ea8bf023b44a8c32117b6f7d63, type: 3}
 --- !u!1001 &3931848180317240543
 PrefabInstance:
   m_ObjectHideFlags: 0
