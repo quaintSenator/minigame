@@ -34,10 +34,22 @@ public class BuildableBase : MonoBehaviour
             TriggerThisBuildable(player);
         }
     }
+
+    private void OnTriggerExit2D(Collider2D other) {
+        if(other.TryGetComponent(out PlayerController player))
+        {
+            TriggerOffThisBuildable(player);
+        }
+    }
     
     protected virtual void TriggerThisBuildable(PlayerController player)
     {
         //TODO 触发功能
+    }
+
+    protected virtual void TriggerOffThisBuildable(PlayerController player)
+    {
+
     }
     
     //设置渲染层级

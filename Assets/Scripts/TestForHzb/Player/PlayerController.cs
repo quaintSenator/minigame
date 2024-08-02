@@ -262,11 +262,6 @@ public class PlayerController : MonoBehaviour
 
     public void SetIsGrounded(bool value)
     {
-        if (!isGrounded && value)
-        {
-            isGrounded = value;
-            OnHitGround();
-        }
         isGrounded = value;
     }
 
