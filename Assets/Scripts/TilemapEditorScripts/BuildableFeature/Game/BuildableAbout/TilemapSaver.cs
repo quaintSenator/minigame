@@ -47,18 +47,17 @@ public class TilemapSaver : Singleton<TilemapSaver>
     
     public void AddThisBuildable(BuildableType type, Vector3Int position)
     {
-        Debug.Log("TilemapSaver record this buildable");
         currentBuildableInfosDic.Add(position, new BuildableInfo(type, position));
     }
     
     public void RemoveThisBuildable(Vector3Int position)
     {
-        Debug.Log("TilemapSaver remove this buildable");
         currentBuildableInfosDic.Remove(position);
     }
 
     public void SaveTilemap()
     {
+        Debug.Log("Save tilemap data key : " + (allSaveMapsList.Count+1));
         string key = (allSaveMapsList.Count+1).ToString();
         List<BuildableInfo> buildableInfos = new List<BuildableInfo>();
         foreach (var buildableInfo in currentBuildableInfosDic.Values)

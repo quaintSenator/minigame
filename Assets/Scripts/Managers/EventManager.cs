@@ -38,6 +38,18 @@ public enum EventType
     NumDownEvent,
     
     #endregion
+
+    #region 地图编辑器输入事件
+
+    CancelCurrentSelectEvent,
+    DrawOrEraseEvent,
+    ChangeTileModeEvent,
+    SaveMapEvent,
+    LoadMapOneEvent,
+    LoadMapTwoEvent,
+    LoadMapThreeEvent,
+
+    #endregion
 }
 
 // 事件数据参数基类，具体使用时可以继承该类，添加自己需要的参数
@@ -64,7 +76,6 @@ public class EventManager : Singleton<EventManager>
     }
     public static void AddListener(EventType eventType, Action<EventData> listener)
     {
-        Debug.Log("AddListener" + eventType);
         Action<EventData> myEvent;
         if (Instance.eventDictionary.TryGetValue(eventType, out myEvent))
         {
@@ -87,7 +98,6 @@ public class EventManager : Singleton<EventManager>
             thisEvent -= listener;
             Instance.eventDictionary[eventType] = thisEvent;
         }
-        Debug.Log("RemoveListener" + eventType);
     }
 
     public static void InvokeEvent(EventType eventType, EventData eventData = null)

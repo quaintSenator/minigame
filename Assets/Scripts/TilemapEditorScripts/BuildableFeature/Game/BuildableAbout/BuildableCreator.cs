@@ -68,10 +68,8 @@ public class BuildableCreator : Singleton<BuildableCreator>
     
     private void ReadDataFromBuildableInfos(List<BuildableInfo> infos)
     {
-        Debug.Log(infos);
         foreach (var buildableInfo in infos)
         {
-            Debug.Log(buildableInfo);
             buildableInfos.Add(new BuildableInfo(buildableInfo.type, buildableInfo.position));
             TilemapSaver.Instance.AddThisBuildable(buildableInfo.type, buildableInfo.position);
         }
@@ -79,36 +77,55 @@ public class BuildableCreator : Singleton<BuildableCreator>
 
     private void OnEnable()
     {
-        EventManager.AddListener(EventType.EscDownEvent,OnEscDown); //取消当前选择
+        EventManager.AddListener(EventType.CancelCurrentSelectEvent,CancelCurrentSelect); //取消当前选择
         EventManager.AddListener(EventType.MouseMoveEvent, OnMouseMove); //鼠标移动
-        EventManager.AddListener(EventType.MouseLeftClickEvent, OnMouseLeftClick); //绘制或者擦除
-        EventManager.AddListener(EventType.EDownEvent, OnEDown); //切换擦除
-        EventManager.AddListener(EventType.KDownEvent, OnKDown); //保存地图
-        EventManager.AddListener(EventType.LDownEvent, OnLDown); //加载地图
-        EventManager.AddListener(EventType.NumDownEvent, OnNumDown); //加载地图
+        EventManager.AddListener(EventType.DrawOrEraseEvent, OnMouseLeftClick); //绘制或者擦除
+        EventManager.AddListener(EventType.ChangeTileModeEvent, ChangeTileMode); //切换擦除
+        EventManager.AddListener(EventType.SaveMapEvent, SaveMap); //保存地图
+        EventManager.AddListener(EventType.LoadMapOneEvent, LoadMapOne); //加载地图一
+        EventManager.AddListener(EventType.LoadMapOneEvent, LoadMapOne); //加载地图一
+        EventManager.AddListener(EventType.LoadMapTwoEvent, LoadMapTwo); //加载地图二
+        EventManager.AddListener(EventType.LoadMapThreeEvent, LoadMapThree); //加载地图三
     }
 
     private void OnDisable()
     {
-        EventManager.RemoveListener(EventType.EscDownEvent,OnEscDown);
-        EventManager.RemoveListener(EventType.MouseMoveEvent, OnMouseMove);
-        EventManager.RemoveListener(EventType.MouseLeftClickEvent, OnMouseLeftClick);
-        EventManager.RemoveListener(EventType.EDownEvent, OnEDown);
-        EventManager.RemoveListener(EventType.KDownEvent, OnKDown);
-        EventManager.RemoveListener(EventType.LDownEvent, OnLDown);
-    }
-    
-    
-    
-    private void OnNumDown(EventData data)
-    {
-        var numData = data as NumDownEventData;
-        Debug.Log("Load map data from num : " + numData.num);
-        ClearAllTilemaps();
-        ReadDataFromBuildableInfos(TilemapSaver.Instance.LoadTilemap(numData.num.ToString()));
+        EventManager.RemoveListener(EventType.CancelCurrentSelectEvent,CancelCurrentSelect); //取消当前选择
+        EventManager.RemoveListener(EventType.MouseMoveEvent, OnMouseMove); //鼠标移动
+        EventManager.RemoveListener(EventType.DrawOrEraseEvent, OnMouseLeftClick); //绘制或者擦除
+        EventManager.RemoveListener(EventType.ChangeTileModeEvent, ChangeTileMode); //切换擦除
+        EventManager.RemoveListener(EventType.SaveMapEvent, SaveMap); //保存地图
+        EventManager.RemoveListener(EventType.LoadMapOneEvent, LoadMapOne); //加载地图一
+        EventManager.RemoveListener(EventType.LoadMapOneEvent, LoadMapOne); //加载地图一
+        EventManager.RemoveListener(EventType.LoadMapTwoEvent, LoadMapTwo); //加载地图二
+        EventManager.RemoveListener(EventType.LoadMapThreeEvent, LoadMapThree); //加载地图三
     }
 
-    private void OnKDown(EventData obj)
+    private void LoadMapOne(EventData data)
+    {
+        Debug.Log("Load map data from map one");
+        ClearAllTilemaps();
+        ReadDataFromBuildableInfos(TilemapSaver.Instance.LoadTilemap(1.ToString()));
+        CheckBuildableVisible();
+    }
+    
+    private void LoadMapTwo(EventData data)
+    {
+        Debug.Log("Load map data from map two");
+        ClearAllTilemaps();
+        ReadDataFromBuildableInfos(TilemapSaver.Instance.LoadTilemap(2.ToString()));
+        CheckBuildableVisible();
+    }
+    
+    private void LoadMapThree(EventData data)
+    {
+        Debug.Log("Load map data from map three");
+        ClearAllTilemaps();
+        ReadDataFromBuildableInfos(TilemapSaver.Instance.LoadTilemap(3.ToString()));
+        CheckBuildableVisible();
+    }
+
+    private void SaveMap(EventData obj)
     {
         if(buildableInfos.Count == 0)
         {
@@ -119,13 +136,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         ClearAllTilemaps();
     }
 
-    private void OnLDown(EventData obj)
-    {
-        ClearAllTilemaps();
-        TilemapSaver.Instance.LoadTilemap(1.ToString());
-    }
-
-    private void OnEDown(EventData obj)
+    private void ChangeTileMode(EventData obj)
     {
         if(currentTileMode != TileMode.Destroy)
         {
@@ -156,7 +167,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
     }
 
 
-    private void OnEscDown(EventData data)
+    private void CancelCurrentSelect(EventData data)
     {
         SetSelectedObject(BuildableType.none);
     }
@@ -301,18 +312,23 @@ public class BuildableCreator : Singleton<BuildableCreator>
         WaitForSeconds wait = new WaitForSeconds(GameConsts.TILE_CHECK_GAP);
         while (true)
         {
-            foreach (var buildableInfo in buildableInfos)
-            {
-                if (BuildableBase.IsBuildableViewport(buildableInfo.position, Camera.main) || showAllBuildable)
-                {
-                    SpawnBuildable(buildableInfo.type, buildableInfo.position);
-                }
-                else
-                {
-                    DestoryBuildable(buildableInfo.position);
-                }
-            }
+            CheckBuildableVisible();
             yield return wait;
+        }
+    }
+
+    private void CheckBuildableVisible()
+    {
+        foreach (var buildableInfo in buildableInfos)
+        {
+            if (BuildableBase.IsBuildableViewport(buildableInfo.position, Camera.main) || showAllBuildable)
+            {
+                SpawnBuildable(buildableInfo.type, buildableInfo.position);
+            }
+            else
+            {
+                DestoryBuildable(buildableInfo.position);
+            }
         }
     }
 
