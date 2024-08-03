@@ -13,6 +13,8 @@ public enum EventType
     TimerDieEvent,
     PlayerDeadEvent,
     GravityInverseEvent,
+    MusicStartEvent,
+    MusicRecordEvent,
 
 
     #region 输入事件在此添加

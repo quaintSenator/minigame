@@ -14,6 +14,7 @@ public class GameConsts
     public static readonly string CURRENT_SELECTED_MAPDATA = "__current_selected_mapdata__";
     public static readonly float TILE_SIZE = 0.135f;
     public static readonly float TILE_CHECK_GAP = 0.5f;
+    public static readonly float SPEED = 5.0f;
 
     public static readonly JumpSettings DEFAULT_JUMP = new JumpSettings();
     public static readonly JumpSettings SPRING_JUMP = new JumpSettings(0.3f, 6.8f, 4.8f);

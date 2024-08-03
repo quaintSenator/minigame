@@ -11,9 +11,20 @@ public class RhythmDataRecorder : Singleton<RhythmDataRecorder>
     private List<RhythmData> audioDataList = new List<RhythmData>();
     private float currentRecordTime = 0f;
     private int count = 0;
-    
 
-    public void StartRecordTime()
+    private void OnEnable()
+    {
+        EventManager.AddListener(EventType.MusicStartEvent, StartRecordTime);
+        EventManager.AddListener(EventType.MusicRecordEvent, RecordTime);
+    }
+    
+    private void OnDisable()
+    {
+        EventManager.RemoveListener(EventType.MusicStartEvent, StartRecordTime);
+        EventManager.RemoveListener(EventType.MusicRecordEvent, RecordTime);
+    }
+
+    public void StartRecordTime(EventData data)
     {
         if (!isRecord)
         {
@@ -25,7 +36,7 @@ public class RhythmDataRecorder : Singleton<RhythmDataRecorder>
         StartCoroutine(UpdateTime());
     }
     
-    public void RecordTime()
+    public void RecordTime(EventData data)
     {
         if (!isRecord)
         {
