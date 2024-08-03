@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,6 +8,8 @@ using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEngine.Experimental.Rendering.RayTracingAccelerationStructure;
+
 
 
 enum JumpMode
@@ -40,21 +43,57 @@ public class JumpSettings : System.Object
 
 public class PlayerController : MonoBehaviour
 {
+    private double JUDGE_ZERO = 0.000001f;
+
+    [SerializeField]
+    [Tooltip("移动、跳跃的基础单位（格子的具体大小），根据场景设置，后续可能会根据变速产生改变")]
+    private float worldScale = 1.0f;
+
+    [SerializeField]
+    [Tooltip("一次节拍时间，默认BPM为120，即一拍0.5s")]
+    private float beatTime = 0.5f;
+
+    [SerializeField]
+    [Tooltip("角色按键缓冲时长，玩家过早输入后，在一定时间内仍然可以触发动作")]
+    private double bufferTime = 0.1f;
+
     [SerializeField] public JumpSettings jumpSettings;
-    //角色自动前进的速度
-    private float speed = 5.0f;
-    //角色跳跃的模式
-    [SerializeField] private JumpMode jumpMode = JumpMode.Force;
-    //角色跳跃的力
-    [SerializeField] private float jumpForce = 5.0f;
-    //角色按键缓冲时长
-    [SerializeField] private double bufferTime = 0.1f;
-    //力的作用时间
-    private float gravityScale = 12.0f;
+
+    [SerializeField] 
+    [Tooltip("角色自动前进的速度,默认为8格/s,即BPM120，每拍前进4格")] 
+    private float speed = 8.0f;
+
+    [SerializeField]
+    [Tooltip("跳跃实现方式，默认为给予初速实现")]
+    private JumpMode jumpMode = JumpMode.Force;
+
+    [SerializeField]
+    [ReadOnly]
+    [Tooltip("重力的大小，目前根据另外两个参数自动调整")]
+    private float gravityScale = 50.0f;
+
+    [SerializeField]
+    [ReadOnly]
+    [Tooltip("跳跃实现方式->给予初速的速度大小，目前根据另外两个参数自动调整")]
+    private float jumpSpeed = 5.0f;
+
+    [SerializeField]
+    [Tooltip("一次跳跃最高上升的高度，需要调整的参数之一，影响重力和跳跃初速")]
+    private float jumpHeight = 2.6f;
+
+    [SerializeField]
+    [Tooltip("一次节拍循环完成时（从起跳到下一次起跳）的此时和最高高度的高度差，需要调整的参数之一，影响重力和跳跃初速，同时为了保证关卡的搭建，需要比1大一点")]
+    private float jumpDeltaHeight = 1.1f;
+
+    [SerializeField]
+    [Tooltip("跳跃实现方式->给予一段持续时间力中力的大小")]
+    private float jumpForce = 25.0f;
+
+
+
     //角色是否在跳跃
     private bool jumping = false;
-    //角色跳跃的初始速度
-    private float jumpSpeed = 5.0f;
+
     //角色是否在地面上
     private bool isGrounded = true;
     //角色是否已经死亡
@@ -92,12 +131,15 @@ public class PlayerController : MonoBehaviour
         cubeSprites = transform.Find("Visual");
         boxCollider = GetComponent<BoxCollider2D>();
         rigidBody = GetComponent<Rigidbody2D>();
-        if (jumpMode == JumpMode.Speed)
-        {
-            CalSettings();
-        }
+        /*        if (jumpMode == JumpMode.Speed)
+                {
+                    CalSettings();
+                }*/
+
+
         _forceManager = ForceManager.Instance;
         playerHeadingDir = Vector3.right;
+        CalSettings();
     }
 
     private void OnEnable()
@@ -148,7 +190,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         //角色一直受一个向下的重力，世界坐标系
-        rigidBody.AddForce(ForceManager.Instance.GetGravityDir() * gravityScale * GameConsts.GRAVITY);
+        rigidBody.AddForce(ForceManager.Instance.GetGravityDir() * gravityScale);//* GameConsts.GRAVITY);
 
         //角色自动向右前进，世界坐标系
         transform.Translate(playerHeadingDir * speed * Time.fixedDeltaTime, Space.World);
@@ -225,6 +267,10 @@ public class PlayerController : MonoBehaviour
                 break;
             case JumpMode.Speed:
                 rigidBody.velocity = Vector2.up * jumpSpeed;
+
+                //rigidBody.AddForce(Vector2.up * jumpForce);
+                // Impulse
+                //rigidBody.impluse
                 break;
         }
     }
@@ -234,30 +280,94 @@ public class PlayerController : MonoBehaviour
     {
         if (isGrounded)
         {
-            CalSettings(data);
+           // CalSettings(data);
             Jump();
         }
         else if (mustJump)
         {
-            CalSettings(data);
+           // CalSettings(data);
             Jump();
         }
     }
 
     private void CalSettings(JumpSettings data = null)
     {
+        /*        if (data == null)
+                {
+                    jumpSettings = GameConsts.DEFAULT_JUMP;
+                }
+                else
+                {
+                    jumpSettings = data;
+                }
+
+                gravityScale = 2 * jumpSettings.verticalBlockNum * transform.localScale.x / Mathf.Pow(jumpSettings.jumpTime,2.0f) / GameConsts.GRAVITY;
+                jumpSpeed = Mathf.Sqrt(2 * GameConsts.GRAVITY * gravityScale * jumpSettings.verticalBlockNum * transform.localScale.x);
+                speed = (jumpSettings.horizontalBlockNum * transform.localScale.x) / (jumpSettings.jumpTime * 2) ;*/
+
+
         if (data == null)
         {
             jumpSettings = GameConsts.DEFAULT_JUMP;
         }
-        else
+
+        CalNormalJumpParameter();
+
+        //TODO:这个值应该是从别处拿到或者直接赋的
+        worldScale = transform.localScale.x;
+
+        speed = speed  * worldScale;
+
+        gravityScale = gravityScale * worldScale;
+
+        jumpForce = jumpForce * worldScale;
+
+        jumpSpeed = jumpSpeed * worldScale;
+
+
+
+
+
+
+
+
+    }
+
+    private void CalNormalJumpParameter()
+    {
+
+        //跳跃一次的上升初速度和最高点位置解析出来会满足一个数量关系
+        //jumpHeight = jumpHeight * worldScale;
+        if (jumpHeight  < JUDGE_ZERO && jumpDeltaHeight < JUDGE_ZERO)
         {
-            jumpSettings = data;
+            Debug.LogError("Error jumpHeight！");
+            return;
         }
 
-        gravityScale = 2 * jumpSettings.verticalBlockNum * transform.localScale.x / Mathf.Pow(jumpSettings.jumpTime,2.0f) / GameConsts.GRAVITY;
-        jumpSpeed = Mathf.Sqrt(2 * GameConsts.GRAVITY * gravityScale * jumpSettings.verticalBlockNum * transform.localScale.x);
-        speed = (jumpSettings.horizontalBlockNum * transform.localScale.x) / (jumpSettings.jumpTime * 2) ;
+        //一次跳跃从起跳到最高点的时间
+        float jumptime = 0;
+
+        jumptime = (float)(Math.Sqrt(jumpHeight / jumpDeltaHeight) 
+            * jumpDeltaHeight
+            / (jumpDeltaHeight + Math.Sqrt(jumpDeltaHeight + jumpHeight))
+            * beatTime );
+
+        if (jumptime < JUDGE_ZERO )
+        {
+            Debug.LogError("Error jumptime！");
+            return;
+        }
+
+        gravityScale = 2 * jumpHeight / jumptime / jumptime;
+
+        jumpSpeed = jumptime * gravityScale;
+
+
+        /*        jumpSpeed = Math.Sqrt(jumpHeight / jumpHeight - 1) 
+                    * (jumpHeight - 1)
+                    / ((jumpHeight - 1) + Math.Sqrt(jumpHeight* jumpHeight - jumpHeight) )
+                    * gravityScale
+                    * beatTime;*/
     }
 
     public void SetIsGrounded(bool value)
