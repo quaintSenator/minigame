@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="150">
+	<SoundBanks>
+		<SoundBank Id="2678230382" Type="User" Language="SFX" Hash="{9A05DBDA-D742-5B12-4EF7-69B47CC59E4B}">
+			<ShortName>Level1</ShortName>
+			<Path>Level1.bnk</Path>
+			<Media>
+				<File Id="187318935" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Dangerous_Love_120bpm.wav</ShortName>
+					<CachePath>SFX/Dangerous_Love_120bpm_29F081A2.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="2859270423" Name="Pause_Level1" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="3659125941" Name="Play_Level1" DurationType="OneShot" DurationMin="94.81698" DurationMax="94.81698">
+					<MediaRefs>
+						<MediaRef Id="187318935"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3265051672" Name="Resume_Level1" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="3077303046" Name="StopLevel1" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+			</Events>
+		</SoundBank>
+	</SoundBanks>
+	<FileHash>{2C455DFC-C717-FE9D-F7D3-9CAD24F1DEDD}</FileHash>
+</SoundBanksInfo>

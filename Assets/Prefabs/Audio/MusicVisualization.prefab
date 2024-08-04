@@ -46,6 +46,7 @@ MonoBehaviour:
   PlayerControllerInstance: {fileID: 0}
   BankNames:
   - LevelTest
+  - Level1
   LevelMusicEvents:
   - LevelMusicPlayEvent:
       idInternal: 0
@@ -63,9 +64,26 @@ MonoBehaviour:
       idInternal: 0
       valueGuidInternal: 
       WwiseObjectReference: {fileID: 11400000, guid: 2c048faf3f7111d46a10955144817e45, type: 2}
+  - LevelMusicPlayEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: f06f059d497d43441b2fada9159fb502, type: 2}
+    LevelMusicStopEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 23d1c0fdbaa69b24cb2527e342e059ab, type: 2}
+    LevelMusicPauseEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 52bab6f4417a5254db0e0eb32b57c115, type: 2}
+    LevelMusicResumeEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: faa8d6785cc088d49855ff14d273737b, type: 2}
   LevelMusicBpmList:
   - 100
-  LevelIndex: 0
+  - 120
+  LevelIndex: 1
   CallbackType: 4
   IfPlayMusicWhenStart: 1
   IfUseVisualization: 1
@@ -87,6 +105,6 @@ MonoBehaviour:
     PerfectRangeEndTime: 0.7
     BeatEndTime: 1.2
     IntervalTimeB2WBeats: 0
-  BeatTimeInterval: 0.6
+  BeatTimeInterval: 0.5
   RhythmVisualzationStartPositionWithPlayerController: {x: 0, y: 5, z: 0}
   NextVisualPositionXOffset: 0

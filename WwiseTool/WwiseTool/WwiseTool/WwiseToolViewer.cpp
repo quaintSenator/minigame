@@ -156,7 +156,7 @@ bool WwiseToolViewer::AddMarkerBasedOnBpm()
 				{"type", AkVariant("Marker")},
 				{ "name",AkVariant("Added by yeniao wwise tool based on bpm") },
 				{ "@Time",AkVariant(MarkSetTime) },
-				{ "@Label",AkVariant("Added by yeniao wwise tool based on bpm") },
+				{ "@Label",AkVariant("bpm") },
 			});
 
 			//

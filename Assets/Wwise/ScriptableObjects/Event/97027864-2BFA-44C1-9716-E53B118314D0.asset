@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b67d56301ae048488b1446769bd94dd, type: 3}
+  m_Name: 97027864-2BFA-44C1-9716-E53B118314D0
+  m_EditorClassIdentifier: 
+  objectName: Pause_Level1
+  id: 2859270423
+  guid: 97027864-2BFA-44C1-9716-E53B118314D0

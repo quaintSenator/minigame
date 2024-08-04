@@ -331,8 +331,22 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: c470e9f5dd22be41893f629373ebf5aa
     GuidInternal: 
-    m_lastTime: -8584795467372073535
+    m_lastTime: -8584788236751252511
     List:
+    - name: Level1
+      guid: a1fbb42e38adbb4689e08f350057b946
+      id: 2678230382
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: c470e9f5dd22be41893f629373ebf5aa
+      - ElementName: Level1
+        ObjectType: 7
+        guid: a1fbb42e38adbb4689e08f350057b946
+      Path: SoundBanks\Default Work Unit\Level1
     - name: LevelTest
       guid: a5fe61cd54e2824ebb8394a5c87e4a32
       id: 4048373417
@@ -386,8 +400,25 @@ MonoBehaviour:
     ParentPath: Events\LevelMusic
     guid: aaeb73d98601b84494e198693fb906e2
     GuidInternal: 
-    m_lastTime: -8584795467376997067
+    m_lastTime: -8584788236989052584
     List:
+    - name: Level1
+      guid: a725d499ac3e7c418adebd43a09bf4b2
+      id: 2678230382
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: LevelMusic
+        ObjectType: 12
+        guid: aaeb73d98601b84494e198693fb906e2
+      - ElementName: Level1
+        ObjectType: 4
+        guid: a725d499ac3e7c418adebd43a09bf4b2
+      Path: Events\LevelMusic\Level1
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
     - name: LevelTest
       guid: 4331e5b8f4f38446b03aa716acac4613
       id: 4048373417
@@ -405,6 +436,26 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
+    - name: Pause_Level1
+      guid: 64780297fa2bc1449716e53b118314d0
+      id: 2859270423
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: LevelMusic
+        ObjectType: 12
+        guid: aaeb73d98601b84494e198693fb906e2
+      - ElementName: Level1
+        ObjectType: 4
+        guid: a725d499ac3e7c418adebd43a09bf4b2
+      - ElementName: Pause_Level1
+        ObjectType: 3
+        guid: 64780297fa2bc1449716e53b118314d0
+      Path: Events\LevelMusic\Level1\Pause_Level1
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: Pause_LevelTest
       guid: db626d3fe78acd4f867b3f5de973710d
       id: 1903092602
@@ -425,6 +476,26 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - name: Play_Level1
+      guid: edb5d16a56be2747adc231da02390146
+      id: 3659125941
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: LevelMusic
+        ObjectType: 12
+        guid: aaeb73d98601b84494e198693fb906e2
+      - ElementName: Level1
+        ObjectType: 4
+        guid: a725d499ac3e7c418adebd43a09bf4b2
+      - ElementName: Play_Level1
+        ObjectType: 3
+        guid: edb5d16a56be2747adc231da02390146
+      Path: Events\LevelMusic\Level1\Play_Level1
+      maxAttenuation: 0
+      maxDuration: 94.81698
+      minDuration: 94.81698
     - name: Play_LevelTest
       guid: 5fa0ea6e9a32b84d96ba1747ae08422d
       id: 265406176
@@ -443,8 +514,28 @@ MonoBehaviour:
         guid: 5fa0ea6e9a32b84d96ba1747ae08422d
       Path: Events\LevelMusic\LevelTest\Play_LevelTest
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 150.44
+      minDuration: 150.44
+    - name: Resume_Level1
+      guid: fa6fe621dd5f624790253eb7ba52de1d
+      id: 3265051672
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: LevelMusic
+        ObjectType: 12
+        guid: aaeb73d98601b84494e198693fb906e2
+      - ElementName: Level1
+        ObjectType: 4
+        guid: a725d499ac3e7c418adebd43a09bf4b2
+      - ElementName: Resume_Level1
+        ObjectType: 3
+        guid: fa6fe621dd5f624790253eb7ba52de1d
+      Path: Events\LevelMusic\Level1\Resume_Level1
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: Resume_LevelTest
       guid: a76d824869a24f4aad8b0c801e472100
       id: 2369008827
@@ -482,6 +573,26 @@ MonoBehaviour:
         ObjectType: 3
         guid: 81f5b12ddb1cc4469818d536bb7b53ce
       Path: Events\LevelMusic\LevelTest\Stop_LevelTest
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: StopLevel1
+      guid: 290e34e133001b4a9c0f325ca6484953
+      id: 3077303046
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: LevelMusic
+        ObjectType: 12
+        guid: aaeb73d98601b84494e198693fb906e2
+      - ElementName: Level1
+        ObjectType: 4
+        guid: a725d499ac3e7c418adebd43a09bf4b2
+      - ElementName: StopLevel1
+        ObjectType: 3
+        guid: 290e34e133001b4a9c0f325ca6484953
+      Path: Events\LevelMusic\Level1\StopLevel1
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
@@ -741,7 +852,7 @@ MonoBehaviour:
     GuidInternal: 
     m_lastTime: -8584800550681670690
     List: []
-  ExpandedFileSystemItemIds: 020000000400000005000000
+  ExpandedFileSystemItemIds: 02000000040000000500000006000000
   ExpandedWaapiItemIds: 020000000400000005000000
   AutoSyncSelection: 0
   autoPopulateEnabled: 1
