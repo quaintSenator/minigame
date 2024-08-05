@@ -3,7 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public class SwitchLevelEventData : EventData
+{
+    public int switchingIntoLevel = 0;
 
+    public SwitchLevelEventData(int i)
+    {
+        switchingIntoLevel = i;
+    }
+}
 public class RotatingCassettes : MonoBehaviour
 {
     private Transform c1;
@@ -37,10 +45,8 @@ public class RotatingCassettes : MonoBehaviour
         
         m_Animator = gameObject.GetComponent<Animator>();
         m_Animator.enabled = false;
-        
-        
     }
-
+    
     public void OnRightScroll()
     {
         _rightScrollBtn.enabled = false;
@@ -72,6 +78,7 @@ public class RotatingCassettes : MonoBehaviour
             default: break;
         }
         m_Animator.Play(anim2Play);
+        EventManager.InvokeEvent(EventType.SwitchLevelEvent, new SwitchLevelEventData(currentMiddleCassette));
     }
     public void after1_2()
     {

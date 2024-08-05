@@ -13,6 +13,7 @@ public enum EventType
     TimerDieEvent,
     PlayerDeadEvent,
     GravityInverseEvent,
+    SwitchLevelEvent,
 
 
     #region 输入事件在此添加
