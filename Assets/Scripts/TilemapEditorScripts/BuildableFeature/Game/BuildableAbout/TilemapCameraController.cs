@@ -62,7 +62,7 @@ public class TilemapCameraController : MonoBehaviour
 
     private void OnMouseMove(EventData data)
     {
-        if (InputManager.Instance.IsMouseRightPressing())
+        if (InputManager.Instance.IsMouseRightPressing() && !RhythmViewer.CurrentMusicIsPlaying)
         {
             var mouseMovementData = data as MouseMovementEventData;
             float xDir = -mouseMovementData.mouseMovement.x;
@@ -77,6 +77,10 @@ public class TilemapCameraController : MonoBehaviour
     private void LateUpdate()
     {
         //移动摄像机
+        if(RhythmViewer.CurrentMusicIsPlaying)
+        {
+            transform.position = new Vector3(RhythmViewer.CurrentMusicTime * GameConsts.SPEED, 0.13f, -1.05f);
+        }
         transform.Translate(moveDirection * Time.deltaTime * moveSpeed);
     }
 }

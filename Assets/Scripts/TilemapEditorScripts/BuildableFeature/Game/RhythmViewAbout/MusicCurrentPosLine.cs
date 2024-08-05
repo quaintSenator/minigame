@@ -6,8 +6,6 @@ using UnityEngine;
 public class MusicCurrentPosLine : MonoBehaviour
 {
     private LineRenderer lineRenderer;
-    private float currentTime = 0f;
-    private bool pause = false;
     
     private void Awake()
     {
@@ -18,32 +16,20 @@ public class MusicCurrentPosLine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (lineRenderer.enabled && !pause)
+        if (lineRenderer.enabled && RhythmViewer.CurrentMusicIsPlaying)
         {
-            currentTime += Time.deltaTime;
-            lineRenderer.SetPosition(0, new Vector3(currentTime * GameConsts.SPEED, 10, 0));
-            lineRenderer.SetPosition(1, new Vector3(currentTime * GameConsts.SPEED, -3, 0));
+            lineRenderer.SetPosition(0, new Vector3(RhythmViewer.CurrentMusicTime * GameConsts.SPEED, 10, 0));
+            lineRenderer.SetPosition(1, new Vector3(RhythmViewer.CurrentMusicTime * GameConsts.SPEED, -3, 0));
         }
     }
     
-    public void StartRecordTime()
+    public void ShowPosLine()
     {
-        currentTime = 0f;
         lineRenderer.enabled = true;
     }
     
-    public void StopRecordTime()
+    public void HidePosLine()
     {
         lineRenderer.enabled = false;
-    }
-    
-    public void PauseRecordTime()
-    {
-        pause = true;
-    }
-    
-    public void ResumeRecordTime()
-    {
-        pause = false;
     }
 }

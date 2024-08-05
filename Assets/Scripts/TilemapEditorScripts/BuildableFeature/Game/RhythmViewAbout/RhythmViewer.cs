@@ -37,7 +37,10 @@ public class RhythmViewer : MonoBehaviour
     private MusicVisualization musicController;
     [BoxGroup("运行时节奏区域显示", centerLabel:true)] [SerializeField]
     private MusicCurrentPosLine musicCurrentPosLine;
-    private bool currentMusicIsPlaying = false;
+    private static bool currentMusicIsPlaying = false;
+    public static bool CurrentMusicIsPlaying => currentMusicIsPlaying;
+    private static float currentMusicTime = 0f;
+    public static float CurrentMusicTime => currentMusicTime;
     
     private void Start()
     {
@@ -67,6 +70,10 @@ public class RhythmViewer : MonoBehaviour
         {
             lastRhythmOffset = rhythmOffset;
             transform.position = new Vector3(rhythmOffset * GameConsts.SPEED, 0, 0);
+        }
+        if(currentMusicIsPlaying)
+        {
+            currentMusicTime += Time.deltaTime;
         }
     }
 
@@ -110,13 +117,14 @@ public class RhythmViewer : MonoBehaviour
         if (musicController == null) return;
         if(currentMusicIsPlaying)
         {
+            currentMusicIsPlaying = false;
             musicController.PauseLevelMusic();
-            musicCurrentPosLine.PauseRecordTime();
         }
         else
         {
+            currentMusicIsPlaying = true;
             musicController.ResumeLevelMusic();
-            musicCurrentPosLine.ResumeRecordTime();
+            musicCurrentPosLine.ShowPosLine();
         }
     }
     
@@ -125,13 +133,17 @@ public class RhythmViewer : MonoBehaviour
         if (musicController == null) return;
         if(currentMusicIsPlaying)
         {
+            currentMusicTime = 0f;
+            currentMusicIsPlaying = false;
             musicController.StopLevelMusic();
-            musicCurrentPosLine.StopRecordTime();
+            musicCurrentPosLine.HidePosLine();
         }
         else
         {
+            currentMusicTime = 0f;
+            currentMusicIsPlaying = true;
             musicController.PlayLevelMusic();
-            musicCurrentPosLine.StartRecordTime();
+            musicCurrentPosLine.ShowPosLine();
         }
     }
 
