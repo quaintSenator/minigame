@@ -13,9 +13,12 @@ public class InputManager : Singleton<InputManager>
     private bool isMouseRightPressing = false;
     
     [SerializeField] private InputActionMap inputActionMap;
-    private Dictionary<EventType, InputAction> inputActionDict = new Dictionary<EventType, InputAction>();
+    private Dictionary<KeyCode, List<EventType>> pressKeyBoardEventDict = new Dictionary<KeyCode, List<EventType>>();
+    private Dictionary<MouseInput, List<EventType>> pressMouseEventDict = new Dictionary<MouseInput, List<EventType>>();
     private Dictionary<KeyCode, List<EventType>> releaseKeyBoardEventDict = new Dictionary<KeyCode, List<EventType>>();
     private Dictionary<MouseInput, List<EventType>> releaseMouseEventDict = new Dictionary<MouseInput, List<EventType>>();
+    private Dictionary<KeyCode,List<EventType>> holdKeyBoardEventDict = new Dictionary<KeyCode, List<EventType>>();
+    private Dictionary<MouseInput,List<EventType>> holdMouseEventDict = new Dictionary<MouseInput, List<EventType>>();
 
     protected override void OnAwake()
     {
@@ -24,111 +27,58 @@ public class InputManager : Singleton<InputManager>
 
     void Update()
     {
-        if (Input.anyKey)
+        if (Input.anyKeyDown)
         {
-            foreach (var inputActionMap in inputActionDict)
+            foreach (var pressEvent in pressKeyBoardEventDict)
             {
-                EventType eventType = inputActionMap.Key;
-                InputAction inputAction = inputActionMap.Value;
-                bool isTrigger = false;
-                if (inputAction.inputEventType == InputEventType.press)
+                if (Input.GetKeyDown(pressEvent.Key))
                 {
-                    foreach (var keyCode in inputAction.keyBoardInput)
+                    Debug.Log("pressEvent.Key " + pressEvent.Key);
+                    foreach (var eventType in pressEvent.Value)
                     {
-                        if (isTrigger || Input.GetKeyDown(keyCode))
-                        {
-                            isTrigger = true;
-                            break;
-                        }
-                    }
-
-                    foreach (var mouseInput in inputAction.mouseInput)
-                    {
-                        if (isTrigger)
-                        {
-                            break;
-                        }
-                        else if (mouseInput == MouseInput.LeftClick)
-                        {
-                            if (Input.GetMouseButtonDown(0))
-                            {
-                                isTrigger = true;
-                                break;
-                            }
-                        }
-                        else if (mouseInput == MouseInput.RightClick)
-                        {
-                            if (Input.GetMouseButtonDown(1))
-                            {
-                                isTrigger = true;
-                                break;
-                            }
-                        }
-                        else if (mouseInput == MouseInput.MiddleClick)
-                        {
-                            if (Input.GetMouseButtonDown(2))
-                            {
-                                isTrigger = true;
-                                break;
-                            }
-                        }
-                    }
-
-                    if (isTrigger)
-                    {
+                        Debug.Log("eventType " + eventType);
                         EventManager.InvokeEvent(eventType);
                     }
                 }
-                else if (inputAction.inputEventType == InputEventType.hold)
-                {
-                    foreach (var keyCode in inputAction.keyBoardInput)
-                    {
-                        if (isTrigger || Input.GetKey(keyCode))
-                        {
-                            isTrigger = true;
-                            break;
-                        }
-                    }
+            }
 
-                    foreach (var mouseInput in inputAction.mouseInput)
-                    {
-                        if (isTrigger)
-                        {
-                            break;
-                        }
-                        else if (mouseInput == MouseInput.LeftClick)
-                        {
-                            if (Input.GetMouseButton(0))
-                            {
-                                isTrigger = true;
-                                break;
-                            }
-                        }
-                        else if (mouseInput == MouseInput.RightClick)
-                        {
-                            if (Input.GetMouseButton(1))
-                            {
-                                isTrigger = true;
-                                break;
-                            }
-                        }
-                        else if (mouseInput == MouseInput.MiddleClick)
-                        {
-                            if (Input.GetMouseButton(2))
-                            {
-                                isTrigger = true;
-                                break;
-                            }
-                        }
-                    }
-                    
-                    if (isTrigger)
+            foreach (var pressEvent in pressMouseEventDict)
+            {
+                if (Input.GetMouseButtonDown((int)pressEvent.Key))
+                {
+                    foreach (var eventType in pressEvent.Value)
                     {
                         EventManager.InvokeEvent(eventType);
                     }
                 }
             }
         }
+        
+        if (Input.anyKey)
+        {
+            foreach (var holdEvent in holdKeyBoardEventDict)
+            {
+                if (Input.GetKey(holdEvent.Key))
+                {
+                    foreach (var eventType in holdEvent.Value)
+                    {
+                        EventManager.InvokeEvent(eventType);
+                    }
+                }
+            }
+
+            foreach (var holdEvent in holdMouseEventDict)
+            {
+                if (Input.GetMouseButton((int)holdEvent.Key))
+                {
+                    foreach (var eventType in holdEvent.Value)
+                    {
+                        EventManager.InvokeEvent(eventType);
+                    }
+                }
+            }
+        }
+        
 
         foreach (var releaseEvent in releaseKeyBoardEventDict)
         {
@@ -215,9 +165,56 @@ public class InputManager : Singleton<InputManager>
                     }
                 }
             }
+            else if (inputAction.inputEventType == InputEventType.press)
+            {
+                foreach (var keyCode in inputAction.keyBoardInput)
+                {
+                    if (pressKeyBoardEventDict.ContainsKey(keyCode))
+                    {
+                        pressKeyBoardEventDict[keyCode].Add(inputAction.eventType);
+                    }
+                    else
+                    {
+                        pressKeyBoardEventDict.Add(keyCode, new List<EventType>() { inputAction.eventType });
+                    }
+                    Debug.Log("inputAction.inputEventType " + inputAction.inputEventType.ToString());
+                }
+                foreach (var mouseInput in inputAction.mouseInput)
+                {
+                    if (pressMouseEventDict.ContainsKey(mouseInput))
+                    {
+                        pressMouseEventDict[mouseInput].Add(inputAction.eventType);
+                    }
+                    else
+                    {
+                        pressMouseEventDict.Add(mouseInput, new List<EventType>() { inputAction.eventType });
+                    }
+                }
+            }
             else
             {
-                inputActionDict.Add(inputAction.eventType, new InputAction(inputAction));
+                foreach (var keyCode in inputAction.keyBoardInput)
+                {
+                    if (holdKeyBoardEventDict.ContainsKey(keyCode))
+                    {
+                        holdKeyBoardEventDict[keyCode].Add(inputAction.eventType);
+                    }
+                    else
+                    {
+                        holdKeyBoardEventDict.Add(keyCode, new List<EventType>() { inputAction.eventType });
+                    }
+                }
+                foreach (var mouseInput in inputAction.mouseInput)
+                {
+                    if (holdMouseEventDict.ContainsKey(mouseInput))
+                    {
+                        holdMouseEventDict[mouseInput].Add(inputAction.eventType);
+                    }
+                    else
+                    {
+                        holdMouseEventDict.Add(mouseInput, new List<EventType>() { inputAction.eventType });
+                    }
+                }
             }
         }
     }
@@ -225,9 +222,12 @@ public class InputManager : Singleton<InputManager>
     [Button(ButtonSizes.Large, Name = "重载输入映射文件")]
     public void ReloadInputActionMap()
     {
-        inputActionDict.Clear();
         releaseKeyBoardEventDict.Clear();
         releaseMouseEventDict.Clear();
+        pressKeyBoardEventDict.Clear();
+        pressMouseEventDict.Clear();
+        holdKeyBoardEventDict.Clear();
+        holdMouseEventDict.Clear();
         InitInputActionDict();
     }
     

@@ -22,9 +22,12 @@ public class TilemapCameraController : MonoBehaviour
     [SerializeField] private float maxZoom = 10.0f;
     //最小缩放大小
     [SerializeField] private float minZoom = 2.5f;
+    
+    private Transform startPoint;
 
     private void Start()
     {
+        startPoint = GameObject.Find("start_point").transform;
         originalZoom = virtualCamera.m_Lens.OrthographicSize;
     }
 
@@ -79,7 +82,7 @@ public class TilemapCameraController : MonoBehaviour
         //移动摄像机
         if(RhythmViewer.CurrentMusicIsPlaying)
         {
-            transform.position = new Vector3(RhythmViewer.CurrentMusicTime * GameConsts.SPEED, 0.13f, -1.05f);
+            transform.position = new Vector3(RhythmViewer.CurrentMusicTime * GameConsts.SPEED + startPoint.position.x, 0.13f, -1.05f);
         }
         transform.Translate(moveDirection * Time.deltaTime * moveSpeed);
     }

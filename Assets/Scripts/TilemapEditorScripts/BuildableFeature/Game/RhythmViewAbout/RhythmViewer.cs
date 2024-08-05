@@ -42,8 +42,11 @@ public class RhythmViewer : MonoBehaviour
     private static float currentMusicTime = 0f;
     public static float CurrentMusicTime => currentMusicTime;
     
+    private Transform startPoint;
+    
     private void Start()
     {
+        startPoint = GameObject.Find("start_point").transform;
         // 创建一个1x1纹理
         squareTexture = new Texture2D(1, 1);
         squareTexture.SetPixel(0, 0, Color.white); // 设置纹理的颜色
@@ -87,7 +90,7 @@ public class RhythmViewer : MonoBehaviour
             GameObject go = new GameObject();
             go.transform.parent = transform;
             go.name = "RhythmZoneVisual_" + count;
-            go.transform.position = new Vector3(rhythmData.perfectTime * GameConsts.SPEED, -2.72f, 0);
+            go.transform.position = new Vector3(rhythmData.perfectTime * GameConsts.SPEED + startPoint.position.x, -2.72f, 0);
             RhythmZoneVisual rhythmZoneVisual = go.AddComponent<RhythmZoneVisual>();
             rhythmZoneVisual.Init(timeVisualDataList);
             count++;

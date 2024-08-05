@@ -13,31 +13,31 @@ MonoBehaviour:
   m_Name: MapEditorSceneInput
   m_EditorClassIdentifier: 
   inputActions:
-  - eventType: 26
+  - eventType: 17
     inputEventType: 0
     keyBoardInput: 1b000000
     mouseInput: 
-  - eventType: 27
+  - eventType: 18
     inputEventType: 0
     keyBoardInput: 
     mouseInput: 00000000
-  - eventType: 28
+  - eventType: 19
     inputEventType: 0
     keyBoardInput: 65000000
     mouseInput: 
-  - eventType: 29
+  - eventType: 20
     inputEventType: 0
     keyBoardInput: 6b000000
     mouseInput: 
-  - eventType: 30
+  - eventType: 21
     inputEventType: 0
     keyBoardInput: 310000006c000000
     mouseInput: 
-  - eventType: 31
+  - eventType: 22
     inputEventType: 0
     keyBoardInput: 32000000
     mouseInput: 
-  - eventType: 32
+  - eventType: 23
     inputEventType: 0
     keyBoardInput: 33000000
     mouseInput: 

@@ -138,6 +138,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
 
     private void ChangeTileMode(EventData obj)
     {
+        Debug.Log("Change tile mode");
         if(currentTileMode != TileMode.Destroy)
         {
             SetSelectedObject(BuildableType.none);
