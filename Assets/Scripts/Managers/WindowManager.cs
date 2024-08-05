@@ -44,7 +44,7 @@ public class WindowManager : Singleton<WindowManager>
         string windowPrefabName = _type2ResourceFileNameDict[windowType];
         var gameObject2Create = Resources.Load(windowPrefabName) as GameObject;
         var generatedObjectRef = Instantiate(gameObject2Create, parent);
-
+        
         if (_uiStack.Count > 0)
         {
             _uiStack.Peek().SetActive(false);
@@ -61,5 +61,4 @@ public class WindowManager : Singleton<WindowManager>
         _uiStack.Pop();
         _uiStack.Peek().SetActive(true);
     }
-    
 }
