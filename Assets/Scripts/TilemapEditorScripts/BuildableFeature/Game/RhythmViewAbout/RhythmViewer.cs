@@ -16,8 +16,8 @@ public class RhythmViewer : MonoBehaviour
     [InfoBox("当前所使用的音频信息", InfoMessageType.None)]
     [SerializeField] private RhythmDataFile rhythmDataFile;
     
-    [Space(20)]
     [InfoBox("节奏点的偏移量", InfoMessageType.None)]
+    [BoxGroup("静态节奏区域显示", centerLabel:true)]
     [SerializeField]private float rhythmOffset = 0f;
     private float lastRhythmOffset = 0f;
     
@@ -25,12 +25,19 @@ public class RhythmViewer : MonoBehaviour
     [InfoBox("增加则会在原有基础上增加一个区域，区域按顺序显示\n" +
              "Start Time : 开始时间 （离完美点的距离）\n" +
              " End Time  : 结束时间 （离完美点的距离）", InfoMessageType.None)]
+    [BoxGroup("静态节奏区域显示", centerLabel:true)]
     [SerializeField] private List<TimeVisualData> timeVisualDataList;
     
     
     private static Texture2D squareTexture;
     private List<RhythmZoneVisual> rhythmZoneVisuals = new List<RhythmZoneVisual>();
-    private bool noPlaying = true;
+    private bool noInPlayMode = true;
+
+    [BoxGroup("运行时节奏区域显示", centerLabel:true)] [SerializeField]
+    private MusicVisualization musicController;
+    [BoxGroup("运行时节奏区域显示", centerLabel:true)] [SerializeField]
+    private MusicCurrentPosLine musicCurrentPosLine;
+    private bool currentMusicIsPlaying = false;
     
     private void Start()
     {
@@ -39,7 +46,19 @@ public class RhythmViewer : MonoBehaviour
         squareTexture.SetPixel(0, 0, Color.white); // 设置纹理的颜色
         squareTexture.Apply(); // 应用纹理的改变
         SpawnRhythmZoneVisual();
-        noPlaying = false;
+        noInPlayMode = false;
+    }
+
+    private void OnEnable()
+    {
+        EventManager.AddListener(EventType.PauseOrResumeMusicEvent, PauseOrResumeMusic);
+        EventManager.AddListener(EventType.StopOrPlayMusicEvent, StopOrPlayMusic);
+    }
+    
+    private void OnDisable()
+    {
+        EventManager.RemoveListener(EventType.PauseOrResumeMusicEvent, PauseOrResumeMusic);
+        EventManager.RemoveListener(EventType.StopOrPlayMusicEvent, StopOrPlayMusic);
     }
 
     private void Update()
@@ -50,6 +69,8 @@ public class RhythmViewer : MonoBehaviour
             transform.position = new Vector3(rhythmOffset * GameConsts.SPEED, 0, 0);
         }
     }
+
+    #region 静态节奏区域显示
 
     private void SpawnRhythmZoneVisual()
     {
@@ -66,11 +87,7 @@ public class RhythmViewer : MonoBehaviour
         }
     }
     
-    
-    
-    
-    
-    [DisableIf("noPlaying"),Button(ButtonSizes.Large)]
+    [DisableIf("noInPlayMode"),Button(ButtonSizes.Large)]
     public void UpdateVisual()
     {
         for (int i = 0; i < rhythmZoneVisuals.Count; i++)
@@ -83,6 +100,42 @@ public class RhythmViewer : MonoBehaviour
     {
         return Sprite.Create(squareTexture, new Rect(0.0f, 0.0f, 1.0f, 1.0f), new Vector2(0.5f, 0.5f), 1.0f);
     }
+
+    #endregion
+
+    #region 运行时节奏区域显示
+
+    private void PauseOrResumeMusic(EventData data)
+    {
+        if (musicController == null) return;
+        if(currentMusicIsPlaying)
+        {
+            musicController.PauseLevelMusic();
+            musicCurrentPosLine.PauseRecordTime();
+        }
+        else
+        {
+            musicController.ResumeLevelMusic();
+            musicCurrentPosLine.ResumeRecordTime();
+        }
+    }
+    
+    private void StopOrPlayMusic(EventData data)
+    {
+        if (musicController == null) return;
+        if(currentMusicIsPlaying)
+        {
+            musicController.StopLevelMusic();
+            musicCurrentPosLine.StopRecordTime();
+        }
+        else
+        {
+            musicController.PlayLevelMusic();
+            musicCurrentPosLine.StartRecordTime();
+        }
+    }
+
+    #endregion
 }
 
 

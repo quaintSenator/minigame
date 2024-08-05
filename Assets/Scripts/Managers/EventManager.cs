@@ -21,21 +21,12 @@ public enum EventType
     
     MouseMoveEvent,
     MouseLeftClickEvent,
-    MouseLeftReleaseEvent,
     MouseRightClickEvent,
-    MouseRightReleaseEvent,
     MiddleClickEvent,
     MiddleScrollEvent,
-    HorizontalInputEvent,
     SpacebarDownEvent,
     SpacebarUpEvent,
-    EscDownEvent,
-    EDownEvent,
-    KDownEvent,
-    LDownEvent,
     JDownEvent,
-    JUpEvent,
-    NumDownEvent,
     
     #endregion
 
@@ -48,6 +39,8 @@ public enum EventType
     LoadMapOneEvent,
     LoadMapTwoEvent,
     LoadMapThreeEvent,
+    PauseOrResumeMusicEvent,
+    StopOrPlayMusicEvent,
 
     #endregion
 }

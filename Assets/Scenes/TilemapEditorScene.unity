@@ -747,6 +747,96 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &998439208
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 998439210}
+  - component: {fileID: 998439209}
+  m_Layer: 0
+  m_Name: music_controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &998439209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998439208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 770928883baa81c4d8ff7570109d49d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerControllerInstance: {fileID: 0}
+  BankNames:
+  - LevelTest
+  LevelMusicEvents:
+  - LevelMusicPlayEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 2f4d39d70a1afc94c91ea8ed2de40e9a, type: 2}
+    LevelMusicStopEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 2e367f4c01d1edc4aaaca055fd971d34, type: 2}
+    LevelMusicPauseEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: a591771d305805a4595f86ce3cc536c8, type: 2}
+    LevelMusicResumeEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 2c048faf3f7111d46a10955144817e45, type: 2}
+  LevelMusicBpmList:
+  - 100
+  LevelIndex: 0
+  CallbackType: 4
+  IfPlayMusicWhenStart: 0
+  IfUseVisualization: 1
+  RhythmVisualizationPerfabType: {fileID: 0}
+  NumberOfRhythmVisualizationPerfabInstance: 5
+  RhythmVisualizationPerfabInstanceList: []
+  RhythmVisualizationPerfabParameterInstance:
+    StartTimeOffset: 0
+    CircleMaxRadium: 0.48
+    OuterCircleWidth: 0.02
+    OuterCircleColor: {r: 0, g: 0, b: 1, a: 1}
+    GrowingCircleColor: {r: 0, g: 1, b: 0, a: 1}
+    NormalColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    PerfectColor: {r: 1, g: 0, b: 0, a: 1}
+    BeatStartTime: 0
+    NormalRangeStartTime: 0.4
+    NormalRangeEndTime: 0.8
+    PerfectRangeStartTime: 0.5
+    PerfectRangeEndTime: 0.7
+    BeatEndTime: 1.2
+    IntervalTimeB2WBeats: 0
+  BeatTimeInterval: 0.6
+  RhythmVisualzationStartPositionWithPlayerController: {x: 100, y: 100, z: 0}
+  NextVisualPositionXOffset: 0
+--- !u!4 &998439210
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998439208}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12.6376, y: 1.1839496, z: -1.004219}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1162231656
 GameObject:
   m_ObjectHideFlags: 0
@@ -6815,7 +6905,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1860919567}
-  - component: {fileID: 1860919566}
   - component: {fileID: 1860919568}
   m_Layer: 0
   m_Name: audio_recorder
@@ -6824,65 +6913,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1860919566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1860919565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 770928883baa81c4d8ff7570109d49d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerControllerInstance: {fileID: 0}
-  BankNames:
-  - LevelTest
-  LevelMusicEvents:
-  - LevelMusicPlayEvent:
-      idInternal: 0
-      valueGuidInternal: 
-      WwiseObjectReference: {fileID: 11400000, guid: 2f4d39d70a1afc94c91ea8ed2de40e9a, type: 2}
-    LevelMusicStopEvent:
-      idInternal: 0
-      valueGuidInternal: 
-      WwiseObjectReference: {fileID: 11400000, guid: 2e367f4c01d1edc4aaaca055fd971d34, type: 2}
-    LevelMusicPauseEvent:
-      idInternal: 0
-      valueGuidInternal: 
-      WwiseObjectReference: {fileID: 11400000, guid: a591771d305805a4595f86ce3cc536c8, type: 2}
-    LevelMusicResumeEvent:
-      idInternal: 0
-      valueGuidInternal: 
-      WwiseObjectReference: {fileID: 11400000, guid: 2c048faf3f7111d46a10955144817e45, type: 2}
-  LevelMusicBpmList:
-  - 100
-  LevelIndex: 0
-  CallbackType: 4
-  IfPlayMusicWhenStart: 1
-  IfUseVisualization: 1
-  RhythmVisualizationPerfabType: {fileID: 0}
-  NumberOfRhythmVisualizationPerfabInstance: 5
-  RhythmVisualizationPerfabInstanceList: []
-  RhythmVisualizationPerfabParameterInstance:
-    StartTimeOffset: 0
-    CircleMaxRadium: 0.48
-    OuterCircleWidth: 0.02
-    OuterCircleColor: {r: 0, g: 0, b: 1, a: 1}
-    GrowingCircleColor: {r: 0, g: 1, b: 0, a: 1}
-    NormalColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    PerfectColor: {r: 1, g: 0, b: 0, a: 1}
-    BeatStartTime: 0
-    NormalRangeStartTime: 0.4
-    NormalRangeEndTime: 0.8
-    PerfectRangeStartTime: 0.5
-    PerfectRangeEndTime: 0.7
-    BeatEndTime: 1.2
-    IntervalTimeB2WBeats: 0
-  BeatTimeInterval: 0.6
-  RhythmVisualzationStartPositionWithPlayerController: {x: 100, y: 100, z: 0}
-  NextVisualPositionXOffset: 0
 --- !u!4 &1860919567
 Transform:
   m_ObjectHideFlags: 0
@@ -6895,7 +6925,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1860919568
 MonoBehaviour:
@@ -6962,6 +6992,8 @@ MonoBehaviour:
     endTime: 0.05
     color: {r: 1, g: 0.9137255, b: 0, a: 0.33333334}
     height: 1.5
+  musicController: {fileID: 998439209}
+  musicCurrentPosLine: {fileID: 2019191481}
 --- !u!4 &1913470047
 Transform:
   m_ObjectHideFlags: 0
@@ -6974,7 +7006,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1956386137
 GameObject:
@@ -7034,7 +7066,7 @@ GameObject:
   - component: {fileID: 2019191479}
   - component: {fileID: 2019191481}
   m_Layer: 0
-  m_Name: MusicCurrentPosLine
+  m_Name: music_current_line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7150,7 +7182,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2019191481
 MonoBehaviour:

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AK.Wwise;
@@ -183,12 +184,7 @@ public class MusicVisualization : MonoBehaviour
                 GetPlayerControllerSpeed();
                 InitRhythmVisualizationPerfabList();
             }
-
-
         }
-
-
-
     }
 
     // Update is called once per frame
@@ -262,7 +258,7 @@ public class MusicVisualization : MonoBehaviour
     }
 
 
-    void PlayLevelMusic()
+    public void PlayLevelMusic()
     {
         //TODO:补充延时播放相关
         if (IfPlayMusicWhenStart)
@@ -289,7 +285,7 @@ public class MusicVisualization : MonoBehaviour
     }
 
 
-    void StopLevelMusic()
+    public void StopLevelMusic()
     {
         if (!(LevelIndex < BankNames.Count) || !(LevelIndex < LevelMusicEvents.Count))
         {
@@ -297,7 +293,7 @@ public class MusicVisualization : MonoBehaviour
         }
     }
 
-    void PauseLevelMusic()
+    public void PauseLevelMusic()
     {
         if (!(LevelIndex < BankNames.Count) || !(LevelIndex < LevelMusicEvents.Count))
         {
@@ -305,7 +301,7 @@ public class MusicVisualization : MonoBehaviour
         }
     }
 
-    void ResumeLevelMusic()
+    public void ResumeLevelMusic()
     {
         if (!(LevelIndex < BankNames.Count) || !(LevelIndex < LevelMusicEvents.Count))
         {
