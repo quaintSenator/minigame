@@ -106,6 +106,9 @@ public class PlayerController : MonoBehaviour
     private int bufferTimerCount = 0;
     //废弃计时器个数（起跳后废弃）
     private int disableTimerCount = 0;
+    //跳跃计时器
+    private float jumpTimer;
+
     //角色是否可以连跳
     private bool isContinueJump = false;
     //角色是否进行回正
@@ -116,6 +119,10 @@ public class PlayerController : MonoBehaviour
     private float returnTimer;
     //回正角度
     private float selfAngle;
+    //死亡判定余量
+    private float deadZone = 0.5f;
+    //运动时长
+    private float moveTimer = 0;
 
     //一些初始化
     private Transform cubeSprites;
@@ -184,7 +191,20 @@ public class PlayerController : MonoBehaviour
             isReturn = false;
             SetCorrect();
         }
+
+        if(isBufferActive)
+        {
+            jumpTimer += Time.deltaTime;
+        }
+        if(jumpTimer >= bufferTime)
+        {
+            jumpTimer = 0;
+            isBufferActive = false;
+            willJump = false;
+        }
+
         Rotate();
+        CheckDead();
     }
 
     private void FixedUpdate()
@@ -213,12 +233,16 @@ public class PlayerController : MonoBehaviour
             willJump = true;
         }
         isContinueJump = true;
+        Debug.Log("OnSpaceDown");
     }
 
     private void OnSpacebarUp(EventData DATA = null)
     {
-        CleverTimerManager.Ask4Timer(bufferTime, OnBufferTimeEnd);
-        bufferTimerCount++;
+        Debug.Log("OnSpacebarUp");
+        //CleverTimerManager.Ask4Timer(bufferTime, OnBufferTimeEnd);
+        //bufferTimerCount++;
+
+        jumpTimer = 0;
         isBufferActive = true;
         isContinueJump = false;
     }
@@ -259,6 +283,8 @@ public class PlayerController : MonoBehaviour
     {
         disableTimerCount = bufferTimerCount > 0 ? bufferTimerCount : 0;
         bufferTimerCount = 0;
+        isBufferActive = false;
+        jumpTimer = 0;
         switch (jumpMode)
         {
             case JumpMode.Force:
@@ -370,6 +396,14 @@ public class PlayerController : MonoBehaviour
                     * beatTime;*/
     }
 
+    private void CheckDead()
+    {
+        moveTimer+=Time.deltaTime;
+        if(Mathf.Abs(transform.position.x - GameConsts.START_POSITION.x - moveTimer * speed) >= deadZone){
+            OnDead();
+        }
+    }
+
     public void SetIsGrounded(bool value)
     {
         isGrounded = value;
@@ -409,6 +443,7 @@ public class PlayerController : MonoBehaviour
         isGrounded = false;
         isReturn = false;
         returnTimer = 0;
+        Debug.Log("OnOffGround");
         EventManager.InvokeEvent(EventType.PlayerJumpoffGroundEvent);
     }
 
@@ -451,7 +486,7 @@ public class PlayerController : MonoBehaviour
             float time = 1.0f;
             if (jumpMode == JumpMode.Speed)
             {
-                time = jumpSpeed / (GameConsts.GRAVITY * gravityScale) * 2;
+                time = jumpSpeed / gravityScale * 2;
             }
             else if (jumpMode == JumpMode.Force)
             {
@@ -506,8 +541,8 @@ public class PlayerController : MonoBehaviour
         boxCollider.enabled = true;
         willJump = false;
         isContinueJump = false;
-        disableTimerCount = bufferTimerCount > 0 ? bufferTimerCount : 0;
-        bufferTimerCount = 0;
+        jumpTimer = 0;
+        moveTimer = 0;
         jumpSettings = GameConsts.DEFAULT_JUMP;
         EventManager.InvokeEvent(EventType.GameRestartEvent);
     }
