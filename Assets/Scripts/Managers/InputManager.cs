@@ -14,6 +14,8 @@ public class InputManager : Singleton<InputManager>
     
     [SerializeField] private InputActionMap inputActionMap;
     private Dictionary<EventType, InputAction> inputActionDict = new Dictionary<EventType, InputAction>();
+    private Dictionary<KeyCode, List<EventType>> releaseKeyBoardEventDict = new Dictionary<KeyCode, List<EventType>>();
+    private Dictionary<MouseInput, List<EventType>> releaseMouseEventDict = new Dictionary<MouseInput, List<EventType>>();
 
     protected override void OnAwake()
     {
@@ -22,7 +24,7 @@ public class InputManager : Singleton<InputManager>
 
     void Update()
     {
-        if (Input.anyKeyDown)
+        if (Input.anyKey)
         {
             foreach (var inputActionMap in inputActionDict)
             {
@@ -125,53 +127,27 @@ public class InputManager : Singleton<InputManager>
                         EventManager.InvokeEvent(eventType);
                     }
                 }
-                else if (inputAction.inputEventType == InputEventType.release)
+            }
+        }
+
+        foreach (var releaseEvent in releaseKeyBoardEventDict)
+        {
+            if (Input.GetKeyUp(releaseEvent.Key))
+            {
+                foreach (var eventType in releaseEvent.Value)
                 {
-                    foreach (var keyCode in inputAction.keyBoardInput)
-                    {
-                        if (isTrigger || Input.GetKeyUp(keyCode))
-                        {
-                            isTrigger = true;
-                            break;
-                        }
-                    }
+                    EventManager.InvokeEvent(eventType);
+                }
+            }
+        }
 
-                    foreach (var mouseInput in inputAction.mouseInput)
-                    {
-                        if (isTrigger)
-                        {
-                            break;
-                        }
-                        else if (mouseInput == MouseInput.LeftClick)
-                        {
-                            if (Input.GetMouseButtonUp(0))
-                            {
-                                isTrigger = true;
-                                break;
-                            }
-                        }
-                        else if (mouseInput == MouseInput.RightClick)
-                        {
-                            if (Input.GetMouseButtonUp(1))
-                            {
-                                isTrigger = true;
-                                break;
-                            }
-                        }
-                        else if (mouseInput == MouseInput.MiddleClick)
-                        {
-                            if (Input.GetMouseButtonUp(2))
-                            {
-                                isTrigger = true;
-                                break;
-                            }
-                        }
-                    }
-
-                    if (isTrigger)
-                    {
-                        EventManager.InvokeEvent(eventType);
-                    }
+        foreach (var releaseEvent in releaseMouseEventDict)
+        {
+            if (Input.GetMouseButtonUp((int)releaseEvent.Key))
+            {
+                foreach (var eventType in releaseEvent.Value)
+                {
+                    EventManager.InvokeEvent(eventType);
                 }
             }
         }
@@ -214,7 +190,35 @@ public class InputManager : Singleton<InputManager>
     {
         foreach (var inputAction in inputActionMap.inputActions)
         {
-            inputActionDict.Add(inputAction.eventType, new InputAction(inputAction));
+            if (inputAction.inputEventType == InputEventType.release)
+            {
+                foreach (var keyCode in inputAction.keyBoardInput)
+                {
+                    if (releaseKeyBoardEventDict.ContainsKey(keyCode))
+                    {
+                        releaseKeyBoardEventDict[keyCode].Add(inputAction.eventType);
+                    }
+                    else
+                    {
+                        releaseKeyBoardEventDict.Add(keyCode, new List<EventType>() { inputAction.eventType });
+                    }
+                }
+                foreach (var mouseInput in inputAction.mouseInput)
+                {
+                    if (releaseMouseEventDict.ContainsKey(mouseInput))
+                    {
+                        releaseMouseEventDict[mouseInput].Add(inputAction.eventType);
+                    }
+                    else
+                    {
+                        releaseMouseEventDict.Add(mouseInput, new List<EventType>() { inputAction.eventType });
+                    }
+                }
+            }
+            else
+            {
+                inputActionDict.Add(inputAction.eventType, new InputAction(inputAction));
+            }
         }
     }
     
@@ -222,6 +226,8 @@ public class InputManager : Singleton<InputManager>
     public void ReloadInputActionMap()
     {
         inputActionDict.Clear();
+        releaseKeyBoardEventDict.Clear();
+        releaseMouseEventDict.Clear();
         InitInputActionDict();
     }
     
