@@ -6,7 +6,8 @@ using UnityEngine;
 public enum WindowType
 {
     LevelSelectPage,
-    MainPage
+    MainPage,
+    ConfigPage
 }
 
 
@@ -31,8 +32,9 @@ public class WindowManager : Singleton<WindowManager>
         _uiStack = new Stack<GameObject>();
         
         _type2ResourceFileNameDict = new Dictionary<WindowType, string>();
-        _type2ResourceFileNameDict[WindowType.LevelSelectPage] = "levelSelectPage";
-        _type2ResourceFileNameDict[WindowType.MainPage] = "mainPage";
+        _type2ResourceFileNameDict[WindowType.LevelSelectPage] = "LevelSelectPage";
+        _type2ResourceFileNameDict[WindowType.MainPage] = "MainPage";
+        _type2ResourceFileNameDict[WindowType.ConfigPage] = "ConfigPage";
         
         //Init Main Page
         InitWindow(WindowType.MainPage, _UIRoot);

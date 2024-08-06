@@ -6,7 +6,7 @@ public class Window : MonoBehaviour
 {
     public WindowManager _WindowManager;
 
-    public void Init()
+    protected void Init()
     {
         Debug.Log("Base.Init() was called");
         _WindowManager = WindowManager.Instance;
