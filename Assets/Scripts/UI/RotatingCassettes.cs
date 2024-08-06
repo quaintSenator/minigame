@@ -21,6 +21,8 @@ public class RotatingCassettes : MonoBehaviour
     private int currentMiddleCassette;
     [SerializeField] private Button _rightScrollBtn;
     [SerializeField] private Button _leftScrollBtn;
+    [SerializeField] private Transform[] points;
+
     void Start()
     {
         currentMiddleCassette = 1;
@@ -45,6 +47,7 @@ public class RotatingCassettes : MonoBehaviour
         
         m_Animator = gameObject.GetComponent<Animator>();
         m_Animator.enabled = false;
+        UpdateSelectingPoints(currentMiddleCassette);
     }
     
     public void OnRightScroll()
@@ -78,7 +81,24 @@ public class RotatingCassettes : MonoBehaviour
             default: break;
         }
         m_Animator.Play(anim2Play);
+        UpdateSelectingPoints(currentMiddleCassette);
         EventManager.InvokeEvent(EventType.SwitchLevelEvent, new SwitchLevelEventData(currentMiddleCassette));
+    }
+
+    private void UpdateSelectingPoints(int c)
+    {
+        for (int i = 1; i <= 3; i++)
+        {
+            var image2Change = points[i].gameObject.GetComponent<Image>();
+            if (i == c)
+            {
+                image2Change.color = Color.yellow;
+            }
+            else
+            {
+                image2Change.color = Color.white;
+            }
+        }
     }
     public void after1_2()
     {
