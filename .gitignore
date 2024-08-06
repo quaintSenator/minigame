@@ -50,3 +50,6 @@ WwiseTool/WwiseTool/WwiseTool/x64/Release/WwiseToolViewer.obj
 /WwiseTool/WwiseTool/WwiseTool/x64
 Assets/WwiseSettings.xml
 Assets/Wwise/Editor/ProjectData/AkWwiseProjectData.asset
+.plastic/plastic.workspace
+.plastic/plastic.wktree
+.plastic/plastic.selector
