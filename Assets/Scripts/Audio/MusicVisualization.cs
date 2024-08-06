@@ -287,7 +287,7 @@ public class MusicVisualization : MonoBehaviour
 
     public void StopLevelMusic()
     {
-        if (!(LevelIndex < BankNames.Count) || !(LevelIndex < LevelMusicEvents.Count))
+        if ((LevelIndex < BankNames.Count) && (LevelIndex < LevelMusicEvents.Count))
         {
             LevelMusicEvents[LevelIndex].LevelMusicStopEvent.Post(gameObject);
         }
@@ -295,7 +295,7 @@ public class MusicVisualization : MonoBehaviour
 
     public void PauseLevelMusic()
     {
-        if (!(LevelIndex < BankNames.Count) || !(LevelIndex < LevelMusicEvents.Count))
+        if ((LevelIndex < BankNames.Count) && (LevelIndex < LevelMusicEvents.Count))
         {
             LevelMusicEvents[LevelIndex].LevelMusicPauseEvent.Post(gameObject);
         }
@@ -303,7 +303,7 @@ public class MusicVisualization : MonoBehaviour
 
     public void ResumeLevelMusic()
     {
-        if (!(LevelIndex < BankNames.Count) || !(LevelIndex < LevelMusicEvents.Count))
+        if ((LevelIndex < BankNames.Count) && (LevelIndex < LevelMusicEvents.Count))
         {
             LevelMusicEvents[LevelIndex].LevelMusicResumeEvent.Post(gameObject);
         }

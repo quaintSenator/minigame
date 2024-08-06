@@ -374,7 +374,7 @@ public class PlayerController : MonoBehaviour
 
         jumptime = (float)(Math.Sqrt(jumpHeight / jumpDeltaHeight) 
             * jumpDeltaHeight
-            / (jumpDeltaHeight + Math.Sqrt(jumpDeltaHeight + jumpHeight))
+            / (jumpDeltaHeight + Math.Sqrt(jumpDeltaHeight * jumpHeight))
             * beatTime );
 
         if (jumptime < JUDGE_ZERO )
