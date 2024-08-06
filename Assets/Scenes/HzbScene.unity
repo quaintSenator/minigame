@@ -167,7 +167,10 @@ MonoBehaviour:
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
+    ModeOverride: 0
     LensShift: {x: 0, y: 0}
+    GateFit: 2
+    m_SensorSize: {x: 1, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1003,6 +1006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19499fd067138f1409bb7154bbc3fe7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputActionMap: {fileID: 11400000, guid: 6a8474d13b04f2547a511ca3c6e348bb, type: 2}
 --- !u!114 &869874842 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3931848181877765673, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
