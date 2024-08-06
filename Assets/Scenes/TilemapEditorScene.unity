@@ -6994,6 +6994,7 @@ MonoBehaviour:
     height: 1.5
   musicController: {fileID: 998439209}
   musicCurrentPosLine: {fileID: 2019191481}
+  dynamicRhythmNodePrefab: {fileID: 1418425985313366245, guid: 220209c6f1f38494380ccec63ee0fa03, type: 3}
 --- !u!4 &1913470047
 Transform:
   m_ObjectHideFlags: 0

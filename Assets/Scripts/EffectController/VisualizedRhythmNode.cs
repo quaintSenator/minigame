@@ -33,4 +33,9 @@ public class VisualizedRhythmNode : MonoBehaviour
         m_mat.SetFloat("_PerfectRangeEndTime", Time.time + preset_perfectRangeEndTime);
         m_mat.SetFloat("_BeatEndTime", Time.time + preset_BeatEndTime);
     }
+
+    public float GetStartTimeOffset()
+    {
+        return preset_perfectRangeStartTime;
+    }
 }

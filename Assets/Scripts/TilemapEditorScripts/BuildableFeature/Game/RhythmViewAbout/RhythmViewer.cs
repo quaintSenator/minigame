@@ -37,6 +37,15 @@ public class RhythmViewer : MonoBehaviour
     private MusicVisualization musicController;
     [BoxGroup("运行时节奏区域显示", centerLabel:true)] [SerializeField]
     private MusicCurrentPosLine musicCurrentPosLine;
+    [BoxGroup("运行时节奏区域显示", centerLabel:true)] [SerializeField]
+    private GameObject dynamicRhythmNodePrefab;
+    // <在list中的Index, 对应的VisualizedRhythmNode>
+    private Dictionary<int, VisualizedRhythmNode> dynamicRhythmNodes = new Dictionary<int, VisualizedRhythmNode>();
+    private int currentDynamicRhythmNodeIndex = 0;
+    private int leftDynamicRhythmNodeIndex = 0;
+    private int rightDynamicRhythmNodeIndex = 0;
+    
+    
     private static bool currentMusicIsPlaying = false;
     public static bool CurrentMusicIsPlaying => currentMusicIsPlaying;
     private static float currentMusicTime = 0f;
@@ -46,6 +55,7 @@ public class RhythmViewer : MonoBehaviour
     
     private void Start()
     {
+        currentMusicTime = 0f;
         startPoint = GameObject.Find("start_point").transform;
         // 创建一个1x1纹理
         squareTexture = new Texture2D(1, 1);
@@ -77,6 +87,7 @@ public class RhythmViewer : MonoBehaviour
         if(currentMusicIsPlaying)
         {
             currentMusicTime += Time.deltaTime;
+            CheckDynamicRhythmNode();
         }
     }
 
@@ -140,6 +151,7 @@ public class RhythmViewer : MonoBehaviour
             currentMusicIsPlaying = false;
             musicController.StopLevelMusic();
             musicCurrentPosLine.HidePosLine();
+            ClearDynamicRhythmNode();
         }
         else
         {
@@ -147,6 +159,110 @@ public class RhythmViewer : MonoBehaviour
             currentMusicIsPlaying = true;
             musicController.PlayLevelMusic();
             musicCurrentPosLine.ShowPosLine();
+            InitCurrentDynamicRhythmNode();
+        }
+    }
+
+    private void InitCurrentDynamicRhythmNode()
+    {
+        currentDynamicRhythmNodeIndex = 0;
+        leftDynamicRhythmNodeIndex = 0;
+        rightDynamicRhythmNodeIndex = 0;
+        for(int i = 0; i < rhythmDataFile.rhythmDataList.Count; i++)
+        {
+            RhythmData rhythmData = rhythmDataFile.rhythmDataList[i];
+            Vector3 realPosition = new Vector3(rhythmData.perfectTime * GameConsts.SPEED + startPoint.position.x, 0, 0);
+            if (IsPositionInViewport(realPosition))
+            {
+                GameObject go = PoolManager.Instance.SpawnFromPool("DynamicRhythmNode", dynamicRhythmNodePrefab, transform);
+                go.transform.position = realPosition;
+                VisualizedRhythmNode visualizedRhythmNode = go.GetComponent<VisualizedRhythmNode>();
+                dynamicRhythmNodes.Add(i, visualizedRhythmNode);
+                currentDynamicRhythmNodeIndex = i;
+                rightDynamicRhythmNodeIndex = i + 1;
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+    
+    private void ClearDynamicRhythmNode()
+    {
+        foreach (var dynamicRhythmNode in dynamicRhythmNodes)
+        {
+            PoolManager.Instance.ReturnToPool("DynamicRhythmNode", dynamicRhythmNode.Value.gameObject);
+        }
+        dynamicRhythmNodes.Clear();
+    }
+        
+    private void CheckDynamicRhythmNode()
+    {
+        if (musicController == null) return;
+        if (currentMusicIsPlaying)
+        {
+            while (leftDynamicRhythmNodeIndex < currentDynamicRhythmNodeIndex)
+            {
+                RhythmData rhythmData = rhythmDataFile.rhythmDataList[leftDynamicRhythmNodeIndex];
+                Vector3 realPosition = new Vector3(rhythmData.perfectTime * GameConsts.SPEED + startPoint.position.x, 0, 0);
+                if (!IsPositionInViewport(realPosition))
+                {
+                    PoolManager.Instance.ReturnToPool("DynamicRhythmNode", dynamicRhythmNodes[leftDynamicRhythmNodeIndex].gameObject);
+                    dynamicRhythmNodes.Remove(leftDynamicRhythmNodeIndex);
+                    leftDynamicRhythmNodeIndex++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            
+            while (rightDynamicRhythmNodeIndex < rhythmDataFile.rhythmDataList.Count)
+            {
+                RhythmData rhythmData = rhythmDataFile.rhythmDataList[rightDynamicRhythmNodeIndex];
+                Vector3 realPosition = new Vector3(rhythmData.perfectTime * GameConsts.SPEED + startPoint.position.x, 0, 0);
+                if (IsPositionInViewport(realPosition))
+                {
+                    GameObject go = PoolManager.Instance.SpawnFromPool("DynamicRhythmNode", dynamicRhythmNodePrefab, transform);
+                    go.transform.position = realPosition;
+                    VisualizedRhythmNode visualizedRhythmNode = go.GetComponent<VisualizedRhythmNode>();
+                    dynamicRhythmNodes.Add(rightDynamicRhythmNodeIndex, visualizedRhythmNode);
+                    rightDynamicRhythmNodeIndex++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            
+            while (currentDynamicRhythmNodeIndex < rightDynamicRhythmNodeIndex)
+            {
+                RhythmData rhythmData = rhythmDataFile.rhythmDataList[currentDynamicRhythmNodeIndex];
+                float startTimeOffset = dynamicRhythmNodes[currentDynamicRhythmNodeIndex].GetStartTimeOffset();
+                if (currentMusicTime >= rhythmData.perfectTime - startTimeOffset)
+                {
+                    dynamicRhythmNodes[currentDynamicRhythmNodeIndex].Play();
+                    currentDynamicRhythmNodeIndex++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+    }
+    
+    private bool IsPositionInViewport(Vector3 position)
+    {
+        Vector3 viewportPos = Camera.main.WorldToViewportPoint(position);
+        if (viewportPos.x < -0.5f || viewportPos.x > 1.5f || viewportPos.y < -0.5f || viewportPos.y > 1.5f)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
 
