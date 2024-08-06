@@ -52,6 +52,7 @@ public class RotatingCassettes : MonoBehaviour
     
     public void OnRightScroll()
     {
+        _leftScrollBtn.enabled = false;
         _rightScrollBtn.enabled = false;
         if (!m_Animator.enabled)
         {
@@ -84,7 +85,41 @@ public class RotatingCassettes : MonoBehaviour
         UpdateSelectingPoints(currentMiddleCassette);
         EventManager.InvokeEvent(EventType.SwitchLevelEvent, new SwitchLevelEventData(currentMiddleCassette));
     }
-
+    public void OnLeftScroll()
+    {
+        _leftScrollBtn.enabled = false;
+        _rightScrollBtn.enabled = false;
+        if (!m_Animator.enabled)
+        {
+            m_Animator.enabled = true;
+        }
+        string anim2Play = "cassetteRotateAnimation";
+        switch (currentMiddleCassette)
+        {
+            case 1:
+                anim2Play += "2_1";
+                c1.gameObject.SetActive(true);
+                c2.gameObject.SetActive(true);
+                currentMiddleCassette = 2;
+                break;
+            case 2:
+                anim2Play += "3_2";
+                c3.gameObject.SetActive(true);
+                c2.gameObject.SetActive(true);
+                currentMiddleCassette = 3;
+                break;
+            case 3:
+                anim2Play += "1_3";
+                c1.gameObject.SetActive(true);
+                c3.gameObject.SetActive(true);
+                currentMiddleCassette = 1;
+                break;
+            default: break;
+        }
+        m_Animator.Play(anim2Play);
+        UpdateSelectingPoints(currentMiddleCassette);
+        EventManager.InvokeEvent(EventType.SwitchLevelEvent, new SwitchLevelEventData(currentMiddleCassette));
+    }
     private void UpdateSelectingPoints(int c)
     {
         for (int i = 1; i <= 3; i++)
@@ -102,20 +137,41 @@ public class RotatingCassettes : MonoBehaviour
     }
     public void after1_2()
     {
-        Debug.LogWarning("after1_2 was called");
+        _leftScrollBtn.enabled = true;
         _rightScrollBtn.enabled = true;
         c2.gameObject.SetActive(false);
     }
     public void after2_3()
     {
-        Debug.LogWarning("after2_3 was called");
+        _leftScrollBtn.enabled = true;
         _rightScrollBtn.enabled = true;
         c3.gameObject.SetActive(false);
     }
     public void after3_1()
     {
-        Debug.LogWarning("after3_1 was called");
+        _leftScrollBtn.enabled = true;
         _rightScrollBtn.enabled = true;
         c1.gameObject.SetActive(false);
+    }
+
+    public void after1_3()
+    {
+        _leftScrollBtn.enabled = true;
+        _rightScrollBtn.enabled = true;
+        c3.gameObject.SetActive(false);
+    }
+
+    public void after2_1()
+    {
+        _leftScrollBtn.enabled = true;
+        _rightScrollBtn.enabled = true;
+        c1.gameObject.SetActive(false);
+    }
+
+    public void after3_2()
+    {
+        _leftScrollBtn.enabled = true;
+        _rightScrollBtn.enabled = true;
+        c2.gameObject.SetActive(false);
     }
 }
