@@ -4,6 +4,14 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using Random = System.Random;
+public class CleverTimeDieEventData : EventData
+{
+    private GameObject go_shall_die;
+    public CleverTimeDieEventData(GameObject go)
+    {
+        go_shall_die = go;
+    }
+}
 public class TimerDieEventData : EventData
 {
     public double absoluteTime;

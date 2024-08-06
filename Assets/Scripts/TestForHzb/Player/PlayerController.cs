@@ -152,7 +152,6 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         EventManager.AddListener(EventType.MouseRightClickEvent, OnDead);
-
         EventManager.AddListener(EventType.SpacebarDownEvent, OnSpacebarDown);
         EventManager.AddListener(EventType.SpacebarUpEvent, OnSpacebarUp);
         EventManager.AddListener(EventType.MouseLeftClickEvent, OnMouseLeftClick);

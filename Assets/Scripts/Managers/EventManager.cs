@@ -15,6 +15,7 @@ public enum EventType
     GravityInverseEvent,
     MusicStartEvent,
     MusicRecordEvent,
+    SwitchLevelEvent,
 
 
     #region 输入事件在此添加
