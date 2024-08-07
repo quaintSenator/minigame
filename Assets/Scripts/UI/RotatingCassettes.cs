@@ -14,9 +14,7 @@ public class SwitchLevelEventData : EventData
 }
 public class RotatingCassettes : MonoBehaviour
 {
-    private Transform c1;
-    private Transform c2;
-    private Transform c3;
+    [SerializeField] private Transform[] cassettes;
     public Animator m_Animator;
     private int currentMiddleCassette;
     [SerializeField] private Button _rightScrollBtn;
@@ -31,29 +29,61 @@ public class RotatingCassettes : MonoBehaviour
             switch (childTransform.name)
             {
                 case "cassette1":
-                    c1 = childTransform;
+                    cassettes[1] = childTransform;
                     break;
                 case "cassette2":
-                    c2 = childTransform;
+                    cassettes[2] = childTransform;
                     break;
                 case "cassette3":
-                    c3 = childTransform;
+                    cassettes[3] = childTransform;
                     break;
                 default: break;
             }
         }
-        c3.gameObject.SetActive(false);
-        c2.gameObject.SetActive(false);
+
+        cassettes[3].gameObject.GetComponent<Button>().enabled = false;
+        cassettes[3].gameObject.SetActive(false);
+        cassettes[2].gameObject.GetComponent<Button>().enabled = false;
+        cassettes[2].gameObject.SetActive(false);
         
         m_Animator = gameObject.GetComponent<Animator>();
         m_Animator.enabled = false;
         UpdateSelectingPoints(currentMiddleCassette);
     }
-    
-    public void OnRightScroll()
+    private void lockScrollAndCassetteClick(int except)
     {
         _leftScrollBtn.enabled = false;
         _rightScrollBtn.enabled = false;
+        for (var i = 1; i <= 3; i++)
+        {
+            if (cassettes[i] && i != except)
+            {
+                var btn = cassettes[i].gameObject.GetComponent<Button>();
+                if (btn)
+                {
+                    btn.enabled = false;
+                }
+            }
+        }
+    }
+    private void unlockScrollAndCassetteClick()
+    {
+        _leftScrollBtn.enabled = true;
+        _rightScrollBtn.enabled = true;
+        for (var i = 1; i <= 3; i++)
+        {
+            if (cassettes[i])
+            {
+                var btn = cassettes[i].gameObject.GetComponent<Button>();
+                if (btn)
+                {
+                    btn.enabled = true;
+                }
+            }
+        }
+    }
+    public void OnRightScroll()
+    {
         if (!m_Animator.enabled)
         {
             m_Animator.enabled = true;
@@ -63,32 +93,31 @@ public class RotatingCassettes : MonoBehaviour
         {
             case 1:
                 anim2Play += "3_1";
-                c1.gameObject.SetActive(true);
-                c3.gameObject.SetActive(true);
+                cassettes[1].gameObject.SetActive(true);
+                cassettes[3].gameObject.SetActive(true);
                 currentMiddleCassette = 3;
                 break;
             case 2:
                 anim2Play += "1_2";
-                c1.gameObject.SetActive(true);
-                c2.gameObject.SetActive(true);
+                cassettes[1].gameObject.SetActive(true);
+                cassettes[2].gameObject.SetActive(true);
                 currentMiddleCassette = 1;
                 break;
             case 3:
                 anim2Play += "2_3";
-                c2.gameObject.SetActive(true);
-                c3.gameObject.SetActive(true);
+                cassettes[2].gameObject.SetActive(true);
+                cassettes[3].gameObject.SetActive(true);
                 currentMiddleCassette = 2;
                 break;
             default: break;
         }
+        lockScrollAndCassetteClick(currentMiddleCassette);
         m_Animator.Play(anim2Play);
         UpdateSelectingPoints(currentMiddleCassette);
         EventManager.InvokeEvent(EventType.SwitchLevelEvent, new SwitchLevelEventData(currentMiddleCassette));
     }
     public void OnLeftScroll()
     {
-        _leftScrollBtn.enabled = false;
-        _rightScrollBtn.enabled = false;
         if (!m_Animator.enabled)
         {
             m_Animator.enabled = true;
@@ -98,24 +127,25 @@ public class RotatingCassettes : MonoBehaviour
         {
             case 1:
                 anim2Play += "2_1";
-                c1.gameObject.SetActive(true);
-                c2.gameObject.SetActive(true);
+                cassettes[1].gameObject.SetActive(true);
+                cassettes[2].gameObject.SetActive(true);
                 currentMiddleCassette = 2;
                 break;
             case 2:
                 anim2Play += "3_2";
-                c3.gameObject.SetActive(true);
-                c2.gameObject.SetActive(true);
+                cassettes[3].gameObject.SetActive(true);
+                cassettes[2].gameObject.SetActive(true);
                 currentMiddleCassette = 3;
                 break;
             case 3:
                 anim2Play += "1_3";
-                c1.gameObject.SetActive(true);
-                c3.gameObject.SetActive(true);
+                cassettes[1].gameObject.SetActive(true);
+                cassettes[3].gameObject.SetActive(true);
                 currentMiddleCassette = 1;
                 break;
             default: break;
         }
+        lockScrollAndCassetteClick(currentMiddleCassette);
         m_Animator.Play(anim2Play);
         UpdateSelectingPoints(currentMiddleCassette);
         EventManager.InvokeEvent(EventType.SwitchLevelEvent, new SwitchLevelEventData(currentMiddleCassette));
@@ -137,41 +167,35 @@ public class RotatingCassettes : MonoBehaviour
     }
     public void after1_2()
     {
-        _leftScrollBtn.enabled = true;
-        _rightScrollBtn.enabled = true;
-        c2.gameObject.SetActive(false);
+        unlockScrollAndCassetteClick();
+        cassettes[2].gameObject.SetActive(false);
     }
     public void after2_3()
     {
-        _leftScrollBtn.enabled = true;
-        _rightScrollBtn.enabled = true;
-        c3.gameObject.SetActive(false);
+        unlockScrollAndCassetteClick();
+        cassettes[3].gameObject.SetActive(false);
     }
     public void after3_1()
     {
-        _leftScrollBtn.enabled = true;
-        _rightScrollBtn.enabled = true;
-        c1.gameObject.SetActive(false);
+        unlockScrollAndCassetteClick();
+        cassettes[1].gameObject.SetActive(false);
     }
 
     public void after1_3()
     {
-        _leftScrollBtn.enabled = true;
-        _rightScrollBtn.enabled = true;
-        c3.gameObject.SetActive(false);
+        unlockScrollAndCassetteClick();
+        cassettes[3].gameObject.SetActive(false);
     }
 
     public void after2_1()
     {
-        _leftScrollBtn.enabled = true;
-        _rightScrollBtn.enabled = true;
-        c1.gameObject.SetActive(false);
+        unlockScrollAndCassetteClick();
+        cassettes[1].gameObject.SetActive(false);
     }
 
     public void after3_2()
     {
-        _leftScrollBtn.enabled = true;
-        _rightScrollBtn.enabled = true;
-        c2.gameObject.SetActive(false);
+        unlockScrollAndCassetteClick();
+        cassettes[2].gameObject.SetActive(false);
     }
 }
