@@ -6,42 +6,42 @@ using UnityEngine;
 // 事件类型
 public enum EventType
 {
-    GameStartEvent,
-    GameRestartEvent,
-    PlayerHitGroundEvent,
-    PlayerJumpoffGroundEvent,
-    TimerDieEvent,
-    PlayerDeadEvent,
-    GravityInverseEvent,
-    MusicStartEvent,
-    MusicRecordEvent,
-    SwitchLevelEvent,
+    GameStartEvent = 1,
+    GameRestartEvent = 2,
+    PlayerHitGroundEvent = 3,
+    PlayerJumpoffGroundEvent = 4,
+    TimerDieEvent = 5,
+    PlayerDeadEvent = 6,
+    GravityInverseEvent = 7,
+    MusicStartEvent = 8,
+    MusicRecordEvent = 9,
+    SwitchLevelEvent = 10,
 
 
     #region 输入事件在此添加
     
-    MouseMoveEvent,
-    MouseLeftClickEvent,
-    MouseRightClickEvent,
-    MiddleClickEvent,
-    MiddleScrollEvent,
-    SpacebarDownEvent,
-    SpacebarUpEvent,
-    JDownEvent,
+    MouseMoveEvent = 101,
+    MouseLeftClickEvent = 102,
+    MouseRightClickEvent = 103,
+    MiddleClickEvent = 104,
+    MiddleScrollEvent = 105,
+    SpacebarDownEvent = 106,
+    SpacebarUpEvent = 107,
+    JDownEvent = 108,
     
     #endregion
 
     #region 地图编辑器输入事件
 
-    CancelCurrentSelectEvent,
-    DrawOrEraseEvent,
-    ChangeTileModeEvent,
-    SaveMapEvent,
-    LoadMapOneEvent,
-    LoadMapTwoEvent,
-    LoadMapThreeEvent,
-    PauseOrResumeMusicEvent,
-    StopOrPlayMusicEvent,
+    CancelCurrentSelectEvent = 201,
+    DrawOrEraseEvent = 202,
+    ChangeTileModeEvent = 203,
+    SaveMapEvent = 204,
+    LoadMapOneEvent = 205,
+    LoadMapTwoEvent = 206,
+    LoadMapThreeEvent = 207,
+    PauseOrResumeMusicEvent = 208,
+    StopOrPlayMusicEvent = 209,
 
     #endregion
 }

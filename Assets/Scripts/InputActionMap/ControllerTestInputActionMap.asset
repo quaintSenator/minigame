@@ -13,19 +13,15 @@ MonoBehaviour:
   m_Name: ControllerTestInputActionMap
   m_EditorClassIdentifier: 
   inputActions:
-  - eventType: 14
+  - eventType: 106
     inputEventType: 0
     keyBoardInput: 20000000
     mouseInput: 00000000
-  - eventType: 15
-    inputEventType: 0
-    keyBoardInput: 20000000
-    mouseInput: 00000000
-  - eventType: 16
+  - eventType: 107
     inputEventType: 2
     keyBoardInput: 20000000
     mouseInput: 00000000
-  - eventType: 12
+  - eventType: 103
     inputEventType: 0
     keyBoardInput: 
     mouseInput: 01000000
