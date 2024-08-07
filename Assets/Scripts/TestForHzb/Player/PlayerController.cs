@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,7 +7,6 @@ using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
-using static UnityEngine.Experimental.Rendering.RayTracingAccelerationStructure;
 
 
 
@@ -59,8 +57,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] public JumpSettings jumpSettings;
 
-    [SerializeField] 
-    [Tooltip("角色自动前进的速度,默认为8格/s,即BPM120，每拍前进4格")] 
+    [SerializeField]
+    [Tooltip("角色自动前进的速度,默认为8格/s,即BPM120，每拍前进4格")]
     private float speed = 8.0f;
 
     [SerializeField]
@@ -98,6 +96,12 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded = true;
     //角色是否已经死亡
     private bool isDead = false;
+    //角色是否可以进入飞行模式
+    private bool canFly = false;
+    //角色是否在飞行模式
+    private bool isFlying = false;
+    //飞行是否到终点
+    private bool isFlyFinished = false;
     //角色是否再跳
     private bool willJump = false;
     //缓冲计时器是否生效
@@ -123,6 +127,8 @@ public class PlayerController : MonoBehaviour
     private float deadZone = 0.5f;
     //运动时长
     private float moveTimer = 0;
+    //飞行时竖直速度
+    private float verticalVelocity = 0;
 
     //一些初始化
     private Transform cubeSprites;
@@ -191,11 +197,11 @@ public class PlayerController : MonoBehaviour
             SetCorrect();
         }
 
-        if(isBufferActive)
+        if (isBufferActive)
         {
             jumpTimer += Time.deltaTime;
         }
-        if(jumpTimer >= bufferTime)
+        if (jumpTimer >= bufferTime)
         {
             jumpTimer = 0;
             isBufferActive = false;
@@ -203,14 +209,15 @@ public class PlayerController : MonoBehaviour
         }
 
         Rotate();
-        CheckDead();
+        //CheckDead();
     }
 
     private void FixedUpdate()
     {
         //角色一直受一个向下的重力，世界坐标系
-        rigidBody.AddForce(ForceManager.Instance.GetGravityDir() * gravityScale);//* GameConsts.GRAVITY);
-
+        if(!isFlying){
+            rigidBody.AddForce(ForceManager.Instance.GetGravityDir() * gravityScale);//* GameConsts.GRAVITY);
+        }
         //角色自动向右前进，世界坐标系
         transform.Translate(playerHeadingDir * speed * Time.fixedDeltaTime, Space.World);
 
@@ -223,15 +230,22 @@ public class PlayerController : MonoBehaviour
 
     private void OnSpacebarDown(EventData data = null)
     {
-        if (isGrounded)
+        if (canFly)
         {
-            TryJump();
+            Fly();
         }
         else
         {
-            willJump = true;
+            if (isGrounded)
+            {
+                TryJump();
+            }
+            else
+            {
+                willJump = true;
+            }
+            isContinueJump = true;
         }
-        isContinueJump = true;
         Debug.Log("OnSpaceDown");
     }
 
@@ -240,10 +254,17 @@ public class PlayerController : MonoBehaviour
         Debug.Log("OnSpacebarUp");
         //CleverTimerManager.Ask4Timer(bufferTime, OnBufferTimeEnd);
         //bufferTimerCount++;
+        if (isFlying)
+        {
+            EndFly();
+        }
+        else
+        {
+            jumpTimer = 0;
+            isBufferActive = true;
+            isContinueJump = false;
+        }
 
-        jumpTimer = 0;
-        isBufferActive = true;
-        isContinueJump = false;
     }
 
     private void OnMouseLeftClick(EventData data = null)
@@ -300,17 +321,36 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void Fly()
+    {
+        isFlying = true;
+        rigidBody.velocity = Vector2.up * verticalVelocity;
+        Debug.Log("vVelocity"+verticalVelocity);
+    }
+
+    private void EndFly()
+    {
+        isFlying = false;
+        if(isFlyFinished)
+        {
+            TryJump(mustJump:true);
+        }
+        else{
+            rigidBody.velocity = new Vector2();
+        }
+    }
+
     //对外跳跃接口，设置跳跃参数，不传为默认参数
     public void TryJump(JumpSettings data = null, bool mustJump = false)
     {
         if (isGrounded)
         {
-           // CalSettings(data);
+            // CalSettings(data);
             Jump();
         }
         else if (mustJump)
         {
-           // CalSettings(data);
+            // CalSettings(data);
             Jump();
         }
     }
@@ -341,7 +381,7 @@ public class PlayerController : MonoBehaviour
         //TODO:这个值应该是从别处拿到或者直接赋的
         worldScale = transform.localScale.x;
 
-        speed = speed  * worldScale;
+        speed = speed * worldScale;
 
         gravityScale = gravityScale * worldScale;
 
@@ -363,7 +403,7 @@ public class PlayerController : MonoBehaviour
 
         //跳跃一次的上升初速度和最高点位置解析出来会满足一个数量关系
         //jumpHeight = jumpHeight * worldScale;
-        if (jumpHeight  < JUDGE_ZERO && jumpDeltaHeight < JUDGE_ZERO)
+        if (jumpHeight < JUDGE_ZERO && jumpDeltaHeight < JUDGE_ZERO)
         {
             Debug.LogError("Error jumpHeight！");
             return;
@@ -372,12 +412,12 @@ public class PlayerController : MonoBehaviour
         //一次跳跃从起跳到最高点的时间
         float jumptime = 0;
 
-        jumptime = (float)(Math.Sqrt(jumpHeight / jumpDeltaHeight) 
+        jumptime = (float)(Math.Sqrt(jumpHeight / jumpDeltaHeight)
             * jumpDeltaHeight
             / (jumpDeltaHeight + Math.Sqrt(jumpDeltaHeight * jumpHeight))
             * beatTime );
 
-        if (jumptime < JUDGE_ZERO )
+        if (jumptime < JUDGE_ZERO)
         {
             Debug.LogError("Error jumptime！");
             return;
@@ -397,8 +437,9 @@ public class PlayerController : MonoBehaviour
 
     private void CheckDead()
     {
-        moveTimer+=Time.deltaTime;
-        if(Mathf.Abs(transform.position.x - GameConsts.START_POSITION.x - moveTimer * speed) >= deadZone){
+        moveTimer += Time.deltaTime;
+        if (Mathf.Abs(transform.position.x - GameConsts.START_POSITION.x - moveTimer * speed) >= deadZone)
+        {
             OnDead();
         }
     }
@@ -419,6 +460,16 @@ public class PlayerController : MonoBehaviour
         {
             isDead = value;
         }
+    }
+
+    public void SetCanFly(bool value)
+    {
+        canFly = value;
+    }
+
+    public void SetFlyFinished(bool value)
+    {
+        isFlyFinished = value;
     }
 
     public void OnHitGround(EventData data = null)
@@ -480,7 +531,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        if (!isGrounded)
+        if (!isGrounded && !isFlying)
         {
             float time = 1.0f;
             if (jumpMode == JumpMode.Speed)
@@ -554,5 +605,10 @@ public class PlayerController : MonoBehaviour
     public float GetSpeed()
     {
         return speed;
+    }
+
+    public void SetVerticalVelocity(float value)
+    {
+        verticalVelocity = value;
     }
 }
