@@ -41,11 +41,14 @@ public class PlayerBottomLine : MonoBehaviour
     //离开地面
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Ground") && enterCount == 1)
+        if (other.gameObject.CompareTag("Ground"))
         {
-            player.OnOffGround();
+            if(enterCount == 1){
+                player.OnOffGround();
+            }
+            enterCount = enterCount - 1 > 0 ? enterCount - 1 : 0;
         }
-        enterCount = enterCount - 1 > 0 ? enterCount - 1 : 0;
+
     }
 
     private void OnDead(EventData data=null){

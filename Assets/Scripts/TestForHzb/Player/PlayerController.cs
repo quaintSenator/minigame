@@ -106,12 +106,12 @@ public class PlayerController : MonoBehaviour
     private bool willJump = false;
     //缓冲计时器是否生效
     private bool isBufferActive = false;
-    //缓冲计时器计数
+    //缓冲计时器计数    ***********已废弃
     private int bufferTimerCount = 0;
-    //废弃计时器个数（起跳后废弃）
+    //废弃计时器个数    ***********已废弃
     private int disableTimerCount = 0;
     //跳跃计时器
-    private float jumpTimer;
+    private float jumpTimer = 0;
 
     //角色是否可以连跳
     private bool isContinueJump = false;
@@ -274,7 +274,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnBufferTimeEnd(EventData data)
     {
-        if (disableTimerCount > 0)
+/*        if (disableTimerCount > 0)
         {
             disableTimerCount--;
             return;
@@ -289,7 +289,7 @@ public class PlayerController : MonoBehaviour
         {
             willJump = false;
             isBufferActive = false;
-        }
+        }*/
     }
 
     //注册事件统一函数
@@ -580,20 +580,9 @@ public class PlayerController : MonoBehaviour
 
     public void OnReset(EventData data = null)
     {
-        isGrounded = true;
-        transform.position = GameConsts.START_POSITION;
-        cubeSprites.rotation = GameConsts.ZERO_ROTATION;
-        rigidBody.velocity = GameConsts.START_VELOCITY;
-
-        isDead = false;
-        isReturn = false;
-        returnTimer = 0;
-        boxCollider.enabled = true;
-        willJump = false;
-        isContinueJump = false;
-        jumpTimer = 0;
-        moveTimer = 0;
-        jumpSettings = GameConsts.DEFAULT_JUMP;
+        ResetState();
+        ResetJump();
+        ResetFly();
         EventManager.InvokeEvent(EventType.GameRestartEvent);
     }
 
@@ -610,5 +599,35 @@ public class PlayerController : MonoBehaviour
     public void SetVerticalVelocity(float value)
     {
         verticalVelocity = value;
+    }
+
+    private void ResetFly()
+    {
+        isFlying = false;
+        canFly = false;
+        isFlyFinished = false;
+    }
+
+    private void ResetJump()
+    {
+        isGrounded = true;
+        isReturn = false;
+        returnTimer = 0;
+        willJump = false;
+        isContinueJump = false;
+        jumpTimer = 0;
+        jumpSettings = GameConsts.DEFAULT_JUMP;
+        isBufferActive = false;
+    }
+
+    private void ResetState()
+    {
+        transform.position = GameConsts.START_POSITION;
+        cubeSprites.rotation = GameConsts.ZERO_ROTATION;
+        rigidBody.velocity = GameConsts.START_VELOCITY;
+
+        isDead = false;
+        boxCollider.enabled = true;
+        moveTimer = 0;
     }
 }
