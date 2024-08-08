@@ -54,7 +54,7 @@ public class BuildableBase : MonoBehaviour
 
     protected virtual void AdjustBuildableScale()
     {
-        transform.localScale = new Vector3(GameConsts.TILE_SIZE / 1.35f, GameConsts.TILE_SIZE / 1.35f, 1);
+        transform.localScale = new Vector3(GameConsts.TILE_SIZE / 1f, GameConsts.TILE_SIZE / 1f, 1);
     }
     
     //设置渲染层级
