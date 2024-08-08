@@ -56,7 +56,7 @@ public class RhythmViewer : MonoBehaviour
     private void Start()
     {
         currentMusicTime = 0f;
-        startPoint = GameObject.Find("start_point").transform;
+        startPoint = Utils.GetStartPointPostion();
         // 创建一个1x1纹理
         squareTexture = new Texture2D(1, 1);
         squareTexture.SetPixel(0, 0, Color.white); // 设置纹理的颜色
