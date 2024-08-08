@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour {
+public class EnemyController : BuildableBase {
 
     public int maxHealth;
 
@@ -11,13 +11,14 @@ public class EnemyController : MonoBehaviour {
 
     private void Awake()
     {
-
+        health = maxHealth;
     }
 
-    private void Start()
+    public override void Init()
     {
         health = maxHealth;
     }
+
     public void TakeAttack(int damage)
     {
         health-=damage;

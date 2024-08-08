@@ -13,7 +13,8 @@ public enum BuildableType
     floor_3,
     spring,
     twoStage,
-    flyOrbit
+    flyOrbit,
+    enemy
 }
 
 [CreateAssetMenu(fileName = "BuildableList", menuName = "Buildable/Create BuildableList")]
