@@ -303,8 +303,8 @@ public class BuildableCreator : Singleton<BuildableCreator>
     
     public static Vector3 GetStartPositionOffset()
     {
-        Transform mapStartPoint = GameObject.Find("start_point").transform;
-        return new Vector3(mapStartPoint.position.x + GameConsts.TILE_SIZE / 2, mapStartPoint.position.y + GameConsts.TILE_SIZE / 2, 0);
+        Vector3 mapStartPoint = GameObject.Find("start_point").transform.position;
+        return new Vector3(mapStartPoint.x + GameConsts.TILE_SIZE / 2, mapStartPoint.y + GameConsts.TILE_SIZE / 2, 0);
     }
     
     //协程，每隔一段时间刷新一次地图，检查是否在摄像机视野内
@@ -322,7 +322,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
     {
         foreach (var buildableInfo in buildableInfos)
         {
-            if (BuildableBase.IsBuildableViewport(buildableInfo.position, Camera.main) || showAllBuildable)
+            if (Utils.IsBuildableViewport(buildableInfo.position, Camera.main) || showAllBuildable)
             {
                 SpawnBuildable(buildableInfo.type, buildableInfo.position);
             }

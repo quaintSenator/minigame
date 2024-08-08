@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: flyOrbit
   m_EditorClassIdentifier: 
   buildableObjectType: 6
-  prefab: {fileID: 0}
+  prefab: {fileID: 4116427268309243163, guid: b425eeaca8857b64fba166fb45939c31, type: 3}

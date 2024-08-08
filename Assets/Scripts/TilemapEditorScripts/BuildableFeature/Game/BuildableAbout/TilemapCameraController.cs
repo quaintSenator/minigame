@@ -27,7 +27,7 @@ public class TilemapCameraController : MonoBehaviour
 
     private void Start()
     {
-        startPoint = GameObject.Find("start_point").transform;
+        startPoint = Utils.GetStartPointPostion();
         originalZoom = virtualCamera.m_Lens.OrthographicSize;
     }
 

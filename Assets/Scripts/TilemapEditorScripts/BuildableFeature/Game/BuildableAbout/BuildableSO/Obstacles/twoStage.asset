@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: twoStage
   m_EditorClassIdentifier: 
   buildableObjectType: 5
-  prefab: {fileID: 0}
+  prefab: {fileID: 571280776891082320, guid: 1a1b70a8fba39e7409a10b1777859395, type: 3}

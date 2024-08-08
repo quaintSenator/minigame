@@ -12,7 +12,7 @@ public class MusicCurrentPosLine : MonoBehaviour
     {
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
-        startPoint = GameObject.Find("start_point").transform;
+        startPoint = Utils.GetStartPointPostion();
     }
 
     // Update is called once per frame
