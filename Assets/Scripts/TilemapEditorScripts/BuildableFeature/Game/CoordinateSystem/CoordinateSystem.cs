@@ -3,11 +3,10 @@ using System.Collections.Generic;
 
 public class CoordinateSystem : MonoBehaviour
 {
-    [SerializeField] private GameObject linePrefab; // Reference to the CoordinateLine prefab
-    [SerializeField] private float tileSize = 1f;
+    [SerializeField] private GameObject linePrefab;
+    [SerializeField] private bool drawGrid = true; // 是否绘制网格
+    [SerializeField] private float extraDrawArea = 1f; // 额外绘制区域大小
     [SerializeField] private Color gridColor = Color.gray;
-    //额外画的区域
-    [SerializeField] private float extraDrawArea = 1f;
     private Transform startPoint;
 
     private Camera mainCamera;
@@ -23,39 +22,53 @@ public class CoordinateSystem : MonoBehaviour
 
     void Update()
     {
-        UpdateGridLines();
+        // 每帧更新网格线
+        // 但是应该也有优化空间，比如只有在摄像机移动时才更新网格线 或者只有在摄像机缩放时才更新网格线
+        // 或者只更新 新进入的区域 和 离开的区域 的网格线 
+        // 或者减小更新频率，比如每0.1s更新一次 额外绘制区域就是用于这个东西
+        // 目前是每帧更新，不过使用了对象池，所以性能应该还可以
+        if( drawGrid )
+        {
+            UpdateGridLines();
+        }
+        else if (gridLines.Count > 0)
+        {
+            foreach (GameObject line in gridLines)
+            {
+                PoolManager.Instance.ReturnToPool("CoordinateLine", line);
+            }
+            gridLines.Clear();
+        }
     }
 
     void UpdateGridLines()
     {
-        // Get camera boundaries
+        // 获取摄像机的左下角和右上角的世界坐标
         Vector3 bottomLeft = mainCamera.ScreenToWorldPoint(new Vector3(0, 0, mainCamera.nearClipPlane));
         Vector3 topRight = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.nearClipPlane));
-        Debug.Log("bottomLeft: " + bottomLeft);
-        Debug.Log("topRight: " + topRight);
         
-        float xOffset = startPoint.position.x % tileSize;
-        float yOffset = startPoint.position.y % tileSize;
+        float xOffset = startPoint.position.x % GameConsts.TILE_SIZE;
+        float yOffset = startPoint.position.y % GameConsts.TILE_SIZE;
         
-        // Compute the range of coordinates to cover a bit beyond the camera view
-        float minX = Mathf.Floor(bottomLeft.x / tileSize) * tileSize + xOffset - extraDrawArea;
-        float maxX = Mathf.Ceil(topRight.x / tileSize) * tileSize + xOffset + extraDrawArea;
-        float minY = Mathf.Floor(bottomLeft.y / tileSize) * tileSize + yOffset - extraDrawArea;
-        float maxY = Mathf.Ceil(topRight.y / tileSize) * tileSize + yOffset + extraDrawArea;
+        // 计算需要绘制的区域
+        float minX = Mathf.Floor(bottomLeft.x / GameConsts.TILE_SIZE) * GameConsts.TILE_SIZE + xOffset - extraDrawArea;
+        float maxX = Mathf.Ceil(topRight.x / GameConsts.TILE_SIZE) * GameConsts.TILE_SIZE + xOffset + extraDrawArea;
+        float minY = Mathf.Floor(bottomLeft.y / GameConsts.TILE_SIZE) * GameConsts.TILE_SIZE + yOffset - extraDrawArea;
+        float maxY = Mathf.Ceil(topRight.y / GameConsts.TILE_SIZE) * GameConsts.TILE_SIZE + yOffset + extraDrawArea;
         
-        // Clear the grid lines
+        // 清除之前的网格线
         foreach (GameObject line in gridLines)
         {
             PoolManager.Instance.ReturnToPool("CoordinateLine", line);
         }
         gridLines.Clear();
         
-        // Draw the grid lines
-        for (float x = minX; x <= maxX; x += tileSize)
+        // 绘制网格线
+        for (float x = minX; x <= maxX; x += GameConsts.TILE_SIZE)
         {
             CreateLine(new Vector3(x, minY, 0), new Vector3(x, maxY, 0), gridColor);
         }
-        for (float y = minY; y <= maxY; y += tileSize)
+        for (float y = minY; y <= maxY; y += GameConsts.TILE_SIZE)
         {
             CreateLine(new Vector3(minX, y, 0), new Vector3(maxX, y, 0), gridColor);
         }
