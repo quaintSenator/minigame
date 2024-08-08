@@ -779,6 +779,7 @@ MonoBehaviour:
   PlayerControllerInstance: {fileID: 0}
   BankNames:
   - LevelTest
+  - Level1
   LevelMusicEvents:
   - LevelMusicPlayEvent:
       idInternal: 0
@@ -796,11 +797,28 @@ MonoBehaviour:
       idInternal: 0
       valueGuidInternal: 
       WwiseObjectReference: {fileID: 11400000, guid: 2c048faf3f7111d46a10955144817e45, type: 2}
+  - LevelMusicPlayEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: f06f059d497d43441b2fada9159fb502, type: 2}
+    LevelMusicStopEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 23d1c0fdbaa69b24cb2527e342e059ab, type: 2}
+    LevelMusicPauseEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 52bab6f4417a5254db0e0eb32b57c115, type: 2}
+    LevelMusicResumeEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: faa8d6785cc088d49855ff14d273737b, type: 2}
   LevelMusicBpmList:
   - 100
-  LevelIndex: 0
+  - 120
+  LevelIndex: 1
   CallbackType: 4
-  IfPlayMusicWhenStart: 0
+  IfPlayMusicWhenStart: 1
   IfUseVisualization: 1
   RhythmVisualizationPerfabType: {fileID: 0}
   NumberOfRhythmVisualizationPerfabInstance: 5
@@ -6939,7 +6957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bf04b067efc9d440b6a3068be32b2ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRecord: 0
+  isRecord: 1
 --- !u!1 &1913470045
 GameObject:
   m_ObjectHideFlags: 0
@@ -6969,7 +6987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48be1c62b3fe2d845bc6e22b8e4dd750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rhythmDataFile: {fileID: 11400000, guid: f162abe0fd890bb4e9b9964173ccd9f9, type: 2}
+  rhythmDataFile: {fileID: 11400000, guid: 94ebfad679c4dcc4cbd5deb422293695, type: 2}
   rhythmOffset: 0
   timeVisualDataList:
   - name: "\u5BB9\u5FCD\u533A\u95F4"
