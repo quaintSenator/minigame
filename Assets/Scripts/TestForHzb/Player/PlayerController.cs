@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
-using UnityEditor;
+//using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -41,6 +41,8 @@ public class JumpSettings : System.Object
 
 public class PlayerController : MonoBehaviour
 {
+    public AK.Wwise.Event ActionJumpEvent=null;
+
     private double JUDGE_ZERO = 0.000001f;
 
     [SerializeField]
@@ -87,6 +89,14 @@ public class PlayerController : MonoBehaviour
     [Tooltip("跳跃实现方式->给予一段持续时间力中力的大小")]
     private float jumpForce = 25.0f;
 
+    [SerializeField]
+    [ReadOnly]
+    [Tooltip("弹簧上升初速,由参数计算得到")]
+    private float jumpSpringSpeed= 5.0f;
+
+    [SerializeField]
+    [Tooltip("一次弹簧跳跃最高上升的高度，需要调整的参数，影响弹簧上升初速")]
+    private float jumpSpringHeight = 4.8f;
 
 
     //角色是否在跳跃
@@ -298,8 +308,17 @@ public class PlayerController : MonoBehaviour
 
     }
 
+
+    private void PlayNormalJumpAudio()
+    {
+        if(ActionJumpEvent !=null)
+        {
+            ActionJumpEvent.Post(gameObject);
+        }
+
+    }
     //角色跳跃
-    private void Jump()
+    private void Jump(bool ifSpring=false)
     {
         disableTimerCount = bufferTimerCount > 0 ? bufferTimerCount : 0;
         bufferTimerCount = 0;
@@ -312,8 +331,16 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(JumpForce());
                 break;
             case JumpMode.Speed:
-                rigidBody.velocity = Vector2.up * jumpSpeed;
-
+                jumping = false;
+                if (!ifSpring)
+                {
+                    rigidBody.velocity = Vector2.up * jumpSpeed;
+                    PlayNormalJumpAudio();
+                }
+                else
+                {
+                    rigidBody.velocity = Vector2.up * jumpSpringSpeed;
+                }
                 //rigidBody.AddForce(Vector2.up * jumpForce);
                 // Impulse
                 //rigidBody.impluse
@@ -333,7 +360,7 @@ public class PlayerController : MonoBehaviour
         isFlying = false;
         if(isFlyFinished)
         {
-            TryJump(mustJump:true);
+            TryJump(null,false);
         }
         else{
             rigidBody.velocity = new Vector2();
@@ -341,17 +368,17 @@ public class PlayerController : MonoBehaviour
     }
 
     //对外跳跃接口，设置跳跃参数，不传为默认参数
-    public void TryJump(JumpSettings data = null, bool mustJump = false)
+    public void TryJump(JumpSettings data = null, bool isSpringJump = false)
     {
         if (isGrounded)
         {
             // CalSettings(data);
-            Jump();
+            Jump(isSpringJump);
         }
-        else if (mustJump)
+        else if (isSpringJump)
         {
             // CalSettings(data);
-            Jump();
+            Jump(isSpringJump);
         }
     }
 
@@ -389,7 +416,7 @@ public class PlayerController : MonoBehaviour
 
         jumpSpeed = jumpSpeed * worldScale;
 
-
+        jumpSpringSpeed= jumpSpringSpeed * worldScale;
 
 
 
@@ -427,6 +454,8 @@ public class PlayerController : MonoBehaviour
 
         jumpSpeed = jumptime * gravityScale;
 
+
+        jumpSpringSpeed = (float)Math.Sqrt(2 * jumpSpringHeight * gravityScale);
 
         /*        jumpSpeed = Math.Sqrt(jumpHeight / jumpHeight - 1) 
                     * (jumpHeight - 1)

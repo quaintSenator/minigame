@@ -15,6 +15,7 @@ namespace AK
     {
         static const AkUniqueID PAUSE_LEVEL1 = 2859270423U;
         static const AkUniqueID PAUSE_LEVELTEST = 1903092602U;
+        static const AkUniqueID PLAY_ACTION_JUMP = 1092387147U;
         static const AkUniqueID PLAY_LEVEL1 = 3659125941U;
         static const AkUniqueID PLAY_LEVELTEST = 265406176U;
         static const AkUniqueID RESUME_LEVEL1 = 3265051672U;
