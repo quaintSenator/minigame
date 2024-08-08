@@ -8,6 +8,8 @@ public class PlayerBottomLine : MonoBehaviour
     [SerializeField] private PlayerController player;
     private BoxCollider2D boxCollider;
 
+    private int enterCount = 0;
+
     private void OnEnable()
     {
         EventManager.AddListener(EventType.PlayerDeadEvent,OnDead);
@@ -31,6 +33,7 @@ public class PlayerBottomLine : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ground"))
         {
+            enterCount++;
             player.OnHitGround();
         }
     }
@@ -38,10 +41,11 @@ public class PlayerBottomLine : MonoBehaviour
     //离开地面
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Ground"))
+        if (other.gameObject.CompareTag("Ground") && enterCount == 1)
         {
             player.OnOffGround();
         }
+        enterCount = enterCount - 1 > 0 ? enterCount - 1 : 0;
     }
 
     private void OnDead(EventData data=null){
