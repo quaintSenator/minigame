@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -18,6 +19,16 @@ public class CoordinateSystem : MonoBehaviour
         mainCamera = Camera.main;
         startPoint = Utils.GetStartPointPostion();
         UpdateGridLines();
+    }
+
+    private void OnEnable()
+    {
+        EventManager.AddListener(EventType.OpenOrCloseCoordinateEvent, OnOpenOrCloseCoordinate);
+    }
+    
+    private void OnDisable()
+    {
+        EventManager.RemoveListener(EventType.OpenOrCloseCoordinateEvent, OnOpenOrCloseCoordinate);
     }
 
     void Update()
@@ -81,5 +92,10 @@ public class CoordinateSystem : MonoBehaviour
         coordinateLine.Init();
         coordinateLine.SetLine(startPos, endPos, color);
         gridLines.Add(line);
+    }
+
+    private void OnOpenOrCloseCoordinate(EventData obj)
+    {
+        drawGrid = !drawGrid;
     }
 }
