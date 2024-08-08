@@ -1,4 +1,4 @@
-Shader "Unlit/NoiseBlockGliatch@qianmo"
+Shader "Unlit/NoiseBlockFading@qianmo"
 {
     Properties
     {
@@ -11,7 +11,7 @@ Shader "Unlit/NoiseBlockGliatch@qianmo"
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags { "RenderType"="Opache" }
         LOD 100
 
         Pass
@@ -68,10 +68,10 @@ Shader "Unlit/NoiseBlockGliatch@qianmo"
                 fixed2 screenUV = fixed2(i.uv.x * _ScreenParams.x, i.uv.y * _ScreenParams.y);
                 half2 block = randomNoise(floor(screenUV * _BlockSize));
                 float displaceNoise = pow(block.x, 8.0) * pow(block.x, 3.0);
-                half R = tex2D(_MainTex, i.uv);
+                half4 R = tex2D(_MainTex, i.uv);
                 half G = tex2D(_MainTex, i.uv + float2(displaceNoise * 0.05 * randomNoise(7.0), 0.0)).g;
                 half B = tex2D(_MainTex, i.uv - float2(displaceNoise * 0.05 * randomNoise(13.0), 0.0)).b;
-                return half4(R, G, B, 1.0);
+                return half4(R.r, G, B, R.a);
             }
             ENDCG
         }
