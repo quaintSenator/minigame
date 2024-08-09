@@ -4625,6 +4625,28 @@
 								<ActiveSource Name="Dangerous_Love_120bpm" ID="{85F9E41D-0F44-4AE5-8878-A2BB58812B2A}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
+						<Sound Name="Actor_Jump" ID="{52730DCB-C3EA-4D54-A780-13922FEBC5F3}" ShortID="632356182">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C3C1FC5D-DE89-438F-A755-093D0E1407FE}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5EE85173-7F1A-46EF-BB21-DFDCE1BA22BC}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Du" ID="{73E893EA-06B7-4BDC-896F-C6CEC2B3B740}">
+									<Language>SFX</Language>
+									<AudioFile>Du.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="957206305"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="Du" ID="{73E893EA-06B7-4BDC-896F-C6CEC2B3B740}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
 					</ChildrenList>
 				</Folder>
 			</ChildrenList>

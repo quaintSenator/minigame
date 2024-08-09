@@ -76,7 +76,7 @@ public class MapReader : Singleton<MapReader>
         {
             foreach (var buildableInfo in buildableInfos)
             {
-                if (BuildableBase.IsBuildableViewport(buildableInfo.position, Camera.main))
+                if (Utils.IsBuildableViewport(buildableInfo.position, Camera.main))
                 {
                     SpawnBuildable(buildableInfo.type, buildableInfo.position);
                 }

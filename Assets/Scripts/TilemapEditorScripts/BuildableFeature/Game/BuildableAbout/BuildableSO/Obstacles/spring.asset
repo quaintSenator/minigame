@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: spring
   m_EditorClassIdentifier: 
   buildableObjectType: 4
-  prefab: {fileID: 0}
+  prefab: {fileID: 7127583651772091612, guid: 58b4e4faf52d71e478fdb594ee23fb8d, type: 3}

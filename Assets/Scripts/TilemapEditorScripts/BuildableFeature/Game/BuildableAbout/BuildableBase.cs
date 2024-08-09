@@ -51,6 +51,11 @@ public class BuildableBase : MonoBehaviour
     {
 
     }
+
+    protected virtual void AdjustBuildableScale()
+    {
+        transform.localScale = new Vector3(GameConsts.TILE_SIZE / 1f, GameConsts.TILE_SIZE / 1f, 1);
+    }
     
     //设置渲染层级
     private void SetSortingOrder(int sortingOrder = 0)
@@ -85,6 +90,7 @@ public class BuildableBase : MonoBehaviour
         BuildableBase buildable = obj.GetComponent<BuildableBase>();
         buildable.type = type;
         buildable.SetPosition(position, sortingOrder);
+        buildable.AdjustBuildableScale();
         buildable.Init();
         return buildable;
     }
@@ -97,20 +103,5 @@ public class BuildableBase : MonoBehaviour
         }
         buildable.Dispose();
         PoolManager.Instance.ReturnToPool(buildable.Type.ToString(), buildable.gameObject);
-    }
-    
-    public static bool IsBuildableViewport(Vector3Int position, Camera camera)
-    {
-        Vector3 offset = BuildableCreator.GetStartPositionOffset();
-        Vector3 realPosition = new Vector3(position.x * GameConsts.TILE_SIZE + offset.x, position.y * GameConsts.TILE_SIZE + offset.y, 0);
-        Vector3 viewportPos = camera.WorldToViewportPoint(realPosition);
-        if (viewportPos.x < -0.5f || viewportPos.x > 1.5f || viewportPos.y < -0.5f || viewportPos.y > 1.5f)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
     }
 }

@@ -43,6 +43,7 @@ public enum EventType
     LoadMapThreeEvent = 207,
     PauseOrResumeMusicEvent = 208,
     StopOrPlayMusicEvent = 209,
+    OpenOrCloseCoordinateEvent = 210,
 
     #endregion
 }
