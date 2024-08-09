@@ -21,6 +21,8 @@ Copyright (c) 2024 Audiokinetic Inc.
 using AK.Wwise.Unity.WwiseAddressables;
 #endif
 
+using UnityEngine;
+
 namespace AK.Wwise
 {
 	[System.Serializable]
@@ -234,6 +236,21 @@ namespace AK.Wwise
 			if (IsValid())
 				AkSoundEngine.StopMIDIOnEvent(Id);
 		}
+
+
+        /// <summary>
+        /// Added by yeniao ,for seek by time(MS)
+        /// </summary>
+        /// <param name="gameObject">The GameObject</param>
+        /// <param name="seekTimeMS">Seek Time (MS)</param>
+        /// <returns>seek result</returns>
+        public bool SeekEventByTime(UnityEngine.GameObject gameObject,int seekTimeMS) 
+		{
+            if (!IsValid())
+                return false;
+            AKRESULT seekResult=AkSoundEngine.SeekOnEvent(Id, gameObject, seekTimeMS, false);
+            return seekResult == AKRESULT.AK_Success;
+        }
 	}
 }
 #endif // #if ! (UNITY_DASHBOARD_WIDGET || UNITY_WEBPLAYER || UNITY_WII || UNITY_WIIU || UNITY_NACL || UNITY_FLASH || UNITY_BLACKBERRY) // Disable under unsupported platforms.

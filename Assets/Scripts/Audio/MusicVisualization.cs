@@ -191,6 +191,7 @@ public class MusicVisualization : MonoBehaviour
     void Update()
     {
 
+        
     }
 
     private void InitRhythmVisualizationPerfabList()
@@ -306,6 +307,15 @@ public class MusicVisualization : MonoBehaviour
         if ((LevelIndex < BankNames.Count) && (LevelIndex < LevelMusicEvents.Count))
         {
             LevelMusicEvents[LevelIndex].LevelMusicResumeEvent.Post(gameObject);
+        }
+    }
+
+
+    public void SeekLevelMusicByTimeMS(int timeMS)
+    {
+        if ((LevelIndex < BankNames.Count) && (LevelIndex < LevelMusicEvents.Count))
+        {
+            LevelMusicEvents[LevelIndex].LevelMusicPlayEvent.SeekEventByTime(gameObject, timeMS);
         }
     }
 
