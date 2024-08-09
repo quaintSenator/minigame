@@ -56,6 +56,7 @@ public class RhythmDataRecorder : Singleton<RhythmDataRecorder>
         }
         StopCoroutine(UpdateTime());
         
+#if UNITY_EDITOR
         // 保存地图数据
         RhythmDataFile saveData = ScriptableObject.CreateInstance<RhythmDataFile>();
         saveData.rhythmDataList = new List<RhythmData>(audioDataList);
@@ -68,6 +69,7 @@ public class RhythmDataRecorder : Singleton<RhythmDataRecorder>
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         Debug.Log("Saved rhythm data to " + path + "/" + saveName);
+#endif
     }
     
     //协程，更新时间
