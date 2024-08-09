@@ -18,24 +18,49 @@ enum JumpMode
     Speed,
 }
 
+public enum JumpType
+{
+    //默认跳跃
+    Default,
+    //弹簧跳跃
+    Spring,
+    //飞行到终点时跳跃
+    Fly,
+}
+
 [System.Serializable]
 public class JumpSettings : System.Object
 {
-    public float jumpTime;
-    public float horizontalBlockNum;
-    public float verticalBlockNum;
+    public static readonly Dictionary<JumpType, Vector2> settings = new Dictionary<JumpType, Vector2>(){
+        {JumpType.Default, new Vector2(2.6f, 1.1f)}, {JumpType.Spring, new Vector2(4.8f, 3.0f)}, {JumpType.Fly, new Vector2(2.6f, 1.1f)}
+    };
+
+    public float jumpHeight;
+    public float jumpDeltaHeight;
 
     public JumpSettings()
     {
-        jumpTime = 0.25f;
-        horizontalBlockNum = 4.5f;
-        verticalBlockNum = 3.0f;
+        jumpHeight = settings[JumpType.Default].x;
+        jumpDeltaHeight = settings[JumpType.Default].y;
     }
-    public JumpSettings(float jumpTime, float horizontalBlockNum, float verticalBlockNum)
+    public JumpSettings(JumpType jumpType)
     {
-        this.jumpTime = jumpTime;
-        this.horizontalBlockNum = horizontalBlockNum;
-        this.verticalBlockNum = verticalBlockNum;
+        jumpHeight = settings[jumpType].x;
+        jumpDeltaHeight = settings[jumpType].y;
+    }
+    public JumpSettings(Vector2 setting)
+    {
+        jumpHeight = setting.x;
+        jumpDeltaHeight = setting.y;
+    }
+    public JumpSettings(float jumpHeight, float jumpDeltaHeight)
+    {
+        this.jumpHeight = jumpHeight;
+        this.jumpDeltaHeight = jumpDeltaHeight;
+    }
+    public static implicit operator JumpSettings(Vector2 setting)
+    {
+        return new JumpSettings(setting);
     }
 }
 
@@ -163,6 +188,7 @@ public class PlayerController : MonoBehaviour
         _forceManager = ForceManager.Instance;
         playerHeadingDir = Vector3.right;
         CalSettings();
+        InitSettings();
     }
 
     private void OnEnable()
@@ -318,7 +344,7 @@ public class PlayerController : MonoBehaviour
 
     }
     //角色跳跃
-    private void Jump(bool ifSpring=false)
+    private void Jump()
     {
         EventManager.InvokeEvent(EventType.DecideCanJumpEvent, null);
         disableTimerCount = bufferTimerCount > 0 ? bufferTimerCount : 0;
@@ -333,15 +359,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case JumpMode.Speed:
                 jumping = false;
-                if (!ifSpring)
-                {
-                    rigidBody.velocity = Vector2.up * jumpSpeed;
-                    PlayNormalJumpAudio();
-                }
-                else
-                {
-                    rigidBody.velocity = Vector2.up * jumpSpringSpeed;
-                }
+                rigidBody.velocity = Vector2.up * jumpSpeed;
                 //rigidBody.AddForce(Vector2.up * jumpForce);
                 // Impulse
                 //rigidBody.impluse
@@ -353,7 +371,6 @@ public class PlayerController : MonoBehaviour
     {
         isFlying = true;
         rigidBody.velocity = Vector2.up * verticalVelocity;
-        Debug.Log("vVelocity"+verticalVelocity);
     }
 
     private void EndFly()
@@ -361,7 +378,7 @@ public class PlayerController : MonoBehaviour
         isFlying = false;
         if(isFlyFinished)
         {
-            TryJump(null,false);
+            TryJump(JumpType.Fly);
         }
         else{
             rigidBody.velocity = new Vector2();
@@ -369,65 +386,60 @@ public class PlayerController : MonoBehaviour
     }
 
     //对外跳跃接口，设置跳跃参数，不传为默认参数
-    public void TryJump(JumpSettings data = null, bool isSpringJump = false)
+    public void TryJump(JumpType jumpType = JumpType.Default, JumpSettings value = null)
     {
-        if (isGrounded)
+        if(value == null)
         {
-            // CalSettings(data);
-            Jump(isSpringJump);
+            CalSettings(JumpSettings.settings[jumpType]);
         }
-        else if (isSpringJump)
+        else
         {
-            // CalSettings(data);
-            Jump(isSpringJump);
+            CalSettings(value);
         }
+
+        if (jumpType == JumpType.Default && isGrounded)
+        {
+            PlayNormalJumpAudio();
+            Jump();
+        }
+        else if (jumpType == JumpType.Spring || jumpType == JumpType.Fly)
+        {
+            Jump();
+        }
+    }
+
+    private void InitSettings()
+    {
+        worldScale = transform.localScale.x;
+
+        speed = speed * worldScale;
+
+        jumpForce = jumpForce * worldScale;
+
+
     }
 
     private void CalSettings(JumpSettings data = null)
     {
-        /*        if (data == null)
-                {
-                    jumpSettings = GameConsts.DEFAULT_JUMP;
-                }
-                else
-                {
-                    jumpSettings = data;
-                }
-
-                gravityScale = 2 * jumpSettings.verticalBlockNum * transform.localScale.x / Mathf.Pow(jumpSettings.jumpTime,2.0f) / GameConsts.GRAVITY;
-                jumpSpeed = Mathf.Sqrt(2 * GameConsts.GRAVITY * gravityScale * jumpSettings.verticalBlockNum * transform.localScale.x);
-                speed = (jumpSettings.horizontalBlockNum * transform.localScale.x) / (jumpSettings.jumpTime * 2) ;*/
-
-
         if (data == null)
         {
             jumpSettings = GameConsts.DEFAULT_JUMP;
         }
 
-        CalNormalJumpParameter();
+        CalNormalJumpParameter(data);
 
         //TODO:这个值应该是从别处拿到或者直接赋的
-        worldScale = transform.localScale.x;
-
-        speed = speed * worldScale;
-
-        gravityScale = gravityScale * worldScale;
-
-        jumpForce = jumpForce * worldScale;
 
         jumpSpeed = jumpSpeed * worldScale;
-
-        jumpSpringSpeed= jumpSpringSpeed * worldScale;
-
-
-
-
-
-
+        gravityScale = gravityScale * worldScale;
     }
 
-    private void CalNormalJumpParameter()
+    private void CalNormalJumpParameter(JumpSettings data = null)
     {
+        if(data == null) return;
+
+        float jumpHeight = data.jumpHeight;
+        float jumpDeltaHeight = data.jumpDeltaHeight;
 
         //跳跃一次的上升初速度和最高点位置解析出来会满足一个数量关系
         //jumpHeight = jumpHeight * worldScale;
@@ -534,7 +546,7 @@ public class PlayerController : MonoBehaviour
     //协程，在jumpTime时间内持续给与一个力
     private IEnumerator JumpForce()
     {
-        yield return new WaitForSeconds(jumpSettings.jumpTime);
+        yield return new WaitForSeconds(1);
         jumping = false;
     }
 
@@ -632,7 +644,7 @@ public class PlayerController : MonoBehaviour
 
     public void SetVerticalVelocity(float value)
     {
-        verticalVelocity = value;
+        verticalVelocity = value * worldScale;
     }
 
     private void ResetFly()

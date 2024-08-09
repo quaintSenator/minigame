@@ -9,6 +9,8 @@ public class FlyController : BuildableBase {
     private Transform endPoint;
     private float vVelocity;
 
+    private static FlyController firstNode;
+
     public PlayerController player;
     private void Awake() {
         Init();

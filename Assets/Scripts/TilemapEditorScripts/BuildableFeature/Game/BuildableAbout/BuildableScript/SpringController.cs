@@ -14,7 +14,7 @@ public class SpringController : BuildableBase
     {
         if (useDefault)
         { 
-            jumpSettings = GameConsts.SPRING_JUMP; 
+            jumpSettings = new JumpSettings(JumpSettings.settings[JumpType.Spring]); 
         }
     }
 
@@ -22,13 +22,13 @@ public class SpringController : BuildableBase
     {
         if (useDefault)
         { 
-            jumpSettings = GameConsts.SPRING_JUMP; 
+            jumpSettings = new JumpSettings(JumpSettings.settings[JumpType.Spring]);
         }       
     }
 
     protected override void TriggerThisBuildable(PlayerController player)
     {
-        player.TryJump(jumpSettings, true);
+        player.TryJump(JumpType.Spring, jumpSettings);
         Debug.Log("OnSpringTrigger");
     }
 

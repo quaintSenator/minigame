@@ -17,5 +17,4 @@ public class GameConsts
     public static readonly float SPEED = 8.0f;
 
     public static readonly JumpSettings DEFAULT_JUMP = new JumpSettings();
-    public static readonly JumpSettings SPRING_JUMP = new JumpSettings(0.3f, 6.8f, 4.8f);
 }

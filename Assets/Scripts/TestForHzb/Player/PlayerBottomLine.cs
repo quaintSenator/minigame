@@ -56,6 +56,7 @@ public class PlayerBottomLine : MonoBehaviour
     }
 
     private void OnReset(EventData data = null){
+        enterCount = 0;
         boxCollider.enabled = true;
     }
 }
