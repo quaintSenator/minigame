@@ -12,7 +12,7 @@ public class HitGroundEventData : EventData
         velocityDir = vec;
     }
 }
-public class FrictionEffectController : MonoBehaviour
+public class FrictionEffectController : HoldStillEffectController
 {
     [SerializeField]
     private ParticleSystem myParticleSystem;
@@ -22,6 +22,7 @@ public class FrictionEffectController : MonoBehaviour
     [SerializeField] private Color particleRandomColorRangeR;
     [SerializeField] private float fricThrowAngle = 15.0f;
     [SerializeField] private float cubeEdgeLen = 0.45f;
+    
     public bool test_is_moving_right;
     void SelfPSInit()
     {
@@ -35,7 +36,7 @@ public class FrictionEffectController : MonoBehaviour
         setPSGravity(ForceManager.Instance.GetGravityDir());
     }
     
-    //根据重力和摩擦力计算抛洒例子方向
+    //根据重力和摩擦力计算抛洒粒子方向
     private float GetFrictionThrowingRotationAngle(Vector2 v, Vector2 g, float realAngle)
     {
         if (v.x > 0)
@@ -71,8 +72,8 @@ public class FrictionEffectController : MonoBehaviour
     {
         //设置transform.rotation, 用于调整喷射方向
         var fmanager = ForceManager.Instance;
-        HitGroundEventData hitGroundEventData = (HitGroundEventData)ed;
-        float rotationX = GetFrictionThrowingRotationAngle(
+        var hitGroundEventData = (HitGroundEventData)ed;
+        var rotationX = GetFrictionThrowingRotationAngle(
             hitGroundEventData.velocityDir, fmanager.GetGravityDir(), fricThrowAngle);
         transform.rotation = Quaternion.Euler(rotationX, -90.0f, 0);
         
@@ -92,7 +93,8 @@ public class FrictionEffectController : MonoBehaviour
         var forceModule = myParticleSystem.forceOverLifetime;
         forceModule.y = gravity.y < 0 ? -20.0f : 20.0f;
     }
-    private void OnEnable()
+
+    protected override void OnEnable_deprive()
     {
         SelfPSInit();
         test_is_moving_right = true;
@@ -100,7 +102,7 @@ public class FrictionEffectController : MonoBehaviour
         EventManager.AddListener(EventType.PlayerHitGroundEvent, OnPlayerHitGround);
         EventManager.AddListener(EventType.GravityInverseEvent, OnGravityInverse);
     }
-    private void OnDisable()
+    protected override void OnDisable_deprive()
     {
         EventManager.RemoveListener(EventType.PlayerJumpoffGroundEvent, OnPlayerJumpOff);
         EventManager.RemoveListener(EventType.PlayerHitGroundEvent, OnPlayerHitGround);

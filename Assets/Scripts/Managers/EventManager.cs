@@ -16,6 +16,7 @@ public enum EventType
     MusicStartEvent = 8,
     MusicRecordEvent = 9,
     SwitchLevelEvent = 10,
+    DecideCanJumpEvent = 11,
 
 
     #region 输入事件在此添加

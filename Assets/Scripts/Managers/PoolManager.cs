@@ -119,10 +119,5 @@ public class PoolManager : Singleton<PoolManager>
         objectToReturn.SetActive(false);
         objectToReturn.transform.SetParent(transform);
         poolDictionary[key].Enqueue(objectToReturn);
-        
-        //暂时只想到通过检查名字来检查是否是同一个prefab
-        //但是如果后面预制体的名字被改了，这个方法就会出问题
-        //所以暂时先不检查是否时同一个prefab
-        //CheckPool(key, objectToReturn);
     }
 }
