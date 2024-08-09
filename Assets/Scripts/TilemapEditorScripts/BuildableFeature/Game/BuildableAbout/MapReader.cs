@@ -9,6 +9,8 @@ public class MapReader : Singleton<MapReader>
     private Transform mapParent;
     private List<BuildableInfo> buildableInfos = new List<BuildableInfo>();
     private Dictionary<Vector3Int, BuildableBase> currentBuildableMap = new Dictionary<Vector3Int, BuildableBase>();
+
+    [SerializeField] private bool showAllBuildable = false;
     
     protected override void OnAwake()
     {
@@ -76,7 +78,7 @@ public class MapReader : Singleton<MapReader>
         {
             foreach (var buildableInfo in buildableInfos)
             {
-                if (Utils.IsBuildableViewport(buildableInfo.position, Camera.main))
+                if (Utils.IsBuildableViewport(buildableInfo.position, Camera.main) || showAllBuildable)
                 {
                     SpawnBuildable(buildableInfo.type, buildableInfo.position);
                 }
