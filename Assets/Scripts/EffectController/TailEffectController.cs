@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.U2D;
@@ -14,40 +15,78 @@ public class GameObjectDieEventData : EventData
         go = gameObject;
     }
 }
+
+public class KeepSlidingEventData : EventData
+{
+    public TailEffectController self;
+
+    public KeepSlidingEventData(TailEffectController s)
+    {
+        self = s;
+    }
+}
 public class TailEffectController : HoldStillEffectController
 {
     private Animator _mAnimator;
     private SpriteRenderer _spriteRenderer;
+    [SerializeField] private float _delayBe4Show;
     [SerializeField] private GameObject _fadingTailEffectPrefab;
 
+    public double lastOffTime;
+    public double lastHitTime;
+
+    private void HideSprite()
+    {
+        _mAnimator.enabled = false;
+        _spriteRenderer.color = new Color(1, 1, 1, 0);
+    }
+
+    private void ShowSprite()
+    {
+        _mAnimator.enabled = true;
+        _spriteRenderer.color = new Color(1, 1, 1, 0.607f);
+        _mAnimator.Play("FrameQueue_play");
+    }
+
+    private void ShowSpriteInTime(float t)
+    {
+        CleverTimerManager.Instance.Ask4Timer(t, OnShowSpriteTimeup, new KeepSlidingEventData(this));
+    }
+
+    public void OnShowSpriteTimeup(EventData eventData)
+    {
+        var s = ((KeepSlidingEventData)eventData).self;
+        if (Time.timeAsDouble - lastOffTime > _delayBe4Show)
+        {
+            s.ShowSprite();
+        }
+    }
     protected override void OnEnable_deprive()
     {
-        Debug.LogError(transform.position);
         _mAnimator = gameObject.GetComponent<Animator>();
         _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        
-        
-        EventManager.AddListener(EventType.DecideCanJumpEvent, OnJumpOff);
+        EventManager.AddListener(EventType.DecideCanJumpEvent, OnJump);
+        EventManager.AddListener(EventType.PlayerJumpoffGroundEvent, OnOff);
         EventManager.AddListener(EventType.PlayerHitGroundEvent, OnHitGround);
     }
 
     protected override void OnDisable_deprive()
     {
-        EventManager.RemoveListener(EventType.DecideCanJumpEvent, OnJumpOff);
+        EventManager.RemoveListener(EventType.DecideCanJumpEvent, OnJump);
+        EventManager.RemoveListener(EventType.PlayerJumpoffGroundEvent, OnOff);
         EventManager.RemoveListener(EventType.PlayerHitGroundEvent, OnHitGround);
     }
-    private void OnJumpOff(EventData eventData)
-    {
-        if (_mAnimator.enabled)
-        {
-            _mAnimator.enabled = false;
-        }
 
-        _spriteRenderer.color = new Color(1, 1, 1, 0);
-        
+    private void OnOff(EventData eventData)
+    {
+        lastOffTime = Time.timeAsDouble;
+        HideSprite();
+    }
+    private void OnJump(EventData eventData)
+    {
         var generatedFade = Instantiate(_fadingTailEffectPrefab, null);
         generatedFade.transform.position = transform.position;
-        CleverTimerManager.Ask4Timer(0.25, eventData =>
+        CleverTimerManager.Instance.Ask4Timer(0.25, eventData =>
         {
             var go2Die = ((GameObjectDieEventData)eventData).go;
             if(go2Die)
@@ -59,17 +98,11 @@ public class TailEffectController : HoldStillEffectController
                 Debug.Log("TailEffect nothing 2 kill");
             }
         }, new GameObjectDieEventData(generatedFade));
-        /*base._initialLocalPosition = transform.localPosition;
-        base._initialWorldY = transform.position.y;
-         _mAnimator.Play("FrameQueue_fading");
-        */
-        
     }
 
     private void OnHitGround(EventData eventData)
     {
-        _mAnimator.enabled = true;
-        _mAnimator.Play("FrameQueue_play");
-        _spriteRenderer.color = new Color(1, 1, 1, 0.607f);
+        lastHitTime = Time.timeAsDouble;
+        ShowSpriteInTime(_delayBe4Show);
     }
 }

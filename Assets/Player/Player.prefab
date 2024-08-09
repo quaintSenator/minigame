@@ -5422,6 +5422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f542cdb1c2b88164280c9e76d243411f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isAlwaysOnGround: 0
   _fadingTailEffectPrefab: {fileID: 7399488042875851703, guid: e33c47e058393eb45a9fafb4259500af, type: 3}
 --- !u!1 &6711620692673762207
 GameObject:

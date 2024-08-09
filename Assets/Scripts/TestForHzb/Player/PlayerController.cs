@@ -504,11 +504,15 @@ public class PlayerController : MonoBehaviour
 
     public void OnHitGround(EventData data = null)
     {
+        if (!isGrounded)
+        {
+            HitGroundEventData hitdata = new HitGroundEventData(playerHeadingDir);
+            EventManager.InvokeEvent(EventType.PlayerHitGroundEvent, hitdata);
+        }
         isGrounded = true;
         isReturn = true;
         selfAngle = cubeSprites.eulerAngles.z;
-        HitGroundEventData hitdata = new HitGroundEventData(playerHeadingDir);
-        EventManager.InvokeEvent(EventType.PlayerHitGroundEvent, hitdata);
+       
         if (willJump || isContinueJump)
         {
             if (!isContinueJump)

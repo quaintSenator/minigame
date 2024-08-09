@@ -39,7 +39,7 @@ public class SwordController : MonoBehaviour
         if(canAttack)
         {
             animator.SetTrigger("Attack");
-            CleverTimerManager.Ask4Timer(coldDownTime,SetAttack);
+            CleverTimerManager.Instance.Ask4Timer(coldDownTime,SetAttack);
             canAttack = false;
         }
         //swordCollider.enabled = true;
