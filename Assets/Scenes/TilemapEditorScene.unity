@@ -1002,7 +1002,7 @@ MonoBehaviour:
   - 120
   LevelIndex: 1
   CallbackType: 4
-  IfPlayMusicWhenStart: 1
+  IfPlayMusicWhenStart: 0
   IfUseVisualization: 1
   RhythmVisualizationPerfabType: {fileID: 0}
   NumberOfRhythmVisualizationPerfabInstance: 5

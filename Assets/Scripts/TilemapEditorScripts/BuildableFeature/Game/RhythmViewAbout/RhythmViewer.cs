@@ -85,6 +85,10 @@ public class RhythmViewer : Singleton<RhythmViewer>
 
     private void SelectCurrentMusicTime(EventData obj)
     {
+        if(BuildableCreator.Instance.GetTileMode() != TileMode.None)
+        {
+            return;
+        }
         if(doubleClickTime > 0)
         {
             //获取鼠标点击位置
