@@ -88,7 +88,7 @@ public class RhythmViewer : Singleton<RhythmViewer>
 
     private void SelectCurrentMusicTime(EventData obj)
     {
-        if(BuildableCreator.Instance.GetTileMode() != TileMode.None)
+        if(BuildableCreator.Instance.GetTileMode() != TileMode.None || BuildableCreator.Instance.GetInSelectMode())
         {
             return;
         }

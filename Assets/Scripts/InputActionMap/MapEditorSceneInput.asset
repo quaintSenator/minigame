@@ -93,3 +93,19 @@ MonoBehaviour:
     inputEventType: 0
     keyBoardInput: 
     mouseInput: 02000000
+  - eventType: 221
+    inputEventType: 0
+    keyBoardInput: 34010000
+    mouseInput: 
+  - eventType: 222
+    inputEventType: 2
+    keyBoardInput: 34010000
+    mouseInput: 
+  - eventType: 223
+    inputEventType: 0
+    keyBoardInput: 
+    mouseInput: 00000000
+  - eventType: 224
+    inputEventType: 2
+    keyBoardInput: 
+    mouseInput: 00000000

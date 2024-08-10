@@ -102,6 +102,8 @@ public class BuildableCreator : Singleton<BuildableCreator>
         EventManager.AddListener(EventType.ExitSelectModeEvent, ExitSelectMode); //退出选择模式
         EventManager.AddListener(EventType.SelectBuildableEvent, OnSelectBuildable); //选择物体
         EventManager.AddListener(EventType.CancelAllSelectEvent, CancelAllSelect); //取消选择所有物体
+        EventManager.AddListener(EventType.StartSelectZoneEvent, OnStartSelectZone); //开始选中框
+        EventManager.AddListener(EventType.CompleteSelectZoneEvent, OnCompleteSelectZone); //完成选中框
     }
 
     private void OnDisable()
@@ -123,10 +125,12 @@ public class BuildableCreator : Singleton<BuildableCreator>
         EventManager.RemoveListener(EventType.ExitSelectModeEvent, ExitSelectMode); //退出选择模式
         EventManager.RemoveListener(EventType.SelectBuildableEvent, OnSelectBuildable); //选择物体
         EventManager.RemoveListener(EventType.CancelAllSelectEvent, CancelAllSelect); //取消选择所有物体
+        EventManager.RemoveListener(EventType.StartSelectZoneEvent, OnStartSelectZone); //开始选中框
+        EventManager.RemoveListener(EventType.CompleteSelectZoneEvent, OnCompleteSelectZone); //完成选中框
         
         AutoSaveMap();
     }
-    
+
     public void AutoSaveMap()
     {
         string key = "auto_save_2";
@@ -140,6 +144,53 @@ public class BuildableCreator : Singleton<BuildableCreator>
         Debug.Log("Auto save tilemap data v2");
     }
 
+    private void OnStartSelectZone(EventData obj)
+    {
+        SetSelectedObject(BuildableType.none);
+    }
+
+    private void OnCompleteSelectZone(EventData data)
+    {
+        var selectZoneData = data as SelectZoneEventData;
+        float xMin = Mathf.Min(selectZoneData.startPos.x, selectZoneData.endPos.x);
+        float xMax = Mathf.Max(selectZoneData.startPos.x, selectZoneData.endPos.x);
+        float yMin = Mathf.Min(selectZoneData.startPos.y, selectZoneData.endPos.y);
+        float yMax = Mathf.Max(selectZoneData.startPos.y, selectZoneData.endPos.y);
+        //检查buildableInfos里面的物体是否在选择框内
+        foreach (var buildableInfo in buildableInfos)
+        {
+            Vector3 realPos = Utils.GetRealPostion(buildableInfo.position);
+            if (realPos.x >= xMin && realPos.x <= xMax && realPos.y >= yMin && realPos.y <= yMax)
+            {
+                if(selectedBuildableInfos.Find(info => info.position == buildableInfo.position) == null)
+                {
+                    selectedBuildableInfos.Add(buildableInfo);
+                    GameObject icon = PoolManager.Instance.SpawnFromPool("selectIcons", selectIcon, mapParent);
+                    icon.transform.position = realPos;
+                    selectIcons.Add(buildableInfo, icon);
+                }
+                else
+                {
+                    selectedBuildableInfos.Remove(buildableInfo);
+                    if (selectIcons.ContainsKey(buildableInfo))
+                    {
+                        PoolManager.Instance.ReturnToPool("selectIcons", selectIcons[buildableInfo]);
+                        selectIcons.Remove(buildableInfo);
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log(realPos + " is not in the select zone");
+            }
+        }
+    }
+
+    public bool GetInSelectMode()
+    {
+        return inSelectMode;
+    }
+    
     private void EnterSelectMode(EventData data)
     {
         SetSelectedObject(BuildableType.none);
@@ -167,7 +218,6 @@ public class BuildableCreator : Singleton<BuildableCreator>
     {
         if(!inSelectMode)
         {
-            CancelAllSelect(obj);
             return;
         }
         SelectBuildable();

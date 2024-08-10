@@ -92,8 +92,6 @@ public class TilemapCameraController : MonoBehaviour
         {
             transform.position = new Vector3(RhythmViewer.CurrentMusicTime * GameConsts.SPEED + startPoint.position.x, 0.13f, -1.05f);
         }
-        Debug.Log(moveDirection);
-        Debug.Log(moveDirection.magnitude);
         transform.Translate(moveDirection * Time.deltaTime * moveSpeed);
     }
 }
