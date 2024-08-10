@@ -26,8 +26,8 @@ public class MusicCurrentPosLine : MonoBehaviour
     void UpdatePos()
     {
         Vector3 currentPos = RhythmViewer.Instance.GetCurrentMusicLinePos();
-        lineRenderer.SetPosition(0, new Vector3(currentPos.x, 10, 0));
-        lineRenderer.SetPosition(1, new Vector3(currentPos.x, -10, 0));
+        lineRenderer.SetPosition(0, new Vector3(currentPos.x, 30, 0));
+        lineRenderer.SetPosition(1, new Vector3(currentPos.x, -30, 0));
     }
     
     public void ShowPosLine()

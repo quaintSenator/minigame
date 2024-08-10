@@ -53,6 +53,7 @@ public enum EventType
     ExitSelectModeEvent = 217,
     SelectBuildableEvent = 218,
     CancelAllSelectEvent = 219,
+    ResetCameraEvent = 220,
 
     #endregion
 }

@@ -18,6 +18,8 @@ public class TilemapCameraController : MonoBehaviour
     [SerializeField] private float zoomSpeed = 5.0f;
     //原始缩放大小
     private float originalZoom;
+    //原始高度
+    private float originalHeight;
     //最大缩放大小
     [SerializeField] private float maxZoom = 10.0f;
     //最小缩放大小
@@ -29,19 +31,20 @@ public class TilemapCameraController : MonoBehaviour
     {
         startPoint = Utils.GetStartPointPostion();
         originalZoom = virtualCamera.m_Lens.OrthographicSize;
+        originalHeight = transform.position.y;
     }
 
     private void OnEnable()
     {
         EventManager.AddListener(EventType.MouseMoveEvent, OnMouseMove);
-        EventManager.AddListener(EventType.MiddleClickEvent, OnMiddleClick);
+        EventManager.AddListener(EventType.ResetCameraEvent, OnMiddleClick);
         EventManager.AddListener(EventType.MiddleScrollEvent, OnMiddleScroll);
     }
     
     private void OnDisable()
     {
         EventManager.RemoveListener(EventType.MouseMoveEvent, OnMouseMove);
-        EventManager.RemoveListener(EventType.MiddleClickEvent, OnMiddleClick);
+        EventManager.RemoveListener(EventType.ResetCameraEvent, OnMiddleClick);
         EventManager.RemoveListener(EventType.MiddleScrollEvent, OnMiddleScroll);
     }
 
@@ -61,6 +64,7 @@ public class TilemapCameraController : MonoBehaviour
     private void OnMiddleClick(EventData data)
     {
         virtualCamera.m_Lens.OrthographicSize = originalZoom;
+        transform.position = new Vector3(transform.position.x, originalHeight, transform.position.z);
     }
 
     private void OnMouseMove(EventData data)
@@ -68,8 +72,8 @@ public class TilemapCameraController : MonoBehaviour
         if (InputManager.Instance.IsMouseRightPressing() && !RhythmViewer.CurrentMusicIsPlaying)
         {
             var mouseMovementData = data as MouseMovementEventData;
-            float xDir = -mouseMovementData.mouseMovement.x;
-            moveDirection = new Vector3(xDir * virtualCamera.m_Lens.OrthographicSize / originalZoom, 0, 0);
+            Vector2 mouseMovement = mouseMovementData.mouseMovement;
+            moveDirection = new Vector3(-mouseMovement.x * virtualCamera.m_Lens.OrthographicSize / originalZoom, -mouseMovement.y * virtualCamera.m_Lens.OrthographicSize / originalZoom, 0);
         }
         else
         {
