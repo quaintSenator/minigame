@@ -102,8 +102,8 @@ public class TilemapEditor : Editor
         TilemapSaveLocalFile saveData = ScriptableObject.CreateInstance<TilemapSaveLocalFile>();
         saveData.saveTime = System.DateTime.Now.ToString();
         saveData.mapData = data;
-        string path = "Assets/Scripts/TilemapEditorScripts/BuildableFeature/AutoSave_2";
-        string saveName = "TilemapSaveData_auto" + ".asset";
+        string path = "Assets/Scripts/TilemapEditorScripts/BuildableFeature/AutoSave";
+        string saveName = "TilemapSaveData_auto_v2" + ".asset";
         AssetDatabase.CreateAsset(saveData, path + "/" + saveName);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
