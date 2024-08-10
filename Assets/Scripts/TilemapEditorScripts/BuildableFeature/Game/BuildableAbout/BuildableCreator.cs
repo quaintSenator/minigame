@@ -34,8 +34,8 @@ public class BuildableCreator : Singleton<BuildableCreator>
     [SerializeField] private bool showAllBuildable = false;
 
     [SerializeField] private GameObject selectIcon;
-    private List<BuildableInfo> selectedBuildableInfos = new List<BuildableInfo>();
-    private List<BuildableInfo> currentMoveBuildableInfos = new List<BuildableInfo>();
+    public List<BuildableInfo> selectedBuildableInfos = new List<BuildableInfo>();
+    public List<BuildableInfo> currentMoveBuildableInfos = new List<BuildableInfo>();
     private Dictionary<BuildableInfo, GameObject> selectIcons = new Dictionary<BuildableInfo, GameObject>();
     private BuildableBase lastBuildable; 
     
@@ -348,7 +348,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         List<BuildableInfo> needMoveInfos;
         if(selectedBuildableInfos.Count != 0)
         {
-            needMoveInfos = selectedBuildableInfos;
+            needMoveInfos = new List<BuildableInfo>(selectedBuildableInfos);
         }
         else
         {
@@ -371,7 +371,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
     {
         if(currentMoveBuildableInfos.Count == 0)
         {
-            currentMoveBuildableInfos = currentMoveBuildableInfos = GetSelectedBuildableInfos();
+            currentMoveBuildableInfos = GetSelectedBuildableInfos();
         }
         MoveBuildable(new Vector3Int(-1, 0, 0));
     }
@@ -380,7 +380,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
     {
         if(currentMoveBuildableInfos.Count == 0)
         {
-            currentMoveBuildableInfos = currentMoveBuildableInfos = GetSelectedBuildableInfos();
+            currentMoveBuildableInfos = GetSelectedBuildableInfos();
         }
         MoveBuildable(new Vector3Int(1, 0, 0));
     }
@@ -389,7 +389,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
     {
         if(currentMoveBuildableInfos.Count == 0)
         {
-            currentMoveBuildableInfos = currentMoveBuildableInfos = GetSelectedBuildableInfos();
+            currentMoveBuildableInfos = GetSelectedBuildableInfos();
         }
         MoveBuildable(new Vector3Int(0, 1, 0));
     }
@@ -398,7 +398,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
     {
         if(currentMoveBuildableInfos.Count == 0)
         {
-            currentMoveBuildableInfos = currentMoveBuildableInfos = GetSelectedBuildableInfos();
+            currentMoveBuildableInfos = GetSelectedBuildableInfos();
         }
         MoveBuildable(new Vector3Int(0, -1, 0));
     }

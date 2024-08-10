@@ -79,7 +79,7 @@ public class TilemapCameraController : MonoBehaviour
         {
             moveDirection = Vector3.zero;
         }
-        if(Mathf.Abs(moveDirection.x) <= 0.05f && Mathf.Abs(moveDirection.y) <= 0.05f)
+        if(moveDirection.magnitude < 0.14f)
         {
             moveDirection = Vector3.zero;
         }
@@ -92,6 +92,8 @@ public class TilemapCameraController : MonoBehaviour
         {
             transform.position = new Vector3(RhythmViewer.CurrentMusicTime * GameConsts.SPEED + startPoint.position.x, 0.13f, -1.05f);
         }
+        Debug.Log(moveDirection);
+        Debug.Log(moveDirection.magnitude);
         transform.Translate(moveDirection * Time.deltaTime * moveSpeed);
     }
 }
