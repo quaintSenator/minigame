@@ -79,6 +79,10 @@ public class TilemapCameraController : MonoBehaviour
         {
             moveDirection = Vector3.zero;
         }
+        if(Mathf.Abs(moveDirection.x) <= 0.05f && Mathf.Abs(moveDirection.y) <= 0.05f)
+        {
+            moveDirection = Vector3.zero;
+        }
     }
 
     private void LateUpdate()
