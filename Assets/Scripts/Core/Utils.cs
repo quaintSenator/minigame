@@ -6,8 +6,7 @@ public class Utils
 {
     public static bool IsBuildableViewport(Vector3Int position, Camera camera)
     {
-        Vector3 offset = BuildableCreator.GetStartPositionOffset();
-        Vector3 realPosition = new Vector3(position.x * GameConsts.TILE_SIZE + offset.x, position.y * GameConsts.TILE_SIZE + offset.y, 0);
+        Vector3 realPosition = GetRealPostion(position);
         Vector3 viewportPos = camera.WorldToViewportPoint(realPosition);
         if (viewportPos.x < -0.5f || viewportPos.x > 1.5f || viewportPos.y < -0.5f || viewportPos.y > 1.5f)
         {
@@ -17,6 +16,13 @@ public class Utils
         {
             return true;
         }
+    }
+    
+    public static Vector3 GetRealPostion(Vector3Int position)
+    {
+        Vector3 offset = BuildableCreator.GetStartPositionOffset();
+        Vector3 realPosition = new Vector3(position.x * GameConsts.TILE_SIZE + offset.x, position.y * GameConsts.TILE_SIZE + offset.y, 0);
+        return realPosition;
     }
 
     public static Transform GetStartPointPostion()

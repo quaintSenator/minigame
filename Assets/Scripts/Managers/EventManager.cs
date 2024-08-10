@@ -47,6 +47,12 @@ public enum EventType
     SelectCurrentMusicTimeEvent = 211,
     LeftMoveBuildableEvent = 212,
     RightMoveBuildableEvent = 213,
+    UpMoveBuildableEvent = 214,
+    DownMoveBuildableEvent = 215,
+    EnterSelectModeEvent = 216,
+    ExitSelectModeEvent = 217,
+    SelectBuildableEvent = 218,
+    CancelAllSelectEvent = 219,
 
     #endregion
 }

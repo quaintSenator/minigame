@@ -22,6 +22,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
     private BuildableBase previewObj;
     [SerializeField] private Transform mapParent; 
     private TileMode currentTileMode = TileMode.None; 
+    private bool inSelectMode = false;
     
     private Vector3 mousePosition;
     private Vector3Int currentCellPosition;
@@ -31,6 +32,12 @@ public class BuildableCreator : Singleton<BuildableCreator>
     private Dictionary<Vector3Int, BuildableBase> currentBuildableMap = new Dictionary<Vector3Int, BuildableBase>();
 
     [SerializeField] private bool showAllBuildable = false;
+
+    [SerializeField] private GameObject selectIcon;
+    private List<BuildableInfo> selectedBuildableInfos = new List<BuildableInfo>();
+    private Dictionary<BuildableInfo, GameObject> selectIcons = new Dictionary<BuildableInfo, GameObject>();
+    private BuildableBase lastBuildable; 
+    
     protected override void OnAwake()
     {
         //唤醒TilemapSaver
@@ -77,9 +84,9 @@ public class BuildableCreator : Singleton<BuildableCreator>
 
     private void OnEnable()
     {
-        EventManager.AddListener(EventType.CancelCurrentSelectEvent,CancelCurrentSelect); //取消当前选择
+        EventManager.AddListener(EventType.CancelCurrentSelectEvent,CancelCurrentSelectToBuild); //取消当前选择
         EventManager.AddListener(EventType.MouseMoveEvent, OnMouseMove); //鼠标移动
-        EventManager.AddListener(EventType.DrawOrEraseEvent, OnMouseLeftClick); //绘制或者擦除
+        EventManager.AddListener(EventType.DrawOrEraseEvent, OnDrawOrErase); //绘制或者擦除
         EventManager.AddListener(EventType.ChangeTileModeEvent, ChangeTileMode); //切换擦除
         EventManager.AddListener(EventType.SaveMapEvent, SaveMap); //保存地图
         EventManager.AddListener(EventType.LoadMapOneEvent, LoadMapOne); //加载地图一
@@ -88,13 +95,19 @@ public class BuildableCreator : Singleton<BuildableCreator>
         EventManager.AddListener(EventType.LoadMapThreeEvent, LoadMapThree); //加载地图三
         EventManager.AddListener(EventType.LeftMoveBuildableEvent, LeftMoveBuildable); //左移
         EventManager.AddListener(EventType.RightMoveBuildableEvent, RightMoveBuildable); //右移
+        EventManager.AddListener(EventType.UpMoveBuildableEvent, UpMoveBuildable); //上移
+        EventManager.AddListener(EventType.DownMoveBuildableEvent, DownMoveBuildable); //下移
+        EventManager.AddListener(EventType.EnterSelectModeEvent, EnterSelectMode); //进入选择模式
+        EventManager.AddListener(EventType.ExitSelectModeEvent, ExitSelectMode); //退出选择模式
+        EventManager.AddListener(EventType.SelectBuildableEvent, OnSelectBuildable); //选择物体
+        EventManager.AddListener(EventType.CancelAllSelectEvent, CancelAllSelect); //取消选择所有物体
     }
 
     private void OnDisable()
     {
-        EventManager.RemoveListener(EventType.CancelCurrentSelectEvent,CancelCurrentSelect); //取消当前选择
+        EventManager.RemoveListener(EventType.CancelCurrentSelectEvent,CancelCurrentSelectToBuild); //取消当前选择
         EventManager.RemoveListener(EventType.MouseMoveEvent, OnMouseMove); //鼠标移动
-        EventManager.RemoveListener(EventType.DrawOrEraseEvent, OnMouseLeftClick); //绘制或者擦除
+        EventManager.RemoveListener(EventType.DrawOrEraseEvent, OnDrawOrErase); //绘制或者擦除
         EventManager.RemoveListener(EventType.ChangeTileModeEvent, ChangeTileMode); //切换擦除
         EventManager.RemoveListener(EventType.SaveMapEvent, SaveMap); //保存地图
         EventManager.RemoveListener(EventType.LoadMapOneEvent, LoadMapOne); //加载地图一
@@ -103,6 +116,86 @@ public class BuildableCreator : Singleton<BuildableCreator>
         EventManager.RemoveListener(EventType.LoadMapThreeEvent, LoadMapThree); //加载地图三
         EventManager.RemoveListener(EventType.LeftMoveBuildableEvent, LeftMoveBuildable); //左移
         EventManager.RemoveListener(EventType.RightMoveBuildableEvent, RightMoveBuildable); //右移
+        EventManager.RemoveListener(EventType.UpMoveBuildableEvent, UpMoveBuildable); //上移
+        EventManager.RemoveListener(EventType.DownMoveBuildableEvent, DownMoveBuildable); //下移
+        EventManager.RemoveListener(EventType.EnterSelectModeEvent, EnterSelectMode); //进入选择模式
+        EventManager.RemoveListener(EventType.ExitSelectModeEvent, ExitSelectMode); //退出选择模式
+        EventManager.RemoveListener(EventType.SelectBuildableEvent, OnSelectBuildable); //选择物体
+        EventManager.RemoveListener(EventType.CancelAllSelectEvent, CancelAllSelect); //取消选择所有物体
+    }
+
+    private void EnterSelectMode(EventData data)
+    {
+        SetSelectedObject(BuildableType.none);
+        inSelectMode = true;
+    }
+    
+    private void ExitSelectMode(EventData data)
+    {
+        inSelectMode = false;
+        foreach (var buildableInfo in selectedBuildableInfos)
+        {
+            while(buildableInfos.Find(info => info.position == buildableInfo.position) != null)
+            {
+                buildableInfos.Remove(buildableInfos.Find(info => info.position == buildableInfo.position));
+            }
+            buildableInfos.Add(buildableInfo);
+        }
+        TilemapSaver.Instance.ClearCurrentBuildableInfos();
+        TilemapSaver.Instance.CopyCurrentBuildableInfos(this.buildableInfos);
+    }
+
+    private void OnSelectBuildable(EventData obj)
+    {
+        if(!inSelectMode)
+        {
+            CancelAllSelect(obj);
+            return;
+        }
+        SelectBuildable();
+    }
+    
+    private void SelectBuildable()
+    {
+        //从当前位置射出射线
+        Ray ray = InputManager.Instance.RaycastMouseRay();
+        RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
+        //如果射线没有碰到任何物体，返回
+        if (!hit)
+        {
+            return;
+        }
+        if(hit.collider.TryGetComponent(out BuildableBase selectable))
+        {
+            BuildableInfo selectInfo = selectedBuildableInfos.Find(info => info.position == selectable.Position);
+            if (selectInfo != null)
+            {
+                selectedBuildableInfos.Remove(selectInfo);
+                if (selectIcons.ContainsKey(selectInfo))
+                {
+                    PoolManager.Instance.ReturnToPool("selectIcons", selectIcons[selectInfo]);
+                    selectIcons.Remove(selectInfo);
+                }
+            }
+            else
+            {
+                BuildableInfo buildableInfo = buildableInfos.Find(info => info.position == selectable.Position);
+                selectedBuildableInfos.Add(buildableInfo);
+                GameObject icon = PoolManager.Instance.SpawnFromPool("selectIcons", selectIcon, mapParent);
+                icon.transform.position = selectable.transform.position;
+                selectIcons.Add(buildableInfo, icon);
+            }
+        }
+    }
+
+    private void CancelAllSelect(EventData obj)
+    {
+        foreach (var iconKeyValue in selectIcons)
+        {
+            PoolManager.Instance.ReturnToPool("selectIcons", iconKeyValue.Value);
+        }
+        selectIcons.Clear();
+        selectedBuildableInfos.Clear();
     }
 
     private void LoadMapOne(EventData data)
@@ -154,13 +247,22 @@ public class BuildableCreator : Singleton<BuildableCreator>
         }
     }
 
-    private void OnMouseLeftClick(EventData data = null)
+    private void OnMouseLeftClick()
     {
         if (InputManager.Instance.IsMouseOverUI())
         {
             return;
         }
-        
+
+        if (inSelectMode)
+        {
+            SelectBuildable();
+        }
+        OnDrawOrErase();
+    }
+
+    private void OnDrawOrErase(EventData data = null)
+    {
         if (currentTileMode == TileMode.Build)
         {
             DrawTileMap();   
@@ -169,14 +271,9 @@ public class BuildableCreator : Singleton<BuildableCreator>
         {
             EraseTileMap();
         }
-        else
-        {
-            
-        }
     }
-
-
-    private void CancelCurrentSelect(EventData data)
+    
+    private void CancelCurrentSelectToBuild(EventData data)
     {
         SetSelectedObject(BuildableType.none);
     }
@@ -212,6 +309,10 @@ public class BuildableCreator : Singleton<BuildableCreator>
     
     private void MoveBuildable(List<BuildableInfo> buildableInfos, Vector3Int offset)
     {
+        if (!inSelectMode)
+        {
+            return;
+        }
         foreach (var buildableInfo in buildableInfos)
         {
             buildableInfo.position += offset;
@@ -221,39 +322,55 @@ public class BuildableCreator : Singleton<BuildableCreator>
             BuildableBase.DestroyBuildable(buildable.Value);
         }
         currentBuildableMap.Clear();
-        TilemapSaver.Instance.ClearCurrentBuildableInfos();
-        TilemapSaver.Instance.CopyCurrentBuildableInfos(this.buildableInfos);
         CheckBuildableVisible();
+    }
+    
+    private List<BuildableInfo> GetSelectedBuildableInfos()
+    {
+        List<BuildableInfo> needMoveInfos;
+        if(selectedBuildableInfos.Count != 0)
+        {
+            needMoveInfos = selectedBuildableInfos;
+        }
+        else
+        {
+            needMoveInfos = new List<BuildableInfo>();
+            
+            float currentX = RhythmViewer.Instance.GetCurrentMusicLinePos().x;
+            foreach (var buildableInfo in buildableInfos)
+            {
+                float realX = buildableInfo.position.x * GameConsts.TILE_SIZE + GetStartPositionOffset().x;
+                if (realX >= currentX)
+                {
+                    needMoveInfos.Add(buildableInfo);
+                }
+            }
+        }
+        return needMoveInfos; 
     }
     
     private void LeftMoveBuildable(EventData data)
     {
-        List<BuildableInfo> needMoveInfos = new List<BuildableInfo>();
-        float currentX = RhythmViewer.Instance.GetCurrentMusicLinePos().x;
-        foreach (var buildableInfo in buildableInfos)
-        {
-            float realX = buildableInfo.position.x * GameConsts.TILE_SIZE + GetStartPositionOffset().x;
-            if (realX >= currentX)
-            {
-                needMoveInfos.Add(buildableInfo);
-            }
-        }
+        List<BuildableInfo> needMoveInfos = GetSelectedBuildableInfos();
         MoveBuildable(needMoveInfos, new Vector3Int(-1, 0, 0));
     }
     
     private void RightMoveBuildable(EventData data)
     {
-        List<BuildableInfo> needMoveInfos = new List<BuildableInfo>();
-        float currentX = RhythmViewer.Instance.GetCurrentMusicLinePos().x;
-        foreach (var buildableInfo in buildableInfos)
-        {
-            float realX = buildableInfo.position.x * GameConsts.TILE_SIZE + GetStartPositionOffset().x;
-            if (realX >= currentX)
-            {
-                needMoveInfos.Add(buildableInfo);
-            }
-        }
+        List<BuildableInfo> needMoveInfos = GetSelectedBuildableInfos();
         MoveBuildable(needMoveInfos, new Vector3Int(1, 0, 0));
+    }
+    
+    private void UpMoveBuildable(EventData data)
+    {
+        List<BuildableInfo> needMoveInfos = GetSelectedBuildableInfos();
+        MoveBuildable(needMoveInfos, new Vector3Int(0, 1, 0));
+    }
+    
+    private void DownMoveBuildable(EventData data)
+    {
+        List<BuildableInfo> needMoveInfos = GetSelectedBuildableInfos();
+        MoveBuildable(needMoveInfos, new Vector3Int(0, -1, 0));
     }
 
     private void UpdateTilemap()
@@ -321,7 +438,6 @@ public class BuildableCreator : Singleton<BuildableCreator>
             buildableInfos.Remove(buildableInfos.Find(info => info.position == buildable.Position));
             TilemapSaver.Instance.RemoveThisBuildable(buildable.Position);
         }
-        
     }
     
     public void ClearAllTilemaps()
@@ -387,6 +503,14 @@ public class BuildableCreator : Singleton<BuildableCreator>
             {
                 DestoryBuildable(buildableInfo.position);
             }
+        }
+
+        foreach (var iconKeyValue in selectIcons)
+        {
+            BuildableInfo buildableInfo = iconKeyValue.Key;
+            GameObject icon = iconKeyValue.Value;
+            Vector3 realPosition = Utils.GetRealPostion(buildableInfo.position);
+            icon.transform.position = realPosition;
         }
     }
 
