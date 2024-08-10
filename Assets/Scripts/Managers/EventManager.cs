@@ -44,6 +44,7 @@ public enum EventType
     PauseOrResumeMusicEvent = 208,
     StopOrPlayMusicEvent = 209,
     OpenOrCloseCoordinateEvent = 210,
+    SelectCurrentMusicTimeEvent = 211,
 
     #endregion
 }

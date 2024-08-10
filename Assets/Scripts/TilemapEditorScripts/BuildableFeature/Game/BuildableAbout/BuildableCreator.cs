@@ -165,6 +165,10 @@ public class BuildableCreator : Singleton<BuildableCreator>
         {
             EraseTileMap();
         }
+        else
+        {
+            
+        }
     }
 
 
@@ -331,6 +335,11 @@ public class BuildableCreator : Singleton<BuildableCreator>
                 DestoryBuildable(buildableInfo.position);
             }
         }
+    }
+
+    public TileMode GetTileMode()
+    {
+        return currentTileMode;
     }
 
 

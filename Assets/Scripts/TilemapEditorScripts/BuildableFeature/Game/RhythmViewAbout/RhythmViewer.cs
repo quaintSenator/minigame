@@ -47,11 +47,15 @@ public class RhythmViewer : MonoBehaviour
     
     
     private static bool currentMusicIsPlaying = false;
+    // 确定当前是否没开始播放音乐
+    private static bool noStart = true;
     public static bool CurrentMusicIsPlaying => currentMusicIsPlaying;
     private static float currentMusicTime = 0f;
     public static float CurrentMusicTime => currentMusicTime;
     
     private Transform startPoint;
+    [SerializeField] private float doubleClickGap = 0.2f;
+    private float doubleClickTime = 0f;
     
     private void Start()
     {
@@ -69,12 +73,35 @@ public class RhythmViewer : MonoBehaviour
     {
         EventManager.AddListener(EventType.PauseOrResumeMusicEvent, PauseOrResumeMusic);
         EventManager.AddListener(EventType.StopOrPlayMusicEvent, StopOrPlayMusic);
+        EventManager.AddListener(EventType.SelectCurrentMusicTimeEvent, SelectCurrentMusicTime);
     }
     
     private void OnDisable()
     {
         EventManager.RemoveListener(EventType.PauseOrResumeMusicEvent, PauseOrResumeMusic);
         EventManager.RemoveListener(EventType.StopOrPlayMusicEvent, StopOrPlayMusic);
+        EventManager.RemoveListener(EventType.SelectCurrentMusicTimeEvent, SelectCurrentMusicTime);
+    }
+
+    private void SelectCurrentMusicTime(EventData obj)
+    {
+        if(doubleClickTime > 0)
+        {
+            //获取鼠标点击位置
+            Vector3 mousePos = Input.mousePosition;
+            //将鼠标点击位置转换为世界坐标
+            Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+            //计算鼠标点击位置与起始点的距离
+            float currentMusicLinePos = worldPos.x - startPoint.position.x;
+            Debug.Log("currentMusicLinePos : "+currentMusicLinePos);
+            //计算当前音乐播放时间
+            currentMusicTime = (float)Math.Round(currentMusicLinePos / GameConsts.SPEED, 3);
+            musicCurrentPosLine.ShowPosLine();
+        }
+        else
+        {
+            doubleClickTime = doubleClickGap;
+        }
     }
 
     private void Update()
@@ -89,6 +116,8 @@ public class RhythmViewer : MonoBehaviour
             currentMusicTime += Time.deltaTime;
             CheckDynamicRhythmNode();
         }
+        
+        doubleClickTime -= Time.deltaTime;
     }
 
     #region 静态节奏区域显示
@@ -129,15 +158,25 @@ public class RhythmViewer : MonoBehaviour
     private void PauseOrResumeMusic(EventData data)
     {
         if (musicController == null) return;
+        ClearDynamicRhythmNode();
         if(currentMusicIsPlaying)
         {
             currentMusicIsPlaying = false;
             musicController.PauseLevelMusic();
         }
+        else if (noStart)
+        {
+            currentMusicIsPlaying = true;
+            noStart = false;
+            musicController.PlayLevelMusic();
+            musicController.SeekLevelMusicByTimeMS((int)(currentMusicTime * 1000));
+            musicCurrentPosLine.ShowPosLine();
+        }
         else
         {
             currentMusicIsPlaying = true;
             musicController.ResumeLevelMusic();
+            musicController.SeekLevelMusicByTimeMS((int)(currentMusicTime * 1000));
             musicCurrentPosLine.ShowPosLine();
         }
     }
@@ -145,10 +184,12 @@ public class RhythmViewer : MonoBehaviour
     private void StopOrPlayMusic(EventData data)
     {
         if (musicController == null) return;
+        ClearDynamicRhythmNode();
         if(currentMusicIsPlaying)
         {
             currentMusicTime = 0f;
             currentMusicIsPlaying = false;
+            noStart = true;
             musicController.StopLevelMusic();
             musicCurrentPosLine.HidePosLine();
             ClearDynamicRhythmNode();
@@ -157,6 +198,7 @@ public class RhythmViewer : MonoBehaviour
         {
             currentMusicTime = 0f;
             currentMusicIsPlaying = true;
+            noStart = false;
             musicController.PlayLevelMusic();
             musicCurrentPosLine.ShowPosLine();
             InitCurrentDynamicRhythmNode();
@@ -194,6 +236,9 @@ public class RhythmViewer : MonoBehaviour
         {
             PoolManager.Instance.ReturnToPool("DynamicRhythmNode", dynamicRhythmNode.Value.gameObject);
         }
+        leftDynamicRhythmNodeIndex = 0;
+        rightDynamicRhythmNodeIndex = 0;
+        currentDynamicRhythmNodeIndex = 0;
         dynamicRhythmNodes.Clear();
     }
         
@@ -202,27 +247,13 @@ public class RhythmViewer : MonoBehaviour
         if (musicController == null) return;
         if (currentMusicIsPlaying)
         {
-            while (leftDynamicRhythmNodeIndex < currentDynamicRhythmNodeIndex)
-            {
-                RhythmData rhythmData = rhythmDataFile.rhythmDataList[leftDynamicRhythmNodeIndex];
-                Vector3 realPosition = new Vector3(rhythmData.perfectTime * GameConsts.SPEED + startPoint.position.x, 0, 0);
-                if (!IsPositionInViewport(realPosition))
-                {
-                    PoolManager.Instance.ReturnToPool("DynamicRhythmNode", dynamicRhythmNodes[leftDynamicRhythmNodeIndex].gameObject);
-                    dynamicRhythmNodes.Remove(leftDynamicRhythmNodeIndex);
-                    leftDynamicRhythmNodeIndex++;
-                }
-                else
-                {
-                    break;
-                }
-            }
-            
             while (rightDynamicRhythmNodeIndex < rhythmDataFile.rhythmDataList.Count)
             {
                 RhythmData rhythmData = rhythmDataFile.rhythmDataList[rightDynamicRhythmNodeIndex];
                 Vector3 realPosition = new Vector3(rhythmData.perfectTime * GameConsts.SPEED + startPoint.position.x, 0, 0);
-                if (IsPositionInViewport(realPosition))
+                
+                //存在Bug，先全部显示，后续在考虑优化
+                if (IsPositionInViewport(realPosition) || true)
                 {
                     GameObject go = PoolManager.Instance.SpawnFromPool("DynamicRhythmNode", dynamicRhythmNodePrefab, transform);
                     go.transform.position = realPosition;
@@ -244,6 +275,24 @@ public class RhythmViewer : MonoBehaviour
                 {
                     dynamicRhythmNodes[currentDynamicRhythmNodeIndex].Play();
                     currentDynamicRhythmNodeIndex++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            
+            while (leftDynamicRhythmNodeIndex < currentDynamicRhythmNodeIndex)
+            {
+                RhythmData rhythmData = rhythmDataFile.rhythmDataList[leftDynamicRhythmNodeIndex];
+                Vector3 realPosition = new Vector3(rhythmData.perfectTime * GameConsts.SPEED + startPoint.position.x, 0, 0);
+                
+                //存在Bug，先不删除，后续在考虑优化
+                if (!IsPositionInViewport(realPosition) && false)
+                {
+                    PoolManager.Instance.ReturnToPool("DynamicRhythmNode", dynamicRhythmNodes[leftDynamicRhythmNodeIndex].gameObject);
+                    dynamicRhythmNodes.Remove(leftDynamicRhythmNodeIndex);
+                    leftDynamicRhythmNodeIndex++;
                 }
                 else
                 {

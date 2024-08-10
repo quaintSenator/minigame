@@ -177,7 +177,6 @@ public class InputManager : Singleton<InputManager>
                     {
                         pressKeyBoardEventDict.Add(keyCode, new List<EventType>() { inputAction.eventType });
                     }
-                    Debug.Log("inputAction.inputEventType " + inputAction.inputEventType.ToString());
                 }
                 foreach (var mouseInput in inputAction.mouseInput)
                 {

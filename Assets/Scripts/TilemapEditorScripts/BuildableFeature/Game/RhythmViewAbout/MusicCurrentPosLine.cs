@@ -18,17 +18,24 @@ public class MusicCurrentPosLine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float xOffset = startPoint.position.x;
+        
         if (lineRenderer.enabled && RhythmViewer.CurrentMusicIsPlaying)
         {
-            lineRenderer.SetPosition(0, new Vector3(RhythmViewer.CurrentMusicTime * GameConsts.SPEED + xOffset, 10, 0));
-            lineRenderer.SetPosition(1, new Vector3(RhythmViewer.CurrentMusicTime * GameConsts.SPEED + xOffset, -3, 0));
+            UpdatePos();
         }
+    }
+
+    void UpdatePos()
+    {
+        float xOffset = startPoint.position.x;
+        lineRenderer.SetPosition(0, new Vector3(RhythmViewer.CurrentMusicTime * GameConsts.SPEED + xOffset, 10, 0));
+        lineRenderer.SetPosition(1, new Vector3(RhythmViewer.CurrentMusicTime * GameConsts.SPEED + xOffset, -10, 0));
     }
     
     public void ShowPosLine()
     {
         lineRenderer.enabled = true;
+        UpdatePos();
     }
     
     public void HidePosLine()
