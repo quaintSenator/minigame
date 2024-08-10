@@ -35,6 +35,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
 
     [SerializeField] private GameObject selectIcon;
     private List<BuildableInfo> selectedBuildableInfos = new List<BuildableInfo>();
+    private List<BuildableInfo> currentMoveBuildableInfos = new List<BuildableInfo>();
     private Dictionary<BuildableInfo, GameObject> selectIcons = new Dictionary<BuildableInfo, GameObject>();
     private BuildableBase lastBuildable; 
     
@@ -148,16 +149,18 @@ public class BuildableCreator : Singleton<BuildableCreator>
     private void ExitSelectMode(EventData data)
     {
         inSelectMode = false;
-        foreach (var buildableInfo in selectedBuildableInfos)
+        foreach (var buildableInfo in currentMoveBuildableInfos)
         {
             while(buildableInfos.Find(info => info.position == buildableInfo.position) != null)
             {
+                Debug.Log("Remove buildableInfo : " + buildableInfo.position);
                 buildableInfos.Remove(buildableInfos.Find(info => info.position == buildableInfo.position));
             }
             buildableInfos.Add(buildableInfo);
         }
         TilemapSaver.Instance.ClearCurrentBuildableInfos();
         TilemapSaver.Instance.CopyCurrentBuildableInfos(this.buildableInfos);
+        currentMoveBuildableInfos.Clear();
     }
 
     private void OnSelectBuildable(EventData obj)
@@ -322,13 +325,13 @@ public class BuildableCreator : Singleton<BuildableCreator>
         UpdateTilemap();
     }
     
-    private void MoveBuildable(List<BuildableInfo> buildableInfos, Vector3Int offset)
+    private void MoveBuildable(Vector3Int offset)
     {
         if (!inSelectMode)
         {
             return;
         }
-        foreach (var buildableInfo in buildableInfos)
+        foreach (var buildableInfo in currentMoveBuildableInfos)
         {
             buildableInfo.position += offset;
         }
@@ -366,26 +369,38 @@ public class BuildableCreator : Singleton<BuildableCreator>
     
     private void LeftMoveBuildable(EventData data)
     {
-        List<BuildableInfo> needMoveInfos = GetSelectedBuildableInfos();
-        MoveBuildable(needMoveInfos, new Vector3Int(-1, 0, 0));
+        if(currentMoveBuildableInfos.Count == 0)
+        {
+            currentMoveBuildableInfos = currentMoveBuildableInfos = GetSelectedBuildableInfos();
+        }
+        MoveBuildable(new Vector3Int(-1, 0, 0));
     }
     
     private void RightMoveBuildable(EventData data)
     {
-        List<BuildableInfo> needMoveInfos = GetSelectedBuildableInfos();
-        MoveBuildable(needMoveInfos, new Vector3Int(1, 0, 0));
+        if(currentMoveBuildableInfos.Count == 0)
+        {
+            currentMoveBuildableInfos = currentMoveBuildableInfos = GetSelectedBuildableInfos();
+        }
+        MoveBuildable(new Vector3Int(1, 0, 0));
     }
     
     private void UpMoveBuildable(EventData data)
     {
-        List<BuildableInfo> needMoveInfos = GetSelectedBuildableInfos();
-        MoveBuildable(needMoveInfos, new Vector3Int(0, 1, 0));
+        if(currentMoveBuildableInfos.Count == 0)
+        {
+            currentMoveBuildableInfos = currentMoveBuildableInfos = GetSelectedBuildableInfos();
+        }
+        MoveBuildable(new Vector3Int(0, 1, 0));
     }
     
     private void DownMoveBuildable(EventData data)
     {
-        List<BuildableInfo> needMoveInfos = GetSelectedBuildableInfos();
-        MoveBuildable(needMoveInfos, new Vector3Int(0, -1, 0));
+        if(currentMoveBuildableInfos.Count == 0)
+        {
+            currentMoveBuildableInfos = currentMoveBuildableInfos = GetSelectedBuildableInfos();
+        }
+        MoveBuildable(new Vector3Int(0, -1, 0));
     }
 
     private void UpdateTilemap()
