@@ -77,7 +77,7 @@ public class TilemapEditor : Editor
     }
     
     //在菜单栏 Tools/HZB/Get Auto Save File 中调用
-    [MenuItem("Tools/HZB/获取自动保存的地图数据文件")]
+    [MenuItem("Tools/HZB/获取自动保存的地图数据文件 (from TilemapSaver)")]
     private static void GetAutoSaveFile()
     {
         string data = PlayerPrefs.GetString(GameConsts.AUTO_TILEMAP_SAVE_DATA);
@@ -86,6 +86,23 @@ public class TilemapEditor : Editor
         saveData.saveTime = System.DateTime.Now.ToString();
         saveData.mapData = data;
         string path = "Assets/Scripts/TilemapEditorScripts/BuildableFeature/AutoSave";
+        string saveName = "TilemapSaveData_auto" + ".asset";
+        AssetDatabase.CreateAsset(saveData, path + "/" + saveName);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+        Debug.Log("Get the auto save file");
+    }
+    
+    //在菜单栏 Tools/HZB/Get Auto Save File 中调用
+    [MenuItem("Tools/HZB/获取自动保存的地图数据文件 (from BuildableCreator)")]
+    private static void GetAutoSaveFile2()
+    {
+        string data = PlayerPrefs.GetString(GameConsts.AUTO_TILEMAP_SAVE_DATA_2);
+        // 保存地图数据
+        TilemapSaveLocalFile saveData = ScriptableObject.CreateInstance<TilemapSaveLocalFile>();
+        saveData.saveTime = System.DateTime.Now.ToString();
+        saveData.mapData = data;
+        string path = "Assets/Scripts/TilemapEditorScripts/BuildableFeature/AutoSave_2";
         string saveName = "TilemapSaveData_auto" + ".asset";
         AssetDatabase.CreateAsset(saveData, path + "/" + saveName);
         AssetDatabase.SaveAssets();

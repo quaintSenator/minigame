@@ -122,6 +122,21 @@ public class BuildableCreator : Singleton<BuildableCreator>
         EventManager.RemoveListener(EventType.ExitSelectModeEvent, ExitSelectMode); //退出选择模式
         EventManager.RemoveListener(EventType.SelectBuildableEvent, OnSelectBuildable); //选择物体
         EventManager.RemoveListener(EventType.CancelAllSelectEvent, CancelAllSelect); //取消选择所有物体
+        
+        AutoSaveMap();
+    }
+    
+    public void AutoSaveMap()
+    {
+        string key = "auto_save_2";
+        List<BuildableInfo> buildableInfos = new List<BuildableInfo>();
+        foreach (var buildableInfo in this.buildableInfos)
+        {
+            buildableInfos.Add(buildableInfo);
+        }
+        MapData mapData = new MapData(key, buildableInfos);
+        PlayerPrefs.SetString(GameConsts.AUTO_TILEMAP_SAVE_DATA_2, JsonUtility.ToJson(mapData));
+        Debug.Log("Auto save tilemap data v2");
     }
 
     private void EnterSelectMode(EventData data)
