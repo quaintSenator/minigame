@@ -222,7 +222,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         }
         currentBuildableMap.Clear();
         TilemapSaver.Instance.ClearCurrentBuildableInfos();
-        TilemapSaver.Instance.CopyCurrentBuildableInfos(buildableInfos);
+        TilemapSaver.Instance.CopyCurrentBuildableInfos(this.buildableInfos);
         CheckBuildableVisible();
     }
     
