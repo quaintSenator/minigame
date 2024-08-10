@@ -1644,6 +1644,7 @@ MonoBehaviour:
   musicController: {fileID: 998439209}
   musicCurrentPosLine: {fileID: 2019191481}
   dynamicRhythmNodePrefab: {fileID: 1418425985313366245, guid: 220209c6f1f38494380ccec63ee0fa03, type: 3}
+  doubleClickGap: 0.2
 --- !u!4 &1913470047
 Transform:
   m_ObjectHideFlags: 0
@@ -1821,7 +1822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9309d17fe7ab9824c9fd7874f91dbe66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedMapdata: {fileID: 11400000, guid: bb787b9d56984764fa2e846dab194eaa, type: 2}
+  selectedMapdata: {fileID: 11400000, guid: b1e6818e2cb50e64bb03a9994e845b07, type: 2}
   mapParent: {fileID: 1270504054}
   showAllBuildable: 0
 --- !u!4 &1956386139

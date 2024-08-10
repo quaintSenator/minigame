@@ -6,13 +6,11 @@ using UnityEngine;
 public class MusicCurrentPosLine : MonoBehaviour
 {
     private LineRenderer lineRenderer;
-    private Transform startPoint;
     
     private void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
-        startPoint = Utils.GetStartPointPostion();
     }
 
     // Update is called once per frame
@@ -27,9 +25,9 @@ public class MusicCurrentPosLine : MonoBehaviour
 
     void UpdatePos()
     {
-        float xOffset = startPoint.position.x;
-        lineRenderer.SetPosition(0, new Vector3(RhythmViewer.CurrentMusicTime * GameConsts.SPEED + xOffset, 10, 0));
-        lineRenderer.SetPosition(1, new Vector3(RhythmViewer.CurrentMusicTime * GameConsts.SPEED + xOffset, -10, 0));
+        Vector3 currentPos = RhythmViewer.Instance.GetCurrentMusicLinePos();
+        lineRenderer.SetPosition(0, new Vector3(currentPos.x, 10, 0));
+        lineRenderer.SetPosition(1, new Vector3(currentPos.x, -10, 0));
     }
     
     public void ShowPosLine()

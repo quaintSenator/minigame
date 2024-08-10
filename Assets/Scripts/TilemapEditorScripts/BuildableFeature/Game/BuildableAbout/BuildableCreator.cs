@@ -86,6 +86,8 @@ public class BuildableCreator : Singleton<BuildableCreator>
         EventManager.AddListener(EventType.LoadMapOneEvent, LoadMapOne); //加载地图一
         EventManager.AddListener(EventType.LoadMapTwoEvent, LoadMapTwo); //加载地图二
         EventManager.AddListener(EventType.LoadMapThreeEvent, LoadMapThree); //加载地图三
+        EventManager.AddListener(EventType.LeftMoveBuildableEvent, LeftMoveBuildable); //左移
+        EventManager.AddListener(EventType.RightMoveBuildableEvent, RightMoveBuildable); //右移
     }
 
     private void OnDisable()
@@ -99,6 +101,8 @@ public class BuildableCreator : Singleton<BuildableCreator>
         EventManager.RemoveListener(EventType.LoadMapOneEvent, LoadMapOne); //加载地图一
         EventManager.RemoveListener(EventType.LoadMapTwoEvent, LoadMapTwo); //加载地图二
         EventManager.RemoveListener(EventType.LoadMapThreeEvent, LoadMapThree); //加载地图三
+        EventManager.RemoveListener(EventType.LeftMoveBuildableEvent, LeftMoveBuildable); //左移
+        EventManager.RemoveListener(EventType.RightMoveBuildableEvent, RightMoveBuildable); //右移
     }
 
     private void LoadMapOne(EventData data)
@@ -204,6 +208,50 @@ public class BuildableCreator : Singleton<BuildableCreator>
             }
         }
         UpdateTilemap();
+    }
+    
+    private void LeftMoveBuildable(EventData data)
+    {
+        float currentX = RhythmViewer.Instance.GetCurrentMusicLinePos().x;
+        foreach (var buildableInfo in buildableInfos)
+        {
+            float realX = buildableInfo.position.x * GameConsts.TILE_SIZE + GetStartPositionOffset().x;
+            if (realX >= currentX)
+            {
+                buildableInfo.position.x -= 1;
+            }
+        }
+
+        foreach (var buildable in currentBuildableMap)
+        {
+            BuildableBase.DestroyBuildable(buildable.Value);
+        }
+        currentBuildableMap.Clear();
+        TilemapSaver.Instance.ClearCurrentBuildableInfos();
+        TilemapSaver.Instance.CopyCurrentBuildableInfos(buildableInfos);
+        CheckBuildableVisible();
+    }
+    
+    private void RightMoveBuildable(EventData data)
+    {
+        float currentX = RhythmViewer.Instance.GetCurrentMusicLinePos().x;
+        foreach (var buildableInfo in buildableInfos)
+        {
+            float realX = buildableInfo.position.x * GameConsts.TILE_SIZE + GetStartPositionOffset().x;
+            if (realX >= currentX)
+            {
+                buildableInfo.position.x += 1;
+            }
+        }
+
+        foreach (var buildable in currentBuildableMap)
+        {
+            BuildableBase.DestroyBuildable(buildable.Value);
+        }
+        currentBuildableMap.Clear();
+        TilemapSaver.Instance.ClearCurrentBuildableInfos();
+        TilemapSaver.Instance.CopyCurrentBuildableInfos(buildableInfos);
+        CheckBuildableVisible();
     }
 
     private void UpdateTilemap()

@@ -54,6 +54,19 @@ public class TilemapSaver : Singleton<TilemapSaver>
     {
         currentBuildableInfosDic.Remove(position);
     }
+    
+    public void ClearCurrentBuildableInfos()
+    {
+        currentBuildableInfosDic.Clear();
+    }
+    
+    public void CopyCurrentBuildableInfos(List<BuildableInfo> buildableInfos)
+    {
+        foreach (var buildableInfo in buildableInfos)
+        {
+            currentBuildableInfosDic.Add(buildableInfo.position, new BuildableInfo(buildableInfo.type, buildableInfo.position));
+        }
+    }
 
     public void SaveTilemap()
     {

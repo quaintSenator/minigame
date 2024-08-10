@@ -45,6 +45,8 @@ public enum EventType
     StopOrPlayMusicEvent = 209,
     OpenOrCloseCoordinateEvent = 210,
     SelectCurrentMusicTimeEvent = 211,
+    LeftMoveBuildableEvent = 212,
+    RightMoveBuildableEvent = 213,
 
     #endregion
 }

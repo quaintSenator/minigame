@@ -10,7 +10,7 @@ enum UpdateMode
     Update,
 }
 
-public class RhythmViewer : MonoBehaviour
+public class RhythmViewer : Singleton<RhythmViewer>
 {
     [Space(20)]
     [InfoBox("当前所使用的音频信息", InfoMessageType.None)]
@@ -316,6 +316,11 @@ public class RhythmViewer : MonoBehaviour
     }
 
     #endregion
+    
+    public Vector3 GetCurrentMusicLinePos()
+    {
+        return new Vector3(currentMusicTime * GameConsts.SPEED + startPoint.position.x, 0, 0);
+    }
 }
 
 
