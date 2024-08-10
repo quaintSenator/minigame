@@ -210,18 +210,12 @@ public class BuildableCreator : Singleton<BuildableCreator>
         UpdateTilemap();
     }
     
-    private void LeftMoveBuildable(EventData data)
+    private void MoveBuildable(List<BuildableInfo> buildableInfos, Vector3Int offset)
     {
-        float currentX = RhythmViewer.Instance.GetCurrentMusicLinePos().x;
         foreach (var buildableInfo in buildableInfos)
         {
-            float realX = buildableInfo.position.x * GameConsts.TILE_SIZE + GetStartPositionOffset().x;
-            if (realX >= currentX)
-            {
-                buildableInfo.position.x -= 1;
-            }
+            buildableInfo.position += offset;
         }
-
         foreach (var buildable in currentBuildableMap)
         {
             BuildableBase.DestroyBuildable(buildable.Value);
@@ -232,26 +226,34 @@ public class BuildableCreator : Singleton<BuildableCreator>
         CheckBuildableVisible();
     }
     
-    private void RightMoveBuildable(EventData data)
+    private void LeftMoveBuildable(EventData data)
     {
+        List<BuildableInfo> needMoveInfos = new List<BuildableInfo>();
         float currentX = RhythmViewer.Instance.GetCurrentMusicLinePos().x;
         foreach (var buildableInfo in buildableInfos)
         {
             float realX = buildableInfo.position.x * GameConsts.TILE_SIZE + GetStartPositionOffset().x;
             if (realX >= currentX)
             {
-                buildableInfo.position.x += 1;
+                needMoveInfos.Add(buildableInfo);
             }
         }
-
-        foreach (var buildable in currentBuildableMap)
+        MoveBuildable(needMoveInfos, new Vector3Int(-1, 0, 0));
+    }
+    
+    private void RightMoveBuildable(EventData data)
+    {
+        List<BuildableInfo> needMoveInfos = new List<BuildableInfo>();
+        float currentX = RhythmViewer.Instance.GetCurrentMusicLinePos().x;
+        foreach (var buildableInfo in buildableInfos)
         {
-            BuildableBase.DestroyBuildable(buildable.Value);
+            float realX = buildableInfo.position.x * GameConsts.TILE_SIZE + GetStartPositionOffset().x;
+            if (realX >= currentX)
+            {
+                needMoveInfos.Add(buildableInfo);
+            }
         }
-        currentBuildableMap.Clear();
-        TilemapSaver.Instance.ClearCurrentBuildableInfos();
-        TilemapSaver.Instance.CopyCurrentBuildableInfos(buildableInfos);
-        CheckBuildableVisible();
+        MoveBuildable(needMoveInfos, new Vector3Int(1, 0, 0));
     }
 
     private void UpdateTilemap()
