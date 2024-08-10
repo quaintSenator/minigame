@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2252913727729079449}
   - component: {fileID: 2252913727729079448}
   m_Layer: 0
-  m_Name: MusicVisualization
+  m_Name: MusicController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,11 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerControllerInstance: {fileID: 0}
-  BankNames:
-  - LevelTest
-  - Level1
   LevelMusicEvents:
-  - LevelMusicPlayEvent:
+  - bankName: LevelTest
+    LevelMusicPlayEvent:
       idInternal: 0
       valueGuidInternal: 
       WwiseObjectReference: {fileID: 11400000, guid: 2f4d39d70a1afc94c91ea8ed2de40e9a, type: 2}
@@ -64,7 +62,9 @@ MonoBehaviour:
       idInternal: 0
       valueGuidInternal: 
       WwiseObjectReference: {fileID: 11400000, guid: 2c048faf3f7111d46a10955144817e45, type: 2}
-  - LevelMusicPlayEvent:
+    bpm: 100
+  - bankName: Level1
+    LevelMusicPlayEvent:
       idInternal: 0
       valueGuidInternal: 
       WwiseObjectReference: {fileID: 11400000, guid: f06f059d497d43441b2fada9159fb502, type: 2}
@@ -80,9 +80,7 @@ MonoBehaviour:
       idInternal: 0
       valueGuidInternal: 
       WwiseObjectReference: {fileID: 11400000, guid: faa8d6785cc088d49855ff14d273737b, type: 2}
-  LevelMusicBpmList:
-  - 100
-  - 120
+    bpm: 120
   LevelIndex: 1
   CallbackType: 4
   IfPlayMusicWhenStart: 1

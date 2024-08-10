@@ -94,10 +94,12 @@ struct RhythmVisualizationPerfabParameter
 [System.Serializable]
 struct LevelMusic
 {
+    public string bankName;
     public AK.Wwise.Event LevelMusicPlayEvent;
     public AK.Wwise.Event LevelMusicStopEvent;
     public AK.Wwise.Event LevelMusicPauseEvent;
     public AK.Wwise.Event LevelMusicResumeEvent;
+    public float bpm;
 }
 
 
@@ -106,17 +108,17 @@ public class MusicVisualization : MonoBehaviour
     [SerializeField]
     private PlayerController PlayerControllerInstance = null;
 
-    //关卡Bank列表
+/*    //关卡Bank列表
     [SerializeField]
-    private List<string> BankNames = new List<string> { "LevelTest" };
+    private List<string> BankNames = new List<string> { "LevelTest" };*/
 
     //关卡音乐Event列表
     [SerializeField]
     private List<LevelMusic> LevelMusicEvents = new List<LevelMusic>() { };
 
-    //关卡音乐Bpm列表
+/*    //关卡音乐Bpm列表
     [SerializeField]
-    private List<float> LevelMusicBpmList = new List<float>() { 100 };
+    private List<float> LevelMusicBpmList = new List<float>() { 100 };*/
 
     //关卡序号
     [SerializeField]
@@ -174,6 +176,7 @@ public class MusicVisualization : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        LoadLevelBank();
         if (IfPlayMusicWhenStart)
         {
             PlayLevelMusic();
@@ -258,19 +261,25 @@ public class MusicVisualization : MonoBehaviour
         }
     }
 
-
+    
+    public void LoadLevelBank()
+    {
+        if ((LevelIndex < LevelMusicEvents.Count))
+        {
+            AkBankManager.LoadBank(LevelMusicEvents[LevelIndex].bankName, false, false);
+        }
+    }
     public void PlayLevelMusic()
     {
         //TODO:补充延时播放相关
-        if (IfPlayMusicWhenStart)
-        {
-            if (!(LevelIndex < BankNames.Count)
-                || !(LevelIndex < LevelMusicEvents.Count))
+/*        if (IfPlayMusicWhenStart)
+        {*/
+            if (!(LevelIndex < LevelMusicEvents.Count))
             {
                 Debug.LogWarning("The LevelIndex out of length of LevelMusicPlayEvent or LevelMusicPlayEvent");
                 return;
             }
-            AkBankManager.LoadBank(BankNames[LevelIndex], false, false);
+
 
             if (IfUseVisualization )
             {
@@ -282,13 +291,13 @@ public class MusicVisualization : MonoBehaviour
             }
 
 
-        }
+       // }
     }
 
 
     public void StopLevelMusic()
     {
-        if ((LevelIndex < BankNames.Count) && (LevelIndex < LevelMusicEvents.Count))
+        if (LevelIndex < LevelMusicEvents.Count)
         {
             LevelMusicEvents[LevelIndex].LevelMusicStopEvent.Post(gameObject);
         }
@@ -296,7 +305,7 @@ public class MusicVisualization : MonoBehaviour
 
     public void PauseLevelMusic()
     {
-        if ((LevelIndex < BankNames.Count) && (LevelIndex < LevelMusicEvents.Count))
+        if (LevelIndex < LevelMusicEvents.Count)
         {
             LevelMusicEvents[LevelIndex].LevelMusicPauseEvent.Post(gameObject);
         }
@@ -304,7 +313,7 @@ public class MusicVisualization : MonoBehaviour
 
     public void ResumeLevelMusic()
     {
-        if ((LevelIndex < BankNames.Count) && (LevelIndex < LevelMusicEvents.Count))
+        if (LevelIndex < LevelMusicEvents.Count)
         {
             LevelMusicEvents[LevelIndex].LevelMusicResumeEvent.Post(gameObject);
         }
@@ -313,7 +322,7 @@ public class MusicVisualization : MonoBehaviour
 
     public void SeekLevelMusicByTimeMS(int timeMS)
     {
-        if ((LevelIndex < BankNames.Count) && (LevelIndex < LevelMusicEvents.Count))
+        if (LevelIndex < LevelMusicEvents.Count)
         {
             LevelMusicEvents[LevelIndex].LevelMusicPlayEvent.SeekEventByTime(gameObject, timeMS);
         }
