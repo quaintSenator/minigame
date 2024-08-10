@@ -283,7 +283,10 @@ public class BuildableCreator : Singleton<BuildableCreator>
         {
             if (currentBuildableMap[currentCellPosition].Type != selectedType)
             {
-                DestoryBuildable(currentCellPosition);
+                BuildableBase buildable = currentBuildableMap[currentCellPosition];
+                DestoryBuildable(buildable.Position);
+                buildableInfos.Remove(buildableInfos.Find(info => info.position == buildable.Position));
+                TilemapSaver.Instance.RemoveThisBuildable(buildable.Position);
             }
             else
             {

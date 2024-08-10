@@ -815,7 +815,7 @@ MonoBehaviour:
   virtualCamera: {fileID: 585073038}
   moveSpeed: 60
   zoomSpeed: 5
-  maxZoom: 10
+  maxZoom: 100
   minZoom: 4
 --- !u!4 &672013359
 Transform:
@@ -1619,6 +1619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rhythmDataFile: {fileID: 11400000, guid: 94ebfad679c4dcc4cbd5deb422293695, type: 2}
+  showRhythmZone: 1
   rhythmOffset: 0
   timeVisualDataList:
   - name: "\u5BB9\u5FCD\u533A\u95F4"
@@ -1822,7 +1823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9309d17fe7ab9824c9fd7874f91dbe66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedMapdata: {fileID: 11400000, guid: b1e6818e2cb50e64bb03a9994e845b07, type: 2}
+  selectedMapdata: {fileID: 0}
   mapParent: {fileID: 1270504054}
   showAllBuildable: 0
 --- !u!4 &1956386139

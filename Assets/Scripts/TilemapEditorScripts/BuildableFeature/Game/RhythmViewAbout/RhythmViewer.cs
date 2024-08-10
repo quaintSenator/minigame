@@ -16,6 +16,9 @@ public class RhythmViewer : Singleton<RhythmViewer>
     [InfoBox("当前所使用的音频信息", InfoMessageType.None)]
     [SerializeField] private RhythmDataFile rhythmDataFile;
     
+    [InfoBox("是否显示静态节奏区域", InfoMessageType.None)]
+    [BoxGroup("静态节奏区域显示", centerLabel:true)]
+    [SerializeField] private bool showRhythmZone = true;
     [InfoBox("节奏点的偏移量", InfoMessageType.None)]
     [BoxGroup("静态节奏区域显示", centerLabel:true)]
     [SerializeField]private float rhythmOffset = 0f;
@@ -27,7 +30,6 @@ public class RhythmViewer : Singleton<RhythmViewer>
              " End Time  : 结束时间 （离完美点的距离）", InfoMessageType.None)]
     [BoxGroup("静态节奏区域显示", centerLabel:true)]
     [SerializeField] private List<TimeVisualData> timeVisualDataList;
-    
     
     private static Texture2D squareTexture;
     private List<RhythmZoneVisual> rhythmZoneVisuals = new List<RhythmZoneVisual>();
@@ -44,6 +46,7 @@ public class RhythmViewer : Singleton<RhythmViewer>
     private int currentDynamicRhythmNodeIndex = 0;
     private int leftDynamicRhythmNodeIndex = 0;
     private int rightDynamicRhythmNodeIndex = 0;
+    
     
     
     private static bool currentMusicIsPlaying = false;
@@ -128,6 +131,11 @@ public class RhythmViewer : Singleton<RhythmViewer>
 
     private void SpawnRhythmZoneVisual()
     {
+        if(!showRhythmZone)
+        {
+            return;
+        }
+        
         int count = 0;
         foreach (var rhythmData in rhythmDataFile.rhythmDataList)
         {
@@ -137,22 +145,36 @@ public class RhythmViewer : Singleton<RhythmViewer>
             go.transform.position = new Vector3(rhythmData.perfectTime * GameConsts.SPEED + startPoint.position.x, -2.72f, 0);
             RhythmZoneVisual rhythmZoneVisual = go.AddComponent<RhythmZoneVisual>();
             rhythmZoneVisual.Init(timeVisualDataList);
+            rhythmZoneVisuals.Add(rhythmZoneVisual);
             count++;
-        }
-    }
-    
-    [DisableIf("noInPlayMode"),Button(ButtonSizes.Large)]
-    public void UpdateVisual()
-    {
-        for (int i = 0; i < rhythmZoneVisuals.Count; i++)
-        {
-            rhythmZoneVisuals[i].UpdateVisual(timeVisualDataList);
         }
     }
 
     public static Sprite GetSprite()
     {
         return Sprite.Create(squareTexture, new Rect(0.0f, 0.0f, 1.0f, 1.0f), new Vector2(0.5f, 0.5f), 1.0f);
+    }
+    
+    [DisableIf("noInPlayMode"),Button(ButtonSizes.Large)]
+    public void UpdateVisual()
+    {
+        if (showRhythmZone)
+        {
+            foreach (var rhythmZoneVisual in rhythmZoneVisuals)
+            {
+                Destroy(rhythmZoneVisual.gameObject);
+            }
+            rhythmZoneVisuals.Clear();
+            SpawnRhythmZoneVisual();
+        }
+        else
+        {
+            foreach (var rhythmZoneVisual in rhythmZoneVisuals)
+            {
+                Destroy(rhythmZoneVisual.gameObject);
+            }
+            rhythmZoneVisuals.Clear();
+        }
     }
 
     #endregion
