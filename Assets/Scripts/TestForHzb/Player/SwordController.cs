@@ -10,6 +10,8 @@ public class SwordController : MonoBehaviour
     private Animator animator;
     private EnemyController enemy;
     [SerializeField]private float coldDownTime = 0.4f;
+    [SerializeField]private GameObject attackWave;
+    [SerializeField]private Material attackWaveMat;
     private bool canAttack = true;
     private int damage;
 
@@ -19,6 +21,14 @@ public class SwordController : MonoBehaviour
         swordCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        if (attackWave)
+        {
+            var meshRenderer = attackWave.gameObject.GetComponent<MeshRenderer>();
+            if (meshRenderer)
+            {
+                attackWaveMat = meshRenderer.material;
+            }
+        }
         damage = 1;
     }
 
@@ -40,6 +50,10 @@ public class SwordController : MonoBehaviour
         {
             animator.SetTrigger("Attack");
             CleverTimerManager.Instance.Ask4Timer(coldDownTime,SetAttack);
+            if (attackWaveMat)
+            {
+                attackWaveMat.SetFloat("_TimeOfStart", Time.time);
+            }
             canAttack = false;
         }
         //swordCollider.enabled = true;
