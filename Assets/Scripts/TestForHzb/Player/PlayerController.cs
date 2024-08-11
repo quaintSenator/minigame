@@ -28,7 +28,7 @@ public enum JumpType
 public class JumpSettings : System.Object
 {
     public static readonly Dictionary<JumpType, Vector2> settings = new Dictionary<JumpType, Vector2>(){
-        {JumpType.Default, new Vector2(2.6f, 1.1f)}, {JumpType.Spring, new Vector2(4.8f, 3.0f)}, {JumpType.Fly, new Vector2(2.6f, 1.1f)}
+        {JumpType.Default, new Vector2(2.375f, 1.4f)}, {JumpType.Spring, new Vector2(4.8f, 3.0f)}, {JumpType.Fly, new Vector2(2.375f, 1.4f)}
     };
 
     public float jumpHeight;
@@ -66,6 +66,8 @@ public class PlayerController : MonoBehaviour
 
     private double JUDGE_ZERO = 0.000001f;
 
+
+
     [SerializeField]
     [Tooltip("移动、跳跃的基础单位（格子的具体大小），根据场景设置，后续可能会根据变速产生改变")]
     private float worldScale = 1.0f;
@@ -79,6 +81,10 @@ public class PlayerController : MonoBehaviour
     private double bufferTime = 0.1f;
 
     [SerializeField] public JumpSettings jumpSettings;
+
+    [SerializeField]
+    [Tooltip("角色最大下落速度")]
+    private float maxFallSpeed = 16.0f;
 
     [SerializeField]
     [Tooltip("角色自动前进的速度,默认为8格/s,即BPM120，每拍前进4格")]
@@ -119,6 +125,18 @@ public class PlayerController : MonoBehaviour
     [Tooltip("一次弹簧跳跃最高上升的高度，需要调整的参数，影响弹簧上升初速")]
     private float jumpSpringHeight = 4.8f;
 
+    [SerializeField]
+    [Tooltip("一次弹簧跳跃最高上升的高度，需要调整的参数，影响弹簧上升初速")]
+    private List<Transform> resetpoints = null;
+
+    //重生点位，影响复活点位和歌曲播放
+    //*
+    //TODO: 关于关卡的流程，需要考虑设置重生点位的重置
+    private int resetPointIndex = 0;
+
+    private float expectedDisplacementXAxis = 0f;
+
+    private float practicalDisplacementXAxis = 0f;
 
     //角色是否在跳跃
     private bool jumping = false;
@@ -208,7 +226,8 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         returnTimer = 0;
-        registerEvents();
+
+        OnReset();
     }
 
     private void Update()
@@ -241,14 +260,19 @@ public class PlayerController : MonoBehaviour
         }
 
         Rotate();
-        //CheckDead();
+      
     }
 
     private void FixedUpdate()
     {
         //角色一直受一个向下的重力，世界坐标系
         if(!isFlying){
-            rigidBody.AddForce(ForceManager.Instance.GetGravityDir() * gravityScale);//* GameConsts.GRAVITY);
+            //添加最大下落速度限制
+            if(rigidBody.velocity.y> -maxFallSpeed)
+            {
+                rigidBody.AddForce(ForceManager.Instance.GetGravityDir() * gravityScale);//* GameConsts.GRAVITY);
+            }
+
         }
         //角色自动向右前进，世界坐标系
         transform.Translate(playerHeadingDir * speed * Time.fixedDeltaTime, Space.World);
@@ -258,6 +282,8 @@ public class PlayerController : MonoBehaviour
         {
             rigidBody.AddForce(Vector2.up * jumpForce);
         }
+
+        CheckDead();
     }
 
     private void OnSpacebarDown(EventData data = null)
@@ -384,7 +410,7 @@ public class PlayerController : MonoBehaviour
     //对外跳跃接口，设置跳跃参数，不传为默认参数
     public void TryJump(JumpType jumpType = JumpType.Default, JumpSettings value = null)
     {
-        if(value == null)
+        if (value == null)
         {
             CalSettings(JumpSettings.settings[jumpType]);
         }
@@ -475,11 +501,15 @@ public class PlayerController : MonoBehaviour
 
     private void CheckDead()
     {
+        //Check X position 
         moveTimer += Time.deltaTime;
         if (Mathf.Abs(transform.position.x - GameConsts.START_POSITION.x - moveTimer * speed) >= deadZone)
         {
             OnDead();
         }
+
+        //Check Y position
+
     }
 
     public void SetIsGrounded(bool value)
@@ -623,8 +653,10 @@ public class PlayerController : MonoBehaviour
     public void OnReset(EventData data = null)
     {
         ResetState();
+        ResetPositionAndDeacCheck();
         ResetJump();
         ResetFly();
+        ResetAudio();
         EventManager.InvokeEvent(EventType.GameRestartEvent);
     }
 
@@ -664,7 +696,8 @@ public class PlayerController : MonoBehaviour
 
     private void ResetState()
     {
-        transform.position = GameConsts.START_POSITION;
+        //重生在重生点 清空死亡坐标计算累计
+        //位置相关重设单独抽离到ResetPositionAndDeacCheck()
         cubeSprites.rotation = GameConsts.ZERO_ROTATION;
         rigidBody.velocity = GameConsts.START_VELOCITY;
 
@@ -672,4 +705,44 @@ public class PlayerController : MonoBehaviour
         boxCollider.enabled = true;
         moveTimer = 0;
     }
+
+    private void ResetPositionAndDeacCheck()
+    {
+        //May be check the reset point if valid position
+        Vector3 resetPosition= new Vector3();
+        if (resetPointIndex < resetpoints.Count && resetPointIndex >= 0)
+        {
+            resetPosition = resetpoints[resetPointIndex].position;
+        }
+        else
+        {
+            if (resetpoints.Count >= 1)
+            {
+                resetPosition = resetpoints[0].position;
+
+            }
+            else
+            {
+                Debug.LogError("ErrorResetPoints");
+                return;
+            }
+
+        }
+
+        transform.position = resetPosition;
+        expectedDisplacementXAxis = 0f;
+        practicalDisplacementXAxis = 0f;
+
+
+    }
+    private void ResetAudio()
+    {
+        GameAudioEventData gameAudioEventData = new GameAudioEventData();
+        //暂时一个Scene对应一个LevelMusic
+        //gameAudioEventData.LevelMusicIndex=
+        gameAudioEventData.LevelResetPointIndex = resetPointIndex;
+        EventManager.InvokeEvent(EventType.GameStartForAudioEvent, gameAudioEventData);
+    }
+
+
 }
