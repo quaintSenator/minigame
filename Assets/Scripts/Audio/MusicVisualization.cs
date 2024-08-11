@@ -102,7 +102,9 @@ struct LevelMusic
     public float bpm;
 }
 
-
+/// <summary>
+/// 名字暂时不改了，这个其实是声音Controller，但也除了我应该没人看吧
+/// </summary>
 public class MusicVisualization : MonoBehaviour
 {
     [SerializeField]
@@ -116,10 +118,11 @@ public class MusicVisualization : MonoBehaviour
     [SerializeField]
     private List<LevelMusic> LevelMusicEvents = new List<LevelMusic>() { };
 
-/*    //关卡音乐Bpm列表
-    [SerializeField]
-    private List<float> LevelMusicBpmList = new List<float>() { 100 };*/
+    /*    //关卡音乐Bpm列表
+        [SerializeField]
+        private List<float> LevelMusicBpmList = new List<float>() { 100 };*/
 
+    private bool hasLoadBank = false;
     //关卡序号
     [SerializeField]
     private int LevelIndex = 0;
@@ -172,11 +175,22 @@ public class MusicVisualization : MonoBehaviour
     private int IndexOfLastRhythmVisualzationInstance = 0;
 
 
+    private void OnEnable()
+    {
+        RegisterEvents();
+    }
+
+    private void OnDisable()
+    {
+        UngisterEvents();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         LoadLevelBank();
+
+        //可能会考虑统一由其他类进行控制 而使用
         if (IfPlayMusicWhenStart)
         {
             PlayLevelMusic();
@@ -188,6 +202,7 @@ public class MusicVisualization : MonoBehaviour
                 InitRhythmVisualizationPerfabList();
             }
         }
+
     }
 
     // Update is called once per frame
@@ -196,6 +211,17 @@ public class MusicVisualization : MonoBehaviour
 
         
     }
+
+    private void RegisterEvents()
+    {
+        EventManager.AddListener(EventType.GameStartForAudioEvent, OnGameStartForAudio);
+    }
+
+    private void UngisterEvents()
+    {
+        EventManager.RemoveListener(EventType.GameStartForAudioEvent, OnGameStartForAudio);
+    }
+
 
     private void InitRhythmVisualizationPerfabList()
     {
@@ -262,71 +288,24 @@ public class MusicVisualization : MonoBehaviour
     }
 
     
-    public void LoadLevelBank()
+    public void OnGameStartForAudio( EventData gameAudioEventData = null)
     {
-        if ((LevelIndex < LevelMusicEvents.Count))
+        LoadLevelBank();
+
+        //May be add more audio play state check ,but seem no necessary
+        GameAudioEventData localGameAudioEventData = gameAudioEventData as GameAudioEventData;
+        if (localGameAudioEventData == null)
         {
-            AkBankManager.LoadBank(LevelMusicEvents[LevelIndex].bankName, false, false);
+            Debug.LogWarning("invoke PlayLevelMusic wrongly");
+            return;
         }
-    }
-    public void PlayLevelMusic()
-    {
-        //TODO:补充延时播放相关
-/*        if (IfPlayMusicWhenStart)
-        {*/
-            if (!(LevelIndex < LevelMusicEvents.Count))
-            {
-                Debug.LogWarning("The LevelIndex out of length of LevelMusicPlayEvent or LevelMusicPlayEvent");
-                return;
-            }
+        StopLevelMusic();
+        PlayLevelMusic();
 
-
-            if (IfUseVisualization )
-            {
-                LevelMusicEvents[LevelIndex].LevelMusicPlayEvent.Post(gameObject, (uint)CallbackType, CallbackFunctionMarker);
-            }
-            else
-            {
-                LevelMusicEvents[LevelIndex].LevelMusicPlayEvent.Post(gameObject);
-            }
-
-
-       // }
     }
 
 
-    public void StopLevelMusic()
-    {
-        if (LevelIndex < LevelMusicEvents.Count)
-        {
-            LevelMusicEvents[LevelIndex].LevelMusicStopEvent.Post(gameObject);
-        }
-    }
 
-    public void PauseLevelMusic()
-    {
-        if (LevelIndex < LevelMusicEvents.Count)
-        {
-            LevelMusicEvents[LevelIndex].LevelMusicPauseEvent.Post(gameObject);
-        }
-    }
-
-    public void ResumeLevelMusic()
-    {
-        if (LevelIndex < LevelMusicEvents.Count)
-        {
-            LevelMusicEvents[LevelIndex].LevelMusicResumeEvent.Post(gameObject);
-        }
-    }
-
-
-    public void SeekLevelMusicByTimeMS(int timeMS)
-    {
-        if (LevelIndex < LevelMusicEvents.Count)
-        {
-            LevelMusicEvents[LevelIndex].LevelMusicPlayEvent.SeekEventByTime(gameObject, timeMS);
-        }
-    }
 
 
     //播放声音的回调函数
@@ -423,6 +402,82 @@ public class MusicVisualization : MonoBehaviour
 
 
 
+    #region Helper Functions
 
+    public void LoadLevelBank()
+    {
+        if ((LevelIndex < LevelMusicEvents.Count) && !hasLoadBank)
+        {
+            AkBankManager.LoadBank(LevelMusicEvents[LevelIndex].bankName, false, false);
+            hasLoadBank = true;
+        }
+    }
+
+    public void UnloadLevelBank()
+    {
+        if ((LevelIndex < LevelMusicEvents.Count) && hasLoadBank)
+        {
+            AkBankManager.UnloadBank(LevelMusicEvents[LevelIndex].bankName);
+            hasLoadBank = false;
+        }
+    }
+    public void PlayLevelMusic()
+    {
+
+
+
+        if (!(LevelIndex < LevelMusicEvents.Count))
+        {
+            Debug.LogWarning("The LevelIndex out of length of LevelMusicPlayEvent or LevelMusicPlayEvent");
+            return;
+        }
+
+
+        if (IfUseVisualization)
+        {
+            LevelMusicEvents[LevelIndex].LevelMusicPlayEvent.Post(gameObject, (uint)CallbackType, CallbackFunctionMarker);
+        }
+        else
+        {
+            LevelMusicEvents[LevelIndex].LevelMusicPlayEvent.Post(gameObject);
+        }
+
+    }
+
+
+    public void StopLevelMusic()
+    {
+        if (LevelIndex < LevelMusicEvents.Count)
+        {
+            LevelMusicEvents[LevelIndex].LevelMusicStopEvent.Post(gameObject);
+        }
+    }
+
+    public void PauseLevelMusic()
+    {
+        if (LevelIndex < LevelMusicEvents.Count)
+        {
+            LevelMusicEvents[LevelIndex].LevelMusicPauseEvent.Post(gameObject);
+        }
+    }
+
+    public void ResumeLevelMusic()
+    {
+        if (LevelIndex < LevelMusicEvents.Count)
+        {
+            LevelMusicEvents[LevelIndex].LevelMusicResumeEvent.Post(gameObject);
+        }
+    }
+
+
+    public void SeekLevelMusicByTimeMS(int timeMS)
+    {
+        if (LevelIndex < LevelMusicEvents.Count)
+        {
+            LevelMusicEvents[LevelIndex].LevelMusicPlayEvent.SeekEventByTime(gameObject, timeMS);
+        }
+    }
+
+    #endregion
 
 }

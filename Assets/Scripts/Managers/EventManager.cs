@@ -19,6 +19,7 @@ public enum EventType
     DecideCanJumpEvent = 11,
 
 
+
     #region 输入事件在此添加
     
     MouseMoveEvent = 101,
@@ -61,12 +62,32 @@ public enum EventType
     CompleteSelectZoneEvent = 225,
 
     #endregion
+
+    #region 音乐流程控制事件
+    GameStartForAudioEvent=300,
+    GameRestartForAudioEvent=301,
+    GamePauseForAudioEvent=302, 
+    GameResumeForAudioEvent=303,
+    #endregion
+
+
 }
 
 // 事件数据参数基类，具体使用时可以继承该类，添加自己需要的参数
 public class EventData
 {
     
+}
+
+public class GameAudioEventData : EventData
+{
+    public int LevelMusicIndex=0;
+    public int LevelResetPointIndex = 0;
+    public GameAudioEventData() : base()
+    {
+            
+    }
+
 }
 
 public class EventManager : Singleton<EventManager>
