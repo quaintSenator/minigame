@@ -8,11 +8,13 @@ using UnityEngine.U2D;
 
 public class GameObjectDieEventData : EventData
 {
-    public GameObject go;
-
-    public GameObjectDieEventData(GameObject gameObject)
+    public GameObject sender;
+    public GameObject go2kill;
+    
+    public GameObjectDieEventData(GameObject sdor, GameObject gameObject)
     {
-        go = gameObject;
+        go2kill = gameObject;
+        sender = sdor;
     }
 }
 
@@ -29,6 +31,7 @@ public class TailEffectController : HoldStillEffectController
 {
     private Animator _mAnimator;
     private SpriteRenderer _spriteRenderer;
+    private bool _isHiding;
     [SerializeField] private float _delayBe4Show;
     [SerializeField] private GameObject _fadingTailEffectPrefab;
 
@@ -37,12 +40,14 @@ public class TailEffectController : HoldStillEffectController
 
     private void HideSprite()
     {
+        _isHiding = true;
         _mAnimator.enabled = false;
         _spriteRenderer.color = new Color(1, 1, 1, 0);
     }
 
     private void ShowSprite()
     {
+        _isHiding = false;
         _mAnimator.enabled = true;
         _spriteRenderer.color = new Color(1, 1, 1, 0.607f);
         _mAnimator.Play("FrameQueue_play");
@@ -53,7 +58,7 @@ public class TailEffectController : HoldStillEffectController
         CleverTimerManager.Instance.Ask4Timer(t, OnShowSpriteTimeup, new KeepSlidingEventData(this));
     }
 
-    public void OnShowSpriteTimeup(EventData eventData)
+    private void OnShowSpriteTimeup(EventData eventData)
     {
         var s = ((KeepSlidingEventData)eventData).self;
         if (Time.timeAsDouble - lastOffTime > _delayBe4Show)
@@ -65,6 +70,7 @@ public class TailEffectController : HoldStillEffectController
     {
         _mAnimator = gameObject.GetComponent<Animator>();
         _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        _isHiding = false;
         EventManager.AddListener(EventType.DecideCanJumpEvent, OnJump);
         EventManager.AddListener(EventType.PlayerJumpoffGroundEvent, OnOff);
         EventManager.AddListener(EventType.PlayerHitGroundEvent, OnHitGround);
@@ -81,23 +87,27 @@ public class TailEffectController : HoldStillEffectController
     {
         lastOffTime = Time.timeAsDouble;
         HideSprite();
+        
     }
     private void OnJump(EventData eventData)
     {
-        var generatedFade = Instantiate(_fadingTailEffectPrefab, null);
-        generatedFade.transform.position = transform.position;
-        CleverTimerManager.Instance.Ask4Timer(0.25, eventData =>
+        if (!_isHiding)
         {
-            var go2Die = ((GameObjectDieEventData)eventData).go;
-            if(go2Die)
+            var generatedFade = Instantiate(_fadingTailEffectPrefab, null);
+            generatedFade.transform.position = transform.position;
+            CleverTimerManager.Instance.Ask4Timer(0.25, eventData =>
             {
-                Destroy(go2Die);
-            }
-            else
-            {
-                Debug.Log("TailEffect nothing 2 kill");
-            }
-        }, new GameObjectDieEventData(generatedFade));
+                var go2Die = ((GameObjectDieEventData)eventData).go2kill;
+                if(go2Die)
+                {
+                    Destroy(go2Die);
+                }
+                else
+                {
+                    Debug.Log("TailEffect nothing 2 kill");
+                }
+            }, new GameObjectDieEventData(gameObject, generatedFade));
+        }
     }
 
     private void OnHitGround(EventData eventData)
