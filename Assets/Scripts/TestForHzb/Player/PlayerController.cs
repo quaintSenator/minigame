@@ -138,6 +138,10 @@ public class PlayerController : MonoBehaviour
 
     private float practicalDisplacementXAxis = 0f;
 
+    [SerializeField]
+    [Tooltip("是否开启下落速度检测")]
+    private bool ifSwitchOnFallSpeedLimit = false;
+
     //角色是否在跳跃
     private bool jumping = false;
 
@@ -268,7 +272,7 @@ public class PlayerController : MonoBehaviour
         //角色一直受一个向下的重力，世界坐标系
         if(!isFlying){
             //添加最大下落速度限制
-            if(rigidBody.velocity.y> -maxFallSpeed)
+            if(!ifSwitchOnFallSpeedLimit || rigidBody.velocity.y> -maxFallSpeed)
             {
                 rigidBody.AddForce(ForceManager.Instance.GetGravityDir() * gravityScale);//* GameConsts.GRAVITY);
             }
