@@ -55,6 +55,11 @@ public enum EventType
     SelectBuildableEvent = 218,
     CancelAllSelectEvent = 219,
     ResetCameraEvent = 220,
+    StartSelectZoneEvent = 221,
+    EndSelectZoneEvent = 222,
+    SetSelectZoneStartPosEvent = 223,
+    SetSelectZoneEndPosEvent = 224,
+    CompleteSelectZoneEvent = 225,
 
     #endregion
 
