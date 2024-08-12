@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using static UnityEngine.Experimental.Rendering.RayTracingAccelerationStructure;
 
 
 
@@ -24,49 +25,12 @@ public enum JumpType
     Fly,
 }
 
-[System.Serializable]
-public class JumpSettings : System.Object
-{
-    public static readonly Dictionary<JumpType, Vector2> settings = new Dictionary<JumpType, Vector2>(){
-        {JumpType.Default, new Vector2(2.375f, 1.4f)}, {JumpType.Spring, new Vector2(4.8f, 3.0f)}, {JumpType.Fly, new Vector2(2.375f, 1.4f)}
-    };
-
-    public float jumpHeight;
-    public float jumpDeltaHeight;
-
-    public JumpSettings()
-    {
-        jumpHeight = settings[JumpType.Default].x;
-        jumpDeltaHeight = settings[JumpType.Default].y;
-    }
-    public JumpSettings(JumpType jumpType)
-    {
-        jumpHeight = settings[jumpType].x;
-        jumpDeltaHeight = settings[jumpType].y;
-    }
-    public JumpSettings(Vector2 setting)
-    {
-        jumpHeight = setting.x;
-        jumpDeltaHeight = setting.y;
-    }
-    public JumpSettings(float jumpHeight, float jumpDeltaHeight)
-    {
-        this.jumpHeight = jumpHeight;
-        this.jumpDeltaHeight = jumpDeltaHeight;
-    }
-    public static implicit operator JumpSettings(Vector2 setting)
-    {
-        return new JumpSettings(setting);
-    }
-}
 
 public class PlayerController : MonoBehaviour
 {
     public AK.Wwise.Event ActionJumpEvent=null;
 
     private double JUDGE_ZERO = 0.000001f;
-
-
 
     [SerializeField]
     [Tooltip("移动、跳跃的基础单位（格子的具体大小），根据场景设置，后续可能会根据变速产生改变")]
@@ -80,7 +44,6 @@ public class PlayerController : MonoBehaviour
     [Tooltip("角色按键缓冲时长，玩家过早输入后，在一定时间内仍然可以触发动作")]
     private double bufferTime = 0.1f;
 
-    [SerializeField] public JumpSettings jumpSettings;
 
     [SerializeField]
     [Tooltip("角色最大下落速度")]
@@ -188,8 +151,6 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D boxCollider;
     private Rigidbody2D rigidBody;
 
-    //为减少FixUp开销保存ForceManager引用
-    private ForceManager _forceManager;
     //为减少FixUp开销保存HeadingDir的常态，仅在事件下切换
     private Vector3 playerHeadingDir;
     private void Awake()
@@ -203,7 +164,7 @@ public class PlayerController : MonoBehaviour
                 }*/
 
 
-        _forceManager = ForceManager.Instance;
+
         playerHeadingDir = Vector3.right;
         CalSettings();
         InitSettings();
@@ -274,7 +235,7 @@ public class PlayerController : MonoBehaviour
             //添加最大下落速度限制
             if(!ifSwitchOnFallSpeedLimit || rigidBody.velocity.y> -maxFallSpeed)
             {
-                rigidBody.AddForce(ForceManager.Instance.GetGravityDir() * gravityScale);//* GameConsts.GRAVITY);
+                rigidBody.AddForce(Vector2.down * gravityScale);//* GameConsts.GRAVITY);
             }
 
         }
@@ -370,9 +331,9 @@ public class PlayerController : MonoBehaviour
 
     }
     //角色跳跃
-    private void Jump()
+    private void Jump(JumpType jumpType= JumpType.Default)
     {
-        EventManager.InvokeEvent(EventType.DecideCanJumpEvent, null);
+        //EventManager.InvokeEvent(EventType.DecideCanJumpEvent, null);
         disableTimerCount = bufferTimerCount > 0 ? bufferTimerCount : 0;
         bufferTimerCount = 0;
         isBufferActive = false;
@@ -385,7 +346,15 @@ public class PlayerController : MonoBehaviour
                 break;
             case JumpMode.Speed:
                 jumping = false;
-                rigidBody.velocity = Vector2.up * jumpSpeed;
+                if(jumpType == JumpType.Default)
+                {
+                    rigidBody.velocity = Vector2.up * jumpSpeed;
+                }
+                else if(jumpType == JumpType.Spring)
+                {
+                    rigidBody.velocity = Vector2.up * jumpSpringSpeed;
+                }
+
                 //rigidBody.AddForce(Vector2.up * jumpForce);
                 // Impulse
                 //rigidBody.impluse
@@ -412,16 +381,11 @@ public class PlayerController : MonoBehaviour
     }
 
     //对外跳跃接口，设置跳跃参数，不传为默认参数
-    public void TryJump(JumpType jumpType = JumpType.Default, JumpSettings value = null)
+    public void TryJump(JumpType jumpType = JumpType.Default)
     {
-        if (value == null)
-        {
-            CalSettings(JumpSettings.settings[jumpType]);
-        }
-        else
-        {
-            CalSettings(value);
-        }
+
+
+        //CalSettings(null);
 
         if (jumpType == JumpType.Default && isGrounded)
         {
@@ -430,7 +394,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (jumpType == JumpType.Spring || jumpType == JumpType.Fly)
         {
-            Jump();
+            Jump(jumpType);
         }
     }
 
@@ -445,27 +409,21 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void CalSettings(JumpSettings data = null)
+    private void CalSettings()
     {
-        if (data == null)
-        {
-            jumpSettings = GameConsts.DEFAULT_JUMP;
-        }
 
-        CalNormalJumpParameter(data);
+
+        CalNormalJumpParameter();
 
         //TODO:这个值应该是从别处拿到或者直接赋的
-
+        //根据WorldScale进行缩放
         jumpSpeed = jumpSpeed * worldScale;
         gravityScale = gravityScale * worldScale;
+        jumpSpringSpeed= jumpSpringSpeed * worldScale;
     }
 
-    private void CalNormalJumpParameter(JumpSettings data = null)
+    private void CalNormalJumpParameter()
     {
-        if(data == null) return;
-
-        float jumpHeight = data.jumpHeight;
-        float jumpDeltaHeight = data.jumpDeltaHeight;
 
         //跳跃一次的上升初速度和最高点位置解析出来会满足一个数量关系
         //jumpHeight = jumpHeight * worldScale;
@@ -507,7 +465,7 @@ public class PlayerController : MonoBehaviour
     {
         //Check X position 
         moveTimer += Time.deltaTime;
-        if (Mathf.Abs(transform.position.x - GameConsts.START_POSITION.x - moveTimer * speed) >= deadZone)
+        if (Mathf.Abs(transform.position.x - resetpoints[0].position. x - moveTimer * speed) >= deadZone)
         {
             OnDead();
         }
@@ -694,7 +652,6 @@ public class PlayerController : MonoBehaviour
         willJump = false;
         isContinueJump = false;
         jumpTimer = 0;
-        jumpSettings = GameConsts.DEFAULT_JUMP;
         isBufferActive = false;
     }
 
@@ -727,7 +684,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                Debug.LogError("ErrorResetPoints");
+                Debug.LogError("Error ResetPoints");
                 return;
             }
 

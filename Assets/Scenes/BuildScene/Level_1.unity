@@ -591,7 +591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07855be1e23f82d4f90bf3e25ac233c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedMapdata: {fileID: 11400000, guid: d23261cd5ea20f84e8055424208aee54, type: 2}
+  selectedMapdata: {fileID: 11400000, guid: c23eb3bb9ed890041805dc7ae0a288bf, type: 2}
   showAllBuildable: 0
 --- !u!1 &1297685984
 GameObject:
@@ -622,7 +622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9309d17fe7ab9824c9fd7874f91dbe66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedMapdata: {fileID: 11400000, guid: 4ab9dca808ca3b7488b5b3dc1e7d9d30, type: 2}
+  selectedMapdata: {fileID: 11400000, guid: c23eb3bb9ed890041805dc7ae0a288bf, type: 2}
   mapParent: {fileID: 1270504054}
   showAllBuildable: 0
   selectIcon: {fileID: 0}
@@ -684,6 +684,10 @@ PrefabInstance:
     - target: {fileID: 3931848181877765673, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: ActionJumpEvent.WwiseObjectReference
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3931848181877765675, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3931848181877765676, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: m_RootOrder

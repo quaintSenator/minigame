@@ -17,5 +17,4 @@ public class GameConsts
     public static readonly float TILE_CHECK_GAP = 0.1f;
     public static readonly float SPEED = 8.0f;
 
-    public static readonly JumpSettings DEFAULT_JUMP = new JumpSettings();
 }

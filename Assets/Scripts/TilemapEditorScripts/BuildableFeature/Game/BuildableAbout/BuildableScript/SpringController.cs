@@ -6,30 +6,27 @@ using UnityEngine;
 public class SpringController : BuildableBase
 {
 
-    [SerializeField]
-    private JumpSettings jumpSettings = new JumpSettings();
-    [SerializeField] private bool useDefault = true;
+    bool hasBeenUsedForJump = false;
 
     public override void Init()
     {
-        if (useDefault)
-        { 
-            jumpSettings = new JumpSettings(JumpSettings.settings[JumpType.Spring]); 
-        }
+
     }
 
     private void Start()
     {
-        if (useDefault)
-        { 
-            jumpSettings = new JumpSettings(JumpSettings.settings[JumpType.Spring]);
-        }       
+
     }
 
     protected override void TriggerThisBuildable(PlayerController player)
     {
-        player.TryJump(JumpType.Spring, jumpSettings);
-        Debug.Log("OnSpringTrigger");
+/*        if(!hasBeenUsedForJump)
+        {*/
+            player.TryJump(JumpType.Spring);
+            Debug.Log("OnSpringTrigger");
+            hasBeenUsedForJump = true;
+       // }
+
     }
 
 }
