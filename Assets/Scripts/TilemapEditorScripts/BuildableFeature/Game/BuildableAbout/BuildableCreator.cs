@@ -644,7 +644,6 @@ public class BuildableCreator : Singleton<BuildableCreator>
         {
             if (showAllBuildable || Utils.IsAlwaysVisible(buildableInfo.type) || Utils.IsBuildableViewport(buildableInfo.position, Camera.main))
             {
-                Debug.Log("Show buildable : " + buildableInfo.position);
                 SpawnBuildable(buildableInfo.type, buildableInfo.position);
             }
             else
