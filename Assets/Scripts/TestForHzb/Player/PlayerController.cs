@@ -92,6 +92,11 @@ public class PlayerController : MonoBehaviour
     [Tooltip("一次弹簧跳跃最高上升的高度，需要调整的参数，影响弹簧上升初速")]
     private List<Transform> resetpoints = null;
 
+    [SerializeField]
+    [Tooltip("下落死亡检测的Y轴坐标")]
+    private Transform deadCheckYAxis = null;
+
+
     //重生点位，影响复活点位和歌曲播放
     //*
     //TODO: 关于关卡的流程，需要考虑设置重生点位的重置
@@ -465,12 +470,26 @@ public class PlayerController : MonoBehaviour
     {
         //Check X position 
         moveTimer += Time.deltaTime;
-        if (Mathf.Abs(transform.position.x - resetpoints[0].position. x - moveTimer * speed) >= deadZone)
+
+        if(resetPointIndex >=0 && resetPointIndex < resetpoints.Count)
+        {
+            if (Mathf.Abs(transform.position.x - resetpoints[resetPointIndex].position.x - moveTimer * speed) >= deadZone)
+            {
+                OnDead();
+            }
+        }
+        else
+        {
+            Debug.LogError("wrong resetPointIndex or wrong resetpoints");
+        }
+
+
+        //Check Y position
+        if(transform.position.y<=deadCheckYAxis.position.y)
         {
             OnDead();
         }
 
-        //Check Y position
 
     }
 
