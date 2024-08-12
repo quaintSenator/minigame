@@ -80,7 +80,6 @@ public class FrictionEffectController : HoldStillEffectController
         //调节相对顶层节点位置
         Vector3 localPosition2Set = new Vector3();
         
-        
         localPosition2Set.x = -cubeEdgeLen;
         localPosition2Set.y = -cubeEdgeLen;
         transform.localPosition = localPosition2Set;

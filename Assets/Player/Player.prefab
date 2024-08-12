@@ -27,11 +27,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1183745991763393449}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.45, y: -0.31, z: -0.41977787}
+  m_LocalPosition: {x: -0.45000008, y: -0.31000003, z: -0.41977793}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 3931848181893502971}
-  m_RootOrder: 0
+  m_Father: {fileID: 3931848181877765676}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!198 &1183745991763393453
 ParticleSystem:
@@ -4854,7 +4854,7 @@ Transform:
   m_Children:
   - {fileID: 2861905252355899696}
   m_Father: {fileID: 3931848181877765676}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2426603820123445343
 GameObject:
@@ -4956,7 +4956,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3931848181893502971}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3832072421744281546
 MonoBehaviour:
@@ -5003,7 +5003,7 @@ Transform:
   - {fileID: 3931848181627620474}
   - {fileID: 2722495892022012283}
   m_Father: {fileID: 3931848181877765676}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3931848181627620475
 GameObject:
@@ -5107,6 +5107,7 @@ Transform:
   m_LocalScale: {x: 1.35, y: 1.35, z: 1.35}
   m_Children:
   - {fileID: 8579508976147554664}
+  - {fileID: 1183745991763393448}
   - {fileID: 3931848181893502971}
   - {fileID: 3931848180994807022}
   - {fileID: 720426652733263593}
@@ -5222,11 +5223,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1183745991763393448}
   - {fileID: 3931848182036276831}
   - {fileID: 3832072421744281557}
   m_Father: {fileID: 3931848181877765676}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3931848182036276896
 GameObject:
@@ -5257,7 +5257,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3931848181893502971}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3931848182036276830
 SpriteRenderer:
@@ -5341,7 +5341,7 @@ Transform:
   m_LocalScale: {x: 0.70000005, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3931848181877765676}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2244101153673914920
 SpriteRenderer:
