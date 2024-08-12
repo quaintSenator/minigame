@@ -14,7 +14,10 @@ public enum BuildableType
     spring,
     twoStage,
     flyOrbit,
-    enemy
+    enemy,
+    continous_start_point,
+    continous_middle_point,
+    continous_end_point,
 }
 
 [CreateAssetMenu(fileName = "BuildableList", menuName = "Buildable/Create BuildableList")]

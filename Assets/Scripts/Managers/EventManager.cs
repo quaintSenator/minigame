@@ -33,33 +33,36 @@ public enum EventType
     
     #endregion
 
-    #region 地图编辑器输入事件
+    #region 地图编辑器事件
 
-    CancelCurrentSelectEvent = 201,
-    DrawOrEraseEvent = 202,
-    ChangeTileModeEvent = 203,
-    SaveMapEvent = 204,
-    LoadMapOneEvent = 205,
-    LoadMapTwoEvent = 206,
-    LoadMapThreeEvent = 207,
-    PauseOrResumeMusicEvent = 208,
-    StopOrPlayMusicEvent = 209,
-    OpenOrCloseCoordinateEvent = 210,
-    SelectCurrentMusicTimeEvent = 211,
-    LeftMoveBuildableEvent = 212,
-    RightMoveBuildableEvent = 213,
-    UpMoveBuildableEvent = 214,
-    DownMoveBuildableEvent = 215,
-    EnterSelectModeEvent = 216,
-    ExitSelectModeEvent = 217,
-    SelectBuildableEvent = 218,
-    CancelAllSelectEvent = 219,
-    ResetCameraEvent = 220,
-    StartSelectZoneEvent = 221,
-    EndSelectZoneEvent = 222,
-    SetSelectZoneStartPosEvent = 223,
-    SetSelectZoneEndPosEvent = 224,
-    CompleteSelectZoneEvent = 225,
+    CancelCurrentSelectEvent = 201, // 取消当前选择
+    DrawOrEraseEvent = 202, // 画或者擦除
+    ChangeTileModeEvent = 203, // 切换画笔模式
+    SaveMapEvent = 204, // 保存地图
+    LoadMapOneEvent = 205, // 加载地图1
+    LoadMapTwoEvent = 206, // 加载地图2
+    LoadMapThreeEvent = 207, // 加载地图3
+    PauseOrResumeMusicEvent = 208, // 暂停或者播放音乐
+    StopOrPlayMusicEvent = 209, // 停止或者播放音乐
+    OpenOrCloseCoordinateEvent = 210, // 打开或者关闭坐标
+    SelectCurrentMusicTimeEvent = 211, // 选择当前音乐时间
+    LeftMoveBuildableEvent = 212, // 左移建筑
+    RightMoveBuildableEvent = 213, // 右移建筑
+    UpMoveBuildableEvent = 214, // 上移建筑
+    DownMoveBuildableEvent = 215, // 下移建筑
+    EnterSelectModeEvent = 216, // 进入选择模式
+    ExitSelectModeEvent = 217, // 退出选择模式
+    SelectBuildableEvent = 218, // 选择建筑
+    CancelAllSelectEvent = 219, // 取消所有选择
+    ResetCameraEvent = 220, // 重置相机
+    StartSelectZoneEvent = 221, // 开始选择区域
+    EndSelectZoneEvent = 222, // 结束选择区域
+    SetSelectZoneStartPosEvent = 223, // 设置选择区域开始位置
+    SetSelectZoneEndPosEvent = 224, // 设置选择区域结束位置
+    CompleteSelectZoneEvent = 225, // 完成选择区域
+    DrawContinuousPointEvent = 226, // 绘制连续点
+    EndDrawContinuousPointEvent = 227, // 结束绘制连续点
+    EraseContinuousPointEvent = 228, // 重置连续点
 
     #endregion
 

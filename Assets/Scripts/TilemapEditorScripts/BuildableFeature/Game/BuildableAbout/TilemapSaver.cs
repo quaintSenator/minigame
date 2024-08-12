@@ -151,6 +151,12 @@ public class BuildableInfo
         this.type = type;
         this.position = position;
     }
+    
+    public BuildableInfo(BuildableInfo buildableInfo)
+    {
+        this.type = buildableInfo.type;
+        this.position = buildableInfo.position;
+    }
 }
 
 [Serializable]

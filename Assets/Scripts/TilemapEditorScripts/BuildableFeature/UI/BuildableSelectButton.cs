@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class BuildableSelectButton : MonoBehaviour
 {
-    [SerializeField] BuildableType buildableType;
-    private Button btn;
+    [SerializeField] protected BuildableType buildableType;
+    protected Button btn;
 
     private void Awake()
     {
@@ -15,7 +15,7 @@ public class BuildableSelectButton : MonoBehaviour
         btn.onClick.AddListener(OnClick);
     }
 
-    private void OnClick()
+    protected virtual void OnClick()
     {
         Debug.Log("Click " + buildableType);
         BuildableCreator.Instance.SetSelectedObject(buildableType);

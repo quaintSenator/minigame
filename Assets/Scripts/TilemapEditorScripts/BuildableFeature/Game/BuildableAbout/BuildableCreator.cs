@@ -104,6 +104,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         EventManager.AddListener(EventType.CancelAllSelectEvent, CancelAllSelect); //取消选择所有物体
         EventManager.AddListener(EventType.StartSelectZoneEvent, OnStartSelectZone); //开始选中框
         EventManager.AddListener(EventType.CompleteSelectZoneEvent, OnCompleteSelectZone); //完成选中框
+        EventManager.AddListener(EventType.DrawContinuousPointEvent, DrawContinuousPoint); //绘制连续点
     }
 
     private void OnDisable()
@@ -127,6 +128,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         EventManager.RemoveListener(EventType.CancelAllSelectEvent, CancelAllSelect); //取消选择所有物体
         EventManager.RemoveListener(EventType.StartSelectZoneEvent, OnStartSelectZone); //开始选中框
         EventManager.RemoveListener(EventType.CompleteSelectZoneEvent, OnCompleteSelectZone); //完成选中框
+        EventManager.RemoveListener(EventType.DrawContinuousPointEvent, DrawContinuousPoint); //绘制连续点
         
         AutoSaveMap();
     }
@@ -142,6 +144,16 @@ public class BuildableCreator : Singleton<BuildableCreator>
         MapData mapData = new MapData(key, buildableInfos);
         PlayerPrefs.SetString(GameConsts.AUTO_TILEMAP_SAVE_DATA_2, JsonUtility.ToJson(mapData));
         Debug.Log("Auto save tilemap data v2");
+    }
+    
+    private void DrawContinuousPoint(EventData obj)
+    {
+        var data = obj as DrawContinuousPointEventData;
+        var point = data.Point;
+        if (selectedType == BuildableType.continous_start_point && point.GetPointType() == ContinousPointType.Start)
+        {
+            SetSelectedObject(BuildableType.continous_middle_point);
+        }
     }
 
     private void OnStartSelectZone(EventData obj)
@@ -331,6 +343,10 @@ public class BuildableCreator : Singleton<BuildableCreator>
 
     private void OnDrawOrErase(EventData data = null)
     {
+        if (InputManager.Instance.IsMouseOverUI())
+        {
+            return;
+        }
         if (currentTileMode == TileMode.Build)
         {
             DrawTileMap();   
@@ -353,26 +369,43 @@ public class BuildableCreator : Singleton<BuildableCreator>
     
     public void SetSelectedObject(BuildableType type)
     {
+        DonePreviousSelect();
         selectedType = type;
         currentTileMode = selectedType == BuildableType.none ? TileMode.None : TileMode.Build;
         if (selectedType != BuildableType.none)
         {
             if (previewObj != null)
             {
-                BuildableBase.DestroyBuildable(previewObj);
+                BuildableBase.DestroyBuildableWithoutDispose(previewObj);
                 previewObj = null;
             }
-            previewObj = BuildableBase.SpawnBuildable(selectedType, currentCellPosition, transform, 1);
+            previewObj = BuildableBase.SpawnBuildableWithoutInit(selectedType, currentCellPosition, transform, 1);
         }
         else
         {
             if (previewObj != null)
             {
-                BuildableBase.DestroyBuildable(previewObj);
+                BuildableBase.DestroyBuildableWithoutDispose(previewObj);
                 previewObj = null;
             }
         }
         UpdateTilemap();
+    }
+
+    private void DonePreviousSelect()
+    {
+        if (selectedType == BuildableType.continous_middle_point)
+        {
+            if(ContinousPoint.LastSpawnPoint != null)
+            {
+                if(ContinousPoint.LastSpawnPoint.GetPointType() == ContinousPointType.Middle)
+                {
+                    Vector3Int position = ContinousPoint.LastSpawnPoint.Position;
+                    //替换为终点
+                    DrawTileMap(BuildableType.continous_end_point, position);
+                }
+            }
+        }
     }
     
     private void MoveBuildable(Vector3Int offset)
@@ -520,6 +553,40 @@ public class BuildableCreator : Singleton<BuildableCreator>
         }
     }
     
+    private void DrawTileMap(BuildableType type, Vector3Int position)
+    {
+        //如果当前鼠标位置上有物体并且和当前选择的不一样，Destroy
+        if (currentBuildableMap.ContainsKey(position))
+        {
+            if (currentBuildableMap[position].Type != type)
+            {
+                BuildableBase buildable = currentBuildableMap[position];
+                DestoryBuildable(buildable.Position);
+                buildableInfos.Remove(buildableInfos.Find(info => info.position == buildable.Position));
+                TilemapSaver.Instance.RemoveThisBuildable(buildable.Position);
+            }
+            else
+            {
+                return;
+            }
+        }
+        
+        //生成选择的物体
+        if (type != BuildableType.none)
+        {
+            TilemapSaver.Instance.AddThisBuildable(type, position);
+            buildableInfos.Add(new BuildableInfo(type, position));
+            SpawnBuildable(type, position);
+        }
+    }
+    
+    private void EraseTileMap(Vector3Int position)
+    {
+        DestoryBuildable(position);
+        buildableInfos.Remove(buildableInfos.Find(info => info.position == position));
+        TilemapSaver.Instance.RemoveThisBuildable(position);
+    }
+    
     public void ClearAllTilemaps()
     {
         Debug.Log("Clear all tilemaps");
@@ -575,8 +642,9 @@ public class BuildableCreator : Singleton<BuildableCreator>
     {
         foreach (var buildableInfo in buildableInfos)
         {
-            if (Utils.IsBuildableViewport(buildableInfo.position, Camera.main) || showAllBuildable)
+            if (showAllBuildable || Utils.IsAlwaysVisible(buildableInfo.type) || Utils.IsBuildableViewport(buildableInfo.position, Camera.main))
             {
+                Debug.Log("Show buildable : " + buildableInfo.position);
                 SpawnBuildable(buildableInfo.type, buildableInfo.position);
             }
             else
@@ -605,5 +673,10 @@ public class BuildableCreator : Singleton<BuildableCreator>
     {
         Debug.Log("currentBuildableMap count : " + currentBuildableMap.Count);
         Debug.Log("buildableInfos count : " + buildableInfos.Count);
+
+        foreach (var VARIABLE in buildableInfos)
+        {
+            Debug.Log(VARIABLE.position + " : " + VARIABLE.type);
+        }
     }
 }

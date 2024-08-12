@@ -11,11 +11,6 @@ public class BuildableBase : MonoBehaviour
     public static BuildableList buildableList;
     private BuildableType type;
     public BuildableType Type => type;
-    
-    private void OnEnable()
-    {
-        SetSortingOrder();
-    }
 
     public virtual void Init()
     {
@@ -25,6 +20,16 @@ public class BuildableBase : MonoBehaviour
     public virtual void Dispose()
     {
         //TODO 销毁
+    }
+    
+    public virtual void RegisterEvent()
+    {
+        //TODO 注册事件
+    }
+    
+    public virtual void UnRegisterEvent()
+    {
+        //TODO 注销事件
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -86,11 +91,14 @@ public class BuildableBase : MonoBehaviour
         {
             buildableList = Resources.Load<BuildableList>("AllBuildableList");
         }
+        Debug.Log("SpawnBuildable : " + type);
+        Debug.Log("SpawnBuildable : " + buildableList.GetPrefab(type));
         GameObject obj = PoolManager.Instance.SpawnFromPool(type.ToString(), buildableList.GetPrefab(type), parent);
         BuildableBase buildable = obj.GetComponent<BuildableBase>();
         buildable.type = type;
         buildable.SetPosition(position, sortingOrder);
         buildable.AdjustBuildableScale();
+        buildable.RegisterEvent();
         buildable.Init();
         return buildable;
     }
@@ -102,6 +110,31 @@ public class BuildableBase : MonoBehaviour
             return;
         }
         buildable.Dispose();
+        buildable.UnRegisterEvent();
         PoolManager.Instance.ReturnToPool(buildable.Type.ToString(), buildable.gameObject);
+    }
+
+    public static BuildableBase SpawnBuildableWithoutInit(BuildableType type, Vector3Int position, Transform parent,
+        int sortingOrder = 0)
+    {
+        if(buildableList == null)
+        {
+            buildableList = Resources.Load<BuildableList>("AllBuildableList");
+        }
+        GameObject obj = Instantiate(buildableList.GetPrefab(type), parent);
+        BuildableBase buildable = obj.GetComponent<BuildableBase>();
+        buildable.type = type;
+        buildable.SetPosition(position, sortingOrder);
+        buildable.AdjustBuildableScale();
+        return buildable;
+    }
+    
+    public static void DestroyBuildableWithoutDispose(BuildableBase buildable)
+    {
+        if (buildable == null)
+        {
+            return;
+        }
+        Destroy(buildable.gameObject);
     }
 }
