@@ -14,28 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildableList:
   - {fileID: 11400000, guid: a13c03e49c7ed154b80edb4b93f444b4, type: 2}
-
   - {fileID: 11400000, guid: 89211f4dfdf6b21458f7c08ff13593c3, type: 2}
-
   - {fileID: 11400000, guid: 1e132e50eb5a36d48ad8f4e01d059b16, type: 2}
-
   - {fileID: 11400000, guid: 9e1b5827dabf570498bfb0681bfaa42a, type: 2}
-
   - {fileID: 11400000, guid: 36d51e69bfaed294caf7252501493dad, type: 2}
-
   - {fileID: 11400000, guid: b06f750e875139644a146c32e7dcc55e, type: 2}
-
   - {fileID: 11400000, guid: 3b6b37ec30d00a5439de0a68ec65a74c, type: 2}
-
   - {fileID: 11400000, guid: f743c93114dcb164f8acb886e5616155, type: 2}
-  <<<<<<< HEAD
-
-  - {fileID: 11400000, guid: 2f86bf620d7f07a46a20cfe196d06300, type: 2}
-
-  - {fileID: 11400000, guid: 4b24c3301825b524bb071743d1e1b5cb, type: 2}
-
-  - {fileID: 11400000, guid: dfbc194a5d3f24d47904b67dd6332b6c, type: 2}
-
   - {fileID: 11400000, guid: fb497cf97900a3946839682710ecb548, type: 2}
-
-    
+  - {fileID: 11400000, guid: 663b97ce0f618274bb42692724f74b31, type: 2}

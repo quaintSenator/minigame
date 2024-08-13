@@ -673,7 +673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07855be1e23f82d4f90bf3e25ac233c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedMapdata: {fileID: 11400000, guid: c23eb3bb9ed890041805dc7ae0a288bf, type: 2}
+  selectedMapdata: {fileID: 11400000, guid: ca20f29d41ea28a4faa6561c8f2e3d64, type: 2}
   showAllBuildable: 0
 --- !u!1 &1297685984
 GameObject:
@@ -704,7 +704,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9309d17fe7ab9824c9fd7874f91dbe66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedMapdata: {fileID: 11400000, guid: c23eb3bb9ed890041805dc7ae0a288bf, type: 2}
+  selectedMapdata: {fileID: 11400000, guid: ca20f29d41ea28a4faa6561c8f2e3d64, type: 2}
   mapParent: {fileID: 1270504054}
   showAllBuildable: 0
   selectIcon: {fileID: 0}
