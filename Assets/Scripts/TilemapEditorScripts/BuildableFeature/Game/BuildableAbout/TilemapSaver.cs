@@ -45,9 +45,9 @@ public class TilemapSaver : Singleton<TilemapSaver>
         currentBuildableInfosDic = new Dictionary<Vector3Int, BuildableInfo>();
     }
     
-    public void AddThisBuildable(BuildableType type, Vector3Int position)
+    public void AddThisBuildable(BuildableInfo buildableInfo)
     {
-        currentBuildableInfosDic.Add(position, new BuildableInfo(type, position));
+        currentBuildableInfosDic.Add(buildableInfo.position, new BuildableInfo(buildableInfo));
     }
     
     public void RemoveThisBuildable(Vector3Int position)
@@ -64,7 +64,7 @@ public class TilemapSaver : Singleton<TilemapSaver>
     {
         foreach (var buildableInfo in buildableInfos)
         {
-            currentBuildableInfosDic.Add(buildableInfo.position, new BuildableInfo(buildableInfo.type, buildableInfo.position));
+            currentBuildableInfosDic.Add(buildableInfo.position, new BuildableInfo(buildableInfo));
         }
     }
 
@@ -145,17 +145,20 @@ public class BuildableInfo
 {
     public BuildableType type;
     public Vector3Int position;
+    public int index;
     
-    public BuildableInfo(BuildableType type, Vector3Int position)
+    public BuildableInfo(BuildableType type, Vector3Int position, int index)
     {
         this.type = type;
         this.position = position;
+        this.index = index;
     }
     
     public BuildableInfo(BuildableInfo buildableInfo)
     {
         this.type = buildableInfo.type;
         this.position = buildableInfo.position;
+        this.index = buildableInfo.index;
     }
 }
 

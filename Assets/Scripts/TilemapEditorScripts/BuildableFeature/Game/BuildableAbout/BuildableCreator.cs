@@ -78,8 +78,10 @@ public class BuildableCreator : Singleton<BuildableCreator>
     {
         foreach (var buildableInfo in infos)
         {
-            buildableInfos.Add(new BuildableInfo(buildableInfo.type, buildableInfo.position));
-            TilemapSaver.Instance.AddThisBuildable(buildableInfo.type, buildableInfo.position);
+            Debug.Log("Read buildableInfo : " + buildableInfo.index);
+            BuildableInfo newBuildableInfo = new BuildableInfo(buildableInfo);
+            buildableInfos.Add(new BuildableInfo(newBuildableInfo));
+            TilemapSaver.Instance.AddThisBuildable(newBuildableInfo);
         }
     }
 
@@ -500,9 +502,10 @@ public class BuildableCreator : Singleton<BuildableCreator>
         //生成选择的物体
         if (selectedType != BuildableType.none)
         {
-            TilemapSaver.Instance.AddThisBuildable(selectedType, currentCellPosition);
-            buildableInfos.Add(new BuildableInfo(selectedType, currentCellPosition));
-            SpawnBuildable(selectedType, currentCellPosition);
+            BuildableInfo newBuildableInfo = new BuildableInfo(selectedType, currentCellPosition, BuildableBase.GetBuildableTypeSpawnIndex(selectedType));
+            TilemapSaver.Instance.AddThisBuildable(newBuildableInfo);
+            buildableInfos.Add(newBuildableInfo);
+            SpawnBuildable(selectedType, currentCellPosition, newBuildableInfo.index);
         }
     }
     
@@ -545,9 +548,10 @@ public class BuildableCreator : Singleton<BuildableCreator>
         //生成选择的物体
         if (type != BuildableType.none)
         {
-            TilemapSaver.Instance.AddThisBuildable(type, position);
-            buildableInfos.Add(new BuildableInfo(type, position));
-            SpawnBuildable(type, position);
+            BuildableInfo newBuildableInfo = new BuildableInfo(type, position, BuildableBase.GetBuildableTypeSpawnIndex(type));
+            TilemapSaver.Instance.AddThisBuildable(newBuildableInfo);
+            buildableInfos.Add(newBuildableInfo);
+            SpawnBuildable(type, position, newBuildableInfo.index);
         }
     }
     
@@ -574,11 +578,11 @@ public class BuildableCreator : Singleton<BuildableCreator>
         currentBuildableMap.Clear();
     }
     
-    private void SpawnBuildable(BuildableType type, Vector3Int position)
+    private void SpawnBuildable(BuildableType type, Vector3Int position, int index)
     {
         if (!currentBuildableMap.ContainsKey(position))
         {
-            BuildableBase buildable = BuildableBase.SpawnBuildable(type, position, mapParent);
+            BuildableBase buildable = BuildableBase.SpawnBuildable(type, position, index, mapParent);
             currentBuildableMap.Add(position, buildable);
         }
     }
@@ -615,7 +619,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         {
             if (showAllBuildable || Utils.IsAlwaysVisible(buildableInfo.type) || Utils.IsBuildableViewport(buildableInfo.position, Camera.main))
             {
-                SpawnBuildable(buildableInfo.type, buildableInfo.position);
+                SpawnBuildable(buildableInfo.type, buildableInfo.position, buildableInfo.index);
             }
             else
             {

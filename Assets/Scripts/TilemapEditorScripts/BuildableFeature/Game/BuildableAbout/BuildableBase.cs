@@ -11,6 +11,8 @@ public class BuildableBase : MonoBehaviour
     public static BuildableList buildableList;
     private BuildableType type;
     public BuildableType Type => type;
+    private int index;
+    public int Index => index;
 
     public virtual void Init()
     {
@@ -85,7 +87,7 @@ public class BuildableBase : MonoBehaviour
 
     
     //生成地块
-    public static BuildableBase SpawnBuildable(BuildableType type, Vector3Int position, Transform parent, int sortingOrder = 0)
+    public static BuildableBase SpawnBuildable(BuildableType type, Vector3Int position, int index, Transform parent, int sortingOrder = 0)
     {
         if(buildableList == null)
         {
@@ -94,6 +96,7 @@ public class BuildableBase : MonoBehaviour
         GameObject obj = PoolManager.Instance.SpawnFromPool(type.ToString(), buildableList.GetPrefab(type), parent);
         BuildableBase buildable = obj.GetComponent<BuildableBase>();
         buildable.type = type;
+        buildable.index = index;
         buildable.SetPosition(position, sortingOrder);
         buildable.AdjustBuildableScale();
         buildable.RegisterEvent();
@@ -122,6 +125,7 @@ public class BuildableBase : MonoBehaviour
         GameObject obj = Instantiate(buildableList.GetPrefab(type), parent);
         BuildableBase buildable = obj.GetComponent<BuildableBase>();
         buildable.type = type;
+        buildable.index = -1;
         buildable.SetPosition(position, sortingOrder);
         buildable.AdjustBuildableScale();
         return buildable;
@@ -134,5 +138,10 @@ public class BuildableBase : MonoBehaviour
             return;
         }
         Destroy(buildable.gameObject);
+    }
+
+    public static int GetBuildableTypeSpawnIndex(BuildableType type)
+    {
+        return -1;
     }
 }
