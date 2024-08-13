@@ -7,6 +7,7 @@ Shader "Unlit/RotatingStarFallShader"
         _StartTime("StartTime", float) = -99999
         _OnceTime("OnceTime", float) = 0.45
         _Angle2Rotate("Angle2Rotate", float) = 30
+        _FadeTime("FadeTime", float) = 0.5
     }
     SubShader
     {
@@ -14,7 +15,6 @@ Shader "Unlit/RotatingStarFallShader"
             "Queue" = "AlphaTest"
             "IgnoreProjector" = "true"
             "RenderType"="Transparent"
-            
         }
         Blend SrcAlpha OneMinusSrcAlpha
         Cull Off
@@ -47,6 +47,7 @@ Shader "Unlit/RotatingStarFallShader"
             float _StartTime;
             float _OnceTime;
             float _Angle2Rotate;
+            float _FadeTime;
             v2f vert (appdata v)
             {
                 v2f o;
@@ -74,7 +75,7 @@ Shader "Unlit/RotatingStarFallShader"
                 float u = uv.x;
                 float v = uv.y;
                 fixed4 transparentColor = (0, 0, 0, 0);
-                if(_StartTime < 0 || _Time.y > _StartTime + _OnceTime)
+                if(_StartTime < 0 || _Time.y > _StartTime + _OnceTime + _FadeTime)
                 {
                    return transparentColor;
                 }
@@ -91,15 +92,24 @@ Shader "Unlit/RotatingStarFallShader"
                 //float tailSamplePercentX = (d - nearest) / (2 * r);
                 float tailSamplePercentX = (d - (R - r)) / (2 * r);
                 float tailSamplePercentY = ((currentTheta - 0.52) / 3.14159);
-                
                 fixed4 tailColor = tex2D(_BallTex, float2(tailSamplePercentX, tailSamplePercentY));
                 tailColor.a = alpha;
+                float alphaScale = 1;
+                if(_Time.y > _StartTime + _OnceTime && _Time.y < _StartTime + _OnceTime + _FadeTime)
+                {
+                    currentAngle = 3.14159;
+                    alphaScale = 1 - (_Time.y - _StartTime - _OnceTime) / _FadeTime;
+                }
+                
                 fixed2 ballHeartVec = fixed2(cos(currentAngle), sin(currentAngle)) * R;
                 fixed2 ballHeart = fixed2(0.5, 0.5) + ballHeartVec;
                 float d2heart = distance(uv, ballHeart);
-                float2 balluv = (uv - ballHeart) * (0.5/ r) + fixed2(0.5, 0.5);
-                float4 ballColor = tex2D(_BallTex, balluv);
+                fixed2 balluv = (uv - ballHeart) * (0.5/ r) + fixed2(0.5, 0.5);
+                fixed4 ballColor = tex2D(_BallTex, balluv);
+                
+                tailColor.a = tailColor.a * alphaScale; 
                 ballColor.a = tailColor.a;
+                
                 if(distance(uv, ballHeart) < r)
                 {
                     return ballColor;

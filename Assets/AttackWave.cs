@@ -8,9 +8,6 @@ public class AttackWave : MonoBehaviour
     // Start is called before the first frame update
     private Material m_material;
     private Animator m_Animator;
-    [SerializeField] private float anim_time_length = 0.45f;
-    [SerializeField] private float startRotation = 0f;
-    [SerializeField] private float endRotation = 270f;
     private void Play()
     {
         m_material.SetFloat("_StartTime", Time.time);
