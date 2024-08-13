@@ -48,15 +48,15 @@ public class MapReader : Singleton<MapReader>
     {
         foreach (var buildableInfo in infos)
         {
-            buildableInfos.Add(new BuildableInfo(buildableInfo.type, buildableInfo.position));
+            buildableInfos.Add(new BuildableInfo(buildableInfo));
         }
     }
     
-    private void SpawnBuildable(BuildableType type, Vector3Int position)
+    private void SpawnBuildable(BuildableType type, Vector3Int position, int index)
     {
         if (!currentBuildableMap.ContainsKey(position))
         {
-            BuildableBase buildable = BuildableBase.SpawnBuildable(type, position, mapParent);
+            BuildableBase buildable = BuildableBase.SpawnBuildable(type, position, index, mapParent);
             currentBuildableMap.Add(position, buildable);
         }
     }
@@ -80,7 +80,7 @@ public class MapReader : Singleton<MapReader>
             {
                 if (showAllBuildable || Utils.IsAlwaysVisible(buildableInfo.type) || Utils.IsBuildableViewport(buildableInfo.position, Camera.main))
                 {
-                    SpawnBuildable(buildableInfo.type, buildableInfo.position);
+                    SpawnBuildable(buildableInfo.type, buildableInfo.position, buildableInfo.index);
                 }
                 else
                 {

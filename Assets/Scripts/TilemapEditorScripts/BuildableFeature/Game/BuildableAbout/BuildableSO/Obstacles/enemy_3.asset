@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: enemy_3
   m_EditorClassIdentifier: 
   buildableObjectType: 9
-  prefab: {fileID: 0}
+  prefab: {fileID: 1498814101468488537, guid: 45e081c7cbb14cd47a533c03f7cfc012, type: 3}

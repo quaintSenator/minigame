@@ -17,9 +17,6 @@ public enum BuildableType
     enemy,
     enemy_2,
     enemy_3,
-    continous_start_point,
-    continous_middle_point,
-    continous_end_point,
 }
 
 [CreateAssetMenu(fileName = "BuildableList", menuName = "Buildable/Create BuildableList")]

@@ -54,7 +54,8 @@ public class TilemapEditor : Editor
                 int nearestY = Mathf.RoundToInt((buildablePos.y-offset.y) / GameConsts.TILE_SIZE); // 计算最近的 tile Y 坐标
                 Vector3Int realPos = new Vector3Int(nearestX, nearestY, 0); // 计算最近的 tile 坐标
                 BuildableType type = child.GetComponent<BuildableBase>().Type;
-                BuildableInfo buildableInfo = new BuildableInfo(type, realPos);
+                int index = child.GetComponent<BuildableBase>().Index;
+                BuildableInfo buildableInfo = new BuildableInfo(type, realPos, index);
                 mapData.buildableInfos.Add(buildableInfo);
             }
         }
