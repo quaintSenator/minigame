@@ -40,6 +40,11 @@ public class Utils
     
     public static bool IsAlwaysVisible(BuildableType type)
     {
+        if (type == BuildableType.continuous_point)
+        {
+            return true;
+        }
+        
         return false;
     }
 }

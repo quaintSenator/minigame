@@ -6,6 +6,12 @@ using UnityEngine.Serialization;
 
 public class BuildableBase : MonoBehaviour
 {
+    //静态变量 确定当前的Index
+    public static int CurrentUsedIndex = 1;
+    public static int CurrentGroupIndex = 1;
+    //分组Buildable Map  <int(GroupIndex), List<BuildableBase>>(Buildable in this group)>
+    public static Dictionary<int, List<BuildableBase>> BuildableGroupMap = new Dictionary<int, List<BuildableBase>>();
+    
     private Vector3Int m_position;
     public Vector3Int Position => m_position;
     public static BuildableList buildableList;
@@ -101,6 +107,7 @@ public class BuildableBase : MonoBehaviour
         buildable.AdjustBuildableScale();
         buildable.RegisterEvent();
         buildable.Init();
+        PutBuildableToGroup(buildable);
         return buildable;
     }
     
@@ -112,6 +119,7 @@ public class BuildableBase : MonoBehaviour
         }
         buildable.Dispose();
         buildable.UnRegisterEvent();
+        RemoveBuildableFromGroup(buildable);
         PoolManager.Instance.ReturnToPool(buildable.Type.ToString(), buildable.gameObject);
     }
 
@@ -142,6 +150,74 @@ public class BuildableBase : MonoBehaviour
 
     public static int GetBuildableTypeSpawnIndex(BuildableType type)
     {
+        if (type == BuildableType.continuous_point)
+        {
+            return CurrentGroupIndex*1000 + CurrentUsedIndex++;
+        }
         return -1;
+    }
+    
+    public static int GetBuildableGroupIndex(int index)
+    {
+        return index / 1000;
+    }
+    
+    public static BuildableBase GetLastBuildableInGroup(int groupIndex)
+    {
+        if (BuildableGroupMap.ContainsKey(groupIndex))
+        {
+            return BuildableGroupMap[groupIndex][BuildableGroupMap[groupIndex].Count - 1];
+        }
+        return null;
+    }
+
+    //GroupIndex更新到最大的GroupIndex+1，Index更新到1
+    public static void UpdateGroupIndexAndIndex()
+    {
+        CurrentUsedIndex = 1;
+        foreach (var VARIABLE in BuildableGroupMap)
+        {
+            CurrentGroupIndex = Math.Max(CurrentGroupIndex, VARIABLE.Key);
+        }
+        CurrentGroupIndex++;
+    }
+    
+    public static void PutBuildableToGroup(BuildableBase buildable)
+    {
+        int groupIndex = GetBuildableGroupIndex(buildable.Index);
+        if (groupIndex < 1)
+        {
+            return;
+        }
+        if (!BuildableGroupMap.ContainsKey(groupIndex))
+        {
+            BuildableGroupMap.Add(groupIndex, new List<BuildableBase>());
+        }
+        BuildableGroupMap[groupIndex].Add(buildable);
+        //根据List中的Buildable的Index排序，从小到大
+        BuildableGroupMap[groupIndex].Sort((a, b) => a.Index - b.Index);
+    }
+    
+    public static void RemoveBuildableFromGroup(BuildableBase buildable)
+    {
+        int groupIndex = GetBuildableGroupIndex(buildable.Index);
+        if (groupIndex < 1)
+        {
+            return;
+        }
+        if (BuildableGroupMap.ContainsKey(groupIndex))
+        {
+            BuildableGroupMap[groupIndex].Remove(buildable);
+            if (BuildableGroupMap[groupIndex].Count == 0)
+            {
+                BuildableGroupMap.Remove(groupIndex);
+            }
+        }
+    }
+    
+    public static void CompleteCurrentGroup()
+    {
+        CurrentUsedIndex = 1;
+        CurrentGroupIndex++;
     }
 }

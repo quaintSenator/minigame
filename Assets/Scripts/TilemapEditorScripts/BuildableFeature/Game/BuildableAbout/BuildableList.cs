@@ -7,20 +7,21 @@ using UnityEngine;
 public enum BuildableType
 {
     none,
-    floor_1,
-    floor_2,
-    floor_3,
-    spring,
-    twoStage,
-    flyOrbit,
-    enemy,
-    enemy_2,
-    enemy_3,
-    continous_start_point,
-    continous_middle_point,
-    continous_end_point,
-    spikeTrap_1,
-    spikeTrap_2
+    floor_1 = 1,
+    floor_2 = 2,
+    floor_3 = 3,
+    spring = 4,
+    twoStage = 5,
+    flyOrbit = 6,
+    enemy = 7,
+    enemy_2 = 8,
+    enemy_3 = 9,
+    continous_start_point = 10,
+    continous_middle_point = 11,
+    continous_end_point = 12,
+    spikeTrap_1 = 13,
+    spikeTrap_2 = 14,
+    continuous_point = 15,
 
 }
 

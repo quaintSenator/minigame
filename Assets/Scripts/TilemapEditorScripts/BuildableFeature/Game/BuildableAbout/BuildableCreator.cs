@@ -83,6 +83,8 @@ public class BuildableCreator : Singleton<BuildableCreator>
             buildableInfos.Add(new BuildableInfo(newBuildableInfo));
             TilemapSaver.Instance.AddThisBuildable(newBuildableInfo);
         }
+        CheckBuildableVisible();
+        BuildableBase.UpdateGroupIndexAndIndex();
     }
 
     private void OnEnable()
@@ -106,6 +108,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         EventManager.AddListener(EventType.CancelAllSelectEvent, CancelAllSelect); //取消选择所有物体
         EventManager.AddListener(EventType.StartSelectZoneEvent, OnStartSelectZone); //开始选中框
         EventManager.AddListener(EventType.CompleteSelectZoneEvent, OnCompleteSelectZone); //完成选中框
+        EventManager.AddListener(EventType.CompleteContinuousPointEvent, OnCompleteContinuousPoint); //完成连续点
     }
 
     private void OnDisable()
@@ -129,6 +132,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         EventManager.RemoveListener(EventType.CancelAllSelectEvent, CancelAllSelect); //取消选择所有物体
         EventManager.RemoveListener(EventType.StartSelectZoneEvent, OnStartSelectZone); //开始选中框
         EventManager.RemoveListener(EventType.CompleteSelectZoneEvent, OnCompleteSelectZone); //完成选中框
+        EventManager.RemoveListener(EventType.CompleteContinuousPointEvent, OnCompleteContinuousPoint); //完成连续点
         
         AutoSaveMap();
     }
@@ -144,6 +148,15 @@ public class BuildableCreator : Singleton<BuildableCreator>
         MapData mapData = new MapData(key, buildableInfos);
         PlayerPrefs.SetString(GameConsts.AUTO_TILEMAP_SAVE_DATA_2, JsonUtility.ToJson(mapData));
         Debug.Log("Auto save tilemap data v2");
+    }
+
+    private void OnCompleteContinuousPoint(EventData obj)
+    {
+        if (selectedType == BuildableType.continuous_point)
+        {
+            BuildableBase.CompleteCurrentGroup();
+            SetSelectedObject(BuildableType.none);
+        }
     }
 
     private void OnStartSelectZone(EventData obj)
@@ -642,6 +655,8 @@ public class BuildableCreator : Singleton<BuildableCreator>
     }
 
 
+    #region 测试打印
+
     [Button]
     public void PrintListAndDic()
     {
@@ -653,4 +668,19 @@ public class BuildableCreator : Singleton<BuildableCreator>
             Debug.Log(VARIABLE.position + " : " + VARIABLE.type);
         }
     }
+
+    [Button]
+    public void PrintBuildableGroupMap()
+    {
+        Debug.Log("BuildableGroupMap count : " + BuildableBase.BuildableGroupMap.Count);
+        foreach (var VARIABLE in BuildableBase.BuildableGroupMap)
+        {
+            foreach (var buildableBase in VARIABLE.Value)
+            {
+                Debug.Log(VARIABLE.Key + " : " + buildableBase.Index);
+            }
+        }
+    }
+
+    #endregion
 }
