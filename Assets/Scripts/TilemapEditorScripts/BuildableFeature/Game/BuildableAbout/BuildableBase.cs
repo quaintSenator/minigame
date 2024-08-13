@@ -91,8 +91,6 @@ public class BuildableBase : MonoBehaviour
         {
             buildableList = Resources.Load<BuildableList>("AllBuildableList");
         }
-        Debug.Log("SpawnBuildable : " + type);
-        Debug.Log("SpawnBuildable : " + buildableList.GetPrefab(type));
         GameObject obj = PoolManager.Instance.SpawnFromPool(type.ToString(), buildableList.GetPrefab(type), parent);
         BuildableBase buildable = obj.GetComponent<BuildableBase>();
         buildable.type = type;
