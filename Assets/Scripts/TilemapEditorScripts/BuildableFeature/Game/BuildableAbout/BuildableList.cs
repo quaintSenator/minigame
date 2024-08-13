@@ -4,7 +4,6 @@ using UnityEngine;
 
 
 
-
 public enum BuildableType
 {
     none,
@@ -21,7 +20,8 @@ public enum BuildableType
     continous_middle_point,
     continous_end_point,
     spikeTrap_1,
-    spikeTrap_2,
+    spikeTrap_2
+
 }
 
 [CreateAssetMenu(fileName = "BuildableList", menuName = "Buildable/Create BuildableList")]
@@ -38,7 +38,7 @@ public class BuildableList : ScriptableObject
                 return buildable.Prefab;
             }
         }
-
+    
         return null;
     }
 }

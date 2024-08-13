@@ -1,4 +1,4 @@
-﻿Shader "Custom/PointScanShader"
+﻿Shader "SF/PixelCollapseShader"
 {
     Properties
     {
@@ -15,7 +15,9 @@
     SubShader
     {
         // No culling or depth
-        Cull Off ZWrite Off ZTest Always
+        Cull Off
+        ZWrite Off
+        ZTest Always
 
         Pass
         {

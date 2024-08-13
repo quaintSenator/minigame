@@ -78,8 +78,10 @@ public class BuildableCreator : Singleton<BuildableCreator>
     {
         foreach (var buildableInfo in infos)
         {
-            buildableInfos.Add(new BuildableInfo(buildableInfo.type, buildableInfo.position));
-            TilemapSaver.Instance.AddThisBuildable(buildableInfo.type, buildableInfo.position);
+            Debug.Log("Read buildableInfo : " + buildableInfo.index);
+            BuildableInfo newBuildableInfo = new BuildableInfo(buildableInfo);
+            buildableInfos.Add(new BuildableInfo(newBuildableInfo));
+            TilemapSaver.Instance.AddThisBuildable(newBuildableInfo);
         }
     }
 
@@ -104,7 +106,6 @@ public class BuildableCreator : Singleton<BuildableCreator>
         EventManager.AddListener(EventType.CancelAllSelectEvent, CancelAllSelect); //取消选择所有物体
         EventManager.AddListener(EventType.StartSelectZoneEvent, OnStartSelectZone); //开始选中框
         EventManager.AddListener(EventType.CompleteSelectZoneEvent, OnCompleteSelectZone); //完成选中框
-        EventManager.AddListener(EventType.DrawContinuousPointEvent, DrawContinuousPoint); //绘制连续点
     }
 
     private void OnDisable()
@@ -128,7 +129,6 @@ public class BuildableCreator : Singleton<BuildableCreator>
         EventManager.RemoveListener(EventType.CancelAllSelectEvent, CancelAllSelect); //取消选择所有物体
         EventManager.RemoveListener(EventType.StartSelectZoneEvent, OnStartSelectZone); //开始选中框
         EventManager.RemoveListener(EventType.CompleteSelectZoneEvent, OnCompleteSelectZone); //完成选中框
-        EventManager.RemoveListener(EventType.DrawContinuousPointEvent, DrawContinuousPoint); //绘制连续点
         
         AutoSaveMap();
     }
@@ -144,16 +144,6 @@ public class BuildableCreator : Singleton<BuildableCreator>
         MapData mapData = new MapData(key, buildableInfos);
         PlayerPrefs.SetString(GameConsts.AUTO_TILEMAP_SAVE_DATA_2, JsonUtility.ToJson(mapData));
         Debug.Log("Auto save tilemap data v2");
-    }
-    
-    private void DrawContinuousPoint(EventData obj)
-    {
-        var data = obj as DrawContinuousPointEventData;
-        var point = data.Point;
-        if (selectedType == BuildableType.continous_start_point && point.GetPointType() == ContinousPointType.Start)
-        {
-            SetSelectedObject(BuildableType.continous_middle_point);
-        }
     }
 
     private void OnStartSelectZone(EventData obj)
@@ -369,7 +359,6 @@ public class BuildableCreator : Singleton<BuildableCreator>
     
     public void SetSelectedObject(BuildableType type)
     {
-        DonePreviousSelect();
         selectedType = type;
         currentTileMode = selectedType == BuildableType.none ? TileMode.None : TileMode.Build;
         if (selectedType != BuildableType.none)
@@ -390,22 +379,6 @@ public class BuildableCreator : Singleton<BuildableCreator>
             }
         }
         UpdateTilemap();
-    }
-
-    private void DonePreviousSelect()
-    {
-        if (selectedType == BuildableType.continous_middle_point)
-        {
-            if(ContinousPoint.LastSpawnPoint != null)
-            {
-                if(ContinousPoint.LastSpawnPoint.GetPointType() == ContinousPointType.Middle)
-                {
-                    Vector3Int position = ContinousPoint.LastSpawnPoint.Position;
-                    //替换为终点
-                    DrawTileMap(BuildableType.continous_end_point, position);
-                }
-            }
-        }
     }
     
     private void MoveBuildable(Vector3Int offset)
@@ -529,9 +502,10 @@ public class BuildableCreator : Singleton<BuildableCreator>
         //生成选择的物体
         if (selectedType != BuildableType.none)
         {
-            TilemapSaver.Instance.AddThisBuildable(selectedType, currentCellPosition);
-            buildableInfos.Add(new BuildableInfo(selectedType, currentCellPosition));
-            SpawnBuildable(selectedType, currentCellPosition);
+            BuildableInfo newBuildableInfo = new BuildableInfo(selectedType, currentCellPosition, BuildableBase.GetBuildableTypeSpawnIndex(selectedType));
+            TilemapSaver.Instance.AddThisBuildable(newBuildableInfo);
+            buildableInfos.Add(newBuildableInfo);
+            SpawnBuildable(selectedType, currentCellPosition, newBuildableInfo.index);
         }
     }
     
@@ -574,9 +548,10 @@ public class BuildableCreator : Singleton<BuildableCreator>
         //生成选择的物体
         if (type != BuildableType.none)
         {
-            TilemapSaver.Instance.AddThisBuildable(type, position);
-            buildableInfos.Add(new BuildableInfo(type, position));
-            SpawnBuildable(type, position);
+            BuildableInfo newBuildableInfo = new BuildableInfo(type, position, BuildableBase.GetBuildableTypeSpawnIndex(type));
+            TilemapSaver.Instance.AddThisBuildable(newBuildableInfo);
+            buildableInfos.Add(newBuildableInfo);
+            SpawnBuildable(type, position, newBuildableInfo.index);
         }
     }
     
@@ -603,11 +578,11 @@ public class BuildableCreator : Singleton<BuildableCreator>
         currentBuildableMap.Clear();
     }
     
-    private void SpawnBuildable(BuildableType type, Vector3Int position)
+    private void SpawnBuildable(BuildableType type, Vector3Int position, int index)
     {
         if (!currentBuildableMap.ContainsKey(position))
         {
-            BuildableBase buildable = BuildableBase.SpawnBuildable(type, position, mapParent);
+            BuildableBase buildable = BuildableBase.SpawnBuildable(type, position, index, mapParent);
             currentBuildableMap.Add(position, buildable);
         }
     }
@@ -644,7 +619,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         {
             if (showAllBuildable || Utils.IsAlwaysVisible(buildableInfo.type) || Utils.IsBuildableViewport(buildableInfo.position, Camera.main))
             {
-                SpawnBuildable(buildableInfo.type, buildableInfo.position);
+                SpawnBuildable(buildableInfo.type, buildableInfo.position, buildableInfo.index);
             }
             else
             {

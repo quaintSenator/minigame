@@ -40,13 +40,6 @@ public class Utils
     
     public static bool IsAlwaysVisible(BuildableType type)
     {
-        if (type == BuildableType.continous_start_point 
-            || type == BuildableType.continous_middle_point
-            || type == BuildableType.continous_end_point)
-        {
-            return true;
-        }
-
         return false;
     }
 }

@@ -60,9 +60,6 @@ public enum EventType
     SetSelectZoneStartPosEvent = 223, // 设置选择区域开始位置
     SetSelectZoneEndPosEvent = 224, // 设置选择区域结束位置
     CompleteSelectZoneEvent = 225, // 完成选择区域
-    DrawContinuousPointEvent = 226, // 绘制连续点
-    EndDrawContinuousPointEvent = 227, // 结束绘制连续点
-    EraseContinuousPointEvent = 228, // 重置连续点
 
     #endregion
 
