@@ -20,6 +20,8 @@ public enum BuildableType
     continous_start_point,
     continous_middle_point,
     continous_end_point,
+    spikeTrap_1,
+    spikeTrap_2,
 }
 
 [CreateAssetMenu(fileName = "BuildableList", menuName = "Buildable/Create BuildableList")]
