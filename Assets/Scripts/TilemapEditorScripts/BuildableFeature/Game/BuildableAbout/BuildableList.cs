@@ -15,6 +15,8 @@ public enum BuildableType
     twoStage,
     flyOrbit,
     enemy,
+    enemy_2,
+    enemy_3,
     continous_start_point,
     continous_middle_point,
     continous_end_point,
