@@ -19,7 +19,7 @@ Shader "Unlit/RotatingStarFallShader"
         Blend SrcAlpha OneMinusSrcAlpha
         Cull Off
         ZWrite Off
-        ZTest LEqual
+        //ZTest LEqual
         LOD 100
 
         Pass
