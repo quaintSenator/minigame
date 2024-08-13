@@ -8,11 +8,9 @@ public class AttackWave : MonoBehaviour
     // Start is called before the first frame update
     private Material m_material;
     private Animator m_Animator;
-    private void Play()
+    public void Play()
     {
         m_material.SetFloat("_StartTime", Time.time);
-        //m_Animator.enabled = true;
-        //m_Animator.Play("attackWaveRotation");
     }
     private void OnEnable()
     {
@@ -20,13 +18,12 @@ public class AttackWave : MonoBehaviour
        // m_Animator = gameObject.GetComponent<Animator>();
         //m_Animator.enabled = false;
     }
-    // Update is called once per frame
-    void Update()
+    public void Init(float p1, float p2, float p3, float p4)
     {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Debug.Log("GetKeyDown(KeyCode.T)");
-            Play();
-        }
+        
+        m_material.SetFloat("_StartTime", p1);
+        m_material.SetFloat("_OnceTime", p2);
+        m_material.SetFloat("_Angle2Rotate", p3);
+        m_material.SetFloat("_FadeTime", p4);
     }
 }
