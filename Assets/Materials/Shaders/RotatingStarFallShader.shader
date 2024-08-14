@@ -12,7 +12,7 @@ Shader "Unlit/RotatingStarFallShader"
     SubShader
     {
         Tags {
-            "Queue" = "AlphaTest"
+            "Queue" = "Transparent"
             "IgnoreProjector" = "true"
             "RenderType"="Transparent"
         }

@@ -20,7 +20,6 @@ public class AttackWave : MonoBehaviour
     }
     public void Init(float p1, float p2, float p3, float p4)
     {
-        
         m_material.SetFloat("_StartTime", p1);
         m_material.SetFloat("_OnceTime", p2);
         m_material.SetFloat("_Angle2Rotate", p3);

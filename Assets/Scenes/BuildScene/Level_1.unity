@@ -557,6 +557,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &907353322 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3076662434505560679, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+  m_PrefabInstance: {fileID: 1369325266}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7491d47cd28bf5448c6785e83cbecfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1152089222
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,6 +754,22 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3076662434505560679, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: bg
+      value: 
+      objectReference: {fileID: 1680951381}
+    - target: {fileID: 3076662434505560679, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: fadeTime
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076662434505560679, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: onceTime
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076662434505560679, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: angle2Rotate
+      value: 280
+      objectReference: {fileID: 0}
     - target: {fileID: 3832072421744281546, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: stillParent
       value: 
@@ -837,8 +864,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6919333483264501423, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: coldDownTime
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6919333483264501423, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: _attackWaveEffectController
+      value: 
+      objectReference: {fileID: 907353322}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
 --- !u!1 &1455026147
