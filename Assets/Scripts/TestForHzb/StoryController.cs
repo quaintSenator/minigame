@@ -37,6 +37,13 @@ public class StoryController : MonoBehaviour
         Step_1, Step_2, Step_3, Step_4
     };
 
+    [SerializeField]
+    readonly private float cubeIdleSpeed = 4.0f;
+    [SerializeField]
+    readonly private float cubeRunSpeed = 8.0f;
+    [SerializeField]
+    readonly private float triangleRunSpeed = 6.0f;
+
     private int stepIndex = 0;
 
     private PlayerController playerController;
