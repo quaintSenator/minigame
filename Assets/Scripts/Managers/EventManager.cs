@@ -71,6 +71,14 @@ public enum EventType
     GameResumeForAudioEvent=303,
     #endregion
 
+    #region 开局小剧场事件
+    StartStoryStep1 = 400,
+    StartStoryStep2 = 401,
+    StartStoryStep3 = 402,
+    StartStoryStep4 = 403,
+
+    #endregion
+
 
 }
 
