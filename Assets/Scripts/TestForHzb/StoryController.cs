@@ -23,6 +23,16 @@ public class StoryController : MonoBehaviour
 
     [SerializeField]
     private List<EventType> storySteps = new List<EventType>();
+    /*
+    Step 1：方块走路
+    Step 2：三角形快速出现
+    Step 3：三角形停下 说第一句话
+    Step 4：方块停下
+    Step 5：三角形说第二句话
+    Step 6：三角形说第三句话
+    Step 7：方块开始跑
+    Step 8：三角形开始追
+    */
     private List<Action> functions = new List<Action>{
         Step_1, Step_2, Step_3, Step_4
     };
