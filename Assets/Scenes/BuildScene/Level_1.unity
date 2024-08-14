@@ -742,6 +742,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 368977363481154082, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: m_Size.x
+      value: 7.976486
+      objectReference: {fileID: 0}
+    - target: {fileID: 368977363481154082, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: m_Size.y
+      value: 2.8089724
+      objectReference: {fileID: 0}
+    - target: {fileID: 368977363481154082, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: m_Offset.x
+      value: 1.097714
+      objectReference: {fileID: 0}
+    - target: {fileID: 368977363481154082, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.7365222
+      objectReference: {fileID: 0}
     - target: {fileID: 1183745991763393448, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -754,21 +770,45 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1433576563816030983, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076662434505560676, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076662434505560676, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076662434505560676, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 220
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076662434505560676, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076662434505560676, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.25
+      objectReference: {fileID: 0}
     - target: {fileID: 3076662434505560679, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: bg
       value: 
-      objectReference: {fileID: 1680951381}
+      objectReference: {fileID: 1819676446}
     - target: {fileID: 3076662434505560679, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: fadeTime
-      value: 0.65
+      value: 0.375
       objectReference: {fileID: 0}
     - target: {fileID: 3076662434505560679, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: onceTime
-      value: 0.15
+      value: 0.125
       objectReference: {fileID: 0}
     - target: {fileID: 3076662434505560679, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: angle2Rotate
-      value: 280
+      value: 260
       objectReference: {fileID: 0}
     - target: {fileID: 3832072421744281546, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: stillParent
@@ -864,7 +904,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6919333483264501423, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: coldDownTime
-      value: 1
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 6919333483264501423, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: _attackWaveEffectController
