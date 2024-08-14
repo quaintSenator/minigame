@@ -5088,6 +5088,7 @@ GameObject:
   - component: {fileID: 3931848181877765675}
   - component: {fileID: 3931848181877765674}
   - component: {fileID: 3931848181877765673}
+  - component: {fileID: 5259083086125303481}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -5181,9 +5182,6 @@ MonoBehaviour:
   worldScale: 1
   beatTime: 0.5
   bufferTime: 0.1
-  jumpSettings:
-    jumpHeight: 2.6
-    jumpDeltaHeight: 1.1
   maxFallSpeed: 16
   speed: 8
   jumpMode: 1
@@ -5195,7 +5193,20 @@ MonoBehaviour:
   jumpSpringSpeed: 5
   jumpSpringHeight: 4.8
   resetpoints: []
+  deadCheckYAxis: {fileID: 0}
   ifSwitchOnFallSpeedLimit: 0
+--- !u!114 &5259083086125303481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3931848181877765677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01aca2e34e4292c44a74abb8da1b9f50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3931848181893502972
 GameObject:
   m_ObjectHideFlags: 0
