@@ -21,14 +21,14 @@ public class SwordController : MonoBehaviour
         swordCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        if (attackWave)
+        /*if (attackWave)
         {
             var meshRenderer = attackWave.gameObject.GetComponent<MeshRenderer>();
             if (meshRenderer)
             {
                 attackWaveMat = meshRenderer.material;
             }
-        }
+        }*/
         damage = 1;
     }
 

@@ -230,11 +230,16 @@ public class PlayerController : MonoBehaviour
         }
 
         Rotate();
-      
+        
     }
 
+    private bool testPause = false;
     private void FixedUpdate()
     {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            testPause = true;
+        }
         //角色一直受一个向下的重力，世界坐标系
         if(!isFlying){
             //添加最大下落速度限制
@@ -244,15 +249,20 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        //角色自动向右前进，世界坐标系
-        transform.Translate(playerHeadingDir * speed * Time.fixedDeltaTime, Space.World);
+
+        if (!testPause)
+        {
+            //角色自动向右前进，世界坐标系
+            transform.Translate(playerHeadingDir * speed * Time.fixedDeltaTime, Space.World);
+        }
+        
 
         //角色跳跃，如果是Force模式，且在跳跃中，给与一个力
         if (jumpMode == JumpMode.Force && jumping)
         {
             rigidBody.AddForce(Vector2.up * jumpForce);
         }
-
+    
         CheckDead();
     }
 
