@@ -5514,14 +5514,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6711620692673762207}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.97, y: 0, z: 0}
-  m_LocalScale: {x: 0.19875, y: 0.68875, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3076662434505560676}
   m_Father: {fileID: 720426652733263593}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &368977363481154082
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5535,7 +5535,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.04850541, y: -0.07278448}
+  m_Offset: {x: 0.5, y: 0.125}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -5546,7 +5546,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.70896816, y: 1.1903588}
+  m_Size: {x: 2, y: 1.5}
   m_EdgeRadius: 0
 --- !u!212 &1433576563816030983
 SpriteRenderer:
@@ -5611,8 +5611,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07e6e83d50ce74641b6bc99f4f5f498e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coldDownTime: 0.4
-  attackWave: {fileID: 0}
+  coldDownTime: 0.125
+  _attackWaveEffectController: {fileID: 0}
   attackWaveMat: {fileID: 0}
 --- !u!95 &1390855068
 Animator:

@@ -92,6 +92,8 @@ public class PlayerController : MonoBehaviour
     [Tooltip("一次弹簧跳跃最高上升的高度，需要调整的参数，影响弹簧上升初速")]
     private List<Transform> resetpoints = null;
 
+    private Hashtable resetpointIndexHashTable = new Hashtable();
+
     [SerializeField]
     [Tooltip("下落死亡检测的Y轴坐标")]
     private Transform deadCheckYAxis = null;
@@ -105,6 +107,8 @@ public class PlayerController : MonoBehaviour
     private float expectedDisplacementXAxis = 0f;
 
     private float practicalDisplacementXAxis = 0f;
+
+
 
     [SerializeField]
     [Tooltip("是否开启下落速度检测")]
@@ -182,6 +186,10 @@ public class PlayerController : MonoBehaviour
         EventManager.AddListener(EventType.SpacebarUpEvent, OnSpacebarUp);
         EventManager.AddListener(EventType.MouseLeftClickEvent, OnMouseLeftClick);
 
+        EventManager.AddListener(EventType.RegisterResetPointEvent, OnRegisterResetPoint);
+        EventManager.AddListener(EventType.PlayerPassRegisterResetPointEvent, OnPlayerPassRegisterResetPoint);
+
+
     }
 
     private void OnDisable()
@@ -191,6 +199,9 @@ public class PlayerController : MonoBehaviour
         EventManager.RemoveListener(EventType.SpacebarDownEvent, OnSpacebarDown);
         EventManager.RemoveListener(EventType.SpacebarUpEvent, OnSpacebarUp);
         EventManager.RemoveListener(EventType.MouseLeftClickEvent, OnMouseLeftClick);
+
+        EventManager.RemoveListener(EventType.RegisterResetPointEvent, OnRegisterResetPoint);
+        EventManager.RemoveListener(EventType.PlayerPassRegisterResetPointEvent, OnPlayerPassRegisterResetPoint);
 
     }
     private void Start()
@@ -233,13 +244,10 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    private bool testPause = false;
+ 
     private void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            testPause = true;
-        }
+
         //角色一直受一个向下的重力，世界坐标系
         if(!isFlying){
             //添加最大下落速度限制
@@ -250,11 +258,10 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        if (!testPause)
-        {
-            //角色自动向右前进，世界坐标系
-            transform.Translate(playerHeadingDir * speed * Time.fixedDeltaTime, Space.World);
-        }
+
+        //角色自动向右前进，世界坐标系
+        transform.Translate(playerHeadingDir * speed * Time.fixedDeltaTime, Space.World);
+
         
 
         //角色跳跃，如果是Force模式，且在跳跃中，给与一个力
@@ -479,19 +486,22 @@ public class PlayerController : MonoBehaviour
     private void CheckDead()
     {
         //Check X position 
-        moveTimer += Time.deltaTime;
-
-        if(resetPointIndex >=0 && resetPointIndex < resetpoints.Count)
-        {
-            if (Mathf.Abs(transform.position.x - resetpoints[resetPointIndex].position.x - moveTimer * speed) >= deadZone)
+        //moveTimer += Time.fixedDeltaTime;
+        expectedDisplacementXAxis += (playerHeadingDir * speed * Time.fixedDeltaTime).x;
+       // playerHeadingDir* speed *Time.fixedDeltaTime
+/*
+        if (resetPointIndex >=0 && resetPointIndex < resetpoints.Count)
+        {*/
+            //if (Mathf.Abs(transform.position.x - resetpoints[resetPointIndex].position.x - moveTimer * speed) >= deadZone)
+            if(expectedDisplacementXAxis - transform.position.x >= deadZone)
             {
                 OnDead();
             }
-        }
-        else
+        //}
+/*        else
         {
             Debug.LogError("wrong resetPointIndex or wrong resetpoints");
-        }
+        }*/
 
 
         //Check Y position
@@ -694,6 +704,8 @@ public class PlayerController : MonoBehaviour
         isDead = false;
         boxCollider.enabled = true;
         moveTimer = 0;
+
+
     }
 
     private void ResetPositionAndDeacCheck()
@@ -720,7 +732,7 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.position = resetPosition;
-        expectedDisplacementXAxis = 0f;
+        expectedDisplacementXAxis = resetPosition.x;
         practicalDisplacementXAxis = 0f;
 
 
@@ -734,5 +746,53 @@ public class PlayerController : MonoBehaviour
         EventManager.InvokeEvent(EventType.GameStartForAudioEvent, gameAudioEventData);
     }
 
+
+
+    private void  OnRegisterResetPoint(EventData eventData)
+    {
+        RegisterResetPointEventData registerResetPointEventData= eventData as RegisterResetPointEventData;
+
+        if (registerResetPointEventData != null)
+        {
+            RegisterResetPointCallbackEventData registerResetPointCallbackEventData = new RegisterResetPointCallbackEventData();
+
+            Transform resetpointPosition = registerResetPointEventData.resetpointPosition;
+
+            //第一次注册
+            if(!resetpointIndexHashTable.Contains(resetpointPosition))
+            {
+                registerResetPointCallbackEventData.index = resetpoints.Count - 1;
+                registerResetPointCallbackEventData.state = false;
+
+                resetpointIndexHashTable.Add(resetpointPosition, resetpoints.Count - 1);
+                resetpoints.Add(resetpointPosition);
+
+            }
+            //if(!resetpointIndexHashTable.Contains(resetpointPosition))
+            else
+            {
+                int registerResetPointIndex = (int)resetpointIndexHashTable[resetpointPosition];
+                registerResetPointCallbackEventData.index = registerResetPointIndex;
+                registerResetPointCallbackEventData.state = registerResetPointIndex <= resetPointIndex;
+
+            }
+
+            EventManager.InvokeEvent(EventType.RegisterResetPointCallbackEvent, registerResetPointCallbackEventData);
+
+
+        }
+          
+    }
+
+    private void OnPlayerPassRegisterResetPoint(EventData eventData)
+    {
+        PlayerPassRegisterResetPointEvent playerPassRegisterResetPointEvent= eventData as PlayerPassRegisterResetPointEvent;
+
+        if (playerPassRegisterResetPointEvent != null)
+        {
+            resetPointIndex = playerPassRegisterResetPointEvent.index;
+
+        }
+    }
 
 }

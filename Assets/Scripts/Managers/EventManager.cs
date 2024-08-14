@@ -17,11 +17,13 @@ public enum EventType
     MusicRecordEvent = 9,
     SwitchLevelEvent = 10,
     DecideCanJumpEvent = 11,
-
+    RegisterResetPointEvent = 12,//重生点动态注册事件
+    RegisterResetPointCallbackEvent=13, //重生点动态注册回调事件
+    PlayerPassRegisterResetPointEvent =14, //玩家经过重生点
 
 
     #region 输入事件在此添加
-    
+
     MouseMoveEvent = 101,
     MouseLeftClickEvent = 102,
     MouseRightClickEvent = 103,
@@ -98,6 +100,43 @@ public class GameAudioEventData : EventData
     }
 
 }
+
+public class RegisterResetPointEventData : EventData
+{
+    public Transform resetpointPosition = null;
+    //public int LevelResetPointIndex = 0;
+    public RegisterResetPointEventData() : base()
+    {
+
+    }
+
+}
+
+public class RegisterResetPointCallbackEventData : EventData
+{
+    public int index  = 0;
+    public bool state = false;
+    //public int LevelResetPointIndex = 0;
+    public RegisterResetPointCallbackEventData() : base()
+    {
+
+    }
+
+}
+
+
+
+ public class PlayerPassRegisterResetPointEvent : EventData
+{
+    public int index = 0;
+    //public int LevelResetPointIndex = 0;
+    public PlayerPassRegisterResetPointEvent() : base()
+    {
+
+    }
+
+}
+
 
 public class EventManager : Singleton<EventManager>
 {
