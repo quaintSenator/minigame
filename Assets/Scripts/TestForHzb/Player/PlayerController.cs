@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
 
     private float practicalDisplacementXAxis = 0f;
 
-
+    private bool isFirstStart = true;
 
     [SerializeField]
     [Tooltip("是否开启下落速度检测")]
@@ -186,6 +186,8 @@ public class PlayerController : MonoBehaviour
         EventManager.AddListener(EventType.SpacebarUpEvent, OnSpacebarUp);
         EventManager.AddListener(EventType.MouseLeftClickEvent, OnMouseLeftClick);
 
+        //EventManager.AddListener(EventType.GameStartEvent, OnReset);
+
         EventManager.AddListener(EventType.RegisterResetPointEvent, OnRegisterResetPoint);
         EventManager.AddListener(EventType.PlayerPassRegisterResetPointEvent, OnPlayerPassRegisterResetPoint);
 
@@ -199,6 +201,8 @@ public class PlayerController : MonoBehaviour
         EventManager.RemoveListener(EventType.SpacebarDownEvent, OnSpacebarDown);
         EventManager.RemoveListener(EventType.SpacebarUpEvent, OnSpacebarUp);
         EventManager.RemoveListener(EventType.MouseLeftClickEvent, OnMouseLeftClick);
+
+        //EventManager.RemoveListener(EventType.GameStartEvent, OnReset);
 
         EventManager.RemoveListener(EventType.RegisterResetPointEvent, OnRegisterResetPoint);
         EventManager.RemoveListener(EventType.PlayerPassRegisterResetPointEvent, OnPlayerPassRegisterResetPoint);
@@ -654,11 +658,18 @@ public class PlayerController : MonoBehaviour
     public void OnReset(EventData data = null)
     {
         ResetState();
-        ResetPositionAndDeacCheck();
+
         ResetJump();
         ResetFly();
         ResetAudio();
+        ResetPositionAndDeacCheck();
         EventManager.InvokeEvent(EventType.GameRestartEvent);
+
+        if (isFirstStart)
+        {
+            EventManager.InvokeEvent(EventType.GameStartEvent);
+            isFirstStart = false;
+        }
     }
 
     public Vector3 getPlayerVelocity()
@@ -757,8 +768,10 @@ public class PlayerController : MonoBehaviour
 
         //计算当前复活点到最初复活点的距离，根据速度换算为毫秒
         float seekTime = (resetpoints[resetPointIndex].x - resetpoints[0].x) / speed *1000;
+
+        gameAudioEventData.LevelMusicTimeInMS = (int)seekTime;
         //TODO :这里逻辑有问题 之后再改
-        if(resetPointIndex == 0)
+        if (resetPointIndex == 0)
         {
             EventManager.InvokeEvent(EventType.GameStartForAudioEvent, gameAudioEventData);
         }
