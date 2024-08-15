@@ -23,19 +23,16 @@ public class FrictionEffectController : HoldStillEffectController
     [SerializeField] private float fricThrowAngle = 15.0f;
     [SerializeField] private float cubeEdgeLen = 0.45f;
     
-    public bool test_is_moving_right;
     void SelfPSInit()
     {
         var myPSMain = myParticleSystem.main;
         ParticleSystem.MinMaxGradient startColorRange = new ParticleSystem.MinMaxGradient(particleRandomColorRangeL, particleRandomColorRangeR);
         myPSMain.startColor = startColorRange;
     }
-    
     private void OnGravityInverse(EventData ed)
     {
         setPSGravity(ForceManager.Instance.GetGravityDir());
     }
-    
     //根据重力和摩擦力计算抛洒粒子方向
     private float GetFrictionThrowingRotationAngle(Vector2 v, Vector2 g, float realAngle)
     {
@@ -79,7 +76,6 @@ public class FrictionEffectController : HoldStillEffectController
         
         //调节相对顶层节点位置
         Vector3 localPosition2Set = new Vector3();
-        
         localPosition2Set.x = -cubeEdgeLen;
         localPosition2Set.y = -cubeEdgeLen;
         transform.localPosition = localPosition2Set;
@@ -93,18 +89,25 @@ public class FrictionEffectController : HoldStillEffectController
         forceModule.y = gravity.y < 0 ? -20.0f : 20.0f;
     }
 
+    private void OnRestart(EventData eventData)
+    {
+        //开喷
+        var emit = myParticleSystem.emission;
+        emit.enabled = true;
+    }
     protected override void OnEnable_deprive()
     {
         SelfPSInit();
-        test_is_moving_right = true;
         EventManager.AddListener(EventType.PlayerJumpoffGroundEvent, OnPlayerJumpOff);
         EventManager.AddListener(EventType.PlayerHitGroundEvent, OnPlayerHitGround);
         EventManager.AddListener(EventType.GravityInverseEvent, OnGravityInverse);
+        EventManager.AddListener(EventType.GameRestartEvent, OnRestart);
     }
     protected override void OnDisable_deprive()
     {
         EventManager.RemoveListener(EventType.PlayerJumpoffGroundEvent, OnPlayerJumpOff);
         EventManager.RemoveListener(EventType.PlayerHitGroundEvent, OnPlayerHitGround);
         EventManager.RemoveListener(EventType.GravityInverseEvent, OnGravityInverse);
+        EventManager.RemoveListener(EventType.GameRestartEvent, OnRestart);
     }
 }

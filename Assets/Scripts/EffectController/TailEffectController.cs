@@ -66,6 +66,11 @@ public class TailEffectController : HoldStillEffectController
             s.ShowSprite();
         }
     }
+
+    private void OnGameRestart(EventData eventData)
+    {
+        ShowSprite();
+    }
     protected override void OnEnable_deprive()
     {
         _mAnimator = gameObject.GetComponent<Animator>();
@@ -74,6 +79,7 @@ public class TailEffectController : HoldStillEffectController
         EventManager.AddListener(EventType.DecideCanJumpEvent, OnJump);
         EventManager.AddListener(EventType.PlayerJumpoffGroundEvent, OnOff);
         EventManager.AddListener(EventType.PlayerHitGroundEvent, OnHitGround);
+        EventManager.AddListener(EventType.GameRestartEvent, OnGameRestart);
     }
 
     protected override void OnDisable_deprive()
@@ -81,13 +87,13 @@ public class TailEffectController : HoldStillEffectController
         EventManager.RemoveListener(EventType.DecideCanJumpEvent, OnJump);
         EventManager.RemoveListener(EventType.PlayerJumpoffGroundEvent, OnOff);
         EventManager.RemoveListener(EventType.PlayerHitGroundEvent, OnHitGround);
+        EventManager.RemoveListener(EventType.GameRestartEvent, OnGameRestart);
     }
 
     private void OnOff(EventData eventData)
     {
         lastOffTime = Time.timeAsDouble;
         HideSprite();
-        
     }
     private void OnJump(EventData eventData)
     {
@@ -95,7 +101,7 @@ public class TailEffectController : HoldStillEffectController
         {
             var generatedFade = Instantiate(_fadingTailEffectPrefab, null);
             generatedFade.transform.position = transform.position;
-            CleverTimerManager.Ask4Timer(0.25, eventData =>
+            CleverTimerManager.Ask4Timer(0.55, eventData =>
             {
                 var go2Die = ((GameObjectDieEventData)eventData).go2kill;
                 if(go2Die)

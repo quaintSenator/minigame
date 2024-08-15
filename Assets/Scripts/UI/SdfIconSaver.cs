@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Sirenix.OdinInspector;
+#if UNITY_EDITOR
 using Sirenix.OdinInspector.Editor;
+#endif
 using UnityEditor;
 using UnityEngine;
 
 public class SdfIconSaver : MonoBehaviour
 {
-    
+#if UNITY_EDITOR
     public SdfIconType iconType;
+#endif
     public Vector2Int size = new Vector2Int(120, 120);
     public Color color = Color.white;
     public string saveName = "icon";

@@ -47,13 +47,13 @@ public class EnemyController : BuildableBase {
         animator.enabled = false;
         _spriteRenderer.material = pixelCollapseMat;
         _spriteRenderer.material.EnableKeyword("_ALPHABLEND_ON");
-        float enemyHeight = 0f;
+        /*float enemyHeight = 0f;
         if (gameObject.name.Equals("Enemy"))
         {
             enemyHeight = 1.4f;
-        }
-        spriteGo.transform.localPosition = new Vector3(0, enemyHeight, -1);
-        spriteGo.transform.rotation = Quaternion.Euler(0, 180, 0);
+        }*/
+        //spriteGo.transform.localPosition = new Vector3(0, enemyHeight, 0);
+        //spriteGo.transform.rotation = Quaternion.Euler(0, 180, 0);
         _spriteRenderer.material.SetFloat("_StartTime", Time.time);
         _particleSystem.Play();
         

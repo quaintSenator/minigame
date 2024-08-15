@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class MapReader : Singleton<MapReader>
@@ -17,6 +18,8 @@ public class MapReader : Singleton<MapReader>
         mapParent = transform;
         LoadSelectedData();
         StartCoroutine(CheckBuildableVisibleCoroutine());
+        UnityEngine.Application.targetFrameRate = 60;
+        UnityEngine.QualitySettings.vSyncCount = 1;
     }
 
     private void LoadSelectedData()
@@ -89,6 +92,13 @@ public class MapReader : Singleton<MapReader>
             }
             yield return wait;
         }
+    }
+
+    [Button]
+    public void PrintFrameRate()
+    {
+        Debug.Log(UnityEngine.QualitySettings.vSyncCount);
+        Debug.Log(UnityEngine.Application.targetFrameRate);
     }
     
 }
