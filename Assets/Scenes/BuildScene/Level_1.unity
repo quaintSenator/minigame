@@ -684,7 +684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07855be1e23f82d4f90bf3e25ac233c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedMapdata: {fileID: 11400000, guid: ca20f29d41ea28a4faa6561c8f2e3d64, type: 2}
+  selectedMapdata: {fileID: 11400000, guid: d474dc43614e595459c00cbb85a4281b, type: 2}
   showAllBuildable: 0
 --- !u!1 &1297685984
 GameObject:
@@ -715,7 +715,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9309d17fe7ab9824c9fd7874f91dbe66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedMapdata: {fileID: 11400000, guid: ca20f29d41ea28a4faa6561c8f2e3d64, type: 2}
+  selectedMapdata: {fileID: 11400000, guid: d474dc43614e595459c00cbb85a4281b, type: 2}
   mapParent: {fileID: 1270504054}
   showAllBuildable: 0
   selectIcon: {fileID: 0}
@@ -744,7 +744,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 368977363481154082, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: m_Size.x
-      value: 2
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 368977363481154082, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: m_Size.y
@@ -752,7 +752,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 368977363481154082, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: m_Offset.x
-      value: 0.5
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 368977363481154082, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: m_Offset.y
@@ -816,7 +816,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3076662434505560676, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3076662434505560679, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: bg
@@ -858,6 +858,10 @@ PrefabInstance:
       propertyPath: resetpoints.Array.data[0]
       value: 
       objectReference: {fileID: 2137890794}
+    - target: {fileID: 3931848181877765673, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: resetpoints.Array.data[0].y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3931848181877765673, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: ActionJumpEvent.WwiseObjectReference
       value: 

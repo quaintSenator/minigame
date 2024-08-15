@@ -94,6 +94,7 @@ public class GameAudioEventData : EventData
 {
     public int LevelMusicIndex=0;
     public int LevelResetPointIndex = 0;
+    public int LevelMusicTimeInMS= 0;
     public GameAudioEventData() : base()
     {
             
@@ -103,7 +104,8 @@ public class GameAudioEventData : EventData
 
 public class RegisterResetPointEventData : EventData
 {
-    public Transform resetpointPosition = null;
+    public Vector3 position = Vector3.zero;
+    //public Transform resetpointPosition = null;
     //public int LevelResetPointIndex = 0;
     public RegisterResetPointEventData() : base()
     {

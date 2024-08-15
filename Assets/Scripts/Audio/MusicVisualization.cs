@@ -215,11 +215,14 @@ public class MusicVisualization : MonoBehaviour
     private void RegisterEvents()
     {
         EventManager.AddListener(EventType.GameStartForAudioEvent, OnGameStartForAudio);
+
+        EventManager.AddListener(EventType.GameRestartEvent, OnGameRestartForAudio);
     }
 
     private void UngisterEvents()
     {
         EventManager.RemoveListener(EventType.GameStartForAudioEvent, OnGameStartForAudio);
+        EventManager.RemoveListener(EventType.GameRestartEvent, OnGameRestartForAudio);
     }
 
 
@@ -302,6 +305,23 @@ public class MusicVisualization : MonoBehaviour
         StopLevelMusic();
         PlayLevelMusic();
 
+    }
+
+    private void  OnGameRestartForAudio(EventData gameAudioEventData = null)
+    {
+        //May be add more audio play state check ,but seem no necessary
+        GameAudioEventData localGameAudioEventData = gameAudioEventData as GameAudioEventData;
+        if (localGameAudioEventData == null)
+        {
+            Debug.LogWarning("invoke PlayLevelMusic wrongly");
+            return;
+        }
+        StopLevelMusic();
+
+        PlayLevelMusic();
+        int SeekTimeInMS = localGameAudioEventData.LevelMusicTimeInMS;
+
+        SeekLevelMusicByTimeMS(SeekTimeInMS);
     }
 
 

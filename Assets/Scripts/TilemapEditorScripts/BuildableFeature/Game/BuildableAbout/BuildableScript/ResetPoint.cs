@@ -8,6 +8,8 @@ using UnityEngine;
 /// 执行流程
 /// 1、初始化向Player或者流程Manager动态注册重生点，之后再通过返回自身状态
 /// 2、玩家经过检查点，向Player或者流程Manager，通知经过事件，永久在管理类中修改状态。
+/// 
+/// 关于重生点可能要考虑在地图中预先把index存一下
 /// </summary>
 public class ResetPoint : BuildableBase
 {
@@ -61,7 +63,13 @@ public class ResetPoint : BuildableBase
     private void RegisterResetPoint()
     {
         RegisterResetPointEventData registerResetPointEventData= new RegisterResetPointEventData();
-        registerResetPointEventData.resetpointPosition = this.transform;
+
+        Transform resetPointTranform= transform;
+        Vector3 resetPointPosition = resetPointTranform.position;
+       // resetPointPosition.x = resetPointPosition.x ;
+
+
+        registerResetPointEventData.position = resetPointPosition;
 
         EventManager.InvokeEvent(EventType.RegisterResetPointEvent, registerResetPointEventData);
     }

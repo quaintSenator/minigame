@@ -28,7 +28,7 @@ public enum JumpType
 
 public class PlayerController : MonoBehaviour
 {
-    public AK.Wwise.Event ActionJumpEvent=null;
+    public AK.Wwise.Event ActionJumpEvent = null;
 
     private double JUDGE_ZERO = 0.000001f;
 
@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     [ReadOnly]
     [Tooltip("弹簧上升初速,由参数计算得到")]
-    private float jumpSpringSpeed= 5.0f;
+    private float jumpSpringSpeed = 5.0f;
 
     [SerializeField]
     [Tooltip("一次弹簧跳跃最高上升的高度，需要调整的参数，影响弹簧上升初速")]
@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     [Tooltip("一次弹簧跳跃最高上升的高度，需要调整的参数，影响弹簧上升初速")]
-    private List<Transform> resetpoints = null;
+    private List<Vector3> resetpoints = null;
 
     private Hashtable resetpointIndexHashTable = new Hashtable();
 
@@ -241,17 +241,17 @@ public class PlayerController : MonoBehaviour
         }
 
         Rotate();
-        
+
     }
 
- 
+
     private void FixedUpdate()
     {
 
         //角色一直受一个向下的重力，世界坐标系
-        if(!isFlying){
+        if (!isFlying) {
             //添加最大下落速度限制
-            if(!ifSwitchOnFallSpeedLimit || rigidBody.velocity.y> -maxFallSpeed)
+            if (!ifSwitchOnFallSpeedLimit || rigidBody.velocity.y > -maxFallSpeed)
             {
                 rigidBody.AddForce(Vector2.down * gravityScale);//* GameConsts.GRAVITY);
             }
@@ -262,14 +262,14 @@ public class PlayerController : MonoBehaviour
         //角色自动向右前进，世界坐标系
         transform.Translate(playerHeadingDir * speed * Time.fixedDeltaTime, Space.World);
 
-        
+
 
         //角色跳跃，如果是Force模式，且在跳跃中，给与一个力
         if (jumpMode == JumpMode.Force && jumping)
         {
             rigidBody.AddForce(Vector2.up * jumpForce);
         }
-    
+
         CheckDead();
     }
 
@@ -319,22 +319,22 @@ public class PlayerController : MonoBehaviour
 
     private void OnBufferTimeEnd(EventData data)
     {
-/*        if (disableTimerCount > 0)
-        {
-            disableTimerCount--;
-            return;
-        }
+        /*        if (disableTimerCount > 0)
+                {
+                    disableTimerCount--;
+                    return;
+                }
 
-        bufferTimerCount--;
-        if (bufferTimerCount == 1)
-        {
-            isBufferActive = true;
-        }
-        else if (isBufferActive)
-        {
-            willJump = false;
-            isBufferActive = false;
-        }*/
+                bufferTimerCount--;
+                if (bufferTimerCount == 1)
+                {
+                    isBufferActive = true;
+                }
+                else if (isBufferActive)
+                {
+                    willJump = false;
+                    isBufferActive = false;
+                }*/
     }
 
     //注册事件统一函数
@@ -346,14 +346,14 @@ public class PlayerController : MonoBehaviour
 
     private void PlayNormalJumpAudio()
     {
-        if(ActionJumpEvent !=null)
+        if (ActionJumpEvent != null)
         {
             ActionJumpEvent.Post(gameObject);
         }
 
     }
     //角色跳跃
-    private void Jump(JumpType jumpType= JumpType.Default)
+    private void Jump(JumpType jumpType = JumpType.Default)
     {
         //EventManager.InvokeEvent(EventType.DecideCanJumpEvent, null);
         disableTimerCount = bufferTimerCount > 0 ? bufferTimerCount : 0;
@@ -368,11 +368,11 @@ public class PlayerController : MonoBehaviour
                 break;
             case JumpMode.Speed:
                 jumping = false;
-                if(jumpType == JumpType.Default)
+                if (jumpType == JumpType.Default)
                 {
                     rigidBody.velocity = Vector2.up * jumpSpeed;
                 }
-                else if(jumpType == JumpType.Spring)
+                else if (jumpType == JumpType.Spring)
                 {
                     rigidBody.velocity = Vector2.up * jumpSpringSpeed;
                 }
@@ -393,11 +393,11 @@ public class PlayerController : MonoBehaviour
     private void EndFly()
     {
         isFlying = false;
-        if(isFlyFinished)
+        if (isFlyFinished)
         {
             TryJump(JumpType.Fly);
         }
-        else{
+        else {
             rigidBody.velocity = new Vector2();
         }
     }
@@ -441,7 +441,7 @@ public class PlayerController : MonoBehaviour
         //根据WorldScale进行缩放
         jumpSpeed = jumpSpeed * worldScale;
         gravityScale = gravityScale * worldScale;
-        jumpSpringSpeed= jumpSpringSpeed * worldScale;
+        jumpSpringSpeed = jumpSpringSpeed * worldScale;
     }
 
     private void CalNormalJumpParameter()
@@ -461,7 +461,7 @@ public class PlayerController : MonoBehaviour
         jumptime = (float)(Math.Sqrt(jumpHeight / jumpDeltaHeight)
             * jumpDeltaHeight
             / (jumpDeltaHeight + Math.Sqrt(jumpDeltaHeight * jumpHeight))
-            * beatTime );
+            * beatTime);
 
         if (jumptime < JUDGE_ZERO)
         {
@@ -488,24 +488,24 @@ public class PlayerController : MonoBehaviour
         //Check X position 
         //moveTimer += Time.fixedDeltaTime;
         expectedDisplacementXAxis += (playerHeadingDir * speed * Time.fixedDeltaTime).x;
-       // playerHeadingDir* speed *Time.fixedDeltaTime
-/*
-        if (resetPointIndex >=0 && resetPointIndex < resetpoints.Count)
-        {*/
-            //if (Mathf.Abs(transform.position.x - resetpoints[resetPointIndex].position.x - moveTimer * speed) >= deadZone)
-            if(expectedDisplacementXAxis - transform.position.x >= deadZone)
-            {
-                OnDead();
-            }
-        //}
-/*        else
+        // playerHeadingDir* speed *Time.fixedDeltaTime
+        /*
+                if (resetPointIndex >=0 && resetPointIndex < resetpoints.Count)
+                {*/
+        //if (Mathf.Abs(transform.position.x - resetpoints[resetPointIndex].position.x - moveTimer * speed) >= deadZone)
+        if (expectedDisplacementXAxis - transform.position.x >= deadZone)
         {
-            Debug.LogError("wrong resetPointIndex or wrong resetpoints");
-        }*/
+            OnDead();
+        }
+        //}
+        /*        else
+                {
+                    Debug.LogError("wrong resetPointIndex or wrong resetpoints");
+                }*/
 
 
         //Check Y position
-        if(transform.position.y<=deadCheckYAxis.position.y)
+        if (transform.position.y <= deadCheckYAxis.position.y)
         {
             OnDead();
         }
@@ -551,7 +551,7 @@ public class PlayerController : MonoBehaviour
         isGrounded = true;
         isReturn = true;
         selfAngle = cubeSprites.eulerAngles.z;
-       
+
         if (willJump || isContinueJump)
         {
             if (!isContinueJump)
@@ -711,16 +711,16 @@ public class PlayerController : MonoBehaviour
     private void ResetPositionAndDeacCheck()
     {
         //May be check the reset point if valid position
-        Vector3 resetPosition= new Vector3();
+        Vector3 resetPosition = new Vector3();
         if (resetPointIndex < resetpoints.Count && resetPointIndex >= 0)
         {
-            resetPosition = resetpoints[resetPointIndex].position;
+            resetPosition = resetpoints[resetPointIndex];
         }
         else
         {
             if (resetpoints.Count >= 1)
             {
-                resetPosition = resetpoints[0].position;
+                resetPosition = resetpoints[0];
 
             }
             else
@@ -743,7 +743,30 @@ public class PlayerController : MonoBehaviour
         //暂时一个Scene对应一个LevelMusic
         //gameAudioEventData.LevelMusicIndex=
         gameAudioEventData.LevelResetPointIndex = resetPointIndex;
-        EventManager.InvokeEvent(EventType.GameStartForAudioEvent, gameAudioEventData);
+        if (resetPointIndex >= resetpoints.Count || resetPointIndex <0)
+        {
+            Debug.LogError("get wrong resetPointIndex in PlayerController::ResetAudio");
+            return;
+        }
+
+        if (speed  == 0)
+        {
+            Debug.LogError("get wrong speed in PlayerController::ResetAudio");
+            return;
+        }
+
+        //计算当前复活点到最初复活点的距离，根据速度换算为毫秒
+        float seekTime = (resetpoints[resetPointIndex].x - resetpoints[0].x) / speed *1000;
+        //TODO :这里逻辑有问题 之后再改
+        if(resetPointIndex == 0)
+        {
+            EventManager.InvokeEvent(EventType.GameStartForAudioEvent, gameAudioEventData);
+        }
+        else
+        {
+            EventManager.InvokeEvent(EventType.GameRestartEvent, gameAudioEventData);
+        }
+
     }
 
 
@@ -755,17 +778,18 @@ public class PlayerController : MonoBehaviour
         if (registerResetPointEventData != null)
         {
             RegisterResetPointCallbackEventData registerResetPointCallbackEventData = new RegisterResetPointCallbackEventData();
+            Vector3 resetpointPosition = registerResetPointEventData.position;
+            //Transform resetpointPosition = registerResetPointEventData.resetpointPosition;
 
-            Transform resetpointPosition = registerResetPointEventData.resetpointPosition;
-
-            //第一次注册
+            //第一次注册(X坐标一定是唯一的，直接作为键值）
             if(!resetpointIndexHashTable.Contains(resetpointPosition))
             {
-                registerResetPointCallbackEventData.index = resetpoints.Count - 1;
-                registerResetPointCallbackEventData.state = false;
-
-                resetpointIndexHashTable.Add(resetpointPosition, resetpoints.Count - 1);
                 resetpoints.Add(resetpointPosition);
+
+                registerResetPointCallbackEventData.state = false;
+                resetpointIndexHashTable.Add(resetpointPosition, resetpoints.Count - 1);
+
+                registerResetPointCallbackEventData.index = resetpoints.Count - 1;
 
             }
             //if(!resetpointIndexHashTable.Contains(resetpointPosition))
