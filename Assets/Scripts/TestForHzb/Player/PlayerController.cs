@@ -355,7 +355,7 @@ public class PlayerController : MonoBehaviour
     //角色跳跃
     private void Jump(JumpType jumpType = JumpType.Default)
     {
-        //EventManager.InvokeEvent(EventType.DecideCanJumpEvent, null);
+        EventManager.InvokeEvent(EventType.DecideCanJumpEvent, null);
         disableTimerCount = bufferTimerCount > 0 ? bufferTimerCount : 0;
         bufferTimerCount = 0;
         isBufferActive = false;
