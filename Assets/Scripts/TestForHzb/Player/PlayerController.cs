@@ -372,7 +372,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case JumpMode.Speed:
                 jumping = false;
-                if (jumpType == JumpType.Default)
+                if (jumpType == JumpType.Default || jumpType == JumpType.Fly)
                 {
                     rigidBody.velocity = Vector2.up * jumpSpeed;
                 }
