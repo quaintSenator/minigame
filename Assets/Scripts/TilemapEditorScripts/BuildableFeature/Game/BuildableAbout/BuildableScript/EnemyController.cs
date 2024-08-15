@@ -26,7 +26,7 @@ public class EnemyController : BuildableBase {
         health = maxHealth;
         _spriteRenderer = spriteGo.GetComponent<SpriteRenderer>();
         _particleSystem = spriteGo.GetComponent<ParticleSystem>();
-        CleverTimerManager.Instance.Ask4Timer(delayTime, CanPlay);
+        CleverTimerManager.Ask4Timer(delayTime, CanPlay);
         _particleSystem.Stop();
     }
 
@@ -57,7 +57,7 @@ public class EnemyController : BuildableBase {
         _spriteRenderer.material.SetFloat("_StartTime", Time.time);
         _particleSystem.Play();
         
-        CleverTimerManager.Instance.Ask4Timer(2f, data =>
+        CleverTimerManager.Ask4Timer(2f, data =>
         {
             Destroy(gameObject);
         });

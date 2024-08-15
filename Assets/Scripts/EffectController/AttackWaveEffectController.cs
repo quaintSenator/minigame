@@ -30,7 +30,7 @@ public class AttackWaveEffectController : MonoBehaviour
         var obj = PoolManager.Instance.SpawnFromPool("AttackWaveEffect", attackWaveEffectPrefab, transform);
         obj.transform.localPosition = new Vector3(0, 0, 0);
         obj.transform.SetParent(bg.transform);
-        CleverTimerManager.Instance.Ask4Timer(onceTime + fadeTime + 0.01f, OnAttackWaveDie, new AttackWaveEffectEndOrDieEventData(obj));
+        CleverTimerManager.Ask4Timer(onceTime + fadeTime + 0.01f, OnAttackWaveDie, new AttackWaveEffectEndOrDieEventData(obj));
         var attackWave = obj.GetComponent<AttackWave>();
         if (attackWave)
         {

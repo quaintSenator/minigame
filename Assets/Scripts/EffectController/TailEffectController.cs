@@ -55,7 +55,7 @@ public class TailEffectController : HoldStillEffectController
 
     private void ShowSpriteInTime(float t)
     {
-        CleverTimerManager.Instance.Ask4Timer(t, OnShowSpriteTimeup, new KeepSlidingEventData(this));
+        CleverTimerManager.Ask4Timer(t, OnShowSpriteTimeup, new KeepSlidingEventData(this));
     }
 
     private void OnShowSpriteTimeup(EventData eventData)
@@ -95,7 +95,7 @@ public class TailEffectController : HoldStillEffectController
         {
             var generatedFade = Instantiate(_fadingTailEffectPrefab, null);
             generatedFade.transform.position = transform.position;
-            CleverTimerManager.Instance.Ask4Timer(0.25, eventData =>
+            CleverTimerManager.Ask4Timer(0.25, eventData =>
             {
                 var go2Die = ((GameObjectDieEventData)eventData).go2kill;
                 if(go2Die)
