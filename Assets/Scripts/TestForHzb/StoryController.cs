@@ -34,6 +34,7 @@ public class StoryController : MonoBehaviour
     Step 6：三角形说第三句话
     Step 7：方块开始跑,三角形说第四句话
     Step 8：三角形开始追
+    Step 9：浮现第一句背景台词
     */
     private List<Action> functions = new List<Action>();
 
@@ -45,6 +46,8 @@ public class StoryController : MonoBehaviour
     private float triangleRunSpeed = 6.0f;
 
     [SerializeField]
+    private float defaultWaitTime = 1.0f;
+    [SerializeField]
     private float cubeIdleTime = 2.0f;
     [SerializeField]
     private float triangleAppearTime = 0.5f;
@@ -54,11 +57,21 @@ public class StoryController : MonoBehaviour
     private float cubeStartRunTime = 0.5f;
     [SerializeField]
     private float triangleStartRunTime = 0.5f;
+    [SerializeField]
+    private float endTime = 5.0f;
+    [SerializeField]
+    private float bgDialog1EndTime = 5.0f;
+
+    [SerializeField]
+    private bool autoPlay = true;
 
     private int stepIndex = 0;
     private bool canNextStep = false;
 
     private readonly StoryEventData mustDoStepData = new StoryEventData(-1, true);
+    private string[] dialogs = {
+        "我是一个正方形, 我生活的世界叫作平面国。",
+    };
 
     private PlayerController playerController;
     private PlayerStoryController playerStoryController;
@@ -83,6 +96,7 @@ public class StoryController : MonoBehaviour
         functions.Add(Step_6);
         functions.Add(Step_7);
         functions.Add(Step_8);
+        functions.Add(Step_9);
         EventManager.InvokeEvent(EventType.StoryStartEvent, mustDoStepData);
     }
 
@@ -166,7 +180,14 @@ public class StoryController : MonoBehaviour
     {
         playerStoryController.SetSpeed(0);
 
-        canNextStep = true;
+        if(autoPlay){
+            canNextStep = false;
+            CleverTimerManager.Ask4Timer(defaultWaitTime, NextStep, mustDoStepData);
+        }
+        else{
+            canNextStep = true;
+        }
+
     }
 
     private void Step_5()
@@ -174,7 +195,13 @@ public class StoryController : MonoBehaviour
         enemyStoryController.EndSpeak();
         enemyStoryController.StartSpeak();
 
-        canNextStep = true;
+        if(autoPlay){
+            canNextStep = false;
+            CleverTimerManager.Ask4Timer(defaultWaitTime, NextStep, mustDoStepData);
+        }
+        else{
+            canNextStep = true;
+        }
     }
 
     private void Step_6()
@@ -203,6 +230,11 @@ public class StoryController : MonoBehaviour
         enemyStoryController.EndSpeak();
 
         canNextStep = false;
+        CleverTimerManager.Ask4Timer(endTime, NextStep, mustDoStepData);
+    }
+
+    private void Step_9()
+    {
         EndStory();
     }
 

@@ -29,7 +29,7 @@ public class EnemyStoryController : MonoBehaviour
 
     private void Awake()
     {
-        bubble = transform.Find("Canvas").Find("sprite");
+        bubble = transform.Find("Canvas").Find("bubble");
         dialog = bubble.Find("Text").GetComponent<Text>();
     }
 

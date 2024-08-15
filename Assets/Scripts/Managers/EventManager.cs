@@ -83,6 +83,7 @@ public enum EventType
     StartStoryStep7 = 406,
     StartStoryStep8 = 407,
     StartStoryStep9 = 408,
+    StartStoryStep10 = 409,
 
     NextStepEvent = 420,
     StoryStartEvent = 421,
