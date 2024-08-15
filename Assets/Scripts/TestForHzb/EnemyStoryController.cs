@@ -14,7 +14,7 @@ public class EnemyStoryController : MonoBehaviour
     [SerializeField]
     private float yOffset = 0;
 
-    private float speed = 6.0f;
+    private float speed = 4.0f;
     private int dialogIndex = 0;
 
     private Transform bubble;
@@ -36,7 +36,7 @@ public class EnemyStoryController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ResetTextPos();
+        //ResetTextPos();
     }
 
     // Update is called once per frame
@@ -62,13 +62,13 @@ public class EnemyStoryController : MonoBehaviour
         return dialogs[dialogIndex++];
     }
 
-    private void Speak()
+    public void StartSpeak()
     {
         ResetTextPos();
         dialog.text = GetDialog();
     }
 
-    private void EndSpeak()
+    public void EndSpeak()
     {
         bubble.gameObject.SetActive(false);
     }
@@ -78,8 +78,4 @@ public class EnemyStoryController : MonoBehaviour
         this.speed = speed;
     }
 
-    public void Step_1()
-    {
-        
-    }
 }

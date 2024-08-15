@@ -41,7 +41,7 @@ public class SwordController : MonoBehaviour
         if(canAttack)
         {
             animator.SetTrigger("Attack");
-            CleverTimerManager.Instance.Ask4Timer(coldDownTime, SetAttack);
+            CleverTimerManager.Ask4Timer(coldDownTime, SetAttack);
             _attackWaveEffectController.SpawnEffectInstance();
             canAttack = false;
         }

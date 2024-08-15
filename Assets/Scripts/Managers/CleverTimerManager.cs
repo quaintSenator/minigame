@@ -78,14 +78,14 @@ public class TimerPElement : PElement
 }
 public class CleverTimerManager : Singleton<CleverTimerManager>
 {
-    private PriorityQueue _pq4FloatTimer;
-    private PriorityQueue _pq4FrameTimer;
+    private static PriorityQueue _pq4FloatTimer;
+    private static PriorityQueue _pq4FrameTimer;
     [SerializeField] private int frame2Wait_test;
     protected override void OnAwake()
     {
         Init();
     }
-    public double Ask4Timer(double time, Action<EventData> action, EventData data2Pass = null)
+    static public double Ask4Timer(double time, Action<EventData> action, EventData data2Pass = null)
     {
         var timeToExplode = Time.timeAsDouble + time;
         var pElement = new TimerPElement(action, timeToExplode, data2Pass);
@@ -94,7 +94,7 @@ public class CleverTimerManager : Singleton<CleverTimerManager>
         return timeToExplode;
     }
     
-    public int Ask4FrameTimer(int frame, Action<EventData> action, EventData data2Pass = null)
+    static public int Ask4FrameTimer(int frame, Action<EventData> action, EventData data2Pass = null)
     {
         var frame2Explode = Time.frameCount + frame;
         var pElement = new TimerPElement(action, frame2Explode, data2Pass);

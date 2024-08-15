@@ -57,7 +57,7 @@ public class FrameSerial
         for (var i = 0; i < framesToCall.Count; i++)
         {
             var frame = framesToCall[i];
-            var id = CleverTimerManager.Instance.Ask4FrameTimer(frame, _frameHitCallback, null);
+            var id = CleverTimerManager.Ask4FrameTimer(frame, _frameHitCallback, null);
         }
     }
 }

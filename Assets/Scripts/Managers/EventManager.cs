@@ -78,6 +78,15 @@ public enum EventType
     StartStoryStep2 = 401,
     StartStoryStep3 = 402,
     StartStoryStep4 = 403,
+    StartStoryStep5 = 404,
+    StartStoryStep6 = 405,
+    StartStoryStep7 = 406,
+    StartStoryStep8 = 407,
+    StartStoryStep9 = 408,
+
+    NextStepEvent = 420,
+    StoryStartEvent = 421,
+    StoryEndEvent = 422,
 
     #endregion
 

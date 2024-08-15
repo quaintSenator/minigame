@@ -64,7 +64,7 @@ public class GuideController : MonoBehaviour
     {
         jumpRenderer.enabled = true;
         attackRenderer.enabled = true;
-        CleverTimerManager.Instance.Ask4Timer(waitTime, StartFade);
+        CleverTimerManager.Ask4Timer(waitTime, StartFade);
     }
 
     private void StartFade(EventData data = null)
