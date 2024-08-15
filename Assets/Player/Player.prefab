@@ -4821,7 +4821,7 @@ MonoBehaviour:
   playerTransform: {fileID: 3931848181877765676}
   minimumPlayerYDecidedAsOnGround: 0
   particleRandomColorRangeL: {r: 1, g: 1, b: 1, a: 1}
-  particleRandomColorRangeR: {r: 0, g: 0.38204694, b: 1, a: 1}
+  particleRandomColorRangeR: {r: 1, g: 1, b: 1, a: 1}
   fricThrowAngle: 15
   cubeEdgeLen: 0.45
   test_is_moving_right: 0

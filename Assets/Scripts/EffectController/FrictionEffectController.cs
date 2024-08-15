@@ -73,9 +73,9 @@ public class FrictionEffectController : HoldStillEffectController
         //设置transform.rotation, 用于调整喷射方向
         var fmanager = ForceManager.Instance;
         var hitGroundEventData = (HitGroundEventData)ed;
-        var rotationX = GetFrictionThrowingRotationAngle(
+        /*var rotationX = GetFrictionThrowingRotationAngle(
             hitGroundEventData.velocityDir, fmanager.GetGravityDir(), fricThrowAngle);
-        transform.rotation = Quaternion.Euler(rotationX, -90.0f, 0);
+        transform.rotation = Quaternion.Euler(rotationX, -90.0f, 0);*/
         
         //调节相对顶层节点位置
         Vector3 localPosition2Set = new Vector3();
