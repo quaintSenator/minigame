@@ -647,6 +647,8 @@ public class BuildableCreator : Singleton<BuildableCreator>
             Vector3 realPosition = Utils.GetRealPostion(buildableInfo.position);
             icon.transform.position = realPosition;
         }
+
+        BuildableBase.LinkAllGroup();
     }
 
     public TileMode GetTileMode()

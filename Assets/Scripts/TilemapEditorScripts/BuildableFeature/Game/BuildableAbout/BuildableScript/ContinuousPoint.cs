@@ -10,7 +10,6 @@ public class ContinuousPoint : BuildableBase
     
     public override void Init()
     {
-        LinkPoint();
         ContinuousPointInit();
     }
     
@@ -30,14 +29,13 @@ public class ContinuousPoint : BuildableBase
         
     }
     
-    private void LinkPoint()
+    public void LinkPoint()
     {
         int groupIndex = GetBuildableGroupIndex(Index);
-        ContinuousPoint last = GetLastBuildableInGroup(groupIndex) as ContinuousPoint;
-        if(last != null)
+        LastPoint = GetLastBuildableInGroup(groupIndex, Index) as ContinuousPoint;
+        NextPoint = GetNextBuildableInGroup(groupIndex, Index) as ContinuousPoint;
+        if(LastPoint != null)
         {
-            last.NextPoint = this;
-            LastPoint = last;
             UpdateLineRenderer();
         }
         else
@@ -50,14 +48,14 @@ public class ContinuousPoint : BuildableBase
     {
         if(LastPoint != null)
         {
-            LastPoint.NextPoint = null;
-            LastPoint = null;
+            LastPoint.NextPoint = NextPoint;
         }
         if(NextPoint != null)
         {
-            NextPoint.LastPoint = null;
-            NextPoint = null;
+            NextPoint.LastPoint = LastPoint;
         }
+        LastPoint = null;
+        NextPoint = null;
     }
     
     public void UpdateLineRenderer()

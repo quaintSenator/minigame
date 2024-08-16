@@ -162,13 +162,46 @@ public class BuildableBase : MonoBehaviour
         return index / 1000;
     }
     
-    public static BuildableBase GetLastBuildableInGroup(int groupIndex)
+    public static BuildableBase GetLastBuildableInGroup(int groupIndex, int index)
     {
         if (BuildableGroupMap.ContainsKey(groupIndex))
         {
-            return BuildableGroupMap[groupIndex][BuildableGroupMap[groupIndex].Count - 1];
+            foreach (var buildable in BuildableGroupMap[groupIndex])
+            {
+                if (buildable.Index == index - 1)
+                {
+                    return buildable;
+                }
+            }
         }
         return null;
+    }
+    
+    public static BuildableBase GetNextBuildableInGroup(int groupIndex, int index)
+    {
+        if (BuildableGroupMap.ContainsKey(groupIndex))
+        {
+            foreach (var buildable in BuildableGroupMap[groupIndex])
+            {
+                if (buildable.Index == index + 1)
+                {
+                    return buildable;
+                }
+            }
+        }
+        return null;
+    }
+
+    public static void LinkAllGroup()
+    {
+        foreach (var allGroups in BuildableGroupMap)
+        {
+            foreach (var group in allGroups.Value)
+            {
+                var point = group as ContinuousPoint;
+                point?.LinkPoint();
+            }
+        }
     }
 
     //GroupIndex更新到最大的GroupIndex+1，Index更新到1
