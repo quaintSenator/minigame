@@ -90,6 +90,9 @@ public class MapReader : Singleton<MapReader>
                     DestoryBuildable(buildableInfo.position);
                 }
             }
+            
+            BuildableBase.LinkAllGroup();
+            
             yield return wait;
         }
     }

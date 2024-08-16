@@ -69,8 +69,8 @@ public class ContinuousPoint : BuildableBase
         lineRenderer.positionCount = 2;
         lineRenderer.SetPosition(0, Utils.GetRealPostion(LastPoint.Position));
         lineRenderer.SetPosition(1, Utils.GetRealPostion(Position));
-        lineRenderer.startColor = Color.white;
-        lineRenderer.endColor = Color.white;
+        lineRenderer.startColor = Color.red;
+        lineRenderer.endColor = Color.green;
         lineRenderer.startWidth = 0.1f;
         lineRenderer.endWidth = 0.1f;
         lineRenderer.sortingOrder = -1;
