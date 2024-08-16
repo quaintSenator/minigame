@@ -166,12 +166,14 @@ public class BuildableBase : MonoBehaviour
     {
         if (BuildableGroupMap.ContainsKey(groupIndex))
         {
+            BuildableBase lastBuildable = null;
             foreach (var buildable in BuildableGroupMap[groupIndex])
             {
-                if (buildable.Index == index - 1)
+                if (buildable.Index == index)
                 {
-                    return buildable;
+                    return lastBuildable;
                 }
+                lastBuildable = buildable;
             }
         }
         return null;
@@ -181,11 +183,16 @@ public class BuildableBase : MonoBehaviour
     {
         if (BuildableGroupMap.ContainsKey(groupIndex))
         {
+            bool find = false;
             foreach (var buildable in BuildableGroupMap[groupIndex])
             {
-                if (buildable.Index == index + 1)
+                if (find)
                 {
                     return buildable;
+                }
+                if (buildable.Index == index)
+                {
+                    find = true;
                 }
             }
         }
