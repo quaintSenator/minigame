@@ -677,7 +677,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         {
             foreach (var buildableBase in VARIABLE.Value)
             {
-                Debug.Log(VARIABLE.Key + " : " + buildableBase.Index);
+                Debug.Log(VARIABLE.Key + " : " + buildableBase.Index + " : " + buildableBase.Position);
             }
         }
     }

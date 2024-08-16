@@ -11,11 +11,23 @@ public class ContinuousPoint : BuildableBase
     public override void Init()
     {
         LinkPoint();
+        ContinuousPointInit();
     }
     
     public override void Dispose()
     {
         UnLinkPoint();
+        ContinuousPointDispose();
+    }
+
+    protected virtual void ContinuousPointInit()
+    {
+        
+    }
+
+    protected virtual void ContinuousPointDispose()
+    {
+        
     }
     
     private void LinkPoint()
