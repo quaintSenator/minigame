@@ -31,10 +31,10 @@ public class PlayerEntireCollider : MonoBehaviour{
 
         }
         else if(other.gameObject.CompareTag("Unsafe")){
-            player.SetIsDead(true);
+            player.OnDead();
         }
         else if(other.gameObject.CompareTag("Enemy")){
-            player.SetIsDead(true);
+            player.OnDead();
         }
         Debug.Log("isCollidsion"+other.gameObject.tag);
     }

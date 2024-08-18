@@ -160,6 +160,9 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D boxCollider;
     private Rigidbody2D rigidBody;
 
+    //是否能进行移动,封装了Getter和Setter
+    public bool ifCanMove = false;
+
     //为减少FixUp开销保存HeadingDir的常态，仅在事件下切换
     private Vector3 playerHeadingDir;
     private void Awake()
@@ -181,7 +184,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.AddListener(EventType.MouseRightClickEvent, OnDead);
+        EventManager.AddListener(EventType.StartLevelEvent, OnStartLevelEvent);
+        EventManager.AddListener(EventType.RestartLevelEvent, OnRestartLevelEvent);
+
+        EventManager.AddListener(EventType.StartPlayerDeadEvent, OnStartPlayerDeadEvent);
+
+        //EventManager.AddListener(EventType.MouseRightClickEvent, OnDead);
         EventManager.AddListener(EventType.SpacebarDownEvent, OnSpacebarDown);
         EventManager.AddListener(EventType.SpacebarUpEvent, OnSpacebarUp);
         EventManager.AddListener(EventType.MouseLeftClickEvent, OnMouseLeftClick);
@@ -196,7 +204,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
-        EventManager.RemoveListener(EventType.MouseRightClickEvent, OnDead);
+        //EventManager.RemoveListener(EventType.MouseRightClickEvent, OnDead);
 
         EventManager.RemoveListener(EventType.SpacebarDownEvent, OnSpacebarDown);
         EventManager.RemoveListener(EventType.SpacebarUpEvent, OnSpacebarUp);
@@ -210,9 +218,10 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
-        returnTimer = 0;
+        //ResetJump中包含了这项
+        //returnTimer = 0;
 
-        OnReset();
+        //OnReset();
     }
 
     private void Update()
@@ -222,6 +231,14 @@ public class PlayerController : MonoBehaviour
              //Debug.Log("willJump");
              willJump = true;
          }*/
+
+        //处于暂停或者其他状态不进行更新
+        if(!ifCanMove)
+        {
+            return;
+        }
+
+
         if (isReturn)
         {
             returnTimer += Time.deltaTime;
@@ -252,6 +269,12 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
 
+        //处于暂停或者其他状态不进行更新
+        if (!ifCanMove)
+        {
+            return;
+        }
+
         //角色一直受一个向下的重力，世界坐标系
         if (!isFlying) {
             //添加最大下落速度限制
@@ -276,6 +299,9 @@ public class PlayerController : MonoBehaviour
 
         CheckDead();
     }
+
+
+
 
     private void OnSpacebarDown(EventData data = null)
     {
@@ -522,18 +548,19 @@ public class PlayerController : MonoBehaviour
         isGrounded = value;
     }
 
-    public void SetIsDead(bool value)
-    {
-        if (!isDead && value)
+    //没看懂这个函数拿来干嘛的，先注释了
+    /*  public void SetIsDead(bool value)
         {
-            isDead = value;
-            OnDead();
-        }
-        else
-        {
-            isDead = value;
-        }
-    }
+           if (!isDead && value)
+           {
+               isDead = value;
+               OnDead();
+           }
+           else
+           {
+               isDead = value;
+           }
+        }*/
 
     public void SetCanFly(bool value)
     {
@@ -651,9 +678,32 @@ public class PlayerController : MonoBehaviour
 
     public void OnDead(EventData data = null)
     {
+        if (resetPointIndex >= resetpoints.Count || resetPointIndex < 0)
+        {
+            Debug.LogError("PlayerController::OnDead :get wrong resetPointIndex in PlayerController::ResetAudio");
+            return;
+        }
+
+        if (speed == 0)
+        {
+            Debug.LogError("PlayerController::OnDead :get wrong speed in PlayerController::ResetAudio");
+            return;
+        }
+
         boxCollider.enabled = false;
-        EventManager.InvokeEvent(EventType.PlayerDeadEvent);
-        OnReset();
+
+
+        //TODO :死亡动画、音效相关补充,添加到OnStartPlayerDead也可
+
+        LevelEventData levelEventData = new LevelEventData();
+        
+        //计算当前复活点到最初复活点的距离，根据速度换算为毫秒
+        int seekTime = (int)Mathf.Ceil((resetpoints[resetPointIndex].x - resetpoints[0].x) / speed * 1000);
+        levelEventData.LevelMusicTimeInMS = seekTime;
+        levelEventData.LevelResetPointIndex = resetPointIndex;
+        //现在死亡流程走Flow，这里只触发事件
+        EventManager.InvokeEvent(EventType.PlayerDeadStoryEvent, levelEventData);
+         // OnReset();
     }
 
     public void OnReset(EventData data = null)
@@ -662,15 +712,18 @@ public class PlayerController : MonoBehaviour
 
         ResetJump();
         ResetFly();
-        ResetAudio();
+        //ResetAudio();
         ResetPositionAndDeacCheck();
-        EventManager.InvokeEvent(EventType.GameRestartEvent);
+        /*        EventManager.InvokeEvent(EventType.GameRestartEvent);
 
-        if (isFirstStart)
-        {
-            EventManager.InvokeEvent(EventType.GameStartEvent);
-            isFirstStart = false;
-        }
+                if (isFirstStart)
+                {
+                    EventManager.InvokeEvent(EventType.GameStartEvent);
+                    isFirstStart = false;
+        }*/
+        EventManager.InvokeEvent(EventType.EndRespawnEvent);
+
+
     }
 
     public Vector3 getPlayerVelocity()
@@ -751,7 +804,7 @@ public class PlayerController : MonoBehaviour
     }
     private void ResetAudio()
     {
-        GameAudioEventData gameAudioEventData = new GameAudioEventData();
+        LevelEventData gameAudioEventData = new LevelEventData();
         //暂时一个Scene对应一个LevelMusic
         //gameAudioEventData.LevelMusicIndex=
         gameAudioEventData.LevelResetPointIndex = resetPointIndex;
@@ -833,4 +886,43 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnStartLevelEvent(EventData eventData)
+    {
+        SetIfCanMove(true);
+    }
+
+    private void OnRestartLevelEvent(EventData eventData)
+    {
+        SetIfCanMove(true);
+    }
+
+
+    private void OnStartDeadEvent(EventData eventData)
+    {
+        OnReset();
+    }
+
+
+    private void OnStartPlayerDeadEvent(EventData eventData)
+    {
+        //TODO :死亡动画、音效相关补充,添加到OnDead也可
+
+        //如果没有额外的其他类的处理，这里就
+        EventManager.InvokeEvent(EventType.EndPlayerDeadEvent);
+
+        OnReset();
+    }
+
+    #region HelperFunctions
+    private void SetIfCanMove(bool newIfCanMove)
+    {
+        this.ifCanMove = newIfCanMove;
+    }
+
+    private bool GetIfCanMove()
+    {
+        return this.ifCanMove;
+    }
+
+    #endregion
 }

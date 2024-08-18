@@ -105,7 +105,7 @@ struct LevelMusic
 /// <summary>
 /// 名字暂时不改了，这个其实是声音Controller，但也除了我应该没人看吧
 /// </summary>
-public class MusicVisualization : MonoBehaviour
+public class MusicManager : Singleton<MusicManager>
 {
     [SerializeField]
     private PlayerController PlayerControllerInstance = null;
@@ -185,10 +185,14 @@ public class MusicVisualization : MonoBehaviour
         UngisterEvents();
     }
 
+    protected override void OnAwake()
+    {
+        LoadLevelBankSync();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        LoadLevelBank();
+/*        LoadLevelBank();
 
         //可能会考虑统一由其他类进行控制 而使用
         if (IfPlayMusicWhenStart)
@@ -201,7 +205,7 @@ public class MusicVisualization : MonoBehaviour
                 GetPlayerControllerSpeed();
                 InitRhythmVisualizationPerfabList();
             }
-        }
+        }*/
 
     }
 
@@ -214,38 +218,24 @@ public class MusicVisualization : MonoBehaviour
 
     private void RegisterEvents()
     {
-        EventManager.AddListener(EventType.GameStartForAudioEvent, OnGameStartForAudio);
+        EventManager.AddListener(EventType.StartLoadBankEvent, OnStartLoadBankEvent);
+        EventManager.AddListener(EventType.StartLevelEvent, OnStartLevelEvent);
+        EventManager.AddListener(EventType.RestartLevelEvent, OnRestartLevelEvent);
+        EventManager.AddListener(EventType.GamePauseEvent, OnGamePauseEvent);
+        EventManager.AddListener(EventType.GameResumeEvent, OnGameResumeEvent);
+        /*        EventManager.AddListener(EventType.GameStartForAudioEvent, OnGameStartForAudio);
 
-        EventManager.AddListener(EventType.GameRestartEvent, OnGameRestartForAudio);
+                EventManager.AddListener(EventType.GameRestartEvent, OnGameRestartForAudio);*/
     }
 
     private void UngisterEvents()
     {
-        EventManager.RemoveListener(EventType.GameStartForAudioEvent, OnGameStartForAudio);
-        EventManager.RemoveListener(EventType.GameRestartEvent, OnGameRestartForAudio);
-    }
 
-
-    private void InitRhythmVisualizationPerfabList()
-    {
-        if (RhythmVisualizationPerfabType != null && IfUseVisualization)
-        {
-            for (int IndexOfPerfab = 0; IndexOfPerfab < NumberOfRhythmVisualizationPerfabInstance; IndexOfPerfab++)
-            {
-                GameObject InstanceOfRhythmVisualizationPerfab = GameObject.Instantiate(RhythmVisualizationPerfabType);
-
-                Renderer RendererInstance = InstanceOfRhythmVisualizationPerfab.GetComponent<Renderer>();
-
-                if (RendererInstance != null)
-                {
-                    InitSingleRhythmVisualizationPerfabParameter(RendererInstance);
-                    RendererInstance.enabled = false;
-                }
-
-                RhythmVisualizationPerfabInstanceList.Add(InstanceOfRhythmVisualizationPerfab);
-            }
-            IfInitRhythmVisualizationList = true;
-        }
+        EventManager.RemoveListener(EventType.StartLoadBankEvent, OnStartLoadBankEvent);
+        EventManager.RemoveListener(EventType.StartLevelEvent, OnStartLevelEvent);
+        EventManager.RemoveListener(EventType.RestartLevelEvent, OnRestartLevelEvent);
+        EventManager.RemoveListener(EventType.GamePauseEvent, OnGamePauseEvent);
+        EventManager.RemoveListener(EventType.GameResumeEvent, OnGameResumeEvent);
     }
 
     private void GetPlayerControllerSpeed()
@@ -261,56 +251,41 @@ public class MusicVisualization : MonoBehaviour
             return;
         }
     }
+    
 
 
-    private void InitSingleRhythmVisualizationPerfabParameter(Renderer RendererInstance)
+    public void OnStartLoadBankEvent(EventData gameAudioEventData = null)
     {
-        Material MaterialInstance = RendererInstance.material;
-        RhythmVisualizationPerfabParameterInstance.StartTimeOffset= Time.realtimeSinceStartup;
-        if (MaterialInstance != null)
+        if(!LoadLevelBankSync())
         {
-            MaterialInstance.SetFloat("_StartTimeOffset", RhythmVisualizationPerfabParameterInstance.StartTimeOffset);
-            MaterialInstance.SetFloat("_CircleMaxRadium", RhythmVisualizationPerfabParameterInstance.CircleMaxRadium);
-            MaterialInstance.SetFloat("_OuterCircleWidth", RhythmVisualizationPerfabParameterInstance.OuterCircleWidth);
-
-            MaterialInstance.SetColor("_GrowingCircleColor", RhythmVisualizationPerfabParameterInstance.GrowingCircleColor);
-            MaterialInstance.SetColor("_NormalColor", RhythmVisualizationPerfabParameterInstance.NormalColor);
-            MaterialInstance.SetColor("_PerfectColor", RhythmVisualizationPerfabParameterInstance.PerfectColor);
-
-            MaterialInstance.SetFloat("_BeatStartTime", RhythmVisualizationPerfabParameterInstance.BeatStartTime);
-            MaterialInstance.SetFloat("_BeatEndTime", RhythmVisualizationPerfabParameterInstance.BeatEndTime);
-
-            MaterialInstance.SetFloat("_NormalRangeStartTime", RhythmVisualizationPerfabParameterInstance.NormalRangeStartTime);
-            MaterialInstance.SetFloat("_NormalRangeEndTime", RhythmVisualizationPerfabParameterInstance.NormalRangeEndTime);
-
-            MaterialInstance.SetFloat("_PerfectRangeStartTime", RhythmVisualizationPerfabParameterInstance.PerfectRangeStartTime);
-            MaterialInstance.SetFloat("_PerfectRangeEndTime", RhythmVisualizationPerfabParameterInstance.PerfectRangeEndTime);
-
-            MaterialInstance.SetFloat("_IntervalTimeB2WBeats", RhythmVisualizationPerfabParameterInstance.IntervalTimeB2WBeats);
+            Debug.LogError("MusiceManager :: OnStartLoadBankEvent : load failed, please check parameter if right ,if dont know how to solve ,please contact Yeniao");
+            return;
         }
+        
+        EventManager.InvokeEvent(EventType.EndLoadBankEvent);
+
+        // LoadLevelBankAsync(OnLoadBankCallbackAsync);
     }
 
-    
-    public void OnGameStartForAudio( EventData gameAudioEventData = null)
+    public void OnStartLevelEvent(EventData gameAudioEventData = null)
     {
-        LoadLevelBank();
 
         //May be add more audio play state check ,but seem no necessary
-        GameAudioEventData localGameAudioEventData = gameAudioEventData as GameAudioEventData;
+/*        GameAudioEventData localGameAudioEventData = gameAudioEventData as GameAudioEventData;
         if (localGameAudioEventData == null)
         {
             Debug.LogWarning("invoke PlayLevelMusic wrongly");
             return;
-        }
+        }*/
         StopLevelMusic();
         PlayLevelMusic();
 
     }
 
-    private void  OnGameRestartForAudio(EventData gameAudioEventData = null)
+    private void OnRestartLevelEvent(EventData gameAudioEventData = null)
     {
         //May be add more audio play state check ,but seem no necessary
-        GameAudioEventData localGameAudioEventData = gameAudioEventData as GameAudioEventData;
+        LevelEventData localGameAudioEventData = gameAudioEventData as LevelEventData;
         if (localGameAudioEventData == null)
         {
             Debug.LogWarning("invoke PlayLevelMusic wrongly");
@@ -324,9 +299,39 @@ public class MusicVisualization : MonoBehaviour
         SeekLevelMusicByTimeMS(SeekTimeInMS);
     }
 
+    private void OnGamePauseEvent(EventData gameAudioEventData = null)
+    {
+        //TODO: add more sound to make this process more interesting
+        PauseLevelMusic();
+    }
+
+    private void OnGameResumeEvent(EventData gameAudioEventData = null)
+    {
+        //TODO: add more sound to make this process more interesting
+        ResumeLevelMusic();
+    }
 
 
+    private void OnStartPlayerDeadEvent(EventData gameAudioEventData = null)
+    {
 
+    }
+    //
+    public void OnLoadBankCallbackAsync(uint in_bankID, System.IntPtr in_InMemoryBankPtr, AKRESULT in_eLoadResult, object in_Cookie)
+    {
+        if (in_eLoadResult != AKRESULT.AK_Success)
+        {
+            Debug.LogError("MusiceManager :: OnLoadBankCallbackAsync : load failed, please check parameter if right ,if dont know how to solve ,please contact Yeniao");
+            return;
+        }
+        else
+        {
+            hasLoadBank = true;
+            EventManager.InvokeEvent(EventType.EndLoadBankEvent);
+        }
+        
+
+    }
 
     //播放声音的回调函数
     //目前打的Marker会在节拍点前提前一定时间，可视化需要计算出正确的位置
@@ -350,12 +355,41 @@ public class MusicVisualization : MonoBehaviour
         }
     }
 
-    private void ComputeRhythmVisualizationPerfabNextVisualPositionXOffset()
+
+
+    #region 弃置的旧有可视化相关
+    private void InitSingleRhythmVisualizationPerfabParameter(Renderer RendererInstance)
     {
-        NextVisualPositionXOffset= (Vector3.right * PlayerSpeed * BeatTimeInterval).x;
-        return ;
+        Material MaterialInstance = RendererInstance.material;
+        RhythmVisualizationPerfabParameterInstance.StartTimeOffset = Time.realtimeSinceStartup;
+        if (MaterialInstance != null)
+        {
+            MaterialInstance.SetFloat("_StartTimeOffset", RhythmVisualizationPerfabParameterInstance.StartTimeOffset);
+            MaterialInstance.SetFloat("_CircleMaxRadium", RhythmVisualizationPerfabParameterInstance.CircleMaxRadium);
+            MaterialInstance.SetFloat("_OuterCircleWidth", RhythmVisualizationPerfabParameterInstance.OuterCircleWidth);
+
+            MaterialInstance.SetColor("_GrowingCircleColor", RhythmVisualizationPerfabParameterInstance.GrowingCircleColor);
+            MaterialInstance.SetColor("_NormalColor", RhythmVisualizationPerfabParameterInstance.NormalColor);
+            MaterialInstance.SetColor("_PerfectColor", RhythmVisualizationPerfabParameterInstance.PerfectColor);
+
+            MaterialInstance.SetFloat("_BeatStartTime", RhythmVisualizationPerfabParameterInstance.BeatStartTime);
+            MaterialInstance.SetFloat("_BeatEndTime", RhythmVisualizationPerfabParameterInstance.BeatEndTime);
+
+            MaterialInstance.SetFloat("_NormalRangeStartTime", RhythmVisualizationPerfabParameterInstance.NormalRangeStartTime);
+            MaterialInstance.SetFloat("_NormalRangeEndTime", RhythmVisualizationPerfabParameterInstance.NormalRangeEndTime);
+
+            MaterialInstance.SetFloat("_PerfectRangeStartTime", RhythmVisualizationPerfabParameterInstance.PerfectRangeStartTime);
+            MaterialInstance.SetFloat("_PerfectRangeEndTime", RhythmVisualizationPerfabParameterInstance.PerfectRangeEndTime);
+
+            MaterialInstance.SetFloat("_IntervalTimeB2WBeats", RhythmVisualizationPerfabParameterInstance.IntervalTimeB2WBeats);
+        }
     }
 
+    private void ComputeRhythmVisualizationPerfabNextVisualPositionXOffset()
+    {
+        NextVisualPositionXOffset = (Vector3.right * PlayerSpeed * BeatTimeInterval).x;
+        return;
+    }
 
     private void InitRhythmVisualizationPerfabInstanceListPosition()
     {
@@ -373,8 +407,8 @@ public class MusicVisualization : MonoBehaviour
             if (IndexOfRhythmVisualzationInstance == 0)
             {
                 //TODO.目前使用玩家的初始位置
-                RhythmVisualizationPerfabInstanceList[IndexOfRhythmVisualzationInstance].transform.position = 
-                    PlayerControllerPosition + 
+                RhythmVisualizationPerfabInstanceList[IndexOfRhythmVisualzationInstance].transform.position =
+                    PlayerControllerPosition +
                     RhythmVisualzationStartPositionWithPlayerController;
             }
             else
@@ -400,11 +434,11 @@ public class MusicVisualization : MonoBehaviour
     private void UpdateRhythmVisualizationPerfabInstanceListLocation()
     {
         int CountOfRhythmVisualizationPerfabInstanceList = RhythmVisualizationPerfabInstanceList.Count;
-        if (CountOfRhythmVisualizationPerfabInstanceList == 0 )
+        if (CountOfRhythmVisualizationPerfabInstanceList == 0)
         {
             return;
         }
-        if(IndexOfLastRhythmVisualzationInstance>= CountOfRhythmVisualizationPerfabInstanceList)
+        if (IndexOfLastRhythmVisualzationInstance >= CountOfRhythmVisualizationPerfabInstanceList)
         {
             Debug.LogWarning("Index out of the RhythmVisualizationPerfabInstanceList range");
             return;
@@ -413,23 +447,55 @@ public class MusicVisualization : MonoBehaviour
         RhythmVisualizationPerfabInstanceList[IndexOfLastRhythmVisualzationInstance].transform.position
             += new Vector3(NextVisualPositionXOffset * CountOfRhythmVisualizationPerfabInstanceList, 0, 0);
 
-        IndexOfLastRhythmVisualzationInstance +=1;
+        IndexOfLastRhythmVisualzationInstance += 1;
 
         IndexOfLastRhythmVisualzationInstance %= CountOfRhythmVisualizationPerfabInstanceList;
 
 
     }
 
+    private void InitRhythmVisualizationPerfabList()
+    {
+        if (RhythmVisualizationPerfabType != null && IfUseVisualization)
+        {
+            for (int IndexOfPerfab = 0; IndexOfPerfab < NumberOfRhythmVisualizationPerfabInstance; IndexOfPerfab++)
+            {
+                GameObject InstanceOfRhythmVisualizationPerfab = GameObject.Instantiate(RhythmVisualizationPerfabType);
 
+                Renderer RendererInstance = InstanceOfRhythmVisualizationPerfab.GetComponent<Renderer>();
+
+                if (RendererInstance != null)
+                {
+                    InitSingleRhythmVisualizationPerfabParameter(RendererInstance);
+                    RendererInstance.enabled = false;
+                }
+
+                RhythmVisualizationPerfabInstanceList.Add(InstanceOfRhythmVisualizationPerfab);
+            }
+            IfInitRhythmVisualizationList = true;
+        }
+    }
+    #endregion
 
     #region Helper Functions
 
-    public void LoadLevelBank()
+    public bool LoadLevelBankSync()
     {
         if ((LevelIndex < LevelMusicEvents.Count) && !hasLoadBank)
         {
             AkBankManager.LoadBank(LevelMusicEvents[LevelIndex].bankName, false, false);
             hasLoadBank = true;
+            return true;
+        }
+        return false;
+    }
+
+    public void LoadLevelBankAsync(AkCallbackManager.BankCallback callback=null)
+    {
+        if ((LevelIndex < LevelMusicEvents.Count) && !hasLoadBank)
+        {
+            AkBankManager.LoadBankAsync(LevelMusicEvents[LevelIndex].bankName, callback);
+
         }
     }
 
@@ -464,7 +530,6 @@ public class MusicVisualization : MonoBehaviour
 
     }
 
-
     public void StopLevelMusic()
     {
         if (LevelIndex < LevelMusicEvents.Count)
@@ -488,7 +553,6 @@ public class MusicVisualization : MonoBehaviour
             LevelMusicEvents[LevelIndex].LevelMusicResumeEvent.Post(gameObject);
         }
     }
-
 
     public void SeekLevelMusicByTimeMS(int timeMS)
     {

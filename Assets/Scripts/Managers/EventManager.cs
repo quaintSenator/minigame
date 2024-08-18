@@ -98,7 +98,7 @@ public enum EventType
 
     StartLoadBankEvent = 500, // 开始加载音乐
     EndLoadBankEvent = 501, // 结束加载音乐
-    EndLoadMapEvent = 502, // 结束加载地图
+    //EndLoadMapEvent = 502, // 弃置：结束加载地图
     EndRespawnEvent = 503, // 结束重生
     StartLevelEvent = 504, // 开始关卡
     RestartLevelEvent = 505, // 重玩关卡
@@ -107,9 +107,14 @@ public enum EventType
     EndPlayerDeadEvent = 508, // 结束玩家死亡
     GamePauseEvent = 509, // 游戏暂停
     GameResumeEvent = 510, // 游戏继续
-    
+    StartStoryEvent=511,//剧情开始播放
+    EndStoryEvent = 512,//剧情开始播放
+    //StartLoadMapEvent=513,// 弃置：开始加载地图
+    EndPlayerDeadStoryEvent = 514,
+
+
     #endregion
-    
+
 }
 
 // 事件数据参数基类，具体使用时可以继承该类，添加自己需要的参数
@@ -118,17 +123,19 @@ public class EventData
     
 }
 
-public class GameAudioEventData : EventData
+public class LevelEventData : EventData
 {
-    public int LevelMusicIndex=0;
+    public int LevelIndex=0;
     public int LevelResetPointIndex = 0;
     public int LevelMusicTimeInMS= 0;
-    public GameAudioEventData() : base()
+    public LevelEventData() : base()
     {
             
     }
 
 }
+
+
 
 public class RegisterResetPointEventData : EventData
 {

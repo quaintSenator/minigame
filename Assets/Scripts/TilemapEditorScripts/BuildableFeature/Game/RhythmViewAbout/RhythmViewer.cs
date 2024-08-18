@@ -36,7 +36,7 @@ public class RhythmViewer : Singleton<RhythmViewer>
     private bool noInPlayMode = true;
 
     [BoxGroup("运行时节奏区域显示", centerLabel:true)] [SerializeField]
-    private MusicVisualization musicController;
+    private MusicManager musicController;
     [BoxGroup("运行时节奏区域显示", centerLabel:true)] [SerializeField]
     private MusicCurrentPosLine musicCurrentPosLine;
     [BoxGroup("运行时节奏区域显示", centerLabel:true)] [SerializeField]
