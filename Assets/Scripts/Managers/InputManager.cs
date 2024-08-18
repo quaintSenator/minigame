@@ -254,6 +254,11 @@ public class InputManager : Singleton<InputManager>
     {
         return isMouseRightPressing;
     }
+
+    protected override bool NeedDestory()
+    {
+        return true;
+    }
 }
 
 // 鼠标移动事件数据

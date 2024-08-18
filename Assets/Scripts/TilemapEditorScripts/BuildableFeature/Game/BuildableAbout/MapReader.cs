@@ -15,11 +15,17 @@ public class MapReader : Singleton<MapReader>
     
     protected override void OnAwake()
     {
+        //当前系统时间
+        float time = Time.realtimeSinceStartup;
+        
         mapParent = transform;
         LoadSelectedData();
         StartCoroutine(CheckBuildableVisibleCoroutine());
         UnityEngine.Application.targetFrameRate = 60;
         UnityEngine.QualitySettings.vSyncCount = 1;
+        
+        //加载地图数据所需时间
+        Debug.Log("Load map data time: " + (Time.realtimeSinceStartup - time));
     }
 
     private void LoadSelectedData()
@@ -58,6 +64,7 @@ public class MapReader : Singleton<MapReader>
         {
             buildableInfos.Add(new BuildableInfo(buildableInfo));
         }
+        CheckBuildableVisible();
     }
     
     private void SpawnBuildable(BuildableType type, Vector3Int position, int index, int rotation)
@@ -84,22 +91,27 @@ public class MapReader : Singleton<MapReader>
         WaitForSeconds wait = new WaitForSeconds(GameConsts.TILE_CHECK_GAP);
         while (true)
         {
-            foreach (var buildableInfo in buildableInfos)
-            {
-                if (showAllBuildable || Utils.IsAlwaysVisible(buildableInfo.type) || Utils.IsBuildableViewport(buildableInfo.position, Camera.main))
-                {
-                    SpawnBuildable(buildableInfo.type, buildableInfo.position, buildableInfo.index, buildableInfo.rotation);
-                }
-                else
-                {
-                    DestoryBuildable(buildableInfo.position);
-                }
-            }
             
-            BuildableBase.LinkAllGroup();
-            
+            CheckBuildableVisible();
             yield return wait;
         }
+    }
+    
+    private void CheckBuildableVisible()
+    {
+        foreach (var buildableInfo in buildableInfos)
+        {
+            if (showAllBuildable || Utils.IsAlwaysVisible(buildableInfo.type) || Utils.IsBuildableViewport(buildableInfo.position, Camera.main))
+            {
+                SpawnBuildable(buildableInfo.type, buildableInfo.position, buildableInfo.index, buildableInfo.rotation);
+            }
+            else
+            {
+                DestoryBuildable(buildableInfo.position);
+            }
+        }
+            
+        BuildableBase.LinkAllGroup();
     }
 
     [Button]

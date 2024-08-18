@@ -78,7 +78,6 @@ public class BuildableCreator : Singleton<BuildableCreator>
     {
         foreach (var buildableInfo in infos)
         {
-            Debug.Log("Read buildableInfo : " + buildableInfo.index);
             BuildableInfo newBuildableInfo = new BuildableInfo(buildableInfo);
             buildableInfos.Add(new BuildableInfo(newBuildableInfo));
             TilemapSaver.Instance.AddThisBuildable(newBuildableInfo);
