@@ -146,12 +146,14 @@ public class BuildableInfo
     public BuildableType type;
     public Vector3Int position;
     public int index;
+    public int rotation;
     
-    public BuildableInfo(BuildableType type, Vector3Int position, int index)
+    public BuildableInfo(BuildableType type, Vector3Int position, int index, int rotation)
     {
         this.type = type;
         this.position = position;
         this.index = index;
+        this.rotation = rotation;
     }
     
     public BuildableInfo(BuildableInfo buildableInfo)
@@ -159,6 +161,7 @@ public class BuildableInfo
         this.type = buildableInfo.type;
         this.position = buildableInfo.position;
         this.index = buildableInfo.index;
+        this.rotation = buildableInfo.rotation;
     }
 }
 

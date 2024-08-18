@@ -43,7 +43,7 @@ public class TilemapSaveLocalFileEditor : Editor
         List<BuildableInfo> newBuildableInfos = new List<BuildableInfo>();
         foreach (var buildableInfo in mapData.buildableInfos)
         {
-            newBuildableInfos.Add(new BuildableInfo(buildableInfo.type, buildableInfo.position, -1));
+            newBuildableInfos.Add(new BuildableInfo(buildableInfo.type, buildableInfo.position, -1, 0));
         }
         MapData newMapData = new MapData(mapData.key, newBuildableInfos);
         string newMapDataString = JsonUtility.ToJson(newMapData);

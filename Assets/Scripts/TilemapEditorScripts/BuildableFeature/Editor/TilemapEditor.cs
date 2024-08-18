@@ -55,7 +55,8 @@ public class TilemapEditor : Editor
                 Vector3Int realPos = new Vector3Int(nearestX, nearestY, 0); // 计算最近的 tile 坐标
                 BuildableType type = child.GetComponent<BuildableBase>().Type;
                 int index = child.GetComponent<BuildableBase>().Index;
-                BuildableInfo buildableInfo = new BuildableInfo(type, realPos, index);
+                int rotation = child.GetComponent<BuildableBase>().Rotation;
+                BuildableInfo buildableInfo = new BuildableInfo(type, realPos, index, rotation);
                 mapData.buildableInfos.Add(buildableInfo);
             }
         }
