@@ -36,7 +36,6 @@ public class PlayerEntireCollider : MonoBehaviour{
         else if(other.gameObject.CompareTag("Enemy")){
             player.SetIsDead(true);
         }
-        Debug.Log("isCollidsion"+other.gameObject.tag);
     }
     private void OnTriggerExit2D(Collider2D other) {
         

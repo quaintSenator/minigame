@@ -563,7 +563,6 @@ public class PlayerController : MonoBehaviour
                 willJump = false;
             TryJump();
         }
-        Debug.Log("OnHitGround");
     }
 
     public void OnOffGround(EventData data = null)
@@ -571,7 +570,6 @@ public class PlayerController : MonoBehaviour
         isGrounded = false;
         isReturn = false;
         returnTimer = 0;
-        Debug.Log("OnOffGround");
         EventManager.InvokeEvent(EventType.PlayerJumpoffGroundEvent);
     }
 
