@@ -39,6 +39,11 @@ public class MapReader : Singleton<MapReader>
         if (mapData != null)
         {
             ReadDataFromBuildableInfos(mapData.buildableInfos);
+            EventManager.InvokeEvent(EventType.EndLoadMapEvent, new EventData());
+            
+            //待删除，放到角色初始化中
+            EventManager.InvokeEvent(EventType.StartLevelEvent, new EventData());
+            
             Debug.Log("Mapdata loaded!");
         }
         else

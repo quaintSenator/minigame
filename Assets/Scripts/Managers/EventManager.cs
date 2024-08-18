@@ -94,6 +94,22 @@ public enum EventType
     #endregion
 
 
+    #region 正式游戏关卡进程时间点事件
+
+    StartLoadBankEvent = 500, // 开始加载音乐
+    EndLoadBankEvent = 501, // 结束加载音乐
+    EndLoadMapEvent = 502, // 结束加载地图
+    EndRespawnEvent = 503, // 结束重生
+    StartLevelEvent = 504, // 开始关卡
+    RestartLevelEvent = 505, // 重玩关卡
+    PlayerDeadStoryEvent = 506, // 玩家死亡剧情
+    StartPlayerDeadEvent = 507, // 开始玩家死亡
+    EndPlayerDeadEvent = 508, // 结束玩家死亡
+    GamePauseEvent = 509, // 游戏暂停
+    GameResumeEvent = 510, // 游戏继续
+    
+    #endregion
+    
 }
 
 // 事件数据参数基类，具体使用时可以继承该类，添加自己需要的参数

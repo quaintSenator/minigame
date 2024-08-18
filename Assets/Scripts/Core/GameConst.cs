@@ -13,6 +13,7 @@ public class GameConsts
     public static readonly string AUTO_TILEMAP_SAVE_DATA = "__auto_tilemap_save_data__";
     public static readonly string AUTO_TILEMAP_SAVE_DATA_2 = "__auto_tilemap_save_data_2__";
     public static readonly string CURRENT_SELECTED_MAPDATA = "__current_selected_mapdata__";
+    public static readonly string PROGRESS_DATA_LIST = "__progress_data_list__";
     public static readonly float TILE_SIZE = 1f;
     public static readonly float TILE_CHECK_GAP = 0.1f;
     public static readonly float SPEED = 8.0f;
