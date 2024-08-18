@@ -47,7 +47,10 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
             if (obj == null)
             {
                 managerObject = new GameObject("Managers").transform;
-                DontDestroyOnLoad(managerObject);
+                if (!NeedDestory())
+                {
+                    DontDestroyOnLoad(managerObject);
+                }
             }
             else
             {
@@ -61,6 +64,11 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
     
     //子类重写这个方法，不要重写Awake
     protected virtual void OnAwake() { }
+
+    protected virtual bool NeedDestory()
+    {
+        return false;
+    }
 
     private void OnApplicationQuit()
     {
