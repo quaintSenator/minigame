@@ -10,22 +10,32 @@ public class ContinuousPoint : BuildableBase
     
     public override void Init()
     {
-        LinkPoint();
+        ContinuousPointInit();
     }
     
     public override void Dispose()
     {
         UnLinkPoint();
+        ContinuousPointDispose();
+    }
+
+    protected virtual void ContinuousPointInit()
+    {
+        
+    }
+
+    protected virtual void ContinuousPointDispose()
+    {
+        
     }
     
-    private void LinkPoint()
+    public void LinkPoint()
     {
         int groupIndex = GetBuildableGroupIndex(Index);
-        ContinuousPoint last = GetLastBuildableInGroup(groupIndex) as ContinuousPoint;
-        if(last != null)
+        LastPoint = GetLastBuildableInGroup(groupIndex, Index) as ContinuousPoint;
+        NextPoint = GetNextBuildableInGroup(groupIndex, Index) as ContinuousPoint;
+        if(LastPoint != null)
         {
-            last.NextPoint = this;
-            LastPoint = last;
             UpdateLineRenderer();
         }
         else
@@ -38,14 +48,14 @@ public class ContinuousPoint : BuildableBase
     {
         if(LastPoint != null)
         {
-            LastPoint.NextPoint = null;
-            LastPoint = null;
+            LastPoint.NextPoint = NextPoint;
         }
         if(NextPoint != null)
         {
-            NextPoint.LastPoint = null;
-            NextPoint = null;
+            NextPoint.LastPoint = LastPoint;
         }
+        LastPoint = null;
+        NextPoint = null;
     }
     
     public void UpdateLineRenderer()
@@ -59,8 +69,8 @@ public class ContinuousPoint : BuildableBase
         lineRenderer.positionCount = 2;
         lineRenderer.SetPosition(0, Utils.GetRealPostion(LastPoint.Position));
         lineRenderer.SetPosition(1, Utils.GetRealPostion(Position));
-        lineRenderer.startColor = Color.white;
-        lineRenderer.endColor = Color.white;
+        lineRenderer.startColor = Color.red;
+        lineRenderer.endColor = Color.green;
         lineRenderer.startWidth = 0.1f;
         lineRenderer.endWidth = 0.1f;
         lineRenderer.sortingOrder = -1;

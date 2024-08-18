@@ -23,6 +23,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
     [SerializeField] private Transform mapParent; 
     private TileMode currentTileMode = TileMode.None; 
     private bool inSelectMode = false;
+    private int currentRotate = 0;
     
     private Vector3 mousePosition;
     private Vector3Int currentCellPosition;
@@ -37,7 +38,6 @@ public class BuildableCreator : Singleton<BuildableCreator>
     public List<BuildableInfo> selectedBuildableInfos = new List<BuildableInfo>();
     public List<BuildableInfo> currentMoveBuildableInfos = new List<BuildableInfo>();
     private Dictionary<BuildableInfo, GameObject> selectIcons = new Dictionary<BuildableInfo, GameObject>();
-    private BuildableBase lastBuildable; 
     
     protected override void OnAwake()
     {
@@ -109,6 +109,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         EventManager.AddListener(EventType.StartSelectZoneEvent, OnStartSelectZone); //开始选中框
         EventManager.AddListener(EventType.CompleteSelectZoneEvent, OnCompleteSelectZone); //完成选中框
         EventManager.AddListener(EventType.CompleteContinuousPointEvent, OnCompleteContinuousPoint); //完成连续点
+        EventManager.AddListener(EventType.RotateBuildableEvent, OnRotateBuildable); //旋转物体
     }
 
     private void OnDisable()
@@ -133,6 +134,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         EventManager.RemoveListener(EventType.StartSelectZoneEvent, OnStartSelectZone); //开始选中框
         EventManager.RemoveListener(EventType.CompleteSelectZoneEvent, OnCompleteSelectZone); //完成选中框
         EventManager.RemoveListener(EventType.CompleteContinuousPointEvent, OnCompleteContinuousPoint); //完成连续点
+        EventManager.RemoveListener(EventType.RotateBuildableEvent, OnRotateBuildable); //旋转物体
         
         AutoSaveMap();
     }
@@ -148,6 +150,22 @@ public class BuildableCreator : Singleton<BuildableCreator>
         MapData mapData = new MapData(key, buildableInfos);
         PlayerPrefs.SetString(GameConsts.AUTO_TILEMAP_SAVE_DATA_2, JsonUtility.ToJson(mapData));
         Debug.Log("Auto save tilemap data v2");
+    }
+
+    private void OnRotateBuildable(EventData obj)
+    {
+        if (selectedType != BuildableType.none)
+        {
+            currentRotate += 1;
+            if (currentRotate == 4)
+            {
+                currentRotate = 0;
+            }
+            if (previewObj != null)
+            {
+                previewObj.transform.rotation = Quaternion.Euler(0, 0, currentRotate * -90);
+            }
+        }
     }
 
     private void OnCompleteContinuousPoint(EventData obj)
@@ -373,6 +391,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
     public void SetSelectedObject(BuildableType type)
     {
         selectedType = type;
+        currentRotate = 0;
         currentTileMode = selectedType == BuildableType.none ? TileMode.None : TileMode.Build;
         if (selectedType != BuildableType.none)
         {
@@ -484,6 +503,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
             if (previewObj != null)
             {
                 previewObj.SetPosition(currentCellPosition, 1);
+                previewObj.transform.rotation = Quaternion.Euler(0, 0, currentRotate * -90);
             }
             lastCellPosition = currentCellPosition;
             //如果鼠标还在按着左键，继续操作
@@ -515,10 +535,10 @@ public class BuildableCreator : Singleton<BuildableCreator>
         //生成选择的物体
         if (selectedType != BuildableType.none)
         {
-            BuildableInfo newBuildableInfo = new BuildableInfo(selectedType, currentCellPosition, BuildableBase.GetBuildableTypeSpawnIndex(selectedType));
+            BuildableInfo newBuildableInfo = new BuildableInfo(selectedType, currentCellPosition, BuildableBase.GetBuildableTypeSpawnIndex(selectedType), currentRotate);
             TilemapSaver.Instance.AddThisBuildable(newBuildableInfo);
             buildableInfos.Add(newBuildableInfo);
-            SpawnBuildable(selectedType, currentCellPosition, newBuildableInfo.index);
+            SpawnBuildable(selectedType, currentCellPosition, newBuildableInfo.index, newBuildableInfo.rotation);
         }
     }
     
@@ -561,10 +581,10 @@ public class BuildableCreator : Singleton<BuildableCreator>
         //生成选择的物体
         if (type != BuildableType.none)
         {
-            BuildableInfo newBuildableInfo = new BuildableInfo(type, position, BuildableBase.GetBuildableTypeSpawnIndex(type));
+            BuildableInfo newBuildableInfo = new BuildableInfo(type, position, BuildableBase.GetBuildableTypeSpawnIndex(type), currentRotate);
             TilemapSaver.Instance.AddThisBuildable(newBuildableInfo);
             buildableInfos.Add(newBuildableInfo);
-            SpawnBuildable(type, position, newBuildableInfo.index);
+            SpawnBuildable(type, position, newBuildableInfo.index, newBuildableInfo.rotation);
         }
     }
     
@@ -591,11 +611,11 @@ public class BuildableCreator : Singleton<BuildableCreator>
         currentBuildableMap.Clear();
     }
     
-    private void SpawnBuildable(BuildableType type, Vector3Int position, int index)
+    private void SpawnBuildable(BuildableType type, Vector3Int position, int index, int rotation)
     {
         if (!currentBuildableMap.ContainsKey(position))
         {
-            BuildableBase buildable = BuildableBase.SpawnBuildable(type, position, index, mapParent);
+            BuildableBase buildable = BuildableBase.SpawnBuildable(type, position, index, rotation, mapParent);
             currentBuildableMap.Add(position, buildable);
         }
     }
@@ -632,7 +652,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         {
             if (showAllBuildable || Utils.IsAlwaysVisible(buildableInfo.type) || Utils.IsBuildableViewport(buildableInfo.position, Camera.main))
             {
-                SpawnBuildable(buildableInfo.type, buildableInfo.position, buildableInfo.index);
+                SpawnBuildable(buildableInfo.type, buildableInfo.position, buildableInfo.index, buildableInfo.rotation);
             }
             else
             {
@@ -647,6 +667,8 @@ public class BuildableCreator : Singleton<BuildableCreator>
             Vector3 realPosition = Utils.GetRealPostion(buildableInfo.position);
             icon.transform.position = realPosition;
         }
+
+        BuildableBase.LinkAllGroup();
     }
 
     public TileMode GetTileMode()
@@ -677,7 +699,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         {
             foreach (var buildableBase in VARIABLE.Value)
             {
-                Debug.Log(VARIABLE.Key + " : " + buildableBase.Index);
+                Debug.Log(VARIABLE.Key + " : " + buildableBase.Index + " : " + buildableBase.Position);
             }
         }
     }

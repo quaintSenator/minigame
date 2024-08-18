@@ -63,6 +63,7 @@ public enum EventType
     SetSelectZoneEndPosEvent = 224, // 设置选择区域结束位置
     CompleteSelectZoneEvent = 225, // 完成选择区域
     CompleteContinuousPointEvent = 226, // 完成连续点
+    RotateBuildableEvent = 227, // 旋转建筑
 
     #endregion
 

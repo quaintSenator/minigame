@@ -87,6 +87,7 @@ public class CleverTimerManager : Singleton<CleverTimerManager>
     }
     static public double Ask4Timer(double time, Action<EventData> action, EventData data2Pass = null)
     {
+        var instance = Instance;
         var timeToExplode = Time.timeAsDouble + time;
         var pElement = new TimerPElement(action, timeToExplode, data2Pass);
         var prioElement = new PriorityElement(timeToExplode, pElement);
@@ -96,6 +97,7 @@ public class CleverTimerManager : Singleton<CleverTimerManager>
     
     static public int Ask4FrameTimer(int frame, Action<EventData> action, EventData data2Pass = null)
     {
+        var instance = Instance;
         var frame2Explode = Time.frameCount + frame;
         var pElement = new TimerPElement(action, frame2Explode, data2Pass);
         var prioElement = new PriorityElement(frame2Explode, pElement);

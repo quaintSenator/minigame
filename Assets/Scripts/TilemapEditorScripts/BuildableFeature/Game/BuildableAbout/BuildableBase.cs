@@ -19,6 +19,8 @@ public class BuildableBase : MonoBehaviour
     public BuildableType Type => type;
     private int index;
     public int Index => index;
+    private int rotation;
+    public int Rotation => rotation;
 
     public virtual void Init()
     {
@@ -88,12 +90,13 @@ public class BuildableBase : MonoBehaviour
         Vector3 offset = BuildableCreator.GetStartPositionOffset();
         Vector3 realPosition = new Vector3(position.x * GameConsts.TILE_SIZE + offset.x, position.y * GameConsts.TILE_SIZE + offset.y, 0);
         transform.position = realPosition;
+        transform.rotation = Quaternion.Euler(0, 0, rotation * -90);
         SetSortingOrder(sortingOrder);
     }
 
     
     //生成地块
-    public static BuildableBase SpawnBuildable(BuildableType type, Vector3Int position, int index, Transform parent, int sortingOrder = 0)
+    public static BuildableBase SpawnBuildable(BuildableType type, Vector3Int position, int index, int rotation, Transform parent, int sortingOrder = 0)
     {
         if(buildableList == null)
         {
@@ -103,6 +106,7 @@ public class BuildableBase : MonoBehaviour
         BuildableBase buildable = obj.GetComponent<BuildableBase>();
         buildable.type = type;
         buildable.index = index;
+        buildable.rotation = rotation;
         buildable.SetPosition(position, sortingOrder);
         buildable.AdjustBuildableScale();
         buildable.RegisterEvent();
@@ -162,13 +166,53 @@ public class BuildableBase : MonoBehaviour
         return index / 1000;
     }
     
-    public static BuildableBase GetLastBuildableInGroup(int groupIndex)
+    public static BuildableBase GetLastBuildableInGroup(int groupIndex, int index)
     {
         if (BuildableGroupMap.ContainsKey(groupIndex))
         {
-            return BuildableGroupMap[groupIndex][BuildableGroupMap[groupIndex].Count - 1];
+            BuildableBase lastBuildable = null;
+            foreach (var buildable in BuildableGroupMap[groupIndex])
+            {
+                if (buildable.Index == index)
+                {
+                    return lastBuildable;
+                }
+                lastBuildable = buildable;
+            }
         }
         return null;
+    }
+    
+    public static BuildableBase GetNextBuildableInGroup(int groupIndex, int index)
+    {
+        if (BuildableGroupMap.ContainsKey(groupIndex))
+        {
+            bool find = false;
+            foreach (var buildable in BuildableGroupMap[groupIndex])
+            {
+                if (find)
+                {
+                    return buildable;
+                }
+                if (buildable.Index == index)
+                {
+                    find = true;
+                }
+            }
+        }
+        return null;
+    }
+
+    public static void LinkAllGroup()
+    {
+        foreach (var allGroups in BuildableGroupMap)
+        {
+            foreach (var group in allGroups.Value)
+            {
+                var point = group as ContinuousPoint;
+                point?.LinkPoint();
+            }
+        }
     }
 
     //GroupIndex更新到最大的GroupIndex+1，Index更新到1
