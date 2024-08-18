@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -18,12 +19,22 @@ public class ProgressFrame : MonoBehaviour
     {
         //levelProgress = new int[4];
         mProgressText.text = GetCurrentLevelProgressText(1);
-        EventManager.AddListener(EventType.SwitchLevelEvent, OnSwitchLevel);
+        
         
         initialFrameWidth = mProgressContent.rectTransform.sizeDelta.x;
         initialFrameHeight = mProgressContent.rectTransform.sizeDelta.y;
         
         UpdateProgressContent(1);
+    }
+
+    private void OnEnable()
+    {
+        EventManager.AddListener(EventType.SwitchLevelEvent, OnSwitchLevel);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.RemoveListener(EventType.SwitchLevelEvent, OnSwitchLevel);
     }
 
     private string GetCurrentLevelProgressText(int i)

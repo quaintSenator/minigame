@@ -6,10 +6,18 @@ using UnityEngine;
 
 public class HitGroundEventData : EventData
 {
-    public Vector2 velocityDir;
-    public HitGroundEventData(Vector2 vec)
+    public Collider2D other;
+    public string hitType;
+    public HitGroundEventData(Collider2D o)
     {
-        velocityDir = vec;
+        other = o;
+        hitType = "";
+    }
+
+    public HitGroundEventData(Collider2D o, string tp)
+    {
+        other = o;
+        hitType = tp;
     }
 }
 public class FrictionEffectController : HoldStillEffectController

@@ -1,13 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.Utilities.Editor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public enum WindowType
 {
     LevelSelectPage,
     MainPage,
-    ConfigPage
+    ConfigPage,
+    PausePage
 }
 
 
@@ -17,6 +21,8 @@ public class WindowManager : Singleton<WindowManager>
     private Transform uiRootTransform;
     private Stack<GameObject> _uiStack;
     private Transform _UIRoot;
+    private bool _pausable;
+    
     protected override void OnAwake()
     {
         //Get UIRoot
@@ -35,10 +41,45 @@ public class WindowManager : Singleton<WindowManager>
         _type2ResourceFileNameDict[WindowType.LevelSelectPage] = "LevelSelectPage";
         _type2ResourceFileNameDict[WindowType.MainPage] = "MainPage";
         _type2ResourceFileNameDict[WindowType.ConfigPage] = "ConfigPage";
-        
-        //Init Main Page
-        InitWindow(WindowType.MainPage, _UIRoot);
-        
+        _type2ResourceFileNameDict[WindowType.PausePage] = "PausePage";
+
+        var sceneName = SceneManager.GetActiveScene().name;
+        _pausable = false;
+        if (sceneName.Contains("Level"))
+        {
+            _pausable = true;
+        }
+        else if (sceneName.Contains("GUI"))
+        {
+            //Init Main Page
+            InitWindow(WindowType.MainPage, _UIRoot);
+        }
+    }
+
+    private void OnEscapeDown(EventData ed)
+    {
+        if (_pausable)//_pausable只用来提示当前场景是否允许显示暂停页面(level场景允许)，不要用于动态检测
+        {
+            if (_uiStack.Peek().gameObject.name.Contains("pause_page"))
+            {
+                
+            }
+            else
+            {
+                InitWindow(WindowType.PausePage, _UIRoot);
+            }
+        }
+    }
+    
+
+    private void OnEnable()
+    {
+        EventManager.AddListener(EventType.EscapeDownEvent, OnEscapeDown);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.RemoveListener(EventType.EscapeDownEvent, OnEscapeDown);
     }
 
     public void InitWindow(WindowType windowType, Transform parent)

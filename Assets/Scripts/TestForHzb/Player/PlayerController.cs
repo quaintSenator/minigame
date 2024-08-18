@@ -547,9 +547,10 @@ public class PlayerController : MonoBehaviour
 
     public void OnHitGround(EventData data = null)
     {
+        var d = (HitGroundEventData)data;
         if (!isGrounded)
         {
-            HitGroundEventData hitdata = new HitGroundEventData(playerHeadingDir);
+            HitGroundEventData hitdata = new HitGroundEventData(d.other, d.hitType);
             EventManager.InvokeEvent(EventType.PlayerHitGroundEvent, hitdata);
         }
         isGrounded = true;

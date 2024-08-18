@@ -32,6 +32,7 @@ public enum EventType
     SpacebarDownEvent = 106,
     SpacebarUpEvent = 107,
     JDownEvent = 108,
+    EscapeDownEvent = 109,
     
     #endregion
 

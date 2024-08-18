@@ -20,7 +20,7 @@ public class DragItem : MonoBehaviour, IDragHandler, IPointerUpHandler
         if (mSlotTransform)
         {
             _slotL = mSlotTransform.anchoredPosition.x;
-            _slotR = _slotL + mSlotTransform.sizeDelta.x;
+            _slotR = _slotL + mSlotTransform.sizeDelta.x - _mRectTransform.sizeDelta.x / 2;
         }
     }
 

@@ -118,7 +118,12 @@ public class TailEffectController : HoldStillEffectController
 
     private void OnHitGround(EventData eventData)
     {
-        lastHitTime = Time.timeAsDouble;
-        ShowSpriteInTime(_delayBe4Show);
+        var hitGroundED = (HitGroundEventData)eventData;
+        if (hitGroundED.other.gameObject.name.Contains("floor_1"))
+        {
+            ShowSprite();
+        }
+        //lastHitTime = Time.timeAsDouble;
+        //ShowSpriteInTime(_delayBe4Show);
     }
 }
