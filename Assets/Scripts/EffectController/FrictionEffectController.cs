@@ -22,6 +22,7 @@ public class FrictionEffectController : HoldStillEffectController
     [SerializeField] private Color particleRandomColorRangeR;
     [SerializeField] private float fricThrowAngle = 15.0f;
     [SerializeField] private float cubeEdgeLen = 0.45f;
+    [SerializeField] private float FrictionTimeLen = 0.4f;
     
     void SelfPSInit()
     {
@@ -59,11 +60,19 @@ public class FrictionEffectController : HoldStillEffectController
             }
         }
     }
+    
     private void OnPlayerJumpOff(EventData ed)
     {
         //断喷
         var emit = myParticleSystem.emission;
         emit.enabled = false;
+    }
+
+    private void Spit()
+    {
+        //开喷
+        var emit = myParticleSystem.emission;
+        emit.enabled = true;
     }
     private void OnPlayerHitGround(EventData ed)
     {
@@ -79,9 +88,7 @@ public class FrictionEffectController : HoldStillEffectController
         localPosition2Set.x = -cubeEdgeLen;
         localPosition2Set.y = -cubeEdgeLen;
         transform.localPosition = localPosition2Set;
-        //开喷
-        var emit = myParticleSystem.emission;
-        emit.enabled = true;
+        Spit();
     }
     private void setPSGravity(Vector2 gravity)
     {
@@ -91,9 +98,7 @@ public class FrictionEffectController : HoldStillEffectController
 
     private void OnRestart(EventData eventData)
     {
-        //开喷
-        var emit = myParticleSystem.emission;
-        emit.enabled = true;
+        Spit();
     }
     protected override void OnEnable_deprive()
     {

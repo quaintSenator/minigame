@@ -101,7 +101,7 @@ public class TailEffectController : HoldStillEffectController
         {
             var generatedFade = Instantiate(_fadingTailEffectPrefab, null);
             generatedFade.transform.position = transform.position;
-            CleverTimerManager.Ask4Timer(0.55, eventData =>
+            CleverTimerManager.Ask4Timer(1.2, eventData =>
             {
                 var go2Die = ((GameObjectDieEventData)eventData).go2kill;
                 if(go2Die)

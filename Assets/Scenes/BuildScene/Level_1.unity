@@ -757,6 +757,10 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0.125
       objectReference: {fileID: 0}
+    - target: {fileID: 1119376711556738691, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: _delayBe4Show
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1183745991763393448, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.45000008
@@ -768,6 +772,10 @@ PrefabInstance:
     - target: {fileID: 1183745991763393448, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.41977793
+      objectReference: {fileID: 0}
+    - target: {fileID: 1183745991763393449, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1433576563816030983, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: m_Enabled
