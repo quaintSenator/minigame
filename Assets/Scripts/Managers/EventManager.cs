@@ -20,7 +20,7 @@ public enum EventType
     RegisterResetPointEvent = 12,//重生点动态注册事件
     RegisterResetPointCallbackEvent=13, //重生点动态注册回调事件
     PlayerPassRegisterResetPointEvent =14, //玩家经过重生点
-
+    Ask4PauseEvent = 15,
 
     #region 输入事件在此添加
 
@@ -32,7 +32,6 @@ public enum EventType
     SpacebarDownEvent = 106,
     SpacebarUpEvent = 107,
     JDownEvent = 108,
-    EscapeDownEvent = 109,
     
     #endregion
 

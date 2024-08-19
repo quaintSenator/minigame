@@ -60,28 +60,54 @@ public class WindowManager : Singleton<WindowManager>
     {
         if (_pausable)//_pausable只用来提示当前场景是否允许显示暂停页面(level场景允许)，不要用于动态检测
         {
-            if (_uiStack.Peek().gameObject.name.Contains("pause_page"))
+            if (_uiStack.Count > 0 && _uiStack.Peek().gameObject.name.Contains("pause_page"))
             {
+                //当已经打开了pause_page，那么调用resume_game,与回到游戏按钮等效
                 
             }
             else
             {
+                //创建暂停页面
                 InitWindow(WindowType.PausePage, _UIRoot);
+                //游戏暂停
+                Time.timeScale = 0;
+                
             }
         }
     }
-    
 
+    public void ResumeGame()
+    {
+        if (_uiStack.Count > 0 && _uiStack.Peek().gameObject.name.Contains("pause_page")) //如果目前暂停页面确实处于最上层
+        {
+            //恢复游戏
+            Time.timeScale = 1;
+            //关闭暂停页面
+            var pausePage = _uiStack.Peek().gameObject;
+            _uiStack.Pop();
+            Destroy(pausePage);
+        }
+    }
     private void OnEnable()
     {
-        EventManager.AddListener(EventType.EscapeDownEvent, OnEscapeDown);
+        EventManager.AddListener(EventType.Ask4PauseEvent, OnEscapeDown); 
+        
     }
 
     private void OnDisable()
     {
-        EventManager.RemoveListener(EventType.EscapeDownEvent, OnEscapeDown);
+        EventManager.RemoveListener(EventType.Ask4PauseEvent, OnEscapeDown);
     }
 
+    public void OnStartPlayerDeadEvent(EventData eventData)
+    {
+        //玩家死亡并不一定会播放死亡弹窗
+        var sceneName = SceneManager.GetActiveScene().name;
+        if (sceneName.Contains("Level"))
+        {
+            
+        }
+    }
     public void InitWindow(WindowType windowType, Transform parent)
     {
         string windowPrefabName = _type2ResourceFileNameDict[windowType];
@@ -94,7 +120,7 @@ public class WindowManager : Singleton<WindowManager>
         }
         _uiStack.Push(generatedObjectRef);
     }
-
+    
     public Transform UIroot()
     {
         return _UIRoot;
