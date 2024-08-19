@@ -117,11 +117,20 @@ public class ProgressManager : Singleton<ProgressManager>
         levelProgressDataList.Add(levelProgressData);
     }
     
+    /// <summary>
+    /// 获取当前关卡进度
+    /// </summary>
+    /// <returns>返回 当前时间 / 总音乐时间</returns>
     public float GetCurrentProgress()
     {
         return currentGameTime / levelMusicMaxTimeList[currentLevelIndex-1];
     }
     
+    /// <summary>
+    /// 返回指定关卡进度
+    /// </summary>
+    /// <param name="levelIndex">关卡Index，从1开始</param>
+    /// <returns>返回 当前时间 / 总音乐时间</returns>
     public float GetLevelProgress(int levelIndex)
     {
         if (!levelProgressDataDic.ContainsKey(levelIndex))
@@ -131,6 +140,11 @@ public class ProgressManager : Singleton<ProgressManager>
         return levelProgressDataDic[levelIndex].levelProgress;
     }
     
+    /// <summary>
+    /// 返回关卡是否完成
+    /// </summary>
+    /// <param name="levelIndex"></param>
+    /// <returns></returns>
     public bool GetLevelComplete(int levelIndex)
     {
         if (!levelProgressDataDic.ContainsKey(levelIndex))
@@ -140,6 +154,11 @@ public class ProgressManager : Singleton<ProgressManager>
         return levelProgressDataDic[levelIndex].isLevelComplete;
     }
     
+    /// <summary>
+    /// 返回关卡是否锁定
+    /// </summary>
+    /// <param name="levelIndex"></param>
+    /// <returns></returns>
     public bool GetLevelLocked(int levelIndex)
     {
         if (!levelProgressDataDic.ContainsKey(levelIndex))
