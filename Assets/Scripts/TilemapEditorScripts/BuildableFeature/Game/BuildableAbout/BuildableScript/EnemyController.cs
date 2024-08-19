@@ -1,4 +1,5 @@
 using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,7 +42,6 @@ public class EnemyController : BuildableBase {
 
     private void OnDead()
     {
-        Debug.Log("sf::OnDead Was called");
         gameObject.tag = "Safe";
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
         animator.enabled = false;

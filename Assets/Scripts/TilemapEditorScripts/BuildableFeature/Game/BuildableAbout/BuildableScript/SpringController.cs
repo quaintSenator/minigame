@@ -23,7 +23,6 @@ public class SpringController : BuildableBase
 /*        if(!hasBeenUsedForJump)
         {*/
             player.TryJump(JumpType.Spring);
-            Debug.Log("OnSpringTrigger");
             hasBeenUsedForJump = true;
        // }
 

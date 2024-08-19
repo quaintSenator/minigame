@@ -97,7 +97,7 @@ public enum EventType
 
     StartLoadBankEvent = 500, // 开始加载音乐
     EndLoadBankEvent = 501, // 结束加载音乐
-    //EndLoadMapEvent = 502, // 弃置：结束加载地图
+    EndLoadMapEvent = 502, // 结束加载地图
     EndRespawnEvent = 503, // 结束重生
     StartLevelEvent = 504, // 开始关卡
     RestartLevelEvent = 505, // 重玩关卡

@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class ProgressManager : Singleton<ProgressManager>
 {
-    private List<LevelProgressData> levelProgressDataList;
+    [SerializeField] List<int> levelMusicMaxTimeList;
+    [SerializeField] private List<LevelProgressData> levelProgressDataList;
     private Dictionary<int, LevelProgressData> levelProgressDataDic;
     
-    private float currentGameTime;
-    private bool gameStart;
+    private float currentGameTime = 0;
+    private bool gameStart = false;
+    private int currentLevelIndex = 1;
 
     protected override void OnAwake()
     {
@@ -32,16 +34,32 @@ public class ProgressManager : Singleton<ProgressManager>
     
     private void OnEnable()
     {
+        EventManager.AddListener(EventType.EndLoadMapEvent, OnLoadMap);
         EventManager.AddListener(EventType.StartLevelEvent, StartLevel);
         EventManager.AddListener(EventType.RestartLevelEvent, StartLevel);
         EventManager.AddListener(EventType.GamePauseEvent, GamePause);
+        EventManager.AddListener(EventType.EndPlayerDeadEvent, OnPlayerDead);
     }
     
     private void OnDisable()
     {
+        EventManager.RemoveListener(EventType.EndLoadMapEvent, OnLoadMap);
         EventManager.RemoveListener(EventType.StartLevelEvent, StartLevel);
         EventManager.RemoveListener(EventType.RestartLevelEvent, StartLevel);
         EventManager.RemoveListener(EventType.GamePauseEvent, GamePause);
+        EventManager.RemoveListener(EventType.EndPlayerDeadEvent, OnPlayerDead);
+    }
+
+    private void OnPlayerDead(EventData obj)
+    {
+        float progress = currentGameTime / levelMusicMaxTimeList[currentLevelIndex-1];
+        UpdateLevelProgress(currentLevelIndex, progress);
+    }
+
+    private void OnLoadMap(EventData obj)
+    {
+        var data = obj as LoadMapDataEvent;
+        currentLevelIndex = data.index;
     }
 
     private void GamePause(EventData obj)
@@ -55,23 +73,91 @@ public class ProgressManager : Singleton<ProgressManager>
         gameStart = true;
     }
     
-    public void UpdateLevelProgress(LevelProgressData levelProgressData)
+    public void UpdateLevelProgress(int levelIndex, float progress)
     {
-        if (levelProgressDataDic.ContainsKey(levelProgressData.levelIndex))
+        if (!levelProgressDataDic.ContainsKey(levelIndex))
         {
-            levelProgressDataDic[levelProgressData.levelIndex] = new LevelProgressData(levelProgressData);
-            levelProgressDataList.Find(data => data.levelIndex == levelProgressData.levelIndex).CopyData(levelProgressData);
+            InitLevelData(levelIndex);
         }
-        else
+        if(progress > levelProgressDataDic[levelIndex].levelProgress)
         {
-            levelProgressDataDic.Add(levelProgressData.levelIndex, levelProgressData);
-            levelProgressDataList.Add(new LevelProgressData(levelProgressData));
+            levelProgressDataDic[levelIndex].levelProgress = progress;
+            levelProgressDataList.Find(data => data.levelIndex == levelIndex).levelProgress = progress;
         }
+        SaveLevelData();
+    }
+    
+    public void UpdateLevelComplete(int levelIndex, bool isComplete)
+    {
+        if (!levelProgressDataDic.ContainsKey(levelIndex))
+        {
+            InitLevelData(levelIndex);
+        }
+        levelProgressDataDic[levelIndex].isLevelComplete = isComplete;
+        levelProgressDataList.Find(data => data.levelIndex == levelIndex).isLevelComplete = isComplete;
+        SaveLevelData();
+    }
+    
+    public void UpdateLevelLocked(int levelIndex, bool isLocked)
+    {
+        if (!levelProgressDataDic.ContainsKey(levelIndex))
+        {
+            InitLevelData(levelIndex);
+        }
+        levelProgressDataDic[levelIndex].isLevelLocked = isLocked;
+        levelProgressDataList.Find(data => data.levelIndex == levelIndex).isLevelLocked = isLocked;
+        SaveLevelData();
+    }
+
+    public void InitLevelData(int levelIndex)
+    {
+        bool isLocked = levelIndex > 1;
+        LevelProgressData levelProgressData = new LevelProgressData("level_" + levelIndex, levelIndex, 0, false, isLocked);
+        levelProgressDataDic.Add(levelIndex, levelProgressData);
+        levelProgressDataList.Add(levelProgressData);
+    }
+    
+    public float GetCurrentProgress()
+    {
+        return currentGameTime / levelMusicMaxTimeList[currentLevelIndex-1];
+    }
+    
+    public float GetLevelProgress(int levelIndex)
+    {
+        if (!levelProgressDataDic.ContainsKey(levelIndex))
+        {
+            InitLevelData(levelIndex);
+        }
+        return levelProgressDataDic[levelIndex].levelProgress;
+    }
+    
+    public bool GetLevelComplete(int levelIndex)
+    {
+        if (!levelProgressDataDic.ContainsKey(levelIndex))
+        {
+            InitLevelData(levelIndex);
+        }
+        return levelProgressDataDic[levelIndex].isLevelComplete;
+    }
+    
+    public bool GetLevelLocked(int levelIndex)
+    {
+        if (!levelProgressDataDic.ContainsKey(levelIndex))
+        {
+            InitLevelData(levelIndex);
+        }
+        return levelProgressDataDic[levelIndex].isLevelLocked;
+    }
+
+    private void SaveLevelData()
+    {
+        string data = JsonUtility.ToJson(new SerializeBridge<LevelProgressData>(levelProgressDataList));
+        PlayerPrefs.SetString(GameConsts.PROGRESS_DATA_LIST, data);
     }
 
     private void Update()
     {
-        if (!gameStart)
+        if (gameStart)
         {
             currentGameTime += Time.deltaTime;
         }

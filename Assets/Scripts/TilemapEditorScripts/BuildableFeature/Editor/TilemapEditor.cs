@@ -180,4 +180,12 @@ public class TilemapEditor : Editor
             Debug.LogError("Please select a Prefab instance.");
         }
     }
+    
+    //在菜单栏 Tools/HZB/清除进度存档 中调用
+    [MenuItem("Tools/HZB/清除进度存档")]
+    public static void ClearProgressPlayerPrefs()
+    {
+        Debug.Log("Cleared progress save");
+        PlayerPrefs.DeleteKey(GameConsts.PROGRESS_DATA_LIST);
+    }
 }

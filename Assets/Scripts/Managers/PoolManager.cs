@@ -84,11 +84,10 @@ public class PoolManager : Singleton<PoolManager>
         GameObject objectToSpawn = poolDictionary[key].Dequeue();
         if (objectToSpawn == null)
         {
+            Debug.LogWarning("Pool with tag " + key + " doesn't exist.");
             objectToSpawn = Instantiate(prefab);
             objectToSpawn.name = prefab.name;
             objectToSpawn.transform.SetParent(transform);
-            objectToSpawn.SetActive(false);
-            poolDictionary[key].Enqueue(objectToSpawn);
         }
         
         objectToSpawn.SetActive(true);

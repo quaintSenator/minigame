@@ -321,12 +321,10 @@ public class PlayerController : MonoBehaviour
             }
             isContinueJump = true;
         }
-        Debug.Log("OnSpaceDown");
     }
 
     private void OnSpacebarUp(EventData DATA = null)
     {
-        Debug.Log("OnSpacebarUp");
         //CleverTimerManager.Ask4Timer(bufferTime, OnBufferTimeEnd);
         //bufferTimerCount++;
         if (isFlying)
