@@ -163,6 +163,16 @@ public class PlayerController : MonoBehaviour
     //是否能进行移动,封装了Getter和Setter
     public bool ifCanMove = false;
 
+
+    //重生相关
+    [SerializeField]
+    [Tooltip("一次重生过程的时间长度")]
+    private float respawnDuration = 0.5f;
+    private bool isRespawning = false;
+    private Vector3 nextRespawnPosition= Vector3.zero;
+    private Vector3 laseDeadPosition = Vector3.zero;
+    private float lastDeadTime = 0.0f;
+
     //为减少FixUp开销保存HeadingDir的常态，仅在事件下切换
     private Vector3 playerHeadingDir;
     private void Awake()
@@ -226,42 +236,52 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if(isRespawning)
+        {
+            Respawning();
+
+            return;
+        }
+        if(!isRespawning)
+        {
+            //处于暂停或者其他状态不进行更新
+            if (!ifCanMove)
+            {
+                return;
+            }
+
+
+            if (isReturn)
+            {
+                returnTimer += Time.deltaTime;
+            }
+            if (returnTimer >= RETURN_TIME)
+            {
+                returnTimer = 0;
+                isReturn = false;
+                SetCorrect();
+            }
+
+            if (isBufferActive)
+            {
+                jumpTimer += Time.deltaTime;
+            }
+            if (jumpTimer >= bufferTime)
+            {
+                jumpTimer = 0;
+                isBufferActive = false;
+                willJump = false;
+            }
+
+            Rotate();
+        }
         /* if (Input.GetKey(KeyCode.Space) && rigidBody.velocity.y <= 0 && !isGrounded)
          {
              //Debug.Log("willJump");
              willJump = true;
          }*/
 
-        //处于暂停或者其他状态不进行更新
-        if(!ifCanMove)
-        {
-            return;
-        }
 
-
-        if (isReturn)
-        {
-            returnTimer += Time.deltaTime;
-        }
-        if (returnTimer >= RETURN_TIME)
-        {
-            returnTimer = 0;
-            isReturn = false;
-            SetCorrect();
-        }
-
-        if (isBufferActive)
-        {
-            jumpTimer += Time.deltaTime;
-        }
-        if (jumpTimer >= bufferTime)
-        {
-            jumpTimer = 0;
-            isBufferActive = false;
-            willJump = false;
-        }
-
-        Rotate();
 
     }
 
@@ -513,6 +533,10 @@ public class PlayerController : MonoBehaviour
 
     private void CheckDead()
     {
+        if(isRespawning  || !ifCanMove)
+        {
+            return;
+        }
         //Check X position 
         //moveTimer += Time.fixedDeltaTime;
         expectedDisplacementXAxis += (playerHeadingDir * speed * Time.fixedDeltaTime).x;
@@ -704,22 +728,16 @@ public class PlayerController : MonoBehaviour
 
     public void OnReset(EventData data = null)
     {
+        laseDeadPosition = transform.position;
+        lastDeadTime = Time.time;
         ResetState();
-
         ResetJump();
         ResetFly();
+        ResetDeacCheck();
         //ResetAudio();
-        ResetPositionAndDeacCheck();
-        /*        EventManager.InvokeEvent(EventType.GameRestartEvent);
-
-                if (isFirstStart)
-                {
-                    EventManager.InvokeEvent(EventType.GameStartEvent);
-                    isFirstStart = false;
-        }*/
-        EventManager.InvokeEvent(EventType.EndRespawnEvent);
-
-
+        isRespawning = true;
+        //ResetPositionAndDeacCheck();
+        //EventManager.InvokeEvent(EventType.EndRespawnEvent);
     }
 
     public Vector3 getPlayerVelocity()
@@ -735,6 +753,27 @@ public class PlayerController : MonoBehaviour
     public void SetVerticalVelocity(float value)
     {
         verticalVelocity = value * worldScale;
+    }
+
+    private void Respawning()
+    {
+        if(NearlyEqualsVector3(transform.position,nextRespawnPosition))
+        {
+            isRespawning = false;
+            EventManager.InvokeEvent(EventType.EndRespawnEvent);
+
+            return;
+        }
+        else
+        {
+            
+            float elapsedTime = Time.time - lastDeadTime; // 已经经过的时间
+            float t = Mathf.Clamp01(elapsedTime / respawnDuration); // 计算插值因子，确保在0和1之间
+
+            transform.position = Vector3.Lerp(laseDeadPosition, nextRespawnPosition, t);
+        }
+        //ResetPositionAndDeacCheck();
+
     }
 
     private void ResetFly()
@@ -769,19 +808,20 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void ResetPositionAndDeacCheck()
+    private void ResetDeacCheck()
     {
         //May be check the reset point if valid position
-        Vector3 resetPosition = new Vector3();
+        //Vector3 resetPosition = new Vector3();
+
         if (resetPointIndex < resetpoints.Count && resetPointIndex >= 0)
         {
-            resetPosition = resetpoints[resetPointIndex];
+            nextRespawnPosition = resetpoints[resetPointIndex];
         }
         else
         {
             if (resetpoints.Count >= 1)
             {
-                resetPosition = resetpoints[0];
+                nextRespawnPosition = resetpoints[0];
 
             }
             else
@@ -792,8 +832,8 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        transform.position = resetPosition;
-        expectedDisplacementXAxis = resetPosition.x;
+        //transform.position = nextRespawnPosition;
+        expectedDisplacementXAxis = nextRespawnPosition.x;
         practicalDisplacementXAxis = 0f;
 
 
@@ -920,5 +960,10 @@ public class PlayerController : MonoBehaviour
         return this.ifCanMove;
     }
 
+
+    public static bool NearlyEqualsVector3(Vector3 vector1 , Vector3 vector2, float tolerance=0.5f)
+    {
+        return (vector1 - vector2).sqrMagnitude < tolerance;
+    }
     #endregion
 }

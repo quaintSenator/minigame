@@ -223,6 +223,8 @@ public class MusicManager : Singleton<MusicManager>
         EventManager.AddListener(EventType.RestartLevelEvent, OnRestartLevelEvent);
         EventManager.AddListener(EventType.GamePauseEvent, OnGamePauseEvent);
         EventManager.AddListener(EventType.GameResumeEvent, OnGameResumeEvent);
+
+        EventManager.AddListener(EventType.PlayerDeadStoryEvent, OnPlayerDeadStoryEvent);
         /*        EventManager.AddListener(EventType.GameStartForAudioEvent, OnGameStartForAudio);
 
                 EventManager.AddListener(EventType.GameRestartEvent, OnGameRestartForAudio);*/
@@ -236,6 +238,7 @@ public class MusicManager : Singleton<MusicManager>
         EventManager.RemoveListener(EventType.RestartLevelEvent, OnRestartLevelEvent);
         EventManager.RemoveListener(EventType.GamePauseEvent, OnGamePauseEvent);
         EventManager.RemoveListener(EventType.GameResumeEvent, OnGameResumeEvent);
+        EventManager.RemoveListener(EventType.PlayerDeadStoryEvent, OnPlayerDeadStoryEvent);
     }
 
     private void GetPlayerControllerSpeed()
@@ -291,6 +294,7 @@ public class MusicManager : Singleton<MusicManager>
             Debug.LogWarning("invoke PlayLevelMusic wrongly");
             return;
         }
+        //StopRespawMusic()
         StopLevelMusic();
 
         PlayLevelMusic();
@@ -331,6 +335,12 @@ public class MusicManager : Singleton<MusicManager>
         }
         
 
+    }
+
+
+    private void OnPlayerDeadStoryEvent(EventData eventData)
+    {
+        StopLevelMusic();
     }
 
     //播放声音的回调函数
