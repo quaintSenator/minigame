@@ -15,6 +15,8 @@ public class SwordController : MonoBehaviour
     private bool canAttack = true;
     private int damage;
 
+    public AK.Wwise.Event ActionAttackEvent = null;
+
 
     private void Awake()
     {
@@ -44,6 +46,8 @@ public class SwordController : MonoBehaviour
             CleverTimerManager.Ask4Timer(coldDownTime, SetAttack);
             _attackWaveEffectController.SpawnEffectInstance();
             canAttack = false;
+
+            ActionAttackEvent.Post(gameObject);
         }
         //swordCollider.enabled = true;
         //spriteRenderer.enabled = true;

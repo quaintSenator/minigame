@@ -112,7 +112,8 @@ public class FlowManager : Singleton<FlowManager>
         }
         else
         {
-            EventManager.InvokeEvent(EventType.StartLoadBankEvent);
+            EventManager.InvokeEvent(EventType.StartLevelEvent);
+            //EventManager.InvokeEvent(EventType.StartLoadBankEvent);
             return;
         }
 
