@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1183745991763393448
 Transform:
   m_ObjectHideFlags: 0
@@ -4824,6 +4824,7 @@ MonoBehaviour:
   particleRandomColorRangeR: {r: 1, g: 1, b: 1, a: 1}
   fricThrowAngle: 15
   cubeEdgeLen: 0.45
+  FrictionTimeLen: 0.4
 --- !u!1 &1320013365611895014
 GameObject:
   m_ObjectHideFlags: 0
@@ -5020,6 +5021,7 @@ MonoBehaviour:
   stillParent: {fileID: 0}
   FadingShadowLifetime: 0.3
   frameBuildString: 13 33 53 73 93 113 133 163 193 253
+  _fadingShadowPrefab: {fileID: 0}
 --- !u!1 &3931848180994807023
 GameObject:
   m_ObjectHideFlags: 0
@@ -5241,6 +5243,7 @@ MonoBehaviour:
   resetpoints: []
   deadCheckYAxis: {fileID: 0}
   ifSwitchOnFallSpeedLimit: 0
+  ifCanMove: 0
 --- !u!114 &5259083086125303481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5385,7 +5388,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &788119610683451696
 Transform:
   m_ObjectHideFlags: 0

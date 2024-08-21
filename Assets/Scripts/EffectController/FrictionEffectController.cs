@@ -31,7 +31,6 @@ public class FrictionEffectController : HoldStillEffectController
     [SerializeField] private float fricThrowAngle = 15.0f;
     [SerializeField] private float cubeEdgeLen = 0.45f;
     [SerializeField] private float FrictionTimeLen = 0.4f;
-    [SerializeField] private Transform player;
     
     void SelfPSInit()
     {
