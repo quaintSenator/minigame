@@ -13,6 +13,8 @@ namespace AK
 {
     namespace EVENTS
     {
+        static const AkUniqueID ATTACK_TEST = 2389297652U;
+        static const AkUniqueID JUMP_TEST = 1883663240U;
         static const AkUniqueID PAUSE_LEVEL1 = 2859270423U;
         static const AkUniqueID PAUSE_LEVELTEST = 1903092602U;
         static const AkUniqueID PLAY_ACTION_JUMP = 1092387147U;

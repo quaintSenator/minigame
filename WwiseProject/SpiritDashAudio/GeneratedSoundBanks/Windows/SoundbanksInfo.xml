@@ -5,7 +5,7 @@
 		<SourceFilesRoot>../../.cache/Windows</SourceFilesRoot>
 		<SoundBanksRoot>.</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
-		<ExternalSourcesOutputRoot>../../../../Assets/StreamingAssets/Audio/GeneratedSoundBanks/Windows</ExternalSourcesOutputRoot>
+		<ExternalSourcesOutputRoot>E:/WorkRepository/UnityProject/SpiritDash/UnityProject/minigame/Assets/StreamingAssets/Audio/GeneratedSoundBanks/Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
 	<DialogueEvents/>
 	<SoundBanks>
@@ -188,7 +188,7 @@
 				</Event>
 			</Events>
 		</SoundBank>
-		<SoundBank Id="2678230382" Type="User" Language="SFX" Hash="{D6385015-2CB2-956C-114E-CFE04BFFD2C5}">
+		<SoundBank Id="2678230382" Type="User" Language="SFX" Hash="{89383146-D958-35F2-2296-E38023672E24}">
 			<ShortName>Level1</ShortName>
 			<Path>Level1.bnk</Path>
 			<Media>
@@ -196,12 +196,30 @@
 					<ShortName>Dangerous_Love_120bpm.wav</ShortName>
 					<CachePath>SFX/Dangerous_Love_120bpm_29F081A2.wem</CachePath>
 				</File>
+				<File Id="346481716" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>jump_1.wav</ShortName>
+					<CachePath>SFX/jump_1_818F3B66.wem</CachePath>
+				</File>
+				<File Id="398724365" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Attack_1.wav</ShortName>
+					<CachePath>SFX/Attack_1_818F3B66.wem</CachePath>
+				</File>
 				<File Id="957206305" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Du.wav</ShortName>
 					<CachePath>SFX/Du_818F3B66.wem</CachePath>
 				</File>
 			</Media>
 			<Events>
+				<Event Id="2389297652" Name="Attack_Test" DurationType="OneShot" DurationMin="1.6979592" DurationMax="1.6979592">
+					<MediaRefs>
+						<MediaRef Id="398724365"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1883663240" Name="Jump_Test" DurationType="OneShot" DurationMin="1.1493877" DurationMax="1.1493877">
+					<MediaRefs>
+						<MediaRef Id="346481716"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="2859270423" Name="Pause_Level1" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 				<Event Id="1092387147" Name="Play_Action_Jump" DurationType="OneShot" DurationMin="0.078708336" DurationMax="0.078708336">
 					<MediaRefs>
@@ -238,5 +256,5 @@
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{F12BF007-0D5B-F39C-2D13-AC1DE730C4B4}</FileHash>
+	<FileHash>{928ED6D4-435A-2096-0981-EDE013C1160E}</FileHash>
 </SoundBanksInfo>

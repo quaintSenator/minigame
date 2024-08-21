@@ -6,6 +6,7 @@ using UnityEngine;
 public class MapReader : Singleton<MapReader>
 {
     [SerializeField] private TilemapSaveLocalFile selectedMapdata;
+    [SerializeField] private int selectedMapIndex = 1;
     
     private Transform mapParent;
     private List<BuildableInfo> buildableInfos = new List<BuildableInfo>();
@@ -49,6 +50,7 @@ public class MapReader : Singleton<MapReader>
             
             //待删除，放到角色初始化中
             EventManager.InvokeEvent(EventType.StartLevelEvent, new EventData());
+            EventManager.InvokeEvent(EventType.EndLoadMapEvent, new LoadMapDataEvent(selectedMapIndex));
             
             Debug.Log("Mapdata loaded!");
         }
@@ -120,5 +122,14 @@ public class MapReader : Singleton<MapReader>
         Debug.Log(UnityEngine.QualitySettings.vSyncCount);
         Debug.Log(UnityEngine.Application.targetFrameRate);
     }
+}
+
+public class LoadMapDataEvent : EventData
+{
+    public int index;
     
+    public LoadMapDataEvent(int index)
+    {
+        this.index = index;
+    }
 }

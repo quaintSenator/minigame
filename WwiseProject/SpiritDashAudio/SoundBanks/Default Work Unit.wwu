@@ -20,6 +20,7 @@
 				<SoundBank Name="Level1" ID="{2EB4FBA1-AD38-46BB-89E0-8F350057B946}">
 					<ObjectInclusionList>
 						<ObjectRef Name="Level1" ID="{99D425A7-3EAC-417C-8ADE-BD43A09BF4B2}" WorkUnitID="{D973EBAA-0186-44B8-94E1-98693FB906E2}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="InteractionSFX" ID="{15F77BCB-82C8-4303-BD1B-A13B316056AD}" WorkUnitID="{15F77BCB-82C8-4303-BD1B-A13B316056AD}" Origin="Manual" Filter="7"/>
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>

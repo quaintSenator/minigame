@@ -27,12 +27,12 @@ public class GuideController : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.AddListener(EventType.GameStartEvent, OnStart);
+        EventManager.AddListener(EventType.StartLevelEvent, OnStart);
     }
 
     private void OnDisable()
     {
-        EventManager.RemoveListener(EventType.GameStartEvent, OnStart);
+        EventManager.RemoveListener(EventType.StartLevelEvent, OnStart);
     }
 
     private void Start()

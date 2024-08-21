@@ -1,11 +1,15 @@
 Event	ID	Name			Wwise Object Path	Notes
 	1092387147	Play_Action_Jump			\LevelMusic\Level1\Play_Action_Jump	
+	1883663240	Jump_Test			\InteractionSFX\Jump_Test	
+	2389297652	Attack_Test			\InteractionSFX\Attack_Test	
 	2859270423	Pause_Level1			\LevelMusic\Level1\Pause_Level1	
 	3077303046	StopLevel1			\LevelMusic\Level1\StopLevel1	
 	3265051672	Resume_Level1			\LevelMusic\Level1\Resume_Level1	
 	3659125941	Play_Level1			\LevelMusic\Level1\Play_Level1	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	187318935	Level1Music	E:\WorkRepository\UnityProject\SpiritDash\UnityProject\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\Dangerous_Love_120bpm_29F081A2.wem		\Actor-Mixer Hierarchy\LevelMusic\Level1\Level1Music		18213292
-	957206305	Actor_Jump	E:\WorkRepository\UnityProject\SpiritDash\UnityProject\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\Du_818F3B66.wem		\Actor-Mixer Hierarchy\LevelMusic\Level1\Actor_Jump		15208
+	187318935	Level1Music	D:\PersonalData\UnityProject\SpiritDash\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\Dangerous_Love_120bpm_29F081A2.wem		\Actor-Mixer Hierarchy\LevelMusic\Level1\Level1Music		18213292
+	346481716	NormalJump	D:\PersonalData\UnityProject\SpiritDash\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\jump_1_818F3B66.wem		\Actor-Mixer Hierarchy\InteractionSFX\NormalJump		202848
+	398724365	Attack	D:\PersonalData\UnityProject\SpiritDash\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\Attack_1_818F3B66.wem		\Actor-Mixer Hierarchy\InteractionSFX\Attack		299616
+	957206305	Actor_Jump	D:\PersonalData\UnityProject\SpiritDash\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\Du_818F3B66.wem		\Actor-Mixer Hierarchy\LevelMusic\Level1\Actor_Jump		15208
 
