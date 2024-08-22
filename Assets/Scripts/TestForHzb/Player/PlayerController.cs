@@ -438,6 +438,14 @@ public class PlayerController : MonoBehaviour
         rigidBody.velocity = Vector2.up * verticalVelocity;
     }
 
+    public void ChangeFlyDir()
+    {
+        if(isFlying)
+        {
+            rigidBody.velocity = Vector2.up * verticalVelocity;    
+        }
+    }
+
     private void EndFly()
     {
         isFlying = false;

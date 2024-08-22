@@ -7,6 +7,7 @@ public class ContinuousPoint : BuildableBase
     public ContinuousPoint LastPoint;
     public ContinuousPoint NextPoint;
     private LineRenderer lineRenderer;
+    private float vVelocity;
     
     public override void Init()
     {
@@ -21,12 +22,60 @@ public class ContinuousPoint : BuildableBase
 
     protected virtual void ContinuousPointInit()
     {
-        
     }
 
     protected virtual void ContinuousPointDispose()
     {
         
+    }
+
+    protected override void TriggerThisBuildable(PlayerController player)
+    {
+        //Debug.Log("vSpeed"+vVelocity);
+        if(NextPoint != null)
+        {
+            Debug.Log("doSendVSpeed"+vVelocity);
+            SendVelocity(player);
+        }
+
+        if(LastPoint == null)
+        {
+            player.SetCanFly(true);
+        }
+        else if(NextPoint == null)
+        {
+            player.SetFlyFinished(true);
+        }
+    }
+
+    protected override void TriggerOffThisBuildable(PlayerController player)
+    {
+        if(LastPoint == null)
+        {
+            player.SetCanFly(false);
+        }
+        else if(NextPoint == null)
+        {
+            player.SetFlyFinished(false);
+            EventManager.InvokeEvent(EventType.SpacebarUpEvent);           
+        }
+    }
+
+    private float CalVerticalVelocity()
+    {
+        Vector3 startPos = transform.position;
+        Vector3 endPos = NextPoint.transform.position;
+        float hDistance = endPos.x - startPos.x;
+        float vDistance = endPos.y - startPos.y;
+        float time = hDistance / GameConsts.SPEED;
+        float vSpeed = vDistance / time;
+        Debug.Log("vSpeed"+vSpeed);
+        return vSpeed;
+    }
+
+    private void SendVelocity(PlayerController player)
+    {
+        player.SetVerticalVelocity(vVelocity);
     }
     
     public void LinkPoint()
@@ -41,6 +90,11 @@ public class ContinuousPoint : BuildableBase
         else
         {
             HideLineRenderer();
+        }
+
+        if(NextPoint != null)
+        {
+            vVelocity = CalVerticalVelocity();
         }
     }
     
