@@ -109,6 +109,17 @@ public class ProgressManager : Singleton<ProgressManager>
         SaveLevelData();
     }
 
+    public void UpdateDialogShow(int levelIndex, int dialogIndex, bool isShown)
+    {
+        if (!levelProgressDataDic.ContainsKey(levelIndex))
+        {
+            InitLevelData(levelIndex);
+        }
+        levelProgressDataDic[levelIndex].dialogsShows[dialogIndex] = isShown;
+        levelProgressDataList.Find(data => data.levelIndex == levelIndex).dialogsShows[dialogIndex] = isShown;
+        SaveLevelData();       
+    }
+
     public void InitLevelData(int levelIndex)
     {
         bool isLocked = levelIndex > 1;
@@ -168,6 +179,15 @@ public class ProgressManager : Singleton<ProgressManager>
         return levelProgressDataDic[levelIndex].isLevelLocked;
     }
 
+    public bool GetDialogShow(int levelIndex, int dialogIndex)
+    {
+        if (!levelProgressDataDic.ContainsKey(levelIndex))
+        {
+            InitLevelData(levelIndex);
+        }
+        return levelProgressDataDic[levelIndex].dialogsShows[dialogIndex];        
+    }
+
     private void SaveLevelData()
     {
         string data = JsonUtility.ToJson(new SerializeBridge<LevelProgressData>(levelProgressDataList));
@@ -192,6 +212,8 @@ public class LevelProgressData
     public float levelProgress;
     public bool isLevelComplete;
     public bool isLevelLocked;
+
+    public List<bool> dialogsShows = new List<bool>();
     
     public LevelProgressData(string levelName, int levelIndex, float levelProgress, bool isLevelComplete, bool isLevelLocked)
     {
@@ -209,6 +231,7 @@ public class LevelProgressData
         levelProgress = levelProgressData.levelProgress;
         isLevelComplete = levelProgressData.isLevelComplete;
         isLevelLocked = levelProgressData.isLevelLocked;
+        dialogsShows = levelProgressData.dialogsShows;
     }
     
     public void CopyData(LevelProgressData levelProgressData)
@@ -220,3 +243,4 @@ public class LevelProgressData
         isLevelLocked = levelProgressData.isLevelLocked;
     }
 }
+
