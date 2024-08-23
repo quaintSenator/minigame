@@ -69,7 +69,7 @@ public class ContinuousPoint : BuildableBase
         float vDistance = endPos.y - startPos.y;
         float time = hDistance / GameConsts.SPEED;
         float vSpeed = vDistance / time;
-        Debug.Log("vSpeed"+vSpeed);
+        //Debug.Log("vSpeed"+vSpeed);
         return vSpeed;
     }
 

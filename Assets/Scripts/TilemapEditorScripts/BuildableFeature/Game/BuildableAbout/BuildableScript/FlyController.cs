@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+//代码已废弃*************************************************
+
 public class FlyController : BuildableBase {
     private Transform startPoint;
     private Transform endPoint;

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//代码已废弃*************************************************
 public class FlyEndPoint : MonoBehaviour {
     public FlyController flyController;
 
