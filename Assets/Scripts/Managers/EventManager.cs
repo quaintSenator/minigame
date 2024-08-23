@@ -87,8 +87,8 @@ public enum EventType
     StartStoryStep10 = 409,
 
     NextStepEvent = 420,
-    StoryStartEvent = 421,
-    StoryEndEvent = 422,
+    //StoryStartEvent = 421,    //废弃，用流程控制的
+    //StoryEndEvent = 422,
 
     #endregion
 

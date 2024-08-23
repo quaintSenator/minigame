@@ -76,18 +76,15 @@ public class StoryController : MonoBehaviour
     private PlayerController playerController;
     private PlayerStoryController playerStoryController;
     private EnemyStoryController enemyStoryController;
+    private ParticleSystem frictionEffect;
 
     private void Awake()
     {
         playerController = player.GetComponent<PlayerController>();
         playerStoryController = player.GetComponent<PlayerStoryController>();
         enemyStoryController = enemy.GetComponent<EnemyStoryController>();
-    }
+        frictionEffect = player.Find("FrictionEffect").GetComponent<ParticleSystem>();
 
-    private void Start()
-    {
-        playerController.enabled = false;
-        playerStoryController.enabled = true;
         functions.Add(Step_1);
         functions.Add(Step_2);
         functions.Add(Step_3);
@@ -97,7 +94,13 @@ public class StoryController : MonoBehaviour
         functions.Add(Step_7);
         functions.Add(Step_8);
         functions.Add(Step_9);
-        EventManager.InvokeEvent(EventType.StoryStartEvent, mustDoStepData);
+    }
+
+    private void Start()
+    {
+        playerController.enabled = false;
+        playerStoryController.enabled = true;
+
     }
 
     private void OnEnable()
@@ -106,7 +109,7 @@ public class StoryController : MonoBehaviour
         {
             EventManager.AddListener(eventType, DoStep);
         }
-        EventManager.AddListener(EventType.StoryStartEvent, NextStep);
+        EventManager.AddListener(EventType.StartStoryEvent, OnStartStoryEvent);
         EventManager.AddListener(EventType.NextStepEvent, NextStep);
     }
 
@@ -117,7 +120,13 @@ public class StoryController : MonoBehaviour
             EventManager.RemoveListener(eventType, DoStep);
         }
         EventManager.RemoveListener(EventType.NextStepEvent, NextStep);
-        EventManager.AddListener(EventType.StoryStartEvent, NextStep);        
+        EventManager.RemoveListener(EventType.StartStoryEvent, OnStartStoryEvent);        
+    }
+
+    private void OnStartStoryEvent(EventData data)
+    {
+        frictionEffect.Stop();
+        EventManager.InvokeEvent(EventType.NextStepEvent, mustDoStepData);
     }
 
     private void NextStep(EventData data = null)
@@ -148,6 +157,7 @@ public class StoryController : MonoBehaviour
         StoryEventData storyData = (StoryEventData)data;
         Debug.Log("step"+storyData.stepIndex);
         int index = storyData.stepIndex;
+        Debug.Log("function num" + functions.Count);
         functions[index].Invoke();
     }
 
@@ -240,10 +250,11 @@ public class StoryController : MonoBehaviour
 
     private void EndStory()
     {
-        EventManager.InvokeEvent(EventType.StoryEndEvent);
         playerController.enabled = true;
         playerStoryController.enabled = false;
-        SceneManager.LoadScene("Level_1", LoadSceneMode.Single);
+        frictionEffect.Play();
+        EventManager.InvokeEvent(EventType.EndStoryEvent);
+
     }
 
 }

@@ -66,7 +66,7 @@ public class FlowManager : Singleton<FlowManager>
     private void RegisterEvents()
     {
         EventManager.AddListener(EventType.EndLoadBankEvent, OnEndLoadBankEvent);
-
+        EventManager.AddListener(EventType.EndStoryEvent, OnEndStoryEvent);
 
 
         EventManager.AddListener(EventType.PlayerDeadStoryEvent, OnPlayerDeadStoryEvent);
@@ -78,6 +78,7 @@ public class FlowManager : Singleton<FlowManager>
     private void UnregisterEvents()
     {
         EventManager.RemoveListener(EventType.EndLoadBankEvent, OnEndLoadBankEvent);
+        EventManager.RemoveListener(EventType.EndStoryEvent, OnEndStoryEvent);
 
         //EventManager.RemoveListener(EventType.EndLoadMapEvent, OnEndLoadMapEvent);
 
@@ -98,7 +99,7 @@ public class FlowManager : Singleton<FlowManager>
         //额外信息：是否是第一次打开关卡
         if(ProgressManager.Instance != null)
         {
-            ifFirstEnterLevel = false;//TODO
+            ifFirstEnterLevel = true;//TODO
         }
 
         shouldPlayStory = ifFirstEnterLevel;
@@ -120,6 +121,11 @@ public class FlowManager : Singleton<FlowManager>
     }
 
     private void OnEndLoadBankEvent(EventData eventData)
+    {
+        EventManager.InvokeEvent(EventType.StartLevelEvent);
+    }
+
+    private void OnEndStoryEvent(EventData eventData)
     {
         EventManager.InvokeEvent(EventType.StartLevelEvent);
     }
