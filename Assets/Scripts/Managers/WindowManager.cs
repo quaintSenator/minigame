@@ -20,7 +20,7 @@ public class WindowManager : Singleton<WindowManager>
     private Dictionary<WindowType, string> _type2ResourceFileNameDict;
     private Transform uiRootTransform;
     private Stack<GameObject> _uiStack;
-    private Transform _UIRoot;
+    [SerializeField]private Transform _UIRoot;
     private bool _pausable;
     
     protected override void OnAwake()
@@ -56,11 +56,16 @@ public class WindowManager : Singleton<WindowManager>
         }
     }
 
+    protected override bool NeedDestory()
+    {
+        return true;
+    }
+
     private void OnEscapeDown(EventData ed)
     {
         if (_pausable)//_pausable只用来提示当前场景是否允许显示暂停页面(level场景允许)，不要用于动态检测
         {
-            if (_uiStack.Count > 0 && _uiStack.Peek().gameObject.name.Contains("PausePage"))
+            if (isAtPausePage())
             {
                 //当已经打开了pause_page，那么调用resume_game,与回到游戏按钮等效
                 ResumeGame();
@@ -76,14 +81,29 @@ public class WindowManager : Singleton<WindowManager>
         }
     }
 
+    public bool isAtPausePage()
+    {
+        return _uiStack.Count > 0 && _uiStack.Peek().gameObject.name.Contains("PausePage");
+    }
+
+    public void ResumeTimePause()
+    {
+        Time.timeScale = 1;
+    }
+
+    public void ResumeMusicStop()
+    {
+        MusicManager.Instance.ResumeLevelMusic();
+    }
     public void ResumeGame()
     {
-        if (_uiStack.Count > 0 && _uiStack.Peek().gameObject.name.Contains("PausePage")) //如果目前暂停页面确实处于最上层
+        if (isAtPausePage()) //如果目前暂停页面确实处于最上层
         {
             //恢复游戏
             //EventManager.InvokeEvent(EventType.StartLevelEvent);
-            Time.timeScale = 1;
-            MusicManager.Instance.ResumeLevelMusic();
+            ResumeMusicStop();
+            ResumeTimePause();
+            
             //关闭暂停页面
             var pausePage = _uiStack.Peek().gameObject;
             _uiStack.Pop();
