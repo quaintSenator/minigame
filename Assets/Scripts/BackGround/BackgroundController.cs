@@ -11,6 +11,8 @@ public class BackgroundController : MonoBehaviour
 
     private Vector3 firstPosition = Vector3.zero;
     private Vector3 secondPosition = Vector3.zero;
+    private Vector3 diffPosition = Vector3.zero;
+    private Vector3 zOffset= Vector3.zero;
 
     [SerializeField]
     private float moveSpeed = 0.5f;
@@ -31,7 +33,14 @@ public class BackgroundController : MonoBehaviour
             secondPosition = child_1.transform.position;
         }
 
+        if(parentCam != null)
+        {
+            zOffset = new Vector3(0, 0, firstPosition.z- parentCam.transform.position.z);
+        }
+
+        diffPosition = secondPosition - firstPosition;
         firstPosition = firstPosition - (secondPosition-firstPosition);
+
 
     }
 
@@ -42,18 +51,20 @@ public class BackgroundController : MonoBehaviour
         {
             return;
         }
-
+        Vector3 prarentCamPosition= parentCam.transform.position;
 
         float step = moveSpeed * Time.deltaTime; // 计算每帧的移动步长
         child_0.transform.Translate(targetDirection * moveSpeed * Time.deltaTime, Space.World);
         child_1.transform.Translate(targetDirection * moveSpeed * Time.deltaTime, Space.World);
-        if(child_0.transform.position.x <= firstPosition.x)
+        if(child_0.transform.position.x <= prarentCamPosition.x - diffPosition.x)
         {
-            child_0.transform.position = secondPosition;
+            child_0.transform.position = prarentCamPosition + diffPosition + zOffset;
+            //child_0.transform.Translate(diffPosition, Space.World);
         }
-        if (child_1.transform.position.x <= firstPosition.x)
+        if (child_1.transform.position.x <= prarentCamPosition.x - diffPosition.x)
         {
-            child_1.transform.position = secondPosition;
+            child_1.transform.position = prarentCamPosition + diffPosition + zOffset;
+            //child_1.transform.Translate(diffPosition, Space.World);
         }
     }
 }
