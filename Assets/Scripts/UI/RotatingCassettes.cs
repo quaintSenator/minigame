@@ -16,7 +16,7 @@ public class RotatingCassettes : MonoBehaviour
 {
     [SerializeField] private Transform[] cassettes;
     public Animator m_Animator;
-    private int currentMiddleCassette;
+    [SerializeField] private int currentMiddleCassette;
     [SerializeField] private Button _rightScrollBtn;
     [SerializeField] private Button _leftScrollBtn;
     [SerializeField] private Transform[] points;
@@ -114,7 +114,6 @@ public class RotatingCassettes : MonoBehaviour
         lockScrollAndCassetteClick(currentMiddleCassette);
         m_Animator.Play(anim2Play);
         UpdateSelectingPoints(currentMiddleCassette);
-        EventManager.InvokeEvent(EventType.SwitchLevelEvent, new SwitchLevelEventData(currentMiddleCassette));
     }
     public void OnLeftScroll()
     {
@@ -148,7 +147,6 @@ public class RotatingCassettes : MonoBehaviour
         lockScrollAndCassetteClick(currentMiddleCassette);
         m_Animator.Play(anim2Play);
         UpdateSelectingPoints(currentMiddleCassette);
-        EventManager.InvokeEvent(EventType.SwitchLevelEvent, new SwitchLevelEventData(currentMiddleCassette));
     }
     private void UpdateSelectingPoints(int c)
     {

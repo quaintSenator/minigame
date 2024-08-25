@@ -30,7 +30,7 @@ public class InputManager : Singleton<InputManager>
     {
         if (Input.anyKeyDown)
         {
-            foreach (var pressEvent in pressKeyBoardEventDict)
+            foreach (var pressEvent in pressKeyBoardEventDict) 
             {
                 if (Input.GetKeyDown(pressEvent.Key))
                 {
@@ -45,7 +45,7 @@ public class InputManager : Singleton<InputManager>
 
             foreach (var pressEvent in pressMouseEventDict)
             {
-                if (Input.GetMouseButtonDown((int)pressEvent.Key))
+                if (Input.GetMouseButtonDown((int)pressEvent.Key) && !WindowManager.Instance.isAtPausePage())
                 {
                     foreach (var eventType in pressEvent.Value)
                     {
