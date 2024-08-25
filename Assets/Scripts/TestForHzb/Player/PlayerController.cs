@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using static UnityEngine.Experimental.Rendering.RayTracingAccelerationStructure;
 
@@ -172,6 +173,22 @@ public class PlayerController : MonoBehaviour
     private Vector3 nextRespawnPosition= Vector3.zero;
     private Vector3 laseDeadPosition = Vector3.zero;
     private float lastDeadTime = 0.0f;
+
+    [SerializeField]
+    [Tooltip("一次重生过程的时间长度")]
+    private GameObject respawnMask = null;
+
+    //重生相关
+    [SerializeField]
+    [Tooltip("TODO")]
+    private Vector3 respawnMaskNormalScale = new Vector3(0.1f, 0.1f, 0);
+
+    //重生相关
+    [SerializeField]
+    [Tooltip("TODO")]
+    private Vector3 respawnMaskTargetScale = new Vector3(0.003f, 0.003f, 0);
+
+    private bool isMaskReducing = false;
 
     //为减少FixUp开销保存HeadingDir的常态，仅在事件下切换
     private Vector3 playerHeadingDir;
@@ -706,6 +723,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnDead(EventData data = null)
     {
+        SetIfCanMove(false);
         if (resetPointIndex >= resetpoints.Count || resetPointIndex < 0)
         {
             Debug.LogError("PlayerController::OnDead :get wrong resetPointIndex in PlayerController::ResetAudio");
@@ -744,6 +762,7 @@ public class PlayerController : MonoBehaviour
         ResetDeacCheck();
         //ResetAudio();
         isRespawning = true;
+        isMaskReducing = true;
         //ResetPositionAndDeacCheck();
         //EventManager.InvokeEvent(EventType.EndRespawnEvent);
     }
@@ -765,25 +784,80 @@ public class PlayerController : MonoBehaviour
 
     private void Respawning()
     {
-        if(NearlyEqualsVector3(transform.position,nextRespawnPosition))
-        {
-            isRespawning = false;
-            EventManager.InvokeEvent(EventType.EndRespawnEvent);
+        /*        if(NearlyEqualsVector3(transform.position,nextRespawnPosition))
+                {
+                    isRespawning = false;
+                    EventManager.InvokeEvent(EventType.EndRespawnEvent);
 
+                    return;
+                }
+                else
+                {
+
+                    float elapsedTime = Time.time - lastDeadTime; // 已经经过的时间
+                    float t = Mathf.Clamp01(elapsedTime / respawnDuration); // 计算插值因子，确保在0和1之间
+
+                    transform.position = Vector3.Lerp(laseDeadPosition, nextRespawnPosition, t);
+                }*/
+        //ResetPositionAndDeacCheck();
+
+        if( respawnMask ==null)
+        {
+            Debug.LogError("can not get the right mask");
             return;
+
+        }
+        if(isMaskReducing)
+        {
+            if (NearlyEqualsVector3(respawnMask.transform.localScale, respawnMaskTargetScale,0.000001f))
+            {
+                //isRespawning = false;
+                //EventManager.InvokeEvent(EventType.EndRespawnEvent);
+                isMaskReducing = false;
+                transform.position = nextRespawnPosition;
+                return;
+            }
+            else
+            {
+
+                float elapsedTime = Time.time - lastDeadTime; // 已经经过的时间
+                float t = Mathf.Clamp01(elapsedTime / respawnDuration *2); // 计算插值因子，确保在0和1之间
+
+                respawnMask.transform.localScale = Vector3.Lerp(respawnMaskNormalScale, respawnMaskTargetScale, t);
+            }
         }
         else
         {
-            
-            float elapsedTime = Time.time - lastDeadTime; // 已经经过的时间
-            float t = Mathf.Clamp01(elapsedTime / respawnDuration); // 计算插值因子，确保在0和1之间
+            if (NearlyEqualsVector3(respawnMask.transform.localScale, respawnMaskNormalScale, 0.000001f))
+            {
+                isRespawning = false;
+                EventManager.InvokeEvent(EventType.EndRespawnEvent);
+                //isMaskReducing = false;
+                return;
+            }
+            else
+            {
 
-            transform.position = Vector3.Lerp(laseDeadPosition, nextRespawnPosition, t);
+                float elapsedTime = Time.time - lastDeadTime - respawnDuration / 2; // 已经经过的时间
+                float t = Mathf.Clamp01(elapsedTime / respawnDuration * 2); // 计算插值因子，确保在0和1之间
+
+                respawnMask.transform.localScale = Vector3.Lerp(respawnMaskTargetScale, respawnMaskNormalScale, t);
+            }
         }
-        //ResetPositionAndDeacCheck();
+
 
     }
 
+    private void ResetLevelState()
+    {
+        laseDeadPosition = transform.position;
+        lastDeadTime = Time.time;
+        ResetState();
+        ResetJump();
+        ResetFly();
+        ResetDeacCheck();
+        resetPointIndex = 0;
+    }
     private void ResetFly()
     {
         isFlying = false;
@@ -845,6 +919,16 @@ public class PlayerController : MonoBehaviour
         practicalDisplacementXAxis = 0f;
 
 
+    }
+
+    private void ResetPosition()
+    {
+        if(resetpoints.Count<=0)
+        {
+            Debug.LogError("Can not get right reset point");
+            return;
+        }
+        transform.position = resetpoints[0];
     }
     private void ResetAudio()
     {
@@ -932,12 +1016,18 @@ public class PlayerController : MonoBehaviour
 
     private void OnStartLevelEvent(EventData eventData)
     {
+        //OnReset();
+        ResetPosition();
+        ResetLevelState();
         SetIfCanMove(true);
+
+
     }
 
     private void OnRestartLevelEvent(EventData eventData)
     {
         SetIfCanMove(true);
+        //OnReset();
     }
 
 
