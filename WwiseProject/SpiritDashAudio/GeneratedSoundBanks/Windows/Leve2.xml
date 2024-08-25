@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="150">
+	<SoundBanks>
+		<SoundBank Id="2782713051" Type="User" Language="SFX" Hash="{62CC1327-CC55-767C-0FDE-DE1315153CD5}">
+			<ShortName>Leve2</ShortName>
+			<Path>Leve2.bnk</Path>
+			<Media>
+				<File Id="760915427" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Break.wav</ShortName>
+					<CachePath>SFX/Break_818F3B66.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="2859270420" Name="Pause_Level2" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="3659125942" Name="Play_Level2" DurationType="OneShot" DurationMin="182.30402" DurationMax="182.30402">
+					<MediaRefs>
+						<MediaRef Id="760915427"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3265051675" Name="Resume_Level2" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="3077303045" Name="StopLevel2" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+			</Events>
+		</SoundBank>
+	</SoundBanks>
+	<FileHash>{AF268EB9-8B49-2744-6223-82DFC75E11B2}</FileHash>
+</SoundBanksInfo>

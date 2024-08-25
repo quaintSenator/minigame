@@ -4649,6 +4649,2095 @@
 						</Sound>
 					</ChildrenList>
 				</Folder>
+				<Folder Name="Level2" ID="{F19DFC93-FBFB-4B25-B67E-09B7E7D6332B}" ShortID="791759128">
+					<ChildrenList>
+						<Sound Name="Level2Music" ID="{DDEFF4C9-D2EB-4605-B152-8495562A8FBD}" ShortID="987512216">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C3C1FC5D-DE89-438F-A755-093D0E1407FE}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5EE85173-7F1A-46EF-BB21-DFDCE1BA22BC}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Dangerous_Love_120bpm" ID="{EB2A7D28-CA7B-4D13-9056-B1B9324DA6D3}">
+									<PropertyList>
+										<Property Name="MarkerInputMode" Type="int16" Value="2"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>Dangerous_Love_120bpm.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="187318935"/>
+									</MediaIDList>
+									<ObjectLists>
+										<ObjectList Name="Markers">
+											<Reference>
+												<Local>
+													<Marker Name="" ID="{51517AA1-210C-4544-93D5-4C41CDABC367}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="Backbeat_1"/>
+															<Property Name="Time" Type="Real64" Value="16.4837708333333"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="" ID="{3B55AA31-5FCD-4A02-AF81-84A32A601D56}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="Backbeat_2"/>
+															<Property Name="Time" Type="Real64" Value="17.5295"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="" ID="{04D8FEED-9646-4BF1-B6A1-519844ED2C7A}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="Backbeat_3"/>
+															<Property Name="Time" Type="Real64" Value="18.5703333333333"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="" ID="{B942D88C-8C95-4885-837E-384E97BA34D4}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="Backbeat_4"/>
+															<Property Name="Time" Type="Real64" Value="19.61375"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="" ID="{6808D723-E7E2-47DC-AF6D-A952AFC42694}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="Backbeat_5"/>
+															<Property Name="Time" Type="Real64" Value="20.675"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="" ID="{AAC827F8-8498-46F0-8A0A-1DE243D4B17D}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="Backbeat_6"/>
+															<Property Name="Time" Type="Real64" Value="21.6884791666667"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="" ID="{018A5B3E-FEFC-4116-8CB9-8F82E8B79A95}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="Backbeat_7"/>
+															<Property Name="Time" Type="Real64" Value="22.7314166666667"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="" ID="{B619E1B3-2723-4103-8238-D4FFB27035B8}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="Backbeat_8"/>
+															<Property Name="Time" Type="Real64" Value="23.7837708333333"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="" ID="{C50EEC6E-4D40-492C-8A79-A7B900152F8B}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="Backbeat_9"/>
+															<Property Name="Time" Type="Real64" Value="24.8137291666667"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="" ID="{EF8A6B64-E45E-48B2-850D-0A0111322AB5}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="Backbeat_10"/>
+															<Property Name="Time" Type="Real64" Value="25.85575"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="" ID="{D4EF82E4-9FC7-4F8D-963F-E0DEE0AFE518}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="Backbeat_11"/>
+															<Property Name="Time" Type="Real64" Value="26.9135"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="" ID="{2D30BFD6-4233-4B7E-80E0-80FEE895DC62}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="Backbeat_12"/>
+															<Property Name="Time" Type="Real64" Value="27.9418541666667"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="" ID="{8402EF1B-B31B-4C80-A13E-DD1F349E6AFC}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="Backbeat_13"/>
+															<Property Name="Time" Type="Real64" Value="28.9837708333333"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="" ID="{AD5F0BEB-6622-4DD1-8157-F327C92044CD}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="Backbeat_14"/>
+															<Property Name="Time" Type="Real64" Value="30.0421666666667"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="" ID="{7047ED19-925D-4A80-9E65-C9BB9962E52D}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="Backbeat_15"/>
+															<Property Name="Time" Type="Real64" Value="31.0846666666667"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{1313E0B5-CB41-4B8E-876C-BB7846656CA7}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{438FC9D3-FA14-4E96-9E12-11BA2EBE18C2}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="0.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{5BD852FE-AFB5-4EA9-9ABF-A5B45E40AA18}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="1"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{C6136114-CC4F-44D8-A7E4-F21DFCFF5535}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="1.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{0FE69A28-45A3-4F1A-94AC-24FFD35373A0}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="2"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{21D616B3-2D1A-4656-8536-98EB6AEADA65}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="2.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{556102BD-3EDE-404A-AC5C-BA71F2EE31F1}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="3"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{F455CC2D-720F-495F-9585-73BD89D36281}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="3.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{B44B11F8-4D0D-4AC7-9E57-0A5F64378829}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="4"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{DE43EBEF-1AC1-47A3-B24B-D3613BE3E101}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="4.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{196AC058-FCA5-4D15-BDEB-F50416F72083}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{DE9D4CCB-0756-4491-88EE-6EC247735E9F}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="5.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{7F8DC2C8-3B04-4858-877E-AE9E5338D514}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="6"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{1887CF78-8317-447D-A7AB-C35441D3B440}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="6.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{5098C15A-849A-4597-A403-19724D8F9E03}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="7"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{3E934C3E-B7B9-4F3B-8B33-1885FCE5E0C6}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="7.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{91D7358B-4C2F-4374-91C1-09C6C24E4F56}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="8"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{91BD3C0F-CBBF-4350-9E42-E31EFE9F3BD4}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="8.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{F5F6C20B-4719-4405-BA9F-E73BABEA3A84}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="9"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{86028B0A-183B-4D2C-9BC8-67AEEDDAC153}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="9.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{BED84942-FE76-4122-8E65-25876115BDA4}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="10"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{6C4D6FBD-6736-4419-B400-2573A74AC3B3}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="10.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{C665F798-4B42-4E3E-AB19-0B05BF62EF04}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="11"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{66224B2F-E936-4425-B489-C0D34878586A}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="11.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{8A9D8EED-7DD4-4AE2-BD53-E3708F3A57A9}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="12"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{8DA53CC8-BD08-443E-8686-B05563492E6D}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="12.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{F3BFC6B5-ABBA-4AE5-83EE-B83E2AF62DD8}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="13"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{F9282705-A705-4E73-93D6-0D95D4F90C03}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="13.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{8FE4A6F2-5AF1-41F4-8C53-969E4CF24BC9}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="14"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{8D8A1E67-FDA2-43E5-9740-428041DEE650}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="14.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{A8AB4138-F640-4862-86CE-81310AD6E294}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="15"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{C25F0312-270A-4DE5-8484-2EADA8DA18AA}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="15.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{7741AACC-4D3D-4278-ABE1-706BF030ED1C}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="16"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{5206503C-4D59-4EC3-A65B-3BEA083A5996}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="16.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{86A5869B-129E-4DD4-8919-7842D090773F}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="17"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{5C991996-45B1-46D5-AB03-8EDD8FA52A5F}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="17.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{89AF62FA-9D97-4D23-9F76-3BB645660FF2}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="18"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{3CDA17FF-CEEB-4338-A4E0-E06FD2698119}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="18.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{9A05E9F4-DAB7-4E8D-BE6C-F50D899F8000}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="19"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{B5A2A27D-6FED-4B3B-8824-F16B60178E18}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="19.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{0D199D14-E64E-4442-BB05-3F5D8CE7D630}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="20"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{2412AF6B-AEC9-4CCC-A7DD-788A7F039350}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="20.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{6E4A074F-185D-480A-974D-5F769FA999A5}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="21"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{DEAA27AE-81FA-4921-85BB-0424C20FB76E}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="21.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{9CD58BDF-A10C-4DF9-B8BF-02094AAF0C38}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="22"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{269F654E-3698-4A01-98FE-EE94AF420FF6}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="22.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{DE9F9DD2-3781-4C03-B90D-7E32CDDFC4F5}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="23"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{F023765E-486A-4817-A4E8-0B2BFF81F423}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="23.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{63C700D1-5C7F-4064-ABA5-16A188BB719D}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="24"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{711275AE-FDD9-4CB1-8ABE-A69748747F07}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="24.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{60537C83-FAAA-4E88-9DD5-E4147D25912E}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="25"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{F97C7251-A1DD-4292-9E75-C7905D2C8530}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="25.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{0CF44E2F-2186-41BA-9A93-B41BFA3B543F}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="26"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{CBAB75D3-BDD5-4FBB-A87C-F7B44B31320E}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="26.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{98BC1D6B-8A86-4FB5-910A-C3A4002A9712}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="27"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{CCF83331-4BF9-4B35-8FBF-55BDFE48C288}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="27.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{AF5C7D0B-D71F-4184-8F63-1F62706794AA}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="28"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{E92530EC-F82E-49D4-B5EA-7D20145156D7}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="28.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{391E576C-314E-4469-B8E4-11525D3795A7}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="29"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{6C70FBF9-727D-439A-B471-D73A989764BF}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="29.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{4297CAD4-A85C-4181-ABA0-36622292B308}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="30"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{1FF9E1C6-208D-455D-AD23-5A84193DDDC8}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="30.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{2BFF153E-9734-4F1D-854C-0FE93E6CE05F}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="31"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{57E694D0-162F-4076-96E4-CD71A9F420DD}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="31.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{983644B8-212B-4710-82C7-A1A5035358AD}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="32"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{8494C3EE-F802-45E6-861D-F2B7A787CC93}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="32.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{2F9D0281-9966-4BBF-8488-024BB71C48FF}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="33"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{1DBCF966-63A4-4E67-A5D5-EFE730322EBE}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="33.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{F2E824F0-89DA-4B89-9997-D334F9B9B2C5}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="34"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{FBADFBD4-52D5-4993-9680-6916554E3A8D}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="34.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{6825DFA7-D211-482D-B671-98B5648F8373}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="35"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{D7D3A027-0E3D-4EBB-B641-BEC1D2755EB5}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="35.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{02022F10-5B7C-4230-BB8E-31DDB991E642}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="36"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{630C7EF9-0F9B-4D04-8B5B-26159B81BFC7}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="36.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{D6997BBC-9CFB-428A-9606-6CC481AEFB9F}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="37"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{AD0AABBD-A8ED-4AB8-AA5E-1DE714054AB3}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="37.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{B036A4B4-980F-466E-BE96-91611476503B}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="38"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{AD7FEE7C-12C4-4631-B686-BEFD52ACAEA4}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="38.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{44827FCA-018B-4FB7-98AA-40CF8AEC31C6}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="39"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{7FCBC17E-723A-44A8-B3CB-3F3EFF152B1D}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="39.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{A5A520A0-605A-4CBA-A318-FF5E8F6000B7}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="40"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{1D78AFE3-2987-42D6-866F-EDD05E0E58CE}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="40.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{5D34CF72-894B-4933-9DCF-99CD81ADCA23}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="41"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{B359152C-1F96-4877-AAD9-0FF87E20EA20}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="41.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{3BA44D35-80F5-491F-BDDB-F7991679760A}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="42"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{8956A1E7-3706-4EF3-B34C-946113CC0A1E}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="42.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{60CEF440-F46B-44F1-AA2D-480D0FCDF6D8}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="43"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{2D97A3A0-5EA1-4C37-BEA6-FDD51E5F103E}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="43.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{2813847D-5023-4706-9BA1-C36CFE494B3A}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="44"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{9042963F-601A-4C3E-8E64-F299B87C82E6}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="44.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{62DA46B5-087D-4D92-9AEB-BF970FDB7700}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="45"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{E30B282E-2C80-4DD1-974D-EEBA60604E9E}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="45.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{0674324A-F449-4A3C-859F-68EE18221FB6}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="46"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{77055702-2F1D-44E0-B10A-71CFEFBF4300}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="46.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{20F6CB12-FADD-4F1D-B0A3-2FAC3FF20D55}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="47"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{9B245423-78EF-4D1C-B5DF-9B20E8E7F935}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="47.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{650C34A4-DD93-4C69-B6A1-DADB502EA03D}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="48"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{8D5136BE-D6DC-45FC-9CC0-43FC8D632A2E}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="48.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{7EC93894-483B-4BA1-BFB2-87EA70E0693C}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="49"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{AE43CE47-C5EF-41B8-B435-D97F2983AA78}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="49.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{A772C6CD-AB45-4C67-B70F-DE7A0F012C41}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="50"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{7758B25D-D9C8-4C53-BE4F-553F07F09B19}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="50.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{667165B2-4BED-4FA0-8729-745A16C7D141}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="51"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{43BBDC83-8F84-461D-9456-EFBCC69042FC}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="51.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{015807B5-4DD5-402A-900C-1EF0CFAB5510}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="52"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{A23D0609-EC55-4C45-894A-931AECA6F179}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="52.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{E6397CB5-A2E0-4515-85DA-0D8E59BCEDCB}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="53"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{BF5356E9-6C44-4610-8381-1D350325C33F}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="53.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{31F8B082-FF80-42F7-89FC-A3CA37FA8B16}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="54"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{9C9DB088-4792-47C1-BA4F-F375AA22A8BD}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="54.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{7B75C6AB-A134-49EE-ACC7-28C2A9F87A9B}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="55"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{ED71DBBB-A92A-4992-AD6E-01164BAF9014}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="55.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{4FB3EC71-A8F6-4FDE-9F48-351C87392AA0}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="56"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{C31A666A-68C0-4CDD-A118-F443DE802B53}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="56.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{34FB0738-1637-4544-8F0C-4BBEC90E790A}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="57"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{E07074E6-16C7-471E-BC59-80E61D83F1D5}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="57.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{6716428C-580E-490B-958E-9DC8666FF0B3}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="58"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{EF2D521B-98E9-4525-A625-BB70B55813E1}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="58.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{316ACB78-167D-40AC-9532-4043774A7A5A}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="59"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{A3739834-CCE6-4DB2-BA56-50E589A80465}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="59.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{1EE47A32-1587-4053-935A-BE4DAD09B515}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="60"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{3ACED457-3CD9-479A-BC53-98B6F0990FFE}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="60.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{88AB4B2A-D31E-428F-93B6-E966F5A8CA63}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="61"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{797BB053-0A86-4FFD-BB6F-D59C906082C7}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="61.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{5FB53A5F-1E7B-4AF2-A0D7-8C221B43A01E}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="62"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{3D757DF5-BECC-4F6A-AC54-07287785B56E}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="62.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{2050135B-B388-4BEB-BE1B-5B33C0BE89FC}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="63"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{2B85D6BC-20C7-4DAA-85C8-06E6CB62E99A}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="63.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{85BBC382-09B2-4B8E-AE9A-716F5E57EFB6}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="64"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{379994BA-6478-465C-9154-8B80A4657811}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="64.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{015151C0-A5AE-4FEA-92E7-1DBB88793A59}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="65"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{E83B5126-685E-4683-A2F3-9481518F19BB}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="65.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{2FA232A5-E164-4605-93B5-72B0B64F833A}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="66"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{E51C8351-51DF-41A8-BDDE-22910D819874}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="66.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{8E5C5628-FF8E-4206-AA15-77EFA193E64C}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="67"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{2DA2EBDF-5E71-428A-8BD2-44984B7FB47E}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="67.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{162ED9C3-E1EF-4C7B-94D1-792FDEA5DB05}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="68"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{80FC8BC1-1762-491D-9257-AD7C3C225455}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="68.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{E2E009ED-61AD-4CE5-8CEF-DC712650B513}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="69"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{640F86E3-6467-4407-BC51-8419228C473E}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="69.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{D258A1B6-82EC-44BB-986B-3596AB7FF066}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="70"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{E222B75D-F86A-4633-8265-79099431F6AC}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="70.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{9F351FCA-6C39-43E5-9F20-5546D0AEA2AB}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="71"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{81B1F379-E361-40FC-AE90-625667BD38E3}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="71.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{E3544B02-DE85-40BB-B5CD-50FC5FC5E244}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="72"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{E50EB235-AAE4-4935-B09E-F8B5CCA5339E}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="72.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{6A31D3C3-CAD1-4B6C-8AA0-188E6128721E}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="73"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{E1F45EE1-DA63-461F-8B27-1F2BA2660335}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="73.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{7FBC2FCA-C07E-4F20-9547-7D04A3015130}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="74"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{4768D560-01D7-4758-A3BF-D8AD3C604BDF}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="74.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{3000C892-99E4-4EB6-B61D-FA3F45562F60}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="75"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{7A71794C-8DFF-46DB-9C75-0A44E96DB337}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="75.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{03770C6D-E2F1-4E7F-AD72-C26F97DDD176}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="76"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{80EBCD5C-6350-45EB-9A18-4B9AF5677BE6}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="76.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{68BC1FE4-8DE4-4543-942B-E4FB91BFAA1F}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="77"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{A226DE5A-4F58-46CD-BDE3-B5B0169DDF71}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="77.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{BA2B9087-CD9A-4DF1-A8B2-B07279669B22}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="78"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{303A721E-98E7-489C-8D39-78EBE7780FD9}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="78.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{CB5BFA8D-7008-433B-816B-E0744247E4DC}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="79"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{B9F4DD42-1AFF-4F43-B7A2-1B600FD9C659}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="79.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{9A886553-CFF6-4CCE-A278-EAF09D86D719}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="80"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{F7927BF9-F53C-45D7-96D0-D1AD662E80C0}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="80.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{7CB3B62A-2FF3-4A3B-AEC7-B9E5098D3112}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="81"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{85575716-37C0-4CB8-8541-4B1CCF3B365C}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="81.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{B8D38E8D-0CC5-4913-8621-BC272B980587}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="82"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{721B6272-80E2-4AA1-82E8-41074834ABC8}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="82.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{AFE2ED1E-2A74-4C4F-A2D4-77ECAA7414D9}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="83"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{0379D0E1-CFE6-49BF-B9EF-F8201D4C6ED7}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="83.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{6AB177F0-4FC7-45D5-9BA6-5F4D8400FDBA}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="84"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{3E4126AB-4164-4856-BCDB-D35C3FAA9BFF}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="84.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{A736928C-448A-4663-B818-B3E68DEF8241}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="85"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{19A7A455-27B2-46C1-8B2A-C855C232E625}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="85.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{2AC7B071-881E-466E-895D-C3B3615277AD}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="86"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{0A7BA87C-3DE7-4F5D-8EC3-AEB8004805BD}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="86.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{7C02862A-4721-4329-A35C-365F254B17FC}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="87"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{0B224926-B949-4EB9-A28A-DE8ECA761CC3}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="87.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{8886C907-A41E-4A32-9BBD-43A6A3C6BB6B}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="88"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{4E99998D-F3F6-46AB-9608-3CC8EE1B9451}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="88.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{C3D94647-1F93-48DC-9C0C-FAB1CFD5877E}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="89"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{0383B408-4743-4B43-A68D-82DD218C2AF0}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="89.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{1BDDEB6A-8D93-41C8-ADBA-83714967B0B3}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="90"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{BAAF4B0C-3A9D-47DA-8D27-682959C43C69}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="90.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{AD1CA884-653E-4DCB-AB47-543289724A16}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="91"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{8368B873-4A0F-409F-99F0-EC1A98BAE142}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="91.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{052675FE-F919-4C07-9442-85718FD9FD29}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="92"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{132A0713-8695-4EED-9BE2-46237546368D}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="92.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{4F6A9270-B43D-4485-90C6-D1BF2C9E320A}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="93"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{17471B80-418F-4740-9E1A-C5142C31DEEC}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="93.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{AB90951F-15E7-4421-8892-435262D27B87}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="94"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<Marker Name="Added by yeniao wwise tool based on bpm" ID="{2D4F7543-07D4-461C-883B-2010245EFFFC}">
+														<PropertyList>
+															<Property Name="Label" Type="string" Value="bpm"/>
+															<Property Name="Time" Type="Real64" Value="94.5"/>
+														</PropertyList>
+													</Marker>
+												</Local>
+											</Reference>
+										</ObjectList>
+									</ObjectLists>
+								</AudioFileSource>
+								<AudioFileSource Name="Break" ID="{E23658C6-7F0B-43C0-9331-3E33138632D6}">
+									<Language>SFX</Language>
+									<AudioFile>Break.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="760915427"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="Break" ID="{E23658C6-7F0B-43C0-9331-3E33138632D6}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>

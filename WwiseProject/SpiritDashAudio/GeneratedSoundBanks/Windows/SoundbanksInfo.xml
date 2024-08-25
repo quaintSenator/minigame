@@ -5,7 +5,7 @@
 		<SourceFilesRoot>../../.cache/Windows</SourceFilesRoot>
 		<SoundBanksRoot>.</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
-		<ExternalSourcesOutputRoot>E:/WorkRepository/UnityProject/SpiritDash/UnityProject/minigame/Assets/StreamingAssets/Audio/GeneratedSoundBanks/Windows</ExternalSourcesOutputRoot>
+		<ExternalSourcesOutputRoot>../../../../Assets/StreamingAssets/Audio/GeneratedSoundBanks/Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
 	<DialogueEvents/>
 	<SoundBanks>
@@ -235,6 +235,26 @@
 				<Event Id="3077303046" Name="StopLevel1" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 			</Events>
 		</SoundBank>
+		<SoundBank Id="2782713051" Type="User" Language="SFX" Hash="{62CC1327-CC55-767C-0FDE-DE1315153CD5}">
+			<ShortName>Leve2</ShortName>
+			<Path>Leve2.bnk</Path>
+			<Media>
+				<File Id="760915427" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Break.wav</ShortName>
+					<CachePath>SFX/Break_818F3B66.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="2859270420" Name="Pause_Level2" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="3659125942" Name="Play_Level2" DurationType="OneShot" DurationMin="182.30402" DurationMax="182.30402">
+					<MediaRefs>
+						<MediaRef Id="760915427"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3265051675" Name="Resume_Level2" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="3077303045" Name="StopLevel2" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+			</Events>
+		</SoundBank>
 		<SoundBank Id="4048373417" Type="User" Language="SFX" Hash="{30542D69-5EEF-4B10-A856-3F71554D0DAE}">
 			<ShortName>LevelTest</ShortName>
 			<Path>LevelTest.bnk</Path>
@@ -256,5 +276,5 @@
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{928ED6D4-435A-2096-0981-EDE013C1160E}</FileHash>
+	<FileHash>{4B55488A-9A5E-F0EF-E51A-067AF5449FE2}</FileHash>
 </SoundBanksInfo>

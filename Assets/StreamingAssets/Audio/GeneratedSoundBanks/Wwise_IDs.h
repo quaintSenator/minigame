@@ -16,14 +16,18 @@ namespace AK
         static const AkUniqueID ATTACK_TEST = 2389297652U;
         static const AkUniqueID JUMP_TEST = 1883663240U;
         static const AkUniqueID PAUSE_LEVEL1 = 2859270423U;
+        static const AkUniqueID PAUSE_LEVEL2 = 2859270420U;
         static const AkUniqueID PAUSE_LEVELTEST = 1903092602U;
         static const AkUniqueID PLAY_ACTION_JUMP = 1092387147U;
         static const AkUniqueID PLAY_LEVEL1 = 3659125941U;
+        static const AkUniqueID PLAY_LEVEL2 = 3659125942U;
         static const AkUniqueID PLAY_LEVELTEST = 265406176U;
         static const AkUniqueID RESUME_LEVEL1 = 3265051672U;
+        static const AkUniqueID RESUME_LEVEL2 = 3265051675U;
         static const AkUniqueID RESUME_LEVELTEST = 2369008827U;
         static const AkUniqueID STOP_LEVELTEST = 566154274U;
         static const AkUniqueID STOPLEVEL1 = 3077303046U;
+        static const AkUniqueID STOPLEVEL2 = 3077303045U;
         static const AkUniqueID TEST_DRUM_BPM100 = 1049805147U;
         static const AkUniqueID TEST_RIP = 2990968617U;
     } // namespace EVENTS
@@ -45,6 +49,7 @@ namespace AK
     namespace BANKS
     {
         static const AkUniqueID INIT = 1355168291U;
+        static const AkUniqueID LEVE2 = 2782713051U;
         static const AkUniqueID LEVEL1 = 2678230382U;
         static const AkUniqueID LEVELTEST = 4048373417U;
         static const AkUniqueID TESTFORYENIAO = 1528500215U;

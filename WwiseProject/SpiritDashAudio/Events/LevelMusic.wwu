@@ -115,6 +115,63 @@
 						</Event>
 					</ChildrenList>
 				</Folder>
+				<Folder Name="Level2" ID="{F3B23B97-DF34-4459-9E6C-A80009C4473D}" ShortID="755561510">
+					<ChildrenList>
+						<Event Name="Play_Level2" ID="{AE9890A1-7760-4DC7-8A08-BA2AE5D72009}">
+							<ChildrenList>
+								<Action Name="" ID="{9C30700F-7E53-4D7A-B843-FE1FD95902C5}" ShortID="506060482">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Level2Music" ID="{DDEFF4C9-D2EB-4605-B152-8495562A8FBD}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="StopLevel2" ID="{72A32A33-5B2A-43B2-886D-FAB72BF0A5AD}">
+							<ChildrenList>
+								<Action Name="" ID="{B7E19802-9F1B-4FAC-917B-B1D3C29694ED}" ShortID="170532409">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Level2Music" ID="{DDEFF4C9-D2EB-4605-B152-8495562A8FBD}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Pause_Level2" ID="{6FE71995-961E-4611-9DC3-BD8C0315911B}">
+							<ChildrenList>
+								<Action Name="" ID="{234BED29-AB84-42AA-B00D-A75FB5298CE5}" ShortID="320757104">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="7"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Level2Music" ID="{DDEFF4C9-D2EB-4605-B152-8495562A8FBD}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Resume_Level2" ID="{2EB5CE08-F4ED-4EB9-9129-09C4C8B05925}">
+							<ChildrenList>
+								<Action Name="" ID="{76D8AF98-9CE8-43FF-8472-C9AFF8382306}" ShortID="503552960">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="9"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Level2Music" ID="{DDEFF4C9-D2EB-4605-B152-8495562A8FBD}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

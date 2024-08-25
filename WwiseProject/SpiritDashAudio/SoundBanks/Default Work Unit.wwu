@@ -25,6 +25,13 @@
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>
 				</SoundBank>
+				<SoundBank Name="Leve2" ID="{B955368A-430F-4313-B44F-3D2591948F8A}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Level2" ID="{F3B23B97-DF34-4459-9E6C-A80009C4473D}" WorkUnitID="{D973EBAA-0186-44B8-94E1-98693FB906E2}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
 			</ChildrenList>
 		</WorkUnit>
 	</SoundBanks>
