@@ -74,6 +74,7 @@ Shader "Unlit/RotatingStarFallShader"
                 float2 uv = rotateUV(i.uv, angleToRotate);
                 float u = uv.x;
                 float v = uv.y;
+                
                 fixed4 transparentColor = (0, 0, 0, 0);
                 if(_StartTime < 0 || _Time.y > _StartTime + _OnceTime + _FadeTime)
                 {
@@ -89,11 +90,23 @@ Shader "Unlit/RotatingStarFallShader"
                 float r = 0.1 * R * (-costheta + 1);  
                 
                 float alpha = 2.2 * pow(currentTheta / 3.14159, 3)  / (currentAngle / 3.14159);
+                
                 //float tailSamplePercentX = (d - nearest) / (2 * r);
                 float tailSamplePercentX = (d - (R - r)) / (2 * r);
-                float tailSamplePercentY = ((currentTheta - 0.52) / 3.14159);
+                float tailSamplePercentY = ((currentTheta - 1) / 3.14159);
                 fixed4 tailColor = tex2D(_BallTex, float2(tailSamplePercentX, tailSamplePercentY));
                 tailColor.a = alpha;
+                if(tailColor.r > 0.95)
+                {
+                    tailColor.a = 0;
+                }
+                else
+                {
+                    tailColor.r = 1;
+                    tailColor.g = 1;
+                    tailColor.g = 1;
+                    
+                }
                 float alphaScale = 1;
                 if(_Time.y > _StartTime + _OnceTime && _Time.y < _StartTime + _OnceTime + _FadeTime)
                 {
@@ -112,7 +125,7 @@ Shader "Unlit/RotatingStarFallShader"
                 
                 if(distance(uv, ballHeart) < r)
                 {
-                    return ballColor;
+                    return tailColor;
                 }
                 if(nearest < r && currentTheta < currentAngle && v > 0.5)
                 {

@@ -23,6 +23,7 @@ public class InputManager : Singleton<InputManager>
     protected override void OnAwake()
     {
         InitInputActionDict();
+        Debug.Log($"pressKeyBoardEventDict count : {pressKeyBoardEventDict.Count}");
     }
 
     void Update()

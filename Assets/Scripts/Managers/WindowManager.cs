@@ -60,28 +60,30 @@ public class WindowManager : Singleton<WindowManager>
     {
         if (_pausable)//_pausable只用来提示当前场景是否允许显示暂停页面(level场景允许)，不要用于动态检测
         {
-            if (_uiStack.Count > 0 && _uiStack.Peek().gameObject.name.Contains("pause_page"))
+            if (_uiStack.Count > 0 && _uiStack.Peek().gameObject.name.Contains("PausePage"))
             {
                 //当已经打开了pause_page，那么调用resume_game,与回到游戏按钮等效
-                
+                ResumeGame();
             }
             else
             {
                 //创建暂停页面
                 InitWindow(WindowType.PausePage, _UIRoot);
                 //游戏暂停
+                EventManager.InvokeEvent(EventType.GamePauseEvent);
                 Time.timeScale = 0;
-                
             }
         }
     }
 
     public void ResumeGame()
     {
-        if (_uiStack.Count > 0 && _uiStack.Peek().gameObject.name.Contains("pause_page")) //如果目前暂停页面确实处于最上层
+        if (_uiStack.Count > 0 && _uiStack.Peek().gameObject.name.Contains("PausePage")) //如果目前暂停页面确实处于最上层
         {
             //恢复游戏
+            //EventManager.InvokeEvent(EventType.StartLevelEvent);
             Time.timeScale = 1;
+            MusicManager.Instance.ResumeLevelMusic();
             //关闭暂停页面
             var pausePage = _uiStack.Peek().gameObject;
             _uiStack.Pop();
@@ -90,8 +92,7 @@ public class WindowManager : Singleton<WindowManager>
     }
     private void OnEnable()
     {
-        EventManager.AddListener(EventType.Ask4PauseEvent, OnEscapeDown); 
-        
+        EventManager.AddListener(EventType.Ask4PauseEvent, OnEscapeDown);
     }
 
     private void OnDisable()
@@ -128,6 +129,10 @@ public class WindowManager : Singleton<WindowManager>
     public void CloseWindow()
     {
         _uiStack.Pop();
-        _uiStack.Peek().SetActive(true);
+        if (_uiStack.Count > 0)
+        {
+            _uiStack.Peek().SetActive(true);
+        }
+        
     }
 }
