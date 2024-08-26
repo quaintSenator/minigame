@@ -90,7 +90,7 @@ public class TilemapCameraController : MonoBehaviour
         //移动摄像机
         if(RhythmViewer.CurrentMusicIsPlaying)
         {
-            transform.position = new Vector3(RhythmViewer.CurrentMusicTime * GameConsts.SPEED + startPoint.position.x, 0.13f, -1.05f);
+            transform.position = new Vector3(RhythmViewer.CurrentMusicTime * GameConsts.SPEED + startPoint.position.x, -1.21f, -1.05f);
         }
         transform.Translate(moveDirection * Time.deltaTime * moveSpeed);
     }

@@ -218,6 +218,10 @@ public class EventManager : Singleton<EventManager>
 
     public static void InvokeEvent(EventType eventType, EventData eventData = null)
     {
+        if (eventType == EventType.StartLevelEvent)
+        {
+            Debug.Log("StartLevelEvent");
+        }
         Action<EventData> thisEvent = null;
         if (Instance.eventDictionary.TryGetValue(eventType, out thisEvent))
         {
