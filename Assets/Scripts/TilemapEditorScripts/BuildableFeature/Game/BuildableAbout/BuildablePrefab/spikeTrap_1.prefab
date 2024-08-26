@@ -70,8 +70,8 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.4}
-      - {x: -0.5, y: -0.5}
+    - - {x: 0.056453973, y: 0.3830638}
+      - {x: -0.37015584, y: -0.5}
       - {x: 0.5, y: -0.5}
 --- !u!1 &6749960980242080338
 GameObject:
