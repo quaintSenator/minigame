@@ -16,7 +16,7 @@ public class RotatingCassettes : MonoBehaviour
 {
     [SerializeField] private Transform[] cassettes;
     public Animator m_Animator;
-    [SerializeField] private int currentMiddleCassette;
+    [SerializeField] private static int currentMiddleCassette;
     [SerializeField] private Button _rightScrollBtn;
     [SerializeField] private Button _leftScrollBtn;
     [SerializeField] private Transform[] points;
@@ -49,6 +49,11 @@ public class RotatingCassettes : MonoBehaviour
         m_Animator = gameObject.GetComponent<Animator>();
         m_Animator.enabled = false;
         UpdateSelectingPoints(currentMiddleCassette);
+    }
+
+    public static int GetMidCassetteId()
+    {
+        return currentMiddleCassette;
     }
     private void lockScrollAndCassetteClick(int except)
     {
@@ -111,6 +116,7 @@ public class RotatingCassettes : MonoBehaviour
                 break;
             default: break;
         }
+        EventManager.InvokeEvent(EventType.SwitchLevelEvent, new SwitchLevelEventData(currentMiddleCassette));
         lockScrollAndCassetteClick(currentMiddleCassette);
         m_Animator.Play(anim2Play);
         UpdateSelectingPoints(currentMiddleCassette);
@@ -144,6 +150,7 @@ public class RotatingCassettes : MonoBehaviour
                 break;
             default: break;
         }
+        EventManager.InvokeEvent(EventType.SwitchLevelEvent, new SwitchLevelEventData(currentMiddleCassette));
         lockScrollAndCassetteClick(currentMiddleCassette);
         m_Animator.Play(anim2Play);
         UpdateSelectingPoints(currentMiddleCassette);
@@ -165,35 +172,42 @@ public class RotatingCassettes : MonoBehaviour
     }
     public void after1_2()
     {
+        Debug.LogWarning("after1_2");
         unlockScrollAndCassetteClick();
         cassettes[2].gameObject.SetActive(false);
+        EventManager.InvokeEvent(EventType.SwitchLevelAnimEndEvent, new SwitchLevelEventData(1));
     }
     public void after2_3()
     {
         unlockScrollAndCassetteClick();
         cassettes[3].gameObject.SetActive(false);
+        EventManager.InvokeEvent(EventType.SwitchLevelAnimEndEvent, new SwitchLevelEventData(2));
     }
     public void after3_1()
     {
         unlockScrollAndCassetteClick();
         cassettes[1].gameObject.SetActive(false);
+        EventManager.InvokeEvent(EventType.SwitchLevelAnimEndEvent, new SwitchLevelEventData(3));
     }
 
     public void after1_3()
     {
         unlockScrollAndCassetteClick();
         cassettes[3].gameObject.SetActive(false);
+        EventManager.InvokeEvent(EventType.SwitchLevelAnimEndEvent, new SwitchLevelEventData(1));
     }
 
     public void after2_1()
     {
         unlockScrollAndCassetteClick();
         cassettes[1].gameObject.SetActive(false);
+        EventManager.InvokeEvent(EventType.SwitchLevelAnimEndEvent, new SwitchLevelEventData(2));
     }
 
     public void after3_2()
     {
         unlockScrollAndCassetteClick();
         cassettes[2].gameObject.SetActive(false);
+        EventManager.InvokeEvent(EventType.SwitchLevelAnimEndEvent, new SwitchLevelEventData(3));
     }
 }

@@ -10,29 +10,27 @@ public class ProgressFrame : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] private Text mProgressText;
     [SerializeField] private Image mProgressContent;
-    [SerializeField] private int[] levelProgress;
     private float initialFrameWidth;
     private float initialFrameHeight;
+    [SerializeField] private float _frameContentWidth;
     
     void Start()
     {
-        //levelProgress = new int[4];
         mProgressText.text = GetCurrentLevelProgressText(1);
-        
-        initialFrameWidth = mProgressContent.rectTransform.sizeDelta.x;
-        initialFrameHeight = mProgressContent.rectTransform.sizeDelta.y;
-        
+        var m_rect = gameObject.GetComponent<RectTransform>();
+        initialFrameWidth = m_rect.sizeDelta.x;
+        initialFrameHeight = m_rect.sizeDelta.y;
         UpdateProgressContent(1);
     }
 
     private void OnEnable()
     {
-        EventManager.AddListener(EventType.SwitchLevelEvent, OnSwitchLevel);
+        EventManager.AddListener(EventType.SwitchLevelAnimEndEvent, OnSwitchedLevel);
     }
 
     private void OnDisable()
     {
-        EventManager.RemoveListener(EventType.SwitchLevelEvent, OnSwitchLevel);
+        EventManager.RemoveListener(EventType.SwitchLevelAnimEndEvent, OnSwitchedLevel);
     }
 
     private string GetCurrentLevelProgressText(int i)
@@ -42,24 +40,24 @@ public class ProgressFrame : MonoBehaviour
             return "#ERROR";
         }
         StringBuilder sb = new StringBuilder();
-        sb.Append(levelProgress[i].ToString());
+        sb.Append(Math.Round(UpdateProgressContent(i), 2).ToString());
         sb.Append("%");
         return sb.ToString();
     }
 
-    private void OnSwitchLevel(EventData ed)
+    private void OnSwitchedLevel(EventData ed)
     {
         var intoLevel = ((SwitchLevelEventData)ed).switchingIntoLevel;
         mProgressText.text = GetCurrentLevelProgressText(intoLevel);
         UpdateProgressContent(intoLevel);
     }
-
-    private void UpdateProgressContent(int i)
+    
+    private float UpdateProgressContent(int i)
     {
-        var bestFitWidth = initialFrameWidth * ProgressManager.Instance.GetLevelProgress(i) / 100;
-        mProgressContent.rectTransform.anchoredPosition = new Vector2(bestFitWidth / 2, 0);
-        mProgressContent.rectTransform.sizeDelta = new Vector2(bestFitWidth, initialFrameHeight);
+        var progress = ProgressManager.Instance.GetLevelProgress(i);
+        _frameContentWidth = initialFrameWidth * progress;
+        mProgressContent.rectTransform.anchoredPosition = new Vector2(_frameContentWidth / 2, 0);
+        mProgressContent.rectTransform.sizeDelta = new Vector2(_frameContentWidth, initialFrameHeight);
+        return progress * 100;
     }
-    
-    
 }

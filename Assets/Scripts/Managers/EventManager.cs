@@ -110,10 +110,12 @@ public enum EventType
     EndStoryEvent = 512,//剧情开始播放
     //StartLoadMapEvent=513,// 弃置：开始加载地图
     EndPlayerDeadStoryEvent = 514,
-
-
     #endregion
 
+    #region UI事件
+    
+    SwitchLevelAnimEndEvent = 1001,
+    #endregion
 }
 
 // 事件数据参数基类，具体使用时可以继承该类，添加自己需要的参数
