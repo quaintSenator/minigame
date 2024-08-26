@@ -786,6 +786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cc5dcc8225ff9c43964bcaa9968f8f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _UIRoot: {fileID: 0}
 --- !u!1 &1270504053
 GameObject:
   m_ObjectHideFlags: 0
@@ -1507,7 +1508,7 @@ Canvas:
   m_GameObject: {fileID: 1819439507}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 2062400694}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
