@@ -45,7 +45,7 @@ public class InputManager : Singleton<InputManager>
 
             foreach (var pressEvent in pressMouseEventDict)
             {
-                if (Input.GetMouseButtonDown((int)pressEvent.Key) && !WindowManager.Instance.isAtPausePage())
+                if (Input.GetMouseButtonDown((int)pressEvent.Key) && !WindowManager.Instance.isAtPausePage() && !WindowManager.Instance.isAtDeadPage())
                 {
                     foreach (var eventType in pressEvent.Value)
                     {

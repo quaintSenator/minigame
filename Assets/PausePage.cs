@@ -13,7 +13,7 @@ public class PausePage : Window
 
     public void OnClickRestartBtn()
     {
-        EventManager.InvokeEvent(EventType.GameRestartEvent);
+        EventManager.InvokeEvent(EventType.StartLevelEvent);
     }
     public void OnClickResumeBtn()
     {

@@ -17,8 +17,7 @@ public class FlowManager : Singleton<FlowManager>
     //单次进入Level的
     private bool ifStartLevelEvent = false;
 
-
-    //TODO:添加 
+    
     private int DeadCount = 0;
 
 
@@ -67,8 +66,7 @@ public class FlowManager : Singleton<FlowManager>
     {
         EventManager.AddListener(EventType.EndLoadBankEvent, OnEndLoadBankEvent);
         EventManager.AddListener(EventType.EndStoryEvent, OnEndStoryEvent);
-
-
+        
         EventManager.AddListener(EventType.PlayerDeadStoryEvent, OnPlayerDeadStoryEvent);
         EventManager.AddListener(EventType.EndPlayerDeadStoryEvent, OnEndPlayerDeadStoryEvent);
         EventManager.AddListener(EventType.EndRespawnEvent, OnEndRespawnEvent);
@@ -145,13 +143,24 @@ public class FlowManager : Singleton<FlowManager>
             //return;
         }
         lastLevelEventData = levelEventData;
-
+        
+        if (DeadCount == 0 || DeadCount >= 20)
+        {
+            DeadCount %= 20;
+            WindowManager.Instance.CallDeadPage(null);
+        }
+        else//直接复活
+        {
+            if(debugSkipPlayerDeadStoryEvent)
+            {
+                EventManager.InvokeEvent(EventType.StartPlayerDeadEvent);
+            }
+        }
         DeadCount++;
-        //TODO:对死亡弹窗的补充
-        if(debugSkipPlayerDeadStoryEvent)
+        /*if(debugSkipPlayerDeadStoryEvent)
         {
             EventManager.InvokeEvent(EventType.StartPlayerDeadEvent);
-        }
+        }*/
     }
 
     private void OnEndPlayerDeadStoryEvent(EventData eventData)

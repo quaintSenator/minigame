@@ -11,7 +11,8 @@ public enum WindowType
     LevelSelectPage,
     MainPage,
     ConfigPage,
-    PausePage
+    PausePage,
+    DeadPage
 }
 
 
@@ -42,6 +43,7 @@ public class WindowManager : Singleton<WindowManager>
         _type2ResourceFileNameDict[WindowType.MainPage] = "MainPage";
         _type2ResourceFileNameDict[WindowType.ConfigPage] = "ConfigPage";
         _type2ResourceFileNameDict[WindowType.PausePage] = "PausePage";
+        _type2ResourceFileNameDict[WindowType.DeadPage] = "DeadPage";
 
         var sceneName = SceneManager.GetActiveScene().name;
         _pausable = false;
@@ -51,11 +53,20 @@ public class WindowManager : Singleton<WindowManager>
         }
         else if (sceneName.Contains("GUI"))
         {
+            ClipUIRoot2Empty();
             //Init Main Page
             InitWindow(WindowType.MainPage, _UIRoot);
         }
     }
-
+    public void ClipUIRoot2Empty()//有时从游戏中返回GUIScene，可能有一些没有清理干净的页面
+    {
+        
+        foreach (Transform child in _UIRoot.transform)
+        {
+            Debug.LogWarning("Deleting..." + child.gameObject.name);
+            Destroy(child.gameObject);
+        }
+    }
     protected override bool NeedDestory()
     {
         return true;
@@ -86,11 +97,23 @@ public class WindowManager : Singleton<WindowManager>
         return _uiStack.Count > 0 && _uiStack.Peek().gameObject.name.Contains("PausePage");
     }
 
+    public bool isAtDeadPage()
+    {
+        return _uiStack.Count > 0 && _uiStack.Peek().gameObject.name.Contains("DeadPage");
+    }
+    public void CallDeadPage(EventData ed)
+    {
+        //
+        //创建死亡页面
+        Debug.Log("callDeadPage");
+        InitWindow(WindowType.DeadPage, _UIRoot);
+        //游戏暂停
+        //EventManager.InvokeEvent(EventType.GamePauseEvent);
+    }
     public void ResumeTimePause()
     {
         Time.timeScale = 1;
     }
-
     public void ResumeMusicStop()
     {
         MusicManager.Instance.ResumeLevelMusic();

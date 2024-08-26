@@ -98,8 +98,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     [Tooltip("下落死亡检测的Y轴坐标")]
     private Transform deadCheckYAxis = null;
-
-
+    
     //重生点位，影响复活点位和歌曲播放
     //*
     //TODO: 关于关卡的流程，需要考虑设置重生点位的重置
@@ -723,6 +722,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnDead(EventData data = null)
     {
+        
         SetIfCanMove(false);
         if (resetPointIndex >= resetpoints.Count || resetPointIndex < 0)
         {
@@ -1040,7 +1040,7 @@ public class PlayerController : MonoBehaviour
     private void OnStartPlayerDeadEvent(EventData eventData)
     {
         //TODO :死亡动画、音效相关补充,添加到OnDead也可
-
+        Debug.LogWarning("Player:OnStartPlayerDeadEvent");
         //如果没有额外的其他类的处理，这里就
         EventManager.InvokeEvent(EventType.EndPlayerDeadEvent);
 
