@@ -49,8 +49,8 @@ public class MapReader : Singleton<MapReader>
             //EventManager.InvokeEvent(EventType.EndLoadMapEvent, new EventData());
             
             //待删除，放到角色初始化中
-            EventManager.InvokeEvent(EventType.StartLevelEvent, new EventData());
-            EventManager.InvokeEvent(EventType.EndLoadMapEvent, new LoadMapDataEvent(selectedMapIndex));
+            //EventManager.InvokeEvent(EventType.StartLevelEvent, new EventData());
+            //EventManager.InvokeEvent(EventType.EndLoadMapEvent, new LoadMapDataEvent(selectedMapIndex));
             
             Debug.Log("Mapdata loaded!");
         }
