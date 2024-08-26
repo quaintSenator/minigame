@@ -14,12 +14,10 @@ public class ProgressFrame : MonoBehaviour
     private float initialFrameWidth;
     private float initialFrameHeight;
     
-    
     void Start()
     {
         //levelProgress = new int[4];
         mProgressText.text = GetCurrentLevelProgressText(1);
-        
         
         initialFrameWidth = mProgressContent.rectTransform.sizeDelta.x;
         initialFrameHeight = mProgressContent.rectTransform.sizeDelta.y;
@@ -58,9 +56,10 @@ public class ProgressFrame : MonoBehaviour
 
     private void UpdateProgressContent(int i)
     {
-        var bestFitWidth = initialFrameWidth * ProgressManager.Instance.GetCurrentProgress() / 100;
+        var bestFitWidth = initialFrameWidth * ProgressManager.Instance.GetLevelProgress(i) / 100;
         mProgressContent.rectTransform.anchoredPosition = new Vector2(bestFitWidth / 2, 0);
         mProgressContent.rectTransform.sizeDelta = new Vector2(bestFitWidth, initialFrameHeight);
     }
+    
     
 }

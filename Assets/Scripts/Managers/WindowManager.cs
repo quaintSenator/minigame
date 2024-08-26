@@ -30,9 +30,11 @@ public class WindowManager : Singleton<WindowManager>
         if (_UIRoot == null)
         {
             var canvasGO = GameObject.Find("Canvas");
-            if (_UIRoot == null)
+            if (canvasGO == null)
             {
-                
+                var pref = Resources.Load("Canvas");
+                var go = GameObject.Instantiate(pref, null) as GameObject;
+                _UIRoot = go.transform;
             }
             else
             {
@@ -63,7 +65,6 @@ public class WindowManager : Singleton<WindowManager>
     }
     public void ClipUIRoot2Empty()//有时从游戏中返回GUIScene，可能有一些没有清理干净的页面
     {
-        
         foreach (Transform child in _UIRoot.transform)
         {
             Debug.LogWarning("Deleting..." + child.gameObject.name);
