@@ -30,10 +30,15 @@ public class WindowManager : Singleton<WindowManager>
         if (_UIRoot == null)
         {
             var canvasGO = GameObject.Find("Canvas");
-            _UIRoot = canvasGO.transform;
-            if (_UIRoot == null)
+            if (canvasGO == null)
             {
-                Debug.LogWarning("UIROOT is null");
+                var pref = Resources.Load("Canvas");
+                var go = GameObject.Instantiate(pref, null) as GameObject;
+                _UIRoot = go.transform;
+            }
+            else
+            {
+                _UIRoot = canvasGO.transform;
             }
         }
         _uiStack = new Stack<GameObject>();
@@ -60,7 +65,6 @@ public class WindowManager : Singleton<WindowManager>
     }
     public void ClipUIRoot2Empty()//有时从游戏中返回GUIScene，可能有一些没有清理干净的页面
     {
-        
         foreach (Transform child in _UIRoot.transform)
         {
             Debug.LogWarning("Deleting..." + child.gameObject.name);
@@ -95,11 +99,19 @@ public class WindowManager : Singleton<WindowManager>
 
     public bool isAtPausePage()
     {
+        if (_UIRoot == null)
+        {
+            return true;
+        }
         return _uiStack.Count > 0 && _uiStack.Peek().gameObject.name.Contains("PausePage");
     }
 
     public bool isAtDeadPage()
     {
+        if (_UIRoot == null)
+        {
+            return true;
+        }
         return _uiStack.Count > 0 && _uiStack.Peek().gameObject.name.Contains("DeadPage");
     }
     public void CallDeadPage(EventData ed)
