@@ -241,6 +241,7 @@ public class LevelProgressData
         levelProgress = levelProgressData.levelProgress;
         isLevelComplete = levelProgressData.isLevelComplete;
         isLevelLocked = levelProgressData.isLevelLocked;
+        dialogsShows = levelProgressData.dialogsShows;
     }
 }
 
