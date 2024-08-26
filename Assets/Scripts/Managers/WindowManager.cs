@@ -66,6 +66,7 @@ public class WindowManager : Singleton<WindowManager>
             Debug.LogWarning("Deleting..." + child.gameObject.name);
             Destroy(child.gameObject);
         }
+        _uiStack.Clear();
     }
     protected override bool NeedDestory()
     {

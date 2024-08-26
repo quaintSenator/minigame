@@ -13,6 +13,8 @@ public class PausePage : Window
 
     public void OnClickRestartBtn()
     {
+        WindowManager.Instance.ResumeTimePause();
+        WindowManager.Instance.ClipUIRoot2Empty();
         EventManager.InvokeEvent(EventType.StartLevelEvent);
     }
     public void OnClickResumeBtn()
