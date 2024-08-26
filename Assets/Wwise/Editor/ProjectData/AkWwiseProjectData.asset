@@ -24,7 +24,7 @@ MonoBehaviour:
     ParentPath: Virtual Acoustics\Default Work Unit
     guid: 7bc1de8f6b8540429f8c40f1d6fd53c3
     GuidInternal: 
-    m_lastTime: -8584801197661728856
+    m_lastTime: -8584780883580398047
     List: []
   - PhysicalPath: Virtual Acoustics\Factory Acoustic Textures.wwu
     PathAndIcons:
@@ -37,7 +37,7 @@ MonoBehaviour:
     ParentPath: Virtual Acoustics\Factory Acoustic Textures
     guid: 6b663d46a83ca54f8b4a5fef12b883f6
     GuidInternal: 
-    m_lastTime: -8584801376523366424
+    m_lastTime: -8584780883580398047
     List:
     - name: Acoustic_Banner
       guid: f2532d2fccda8e408b8898b1b52a26d6
@@ -303,7 +303,7 @@ MonoBehaviour:
     ParentPath: Master-Mixer Hierarchy\Default Work Unit
     guid: 7351e85e1a7fef46bb21dfdce1ba22bc
     GuidInternal: 
-    m_lastTime: -8584801197662195754
+    m_lastTime: -8584780883589845373
     List:
     - name: Master Audio Bus
       guid: d8a41415a61d2a41a17e75ca0c2149f3
@@ -331,8 +331,22 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: c470e9f5dd22be41893f629373ebf5aa
     GuidInternal: 
-    m_lastTime: -8584770296359658982
+    m_lastTime: -8584769689899159107
     List:
+    - name: Leve2
+      guid: 8a3655b90f431343b44f3d2591948f8a
+      id: 2782713051
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: c470e9f5dd22be41893f629373ebf5aa
+      - ElementName: Leve2
+        ObjectType: 7
+        guid: 8a3655b90f431343b44f3d2591948f8a
+      Path: SoundBanks\Default Work Unit\Leve2
     - name: Level1
       guid: a1fbb42e38adbb4689e08f350057b946
       id: 2678230382
@@ -387,7 +401,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 35cab8445c131b4fa4e8550b2232a5b9
     GuidInternal: 
-    m_lastTime: -8584801197661538923
+    m_lastTime: -8584780883595493384
     List: []
   - PhysicalPath: Events\InteractionSFX.wwu
     PathAndIcons:
@@ -447,7 +461,7 @@ MonoBehaviour:
     ParentPath: Events\LevelMusic
     guid: aaeb73d98601b84494e198693fb906e2
     GuidInternal: 
-    m_lastTime: -8584784669784442730
+    m_lastTime: -8584769689906195621
     List:
     - name: Level1
       guid: a725d499ac3e7c418adebd43a09bf4b2
@@ -463,6 +477,23 @@ MonoBehaviour:
         ObjectType: 4
         guid: a725d499ac3e7c418adebd43a09bf4b2
       Path: Events\LevelMusic\Level1
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Level2
+      guid: 973bb2f334df59449e6ca80009c4473d
+      id: 2678230381
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: LevelMusic
+        ObjectType: 12
+        guid: aaeb73d98601b84494e198693fb906e2
+      - ElementName: Level2
+        ObjectType: 4
+        guid: 973bb2f334df59449e6ca80009c4473d
+      Path: Events\LevelMusic\Level2
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
@@ -500,6 +531,26 @@ MonoBehaviour:
         ObjectType: 3
         guid: 64780297fa2bc1449716e53b118314d0
       Path: Events\LevelMusic\Level1\Pause_Level1
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Pause_Level2
+      guid: 9519e76f1e9611469dc3bd8c0315911b
+      id: 2859270420
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: LevelMusic
+        ObjectType: 12
+        guid: aaeb73d98601b84494e198693fb906e2
+      - ElementName: Level2
+        ObjectType: 4
+        guid: 973bb2f334df59449e6ca80009c4473d
+      - ElementName: Pause_Level2
+        ObjectType: 3
+        guid: 9519e76f1e9611469dc3bd8c0315911b
+      Path: Events\LevelMusic\Level2\Pause_Level2
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
@@ -563,6 +614,26 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 94.81698
       minDuration: 94.81698
+    - name: Play_Level2
+      guid: a19098ae6077c74d8a08ba2ae5d72009
+      id: 3659125942
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: LevelMusic
+        ObjectType: 12
+        guid: aaeb73d98601b84494e198693fb906e2
+      - ElementName: Level2
+        ObjectType: 4
+        guid: 973bb2f334df59449e6ca80009c4473d
+      - ElementName: Play_Level2
+        ObjectType: 3
+        guid: a19098ae6077c74d8a08ba2ae5d72009
+      Path: Events\LevelMusic\Level2\Play_Level2
+      maxAttenuation: 0
+      maxDuration: 182.30402
+      minDuration: 182.30402
     - name: Play_LevelTest
       guid: 5fa0ea6e9a32b84d96ba1747ae08422d
       id: 265406176
@@ -600,6 +671,26 @@ MonoBehaviour:
         ObjectType: 3
         guid: fa6fe621dd5f624790253eb7ba52de1d
       Path: Events\LevelMusic\Level1\Resume_Level1
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Resume_Level2
+      guid: 08ceb52eedf4b94e912909c4c8b05925
+      id: 3265051675
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: LevelMusic
+        ObjectType: 12
+        guid: aaeb73d98601b84494e198693fb906e2
+      - ElementName: Level2
+        ObjectType: 4
+        guid: 973bb2f334df59449e6ca80009c4473d
+      - ElementName: Resume_Level2
+        ObjectType: 3
+        guid: 08ceb52eedf4b94e912909c4c8b05925
+      Path: Events\LevelMusic\Level2\Resume_Level2
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
@@ -663,6 +754,26 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - name: StopLevel2
+      guid: 332aa3722a5bb243886dfab72bf0a5ad
+      id: 3077303045
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: LevelMusic
+        ObjectType: 12
+        guid: aaeb73d98601b84494e198693fb906e2
+      - ElementName: Level2
+        ObjectType: 4
+        guid: 973bb2f334df59449e6ca80009c4473d
+      - ElementName: StopLevel2
+        ObjectType: 3
+        guid: 332aa3722a5bb243886dfab72bf0a5ad
+      Path: Events\LevelMusic\Level2\StopLevel2
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
   - PhysicalPath: Events\TestForYeniao.wwu
     PathAndIcons:
     - ElementName: Events
@@ -674,7 +785,7 @@ MonoBehaviour:
     ParentPath: Events\TestForYeniao
     guid: 984d1539623249458096db490ca566b5
     GuidInternal: 
-    m_lastTime: -8584798601725333939
+    m_lastTime: -8584780883595493384
     List:
     - name: Test_Drum_Bpm100
       guid: cfbce826e1812740969a965541bc57ae
@@ -722,7 +833,7 @@ MonoBehaviour:
     ParentPath: Game Parameters\Default Work Unit
     guid: 1f4695e4c7ee2643a45912df1e970c07
     GuidInternal: 
-    m_lastTime: -8584801197661859012
+    m_lastTime: -8584780883595493384
     List: []
   - PhysicalPath: Game Parameters\Factory Soundseed Air Game Syncs.wwu
     PathAndIcons:
@@ -735,7 +846,7 @@ MonoBehaviour:
     ParentPath: Game Parameters\Factory Soundseed Air Game Syncs
     guid: 5577163b42fb8b4598bf96f557afb3b9
     GuidInternal: 
-    m_lastTime: -8584801376059026656
+    m_lastTime: -8584780883595479036
     List:
     - name: SS_Air_Fear
       guid: 59062ef746431c4ea1b1dab46a05101e
@@ -889,7 +1000,7 @@ MonoBehaviour:
     ParentPath: States\Default Work Unit
     guid: e9ba440bc537f24f888c2eaa0240a105
     GuidInternal: 
-    m_lastTime: -8584801197662120680
+    m_lastTime: -8584780883580408520
     List: []
   SwitchWwu:
   - PhysicalPath: Switches\Default Work Unit.wwu
@@ -903,7 +1014,7 @@ MonoBehaviour:
     ParentPath: Switches\Default Work Unit
     guid: b4bcc398bb8d2d458c4b04244d09808d
     GuidInternal: 
-    m_lastTime: -8584801197661698838
+    m_lastTime: -8584780883580408520
     List: []
   TriggerWwu:
   - PhysicalPath: Triggers\Default Work Unit.wwu
@@ -917,7 +1028,7 @@ MonoBehaviour:
     ParentPath: Triggers\Default Work Unit
     guid: a401817d58ebda42929e7be78b9a728c
     GuidInternal: 
-    m_lastTime: -8584801197661604364
+    m_lastTime: -8584780883580408520
     List: []
   ExpandedFileSystemItemIds: 
   ExpandedWaapiItemIds: 
