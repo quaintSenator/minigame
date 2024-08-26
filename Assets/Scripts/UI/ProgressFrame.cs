@@ -58,7 +58,7 @@ public class ProgressFrame : MonoBehaviour
 
     private void UpdateProgressContent(int i)
     {
-        var bestFitWidth = initialFrameWidth * levelProgress[i] / 100;
+        var bestFitWidth = initialFrameWidth * ProgressManager.Instance.GetCurrentProgress() / 100;
         mProgressContent.rectTransform.anchoredPosition = new Vector2(bestFitWidth / 2, 0);
         mProgressContent.rectTransform.sizeDelta = new Vector2(bestFitWidth, initialFrameHeight);
     }

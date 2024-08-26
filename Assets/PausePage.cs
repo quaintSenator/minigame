@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class PausePage : Window
 {
-    // Start is called before the first frame update
+    //Start is called before the first frame update
     public new void Start()
     {
         base.Init();
+        
     }
 
     public void OnClickRestartBtn()

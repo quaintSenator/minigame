@@ -30,10 +30,13 @@ public class WindowManager : Singleton<WindowManager>
         if (_UIRoot == null)
         {
             var canvasGO = GameObject.Find("Canvas");
-            _UIRoot = canvasGO.transform;
             if (_UIRoot == null)
             {
-                Debug.LogWarning("UIROOT is null");
+                
+            }
+            else
+            {
+                _UIRoot = canvasGO.transform;
             }
         }
         _uiStack = new Stack<GameObject>();
@@ -95,11 +98,19 @@ public class WindowManager : Singleton<WindowManager>
 
     public bool isAtPausePage()
     {
+        if (_UIRoot == null)
+        {
+            return true;
+        }
         return _uiStack.Count > 0 && _uiStack.Peek().gameObject.name.Contains("PausePage");
     }
 
     public bool isAtDeadPage()
     {
+        if (_UIRoot == null)
+        {
+            return true;
+        }
         return _uiStack.Count > 0 && _uiStack.Peek().gameObject.name.Contains("DeadPage");
     }
     public void CallDeadPage(EventData ed)
