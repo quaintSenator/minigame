@@ -28,6 +28,12 @@ public class InputManager : Singleton<InputManager>
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            BossController.InitBoss();
+        }
+        
+        
         if (Input.anyKeyDown)
         {
             foreach (var pressEvent in pressKeyBoardEventDict) 
