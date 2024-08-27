@@ -235,7 +235,7 @@
 				<Event Id="3077303046" Name="StopLevel1" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 			</Events>
 		</SoundBank>
-		<SoundBank Id="2782713051" Type="User" Language="SFX" Hash="{62CC1327-CC55-767C-0FDE-DE1315153CD5}">
+		<SoundBank Id="2782713051" Type="User" Language="SFX" Hash="{276DF46D-0B29-EE74-68D2-6918190919BC}">
 			<ShortName>Leve2</ShortName>
 			<Path>Leve2.bnk</Path>
 			<Media>
@@ -246,7 +246,7 @@
 			</Media>
 			<Events>
 				<Event Id="2859270420" Name="Pause_Level2" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
-				<Event Id="3659125942" Name="Play_Level2" DurationType="OneShot" DurationMin="182.30402" DurationMax="182.30402">
+				<Event Id="3659125942" Name="Play_Level2" DurationType="OneShot" DurationMin="182.21053" DurationMax="182.21053">
 					<MediaRefs>
 						<MediaRef Id="760915427"/>
 					</MediaRefs>
@@ -276,5 +276,5 @@
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{4B55488A-9A5E-F0EF-E51A-067AF5449FE2}</FileHash>
+	<FileHash>{8E291B13-CA35-E96D-41B3-F90936FC771B}</FileHash>
 </SoundBanksInfo>
