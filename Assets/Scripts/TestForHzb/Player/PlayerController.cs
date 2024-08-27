@@ -477,7 +477,10 @@ public class PlayerController : MonoBehaviour
     //对外跳跃接口，设置跳跃参数，不传为默认参数
     public void TryJump(JumpType jumpType = JumpType.Default)
     {
-
+        if(!ifCanMove)
+        {
+            return;
+        }
 
         //CalSettings(null);
 
