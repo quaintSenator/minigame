@@ -8,6 +8,9 @@ public class ProgressManager : Singleton<ProgressManager>
     [SerializeField] List<int> levelMusicMaxTimeList;
     [SerializeField] private List<LevelProgressData> levelProgressDataList;
     private Dictionary<int, LevelProgressData> levelProgressDataDic;
+
+    //储存台词触发点个数，初始化ProgressData中的List用
+    static public int[] dialogNums = {4, 3, 1};
     
     private float currentGameTime = 0;
     private bool gameStart = false;
@@ -222,6 +225,14 @@ public class LevelProgressData
         this.levelProgress = levelProgress;
         this.isLevelComplete = isLevelComplete;
         this.isLevelLocked = isLevelLocked;
+
+        if(levelIndex > 0 && levelIndex < 3)
+        {
+            int length = ProgressManager.dialogNums[levelIndex];
+            for(int i = 0; i < length; i++){
+                dialogsShows.Add(false);
+            }
+        }
     }
     
     public LevelProgressData(LevelProgressData levelProgressData)
