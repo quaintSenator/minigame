@@ -2,12 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class TilemapCameraController : MonoBehaviour
+public class TilemapCameraController : Singleton<TilemapCameraController>
 {
     //虚拟摄像机
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
+
+    [SerializeField] private CinemachineVirtualCamera virtualCamera2;
+    
+    private CinemachineVirtualCamera currentVirtualCamera;
     //移动方向
     private Vector3 moveDirection;
     //移动速度
@@ -32,6 +37,9 @@ public class TilemapCameraController : MonoBehaviour
         startPoint = Utils.GetStartPointPostion();
         originalZoom = virtualCamera.m_Lens.OrthographicSize;
         originalHeight = transform.position.y;
+        currentVirtualCamera = virtualCamera;
+        virtualCamera.gameObject.SetActive(true);
+        virtualCamera2.gameObject.SetActive(false);
     }
 
     private void OnEnable()
@@ -53,17 +61,17 @@ public class TilemapCameraController : MonoBehaviour
         var middleScrollData = data as MiddleScrollEventData;
         zoomDirection = middleScrollData.scroll;
         //如果摄像机缩放到达最大最小值，停止缩放
-        if ((zoomDirection < 0 && virtualCamera.m_Lens.OrthographicSize >= maxZoom) || (zoomDirection > 0 && virtualCamera.m_Lens.OrthographicSize <= minZoom))
+        if ((zoomDirection < 0 && currentVirtualCamera.m_Lens.OrthographicSize >= maxZoom) || (zoomDirection > 0 && currentVirtualCamera.m_Lens.OrthographicSize <= minZoom))
         {
             zoomDirection = 0;
         }
         //缩放摄像机
-        virtualCamera.m_Lens.OrthographicSize -= zoomDirection * zoomSpeed;
+        currentVirtualCamera.m_Lens.OrthographicSize -= zoomDirection * zoomSpeed;
     }
 
     private void OnMiddleClick(EventData data)
     {
-        virtualCamera.m_Lens.OrthographicSize = originalZoom;
+        currentVirtualCamera.m_Lens.OrthographicSize = originalZoom;
         transform.position = new Vector3(transform.position.x, originalHeight, transform.position.z);
     }
 
@@ -73,7 +81,7 @@ public class TilemapCameraController : MonoBehaviour
         {
             var mouseMovementData = data as MouseMovementEventData;
             Vector2 mouseMovement = mouseMovementData.mouseMovement;
-            moveDirection = new Vector3(-mouseMovement.x * virtualCamera.m_Lens.OrthographicSize / originalZoom, -mouseMovement.y * virtualCamera.m_Lens.OrthographicSize / originalZoom, 0);
+            moveDirection = new Vector3(-mouseMovement.x * currentVirtualCamera.m_Lens.OrthographicSize / originalZoom, -mouseMovement.y * currentVirtualCamera.m_Lens.OrthographicSize / originalZoom, 0);
         }
         else
         {
@@ -82,6 +90,30 @@ public class TilemapCameraController : MonoBehaviour
         if(moveDirection.magnitude < 0.14f)
         {
             moveDirection = Vector3.zero;
+        }
+    }
+
+    [Button]
+    public void ChangeCamera(bool fromBoss = false)
+    {
+        if (fromBoss)
+        {
+            virtualCamera.gameObject.SetActive(false);
+            virtualCamera2.gameObject.SetActive(true);
+            currentVirtualCamera = virtualCamera2;
+            return;
+        }
+        if (currentVirtualCamera == virtualCamera)
+        {
+            virtualCamera.gameObject.SetActive(false);
+            virtualCamera2.gameObject.SetActive(true);
+            currentVirtualCamera = virtualCamera2;
+        }
+        else
+        {
+            virtualCamera.gameObject.SetActive(true);
+            virtualCamera2.gameObject.SetActive(false);
+            currentVirtualCamera = virtualCamera;
         }
     }
 

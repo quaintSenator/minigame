@@ -44,13 +44,26 @@ public class BuildableBase : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.TryGetComponent(out MusicCurrentPosLine line))
+        {
+            TilemapCameraController.Instance.ChangeCamera(true);
+            TriggerThisBuildable(null);
+        }
+
         if (other.TryGetComponent(out PlayerController player))
         {
             TriggerThisBuildable(player);
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other) {
+    private void OnTriggerExit2D(Collider2D other) 
+    {
+        
+        if (other.TryGetComponent(out MusicCurrentPosLine line))
+        {
+            TriggerOffThisBuildable(null);
+        }
+
         if(other.TryGetComponent(out PlayerController player))
         {
             TriggerOffThisBuildable(player);

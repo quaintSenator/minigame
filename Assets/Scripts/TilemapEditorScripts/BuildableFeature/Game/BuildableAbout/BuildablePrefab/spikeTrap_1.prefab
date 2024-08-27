@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6749960979790524737}
   - component: {fileID: 6749960979790524738}
   - component: {fileID: 2936076146390652828}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: spikeTrap_1
   m_TagString: Unsafe
   m_Icon: {fileID: 0}
@@ -82,7 +82,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6749960980242080339}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6749960980631734309}
   - component: {fileID: 6749960980631734310}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

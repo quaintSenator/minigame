@@ -17,7 +17,8 @@ public class BossController : MonoBehaviour
         if (centerPoint == null)
         {
             centerPoint = new GameObject("CenterPoint").transform;
-            centerPoint.position = new Vector3(0, Utils.GetStartPointPostion().position.y, 0);
+            centerPoint.transform.parent = Camera.main.transform;
+            centerPoint.transform.localPosition = Vector3.zero;
             centerPoint.gameObject.AddComponent<CenterPoint>();
         }
         GameObject bossPrefab = Resources.Load<GameObject>("Boss");
@@ -26,6 +27,7 @@ public class BossController : MonoBehaviour
             CurrentBoss = PoolManager.Instance.SpawnFromPool("Boss", bossPrefab, centerPoint)
                 .GetComponent<BossController>();
             CurrentBoss.transform.localPosition = new Vector3(CurrentBoss.spawnPosition.x, CurrentBoss.spawnPosition.y, 10);
+            CurrentBoss.ShowUp();
         }
     }
     

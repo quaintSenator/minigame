@@ -26,6 +26,10 @@ public class VisualizedRhythmNode : MonoBehaviour
 
     public void Play()
     {
+        if(m_mat == null)
+        {
+            return;
+        }
         m_mat.SetFloat("_CallTime", Time.time);
         m_mat.SetFloat("_HoldTime", Time.time + preset_HoldTime);
         m_mat.SetFloat("_BeatStartTime", Time.time + preset_beatStartTime);

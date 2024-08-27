@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5468705425027746319}
   - component: {fileID: 3206458425528056204}
   - component: {fileID: 6599627804677422394}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4984,7 +4984,7 @@ GameObject:
   - component: {fileID: 3932291072922003392}
   - component: {fileID: 3932291072922003397}
   - component: {fileID: 4285521779927389607}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -5077,7 +5077,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9196402769759503881}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}

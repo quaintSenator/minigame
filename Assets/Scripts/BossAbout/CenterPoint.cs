@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class CenterPoint : MonoBehaviour
 {
+    private Transform startPoint;
+    
+    private void Start()
+    {
+        startPoint = Utils.GetStartPointPostion();
+    }
+    
     void FixedUpdate()
     {
-        transform.position = new Vector3(Camera.main.transform.position.x, 0, 0);  
+        transform.position = new Vector3(transform.position.x, startPoint.position.y, 0);  
     }
 }

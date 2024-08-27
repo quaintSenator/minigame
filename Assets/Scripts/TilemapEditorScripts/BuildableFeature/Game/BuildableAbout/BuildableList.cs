@@ -23,6 +23,7 @@ public enum BuildableType
     spikeTrap_2 = 14,
     continuous_point = 15,
     resetPoint = 16,
+    bossShowUpTrigger = 17,
 }
 
 [CreateAssetMenu(fileName = "BuildableList", menuName = "Buildable/Create BuildableList")]

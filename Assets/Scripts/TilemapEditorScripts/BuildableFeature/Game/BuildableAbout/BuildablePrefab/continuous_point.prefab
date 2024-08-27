@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9187405846644159231}
   - component: {fileID: 6244682991369878955}
   - component: {fileID: 6961446974732681005}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: continuous_point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 1400365684993339001}
   - component: {fileID: 3199183654784319545}
   - component: {fileID: 5844791449062959827}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: change_dir_point
   m_TagString: Untagged
   m_Icon: {fileID: 0}

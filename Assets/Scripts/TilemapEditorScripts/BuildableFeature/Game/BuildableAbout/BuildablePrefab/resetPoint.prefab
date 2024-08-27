@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7253276884640213922}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3136717815747316675}
   - component: {fileID: 1366434576763789603}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ResetPoints_On
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8163170337579024031}
   - component: {fileID: 7144235392596392884}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ResetPoints_Off
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 7127583651772091600}
   - component: {fileID: 7127583651772091614}
   - component: {fileID: 3325127022917627956}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: resetPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
