@@ -5247,8 +5247,8 @@ MonoBehaviour:
   ifCanMove: 0
   respawnDuration: 0.5
   respawnMask: {fileID: 7599332147303344606}
-  respawnMaskNormalScale: {x: 0.1, y: 0.1, z: 0}
-  respawnMaskTargetScale: {x: 0.003, y: 0.003, z: 0}
+  respawnMaskNormalScale: {x: 0.03, y: 0.03, z: 0}
+  respawnMaskTargetScale: {x: 0.002, y: 0.002, z: 0}
 --- !u!114 &5259083086125303481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5654,7 +5654,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2073986743587958438}
   - component: {fileID: 3153166391016765087}
-  - component: {fileID: 65351965213715233}
   m_Layer: 0
   m_Name: RespawnMask
   m_TagString: Untagged
@@ -5671,7 +5670,7 @@ Transform:
   m_GameObject: {fileID: 7599332147303344606}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.03, y: 0.03, z: 1}
   m_Children: []
   m_Father: {fileID: 3931848181877765676}
   m_RootOrder: 5
@@ -5727,15 +5726,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &65351965213715233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7599332147303344606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52ef2320e9de4634d87b63de49078812, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
