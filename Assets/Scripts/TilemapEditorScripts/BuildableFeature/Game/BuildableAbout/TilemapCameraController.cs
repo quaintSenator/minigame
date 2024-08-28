@@ -47,6 +47,7 @@ public class TilemapCameraController : Singleton<TilemapCameraController>
         EventManager.AddListener(EventType.MouseMoveEvent, OnMouseMove);
         EventManager.AddListener(EventType.ResetCameraEvent, OnMiddleClick);
         EventManager.AddListener(EventType.MiddleScrollEvent, OnMiddleScroll);
+        EventManager.AddListener(EventType.StopOrPlayMusicEvent, OnStop);
     }
     
     private void OnDisable()
@@ -54,6 +55,14 @@ public class TilemapCameraController : Singleton<TilemapCameraController>
         EventManager.RemoveListener(EventType.MouseMoveEvent, OnMouseMove);
         EventManager.RemoveListener(EventType.ResetCameraEvent, OnMiddleClick);
         EventManager.RemoveListener(EventType.MiddleScrollEvent, OnMiddleScroll);
+        EventManager.RemoveListener(EventType.StopOrPlayMusicEvent, OnStop);
+    }
+
+    private void OnStop(EventData obj)
+    {
+        virtualCamera.gameObject.SetActive(false);
+        virtualCamera2.gameObject.SetActive(true);
+        currentVirtualCamera = virtualCamera2;
     }
 
     private void OnMiddleScroll(EventData data)

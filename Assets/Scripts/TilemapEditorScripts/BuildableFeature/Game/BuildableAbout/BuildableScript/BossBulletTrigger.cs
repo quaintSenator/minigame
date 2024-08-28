@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossShowUpTrigger : BuildableBase
+public class BossBulletTrigger : BuildableBase
 {
     protected override void TriggerThisBuildable(PlayerController player)
     {
-        BossController.InitBoss();
+        EventManager.InvokeEvent(EventType.ReleaseBulletEvent);
     }
 }

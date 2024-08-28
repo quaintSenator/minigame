@@ -92,7 +92,6 @@ public enum EventType
 
     #endregion
 
-
     #region 正式游戏关卡进程时间点事件
 
     StartLoadBankEvent = 500, // 开始加载音乐
@@ -110,6 +109,13 @@ public enum EventType
     EndStoryEvent = 512,//剧情开始播放
     //StartLoadMapEvent=513,// 弃置：开始加载地图
     EndPlayerDeadStoryEvent = 514,
+    #endregion
+
+    #region Boss事件
+
+    ReleaseLaserEvent = 600,
+    ReleaseBulletEvent = 601,
+
     #endregion
 
     #region UI事件

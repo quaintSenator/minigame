@@ -24,6 +24,8 @@ public enum BuildableType
     continuous_point = 15,
     resetPoint = 16,
     bossShowUpTrigger = 17,
+    bossLaserTrigger = 18,
+    bossBulletTrigger = 19,
 }
 
 [CreateAssetMenu(fileName = "BuildableList", menuName = "Buildable/Create BuildableList")]
