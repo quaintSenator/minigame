@@ -17,8 +17,12 @@ public class BossController : MonoBehaviour
     [BoxGroup("Boss激光相关设置")]
     [SerializeField] private GameObject laser;
     
+    [BoxGroup("Boss子弹相关设置")]
+    [SerializeField] private GameObject bullet;
+    
     public static BossController CurrentBoss;
     private static Transform centerPoint;
+    private static bool inDOMove = false;
 
     private void OnEnable()
     {
@@ -34,6 +38,11 @@ public class BossController : MonoBehaviour
         EventManager.RemoveListener(EventType.EndPlayerDeadEvent, DestroyBoss);
         EventManager.RemoveListener(EventType.ReleaseLaserEvent, ReleaseLaser);
         EventManager.RemoveListener(EventType.ReleaseBulletEvent, ReleaseBullet);
+    }
+
+    private void Update()
+    {
+        ResetPosition();
     }
 
     public static void InitBoss()
@@ -63,14 +72,19 @@ public class BossController : MonoBehaviour
     [Button]
     public void ShowUp()
     {
-        transform.DOLocalMove(showUpPosition, showUpTime);
+        inDOMove = true;
+        transform.DOLocalMove(showUpPosition, showUpTime).onComplete = () =>
+        {
+            inDOMove = false;
+        };
     }
 
     [Button]
     public void ReleaseLaser(EventData obj)
     {
-        var data = obj as ReleaseLaserEvent;
+        var data = obj as ReleaseLaserEventData;
         
+        inDOMove = true;
         float localTargetY = data.position.y - centerPoint.transform.position.y;
         transform.DOLocalMove(new Vector3(transform.localPosition.x, localTargetY, 0), 0.2f)
             .onComplete = () =>
@@ -82,13 +96,40 @@ public class BossController : MonoBehaviour
             .onComplete = () =>
         {
             laser.SetActive(false);
-            transform.DOLocalMove(showUpPosition, 0.2f);
+            inDOMove = false;
         };
     }
 
     [Button]
-    public void ReleaseBullet(EventData data)
+    public void ReleaseBullet(EventData obj)
     {
-        transform.DOShakeScale(1, 0.6f, 7, 90, true, ShakeRandomnessMode.Harmonic);
+        var data = obj as ReleaseBulletEventData;
+        
+        inDOMove = true;
+        float localTargetY = data.position.y - centerPoint.transform.position.y;
+        
+        Vector3 bulletPos = new Vector3(transform.position.x, data.position.y, 0);
+        Vector3 targetPos = new Vector3(data.position.x + data.meetTime * GameConsts.SPEED, data.position.y, 0);
+        float speed = (transform.position.x - (data.position.x + data.meetTime * GameConsts.SPEED)) / (data.meetTime - 0.2f);
+        
+        transform.DOLocalMove(new Vector3(transform.localPosition.x, localTargetY, 0), 0.2f)
+            .onComplete = () =>
+        {
+            transform.DOShakeScale(1, 0.6f, 7, 90, true, ShakeRandomnessMode.Harmonic);
+            BossBullet newBullet = PoolManager.Instance.SpawnFromPool("BossBullet", bullet).GetComponent<BossBullet>();
+            newBullet.Init(bulletPos, speed, 5f);
+            
+            inDOMove = false;
+        };
+        
+    }
+    
+    public void ResetPosition()
+    {
+        if (inDOMove == false && transform.localPosition != showUpPosition)
+        {
+            inDOMove = false;
+            transform.DOLocalMove(showUpPosition, 0.2f);
+        }
     }
 }
