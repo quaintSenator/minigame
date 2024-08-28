@@ -189,6 +189,7 @@ public class RhythmViewer : Singleton<RhythmViewer>
         {
             currentMusicIsPlaying = false;
             musicController.PauseLevelMusic();
+            musicCurrentPosLine.PausePosLine();
         }
         else if (noStart)
         {

@@ -13,6 +13,10 @@ public class BossController : MonoBehaviour
     [SerializeField] private Vector3 showUpPosition;
     [BoxGroup("Boss出场相关设置"), Tooltip("出生位置移动至目标位置的时间")]
     [SerializeField] private float showUpTime = 1.5f;
+    
+    [BoxGroup("Boss激光相关设置")]
+    [SerializeField] private GameObject laser;
+    
     public static BossController CurrentBoss;
     private static Transform centerPoint;
 
@@ -63,9 +67,19 @@ public class BossController : MonoBehaviour
     }
 
     [Button]
-    public void ReleaseLaser(EventData data)
+    public void ReleaseLaser(EventData obj)
     {
-        transform.DOShakePosition(1, 0.6f, 7, 90, false, true, ShakeRandomnessMode.Harmonic);
+        var data = obj as ReleaseLaserEvent;
+        
+        float localTargetY = data.position.y - centerPoint.transform.position.y;
+        transform.DOLocalMove(new Vector3(transform.localPosition.x, localTargetY, 0), 0.2f);
+        laser.SetActive(true);
+        laser.transform.DOShakeScale(data.continueTime, 0.1f, 2, 10, true, ShakeRandomnessMode.Harmonic)
+            .onComplete = () =>
+        {
+            laser.SetActive(false);
+            transform.DOLocalMove(showUpPosition, 0.2f);
+        };
     }
 
     [Button]

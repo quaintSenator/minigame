@@ -23,6 +23,17 @@ public class BossLaserTrigger : BuildableBase
     }
     protected override void TriggerThisBuildable(PlayerController player)
     {
-        EventManager.InvokeEvent(EventType.ReleaseLaserEvent);
+        EventManager.InvokeEvent(EventType.ReleaseLaserEvent, new ReleaseLaserEvent(transform.position, continueTime));
+    }
+}
+
+public class ReleaseLaserEvent : EventData
+{
+    public Vector3 position;
+    public float continueTime;
+    public ReleaseLaserEvent(Vector3 position, float continueTime)
+    {
+        this.position = position;
+        this.continueTime = continueTime;
     }
 }

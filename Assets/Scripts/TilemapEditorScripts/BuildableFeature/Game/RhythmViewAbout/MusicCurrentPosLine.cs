@@ -46,4 +46,14 @@ public class MusicCurrentPosLine : MonoBehaviour
         lineRenderer.enabled = false;
         boxCollider2D.enabled = false;
     }
+    
+    public void ResumePosLine()
+    {
+        boxCollider2D.enabled = true;
+    }
+    
+    public void PausePosLine()
+    {
+        boxCollider2D.enabled = false;
+    }
 }
