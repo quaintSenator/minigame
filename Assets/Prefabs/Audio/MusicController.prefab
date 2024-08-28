@@ -81,6 +81,24 @@ MonoBehaviour:
       valueGuidInternal: 
       WwiseObjectReference: {fileID: 11400000, guid: faa8d6785cc088d49855ff14d273737b, type: 2}
     bpm: 120
+  - bankName: Leve2
+    LevelMusicPlayEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 7224cf9e90165084092ae1b287959aaf, type: 2}
+    LevelMusicStopEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 31a59422fe0eca04d9cd43190cceec62, type: 2}
+    LevelMusicPauseEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: de1dc292640fc6343ae978464346ea4c, type: 2}
+    LevelMusicResumeEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 081ccdfca94db574f8ce4b1191557cf7, type: 2}
+    bpm: 120
   LevelIndex: 1
   CallbackType: 4
   IfPlayMusicWhenStart: 1
