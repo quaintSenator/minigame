@@ -43,7 +43,7 @@ public class EnemyController : BuildableBase {
     private void OnDead()
     {
         gameObject.tag = "Safe";
-        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        gameObject.GetComponent<Collider2D>().enabled = false;
         animator.enabled = false;
         _spriteRenderer.material = pixelCollapseMat;
         _spriteRenderer.material.EnableKeyword("_ALPHABLEND_ON");
