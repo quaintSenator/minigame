@@ -218,7 +218,7 @@ public class ProgressManager : Singleton<ProgressManager>
 public class LevelProgressData
 {
     public string levelName;
-    public int levelIndex;
+    public int levelIndex;  //使用说明：从0开始计数，通过LoadMapEndEvent由LoadMapDataEvent赋值来
     public float levelProgress;
     public bool isLevelComplete;
     public bool isLevelLocked;
@@ -233,7 +233,7 @@ public class LevelProgressData
         this.isLevelComplete = isLevelComplete;
         this.isLevelLocked = isLevelLocked;
 
-        if(levelIndex > 0 && levelIndex < 3)
+        if(levelIndex >= 0 && levelIndex < 3)
         {
             int length = ProgressManager.dialogNums[levelIndex];
             for(int i = 0; i < length; i++){

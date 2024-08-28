@@ -26,6 +26,7 @@ public enum BuildableType
     bossShowUpTrigger = 17,
     bossLaserTrigger = 18,
     bossBulletTrigger = 19,
+    storyTrigger = 20,
 }
 
 [CreateAssetMenu(fileName = "BuildableList", menuName = "Buildable/Create BuildableList")]
