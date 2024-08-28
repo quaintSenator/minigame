@@ -72,7 +72,11 @@ public class BossController : MonoBehaviour
         var data = obj as ReleaseLaserEvent;
         
         float localTargetY = data.position.y - centerPoint.transform.position.y;
-        transform.DOLocalMove(new Vector3(transform.localPosition.x, localTargetY, 0), 0.2f);
+        transform.DOLocalMove(new Vector3(transform.localPosition.x, localTargetY, 0), 0.2f)
+            .onComplete = () =>
+        {
+            transform.DOShakeScale(data.continueTime, 0.1f, 2, 10, true, ShakeRandomnessMode.Harmonic);
+        };
         laser.SetActive(true);
         laser.transform.DOShakeScale(data.continueTime, 0.1f, 2, 10, true, ShakeRandomnessMode.Harmonic)
             .onComplete = () =>

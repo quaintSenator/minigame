@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,16 @@ public class BossLaserTrigger : BuildableBase
     protected override void TriggerThisBuildable(PlayerController player)
     {
         EventManager.InvokeEvent(EventType.ReleaseLaserEvent, new ReleaseLaserEvent(transform.position, continueTime));
+    }
+
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().name == "TilemapEditorScene")
+        {
+            previewObj.localPosition = new Vector3((-0.5f + continueTime * GameConsts.SPEED)/2, 0, 0);
+            previewObj.localScale = new Vector3(continueTime * GameConsts.SPEED, 0.5f, 0);
+            previewObj.gameObject.SetActive(true);
+        }
     }
 }
 
