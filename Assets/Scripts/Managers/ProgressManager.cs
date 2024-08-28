@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class ProgressManager : Singleton<ProgressManager>
@@ -121,6 +122,12 @@ public class ProgressManager : Singleton<ProgressManager>
         levelProgressDataDic[levelIndex].dialogsShows[dialogIndex] = isShown;
         levelProgressDataList.Find(data => data.levelIndex == levelIndex).dialogsShows[dialogIndex] = isShown;
         SaveLevelData();       
+    }
+
+    [Button]
+    public void DeletePlayerPrefsData()
+    {
+        PlayerPrefs.DeleteKey(GameConsts.PROGRESS_DATA_LIST);
     }
 
     public void InitLevelData(int levelIndex)
