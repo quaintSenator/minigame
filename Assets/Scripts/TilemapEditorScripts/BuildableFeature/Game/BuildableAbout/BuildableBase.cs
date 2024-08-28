@@ -80,10 +80,10 @@ public class BuildableBase : MonoBehaviour
 
     }
 
-    protected virtual void AdjustBuildableScale()
-    {
-        transform.localScale = new Vector3(GameConsts.TILE_SIZE / 1f, GameConsts.TILE_SIZE / 1f, 1);
-    }
+    // protected virtual void AdjustBuildableScale()
+    // {
+    //     transform.localScale = new Vector3(GameConsts.TILE_SIZE / 1f, GameConsts.TILE_SIZE / 1f, 1);
+    // }
     
     //设置渲染层级
     private void SetSortingOrder(int sortingOrder = 0)
@@ -121,7 +121,7 @@ public class BuildableBase : MonoBehaviour
         buildable.index = index;
         buildable.rotation = rotation;
         buildable.SetPosition(position, sortingOrder);
-        buildable.AdjustBuildableScale();
+        //buildable.AdjustBuildableScale();
         buildable.RegisterEvent();
         buildable.Init();
         PutBuildableToGroup(buildable);
@@ -152,7 +152,7 @@ public class BuildableBase : MonoBehaviour
         buildable.type = type;
         buildable.index = -1;
         buildable.SetPosition(position, sortingOrder);
-        buildable.AdjustBuildableScale();
+        //buildable.AdjustBuildableScale();
         return buildable;
     }
     
