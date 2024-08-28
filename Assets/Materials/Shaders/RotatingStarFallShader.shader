@@ -100,13 +100,7 @@ Shader "Unlit/RotatingStarFallShader"
                 {
                     tailColor.a = 0;
                 }
-                else
-                {
-                    tailColor.r = 1;
-                    tailColor.g = 1;
-                    tailColor.g = 1;
-                    
-                }
+                
                 float alphaScale = 1;
                 if(_Time.y > _StartTime + _OnceTime && _Time.y < _StartTime + _OnceTime + _FadeTime)
                 {
