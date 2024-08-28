@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using Sirenix.Utilities.Editor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CassetteButton : MonoBehaviour
 {
     [SerializeField]private GameObject m_lockIcon;
+    [SerializeField] private Image m_img;
     [SerializeField] private int m_id;
     public void OnEnable()
     {
@@ -17,6 +19,10 @@ public class CassetteButton : MonoBehaviour
     private void Start()
     {
         var name = gameObject.name;
+        if (!m_img)
+        {
+            m_img = gameObject.GetComponent<Image>();
+        }
         m_id = Int32.Parse(gameObject.name.Substring(name.Length - 1, 1));
         m_lockIcon.SetActive(ProgressManager.Instance.GetLevelLocked(m_id));
     }
@@ -25,14 +31,15 @@ public class CassetteButton : MonoBehaviour
     {
         EventManager.RemoveListener(EventType.SwitchLevelEvent, OnSwitch);
     }
-
     public void OnSwitch(EventData eventData)
     {
         var clickedLevelNum = ((SwitchLevelEventData)eventData).switchingIntoLevel;
         if (gameObject.name.Contains(clickedLevelNum.ToString()))//我被点了吗
         {
             //后台的
-            m_lockIcon.SetActive(ProgressManager.Instance.GetLevelLocked(clickedLevelNum) && m_id == RotatingCassettes.GetMidCassetteId());
+            var meLocked = ProgressManager.Instance.GetLevelLocked(clickedLevelNum);
+            m_img.color = meLocked ? Color.gray : Color.white;
+            m_lockIcon.SetActive(meLocked && m_id == RotatingCassettes.GetMidCassetteId());
         }
     }
     public void OnCassetteClick()
@@ -55,6 +62,10 @@ public class CassetteButton : MonoBehaviour
         if (!ProgressManager.Instance.GetLevelLocked(clickedLevelNum))
         {
             EnterLevel(clickedLevelNum);
+        }
+        else
+        {
+            WindowManager.Instance.OpenTip(clickedLevelNum);
         }
     }
     
