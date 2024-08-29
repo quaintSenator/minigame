@@ -155,10 +155,21 @@ public class PlayerController : MonoBehaviour
     //飞行时竖直速度
     private float verticalVelocity = 0;
 
+    //眨眼回正动画触发相关
+    private bool isBlink = false;
+    private readonly float BLINK_TIME = 0.3f;
+    private float blinkTimer;
+    private readonly float BLINK_CHANGE_TIME = 0.1f;
+
+    //表情切换相关
+    private bool checkVelocity = false;
+    private readonly float SPRING_CHANGE_TIME = 0.1f;
+
     //一些初始化
     private Transform cubeSprites;
     private BoxCollider2D boxCollider;
     private Rigidbody2D rigidBody;
+    private PlayerSpriteController spriteController;
 
     //是否能进行移动,封装了Getter和Setter
     public bool ifCanMove = false;
@@ -200,7 +211,7 @@ public class PlayerController : MonoBehaviour
                 {
                     CalSettings();
                 }*/
-
+        spriteController = cubeSprites.Find("cube").GetComponent<PlayerSpriteController>();
 
 
         playerHeadingDir = Vector3.right;
@@ -278,6 +289,17 @@ public class PlayerController : MonoBehaviour
                 SetCorrect();
             }
 
+            if (isBlink)
+            {
+                blinkTimer += Time.deltaTime;
+            }
+            if (blinkTimer >= BLINK_TIME)
+            {
+                blinkTimer = 0;
+                isBlink = false;
+                DoBlink();
+            }
+
             if (isBufferActive)
             {
                 jumpTimer += Time.deltaTime;
@@ -288,7 +310,9 @@ public class PlayerController : MonoBehaviour
                 isBufferActive = false;
                 willJump = false;
             }
-
+            if(checkVelocity){
+                CheckSpringVelocity();
+            }
             Rotate();
         }
         /* if (Input.GetKey(KeyCode.Space) && rigidBody.velocity.y <= 0 && !isGrounded)
@@ -435,10 +459,12 @@ public class PlayerController : MonoBehaviour
                 if (jumpType == JumpType.Default || jumpType == JumpType.Fly)
                 {
                     rigidBody.velocity = Vector2.up * jumpSpeed;
+                    ChangeJumpExpression();
                 }
                 else if (jumpType == JumpType.Spring)
                 {
                     rigidBody.velocity = Vector2.up * jumpSpringSpeed;
+                    SetCheckVelocity(true);
                 }
 
                 //rigidBody.AddForce(Vector2.up * jumpForce);
@@ -621,6 +647,12 @@ public class PlayerController : MonoBehaviour
         isFlyFinished = value;
     }
 
+    public void SetCheckVelocity(bool value)
+    {
+        checkVelocity = value;
+        SetSprite(new ExpressionTypeData(ExpressionType.CLOSE, 20));
+    }
+
     public void OnHitGround(EventData data = null)
     {
         var d = (HitGroundEventData)data;
@@ -631,6 +663,8 @@ public class PlayerController : MonoBehaviour
         }
         isGrounded = true;
         isReturn = true;
+        isBlink = true;
+        SetSprite(new ExpressionTypeData(ExpressionType.IDLE, 99));
         selfAngle = cubeSprites.eulerAngles.z;
 
         if (willJump || isContinueJump)
@@ -645,6 +679,7 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = false;
         isReturn = false;
+        isBlink = false;
         returnTimer = 0;
         EventManager.InvokeEvent(EventType.PlayerJumpoffGroundEvent);
     }
@@ -701,6 +736,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void CheckSpringVelocity()
+    {
+        if(rigidBody.velocity.y < 1f)
+        {
+            checkVelocity = false;
+            SetSprite(new ExpressionTypeData(ExpressionType.AFRAID, 20));
+            CleverTimerManager.Ask4Timer(SPRING_CHANGE_TIME, SetSprite, new ExpressionTypeData(ExpressionType.IDLE, 20));
+        }
+    }
+
+    private void ChangeJumpExpression()
+    {
+        SetSprite(new ExpressionTypeData(ExpressionType.CLOSE, 10));
+    }
+
     private void SetCorrect()
     {
         Quaternion spriteRotate = cubeSprites.rotation;
@@ -721,6 +771,23 @@ public class PlayerController : MonoBehaviour
             spriteRotate = Quaternion.Euler(0, 0, 0);
         }
         cubeSprites.rotation = spriteRotate;
+        Debug.Log("setCorrect");
+    }
+
+    private void DoBlink()
+    {
+        CleverTimerManager.Ask4Timer(BLINK_CHANGE_TIME, SetSprite, new ExpressionTypeData(ExpressionType.CLOSE, 5));
+        CleverTimerManager.Ask4Timer(BLINK_CHANGE_TIME * 2, SetSpriteCorrect);
+    }
+
+    private void SetSprite(EventData data = null)
+    {
+        spriteController.SetSprite(data);
+    }
+
+    private void SetSpriteCorrect(EventData data = null)
+    {
+        spriteController.SetCorrect();
     }
 
     public void OnDead(EventData data = null)
@@ -874,6 +941,7 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = true;
         isReturn = false;
+        isBlink = false;
         returnTimer = 0;
         willJump = false;
         isContinueJump = false;

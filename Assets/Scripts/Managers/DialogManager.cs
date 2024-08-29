@@ -64,8 +64,9 @@ public class DialogManager : Singleton<DialogManager>
 
         nowDialogList = GetDialogList();
         dialogController.ShowDialogs(nowDialogList);
-        ProgressManager.Instance.UpdateDialogShow(levelIndex, listIndex, true);
         listIndex++;
+        ProgressManager.Instance.UpdateDialogShow(levelIndex, listIndex, true);     //这里使用+1后的listIndex，原因为开场剧情占用index = 0
+
     }
 
 }
