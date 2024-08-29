@@ -59,6 +59,9 @@ public class StoryController : MonoBehaviour
     private PlayerStoryController playerStoryController;
     private EnemyStoryController enemyStoryController;
     private ParticleSystem frictionEffect;
+	
+	
+	private bool ifEnd=false;
 
     private void Awake()
     {
@@ -132,6 +135,10 @@ public class StoryController : MonoBehaviour
 
     private void DoStep(EventData data = null)
     {
+		if(ifEnd)
+		{
+			return;
+		}
         if(data == null){
             return;
         }
@@ -226,6 +233,7 @@ public class StoryController : MonoBehaviour
 
     private void EndStory()
     {
+		ifEnd=true;
         playerController.enabled = true;
         playerStoryController.enabled = false;
         EventManager.InvokeEvent(EventType.EndStoryEvent);
