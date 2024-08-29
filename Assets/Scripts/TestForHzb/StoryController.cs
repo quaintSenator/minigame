@@ -45,21 +45,7 @@ public class StoryController : MonoBehaviour
     private float triangleRunSpeed = 6.0f;
 
     [SerializeField]
-    private float defaultWaitTime = 1.0f;
-    [SerializeField]
-    private float cubeIdleTime = 2.0f;
-    [SerializeField]
-    private float triangleAppearTime = 0.5f;
-    [SerializeField]
-    private float cubeStopIdleTime = 0.5f;
-    [SerializeField]
-    private float cubeStartRunTime = 0.5f;
-    [SerializeField]
-    private float triangleStartRunTime = 0.5f;
-    [SerializeField]
-    private float endTime = 5.0f;
-    [SerializeField]
-    private float bgDialog1EndTime = 5.0f;
+    private List<float> stepTimes;
 
     [SerializeField]
     private bool autoPlay = true;
@@ -153,6 +139,7 @@ public class StoryController : MonoBehaviour
         Debug.Log("step"+storyData.stepIndex);
         int index = storyData.stepIndex;
         functions[index].Invoke();
+        CleverTimerManager.Ask4Timer(stepTimes[index], NextStep, mustDoStepData);
     }
 
     private void Step_1()
@@ -160,7 +147,6 @@ public class StoryController : MonoBehaviour
         playerStoryController.SetSpeed(cubeIdleSpeed);
 
         canNextStep = false;
-        CleverTimerManager.Ask4Timer(cubeIdleTime, NextStep, mustDoStepData);
     }
 
     private void Step_2()
@@ -168,7 +154,6 @@ public class StoryController : MonoBehaviour
         enemyStoryController.StartBgSpeak();
 
         canNextStep = false;
-        CleverTimerManager.Ask4Timer(triangleAppearTime, NextStep, mustDoStepData);
     }
 
     private void Step_3()
@@ -178,7 +163,6 @@ public class StoryController : MonoBehaviour
         enemyStoryController.EndBgSpeak();
 
         canNextStep = false;
-        CleverTimerManager.Ask4Timer(cubeStopIdleTime, NextStep, mustDoStepData);
     }
 
     private void Step_4()
@@ -187,7 +171,7 @@ public class StoryController : MonoBehaviour
 
         if(autoPlay){
             canNextStep = false;
-            CleverTimerManager.Ask4Timer(defaultWaitTime, NextStep, mustDoStepData);
+            //CleverTimerManager.Ask4Timer(defaultWaitTime, NextStep, mustDoStepData);
         }
         else{
             canNextStep = true;
@@ -201,7 +185,7 @@ public class StoryController : MonoBehaviour
 
         if(autoPlay){
             canNextStep = false;
-            CleverTimerManager.Ask4Timer(defaultWaitTime, NextStep, mustDoStepData);
+           // CleverTimerManager.Ask4Timer(defaultWaitTime, NextStep, mustDoStepData);
         }
         else{
             canNextStep = true;
@@ -213,7 +197,7 @@ public class StoryController : MonoBehaviour
         enemyStoryController.StartSpeak();
 
         canNextStep = false;
-        CleverTimerManager.Ask4Timer(cubeStartRunTime, NextStep, mustDoStepData);
+        //CleverTimerManager.Ask4Timer(cubeStartRunTime, NextStep, mustDoStepData);
     }
 
     private void Step_7()
@@ -222,7 +206,7 @@ public class StoryController : MonoBehaviour
         frictionEffect.Play();
 
         canNextStep = false;
-        CleverTimerManager.Ask4Timer(triangleStartRunTime, NextStep, mustDoStepData);
+        //CleverTimerManager.Ask4Timer(triangleStartRunTime, NextStep, mustDoStepData);
         
     }
 
@@ -232,7 +216,7 @@ public class StoryController : MonoBehaviour
         enemyStoryController.SetSpeed(triangleRunSpeed);
 
         canNextStep = false;
-        CleverTimerManager.Ask4Timer(endTime, NextStep, mustDoStepData);
+        //CleverTimerManager.Ask4Timer(endTime, NextStep, mustDoStepData);
     }
 
     private void Step_9()
