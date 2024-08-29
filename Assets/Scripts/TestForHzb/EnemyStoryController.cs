@@ -14,11 +14,15 @@ public class EnemyStoryController : MonoBehaviour
     [SerializeField]
     private float yOffset = 0;
 
+    [SerializeField]
+    private float dialogDuringTime = 0;
+
     private float speed = 4.0f;
     private int dialogIndex = 0;
 
     private Transform bubble;
     private Text dialog;
+    private Text bgDialog;
 
     private string[] dialogs = {
         "站住！",
@@ -31,6 +35,7 @@ public class EnemyStoryController : MonoBehaviour
     {
         bubble = transform.Find("Canvas").Find("bubble");
         dialog = bubble.Find("Text").GetComponent<Text>();
+        bgDialog = transform.Find("Canvas").Find("bg_dialog").GetComponent<Text>();
     }
 
     // Start is called before the first frame update
@@ -66,11 +71,22 @@ public class EnemyStoryController : MonoBehaviour
     {
         ResetTextPos();
         dialog.text = GetDialog();
+        CleverTimerManager.Ask4Timer(dialogDuringTime, EndSpeak);
     }
 
-    public void EndSpeak()
+    public void StartBgSpeak()
+    {
+        bgDialog.text = GetDialog();
+    }
+
+    private void EndSpeak(EventData data = null)
     {
         bubble.gameObject.SetActive(false);
+    }
+
+    public void EndBgSpeak()
+    {
+        bgDialog.text = "";
     }
 
     public void SetSpeed(float speed)

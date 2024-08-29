@@ -34,7 +34,6 @@ public class StoryController : MonoBehaviour
     Step 6：三角形说第三句话
     Step 7：方块开始跑,三角形说第四句话
     Step 8：三角形开始追
-    Step 9：浮现第一句背景台词
     */
     private List<Action> functions = new List<Action>();
 
@@ -69,9 +68,6 @@ public class StoryController : MonoBehaviour
     private bool canNextStep = false;
 
     private readonly StoryEventData mustDoStepData = new StoryEventData(-1, true);
-    private string[] dialogs = {
-        "我是一个正方形, 我生活的世界叫作平面国。",
-    };
 
     private PlayerController playerController;
     private PlayerStoryController playerStoryController;
@@ -142,7 +138,6 @@ public class StoryController : MonoBehaviour
 
         if(storyData.doNextStep || canNextStep)
         {
-            Debug.Log("NextStep"+stepIndex);
             EventManager.InvokeEvent(storySteps[stepIndex], new StoryEventData(stepIndex));
             stepIndex++;
 
@@ -157,7 +152,6 @@ public class StoryController : MonoBehaviour
         StoryEventData storyData = (StoryEventData)data;
         Debug.Log("step"+storyData.stepIndex);
         int index = storyData.stepIndex;
-        Debug.Log("function num" + functions.Count);
         functions[index].Invoke();
     }
 
@@ -171,7 +165,7 @@ public class StoryController : MonoBehaviour
 
     private void Step_2()
     {
-        enemyStoryController.SetSpeed(triangleRunSpeed);
+        enemyStoryController.StartBgSpeak();
 
         canNextStep = false;
         CleverTimerManager.Ask4Timer(triangleAppearTime, NextStep, mustDoStepData);
@@ -179,8 +173,9 @@ public class StoryController : MonoBehaviour
 
     private void Step_3()
     {
-        enemyStoryController.SetSpeed(0);
-        enemyStoryController.StartSpeak();
+        playerStoryController.SetSpeed(0);
+        enemyStoryController.SetSpeed(triangleRunSpeed);    
+        enemyStoryController.EndBgSpeak();
 
         canNextStep = false;
         CleverTimerManager.Ask4Timer(cubeStopIdleTime, NextStep, mustDoStepData);
@@ -188,7 +183,7 @@ public class StoryController : MonoBehaviour
 
     private void Step_4()
     {
-        playerStoryController.SetSpeed(0);
+        enemyStoryController.SetSpeed(0);
 
         if(autoPlay){
             canNextStep = false;
@@ -202,7 +197,6 @@ public class StoryController : MonoBehaviour
 
     private void Step_5()
     {
-        enemyStoryController.EndSpeak();
         enemyStoryController.StartSpeak();
 
         if(autoPlay){
@@ -216,7 +210,6 @@ public class StoryController : MonoBehaviour
 
     private void Step_6()
     {
-        enemyStoryController.EndSpeak();
         enemyStoryController.StartSpeak();
 
         canNextStep = false;
@@ -226,8 +219,7 @@ public class StoryController : MonoBehaviour
     private void Step_7()
     {
         playerStoryController.SetSpeed(cubeRunSpeed);
-        enemyStoryController.EndSpeak();
-        enemyStoryController.StartSpeak();
+        frictionEffect.Play();
 
         canNextStep = false;
         CleverTimerManager.Ask4Timer(triangleStartRunTime, NextStep, mustDoStepData);
@@ -236,8 +228,8 @@ public class StoryController : MonoBehaviour
 
     private void Step_8()
     {
+        enemyStoryController.StartSpeak();
         enemyStoryController.SetSpeed(triangleRunSpeed);
-        enemyStoryController.EndSpeak();
 
         canNextStep = false;
         CleverTimerManager.Ask4Timer(endTime, NextStep, mustDoStepData);
@@ -252,7 +244,6 @@ public class StoryController : MonoBehaviour
     {
         playerController.enabled = true;
         playerStoryController.enabled = false;
-        frictionEffect.Play();
         EventManager.InvokeEvent(EventType.EndStoryEvent);
 
     }
