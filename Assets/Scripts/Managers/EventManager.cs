@@ -64,6 +64,7 @@ public enum EventType
     CompleteSelectZoneEvent = 225, // 完成选择区域
     CompleteContinuousPointEvent = 226, // 完成连续点
     RotateBuildableEvent = 227, // 旋转建筑
+    ChangeEnemyTypeEvent = 228, // 改变敌人类型
 
     #endregion
 
