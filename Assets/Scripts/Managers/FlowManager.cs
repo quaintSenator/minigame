@@ -45,6 +45,11 @@ public class FlowManager : Singleton<FlowManager>
     {
         InitFlowSetting();
     }
+	
+	protected override bool NeedDestory()
+    {
+        return true;
+    }
 
     private void Start()
     {

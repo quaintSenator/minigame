@@ -215,6 +215,11 @@ public class MusicManager : Singleton<MusicManager>
 
         
     }
+	
+	protected override bool NeedDestory()
+    {
+        return true;
+    }
 
     private void RegisterEvents()
     {
