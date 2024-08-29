@@ -30,6 +30,7 @@ public class BossController : MonoBehaviour
         EventManager.AddListener(EventType.EndPlayerDeadEvent, DestroyBoss);
         EventManager.AddListener(EventType.ReleaseLaserEvent, ReleaseLaser);
         EventManager.AddListener(EventType.ReleaseBulletEvent, ReleaseBullet);
+        EventManager.AddListener(EventType.ReleaseEnemyEvent, ReleaseEnemy);
     }
     
     private void OnDisable()
@@ -38,11 +39,14 @@ public class BossController : MonoBehaviour
         EventManager.RemoveListener(EventType.EndPlayerDeadEvent, DestroyBoss);
         EventManager.RemoveListener(EventType.ReleaseLaserEvent, ReleaseLaser);
         EventManager.RemoveListener(EventType.ReleaseBulletEvent, ReleaseBullet);
+        EventManager.RemoveListener(EventType.ReleaseEnemyEvent, ReleaseEnemy);
+
     }
 
     private void Update()
     {
         ResetPosition();
+        ResetScale();
     }
 
     public static void InitBoss()
@@ -124,12 +128,31 @@ public class BossController : MonoBehaviour
         
     }
     
+    
+    private void ReleaseEnemy(EventData obj)
+    {
+        inDOMove = true;
+        transform.DOShakeScale(0.3f, 0.3f, 4, 40, true, ShakeRandomnessMode.Harmonic).onComplete = () =>
+        {
+            inDOMove = false;
+        };
+    }
+    
     public void ResetPosition()
     {
         if (inDOMove == false && transform.localPosition != showUpPosition)
         {
             inDOMove = false;
             transform.DOLocalMove(showUpPosition, 0.2f);
+        }
+    }
+    
+    public void ResetScale()
+    {
+        if (inDOMove == false && transform.localScale != Vector3.one)
+        {
+            inDOMove = false;
+            transform.DOScale(Vector3.one, 0.2f);
         }
     }
 }

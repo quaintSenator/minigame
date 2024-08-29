@@ -109,6 +109,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         EventManager.AddListener(EventType.CompleteSelectZoneEvent, OnCompleteSelectZone); //完成选中框
         EventManager.AddListener(EventType.CompleteContinuousPointEvent, OnCompleteContinuousPoint); //完成连续点
         EventManager.AddListener(EventType.RotateBuildableEvent, OnRotateBuildable); //旋转物体
+        EventManager.AddListener(EventType.ChangeEnemyTypeEvent, OnChangeEnemyType); //改变敌人类型
     }
 
     private void OnDisable()
@@ -134,6 +135,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
         EventManager.RemoveListener(EventType.CompleteSelectZoneEvent, OnCompleteSelectZone); //完成选中框
         EventManager.RemoveListener(EventType.CompleteContinuousPointEvent, OnCompleteContinuousPoint); //完成连续点
         EventManager.RemoveListener(EventType.RotateBuildableEvent, OnRotateBuildable); //旋转物体
+        EventManager.RemoveListener(EventType.ChangeEnemyTypeEvent, OnChangeEnemyType); //改变敌人类型
         
         AutoSaveMap();
     }
@@ -164,6 +166,34 @@ public class BuildableCreator : Singleton<BuildableCreator>
             {
                 previewObj.transform.rotation = Quaternion.Euler(0, 0, currentRotate * -90);
             }
+        }
+    }
+
+    private void OnChangeEnemyType(EventData obj)
+    {
+        if (selectedType == BuildableType.enemy)
+        {
+            SetSelectedObject(BuildableType.enemy_with_trigger_1);
+        }
+        else if (selectedType == BuildableType.enemy_2)
+        {
+            SetSelectedObject(BuildableType.enemy_with_trigger_2);
+        }
+        else if (selectedType == BuildableType.enemy_3)
+        {
+            SetSelectedObject(BuildableType.enemy_with_trigger_3);
+        }
+        else if (selectedType == BuildableType.enemy_with_trigger_1)
+        {
+            SetSelectedObject(BuildableType.enemy);
+        }
+        else if (selectedType == BuildableType.enemy_with_trigger_2)
+        {
+            SetSelectedObject(BuildableType.enemy_2);
+        }
+        else if (selectedType == BuildableType.enemy_with_trigger_3)
+        {
+            SetSelectedObject(BuildableType.enemy_3);
         }
     }
 

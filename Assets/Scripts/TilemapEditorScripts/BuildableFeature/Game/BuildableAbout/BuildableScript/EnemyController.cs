@@ -7,14 +7,14 @@ using UnityEngine;
 public class EnemyController : BuildableBase {
 
     public int maxHealth;
-    private int health;
-    [SerializeField] private Material pixelCollapseMat;
-    [SerializeField] private Material spriteDefaultMat;
-    [SerializeField] private float delayTime = 0;
-    private SpriteRenderer _spriteRenderer;
-    [SerializeField] private GameObject spriteGo;
-    private ParticleSystem _particleSystem;
-    private Animator animator;
+    protected int health;
+    [SerializeField] protected Material pixelCollapseMat;
+    [SerializeField] protected Material spriteDefaultMat;
+    [SerializeField] protected float delayTime = 0;
+    protected SpriteRenderer _spriteRenderer;
+    [SerializeField] protected GameObject spriteGo;
+    protected ParticleSystem _particleSystem;
+    protected Animator animator;
 
     private void Awake()
     {
@@ -63,7 +63,7 @@ public class EnemyController : BuildableBase {
         });
     }
 
-    private void CanPlay(EventData data)
+    protected void CanPlay(EventData data)
     {
         animator.SetTrigger("CanPlay");
     }

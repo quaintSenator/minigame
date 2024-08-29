@@ -116,6 +116,7 @@ public enum EventType
 
     ReleaseLaserEvent = 600,
     ReleaseBulletEvent = 601,
+    ReleaseEnemyEvent = 602,
 
     #endregion
 
