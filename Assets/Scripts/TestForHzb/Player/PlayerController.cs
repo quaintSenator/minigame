@@ -727,6 +727,8 @@ public class PlayerController : MonoBehaviour
     {
         
         SetIfCanMove(false);
+        rigidBody.velocity = GameConsts.START_VELOCITY;
+
         if (resetPointIndex >= resetpoints.Count || resetPointIndex < 0)
         {
             Debug.LogError("PlayerController::OnDead :get wrong resetPointIndex in PlayerController::ResetAudio");
