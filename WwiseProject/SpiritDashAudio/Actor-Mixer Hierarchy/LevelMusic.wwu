@@ -4652,6 +4652,13 @@
 				<Folder Name="Level2" ID="{F19DFC93-FBFB-4B25-B67E-09B7E7D6332B}" ShortID="791759128">
 					<ChildrenList>
 						<Sound Name="Level2Music" ID="{DDEFF4C9-D2EB-4605-B152-8495562A8FBD}" ShortID="987512216">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-10</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C3C1FC5D-DE89-438F-A755-093D0E1407FE}"/>

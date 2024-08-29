@@ -5,5 +5,5 @@ Event	ID	Name			Wwise Object Path	Notes
 	3659125942	Play_Level2			\LevelMusic\Level2\Play_Level2	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	760915427	Level2Music	E:\WorkRepository\UnityProject\SpiritDash\UnityProject\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\Break_818F3B66.wem		\Actor-Mixer Hierarchy\LevelMusic\Level2\Level2Music		34998852
+	760915427	Level2Music	D:\PersonalData\UnityProject\SpiritDash\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\Break_818F3B66.wem		\Actor-Mixer Hierarchy\LevelMusic\Level2\Level2Music		34998804
 

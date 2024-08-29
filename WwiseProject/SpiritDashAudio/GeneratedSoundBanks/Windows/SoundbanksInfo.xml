@@ -5,7 +5,7 @@
 		<SourceFilesRoot>../../.cache/Windows</SourceFilesRoot>
 		<SoundBanksRoot>.</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
-		<ExternalSourcesOutputRoot>../../../../Assets/StreamingAssets/Audio/GeneratedSoundBanks/Windows</ExternalSourcesOutputRoot>
+		<ExternalSourcesOutputRoot>E:/WorkRepository/UnityProject/SpiritDash/UnityProject/minigame/Assets/StreamingAssets/Audio/GeneratedSoundBanks/Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
 	<DialogueEvents/>
 	<SoundBanks>
@@ -235,7 +235,7 @@
 				<Event Id="3077303046" Name="StopLevel1" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 			</Events>
 		</SoundBank>
-		<SoundBank Id="2782713051" Type="User" Language="SFX" Hash="{276DF46D-0B29-EE74-68D2-6918190919BC}">
+		<SoundBank Id="2782713051" Type="User" Language="SFX" Hash="{A2B99B27-F577-C899-EC62-76FD858FCB55}">
 			<ShortName>Leve2</ShortName>
 			<Path>Leve2.bnk</Path>
 			<Media>
@@ -276,5 +276,5 @@
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{8E291B13-CA35-E96D-41B3-F90936FC771B}</FileHash>
+	<FileHash>{AB831376-5AA3-F9EF-A245-2A8984920BE1}</FileHash>
 </SoundBanksInfo>
