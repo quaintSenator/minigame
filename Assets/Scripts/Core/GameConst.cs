@@ -17,4 +17,5 @@ public class GameConsts
     public static readonly float TILE_SIZE = 1f;
     public static readonly float TILE_CHECK_GAP = 0.1f;
     public static readonly float SPEED = 8.0f;
+    public static readonly List<int> MUSIC_TIME_LIST = new List<int>() {180, 180, 180};
 }

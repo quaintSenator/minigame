@@ -7,7 +7,7 @@ using UnityEngine;
 public class ProgressManager : Singleton<ProgressManager>
 {
     [SerializeField] List<int> levelMusicMaxTimeList;
-    [SerializeField] private List<LevelProgressData> levelProgressDataList;
+    private List<LevelProgressData> levelProgressDataList;
     private Dictionary<int, LevelProgressData> levelProgressDataDic;
 
     //储存台词触发点个数，初始化ProgressData中的List用
@@ -19,6 +19,7 @@ public class ProgressManager : Singleton<ProgressManager>
 
     protected override void OnAwake()
     {
+        levelMusicMaxTimeList = GameConsts.MUSIC_TIME_LIST;
         string data = PlayerPrefs.GetString(GameConsts.PROGRESS_DATA_LIST);
         if (data != "")
         {
