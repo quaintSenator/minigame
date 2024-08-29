@@ -7,6 +7,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
     private static bool applicationIsQuitting = false;
 
     private static Transform managerObject = null;
+    private static Transform managerObjectNeedDestroy = null;
 
     public static T Instance
     {
@@ -33,13 +34,11 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
         if (instance == null)
         {
             instance = this as T;
-            DontDestroyOnLoad(gameObject);
         }
         else if (instance != this as T)
         {
             Destroy(gameObject);
         }
-        else { DontDestroyOnLoad(gameObject); }
         
         if (managerObject == null)
         {
@@ -47,18 +46,34 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
             if (obj == null)
             {
                 managerObject = new GameObject("Managers").transform;
-                if (!NeedDestory())
-                {
-                    DontDestroyOnLoad(managerObject);
-                }
+                DontDestroyOnLoad(managerObject);
             }
             else
             {
                 managerObject = obj.transform;
-            
             }
         }
-        transform.parent = managerObject.transform;
+        if (managerObjectNeedDestroy == null)
+        {
+            GameObject obj = GameObject.Find("ManagersNeedDestroy");
+            if (obj == null)
+            {
+                managerObjectNeedDestroy = new GameObject("ManagersNeedDestroy").transform;
+            }
+            else
+            {
+                managerObjectNeedDestroy = obj.transform;
+            }
+        }
+
+        if (NeedDestory())
+        {
+            transform.parent = managerObjectNeedDestroy.transform;
+        }
+        else
+        {
+            transform.parent = managerObject.transform;
+        }
         OnAwake();
     }
     
