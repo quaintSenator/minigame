@@ -26,16 +26,6 @@ public class DialogManager : Singleton<DialogManager>
 
     private List<string> nowDialogList ;
 
-    [SerializeField]
-    private float duringTime = 2f;
-    [SerializeField]
-    private float fadeTime = 1f;
-    [SerializeField]
-    private float waitTime = 0.7f;
-
-    private float fadeTimer = 0f;
-    private bool fading = false;
-
     protected override void OnAwake()
     {
         dialogs.Add(0, levelDialogs1);
@@ -52,18 +42,6 @@ public class DialogManager : Singleton<DialogManager>
         EventManager.RemoveListener(EventType.EndLoadMapEvent, OnLoadMap);
     }
 
-    private void Update()
-    {
-        if(fading){
-            fadeTimer += Time.deltaTime;
-        }
-        if(fadeTimer > fadeTime){
-            fading = false;
-            fadeTimer = 0;
-            CleverTimerManager.Ask4Timer(waitTime, ShowOneDialog);
-        }
-    }
-
     private void OnLoadMap(EventData data)
     {
         var mapData = data as LoadMapDataEvent;
@@ -76,11 +54,6 @@ public class DialogManager : Singleton<DialogManager>
         return dialogs[levelIndex][listIndex];
     }
 
-    private string GetDialog()
-    {
-        return nowDialogList[dialogIndex];
-    }
-
     public void TryShowDialogs()
     {
         bool hasShown = ProgressManager.Instance.GetDialogShow(levelIndex, listIndex);
@@ -89,36 +62,10 @@ public class DialogManager : Singleton<DialogManager>
             return;
         }
 
-        ShowDialogs();
-    }
-
-    private void ShowDialogs()
-    {
-        dialogIndex = 0;
-
         nowDialogList = GetDialogList();
+        dialogController.ShowDialogs(nowDialogList);
+        ProgressManager.Instance.UpdateDialogShow(levelIndex, listIndex, true);
         listIndex++;
-
-        ShowOneDialog();
-    }
-
-    private void ShowOneDialog(EventData data = null)
-    {
-        if(dialogIndex >= nowDialogList.Count)
-            return;
-            
-        //do something
-        string dialog = GetDialog();
-        dialogIndex++;
-        dialogController.ShowDialog(dialog);
-
-
-        CleverTimerManager.Ask4Timer(duringTime, StartFade);
-    }
-
-    private void StartFade(EventData data = null)
-    {
-        fading = true;
     }
 
 }
