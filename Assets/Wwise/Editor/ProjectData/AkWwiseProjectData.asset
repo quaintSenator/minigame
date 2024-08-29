@@ -331,7 +331,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: c470e9f5dd22be41893f629373ebf5aa
     GuidInternal: 
-    m_lastTime: -8584769689899159107
+    m_lastTime: -8584769686843342366
     List:
     - name: Leve2
       guid: 8a3655b90f431343b44f3d2591948f8a
@@ -461,7 +461,7 @@ MonoBehaviour:
     ParentPath: Events\LevelMusic
     guid: aaeb73d98601b84494e198693fb906e2
     GuidInternal: 
-    m_lastTime: -8584769689906195621
+    m_lastTime: -8584769686853169209
     List:
     - name: Level1
       guid: a725d499ac3e7c418adebd43a09bf4b2
@@ -632,8 +632,8 @@ MonoBehaviour:
         guid: a19098ae6077c74d8a08ba2ae5d72009
       Path: Events\LevelMusic\Level2\Play_Level2
       maxAttenuation: 0
-      maxDuration: 182.30402
-      minDuration: 182.30402
+      maxDuration: 182.21053
+      minDuration: 182.21053
     - name: Play_LevelTest
       guid: 5fa0ea6e9a32b84d96ba1747ae08422d
       id: 265406176
