@@ -5,19 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class StoryEventData : EventData
-{
-    public int stepIndex = 0;
-    public bool doNextStep = false;
-    public StoryEventData(int index, bool isDo = false)
-    {
-        stepIndex = index;
-        doNextStep = isDo;
-    }
-}
 
-
-public class StoryController : MonoBehaviour
+public class StoryControllerLevel2 : MonoBehaviour
 {
 
     public Transform player;
@@ -26,23 +15,24 @@ public class StoryController : MonoBehaviour
     [SerializeField]
     private List<EventType> storySteps = new List<EventType>();
     /*
-    Step 1：方块走路
-    Step 2：三角形快速出现
-    Step 3：三角形停下 说第一句话
-    Step 4：方块停下
-    Step 5：三角形说第二句话
-    Step 6：三角形说第三句话
-    Step 7：方块开始跑,三角形说第四句话
-    Step 8：三角形开始追
+    Step 1：方块停在原地
+    Step 2：方块说第一句话
+    Step 3：说第二句话
+    Step 4：旁白第一句
+    Step 5：方块第三句
+    Step 6：旁白第二句
+    Step 7：旁白第三句
+    Step 8：方块第四句
+    Step 9：旁白第四句
+    Step 10：正方形运动
+    Step 11：旁白第五句
     */
     private List<Action> functions = new List<Action>();
 
     [SerializeField]
-    private float cubeIdleSpeed = 4.0f;
+    private float cubeIdleSpeed = 0;
     [SerializeField]
     private float cubeRunSpeed = 8.0f;
-    [SerializeField]
-    private float triangleRunSpeed = 6.0f;
 
     [SerializeField]
     private List<float> stepTimes;
@@ -57,7 +47,7 @@ public class StoryController : MonoBehaviour
 
     private PlayerController playerController;
     private PlayerStoryController playerStoryController;
-    private EnemyStoryController enemyStoryController;
+    private EnemyStoryController2 enemyStoryController;
     private ParticleSystem frictionEffect;
 	
 	
@@ -67,7 +57,7 @@ public class StoryController : MonoBehaviour
     {
         playerController = player.GetComponent<PlayerController>();
         playerStoryController = player.GetComponent<PlayerStoryController>();
-        enemyStoryController = enemy.GetComponent<EnemyStoryController>();
+        enemyStoryController = enemy.GetComponent<EnemyStoryController2>();
         frictionEffect = player.Find("FrictionEffect").GetComponent<ParticleSystem>();
 
         functions.Add(Step_1);
@@ -79,6 +69,9 @@ public class StoryController : MonoBehaviour
         functions.Add(Step_7);
         functions.Add(Step_8);
         functions.Add(Step_9);
+        functions.Add(Step_10);
+        functions.Add(Step_11);
+        functions.Add(Step_12);
     }
 
     private void Start()
@@ -146,101 +139,91 @@ public class StoryController : MonoBehaviour
         Debug.Log("step"+storyData.stepIndex);
         int index = storyData.stepIndex;
         functions[index].Invoke();
+        canNextStep = false;
         if(index < functions.Count - 1){
             CleverTimerManager.Ask4Timer(stepTimes[index], NextStep, mustDoStepData);
         }
-
     }
 
     private void Step_1()
     {
         playerStoryController.SetSpeed(cubeIdleSpeed);
 
-        canNextStep = false;
     }
 
     private void Step_2()
     {
-        enemyStoryController.StartBgSpeak();
+        enemyStoryController.StartSpeak();
 
-        canNextStep = false;
     }
 
     private void Step_3()
     {
-        playerStoryController.SetSpeed(0);
-        enemyStoryController.SetSpeed(triangleRunSpeed);    
-        enemyStoryController.EndBgSpeak();
-
-        canNextStep = false;
+        enemyStoryController.StartSpeak();
     }
 
     private void Step_4()
     {
-        enemyStoryController.SetSpeed(0);
-
-        if(autoPlay){
-            canNextStep = false;
-            //CleverTimerManager.Ask4Timer(defaultWaitTime, NextStep, mustDoStepData);
-        }
-        else{
-            canNextStep = true;
-        }
+        enemyStoryController.StartBgSpeak();
 
     }
 
     private void Step_5()
     {
+        enemyStoryController.EndBgSpeak();
         enemyStoryController.StartSpeak();
-
-        if(autoPlay){
-            canNextStep = false;
-           // CleverTimerManager.Ask4Timer(defaultWaitTime, NextStep, mustDoStepData);
-        }
-        else{
-            canNextStep = true;
-        }
     }
 
     private void Step_6()
     {
-        enemyStoryController.StartSpeak();
+        enemyStoryController.StartBgSpeak();
 
-        canNextStep = false;
-        //CleverTimerManager.Ask4Timer(cubeStartRunTime, NextStep, mustDoStepData);
     }
 
     private void Step_7()
     {
-        playerStoryController.SetSpeed(cubeRunSpeed);
-        frictionEffect.Play();
-
-        canNextStep = false;
-        //CleverTimerManager.Ask4Timer(triangleStartRunTime, NextStep, mustDoStepData);
+        enemyStoryController.EndBgSpeak();
+        enemyStoryController.StartBgSpeak();
         
     }
 
     private void Step_8()
     {
         enemyStoryController.StartSpeak();
-        enemyStoryController.SetSpeed(triangleRunSpeed);
-
-        canNextStep = false;
-        //CleverTimerManager.Ask4Timer(endTime, NextStep, mustDoStepData);
     }
 
     private void Step_9()
     {
+        enemyStoryController.StartBgSpeak();
+    }
+
+    private void Step_10()
+    {
+        enemyStoryController.EndBgSpeak();
+        playerStoryController.SetSpeed(cubeRunSpeed);
+        frictionEffect.Play();
+    }
+
+    private void Step_11()
+    {
+        enemyStoryController.StartBgSpeak();
+    }
+
+    private void Step_12()
+    {
+        enemyStoryController.EndBgSpeak();
         EndStory();
     }
 
     private void EndStory()
     {
+        Debug.Log("EndStory");
 		ifEnd = true;
         playerController.enabled = true;
         enemyStoryController.gameObject.SetActive(false);
         playerStoryController.enabled = false;
         EventManager.InvokeEvent(EventType.EndStoryEvent);
+
     }
 
 }

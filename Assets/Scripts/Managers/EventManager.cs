@@ -91,6 +91,19 @@ public enum EventType
     //StoryStartEvent = 421,    //废弃，用流程控制的
     //StoryEndEvent = 422,
 
+    StartStory2Step1 = 421,
+    StartStory2Step2 = 422,
+    StartStory2Step3 = 423,
+    StartStory2Step4 = 424,
+    StartStory2Step5 = 425,
+    StartStory2Step6 = 426,
+    StartStory2Step7 = 427,
+    StartStory2Step8 = 428,
+    StartStory2Step9 = 429,
+    StartStory2Step10 = 430,
+    StartStory2Step11= 431,
+    StartStory2Step12 = 432,
+
     #endregion
 
     #region 正式游戏关卡进程时间点事件
