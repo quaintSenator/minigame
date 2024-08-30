@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="150">
 	<SoundBanks>
-		<SoundBank Id="2678230382" Type="User" Language="SFX" Hash="{89383146-D958-35F2-2296-E38023672E24}">
+		<SoundBank Id="2678230382" Type="User" Language="SFX" Hash="{72135646-CC0E-02E7-0D2A-AAD6599141F7}">
 			<ShortName>Level1</ShortName>
 			<Path>Level1.bnk</Path>
 			<Media>
@@ -9,36 +9,9 @@
 					<ShortName>Dangerous_Love_120bpm.wav</ShortName>
 					<CachePath>SFX/Dangerous_Love_120bpm_29F081A2.wem</CachePath>
 				</File>
-				<File Id="346481716" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>jump_1.wav</ShortName>
-					<CachePath>SFX/jump_1_818F3B66.wem</CachePath>
-				</File>
-				<File Id="398724365" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>Attack_1.wav</ShortName>
-					<CachePath>SFX/Attack_1_818F3B66.wem</CachePath>
-				</File>
-				<File Id="957206305" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>Du.wav</ShortName>
-					<CachePath>SFX/Du_818F3B66.wem</CachePath>
-				</File>
 			</Media>
 			<Events>
-				<Event Id="2389297652" Name="Attack_Test" DurationType="OneShot" DurationMin="1.6979592" DurationMax="1.6979592">
-					<MediaRefs>
-						<MediaRef Id="398724365"/>
-					</MediaRefs>
-				</Event>
-				<Event Id="1883663240" Name="Jump_Test" DurationType="OneShot" DurationMin="1.1493877" DurationMax="1.1493877">
-					<MediaRefs>
-						<MediaRef Id="346481716"/>
-					</MediaRefs>
-				</Event>
 				<Event Id="2859270423" Name="Pause_Level1" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
-				<Event Id="1092387147" Name="Play_Action_Jump" DurationType="OneShot" DurationMin="0.078708336" DurationMax="0.078708336">
-					<MediaRefs>
-						<MediaRef Id="957206305"/>
-					</MediaRefs>
-				</Event>
 				<Event Id="3659125941" Name="Play_Level1" DurationType="OneShot" DurationMin="94.81698" DurationMax="94.81698">
 					<MediaRefs>
 						<MediaRef Id="187318935"/>
@@ -49,5 +22,5 @@
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{B1C1F751-221E-F440-9B01-9F99AE885083}</FileHash>
+	<FileHash>{67EF6090-5CA9-CF59-F088-97CA7A53DE3F}</FileHash>
 </SoundBanksInfo>

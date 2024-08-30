@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b67d56301ae048488b1446769bd94dd, type: 3}
   m_Name: 57BB9C7E-45E3-46B6-A6A9-9B9CA673CA0B
   m_EditorClassIdentifier: 
-  objectName: Jump_Test
-  id: 1883663240
+  objectName: Jump
+  id: 3833651337
   guid: 57BB9C7E-45E3-46B6-A6A9-9B9CA673CA0B

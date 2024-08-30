@@ -1,0 +1,8 @@
+Event	ID	Name			Wwise Object Path	Notes
+	180661997	Attack			\InteractionSFX\Attack	
+	3833651337	Jump			\InteractionSFX\Jump	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	346481716	NormalJump	E:\WorkRepository\UnityProject\SpiritDash\UnityProject\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\jump_1_818F3B66.wem		\Actor-Mixer Hierarchy\InteractionSFX\Action\NormalJump		202848
+	398724365	Attack	E:\WorkRepository\UnityProject\SpiritDash\UnityProject\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\Attack_1_818F3B66.wem		\Actor-Mixer Hierarchy\InteractionSFX\Action\Attack		299616
+

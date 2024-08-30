@@ -174,10 +174,18 @@ public class MusicManager : Singleton<MusicManager>
 
     private int IndexOfLastRhythmVisualzationInstance = 0;
 
+    public RTPC LevelMusicVolume = null;
+    public RTPC UIVolume = null;
+    public RTPC InteractiveVolume = null;
+
+
+    public string UIBankName="";
+    public string InteractiveBankName="";
 
     private void OnEnable()
     {
         RegisterEvents();
+        
     }
 
     private void OnDisable()
@@ -188,6 +196,14 @@ public class MusicManager : Singleton<MusicManager>
     protected override void OnAwake()
     {
         LoadLevelBankSync();
+
+        LoadUIBankSync();
+        LoadInteractiveBankSync();
+    }
+
+    private void OnDestroy()
+    {
+        UnloadLevelBank();
     }
     // Start is called before the first frame update
     void Start()
@@ -213,7 +229,7 @@ public class MusicManager : Singleton<MusicManager>
     void Update()
     {
 
-        
+
     }
 	
 	protected override bool NeedDestory()
@@ -496,6 +512,7 @@ public class MusicManager : Singleton<MusicManager>
 
     public bool LoadLevelBankSync()
     {
+        
         if ((LevelIndex < LevelMusicEvents.Count) && !hasLoadBank)
         {
             AkBankManager.LoadBank(LevelMusicEvents[LevelIndex].bankName, false, false);
@@ -503,6 +520,32 @@ public class MusicManager : Singleton<MusicManager>
             return true;
         }
         return false;
+    }
+
+    public bool UnloadLevelBank()
+    {
+        if ((LevelIndex < LevelMusicEvents.Count) && !hasLoadBank)
+        {
+            AkBankManager.UnloadBank(LevelMusicEvents[LevelIndex].bankName);
+            hasLoadBank = true;
+            return true;
+        }
+        return false;
+
+    }
+
+    public bool LoadUIBankSync()
+    {
+        AkBankManager.LoadBank(UIBankName, false, false);
+
+        return true;
+    }
+
+    public bool LoadInteractiveBankSync()
+    {
+        AkBankManager.LoadBank(InteractiveBankName, false, false);
+
+        return true;
     }
 
     public void LoadLevelBankAsync(AkCallbackManager.BankCallback callback=null)
@@ -514,17 +557,10 @@ public class MusicManager : Singleton<MusicManager>
         }
     }
 
-    public void UnloadLevelBank()
-    {
-        if ((LevelIndex < LevelMusicEvents.Count) && hasLoadBank)
-        {
-            AkBankManager.UnloadBank(LevelMusicEvents[LevelIndex].bankName);
-            hasLoadBank = false;
-        }
-    }
+
     public void PlayLevelMusic()
     {
-
+        
 
 
         if (!(LevelIndex < LevelMusicEvents.Count))
@@ -576,6 +612,24 @@ public class MusicManager : Singleton<MusicManager>
             LevelMusicEvents[LevelIndex].LevelMusicPlayEvent.SeekEventByTime(gameObject, timeMS);
         }
     }
+
+
+
+    public void SetLevelMusicVolume(float Volume)
+    {
+        LevelMusicVolume.SetGlobalValue(Volume);
+    }
+
+    public void SetUIVolume(float Volume)
+    {
+        UIVolume.SetGlobalValue(Volume);
+    }
+
+    public void SetInteractiveVolume(float Volume)
+    {
+        InteractiveVolume.SetGlobalValue(Volume);
+    }
+
 
     #endregion
 

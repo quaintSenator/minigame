@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="150">
+	<SoundBanks>
+		<SoundBank Id="1551306167" Type="User" Language="SFX" Hash="{4DAAF1AA-AC05-2700-7B3E-41076F4BB1CA}">
+			<ShortName>UI</ShortName>
+			<Path>UI.bnk</Path>
+		</SoundBank>
+	</SoundBanks>
+	<FileHash>{405698FD-E0CE-46BF-E71E-5570D2EC3A02}</FileHash>
+</SoundBanksInfo>

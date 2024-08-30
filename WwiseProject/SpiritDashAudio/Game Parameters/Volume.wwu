@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{41DDACB1-1165-4F3E-A7EE-EE6A993D4213}" SchemaVersion="119">
+	<GameParameters>
+		<WorkUnit Name="Volume" ID="{41DDACB1-1165-4F3E-A7EE-EE6A993D4213}" PersistMode="Standalone">
+			<ChildrenList>
+				<GameParameter Name="UI_Volume" ID="{A7BBE5CF-6F4D-4389-AB58-1DD168D233A4}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="0"/>
+						<Property Name="Min" Type="Real64" Value="-100"/>
+					</PropertyList>
+				</GameParameter>
+				<GameParameter Name="LevelMusic_Volume" ID="{92261356-991B-4A4D-9EB8-71794B61EF6C}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="0"/>
+						<Property Name="Min" Type="Real64" Value="-100"/>
+					</PropertyList>
+				</GameParameter>
+				<GameParameter Name="InteractionSFX_Volume" ID="{B794910B-4535-46D9-9CFC-B606A690CD5E}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="0"/>
+						<Property Name="Min" Type="Real64" Value="-100"/>
+					</PropertyList>
+				</GameParameter>
+			</ChildrenList>
+		</WorkUnit>
+	</GameParameters>
+</WwiseDocument>

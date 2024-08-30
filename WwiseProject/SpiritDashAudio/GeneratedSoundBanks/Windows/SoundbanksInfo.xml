@@ -5,11 +5,11 @@
 		<SourceFilesRoot>../../.cache/Windows</SourceFilesRoot>
 		<SoundBanksRoot>.</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
-		<ExternalSourcesOutputRoot>E:/WorkRepository/UnityProject/SpiritDash/UnityProject/minigame/Assets/StreamingAssets/Audio/GeneratedSoundBanks/Windows</ExternalSourcesOutputRoot>
+		<ExternalSourcesOutputRoot>../../../../Assets/StreamingAssets/Audio/GeneratedSoundBanks/Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
 	<DialogueEvents/>
 	<SoundBanks>
-		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{AB9F0343-CD85-AB9E-58D8-B63D74A50185}">
+		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{EC117D39-FF7B-AF80-51D9-91776E258C89}">
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 			<Plugins>
@@ -19,13 +19,19 @@
 				</AudioDevices>
 			</Plugins>
 			<Busses>
+				<Bus Id="1321655446" Name="LevelMusic"/>
+				<Bus Id="1551306167" Name="UI"/>
+				<Bus Id="3060922364" Name="InteractionSFX"/>
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
 			</Busses>
 			<GameParameters>
 				<GameParameter Id="822163944" Name="SS_Air_RPM"/>
+				<GameParameter Id="978959531" Name="LevelMusic_Volume"/>
 				<GameParameter Id="1029930033" Name="SS_Air_Fury"/>
 				<GameParameter Id="1351367891" Name="SS_Air_Fear"/>
+				<GameParameter Id="1719345792" Name="UI_Volume"/>
 				<GameParameter Id="2648548617" Name="SS_Air_Month"/>
+				<GameParameter Id="2913660057" Name="InteractionSFX_Volume"/>
 				<GameParameter Id="3002758120" Name="SS_Air_Freefall"/>
 				<GameParameter Id="3074696722" Name="SS_Air_Size"/>
 				<GameParameter Id="3203397129" Name="SS_Air_TimeOfDay"/>
@@ -162,33 +168,11 @@
 				</AcousticTexture>
 			</AcousticTextures>
 		</SoundBank>
-		<SoundBank Id="1528500215" Type="User" Language="SFX" Hash="{954FA6D7-D79B-C6FB-09CA-C271621CE2D8}">
-			<ShortName>TestForYeniao</ShortName>
-			<Path>TestForYeniao.bnk</Path>
-			<Media>
-				<File Id="459520497" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>Drum_100bpm.wav</ShortName>
-					<CachePath>SFX/Drum_100bpm_7B9A9841.wem</CachePath>
-				</File>
-				<File Id="695210998" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>RIP_4832.wav</ShortName>
-					<CachePath>SFX/RIP_4832_FBC78EF0.wem</CachePath>
-				</File>
-			</Media>
-			<Events>
-				<Event Id="1049805147" Name="Test_Drum_Bpm100" DurationType="Infinite">
-					<MediaRefs>
-						<MediaRef Id="459520497"/>
-					</MediaRefs>
-				</Event>
-				<Event Id="2990968617" Name="Test_RIP" DurationType="OneShot" DurationMin="150.34874" DurationMax="150.34874">
-					<MediaRefs>
-						<MediaRef Id="695210998"/>
-					</MediaRefs>
-				</Event>
-			</Events>
+		<SoundBank Id="1551306167" Type="User" Language="SFX" Hash="{4DAAF1AA-AC05-2700-7B3E-41076F4BB1CA}">
+			<ShortName>UI</ShortName>
+			<Path>UI.bnk</Path>
 		</SoundBank>
-		<SoundBank Id="2678230382" Type="User" Language="SFX" Hash="{89383146-D958-35F2-2296-E38023672E24}">
+		<SoundBank Id="2678230382" Type="User" Language="SFX" Hash="{72135646-CC0E-02E7-0D2A-AAD6599141F7}">
 			<ShortName>Level1</ShortName>
 			<Path>Level1.bnk</Path>
 			<Media>
@@ -196,36 +180,9 @@
 					<ShortName>Dangerous_Love_120bpm.wav</ShortName>
 					<CachePath>SFX/Dangerous_Love_120bpm_29F081A2.wem</CachePath>
 				</File>
-				<File Id="346481716" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>jump_1.wav</ShortName>
-					<CachePath>SFX/jump_1_818F3B66.wem</CachePath>
-				</File>
-				<File Id="398724365" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>Attack_1.wav</ShortName>
-					<CachePath>SFX/Attack_1_818F3B66.wem</CachePath>
-				</File>
-				<File Id="957206305" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>Du.wav</ShortName>
-					<CachePath>SFX/Du_818F3B66.wem</CachePath>
-				</File>
 			</Media>
 			<Events>
-				<Event Id="2389297652" Name="Attack_Test" DurationType="OneShot" DurationMin="1.6979592" DurationMax="1.6979592">
-					<MediaRefs>
-						<MediaRef Id="398724365"/>
-					</MediaRefs>
-				</Event>
-				<Event Id="1883663240" Name="Jump_Test" DurationType="OneShot" DurationMin="1.1493877" DurationMax="1.1493877">
-					<MediaRefs>
-						<MediaRef Id="346481716"/>
-					</MediaRefs>
-				</Event>
 				<Event Id="2859270423" Name="Pause_Level1" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
-				<Event Id="1092387147" Name="Play_Action_Jump" DurationType="OneShot" DurationMin="0.078708336" DurationMax="0.078708336">
-					<MediaRefs>
-						<MediaRef Id="957206305"/>
-					</MediaRefs>
-				</Event>
 				<Event Id="3659125941" Name="Play_Level1" DurationType="OneShot" DurationMin="94.81698" DurationMax="94.81698">
 					<MediaRefs>
 						<MediaRef Id="187318935"/>
@@ -235,7 +192,7 @@
 				<Event Id="3077303046" Name="StopLevel1" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 			</Events>
 		</SoundBank>
-		<SoundBank Id="2782713051" Type="User" Language="SFX" Hash="{A2B99B27-F577-C899-EC62-76FD858FCB55}">
+		<SoundBank Id="2782713051" Type="User" Language="SFX" Hash="{6D2436E5-0EFB-EBF9-0328-D3E9FEFDA505}">
 			<ShortName>Leve2</ShortName>
 			<Path>Leve2.bnk</Path>
 			<Media>
@@ -255,26 +212,32 @@
 				<Event Id="3077303045" Name="StopLevel2" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 			</Events>
 		</SoundBank>
-		<SoundBank Id="4048373417" Type="User" Language="SFX" Hash="{30542D69-5EEF-4B10-A856-3F71554D0DAE}">
-			<ShortName>LevelTest</ShortName>
-			<Path>LevelTest.bnk</Path>
+		<SoundBank Id="3060922364" Type="User" Language="SFX" Hash="{04C85749-82D4-DD21-AD3A-D17C2F9A359E}">
+			<ShortName>InteractionSFX</ShortName>
+			<Path>InteractionSFX.bnk</Path>
 			<Media>
-				<File Id="559928222" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>Destination_Unknown_100bpm.wav</ShortName>
-					<CachePath>SFX/Destination_Unknown_100bpm_D1AE7A47.wem</CachePath>
+				<File Id="346481716" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>jump_1.wav</ShortName>
+					<CachePath>SFX/jump_1_818F3B66.wem</CachePath>
+				</File>
+				<File Id="398724365" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Attack_1.wav</ShortName>
+					<CachePath>SFX/Attack_1_818F3B66.wem</CachePath>
 				</File>
 			</Media>
 			<Events>
-				<Event Id="1903092602" Name="Pause_LevelTest" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
-				<Event Id="265406176" Name="Play_LevelTest" DurationType="OneShot" DurationMin="150.44" DurationMax="150.44">
+				<Event Id="180661997" Name="Attack" DurationType="OneShot" DurationMin="1.6979592" DurationMax="1.6979592">
 					<MediaRefs>
-						<MediaRef Id="559928222"/>
+						<MediaRef Id="398724365"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="2369008827" Name="Resume_LevelTest" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
-				<Event Id="566154274" Name="Stop_LevelTest" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="3833651337" Name="Jump" DurationType="OneShot" DurationMin="1.1493877" DurationMax="1.1493877">
+					<MediaRefs>
+						<MediaRef Id="346481716"/>
+					</MediaRefs>
+				</Event>
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{AB831376-5AA3-F9EF-A245-2A8984920BE1}</FileHash>
+	<FileHash>{2852481C-84EC-FE4F-6241-AE0BE64ABEAD}</FileHash>
 </SoundBanksInfo>

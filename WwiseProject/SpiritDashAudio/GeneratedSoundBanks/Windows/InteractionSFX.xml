@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="150">
+	<SoundBanks>
+		<SoundBank Id="3060922364" Type="User" Language="SFX" Hash="{04C85749-82D4-DD21-AD3A-D17C2F9A359E}">
+			<ShortName>InteractionSFX</ShortName>
+			<Path>InteractionSFX.bnk</Path>
+			<Media>
+				<File Id="346481716" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>jump_1.wav</ShortName>
+					<CachePath>SFX/jump_1_818F3B66.wem</CachePath>
+				</File>
+				<File Id="398724365" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Attack_1.wav</ShortName>
+					<CachePath>SFX/Attack_1_818F3B66.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="180661997" Name="Attack" DurationType="OneShot" DurationMin="1.6979592" DurationMax="1.6979592">
+					<MediaRefs>
+						<MediaRef Id="398724365"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3833651337" Name="Jump" DurationType="OneShot" DurationMin="1.1493877" DurationMax="1.1493877">
+					<MediaRefs>
+						<MediaRef Id="346481716"/>
+					</MediaRefs>
+				</Event>
+			</Events>
+		</SoundBank>
+	</SoundBanks>
+	<FileHash>{7EA9DE0A-E6F1-3EEA-B12B-3AB78D28A106}</FileHash>
+</SoundBanksInfo>
