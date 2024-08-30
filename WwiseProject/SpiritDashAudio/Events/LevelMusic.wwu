@@ -3,50 +3,6 @@
 	<Events>
 		<WorkUnit Name="LevelMusic" ID="{D973EBAA-0186-44B8-94E1-98693FB906E2}" PersistMode="Standalone">
 			<ChildrenList>
-				<Folder Name="LevelTest" ID="{B8E53143-F3F4-4684-B03A-A716ACAC4613}" ShortID="28127960">
-					<ChildrenList>
-						<Event Name="Play_LevelTest" ID="{6EEAA05F-329A-4DB8-96BA-1747AE08422D}">
-							<ChildrenList>
-								<Action Name="" ID="{79CB8A93-0A36-4303-A548-25F9EECE1201}" ShortID="517160783">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="LevelTest_Destination_Unknown_100bpm" ID="{0200E018-6767-4EC5-8174-62C6AF66667C}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Pause_LevelTest" ID="{3F6D62DB-8AE7-4FCD-867B-3F5DE973710D}">
-							<ChildrenList>
-								<Action Name="" ID="{FD102D79-E314-40C4-9DCD-ECA21272579C}" ShortID="458708210">
-									<PropertyList>
-										<Property Name="ActionType" Type="int16" Value="7"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="LevelTest_Destination_Unknown_100bpm" ID="{0200E018-6767-4EC5-8174-62C6AF66667C}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Stop_LevelTest" ID="{2DB1F581-1CDB-46C4-9818-D536BB7B53CE}"/>
-						<Event Name="Resume_LevelTest" ID="{48826DA7-A269-4A4F-AD8B-0C801E472100}">
-							<ChildrenList>
-								<Action Name="" ID="{7BA9A81A-3573-45EF-8F7F-983C527B58CD}" ShortID="430660350">
-									<PropertyList>
-										<Property Name="ActionType" Type="int16" Value="9"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="LevelTest_Destination_Unknown_100bpm" ID="{0200E018-6767-4EC5-8174-62C6AF66667C}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-					</ChildrenList>
-				</Folder>
 				<Folder Name="Level1" ID="{99D425A7-3EAC-417C-8ADE-BD43A09BF4B2}" ShortID="989309218">
 					<ChildrenList>
 						<Event Name="Play_Level1" ID="{6AD1B5ED-BE56-4727-ADC2-31DA02390146}">
@@ -97,17 +53,6 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="Level1Music" ID="{6151654D-A219-4018-BE7D-A4DE3FDA1064}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Play_Action_Jump" ID="{40A9DFC5-AAEA-4E96-9CA5-DA3F87C6A9D8}">
-							<ChildrenList>
-								<Action Name="" ID="{BC0F4CC7-F806-4F71-BD47-E09F168F7E42}" ShortID="814243218">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="Actor_Jump" ID="{52730DCB-C3EA-4D54-A780-13922FEBC5F3}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>

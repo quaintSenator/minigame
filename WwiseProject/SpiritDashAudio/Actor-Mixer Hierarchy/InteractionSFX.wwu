@@ -3,64 +3,76 @@
 	<AudioObjects>
 		<WorkUnit Name="InteractionSFX" ID="{FB78CDA5-D1B9-4F48-8912-C37AF4B84146}" PersistMode="Standalone">
 			<ChildrenList>
-				<Sound Name="NormalJump" ID="{4B91B799-30E2-4CBE-B6A1-EFFE335411D8}" ShortID="1029346308">
-					<PropertyList>
-						<Property Name="Volume" Type="Real64">
-							<ValueList>
-								<Value>-20</Value>
-							</ValueList>
-						</Property>
-					</PropertyList>
+				<ActorMixer Name="Action" ID="{662488A1-79D6-4917-B3AC-58E8C676FFB4}" ShortID="717677961">
 					<ReferenceList>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C3C1FC5D-DE89-438F-A755-093D0E1407FE}"/>
 						</Reference>
 						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5EE85173-7F1A-46EF-BB21-DFDCE1BA22BC}"/>
+							<ObjectRef Name="InteractionSFX" ID="{F5921835-3754-4985-902E-3F4A738F9303}" WorkUnitID="{5EE85173-7F1A-46EF-BB21-DFDCE1BA22BC}"/>
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
-						<AudioFileSource Name="jump_1" ID="{80235512-5E64-49E7-80AD-22CBF0DED069}">
-							<Language>SFX</Language>
-							<AudioFile>jump_1.wav</AudioFile>
-							<MediaIDList>
-								<MediaID ID="346481716"/>
-							</MediaIDList>
-						</AudioFileSource>
+						<Sound Name="Attack" ID="{02DC4E32-B8B9-4B8F-A208-5FD08C67CF9D}" ShortID="555728941">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-20</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C3C1FC5D-DE89-438F-A755-093D0E1407FE}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5EE85173-7F1A-46EF-BB21-DFDCE1BA22BC}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Attack_1" ID="{34297E83-0055-40C0-842A-20F6F8B80656}">
+									<Language>SFX</Language>
+									<AudioFile>Attack_1.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="398724365"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="Attack_1" ID="{34297E83-0055-40C0-842A-20F6F8B80656}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="NormalJump" ID="{4B91B799-30E2-4CBE-B6A1-EFFE335411D8}" ShortID="1029346308">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-20</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C3C1FC5D-DE89-438F-A755-093D0E1407FE}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5EE85173-7F1A-46EF-BB21-DFDCE1BA22BC}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="jump_1" ID="{80235512-5E64-49E7-80AD-22CBF0DED069}">
+									<Language>SFX</Language>
+									<AudioFile>jump_1.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="346481716"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="jump_1" ID="{80235512-5E64-49E7-80AD-22CBF0DED069}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
 					</ChildrenList>
-					<ActiveSourceList>
-						<ActiveSource Name="jump_1" ID="{80235512-5E64-49E7-80AD-22CBF0DED069}" Platform="Linked"/>
-					</ActiveSourceList>
-				</Sound>
-				<Sound Name="Attack" ID="{02DC4E32-B8B9-4B8F-A208-5FD08C67CF9D}" ShortID="555728941">
-					<PropertyList>
-						<Property Name="Volume" Type="Real64">
-							<ValueList>
-								<Value>-20</Value>
-							</ValueList>
-						</Property>
-					</PropertyList>
-					<ReferenceList>
-						<Reference Name="Conversion">
-							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C3C1FC5D-DE89-438F-A755-093D0E1407FE}"/>
-						</Reference>
-						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5EE85173-7F1A-46EF-BB21-DFDCE1BA22BC}"/>
-						</Reference>
-					</ReferenceList>
-					<ChildrenList>
-						<AudioFileSource Name="Attack_1" ID="{34297E83-0055-40C0-842A-20F6F8B80656}">
-							<Language>SFX</Language>
-							<AudioFile>Attack_1.wav</AudioFile>
-							<MediaIDList>
-								<MediaID ID="398724365"/>
-							</MediaIDList>
-						</AudioFileSource>
-					</ChildrenList>
-					<ActiveSourceList>
-						<ActiveSource Name="Attack_1" ID="{34297E83-0055-40C0-842A-20F6F8B80656}" Platform="Linked"/>
-					</ActiveSourceList>
-				</Sound>
+				</ActorMixer>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>

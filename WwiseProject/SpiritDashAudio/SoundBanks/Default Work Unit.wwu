@@ -3,24 +3,9 @@
 	<SoundBanks>
 		<WorkUnit Name="Default Work Unit" ID="{F5E970C4-22DD-41BE-893F-629373EBF5AA}" PersistMode="Standalone">
 			<ChildrenList>
-				<SoundBank Name="TestForYeniao" ID="{932D5168-302F-4558-979D-771FBD5014DC}">
-					<ObjectInclusionList>
-						<ObjectRef Name="TestForYeniao" ID="{39154D98-3262-4549-8096-DB490CA566B5}" WorkUnitID="{39154D98-3262-4549-8096-DB490CA566B5}" Origin="Manual" Filter="7"/>
-					</ObjectInclusionList>
-					<ObjectExclusionList/>
-					<GameSyncExclusionList/>
-				</SoundBank>
-				<SoundBank Name="LevelTest" ID="{CD61FEA5-E254-4E82-BB83-94A5C87E4A32}">
-					<ObjectInclusionList>
-						<ObjectRef Name="LevelTest" ID="{B8E53143-F3F4-4684-B03A-A716ACAC4613}" WorkUnitID="{D973EBAA-0186-44B8-94E1-98693FB906E2}" Origin="Manual" Filter="7"/>
-					</ObjectInclusionList>
-					<ObjectExclusionList/>
-					<GameSyncExclusionList/>
-				</SoundBank>
 				<SoundBank Name="Level1" ID="{2EB4FBA1-AD38-46BB-89E0-8F350057B946}">
 					<ObjectInclusionList>
 						<ObjectRef Name="Level1" ID="{99D425A7-3EAC-417C-8ADE-BD43A09BF4B2}" WorkUnitID="{D973EBAA-0186-44B8-94E1-98693FB906E2}" Origin="Manual" Filter="7"/>
-						<ObjectRef Name="InteractionSFX" ID="{15F77BCB-82C8-4303-BD1B-A13B316056AD}" WorkUnitID="{15F77BCB-82C8-4303-BD1B-A13B316056AD}" Origin="Manual" Filter="7"/>
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>
@@ -28,6 +13,20 @@
 				<SoundBank Name="Leve2" ID="{B955368A-430F-4313-B44F-3D2591948F8A}">
 					<ObjectInclusionList>
 						<ObjectRef Name="Level2" ID="{F3B23B97-DF34-4459-9E6C-A80009C4473D}" WorkUnitID="{D973EBAA-0186-44B8-94E1-98693FB906E2}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="UI" ID="{77BF171E-6E38-45DB-8C3F-58245A1CC9AD}">
+					<ObjectInclusionList>
+						<ObjectRef Name="UI" ID="{BFAF0EE0-7E66-4C43-A89C-CB6E11C99451}" WorkUnitID="{BFAF0EE0-7E66-4C43-A89C-CB6E11C99451}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="InteractionSFX" ID="{2D5192DE-CB66-477E-9366-87985611CEB5}">
+					<ObjectInclusionList>
+						<ObjectRef Name="InteractionSFX" ID="{15F77BCB-82C8-4303-BD1B-A13B316056AD}" WorkUnitID="{15F77BCB-82C8-4303-BD1B-A13B316056AD}" Origin="Manual" Filter="7"/>
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>

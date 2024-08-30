@@ -3,7 +3,7 @@
 	<Events>
 		<WorkUnit Name="InteractionSFX" ID="{15F77BCB-82C8-4303-BD1B-A13B316056AD}" PersistMode="Standalone">
 			<ChildrenList>
-				<Event Name="Jump_Test" ID="{57BB9C7E-45E3-46B6-A6A9-9B9CA673CA0B}">
+				<Event Name="Jump" ID="{57BB9C7E-45E3-46B6-A6A9-9B9CA673CA0B}">
 					<ChildrenList>
 						<Action Name="" ID="{259966BC-36A8-4C8C-8882-4FF886101440}" ShortID="556937685">
 							<ReferenceList>
@@ -14,7 +14,7 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="Attack_Test" ID="{904020F1-06BB-40A1-BF64-721ADEE9B47C}">
+				<Event Name="Attack" ID="{904020F1-06BB-40A1-BF64-721ADEE9B47C}">
 					<ChildrenList>
 						<Action Name="" ID="{0D7F7EE2-D549-4083-916F-DAD6DC13C9FF}" ShortID="4214099">
 							<ReferenceList>
