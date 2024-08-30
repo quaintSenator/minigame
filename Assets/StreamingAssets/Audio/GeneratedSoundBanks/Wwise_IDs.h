@@ -13,27 +13,22 @@ namespace AK
 {
     namespace EVENTS
     {
-        static const AkUniqueID ATTACK_TEST = 2389297652U;
-        static const AkUniqueID JUMP_TEST = 1883663240U;
+        static const AkUniqueID ATTACK = 180661997U;
+        static const AkUniqueID JUMP = 3833651337U;
         static const AkUniqueID PAUSE_LEVEL1 = 2859270423U;
         static const AkUniqueID PAUSE_LEVEL2 = 2859270420U;
-        static const AkUniqueID PAUSE_LEVELTEST = 1903092602U;
-        static const AkUniqueID PLAY_ACTION_JUMP = 1092387147U;
         static const AkUniqueID PLAY_LEVEL1 = 3659125941U;
         static const AkUniqueID PLAY_LEVEL2 = 3659125942U;
-        static const AkUniqueID PLAY_LEVELTEST = 265406176U;
         static const AkUniqueID RESUME_LEVEL1 = 3265051672U;
         static const AkUniqueID RESUME_LEVEL2 = 3265051675U;
-        static const AkUniqueID RESUME_LEVELTEST = 2369008827U;
-        static const AkUniqueID STOP_LEVELTEST = 566154274U;
         static const AkUniqueID STOPLEVEL1 = 3077303046U;
         static const AkUniqueID STOPLEVEL2 = 3077303045U;
-        static const AkUniqueID TEST_DRUM_BPM100 = 1049805147U;
-        static const AkUniqueID TEST_RIP = 2990968617U;
     } // namespace EVENTS
 
     namespace GAME_PARAMETERS
     {
+        static const AkUniqueID INTERACTIONSFX_VOLUME = 2913660057U;
+        static const AkUniqueID LEVELMUSIC_VOLUME = 978959531U;
         static const AkUniqueID SS_AIR_FEAR = 1351367891U;
         static const AkUniqueID SS_AIR_FREEFALL = 3002758120U;
         static const AkUniqueID SS_AIR_FURY = 1029930033U;
@@ -44,20 +39,24 @@ namespace AK
         static const AkUniqueID SS_AIR_STORM = 3715662592U;
         static const AkUniqueID SS_AIR_TIMEOFDAY = 3203397129U;
         static const AkUniqueID SS_AIR_TURBULENCE = 4160247818U;
+        static const AkUniqueID UI_VOLUME = 1719345792U;
     } // namespace GAME_PARAMETERS
 
     namespace BANKS
     {
         static const AkUniqueID INIT = 1355168291U;
+        static const AkUniqueID INTERACTIONSFX = 3060922364U;
         static const AkUniqueID LEVE2 = 2782713051U;
         static const AkUniqueID LEVEL1 = 2678230382U;
-        static const AkUniqueID LEVELTEST = 4048373417U;
-        static const AkUniqueID TESTFORYENIAO = 1528500215U;
+        static const AkUniqueID UI = 1551306167U;
     } // namespace BANKS
 
     namespace BUSSES
     {
+        static const AkUniqueID INTERACTIONSFX = 3060922364U;
+        static const AkUniqueID LEVELMUSIC = 1321655446U;
         static const AkUniqueID MASTER_AUDIO_BUS = 3803692087U;
+        static const AkUniqueID UI = 1551306167U;
     } // namespace BUSSES
 
     namespace AUDIO_DEVICES

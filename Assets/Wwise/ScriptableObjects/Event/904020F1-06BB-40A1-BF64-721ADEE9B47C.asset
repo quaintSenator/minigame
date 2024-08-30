@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b67d56301ae048488b1446769bd94dd, type: 3}
   m_Name: 904020F1-06BB-40A1-BF64-721ADEE9B47C
   m_EditorClassIdentifier: 
-  objectName: Attack_Test
-  id: 2389297652
+  objectName: Attack
+  id: 180661997
   guid: 904020F1-06BB-40A1-BF64-721ADEE9B47C

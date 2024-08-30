@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d178eff594c0e9542b72f6800f3455e5, type: 3}
-  m_Name: 932D5168-302F-4558-979D-771FBD5014DC
+  m_Script: {fileID: 11500000, guid: 27060aa4ac9f46045845b6c72288754c, type: 3}
+  m_Name: B794910B-4535-46D9-9CFC-B606A690CD5E
   m_EditorClassIdentifier: 
-  objectName: TestForYeniao
-  id: 1528500215
-  guid: 932D5168-302F-4558-979D-771FBD5014DC
+  objectName: InteractionSFX_Volume
+  id: 2913660057
+  guid: B794910B-4535-46D9-9CFC-B606A690CD5E

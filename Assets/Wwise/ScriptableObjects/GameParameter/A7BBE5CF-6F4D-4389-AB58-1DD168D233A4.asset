@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b67d56301ae048488b1446769bd94dd, type: 3}
-  m_Name: 087E5B4E-47A8-4E58-8EC7-DFD482F1B829
+  m_Script: {fileID: 11500000, guid: 27060aa4ac9f46045845b6c72288754c, type: 3}
+  m_Name: A7BBE5CF-6F4D-4389-AB58-1DD168D233A4
   m_EditorClassIdentifier: 
-  objectName: Test_RIP
-  id: 2990968617
-  guid: 087E5B4E-47A8-4E58-8EC7-DFD482F1B829
+  objectName: UI_Volume
+  id: 1719345792
+  guid: A7BBE5CF-6F4D-4389-AB58-1DD168D233A4
