@@ -37,7 +37,8 @@ public class CassetteButton : MonoBehaviour
         if (gameObject.name.Contains(clickedLevelNum.ToString()))//我被点了吗
         {
             //后台的
-            var meLocked = ProgressManager.Instance.GetLevelLocked(clickedLevelNum);
+            //var meLocked = ProgressManager.Instance.GetLevelLocked(clickedLevelNum);
+            var meLocked = false;
             m_img.color = meLocked ? Color.gray : Color.white;
             m_lockIcon.SetActive(meLocked && m_id == RotatingCassettes.GetMidCassetteId());
         }
@@ -59,14 +60,15 @@ public class CassetteButton : MonoBehaviour
                 break;
         }
         
-        if (!ProgressManager.Instance.GetLevelLocked(clickedLevelNum))
+        /*if (!ProgressManager.Instance.GetLevelLocked(clickedLevelNum))
         {
             EnterLevel(clickedLevelNum);
-        }
-        else
+        }*/
+        EnterLevel(clickedLevelNum);
+        /*else
         {
             WindowManager.Instance.OpenTip(clickedLevelNum);
-        }
+        }*/
     }
     
     public void EnterLevel(int i)
