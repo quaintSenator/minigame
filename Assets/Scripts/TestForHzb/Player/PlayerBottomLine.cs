@@ -34,7 +34,11 @@ public class PlayerBottomLine : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             enterCount++;
-            player.OnHitGround(new HitGroundEventData(other, "Ground"));
+            if(enterCount == 1)
+            {
+                player.OnHitGround(new HitGroundEventData(other, "Ground"));
+            }
+
         }
     }
     
