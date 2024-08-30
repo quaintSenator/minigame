@@ -9,8 +9,6 @@ using UnityEngine.Serialization;
 
 public class BossBulletTrigger : BuildableBase
 {
-    [FormerlySerializedAs("continueTime")]
-    [InlineButton("SaveTimeToPrefab", "保存至预制体")]
     [SerializeField] private float meetTime = 0.5f;
     [SerializeField] private Transform previewObj;
 
@@ -42,6 +40,7 @@ public class BossBulletTrigger : BuildableBase
         }
     }
 
+    [Button]
     private void SaveTimeToPrefab()
     {
 #if UNITY_EDITOR

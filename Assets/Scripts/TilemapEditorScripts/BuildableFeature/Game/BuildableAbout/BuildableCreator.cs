@@ -47,6 +47,8 @@ public class BuildableCreator : Singleton<BuildableCreator>
         LoadSelectedData();
         
         StartCoroutine(CheckBuildableVisibleCoroutine());
+        UnityEngine.Application.targetFrameRate = 60;
+        UnityEngine.QualitySettings.vSyncCount = 1;
     }
     
     private void LoadSelectedData()

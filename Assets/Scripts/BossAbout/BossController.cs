@@ -16,6 +16,8 @@ public class BossController : MonoBehaviour
     
     [BoxGroup("Boss激光相关设置")]
     [SerializeField] private GameObject laser;
+    [BoxGroup("Boss激光相关设置")]
+    [SerializeField] private GameObject laserPreview;
     
     [BoxGroup("Boss子弹相关设置")]
     [SerializeField] private GameObject bullet;
@@ -90,17 +92,27 @@ public class BossController : MonoBehaviour
         
         inDOMove = true;
         float localTargetY = data.position.y - centerPoint.transform.position.y;
+        laserPreview.SetActive(true);
+        laserPreview.transform.DOShakeScale(data.holdTime, 0.3f, 2, 10, true, ShakeRandomnessMode.Harmonic)
+            .onComplete = () =>
+        {
+            laserPreview.SetActive(false);
+        };
         transform.DOLocalMove(new Vector3(transform.localPosition.x, localTargetY, 0), 0.2f)
             .onComplete = () =>
         {
-            transform.DOShakeScale(data.continueTime, 0.1f, 2, 10, true, ShakeRandomnessMode.Harmonic);
-        };
-        laser.SetActive(true);
-        laser.transform.DOShakeScale(data.continueTime, 0.1f, 2, 10, true, ShakeRandomnessMode.Harmonic)
-            .onComplete = () =>
-        {
-            laser.SetActive(false);
-            inDOMove = false;
+            transform.DOShakeScale(data.holdTime-0.2f, 0.1f, 2, 10, true, ShakeRandomnessMode.Harmonic)
+                .onComplete = () =>
+            {
+                transform.DOShakeScale(data.continueTime, 0.1f, 2, 10, true, ShakeRandomnessMode.Harmonic);
+                laser.SetActive(true);
+                laser.transform.DOShakeScale(data.continueTime, 0.1f, 2, 10, true, ShakeRandomnessMode.Harmonic)
+                    .onComplete = () =>
+                {
+                    laser.SetActive(false);
+                    inDOMove = false;
+                };
+            };
         };
     }
 

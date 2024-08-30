@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf346476e419a694abe22addbbdad81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  holdTime: 0.6
   continueTime: 0.6
   previewObj: {fileID: 5166520317956381602}
 --- !u!1 &6679448756449570461

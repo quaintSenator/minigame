@@ -12,7 +12,7 @@ using UnityEngine.SceneManagement;
 
 public class BossLaserTrigger : BuildableBase
 {
-    [InlineButton("SaveTimeToPrefab", "保存至预制体")]
+    [SerializeField] private float holdTime = 0.3f;
     [SerializeField] private float continueTime = 0.5f;
     [SerializeField] private Transform previewObj;
 
@@ -31,19 +31,20 @@ public class BossLaserTrigger : BuildableBase
     }
     protected override void TriggerThisBuildable(PlayerController player)
     {
-        EventManager.InvokeEvent(EventType.ReleaseLaserEvent, new ReleaseLaserEventData(transform.position, continueTime));
+        EventManager.InvokeEvent(EventType.ReleaseLaserEvent, new ReleaseLaserEventData(transform.position, holdTime, continueTime));
     }
 
     private void Update()
     {
         if (SceneManager.GetActiveScene().name == "TilemapEditorScene")
         {
-            previewObj.localPosition = new Vector3((-0.5f + continueTime * GameConsts.SPEED)/2, 0, 0);
+            previewObj.localPosition = new Vector3((continueTime/2 + holdTime) * GameConsts.SPEED - 0.5f, 0, 0);
             previewObj.localScale = new Vector3(continueTime * GameConsts.SPEED, 0.5f, 0);
             previewObj.gameObject.SetActive(true);
         }
     }
 
+    [Button]
     private void SaveTimeToPrefab()
     {
 #if UNITY_EDITOR
@@ -68,10 +69,12 @@ public class BossLaserTrigger : BuildableBase
 public class ReleaseLaserEventData : EventData
 {
     public Vector3 position;
+    public float holdTime;
     public float continueTime;
-    public ReleaseLaserEventData(Vector3 position, float continueTime)
+    public ReleaseLaserEventData(Vector3 position, float holdTime ,float continueTime)
     {
         this.position = position;
         this.continueTime = continueTime;
+        this.holdTime = holdTime;
     }
 }
