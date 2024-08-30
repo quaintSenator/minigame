@@ -8,13 +8,17 @@ public class EnemyControllerWithTrigger : EnemyController
     
     public override void Init()
     {
+        InitComponent();
+        enemyTrigger.ResetTrigger();
+    }
+
+    public void InitComponent()
+    {
         animator = GetComponent<Animator>();
         health = maxHealth;
         _spriteRenderer = spriteGo.GetComponent<SpriteRenderer>();
         _particleSystem = spriteGo.GetComponent<ParticleSystem>();
         CleverTimerManager.Ask4Timer(delayTime, CanPlay);
         _particleSystem.Stop();
-
-        enemyTrigger.ResetTrigger();
     }
 }
