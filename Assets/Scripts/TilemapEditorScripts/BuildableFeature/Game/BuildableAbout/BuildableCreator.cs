@@ -43,8 +43,10 @@ public class BuildableCreator : Singleton<BuildableCreator>
     {
         //唤醒TilemapSaver
         TilemapSaver.Instance.Init();
-        
+
+#if UNITY_EDITOR
         LoadSelectedData();
+#endif
         
         StartCoroutine(CheckBuildableVisibleCoroutine());
         UnityEngine.Application.targetFrameRate = 60;
@@ -397,6 +399,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
     {
         if (InputManager.Instance.IsMouseOverUI())
         {
+            Debug.Log("Mouse is over UI");
             return;
         }
         if (currentTileMode == TileMode.Build)
