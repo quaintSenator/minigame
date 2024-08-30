@@ -31,7 +31,7 @@ public class WindowManager : Singleton<WindowManager>
         //Get UIRoot
         if (_UIRoot == null)
         {
-            var canvasGO = GameObject.Find("Canvas");
+            var canvasGO = GameObject.Find("MainCanvas");
             if (canvasGO == null)
             {
                 var pref = Resources.Load("Canvas");
