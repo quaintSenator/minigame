@@ -178,6 +178,10 @@ public class MusicManager : Singleton<MusicManager>
     public RTPC UIVolume = null;
     public RTPC InteractiveVolume = null;
 
+
+    public string UIBankName="";
+    public string InteractiveBankName="";
+
     private void OnEnable()
     {
         RegisterEvents();
@@ -192,6 +196,14 @@ public class MusicManager : Singleton<MusicManager>
     protected override void OnAwake()
     {
         LoadLevelBankSync();
+
+        LoadUIBankSync();
+        LoadInteractiveBankSync();
+    }
+
+    private void OnDestroy()
+    {
+        UnloadLevelBank();
     }
     // Start is called before the first frame update
     void Start()
@@ -216,7 +228,7 @@ public class MusicManager : Singleton<MusicManager>
     // Update is called once per frame
     void Update()
     {
-        LevelMusicVolume.SetGlobalValue(testvalue);
+
 
     }
 	
@@ -510,6 +522,32 @@ public class MusicManager : Singleton<MusicManager>
         return false;
     }
 
+    public bool UnloadLevelBank()
+    {
+        if ((LevelIndex < LevelMusicEvents.Count) && !hasLoadBank)
+        {
+            AkBankManager.UnloadBank(LevelMusicEvents[LevelIndex].bankName);
+            hasLoadBank = true;
+            return true;
+        }
+        return false;
+
+    }
+
+    public bool LoadUIBankSync()
+    {
+        AkBankManager.LoadBank(UIBankName, false, false);
+
+        return true;
+    }
+
+    public bool LoadInteractiveBankSync()
+    {
+        AkBankManager.LoadBank(InteractiveBankName, false, false);
+
+        return true;
+    }
+
     public void LoadLevelBankAsync(AkCallbackManager.BankCallback callback=null)
     {
         if ((LevelIndex < LevelMusicEvents.Count) && !hasLoadBank)
@@ -519,14 +557,7 @@ public class MusicManager : Singleton<MusicManager>
         }
     }
 
-    public void UnloadLevelBank()
-    {
-        if ((LevelIndex < LevelMusicEvents.Count) && hasLoadBank)
-        {
-            AkBankManager.UnloadBank(LevelMusicEvents[LevelIndex].bankName);
-            hasLoadBank = false;
-        }
-    }
+
     public void PlayLevelMusic()
     {
         
