@@ -34,7 +34,7 @@ public class WindowManager : Singleton<WindowManager>
             var canvasGO = GameObject.Find("MainCanvas");
             if (canvasGO == null)
             {
-                var pref = Resources.Load("Canvas");
+                var pref = Resources.Load("MainCanvas");
                 var go = GameObject.Instantiate(pref, null) as GameObject;
                 _UIRoot = go.transform;
             }

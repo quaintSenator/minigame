@@ -74,7 +74,6 @@ Shader "Unlit/RotatingStarFallShader"
                 float2 uv = rotateUV(i.uv, angleToRotate);
                 float u = uv.x;
                 float v = uv.y;
-                
                 fixed4 transparentColor = (0, 0, 0, 0);
                 if(_StartTime < 0 || _Time.y > _StartTime + _OnceTime + _FadeTime)
                 {
@@ -113,10 +112,7 @@ Shader "Unlit/RotatingStarFallShader"
                 float d2heart = distance(uv, ballHeart);
                 fixed2 balluv = (uv - ballHeart) * (0.5/ r) + fixed2(0.5, 0.5);
                 fixed4 ballColor = tex2D(_BallTex, balluv);
-                
-                tailColor.a = tailColor.a * alphaScale; 
-                ballColor.a = tailColor.a;
-                
+
                 if(distance(uv, ballHeart) < r)
                 {
                     return tailColor;
