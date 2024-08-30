@@ -174,10 +174,14 @@ public class MusicManager : Singleton<MusicManager>
 
     private int IndexOfLastRhythmVisualzationInstance = 0;
 
+    public RTPC LevelMusicVolume = null;
+    public RTPC UIVolume = null;
+    public RTPC InteractiveVolume = null;
 
     private void OnEnable()
     {
         RegisterEvents();
+        
     }
 
     private void OnDisable()
@@ -212,8 +216,8 @@ public class MusicManager : Singleton<MusicManager>
     // Update is called once per frame
     void Update()
     {
+        LevelMusicVolume.SetGlobalValue(testvalue);
 
-        
     }
 	
 	protected override bool NeedDestory()
@@ -496,6 +500,7 @@ public class MusicManager : Singleton<MusicManager>
 
     public bool LoadLevelBankSync()
     {
+        
         if ((LevelIndex < LevelMusicEvents.Count) && !hasLoadBank)
         {
             AkBankManager.LoadBank(LevelMusicEvents[LevelIndex].bankName, false, false);
@@ -524,7 +529,7 @@ public class MusicManager : Singleton<MusicManager>
     }
     public void PlayLevelMusic()
     {
-
+        
 
 
         if (!(LevelIndex < LevelMusicEvents.Count))
@@ -576,6 +581,24 @@ public class MusicManager : Singleton<MusicManager>
             LevelMusicEvents[LevelIndex].LevelMusicPlayEvent.SeekEventByTime(gameObject, timeMS);
         }
     }
+
+
+
+    public void SetLevelMusicVolume(float Volume)
+    {
+        LevelMusicVolume.SetGlobalValue(Volume);
+    }
+
+    public void SetUIVolume(float Volume)
+    {
+        UIVolume.SetGlobalValue(Volume);
+    }
+
+    public void SetInteractiveVolume(float Volume)
+    {
+        InteractiveVolume.SetGlobalValue(Volume);
+    }
+
 
     #endregion
 
