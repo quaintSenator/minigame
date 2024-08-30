@@ -532,7 +532,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelMusicMaxTimeList: b4000000b4000000b4000000
-  levelProgressDataList: []
 --- !u!1 &857507856
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,7 +785,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07855be1e23f82d4f90bf3e25ac233c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedMapdata: {fileID: 11400000, guid: 4cf5dc695fae8e94aaf2a03191afe451, type: 2}
+  selectedMapdata: {fileID: 11400000, guid: a7d4f8afeed2aa349a4851be9ed66027, type: 2}
   selectedMapIndex: 1
   showAllBuildable: 0
 --- !u!1001 &1369325266
