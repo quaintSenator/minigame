@@ -65,6 +65,7 @@ public enum EventType
     CompleteContinuousPointEvent = 226, // 完成连续点
     RotateBuildableEvent = 227, // 旋转建筑
     ChangeEnemyTypeEvent = 228, // 改变敌人类型
+    UGCSaveMapDataEvent = 229, // UGC保存地图数据
 
     #endregion
 
@@ -226,6 +227,11 @@ public class EventManager : Singleton<EventManager>
             myEvent += listener;
             Instance.eventDictionary.Add(eventType, myEvent);
         }
+
+        if (eventType == EventType.UGCSaveMapDataEvent)
+        {
+            Debug.Log("UGCSaveMapDataEvent AddListener");
+        }
     }
 
     public static void RemoveListener(EventType eventType, Action<EventData> listener)
@@ -249,6 +255,11 @@ public class EventManager : Singleton<EventManager>
         if (Instance.eventDictionary.TryGetValue(eventType, out thisEvent))
         {
             thisEvent?.Invoke(eventData);
+        }
+        
+        if(eventType == EventType.UGCSaveMapDataEvent)
+        {
+            Debug.Log("UGCSaveMapDataEvent");
         }
     }
 

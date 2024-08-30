@@ -9,14 +9,16 @@ public class MapEditorSaveAndLoadUI : MonoBehaviour
     [SerializeField] private Button saveAndLoadButton;
     [SerializeField] private GameObject saveAndLoadPage;
 
+
+    public static bool InSaveAndLoadUI = false;
     private void Awake()
     {
         saveAndLoadButton.onClick.AddListener(OnSaveAndLoadButtonClick);
-        saveAndLoadPage.SetActive(false);
     }
 
     private void OnSaveAndLoadButtonClick()
     {
         saveAndLoadPage.SetActive(true);
+        InSaveAndLoadUI = true;
     }
 }
