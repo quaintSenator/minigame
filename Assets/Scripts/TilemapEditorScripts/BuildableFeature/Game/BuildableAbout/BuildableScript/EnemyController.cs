@@ -59,7 +59,7 @@ public class EnemyController : BuildableBase {
         }*/
         //spriteGo.transform.localPosition = new Vector3(0, enemyHeight, 0);
         //spriteGo.transform.rotation = Quaternion.Euler(0, 180, 0);
-        _spriteRenderer.material.SetFloat("_StartTime", Time.time);
+        _spriteRenderer.material.SetFloat("_StartTime", Time.timeSinceLevelLoad);
         _particleSystem.Play();
         
         CleverTimerManager.Ask4Timer(2f, data =>
