@@ -1,9 +1,0 @@
-Event	ID	Name			Wwise Object Path	Notes
-	265406176	Play_LevelTest			\LevelMusic\LevelTest\Play_LevelTest	
-	566154274	Stop_LevelTest			\LevelMusic\LevelTest\Stop_LevelTest	
-	1903092602	Pause_LevelTest			\LevelMusic\LevelTest\Pause_LevelTest	
-	2369008827	Resume_LevelTest			\LevelMusic\LevelTest\Resume_LevelTest	
-
-In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	559928222	LevelTest_Destination_Unknown_100bpm	E:\WorkRepository\UnityProject\SpiritDash\UnityProject\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\Destination_Unknown_100bpm_D1AE7A47.wem		\Actor-Mixer Hierarchy\LevelMusic\Bpm_100\LevelTest_Destination_Unknown_100bpm		28903664
-
