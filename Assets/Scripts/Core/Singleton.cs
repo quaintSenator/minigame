@@ -82,7 +82,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
 
     protected virtual bool NeedDestory()
     {
-        return false;
+        return true;
     }
 
     private void OnApplicationQuit()

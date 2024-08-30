@@ -238,4 +238,9 @@ public class EventManager : Singleton<EventManager>
             thisEvent?.Invoke(eventData);
         }
     }
+
+    protected override bool NeedDestory()
+    {
+        return false;
+    }
 }
