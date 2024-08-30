@@ -18,7 +18,7 @@ public class EnemyController : BuildableBase {
 
     private void Awake()
     {
-        Init();
+        //Init();
     }
 
     public override void Init()
@@ -29,6 +29,11 @@ public class EnemyController : BuildableBase {
         _particleSystem = spriteGo.GetComponent<ParticleSystem>();
         CleverTimerManager.Ask4Timer(delayTime, CanPlay);
         _particleSystem.Stop();
+    }
+
+    private void OnEnable()
+    {
+        Init();
     }
 
     public void TakeAttack(int damage)
