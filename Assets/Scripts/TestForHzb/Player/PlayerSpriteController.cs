@@ -17,6 +17,7 @@ public class ExpressionTypeData : EventData
     /* 
     眨眼切换：5
     普通起跳：10
+    战斗：15
     弹簧起跳：20
     落地切换：99
     */
@@ -39,6 +40,7 @@ public class PlayerSpriteController : MonoBehaviour
 
     private float CLEAR_TIME = 0.2f;
     private float clearTimer = 0;
+    private float ATTACK_DURING_TIME = 0.3f;
     private bool startclear = false;
 
     private void Awake()
@@ -81,6 +83,12 @@ public class PlayerSpriteController : MonoBehaviour
     {
         visual.rotation = Quaternion.Euler(0, 0, 0);
         SetSprite(new ExpressionTypeData(ExpressionType.IDLE, 5));
+    }
+
+    public void SetAttackSprite()
+    {
+        SetSprite(new ExpressionTypeData(ExpressionType.ANGRY, 15));
+        CleverTimerManager.Ask4Timer(ATTACK_DURING_TIME, SetSprite, new ExpressionTypeData(ExpressionType.IDLE, 15));
     }
 
 }
