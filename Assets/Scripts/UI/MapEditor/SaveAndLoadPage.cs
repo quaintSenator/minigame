@@ -2,14 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SaveAndLoadPage : MonoBehaviour
+public class SaveAndLoadPage : SaveUIBase
 {
     [SerializeField] private Button bgMask;
     [SerializeField] private List<SaveItem> saveItems;
+    [SerializeField] private SavePopUp savePopUp;
     
-    private static List<MapData> mapDatas = new List<MapData>();
+    public List<MapData> mapDatas = new List<MapData>();
     
     private void Awake()
     {
@@ -50,18 +52,11 @@ public class SaveAndLoadPage : MonoBehaviour
         saveData(BuildableCreator.Instance.GetCurrentMapData(), data.index);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            OnBgMaskClick();
-        }
-    }
-
-    private void OnBgMaskClick()
+    public override void OnBgMaskClick()
     {
         gameObject.SetActive(false);
         MapEditorSaveAndLoadUI.InSaveAndLoadUI = false;
+        MapEditorSaveAndLoadUI.CurrentPages.Remove(this);
     }
     
     public void saveData(MapData mapData, int index)
@@ -69,5 +64,41 @@ public class SaveAndLoadPage : MonoBehaviour
         mapDatas[index] = mapData;
         PlayerPrefs.SetString(GameConsts.UGC_SAVE_DATA, JsonUtility.ToJson(new SerializeBridge<MapData>(mapDatas)));
         saveItems[index].SetMapData(mapData);
+    }
+
+    public void RightClickSaveItem(int index)
+    {
+        Action confirmFun = () =>
+        {
+            mapDatas[index] = new MapData();
+            PlayerPrefs.SetString(GameConsts.UGC_SAVE_DATA, JsonUtility.ToJson(new SerializeBridge<MapData>(mapDatas)));
+            saveItems[index].SetMapData(new MapData());
+            Debug.Log("DeleteData : " + index);
+        };
+        
+        savePopUp.OpenPopUp("Delete", confirmFun);
+    }
+    
+    public void LeftClickSaveItem(int index)
+    {
+        if(mapDatas[index].key == "")
+        {
+            saveData(BuildableCreator.Instance.GetCurrentMapData(), index);
+        }
+        else
+        {
+            Action confirmFun = () =>
+            {
+                saveData(BuildableCreator.Instance.GetCurrentMapData(), index);
+            };
+            Action cancelFun = () =>
+            {
+                Debug.Log("LoadData : " + index);
+                PlayerPrefs.SetString(GameConsts.UGC_SELECTED_MAPDATA, JsonUtility.ToJson(mapDatas[index]));
+                SceneManager.LoadScene("LevelForMapEditor");
+            };
+        
+            savePopUp.OpenPopUp("Cover Or Load?", confirmFun, cancelFun, "Cover", "Load");
+        }
     }
 }

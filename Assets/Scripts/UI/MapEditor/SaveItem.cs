@@ -17,6 +17,8 @@ public class SaveItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] private Text saveItemMusicName;
     [SerializeField] private Text saveItemTime;
     
+    [SerializeField] private SaveAndLoadPage saveAndLoadPage;
+    
     private MapData mapData;
     
     public void SetMapData(MapData mapData)
@@ -54,7 +56,15 @@ public class SaveItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("OnPointerClick : " + index);
-        EventManager.InvokeEvent(EventType.UGCSaveMapDataEvent, new SaveMapEventData(index));
+        // 如果是左键点击
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            saveAndLoadPage.LeftClickSaveItem(index);
+        }
+        else if (eventData.button == PointerEventData.InputButton.Right && mapData.key != "")
+        {
+            saveAndLoadPage.RightClickSaveItem(index);
+        }
     }
 }
 
