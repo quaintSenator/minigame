@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class InputManager : Singleton<InputManager>
 {   
@@ -28,11 +29,11 @@ public class InputManager : Singleton<InputManager>
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            BossController.InitBoss();
-        }
         
+        if(SceneManager.GetActiveScene().name == "TilemapEditorScene" && MapEditorSaveAndLoadUI.InSaveAndLoadUI)
+        {
+            return;
+        }
         
         if (Input.anyKeyDown)
         {
@@ -51,8 +52,13 @@ public class InputManager : Singleton<InputManager>
 
             foreach (var pressEvent in pressMouseEventDict)
             {
-                if (Input.GetMouseButtonDown((int)pressEvent.Key) && !WindowManager.Instance.isAtPausePage() && !WindowManager.Instance.isAtDeadPage())
+                if (Input.GetMouseButtonDown((int)pressEvent.Key))
                 {
+                    if (SceneManager.GetActiveScene().name != "TilemapEditorScene" &&
+                        (WindowManager.Instance.isAtPausePage() || WindowManager.Instance.isAtDeadPage()))
+                    {
+                        return;
+                    }
                     foreach (var eventType in pressEvent.Value)
                     {
                         EventManager.InvokeEvent(eventType);

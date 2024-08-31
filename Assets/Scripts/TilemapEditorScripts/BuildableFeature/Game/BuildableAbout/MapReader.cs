@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MapReader : Singleton<MapReader>
 {
@@ -33,6 +34,10 @@ public class MapReader : Singleton<MapReader>
     {
         MapData mapData = null;
         string dataString = PlayerPrefs.GetString(GameConsts.CURRENT_SELECTED_MAPDATA);
+        if(SceneManager.GetActiveScene().name == "LevelForMapEditor")
+        {
+            dataString = PlayerPrefs.GetString(GameConsts.UGC_SELECTED_MAPDATA);
+        }
         if (dataString != "")
         {
             Debug.Log("Load selected map data from PlayerPrefs");
@@ -43,6 +48,7 @@ public class MapReader : Singleton<MapReader>
             Debug.Log("Load selected map data from selectedMapdata : " + selectedMapdata.mapData);
             mapData = JsonUtility.FromJson<MapData>(selectedMapdata.mapData);
         }
+        mapData = JsonUtility.FromJson<MapData>(selectedMapdata.mapData);
         if (mapData != null)
         {
             ReadDataFromBuildableInfos(mapData.buildableInfos);

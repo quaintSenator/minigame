@@ -24,7 +24,7 @@ public class AttackWave : MonoBehaviour
     [Button]
     public void Init(float p1, float p2, float p3, float p4)
     {
-        p1 = Time.time;
+        p1 = Time.timeSinceLevelLoad;
         p2 = 0.125f;
         p3 = 260;
         p4 = 0.375f;
@@ -32,5 +32,6 @@ public class AttackWave : MonoBehaviour
         m_material.SetFloat("_OnceTime", p2);
         m_material.SetFloat("_Angle2Rotate", p3);
         m_material.SetFloat("_FadeTime", p4);
+        Debug.LogError("sfsf:startTime" + p1.ToString());
     }
 }

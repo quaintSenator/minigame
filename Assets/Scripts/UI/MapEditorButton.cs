@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MapEditorButton : MonoBehaviour
 {
     //for test
     public void MapEditorButtonWasClicked()
     {
-        Debug.Log("MapEditor Button was clicked.");
+        SceneManager.LoadScene("TilemapEditorScene");
     }
 }

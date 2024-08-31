@@ -126,16 +126,20 @@ public class TilemapSaver : Singleton<TilemapSaver>
 [Serializable]
 public class MapData
 {
-    public string key; 
+    public string key;
+    public string musicName;
     public List<BuildableInfo> buildableInfos;
-    public MapData(string key, List<BuildableInfo> buildableInfos)
+    public MapData(string key, List<BuildableInfo> buildableInfos, string musicName = "")
     {
         this.key = key;
         this.buildableInfos = buildableInfos;
+        this.musicName = musicName;
     }
     
     public MapData()
     {
+        key = "";
+        musicName = "";
         buildableInfos = new List<BuildableInfo>();
     }
 }
