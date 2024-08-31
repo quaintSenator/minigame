@@ -2259,6 +2259,14 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2252913727729079448, guid: dc9dd7ea8bf023b44a8c32117b6f7d63, type: 3}
+      propertyPath: UIBankName
+      value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 2252913727729079448, guid: dc9dd7ea8bf023b44a8c32117b6f7d63, type: 3}
+      propertyPath: InteractiveBankName
+      value: InteractionSFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 2252913727729079448, guid: dc9dd7ea8bf023b44a8c32117b6f7d63, type: 3}
       propertyPath: IfPlayMusicWhenStart
       value: 0
       objectReference: {fileID: 0}

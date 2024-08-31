@@ -136,4 +136,5 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 75b77efcfd513cb47b9a3bd6dd6da633, type: 2}
-  testvalue: 0
+  UIBankName: UI
+  InteractiveBankName: InteractionSFX

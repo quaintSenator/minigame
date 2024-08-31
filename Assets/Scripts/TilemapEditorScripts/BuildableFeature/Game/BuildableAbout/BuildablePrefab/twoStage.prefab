@@ -122,3 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15eec9af8293ca44b9506c9742b7dd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ifRotateSelf: 1
+  selfRotateSpeed: 30
+  noBlendMat: {fileID: 2100000, guid: bcbd6e06c7e2e14489570a339788ef24, type: 2}
+  needSpacialProcessLevelIndexs: 
