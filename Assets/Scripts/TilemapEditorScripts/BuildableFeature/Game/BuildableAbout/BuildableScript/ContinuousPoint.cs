@@ -6,6 +6,7 @@ public class ContinuousPoint : BuildableBase
 {
     public ContinuousPoint LastPoint;
     public ContinuousPoint NextPoint;
+    public Material lineMaterial;
     private LineRenderer lineRenderer;
     private float vVelocity;
     
@@ -85,10 +86,13 @@ public class ContinuousPoint : BuildableBase
         NextPoint = GetNextBuildableInGroup(groupIndex, Index) as ContinuousPoint;
         if(LastPoint != null)
         {
+            GetComponent<SpriteRenderer>().enabled = false;
+            LastPoint.GetComponent<SpriteRenderer>().enabled = false;
             UpdateLineRenderer();
         }
         else
         {
+            GetComponent<SpriteRenderer>().enabled = true;
             HideLineRenderer();
         }
 
@@ -123,12 +127,13 @@ public class ContinuousPoint : BuildableBase
         lineRenderer.positionCount = 2;
         lineRenderer.SetPosition(0, Utils.GetRealPostion(LastPoint.Position));
         lineRenderer.SetPosition(1, Utils.GetRealPostion(Position));
-        lineRenderer.startColor = Color.red;
-        lineRenderer.endColor = Color.green;
-        lineRenderer.startWidth = 0.1f;
-        lineRenderer.endWidth = 0.1f;
+        lineRenderer.startColor = Color.white;
+        lineRenderer.endColor = Color.white;
+        lineRenderer.startWidth = 0.5f;
+        lineRenderer.endWidth = 0.5f;
         lineRenderer.sortingOrder = -1;
-        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+        lineRenderer.material = lineMaterial;
+        lineRenderer.textureMode = LineTextureMode.Tile;
         lineRenderer.enabled = true;
     }
     
