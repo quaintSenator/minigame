@@ -40,7 +40,8 @@ public class Utils
     
     public static bool IsAlwaysVisible(BuildableType type)
     {
-        if (type == BuildableType.continuous_point)
+        if (type == BuildableType.continuous_point || 
+            type == BuildableType.change_direction_trigger)
         {
             return true;
         }

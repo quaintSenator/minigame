@@ -29,9 +29,19 @@ public class MusicCurrentPosLine : MonoBehaviour
     void UpdatePos()
     {
         Vector3 currentPos = RhythmViewer.Instance.GetCurrentMusicLinePos();
-        transform.position = new Vector3(currentPos.x, 0, 0);
-        lineRenderer.SetPosition(0, new Vector3(currentPos.x, 30, 0));
-        lineRenderer.SetPosition(1, new Vector3(currentPos.x, -30, 0));
+        transform.position = new Vector3(currentPos.x, currentPos.y, 0);
+        if (TilemapCameraController.MoveDirection == Direction.Right)
+        {
+            lineRenderer.SetPosition(0, new Vector3(currentPos.x, 30 + currentPos.y, 0));
+            lineRenderer.SetPosition(1, new Vector3(currentPos.x, -30 + currentPos.y, 0));
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 90);
+            lineRenderer.SetPosition(0, new Vector3(currentPos.x + 30, currentPos.y, 0));
+            lineRenderer.SetPosition(1, new Vector3(currentPos.x - 30, currentPos.y, 0));
+        }
     }
     
     public void ShowPosLine()

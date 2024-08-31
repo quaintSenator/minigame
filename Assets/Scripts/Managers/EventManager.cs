@@ -124,6 +124,7 @@ public enum EventType
     EndStoryEvent = 512,//剧情开始播放
     //StartLoadMapEvent=513,// 弃置：开始加载地图
     EndPlayerDeadStoryEvent = 514,
+    ChangeDirectionEvent = 515,// 改变方向
     #endregion
 
     #region Boss事件

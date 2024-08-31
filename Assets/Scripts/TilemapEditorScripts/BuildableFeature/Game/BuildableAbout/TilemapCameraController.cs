@@ -13,8 +13,8 @@ public class TilemapCameraController : Singleton<TilemapCameraController>
     [SerializeField] private CinemachineVirtualCamera virtualCamera2;
     
     private CinemachineVirtualCamera currentVirtualCamera;
-    //移动方向
-    private Vector3 moveDirection;
+    //移动方向 -- 用于鼠标移动方向
+    private Vector3 mouseMoveDirection;
     //移动速度
     [SerializeField] private float moveSpeed = 50.0f;
     //缩放方向
@@ -31,6 +31,10 @@ public class TilemapCameraController : Singleton<TilemapCameraController>
     [SerializeField] private float minZoom = 2.5f;
     
     private Transform startPoint;
+    private Vector3 originalPosition = new Vector3(0, -1.21f, -1.05f);
+    
+    //移动方向 -- 用于自动前进的方向
+    public static Direction MoveDirection = Direction.Right;
 
     private void Start()
     {
@@ -48,6 +52,7 @@ public class TilemapCameraController : Singleton<TilemapCameraController>
         EventManager.AddListener(EventType.ResetCameraEvent, OnMiddleClick);
         EventManager.AddListener(EventType.MiddleScrollEvent, OnMiddleScroll);
         EventManager.AddListener(EventType.StopOrPlayMusicEvent, OnStop);
+        EventManager.AddListener(EventType.ChangeDirectionEvent, OnChangeDirection);
     }
     
     private void OnDisable()
@@ -56,6 +61,13 @@ public class TilemapCameraController : Singleton<TilemapCameraController>
         EventManager.RemoveListener(EventType.ResetCameraEvent, OnMiddleClick);
         EventManager.RemoveListener(EventType.MiddleScrollEvent, OnMiddleScroll);
         EventManager.RemoveListener(EventType.StopOrPlayMusicEvent, OnStop);
+        EventManager.RemoveListener(EventType.ChangeDirectionEvent, OnChangeDirection);
+    }
+
+    private void OnChangeDirection(EventData obj)
+    {
+        MoveDirection = MoveDirection == Direction.Right ? Direction.Up : Direction.Right;
+        Debug.Log("MoveDirection" + MoveDirection);
     }
 
     private void OnStop(EventData obj)
@@ -90,15 +102,15 @@ public class TilemapCameraController : Singleton<TilemapCameraController>
         {
             var mouseMovementData = data as MouseMovementEventData;
             Vector2 mouseMovement = mouseMovementData.mouseMovement;
-            moveDirection = new Vector3(-mouseMovement.x * currentVirtualCamera.m_Lens.OrthographicSize / originalZoom, -mouseMovement.y * currentVirtualCamera.m_Lens.OrthographicSize / originalZoom, 0);
+            mouseMoveDirection = new Vector3(-mouseMovement.x * currentVirtualCamera.m_Lens.OrthographicSize / originalZoom, -mouseMovement.y * currentVirtualCamera.m_Lens.OrthographicSize / originalZoom, 0);
         }
         else
         {
-            moveDirection = Vector3.zero;
+            mouseMoveDirection = Vector3.zero;
         }
-        if(moveDirection.magnitude < 0.14f)
+        if(mouseMoveDirection.magnitude < 0.14f)
         {
-            moveDirection = Vector3.zero;
+            mouseMoveDirection = Vector3.zero;
         }
     }
 
@@ -131,8 +143,8 @@ public class TilemapCameraController : Singleton<TilemapCameraController>
         //移动摄像机
         if(RhythmViewer.CurrentMusicIsPlaying)
         {
-            transform.position = new Vector3(RhythmViewer.CurrentMusicTime * GameConsts.SPEED + startPoint.position.x, -1.21f, -1.05f);
+            transform.position = RhythmViewer.Instance.GetCurrentMusicLinePos() + originalPosition;
         }
-        transform.Translate(moveDirection * Time.deltaTime * moveSpeed);
+        transform.Translate(mouseMoveDirection * Time.fixedDeltaTime * moveSpeed);
     }
 }

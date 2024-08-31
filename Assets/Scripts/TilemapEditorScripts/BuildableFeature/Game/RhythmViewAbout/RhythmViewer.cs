@@ -22,6 +22,7 @@ public class RhythmViewer : Singleton<RhythmViewer>
     [InfoBox("节奏点的偏移量", InfoMessageType.None)]
     [BoxGroup("静态节奏区域显示", centerLabel:true)]
     [SerializeField]private float rhythmOffset = 0f;
+    
     private float lastRhythmOffset = 0f;
     
     [Space(20)]
@@ -41,6 +42,8 @@ public class RhythmViewer : Singleton<RhythmViewer>
     private MusicCurrentPosLine musicCurrentPosLine;
     [BoxGroup("运行时节奏区域显示", centerLabel:true)] [SerializeField]
     private GameObject dynamicRhythmNodePrefab;
+    [BoxGroup("运行时节奏区域显示", centerLabel:true)] [SerializeField]
+    private TilemapCameraController tilemapCameraController;
     // <在list中的Index, 对应的VisualizedRhythmNode>
     private Dictionary<int, VisualizedRhythmNode> dynamicRhythmNodes = new Dictionary<int, VisualizedRhythmNode>();
     private int currentDynamicRhythmNodeIndex = 0;
@@ -51,7 +54,7 @@ public class RhythmViewer : Singleton<RhythmViewer>
     
     private static bool currentMusicIsPlaying = false;
     // 确定当前是否没开始播放音乐
-    private static bool noStart = true;
+    public static bool NoStart = true;
     public static bool CurrentMusicIsPlaying => currentMusicIsPlaying;
     private static float currentMusicTime = 0f;
     public static float CurrentMusicTime => currentMusicTime;
@@ -129,6 +132,81 @@ public class RhythmViewer : Singleton<RhythmViewer>
 
     #region 静态节奏区域显示
 
+    [SerializeField] private List<Vector3> changeDirectionPoints = new List<Vector3>();
+    [SerializeField] private List<ChangePointData> changePointDatas = new List<ChangePointData>();
+    
+    public void AddChangeDirectionPoint(Vector3 point)
+    {
+        changeDirectionPoints.Add(point);
+        UpdateChangePointDatas();
+    }
+    
+    public void RemoveChangeDirectionPoint(Vector3 point)
+    {
+        changeDirectionPoints.Remove(point);
+        UpdateChangePointDatas();
+    }
+
+    public void UpdateChangePointDatas()
+    {
+        Vector3 lastPoint = new Vector3(0, -2.19f, 0);
+        Vector3 currentPoint = Vector3.zero;
+        float lastMax = 0;
+        float currentMax = 0;
+        Direction direction = Direction.Right;
+        for(int i = 0; i < changeDirectionPoints.Count; i++)
+        {
+            float minDistance = -1;
+            foreach (var point in changeDirectionPoints)
+            {
+                if(point == lastPoint || point.x < lastPoint.x || point.y < lastPoint.y)
+                {
+                    continue;
+                }
+                float distance = Vector3.Distance(point, lastPoint);
+                if (minDistance == -1 || distance < minDistance)
+                {
+                    minDistance = distance;
+                    currentPoint = point;
+                }
+            }
+            currentMax = minDistance+lastMax;
+            changePointDatas.Add(new ChangePointData(lastMax, currentMax, lastPoint, direction));
+            lastPoint = currentPoint;
+            lastMax = currentMax;
+            direction = direction == Direction.Right ? Direction.Up : Direction.Right;
+        }
+        changePointDatas.Add(new ChangePointData(lastMax, 100000, lastPoint, direction));
+        UpdateVisual();
+    }
+
+    public void SetSpawnPosAndRot(Transform transform, RhythmData rhythmData)
+    {
+        ChangePointData belongData = null;
+        foreach (var changePointData in changePointDatas)
+        {
+            if (rhythmData.perfectTime * GameConsts.SPEED >= changePointData.min && rhythmData.perfectTime <= changePointData.max)
+            {
+                belongData = changePointData;
+            }
+        }
+        Vector3 lastPoint = belongData != null ? belongData.startPoint : new Vector3(0, -2.19f, 0);
+        Direction direction = belongData != null ? belongData.direction : Direction.Right;
+        float min = belongData != null ? belongData.min : 0;
+        float distance = rhythmData.perfectTime * GameConsts.SPEED - min;
+        Vector3 deltaPos;
+        if (direction == Direction.Right)
+        {
+            deltaPos = new Vector3(distance, -0.53f, 0);
+        }
+        else
+        {
+            deltaPos = new Vector3(0.47f, distance, 0);
+        }
+        transform.position = lastPoint + deltaPos;
+        transform.rotation = Quaternion.Euler(0, 0, direction == Direction.Right ? 0 : 90);
+    }
+    
     private void SpawnRhythmZoneVisual()
     {
         if(!showRhythmZone)
@@ -142,7 +220,7 @@ public class RhythmViewer : Singleton<RhythmViewer>
             GameObject go = new GameObject();
             go.transform.parent = transform;
             go.name = "RhythmZoneVisual_" + count;
-            go.transform.position = new Vector3(rhythmData.perfectTime * GameConsts.SPEED + startPoint.position.x, -2.72f, 0);
+            SetSpawnPosAndRot(go.transform, rhythmData);
             RhythmZoneVisual rhythmZoneVisual = go.AddComponent<RhythmZoneVisual>();
             rhythmZoneVisual.Init(timeVisualDataList);
             rhythmZoneVisuals.Add(rhythmZoneVisual);
@@ -191,10 +269,10 @@ public class RhythmViewer : Singleton<RhythmViewer>
             musicController.PauseLevelMusic();
             musicCurrentPosLine.PausePosLine();
         }
-        else if (noStart)
+        else if (NoStart)
         {
             currentMusicIsPlaying = true;
-            noStart = false;
+            NoStart = false;
             musicController.PlayLevelMusic();
             musicController.SeekLevelMusicByTimeMS((int)(currentMusicTime * 1000));
             musicCurrentPosLine.ShowPosLine();
@@ -216,7 +294,7 @@ public class RhythmViewer : Singleton<RhythmViewer>
         {
             currentMusicTime = 0f;
             currentMusicIsPlaying = false;
-            noStart = true;
+            NoStart = true;
             musicController.StopLevelMusic();
             musicCurrentPosLine.HidePosLine();
             ClearDynamicRhythmNode();
@@ -225,7 +303,7 @@ public class RhythmViewer : Singleton<RhythmViewer>
         {
             currentMusicTime = 0f;
             currentMusicIsPlaying = true;
-            noStart = false;
+            NoStart = false;
             musicController.PlayLevelMusic();
             musicCurrentPosLine.ShowPosLine();
             InitCurrentDynamicRhythmNode();
@@ -346,7 +424,29 @@ public class RhythmViewer : Singleton<RhythmViewer>
     
     public Vector3 GetCurrentMusicLinePos()
     {
-        return new Vector3(currentMusicTime * GameConsts.SPEED + startPoint.position.x, 0, 0);
+        ChangePointData belongData = null;
+        foreach (var changePointData in changePointDatas)
+        {
+            if (currentMusicTime * GameConsts.SPEED >= changePointData.min && currentMusicTime <= changePointData.max)
+            {
+                belongData = changePointData;
+            }
+        }
+        Vector3 lastPoint = belongData != null ? belongData.startPoint : Vector3.zero;
+        Direction direction = belongData != null ? belongData.direction : Direction.Right;
+        float min = belongData != null ? belongData.min : 0;
+        float distance = currentMusicTime * GameConsts.SPEED - min;
+        Vector3 deltaPos;
+        if (direction == Direction.Right)
+        {
+            deltaPos = new Vector3(distance, 0, 0);
+        }
+        else
+        {
+            deltaPos = new Vector3(0, distance, 0);
+        }
+        
+        return lastPoint + deltaPos;
     }
 }
 
@@ -359,4 +459,27 @@ public class TimeVisualData
     public float endTime;
     public Color color;
     public float height;
+}
+
+public enum Direction
+{
+    Right = 1,
+    Up = 2,
+}
+
+[Serializable]
+public class ChangePointData
+{
+    public float min;
+    public float max;
+    public Vector3 startPoint;
+    public Direction direction;
+    
+    public ChangePointData(float min, float max, Vector3 startPoint, Direction direction)
+    {
+        this.min = min;
+        this.max = max;
+        this.startPoint = startPoint;
+        this.direction = direction;
+    }
 }
