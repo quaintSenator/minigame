@@ -172,6 +172,26 @@
 			<ShortName>UI</ShortName>
 			<Path>UI.bnk</Path>
 		</SoundBank>
+		<SoundBank Id="2678230380" Type="User" Language="SFX" Hash="{412BE42B-27E9-9BC8-91E5-BA0CAB196607}">
+			<ShortName>Level3</ShortName>
+			<Path>Level3.bnk</Path>
+			<Media>
+				<File Id="68713490" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Up.wav</ShortName>
+					<CachePath>SFX/Up_C0F96E8C.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="2859270421" Name="Pause_Level3" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="3659125943" Name="Play_Level3" DurationType="OneShot" DurationMin="172.148" DurationMax="172.148">
+					<MediaRefs>
+						<MediaRef Id="68713490"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3265051674" Name="Resume_Level3" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="1761439789" Name="Stop_Level3" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+			</Events>
+		</SoundBank>
 		<SoundBank Id="2678230382" Type="User" Language="SFX" Hash="{72135646-CC0E-02E7-0D2A-AAD6599141F7}">
 			<ShortName>Level1</ShortName>
 			<Path>Level1.bnk</Path>
@@ -239,5 +259,5 @@
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{2852481C-84EC-FE4F-6241-AE0BE64ABEAD}</FileHash>
+	<FileHash>{EC03819F-0401-B658-3C64-2F8C39F3C8AD}</FileHash>
 </SoundBanksInfo>

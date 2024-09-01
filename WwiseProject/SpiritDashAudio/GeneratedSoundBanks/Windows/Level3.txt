@@ -1,0 +1,9 @@
+Event	ID	Name			Wwise Object Path	Notes
+	1761439789	Stop_Level3			\LevelMusic\Level3\Stop_Level3	
+	2859270421	Pause_Level3			\LevelMusic\Level3\Pause_Level3	
+	3265051674	Resume_Level3			\LevelMusic\Level3\Resume_Level3	
+	3659125943	Play_Level3			\LevelMusic\Level3\Play_Level3	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	68713490	Level3Music	E:\WorkRepository\UnityProject\SpiritDash\UnityProject\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\Up_C0F96E8C.wem		\Actor-Mixer Hierarchy\LevelMusic\LevelMusic\Level3Music		33070928
+
