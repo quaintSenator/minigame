@@ -66,6 +66,7 @@ public enum EventType
     RotateBuildableEvent = 227, // 旋转建筑
     ChangeEnemyTypeEvent = 228, // 改变敌人类型
     UGCSaveMapDataEvent = 229, // UGC保存地图数据
+    SelectMusicEvent = 230, // 选择音乐
 
     #endregion
 

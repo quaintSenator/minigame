@@ -15,6 +15,9 @@ public class RhythmViewer : Singleton<RhythmViewer>
     [Space(20)]
     [InfoBox("当前所使用的音频信息", InfoMessageType.None)]
     [SerializeField] private RhythmDataFile rhythmDataFile;
+
+    [SerializeField] private List<RhythmDataFile> allMusicFiles;
+    public string MusicName;
     
     [InfoBox("是否显示静态节奏区域", InfoMessageType.None)]
     [BoxGroup("静态节奏区域显示", centerLabel:true)]
@@ -73,6 +76,8 @@ public class RhythmViewer : Singleton<RhythmViewer>
         squareTexture.Apply(); // 应用纹理的改变
         SpawnRhythmZoneVisual();
         noInPlayMode = false;
+        
+        MusicName = rhythmDataFile.name;
     }
 
     private void OnEnable()
@@ -80,6 +85,7 @@ public class RhythmViewer : Singleton<RhythmViewer>
         EventManager.AddListener(EventType.PauseOrResumeMusicEvent, PauseOrResumeMusic);
         EventManager.AddListener(EventType.StopOrPlayMusicEvent, StopOrPlayMusic);
         EventManager.AddListener(EventType.SelectCurrentMusicTimeEvent, SelectCurrentMusicTime);
+        EventManager.AddListener(EventType.SelectMusicEvent, SelectMusic);
     }
     
     private void OnDisable()
@@ -87,6 +93,16 @@ public class RhythmViewer : Singleton<RhythmViewer>
         EventManager.RemoveListener(EventType.PauseOrResumeMusicEvent, PauseOrResumeMusic);
         EventManager.RemoveListener(EventType.StopOrPlayMusicEvent, StopOrPlayMusic);
         EventManager.RemoveListener(EventType.SelectCurrentMusicTimeEvent, SelectCurrentMusicTime);
+        EventManager.RemoveListener(EventType.SelectMusicEvent, SelectMusic);
+    }
+
+    private void SelectMusic(EventData obj)
+    {
+        SelectMusicEventData data = obj as SelectMusicEventData;
+        rhythmDataFile = allMusicFiles[data.index];
+        MusicName = rhythmDataFile.name;
+        musicController.SetLevelIndex(data.index + 1);
+        UpdateVisual();
     }
 
     private void SelectCurrentMusicTime(EventData obj)

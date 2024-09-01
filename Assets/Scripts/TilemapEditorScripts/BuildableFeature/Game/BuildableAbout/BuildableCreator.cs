@@ -720,7 +720,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
             saveInfos.Add(buildableInfo);
         }
         string key = System.DateTime.Now.ToString();
-        MapData mapData = new MapData(key, buildableInfos, "musicName");
+        MapData mapData = new MapData(key, buildableInfos, RhythmViewer.Instance.MusicName);
         return mapData;
     }
 
