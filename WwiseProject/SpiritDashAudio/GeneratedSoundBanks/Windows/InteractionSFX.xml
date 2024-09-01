@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="150">
 	<SoundBanks>
-		<SoundBank Id="3060922364" Type="User" Language="SFX" Hash="{AF70FDE1-803F-CA98-F447-FFEB6AF9094F}">
+		<SoundBank Id="3060922364" Type="User" Language="SFX" Hash="{DB623E24-B576-50AE-AF3C-13EFCFF5C033}">
 			<ShortName>InteractionSFX</ShortName>
 			<Path>InteractionSFX.bnk</Path>
 			<Media>
@@ -46,5 +46,5 @@
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{088352E1-A21D-13DC-8833-308421837A91}</FileHash>
+	<FileHash>{EA60E958-5FA2-024B-3C3A-B655E01A96A8}</FileHash>
 </SoundBanksInfo>

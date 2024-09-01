@@ -19,6 +19,7 @@ namespace AK
         static const AkUniqueID PAUSE_LEVEL2 = 2859270420U;
         static const AkUniqueID PAUSE_LEVEL3 = 2859270421U;
         static const AkUniqueID PLAY_ATTACK_2 = 3944433909U;
+        static const AkUniqueID PLAY_BUTTON = 2099555730U;
         static const AkUniqueID PLAY_JUMP_2 = 2102497793U;
         static const AkUniqueID PLAY_LEVEL1 = 3659125941U;
         static const AkUniqueID PLAY_LEVEL2 = 3659125942U;
@@ -30,6 +31,20 @@ namespace AK
         static const AkUniqueID STOPLEVEL1 = 3077303046U;
         static const AkUniqueID STOPLEVEL2 = 3077303045U;
     } // namespace EVENTS
+
+    namespace SWITCHES
+    {
+        namespace BUTTON
+        {
+            static const AkUniqueID GROUP = 977454165U;
+
+            namespace SWITCH
+            {
+                static const AkUniqueID DEFAULT = 782826392U;
+            } // namespace SWITCH
+        } // namespace BUTTON
+
+    } // namespace SWITCHES
 
     namespace GAME_PARAMETERS
     {
