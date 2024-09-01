@@ -39,6 +39,13 @@
 				<GameParameter Id="3847924954" Name="SS_Air_Presence"/>
 				<GameParameter Id="4160247818" Name="SS_Air_Turbulence"/>
 			</GameParameters>
+			<SwitchGroups>
+				<SwitchGroup Id="977454165" Name="Button">
+					<Switches>
+						<Switch Id="782826392" Name="Default"/>
+					</Switches>
+				</SwitchGroup>
+			</SwitchGroups>
 			<AcousticTextures>
 				<AcousticTexture Id="504532776" Name="Brick">
 					<Properties>
@@ -168,9 +175,54 @@
 				</AcousticTexture>
 			</AcousticTextures>
 		</SoundBank>
-		<SoundBank Id="1551306167" Type="User" Language="SFX" Hash="{4DAAF1AA-AC05-2700-7B3E-41076F4BB1CA}">
+		<SoundBank Id="1551306167" Type="User" Language="SFX" Hash="{EBF3763D-5332-9B88-C201-A2147C001C3D}">
 			<ShortName>UI</ShortName>
 			<Path>UI.bnk</Path>
+			<Media>
+				<File Id="796426103" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>UI_Click_3.wav</ShortName>
+					<CachePath>SFX/UI_Click_3_818F3B66.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="2099555730" Name="Play_Button" DurationType="OneShot" DurationMin="2.64" DurationMax="2.64">
+					<SwitchContainers>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="977454165" Id="782826392" Default="true"/>
+							<MediaRefs>
+								<MediaRef Id="796426103"/>
+							</MediaRefs>
+						</SwitchContainer>
+					</SwitchContainers>
+				</Event>
+			</Events>
+			<SwitchGroups>
+				<SwitchGroup Id="977454165" Name="Button">
+					<Switches>
+						<Switch Id="782826392" Name="Default"/>
+					</Switches>
+				</SwitchGroup>
+			</SwitchGroups>
+		</SoundBank>
+		<SoundBank Id="2678230380" Type="User" Language="SFX" Hash="{25A8ACC6-DD92-1403-D5E8-4856DB9B733B}">
+			<ShortName>Level3</ShortName>
+			<Path>Level3.bnk</Path>
+			<Media>
+				<File Id="916479105" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Up_withMarker.wav</ShortName>
+					<CachePath>SFX/Up_withMarker_818F3B66.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="2859270421" Name="Pause_Level3" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="3659125943" Name="Play_Level3" DurationType="OneShot" DurationMin="172.148" DurationMax="172.148">
+					<MediaRefs>
+						<MediaRef Id="916479105"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3265051674" Name="Resume_Level3" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="1761439789" Name="Stop_Level3" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+			</Events>
 		</SoundBank>
 		<SoundBank Id="2678230382" Type="User" Language="SFX" Hash="{72135646-CC0E-02E7-0D2A-AAD6599141F7}">
 			<ShortName>Level1</ShortName>
@@ -212,10 +264,14 @@
 				<Event Id="3077303045" Name="StopLevel2" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 			</Events>
 		</SoundBank>
-		<SoundBank Id="3060922364" Type="User" Language="SFX" Hash="{04C85749-82D4-DD21-AD3A-D17C2F9A359E}">
+		<SoundBank Id="3060922364" Type="User" Language="SFX" Hash="{DB623E24-B576-50AE-AF3C-13EFCFF5C033}">
 			<ShortName>InteractionSFX</ShortName>
 			<Path>InteractionSFX.bnk</Path>
 			<Media>
+				<File Id="226520610" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Snare01.wav</ShortName>
+					<CachePath>SFX/Snare01_818F3B66.wem</CachePath>
+				</File>
 				<File Id="346481716" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>jump_1.wav</ShortName>
 					<CachePath>SFX/jump_1_818F3B66.wem</CachePath>
@@ -223,6 +279,10 @@
 				<File Id="398724365" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Attack_1.wav</ShortName>
 					<CachePath>SFX/Attack_1_818F3B66.wem</CachePath>
+				</File>
+				<File Id="767300613" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SKick_1.wav</ShortName>
+					<CachePath>SFX/SKick_1_818F3B66.wem</CachePath>
 				</File>
 			</Media>
 			<Events>
@@ -236,8 +296,18 @@
 						<MediaRef Id="346481716"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="3944433909" Name="Play_Attack_2" DurationType="OneShot" DurationMin="1.8798866" DurationMax="1.8798866">
+					<MediaRefs>
+						<MediaRef Id="767300613"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2102497793" Name="Play_Jump_2" DurationType="OneShot" DurationMin="0.3660771" DurationMax="0.3660771">
+					<MediaRefs>
+						<MediaRef Id="226520610"/>
+					</MediaRefs>
+				</Event>
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{2852481C-84EC-FE4F-6241-AE0BE64ABEAD}</FileHash>
+	<FileHash>{0488B7A4-C7F5-99DD-DDF6-BF50F8069565}</FileHash>
 </SoundBanksInfo>

@@ -42,6 +42,7 @@ public class RhythmZoneVisual : MonoBehaviour
         sr.sortingOrder = -2;
         go.transform.localPosition = new Vector3((visualDate.startTime + visualDate.endTime) * speed / 2, visualDate.height / 2, 0);
         go.transform.localScale = new Vector3(Mathf.Abs(visualDate.endTime - visualDate.startTime) * speed, visualDate.height, 1f);
+        go.transform.localRotation = Quaternion.Euler(0, 0, 0);
         visualList.Add(go);
     }
 }

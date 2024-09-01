@@ -99,6 +99,24 @@ MonoBehaviour:
       valueGuidInternal: 
       WwiseObjectReference: {fileID: 11400000, guid: 081ccdfca94db574f8ce4b1191557cf7, type: 2}
     bpm: 120
+  - bankName: Level3
+    LevelMusicPlayEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 4a290bed30d3be94baaf8336298810b7, type: 2}
+    LevelMusicStopEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 016e30df9ecd31a4c97ce8f9eed9e95a, type: 2}
+    LevelMusicPauseEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: a51b8bd1163959c4ea270f12a978d1b9, type: 2}
+    LevelMusicResumeEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 17660e50be9560847baf7b9606cca897, type: 2}
+    bpm: 160
   LevelIndex: 1
   CallbackType: 4
   IfPlayMusicWhenStart: 1
@@ -136,4 +154,5 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 75b77efcfd513cb47b9a3bd6dd6da633, type: 2}
-  testvalue: 0
+  UIBankName: UI
+  InteractiveBankName: InteractionSFX

@@ -155,7 +155,7 @@ public class BossController : MonoBehaviour
         if (inDOMove == false && transform.localPosition != showUpPosition)
         {
             inDOMove = false;
-            transform.DOLocalMove(showUpPosition, 0.2f);
+            //transform.DOLocalMove(showUpPosition, 0.2f);
         }
     }
     

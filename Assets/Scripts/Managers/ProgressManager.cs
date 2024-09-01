@@ -212,6 +212,13 @@ public class ProgressManager : Singleton<ProgressManager>
             currentGameTime += Time.deltaTime;
         }
     }
+
+    #region HelperFunction
+    public int GetCurrentLevelIndex()
+    {
+        return this.currentLevelIndex;
+    }
+    #endregion
 }
 
 
@@ -262,5 +269,7 @@ public class LevelProgressData
         isLevelLocked = levelProgressData.isLevelLocked;
         dialogsShows = levelProgressData.dialogsShows;
     }
+
+
 }
 

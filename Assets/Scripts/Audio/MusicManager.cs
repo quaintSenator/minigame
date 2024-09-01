@@ -524,10 +524,10 @@ public class MusicManager : Singleton<MusicManager>
 
     public bool UnloadLevelBank()
     {
-        if ((LevelIndex < LevelMusicEvents.Count) && !hasLoadBank)
+        if ((LevelIndex < LevelMusicEvents.Count) && hasLoadBank)
         {
             AkBankManager.UnloadBank(LevelMusicEvents[LevelIndex].bankName);
-            hasLoadBank = true;
+            hasLoadBank = false;
             return true;
         }
         return false;
@@ -628,6 +628,31 @@ public class MusicManager : Singleton<MusicManager>
     public void SetInteractiveVolume(float Volume)
     {
         InteractiveVolume.SetGlobalValue(Volume);
+    }
+    
+    public void SetLevelIndex(int index)
+    {
+        UnloadLevelBank();
+        LevelIndex = index;
+        LoadLevelBankSync();
+    }
+    
+    public void SetLevelIndex(string musicName)
+    {
+        UnloadLevelBank();
+        if (musicName == "Level1")
+        {
+            LevelIndex = 1;
+        }
+        else if (musicName == "Level2")
+        {
+            LevelIndex = 2;
+        }
+        else
+        {
+            LevelIndex = 3;
+        }
+        LoadLevelBankSync();
     }
 
 

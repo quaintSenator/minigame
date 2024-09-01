@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // 事件类型
 public enum EventType
@@ -65,6 +66,8 @@ public enum EventType
     CompleteContinuousPointEvent = 226, // 完成连续点
     RotateBuildableEvent = 227, // 旋转建筑
     ChangeEnemyTypeEvent = 228, // 改变敌人类型
+    UGCSaveMapDataEvent = 229, // UGC保存地图数据
+    SelectMusicEvent = 230, // 选择音乐
 
     #endregion
 
@@ -123,6 +126,7 @@ public enum EventType
     EndStoryEvent = 512,//剧情开始播放
     //StartLoadMapEvent=513,// 弃置：开始加载地图
     EndPlayerDeadStoryEvent = 514,
+    ChangeDirectionEvent = 515,// 改变方向
     #endregion
 
     #region Boss事件
@@ -200,7 +204,7 @@ public class RegisterResetPointCallbackEventData : EventData
 public class EventManager : Singleton<EventManager>
 {
     private Dictionary<EventType, Action<EventData>> eventDictionary;
-
+    private string sceneName = "";
     protected override void OnAwake()
     {
         Init();
@@ -215,6 +219,7 @@ public class EventManager : Singleton<EventManager>
     }
     public static void AddListener(EventType eventType, Action<EventData> listener)
     {
+        Instance.CheckNeedClear();
         Action<EventData> myEvent;
         if (Instance.eventDictionary.TryGetValue(eventType, out myEvent))
         {
@@ -226,11 +231,17 @@ public class EventManager : Singleton<EventManager>
             myEvent += listener;
             Instance.eventDictionary.Add(eventType, myEvent);
         }
+
+        if (eventType == EventType.UGCSaveMapDataEvent)
+        {
+            Debug.Log("UGCSaveMapDataEvent AddListener");
+        }
     }
 
     public static void RemoveListener(EventType eventType, Action<EventData> listener)
     {
         if (Instance == null) return;
+        Instance.CheckNeedClear();
         Action<EventData> thisEvent;
         if (Instance.eventDictionary.TryGetValue(eventType, out thisEvent))
         {
@@ -241,6 +252,7 @@ public class EventManager : Singleton<EventManager>
 
     public static void InvokeEvent(EventType eventType, EventData eventData = null)
     {
+        Instance.CheckNeedClear();
         if (eventType == EventType.StartLevelEvent)
         {
             Debug.Log("StartLevelEvent");
@@ -249,6 +261,20 @@ public class EventManager : Singleton<EventManager>
         if (Instance.eventDictionary.TryGetValue(eventType, out thisEvent))
         {
             thisEvent?.Invoke(eventData);
+        }
+        
+        if(eventType == EventType.UGCSaveMapDataEvent)
+        {
+            Debug.Log("UGCSaveMapDataEvent");
+        }
+    }
+
+    private void CheckNeedClear()
+    {
+        if (sceneName != SceneManager.GetActiveScene().name)
+        {
+            eventDictionary.Clear();
+            sceneName = SceneManager.GetActiveScene().name;
         }
     }
 

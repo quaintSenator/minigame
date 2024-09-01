@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MapReader : Singleton<MapReader>
 {
@@ -13,6 +14,7 @@ public class MapReader : Singleton<MapReader>
     private Dictionary<Vector3Int, BuildableBase> currentBuildableMap = new Dictionary<Vector3Int, BuildableBase>();
 
     [SerializeField] private bool showAllBuildable = false;
+    [SerializeField] private MusicManager musicManager;
     
     protected override void OnAwake()
     {
@@ -37,6 +39,20 @@ public class MapReader : Singleton<MapReader>
         {
             Debug.Log("Load selected map data from PlayerPrefs");
             mapData = JsonUtility.FromJson<MapData>(dataString);
+        }
+        if(SceneManager.GetActiveScene().name == "LevelForMapEditor")
+        {
+            dataString = PlayerPrefs.GetString(GameConsts.UGC_SELECTED_MAPDATA);
+            if (dataString != "")
+            {
+                Debug.Log("Load selected map data from PlayerPrefs");
+                mapData = JsonUtility.FromJson<MapData>(dataString);
+                string musicName = mapData.musicName;
+                if (musicName != "")
+                {
+                    musicManager.SetLevelIndex(musicName);
+                }
+            }
         }
         else if (selectedMapdata != null)
         {

@@ -29,11 +29,11 @@ public class InputManager : Singleton<InputManager>
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            BossController.InitBoss();
-        }
         
+        if(SceneManager.GetActiveScene().name == "TilemapEditorScene" && (MapEditorSaveAndLoadUI.InSaveAndLoadUI || HelpUI.InHelpUI))
+        {
+            return;
+        }
         
         if (Input.anyKeyDown)
         {

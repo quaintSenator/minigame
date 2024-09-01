@@ -1,6 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{BFAF0EE0-7E66-4C43-A89C-CB6E11C99451}" SchemaVersion="119">
 	<Events>
-		<WorkUnit Name="UI" ID="{BFAF0EE0-7E66-4C43-A89C-CB6E11C99451}" PersistMode="Standalone"/>
+		<WorkUnit Name="UI" ID="{BFAF0EE0-7E66-4C43-A89C-CB6E11C99451}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Play_MainUIBgm" ID="{EC0EE8C4-AE03-42EF-8BCE-7BC25BAC6D85}">
+					<PropertyList>
+						<Property Name="Inclusion" Type="bool" Value="False"/>
+					</PropertyList>
+					<ChildrenList>
+						<Action Name="" ID="{2DF1E67A-FE19-4E69-82F3-41896DEE7C1B}" ShortID="979815934">
+							<PropertyList>
+								<Property Name="FadeInCurve" Type="int16" Value="0"/>
+								<Property Name="FadeTime" Type="Real64" Value="10"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MainUIBgm" ID="{427EF2FA-902B-497A-B929-6CF34580D0E0}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_PauseUIBgm" ID="{7CDDBD41-B7E6-43A8-A48D-13D962352CD1}">
+					<PropertyList>
+						<Property Name="Inclusion" Type="bool" Value="False"/>
+					</PropertyList>
+					<ChildrenList>
+						<Action Name="" ID="{5F94DE72-8F67-41FC-9258-8C20B46BB103}" ShortID="1000975073">
+							<PropertyList>
+								<Property Name="FadeInCurve" Type="int16" Value="2"/>
+								<Property Name="FadeTime" Type="Real64" Value="10"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="PauseUIBgm" ID="{CC439BC7-72DA-44E6-B2C0-692FBF320104}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Stop_PauseUIBgm" ID="{32DD489C-F635-474E-BC52-7675A747724C}">
+					<PropertyList>
+						<Property Name="Inclusion" Type="bool" Value="False"/>
+					</PropertyList>
+					<ChildrenList>
+						<Action Name="" ID="{49404BD7-B60E-4075-A7EF-BAB2AEB7FE61}" ShortID="790874758">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="FadeInCurve" Type="int16" Value="2"/>
+								<Property Name="FadeTime" Type="Real64" Value="10"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="PauseUIBgm" ID="{CC439BC7-72DA-44E6-B2C0-692FBF320104}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Stop_MainUIBgm" ID="{E70F4133-D9CB-47D5-BBEE-E4CB3561330D}">
+					<PropertyList>
+						<Property Name="Inclusion" Type="bool" Value="False"/>
+					</PropertyList>
+					<ChildrenList>
+						<Action Name="" ID="{C36913CD-4968-4E40-89FC-C67A35ADD168}" ShortID="792280357">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="FadeInCurve" Type="int16" Value="0"/>
+								<Property Name="FadeTime" Type="Real64" Value="10"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MainUIBgm" ID="{427EF2FA-902B-497A-B929-6CF34580D0E0}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Button" ID="{80D0DF06-AB23-4472-BB50-7841F12D437E}">
+					<ChildrenList>
+						<Action Name="" ID="{0BB76919-9D45-4648-A8B1-8066A719A533}" ShortID="745511047">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Button" ID="{3FC6DE58-BA7F-4448-A812-B213A75D7262}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
 	</Events>
 </WwiseDocument>

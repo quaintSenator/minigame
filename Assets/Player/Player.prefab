@@ -5227,7 +5227,7 @@ MonoBehaviour:
   ActionJumpEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: c494294efe6ea674dbf75cc0230aefac, type: 2}
   worldScale: 1
   beatTime: 0.5
   bufferTime: 0.1
@@ -5642,7 +5642,7 @@ MonoBehaviour:
   ActionAttackEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: c494294efe6ea674dbf75cc0230aefac, type: 2}
 --- !u!95 &1390855068
 Animator:
   serializedVersion: 3

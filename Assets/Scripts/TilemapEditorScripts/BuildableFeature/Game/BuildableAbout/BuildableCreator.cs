@@ -709,6 +709,20 @@ public class BuildableCreator : Singleton<BuildableCreator>
     {
         return currentTileMode;
     }
+    
+    
+
+    public MapData GetCurrentMapData()
+    {
+        List<BuildableInfo> saveInfos = new List<BuildableInfo>();
+        foreach (var buildableInfo in buildableInfos)
+        {
+            saveInfos.Add(buildableInfo);
+        }
+        string key = System.DateTime.Now.ToString();
+        MapData mapData = new MapData(key, buildableInfos, RhythmViewer.Instance.MusicName);
+        return mapData;
+    }
 
 
     #region 测试打印

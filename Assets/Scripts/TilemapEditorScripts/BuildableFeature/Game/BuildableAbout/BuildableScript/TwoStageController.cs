@@ -5,6 +5,50 @@ using UnityEngine;
 
 public class TwoStageController : BuildableBase
 {
+
+    public bool ifRotateSelf = true;
+    public float selfRotateSpeed = 30.0f;
+
+    public Material noBlendMat = null;
+    public List<int> needSpacialProcessLevelIndexs = null;
+    public bool debugReplaceMat = false;
+    //private int Index = 0;
+
+    public override void Init()
+    {
+        if(debugReplaceMat)
+        {
+            if (!noBlendMat)
+            {
+                return;
+            }
+            Renderer renderer = GetComponent<Renderer>();
+            renderer.material = noBlendMat;
+            return;
+        }
+
+        int currentLevelIndex = ProgressManager.Instance.GetCurrentLevelIndex();
+        foreach(int needSpacialProcessLevelIndex in needSpacialProcessLevelIndexs)
+        {
+            if(needSpacialProcessLevelIndex == currentLevelIndex )
+            {
+                if(!noBlendMat)
+                {
+                    return;
+                }
+                Renderer renderer = GetComponent<Renderer>();
+                renderer.material = noBlendMat;
+                return;
+            }
+        }
+
+    }
+
+     private void SelfRotateSD()
+    {
+        transform.Rotate(Vector3.forward, selfRotateSpeed * Time.deltaTime);
+    }
+
     protected override void TriggerThisBuildable(PlayerController player)
     {
         player.SetIsGrounded(true);
@@ -14,4 +58,15 @@ public class TwoStageController : BuildableBase
     {
         player.SetIsGrounded(false);
     }
+
+
+    private void Update()
+    {
+        if (ifRotateSelf)
+        {
+            SelfRotateSD();
+        }
+
+    }
+
 }

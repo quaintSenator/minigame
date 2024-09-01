@@ -7,16 +7,29 @@ using UnityEngine.UI;
 public class MapEditorSaveAndLoadUI : MonoBehaviour
 {
     [SerializeField] private Button saveAndLoadButton;
-    [SerializeField] private GameObject saveAndLoadPage;
+    [SerializeField] private SaveUIBase saveAndLoadPage;
 
+
+    public static List<SaveUIBase> CurrentPages = new List<SaveUIBase>();
+    public static bool InSaveAndLoadUI = false;
     private void Awake()
     {
         saveAndLoadButton.onClick.AddListener(OnSaveAndLoadButtonClick);
-        saveAndLoadPage.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (InSaveAndLoadUI && Input.GetKeyDown(KeyCode.Escape))
+        {
+            SaveUIBase currentPage = CurrentPages[CurrentPages.Count - 1];
+            currentPage.OnBgMaskClick();
+        }
     }
 
     private void OnSaveAndLoadButtonClick()
     {
-        saveAndLoadPage.SetActive(true);
+        saveAndLoadPage.gameObject.SetActive(true);
+        CurrentPages.Add(saveAndLoadPage);
+        InSaveAndLoadUI = true;
     }
 }

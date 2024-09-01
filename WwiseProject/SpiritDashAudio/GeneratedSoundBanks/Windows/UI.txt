@@ -1,0 +1,12 @@
+Event	ID	Name			Wwise Object Path	Notes
+	2099555730	Play_Button			\UI\Play_Button	
+
+Switch Group	ID	Name			Wwise Object Path	Notes
+	977454165	Button			\UI\Button	
+
+Switch	ID	Name	Switch Group			Notes
+	782826392	Default	Button			
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	796426103	UI_Click_3	E:\WorkRepository\UnityProject\SpiritDash\UnityProject\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\UI_Click_3_818F3B66.wem		\Actor-Mixer Hierarchy\LevelMusic\UIBackgroudMusic\Button\UI_Click_3		253536
+

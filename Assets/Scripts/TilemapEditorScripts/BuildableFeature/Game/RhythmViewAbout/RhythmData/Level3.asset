@@ -1,0 +1,771 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9269b194f6e854349abfbc78eeea3a73, type: 3}
+  m_Name: Level3
+  m_EditorClassIdentifier: 
+  rhythmDataList:
+  - count: 1
+    perfectTime: 3.0399978
+  - count: 2
+    perfectTime: 4.5399966
+  - count: 3
+    perfectTime: 6.039995
+  - count: 4
+    perfectTime: 7.519994
+  - count: 5
+    perfectTime: 9.020017
+  - count: 6
+    perfectTime: 10.540051
+  - count: 7
+    perfectTime: 11.660077
+  - count: 8
+    perfectTime: 12.040086
+  - count: 9
+    perfectTime: 12.320092
+  - count: 10
+    perfectTime: 12.600099
+  - count: 11
+    perfectTime: 13.160111
+  - count: 12
+    perfectTime: 13.52012
+  - count: 13
+    perfectTime: 13.820127
+  - count: 14
+    perfectTime: 14.0801325
+  - count: 15
+    perfectTime: 14.660146
+  - count: 16
+    perfectTime: 14.84015
+  - count: 17
+    perfectTime: 15.040154
+  - count: 18
+    perfectTime: 15.220159
+  - count: 19
+    perfectTime: 15.320161
+  - count: 20
+    perfectTime: 15.600167
+  - count: 21
+    perfectTime: 15.980176
+  - count: 22
+    perfectTime: 16.16018
+  - count: 23
+    perfectTime: 16.340183
+  - count: 24
+    perfectTime: 16.520187
+  - count: 25
+    perfectTime: 16.700191
+  - count: 26
+    perfectTime: 16.820194
+  - count: 27
+    perfectTime: 17.1002
+  - count: 28
+    perfectTime: 17.280205
+  - count: 29
+    perfectTime: 17.640213
+  - count: 30
+    perfectTime: 17.840218
+  - count: 31
+    perfectTime: 17.94022
+  - count: 32
+    perfectTime: 18.020222
+  - count: 33
+    perfectTime: 18.320229
+  - count: 34
+    perfectTime: 18.580235
+  - count: 35
+    perfectTime: 19.140247
+  - count: 36
+    perfectTime: 19.520256
+  - count: 37
+    perfectTime: 19.820263
+  - count: 38
+    perfectTime: 20.080269
+  - count: 39
+    perfectTime: 20.660282
+  - count: 40
+    perfectTime: 20.840286
+  - count: 41
+    perfectTime: 21.02029
+  - count: 42
+    perfectTime: 21.200294
+  - count: 43
+    perfectTime: 21.320297
+  - count: 44
+    perfectTime: 21.600304
+  - count: 45
+    perfectTime: 21.960312
+  - count: 46
+    perfectTime: 22.140316
+  - count: 47
+    perfectTime: 22.34032
+  - count: 48
+    perfectTime: 22.520325
+  - count: 49
+    perfectTime: 22.640327
+  - count: 50
+    perfectTime: 22.72033
+  - count: 51
+    perfectTime: 22.820332
+  - count: 52
+    perfectTime: 22.900333
+  - count: 53
+    perfectTime: 23.000336
+  - count: 54
+    perfectTime: 23.080338
+  - count: 55
+    perfectTime: 23.18034
+  - count: 56
+    perfectTime: 23.280342
+  - count: 57
+    perfectTime: 24.04036
+  - count: 58
+    perfectTime: 25.160385
+  - count: 59
+    perfectTime: 25.520393
+  - count: 60
+    perfectTime: 25.920403
+  - count: 61
+    perfectTime: 26.300411
+  - count: 62
+    perfectTime: 26.66042
+  - count: 63
+    perfectTime: 27.040428
+  - count: 64
+    perfectTime: 27.400436
+  - count: 65
+    perfectTime: 27.780445
+  - count: 66
+    perfectTime: 28.160454
+  - count: 67
+    perfectTime: 30.020496
+  - count: 68
+    perfectTime: 30.400505
+  - count: 69
+    perfectTime: 30.60051
+  - count: 70
+    perfectTime: 30.780514
+  - count: 71
+    perfectTime: 30.960518
+  - count: 72
+    perfectTime: 31.140522
+  - count: 73
+    perfectTime: 31.340527
+  - count: 74
+    perfectTime: 31.540531
+  - count: 75
+    perfectTime: 31.720535
+  - count: 76
+    perfectTime: 31.90054
+  - count: 77
+    perfectTime: 32.080544
+  - count: 78
+    perfectTime: 32.200546
+  - count: 79
+    perfectTime: 32.28055
+  - count: 80
+    perfectTime: 32.480553
+  - count: 81
+    perfectTime: 32.660557
+  - count: 82
+    perfectTime: 32.84056
+  - count: 83
+    perfectTime: 32.940563
+  - count: 84
+    perfectTime: 33.020565
+  - count: 85
+    perfectTime: 33.22057
+  - count: 86
+    perfectTime: 33.32057
+  - count: 87
+    perfectTime: 33.400574
+  - count: 88
+    perfectTime: 33.580578
+  - count: 89
+    perfectTime: 33.68058
+  - count: 90
+    perfectTime: 33.780582
+  - count: 91
+    perfectTime: 33.880585
+  - count: 92
+    perfectTime: 33.960587
+  - count: 93
+    perfectTime: 34.08059
+  - count: 94
+    perfectTime: 34.16059
+  - count: 95
+    perfectTime: 34.340595
+  - count: 96
+    perfectTime: 34.440598
+  - count: 97
+    perfectTime: 34.92061
+  - count: 98
+    perfectTime: 35.660625
+  - count: 99
+    perfectTime: 35.86063
+  - count: 100
+    perfectTime: 36.040634
+  - count: 101
+    perfectTime: 36.400642
+  - count: 102
+    perfectTime: 36.78065
+  - count: 103
+    perfectTime: 37.16066
+  - count: 104
+    perfectTime: 37.54067
+  - count: 105
+    perfectTime: 37.900677
+  - count: 106
+    perfectTime: 38.280685
+  - count: 107
+    perfectTime: 38.48069
+  - count: 108
+    perfectTime: 38.48069
+  - count: 109
+    perfectTime: 38.660694
+  - count: 110
+    perfectTime: 38.8407
+  - count: 111
+    perfectTime: 39.040703
+  - count: 112
+    perfectTime: 39.40071
+  - count: 113
+    perfectTime: 39.78072
+  - count: 114
+    perfectTime: 40.16073
+  - count: 115
+    perfectTime: 42.02077
+  - count: 116
+    perfectTime: 42.220776
+  - count: 117
+    perfectTime: 42.40078
+  - count: 118
+    perfectTime: 42.600784
+  - count: 119
+    perfectTime: 42.78079
+  - count: 120
+    perfectTime: 43.140797
+  - count: 121
+    perfectTime: 43.540806
+  - count: 122
+    perfectTime: 43.900814
+  - count: 123
+    perfectTime: 44.280823
+  - count: 124
+    perfectTime: 44.480827
+  - count: 125
+    perfectTime: 44.66083
+  - count: 126
+    perfectTime: 44.840836
+  - count: 127
+    perfectTime: 45.04084
+  - count: 128
+    perfectTime: 45.40085
+  - count: 129
+    perfectTime: 48.04091
+  - count: 130
+    perfectTime: 51.780994
+  - count: 131
+    perfectTime: 51.981
+  - count: 132
+    perfectTime: 52.181004
+  - count: 133
+    perfectTime: 52.341007
+  - count: 134
+    perfectTime: 52.52101
+  - count: 135
+    perfectTime: 52.721016
+  - count: 136
+    perfectTime: 52.92102
+  - count: 137
+    perfectTime: 53.101025
+  - count: 138
+    perfectTime: 53.28103
+  - count: 139
+    perfectTime: 53.481033
+  - count: 140
+    perfectTime: 53.661037
+  - count: 141
+    perfectTime: 53.861042
+  - count: 142
+    perfectTime: 54.021046
+  - count: 143
+    perfectTime: 54.021046
+  - count: 144
+    perfectTime: 54.22105
+  - count: 145
+    perfectTime: 54.421055
+  - count: 146
+    perfectTime: 54.60106
+  - count: 147
+    perfectTime: 54.781063
+  - count: 148
+    perfectTime: 54.961067
+  - count: 149
+    perfectTime: 55.16107
+  - count: 150
+    perfectTime: 55.361076
+  - count: 151
+    perfectTime: 55.52108
+  - count: 152
+    perfectTime: 55.721085
+  - count: 153
+    perfectTime: 55.92109
+  - count: 154
+    perfectTime: 56.101093
+  - count: 155
+    perfectTime: 56.281097
+  - count: 156
+    perfectTime: 56.481102
+  - count: 157
+    perfectTime: 56.661106
+  - count: 158
+    perfectTime: 56.84111
+  - count: 159
+    perfectTime: 57.041115
+  - count: 160
+    perfectTime: 57.22112
+  - count: 161
+    perfectTime: 57.401123
+  - count: 162
+    perfectTime: 57.601128
+  - count: 163
+    perfectTime: 57.78113
+  - count: 164
+    perfectTime: 57.981136
+  - count: 165
+    perfectTime: 58.16114
+  - count: 166
+    perfectTime: 58.341145
+  - count: 167
+    perfectTime: 58.52115
+  - count: 168
+    perfectTime: 58.721153
+  - count: 169
+    perfectTime: 58.901157
+  - count: 170
+    perfectTime: 59.101162
+  - count: 171
+    perfectTime: 59.281166
+  - count: 172
+    perfectTime: 59.46117
+  - count: 173
+    perfectTime: 59.661175
+  - count: 174
+    perfectTime: 60.041183
+  - count: 175
+    perfectTime: 60.30119
+  - count: 176
+    perfectTime: 60.601196
+  - count: 177
+    perfectTime: 61.14121
+  - count: 178
+    perfectTime: 61.541218
+  - count: 179
+    perfectTime: 61.801224
+  - count: 180
+    perfectTime: 62.10123
+  - count: 181
+    perfectTime: 62.661243
+  - count: 182
+    perfectTime: 62.661243
+  - count: 183
+    perfectTime: 62.841248
+  - count: 184
+    perfectTime: 63.041252
+  - count: 185
+    perfectTime: 63.221256
+  - count: 186
+    perfectTime: 63.32126
+  - count: 187
+    perfectTime: 63.581264
+  - count: 188
+    perfectTime: 63.981274
+  - count: 189
+    perfectTime: 64.16125
+  - count: 190
+    perfectTime: 64.34122
+  - count: 191
+    perfectTime: 64.52119
+  - count: 192
+    perfectTime: 64.72115
+  - count: 193
+    perfectTime: 64.82114
+  - count: 194
+    perfectTime: 65.10109
+  - count: 195
+    perfectTime: 65.28106
+  - count: 196
+    perfectTime: 65.660995
+  - count: 197
+    perfectTime: 65.660995
+  - count: 198
+    perfectTime: 65.840965
+  - count: 199
+    perfectTime: 65.94095
+  - count: 200
+    perfectTime: 66.020935
+  - count: 201
+    perfectTime: 66.30089
+  - count: 202
+    perfectTime: 66.60084
+  - count: 203
+    perfectTime: 67.16074
+  - count: 204
+    perfectTime: 67.54068
+  - count: 205
+    perfectTime: 67.82063
+  - count: 206
+    perfectTime: 68.100586
+  - count: 207
+    perfectTime: 68.66049
+  - count: 208
+    perfectTime: 68.84046
+  - count: 209
+    perfectTime: 69.02043
+  - count: 210
+    perfectTime: 69.2204
+  - count: 211
+    perfectTime: 69.300385
+  - count: 212
+    perfectTime: 69.600334
+  - count: 213
+    perfectTime: 69.98027
+  - count: 214
+    perfectTime: 70.14024
+  - count: 215
+    perfectTime: 70.34021
+  - count: 216
+    perfectTime: 70.54018
+  - count: 217
+    perfectTime: 71.28005
+  - count: 218
+    perfectTime: 71.65999
+  - count: 219
+    perfectTime: 72.039925
+  - count: 220
+    perfectTime: 72.039925
+  - count: 221
+    perfectTime: 72.399864
+  - count: 222
+    perfectTime: 72.7798
+  - count: 223
+    perfectTime: 73.15974
+  - count: 224
+    perfectTime: 73.51968
+  - count: 225
+    perfectTime: 73.91961
+  - count: 226
+    perfectTime: 74.27955
+  - count: 227
+    perfectTime: 74.45952
+  - count: 228
+    perfectTime: 74.5595
+  - count: 229
+    perfectTime: 74.659485
+  - count: 230
+    perfectTime: 74.839455
+  - count: 231
+    perfectTime: 75.019424
+  - count: 232
+    perfectTime: 75.39936
+  - count: 233
+    perfectTime: 75.7593
+  - count: 234
+    perfectTime: 76.15923
+  - count: 235
+    perfectTime: 76.3592
+  - count: 236
+    perfectTime: 76.919106
+  - count: 237
+    perfectTime: 77.279045
+  - count: 238
+    perfectTime: 77.65898
+  - count: 239
+    perfectTime: 78.01892
+  - count: 240
+    perfectTime: 78.39886
+  - count: 241
+    perfectTime: 78.77879
+  - count: 242
+    perfectTime: 79.13873
+  - count: 243
+    perfectTime: 79.538666
+  - count: 244
+    perfectTime: 79.9186
+  - count: 245
+    perfectTime: 80.27854
+  - count: 246
+    perfectTime: 80.47851
+  - count: 247
+    perfectTime: 80.558495
+  - count: 248
+    perfectTime: 80.63848
+  - count: 249
+    perfectTime: 80.83845
+  - count: 250
+    perfectTime: 81.038414
+  - count: 251
+    perfectTime: 81.39835
+  - count: 252
+    perfectTime: 81.77829
+  - count: 253
+    perfectTime: 82.158226
+  - count: 254
+    perfectTime: 82.71813
+  - count: 255
+    perfectTime: 82.818115
+  - count: 256
+    perfectTime: 82.9181
+  - count: 257
+    perfectTime: 83.09807
+  - count: 258
+    perfectTime: 83.25804
+  - count: 259
+    perfectTime: 83.45801
+  - count: 260
+    perfectTime: 83.657974
+  - count: 261
+    perfectTime: 83.85794
+  - count: 262
+    perfectTime: 93.0364
+  - count: 263
+    perfectTime: 96.0359
+  - count: 264
+    perfectTime: 96.53581
+  - count: 265
+    perfectTime: 97.03573
+  - count: 266
+    perfectTime: 97.57564
+  - count: 267
+    perfectTime: 98.09555
+  - count: 268
+    perfectTime: 99.195366
+  - count: 269
+    perfectTime: 99.735275
+  - count: 270
+    perfectTime: 99.99523
+  - count: 271
+    perfectTime: 100.25519
+  - count: 272
+    perfectTime: 100.53514
+  - count: 273
+    perfectTime: 100.7951
+  - count: 274
+    perfectTime: 101.05505
+  - count: 275
+    perfectTime: 101.31501
+  - count: 276
+    perfectTime: 101.85492
+  - count: 277
+    perfectTime: 101.85492
+  - count: 278
+    perfectTime: 101.9749
+  - count: 279
+    perfectTime: 102.13487
+  - count: 280
+    perfectTime: 102.25485
+  - count: 281
+    perfectTime: 102.79476
+  - count: 282
+    perfectTime: 103.194695
+  - count: 283
+    perfectTime: 103.97456
+  - count: 284
+    perfectTime: 104.51447
+  - count: 285
+    perfectTime: 104.914406
+  - count: 286
+    perfectTime: 105.31434
+  - count: 287
+    perfectTime: 106.114204
+  - count: 288
+    perfectTime: 106.39416
+  - count: 289
+    perfectTime: 106.65411
+  - count: 290
+    perfectTime: 106.91407
+  - count: 291
+    perfectTime: 107.05405
+  - count: 292
+    perfectTime: 107.45398
+  - count: 293
+    perfectTime: 107.99389
+  - count: 294
+    perfectTime: 108.253845
+  - count: 295
+    perfectTime: 108.5138
+  - count: 296
+    perfectTime: 108.793755
+  - count: 297
+    perfectTime: 108.913734
+  - count: 298
+    perfectTime: 109.033714
+  - count: 299
+    perfectTime: 109.17369
+  - count: 300
+    perfectTime: 109.333664
+  - count: 301
+    perfectTime: 109.45364
+  - count: 302
+    perfectTime: 109.57362
+  - count: 303
+    perfectTime: 109.7136
+  - count: 304
+    perfectTime: 109.85358
+  - count: 305
+    perfectTime: 110.393486
+  - count: 306
+    perfectTime: 110.513466
+  - count: 307
+    perfectTime: 110.65344
+  - count: 308
+    perfectTime: 110.77342
+  - count: 309
+    perfectTime: 110.9134
+  - count: 310
+    perfectTime: 111.293335
+  - count: 311
+    perfectTime: 111.713264
+  - count: 312
+    perfectTime: 112.51313
+  - count: 313
+    perfectTime: 113.05304
+  - count: 314
+    perfectTime: 113.432976
+  - count: 315
+    perfectTime: 113.83291
+  - count: 316
+    perfectTime: 114.632774
+  - count: 317
+    perfectTime: 114.91273
+  - count: 318
+    perfectTime: 115.17268
+  - count: 319
+    perfectTime: 115.43264
+  - count: 320
+    perfectTime: 115.59261
+  - count: 321
+    perfectTime: 115.97255
+  - count: 322
+    perfectTime: 116.49246
+  - count: 323
+    perfectTime: 116.75242
+  - count: 324
+    perfectTime: 117.012375
+  - count: 325
+    perfectTime: 117.29233
+  - count: 326
+    perfectTime: 118.35215
+  - count: 327
+    perfectTime: 119.391975
+  - count: 328
+    perfectTime: 119.77191
+  - count: 329
+    perfectTime: 120.171844
+  - count: 330
+    perfectTime: 120.91172
+  - count: 331
+    perfectTime: 121.45163
+  - count: 332
+    perfectTime: 121.81157
+  - count: 333
+    perfectTime: 122.191505
+  - count: 334
+    perfectTime: 122.95138
+  - count: 335
+    perfectTime: 123.19134
+  - count: 336
+    perfectTime: 123.451294
+  - count: 337
+    perfectTime: 123.85123
+  - count: 338
+    perfectTime: 124.21117
+  - count: 339
+    perfectTime: 124.71108
+  - count: 340
+    perfectTime: 124.95104
+  - count: 341
+    perfectTime: 125.171005
+  - count: 342
+    perfectTime: 126.4108
+  - count: 343
+    perfectTime: 126.87072
+  - count: 344
+    perfectTime: 127.370636
+  - count: 345
+    perfectTime: 127.71058
+  - count: 346
+    perfectTime: 128.05054
+  - count: 347
+    perfectTime: 128.75069
+  - count: 348
+    perfectTime: 129.23079
+  - count: 349
+    perfectTime: 129.59087
+  - count: 350
+    perfectTime: 129.93094
+  - count: 351
+    perfectTime: 130.63109
+  - count: 352
+    perfectTime: 130.87114
+  - count: 353
+    perfectTime: 131.11119
+  - count: 354
+    perfectTime: 131.33124
+  - count: 355
+    perfectTime: 131.45126
+  - count: 356
+    perfectTime: 131.81134
+  - count: 357
+    perfectTime: 132.03139
+  - count: 358
+    perfectTime: 132.27144
+  - count: 359
+    perfectTime: 132.51149
+  - count: 360
+    perfectTime: 132.73154
+  - count: 361
+    perfectTime: 132.9916
+  - count: 362
+    perfectTime: 134.39189
+  - count: 363
+    perfectTime: 134.83199
+  - count: 364
+    perfectTime: 135.19206
+  - count: 365
+    perfectTime: 135.55214
+  - count: 366
+    perfectTime: 135.77219
+  - count: 367
+    perfectTime: 136.23228
+  - count: 368
+    perfectTime: 136.71239
+  - count: 369
+    perfectTime: 137.05246
+  - count: 370
+    perfectTime: 137.41254
+  - count: 371
+    perfectTime: 138.09268
+  - count: 372
+    perfectTime: 138.33273
+  - count: 373
+    perfectTime: 138.57278
+  - count: 374
+    perfectTime: 139.25293
+  - count: 375
+    perfectTime: 139.73303
+  - count: 376
+    perfectTime: 140.21313
+  - count: 377
+    perfectTime: 141.35338
+  - count: 378
+    perfectTime: 147.73474

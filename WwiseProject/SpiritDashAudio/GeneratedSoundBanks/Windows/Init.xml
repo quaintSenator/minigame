@@ -31,6 +31,13 @@
 				<GameParameter Id="3847924954" Name="SS_Air_Presence"/>
 				<GameParameter Id="4160247818" Name="SS_Air_Turbulence"/>
 			</GameParameters>
+			<SwitchGroups>
+				<SwitchGroup Id="977454165" Name="Button">
+					<Switches>
+						<Switch Id="782826392" Name="Default"/>
+					</Switches>
+				</SwitchGroup>
+			</SwitchGroups>
 			<AcousticTextures>
 				<AcousticTexture Id="504532776" Name="Brick">
 					<Properties>
@@ -161,5 +168,5 @@
 			</AcousticTextures>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{AB59C7DF-0EAA-8BA4-849E-6AF12FA40965}</FileHash>
+	<FileHash>{FDC4AF48-BA69-58B2-4632-03FA3B90BADF}</FileHash>
 </SoundBanksInfo>

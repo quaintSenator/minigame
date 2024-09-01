@@ -17,13 +17,34 @@ namespace AK
         static const AkUniqueID JUMP = 3833651337U;
         static const AkUniqueID PAUSE_LEVEL1 = 2859270423U;
         static const AkUniqueID PAUSE_LEVEL2 = 2859270420U;
+        static const AkUniqueID PAUSE_LEVEL3 = 2859270421U;
+        static const AkUniqueID PLAY_ATTACK_2 = 3944433909U;
+        static const AkUniqueID PLAY_BUTTON = 2099555730U;
+        static const AkUniqueID PLAY_JUMP_2 = 2102497793U;
         static const AkUniqueID PLAY_LEVEL1 = 3659125941U;
         static const AkUniqueID PLAY_LEVEL2 = 3659125942U;
+        static const AkUniqueID PLAY_LEVEL3 = 3659125943U;
         static const AkUniqueID RESUME_LEVEL1 = 3265051672U;
         static const AkUniqueID RESUME_LEVEL2 = 3265051675U;
+        static const AkUniqueID RESUME_LEVEL3 = 3265051674U;
+        static const AkUniqueID STOP_LEVEL3 = 1761439789U;
         static const AkUniqueID STOPLEVEL1 = 3077303046U;
         static const AkUniqueID STOPLEVEL2 = 3077303045U;
     } // namespace EVENTS
+
+    namespace SWITCHES
+    {
+        namespace BUTTON
+        {
+            static const AkUniqueID GROUP = 977454165U;
+
+            namespace SWITCH
+            {
+                static const AkUniqueID DEFAULT = 782826392U;
+            } // namespace SWITCH
+        } // namespace BUTTON
+
+    } // namespace SWITCHES
 
     namespace GAME_PARAMETERS
     {
@@ -48,6 +69,7 @@ namespace AK
         static const AkUniqueID INTERACTIONSFX = 3060922364U;
         static const AkUniqueID LEVE2 = 2782713051U;
         static const AkUniqueID LEVEL1 = 2678230382U;
+        static const AkUniqueID LEVEL3 = 2678230380U;
         static const AkUniqueID UI = 1551306167U;
     } // namespace BANKS
 

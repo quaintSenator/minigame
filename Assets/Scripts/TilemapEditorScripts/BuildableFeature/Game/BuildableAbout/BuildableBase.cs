@@ -46,7 +46,6 @@ public class BuildableBase : MonoBehaviour
     {
         if (other.TryGetComponent(out MusicCurrentPosLine line))
         {
-            TilemapCameraController.Instance.ChangeCamera(true);
             TriggerThisBuildable(null);
         }
 
