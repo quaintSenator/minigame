@@ -8,7 +8,7 @@
 						<Action Name="" ID="{259966BC-36A8-4C8C-8882-4FF886101440}" ShortID="556937685">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="NormalJump" ID="{4B91B799-30E2-4CBE-B6A1-EFFE335411D8}" WorkUnitID="{FB78CDA5-D1B9-4F48-8912-C37AF4B84146}"/>
+									<ObjectRef Name="NormalJump_1" ID="{4B91B799-30E2-4CBE-B6A1-EFFE335411D8}" WorkUnitID="{FB78CDA5-D1B9-4F48-8912-C37AF4B84146}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -19,7 +19,29 @@
 						<Action Name="" ID="{0D7F7EE2-D549-4083-916F-DAD6DC13C9FF}" ShortID="4214099">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="Attack" ID="{02DC4E32-B8B9-4B8F-A208-5FD08C67CF9D}" WorkUnitID="{FB78CDA5-D1B9-4F48-8912-C37AF4B84146}"/>
+									<ObjectRef Name="Attack_1" ID="{02DC4E32-B8B9-4B8F-A208-5FD08C67CF9D}" WorkUnitID="{FB78CDA5-D1B9-4F48-8912-C37AF4B84146}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Attack_2" ID="{7E29817D-D1BF-4AC1-AB11-2C4F58F8B403}">
+					<ChildrenList>
+						<Action Name="" ID="{114706B4-8FAC-4C96-B5B9-049062BACDF2}" ShortID="629110175">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Attack_2" ID="{0DAF3FB2-210E-413E-AF80-5B15243C6FAD}" WorkUnitID="{FB78CDA5-D1B9-4F48-8912-C37AF4B84146}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Jump_2" ID="{67C58294-194A-4B68-8B37-46F2D409C889}">
+					<ChildrenList>
+						<Action Name="" ID="{0E457E96-A275-4A22-9D54-B429CA2937CF}" ShortID="179205606">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="NormalJump_2" ID="{361D6192-8A11-4E39-BA28-4BB14ED4C4D4}" WorkUnitID="{FB78CDA5-D1B9-4F48-8912-C37AF4B84146}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>

@@ -172,20 +172,20 @@
 			<ShortName>UI</ShortName>
 			<Path>UI.bnk</Path>
 		</SoundBank>
-		<SoundBank Id="2678230380" Type="User" Language="SFX" Hash="{412BE42B-27E9-9BC8-91E5-BA0CAB196607}">
+		<SoundBank Id="2678230380" Type="User" Language="SFX" Hash="{25A8ACC6-DD92-1403-D5E8-4856DB9B733B}">
 			<ShortName>Level3</ShortName>
 			<Path>Level3.bnk</Path>
 			<Media>
-				<File Id="68713490" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>Up.wav</ShortName>
-					<CachePath>SFX/Up_C0F96E8C.wem</CachePath>
+				<File Id="916479105" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Up_withMarker.wav</ShortName>
+					<CachePath>SFX/Up_withMarker_818F3B66.wem</CachePath>
 				</File>
 			</Media>
 			<Events>
 				<Event Id="2859270421" Name="Pause_Level3" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 				<Event Id="3659125943" Name="Play_Level3" DurationType="OneShot" DurationMin="172.148" DurationMax="172.148">
 					<MediaRefs>
-						<MediaRef Id="68713490"/>
+						<MediaRef Id="916479105"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="3265051674" Name="Resume_Level3" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
@@ -232,10 +232,14 @@
 				<Event Id="3077303045" Name="StopLevel2" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 			</Events>
 		</SoundBank>
-		<SoundBank Id="3060922364" Type="User" Language="SFX" Hash="{04C85749-82D4-DD21-AD3A-D17C2F9A359E}">
+		<SoundBank Id="3060922364" Type="User" Language="SFX" Hash="{AF70FDE1-803F-CA98-F447-FFEB6AF9094F}">
 			<ShortName>InteractionSFX</ShortName>
 			<Path>InteractionSFX.bnk</Path>
 			<Media>
+				<File Id="226520610" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Snare01.wav</ShortName>
+					<CachePath>SFX/Snare01_818F3B66.wem</CachePath>
+				</File>
 				<File Id="346481716" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>jump_1.wav</ShortName>
 					<CachePath>SFX/jump_1_818F3B66.wem</CachePath>
@@ -243,6 +247,10 @@
 				<File Id="398724365" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Attack_1.wav</ShortName>
 					<CachePath>SFX/Attack_1_818F3B66.wem</CachePath>
+				</File>
+				<File Id="767300613" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SKick_1.wav</ShortName>
+					<CachePath>SFX/SKick_1_818F3B66.wem</CachePath>
 				</File>
 			</Media>
 			<Events>
@@ -256,8 +264,18 @@
 						<MediaRef Id="346481716"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="3944433909" Name="Play_Attack_2" DurationType="OneShot" DurationMin="1.8798866" DurationMax="1.8798866">
+					<MediaRefs>
+						<MediaRef Id="767300613"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2102497793" Name="Play_Jump_2" DurationType="OneShot" DurationMin="0.3660771" DurationMax="0.3660771">
+					<MediaRefs>
+						<MediaRef Id="226520610"/>
+					</MediaRefs>
+				</Event>
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{EC03819F-0401-B658-3C64-2F8C39F3C8AD}</FileHash>
+	<FileHash>{820E2B8F-AF1F-C2BE-AC8F-0F37B79F20A8}</FileHash>
 </SoundBanksInfo>
