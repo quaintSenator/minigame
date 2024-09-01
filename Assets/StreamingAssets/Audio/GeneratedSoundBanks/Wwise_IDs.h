@@ -18,6 +18,8 @@ namespace AK
         static const AkUniqueID PAUSE_LEVEL1 = 2859270423U;
         static const AkUniqueID PAUSE_LEVEL2 = 2859270420U;
         static const AkUniqueID PAUSE_LEVEL3 = 2859270421U;
+        static const AkUniqueID PLAY_ATTACK_2 = 3944433909U;
+        static const AkUniqueID PLAY_JUMP_2 = 2102497793U;
         static const AkUniqueID PLAY_LEVEL1 = 3659125941U;
         static const AkUniqueID PLAY_LEVEL2 = 3659125942U;
         static const AkUniqueID PLAY_LEVEL3 = 3659125943U;
