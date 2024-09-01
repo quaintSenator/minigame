@@ -72,9 +72,9 @@ public class TilemapCameraController : Singleton<TilemapCameraController>
 
     private void OnStop(EventData obj)
     {
-        virtualCamera.gameObject.SetActive(false);
-        virtualCamera2.gameObject.SetActive(true);
-        currentVirtualCamera = virtualCamera2;
+        virtualCamera.gameObject.SetActive(true);
+        virtualCamera2.gameObject.SetActive(false);
+        currentVirtualCamera = virtualCamera;
     }
 
     private void OnMiddleScroll(EventData data)

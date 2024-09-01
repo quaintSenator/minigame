@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/GUIScene.unity
     guid: fe8ab8c135a568d4cb84204220794121
@@ -25,5 +22,5 @@ EditorBuildSettings:
     guid: 75a3babd70518f742b81ff9565696c61
   - enabled: 1
     path: Assets/Scenes/BuildScene/LevelForMapEditor.unity
-    guid: 3eb32b79e47c6f94ba752df4e0069684
+    guid: 626e3d0342957ca4c9391de139269b52
   m_configObjects: {}

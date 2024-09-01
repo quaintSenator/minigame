@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // 事件类型
 public enum EventType
@@ -203,7 +204,7 @@ public class RegisterResetPointCallbackEventData : EventData
 public class EventManager : Singleton<EventManager>
 {
     private Dictionary<EventType, Action<EventData>> eventDictionary;
-
+    private string sceneName = "";
     protected override void OnAwake()
     {
         Init();
@@ -218,6 +219,7 @@ public class EventManager : Singleton<EventManager>
     }
     public static void AddListener(EventType eventType, Action<EventData> listener)
     {
+        Instance.CheckNeedClear();
         Action<EventData> myEvent;
         if (Instance.eventDictionary.TryGetValue(eventType, out myEvent))
         {
@@ -239,6 +241,7 @@ public class EventManager : Singleton<EventManager>
     public static void RemoveListener(EventType eventType, Action<EventData> listener)
     {
         if (Instance == null) return;
+        Instance.CheckNeedClear();
         Action<EventData> thisEvent;
         if (Instance.eventDictionary.TryGetValue(eventType, out thisEvent))
         {
@@ -249,6 +252,7 @@ public class EventManager : Singleton<EventManager>
 
     public static void InvokeEvent(EventType eventType, EventData eventData = null)
     {
+        Instance.CheckNeedClear();
         if (eventType == EventType.StartLevelEvent)
         {
             Debug.Log("StartLevelEvent");
@@ -262,6 +266,15 @@ public class EventManager : Singleton<EventManager>
         if(eventType == EventType.UGCSaveMapDataEvent)
         {
             Debug.Log("UGCSaveMapDataEvent");
+        }
+    }
+
+    private void CheckNeedClear()
+    {
+        if (sceneName != SceneManager.GetActiveScene().name)
+        {
+            eventDictionary.Clear();
+            sceneName = SceneManager.GetActiveScene().name;
         }
     }
 

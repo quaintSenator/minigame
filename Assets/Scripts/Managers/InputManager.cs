@@ -30,7 +30,7 @@ public class InputManager : Singleton<InputManager>
     void Update()
     {
         
-        if(SceneManager.GetActiveScene().name == "TilemapEditorScene" && MapEditorSaveAndLoadUI.InSaveAndLoadUI)
+        if(SceneManager.GetActiveScene().name == "TilemapEditorScene" && (MapEditorSaveAndLoadUI.InSaveAndLoadUI || HelpUI.InHelpUI))
         {
             return;
         }

@@ -636,6 +636,24 @@ public class MusicManager : Singleton<MusicManager>
         LevelIndex = index;
         LoadLevelBankSync();
     }
+    
+    public void SetLevelIndex(string musicName)
+    {
+        UnloadLevelBank();
+        if (musicName == "Level1")
+        {
+            LevelIndex = 1;
+        }
+        else if (musicName == "Level2")
+        {
+            LevelIndex = 2;
+        }
+        else
+        {
+            LevelIndex = 3;
+        }
+        LoadLevelBankSync();
+    }
 
 
     #endregion

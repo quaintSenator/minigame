@@ -14,6 +14,7 @@ public class MapReader : Singleton<MapReader>
     private Dictionary<Vector3Int, BuildableBase> currentBuildableMap = new Dictionary<Vector3Int, BuildableBase>();
 
     [SerializeField] private bool showAllBuildable = false;
+    [SerializeField] private MusicManager musicManager;
     
     protected override void OnAwake()
     {
@@ -34,21 +35,30 @@ public class MapReader : Singleton<MapReader>
     {
         MapData mapData = null;
         string dataString = PlayerPrefs.GetString(GameConsts.CURRENT_SELECTED_MAPDATA);
-        if(SceneManager.GetActiveScene().name == "LevelForMapEditor")
-        {
-            dataString = PlayerPrefs.GetString(GameConsts.UGC_SELECTED_MAPDATA);
-        }
         if (dataString != "")
         {
             Debug.Log("Load selected map data from PlayerPrefs");
             mapData = JsonUtility.FromJson<MapData>(dataString);
+        }
+        if(SceneManager.GetActiveScene().name == "LevelForMapEditor")
+        {
+            dataString = PlayerPrefs.GetString(GameConsts.UGC_SELECTED_MAPDATA);
+            if (dataString != "")
+            {
+                Debug.Log("Load selected map data from PlayerPrefs");
+                mapData = JsonUtility.FromJson<MapData>(dataString);
+                string musicName = mapData.musicName;
+                if (musicName != "")
+                {
+                    musicManager.SetLevelIndex(musicName);
+                }
+            }
         }
         else if (selectedMapdata != null)
         {
             Debug.Log("Load selected map data from selectedMapdata : " + selectedMapdata.mapData);
             mapData = JsonUtility.FromJson<MapData>(selectedMapdata.mapData);
         }
-        mapData = JsonUtility.FromJson<MapData>(selectedMapdata.mapData);
         if (mapData != null)
         {
             ReadDataFromBuildableInfos(mapData.buildableInfos);
