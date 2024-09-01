@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{E87CEBE4-0763-4B37-872F-ED042B33D297}" SchemaVersion="119">
+	<Switches>
+		<WorkUnit Name="UI" ID="{E87CEBE4-0763-4B37-872F-ED042B33D297}" PersistMode="Standalone">
+			<ChildrenList>
+				<SwitchGroup Name="Button" ID="{BA898226-7FF6-4E88-A0AE-27F6323EFB12}">
+					<ChildrenList>
+						<Switch Name="Default" ID="{9904A590-27F4-490A-9E17-B9B391928EF2}"/>
+					</ChildrenList>
+				</SwitchGroup>
+			</ChildrenList>
+		</WorkUnit>
+	</Switches>
+</WwiseDocument>
