@@ -33,6 +33,9 @@ public class FlowManager : Singleton<FlowManager>
 
     //用于每次流程控制
     private LevelEventData lastLevelEventData = null;
+	
+	//终章关卡序号
+	private int endLevelIndex=3;
 
     //EnterGameEvent
     //StartStoryEvent
@@ -75,6 +78,8 @@ public class FlowManager : Singleton<FlowManager>
         EventManager.AddListener(EventType.PlayerDeadStoryEvent, OnPlayerDeadStoryEvent);
         EventManager.AddListener(EventType.EndPlayerDeadStoryEvent, OnEndPlayerDeadStoryEvent);
         EventManager.AddListener(EventType.EndRespawnEvent, OnEndRespawnEvent);
+		
+		EventManager.AddListener(EventType.StartPassLevelEvent, OnStartPassLevelEvent);
 
     }
 
@@ -88,6 +93,8 @@ public class FlowManager : Singleton<FlowManager>
         EventManager.RemoveListener(EventType.PlayerDeadStoryEvent, OnPlayerDeadStoryEvent);
         EventManager.RemoveListener(EventType.EndPlayerDeadStoryEvent, OnEndPlayerDeadStoryEvent);
         EventManager.RemoveListener(EventType.EndRespawnEvent, OnEndRespawnEvent);
+		
+		EventManager.RemoveListener(EventType.StartPassLevelEvent, OnStartPassLevelEvent);
 
     }
 
@@ -178,6 +185,20 @@ public class FlowManager : Singleton<FlowManager>
     {
 
     }
+	
+	private void OnStartPassLevelEvent(EventData eventData)
+	{
+		
+		if(ProgressManager.Instance.GetCurrentLevelIndex()==endLevelIndex)
+		{
+			EventManager.InvokeEvent(EventType.EpilogueEvent);
+		}
+		else
+		{
+			EventManager.InvokeEvent(EventType.EndPassLevelEvent);
+		}
+		
+	}
 
 
 

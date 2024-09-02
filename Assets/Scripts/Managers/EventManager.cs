@@ -127,6 +127,10 @@ public enum EventType
     //StartLoadMapEvent=513,// 弃置：开始加载地图
     EndPlayerDeadStoryEvent = 514,
     ChangeDirectionEvent = 515,// 改变方向
+	
+	StartPassLevelEvent=516,//除了Flow以外都别监听
+	EndPassLevelEvent=517,//过关（非终章即第三关）需要监听的事件
+	EpilogueEvent=518,//终章(即第三关）过关需要监听的事件
     #endregion
 
     #region Boss事件

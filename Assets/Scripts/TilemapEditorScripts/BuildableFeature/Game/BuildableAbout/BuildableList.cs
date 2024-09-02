@@ -31,6 +31,7 @@ public enum BuildableType
     enemy_with_trigger_2 = 22,
     enemy_with_trigger_3 = 23,
     change_direction_trigger = 24,
+	pass_level_trigger=25
 }
 
 [CreateAssetMenu(fileName = "BuildableList", menuName = "Buildable/Create BuildableList")]

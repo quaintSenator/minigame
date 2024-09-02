@@ -197,6 +197,15 @@ public class PlayerController : MonoBehaviour
     private Vector3 respawnMaskTargetScale = new Vector3(0.003f, 0.003f, 0);
 
     private bool isMaskReducing = false;
+	
+	
+	//通关相关
+	private bool bHasPassLevel=false;
+	
+	private bool bHasPassEpilogueLevel=false;
+	
+	//public CinemachineVirtualCamera cinemachine=null;
+	
 
     //为减少FixUp开销保存HeadingDir的常态，仅在事件下切换
     private Vector3 playerHeadingDir;
@@ -233,7 +242,9 @@ public class PlayerController : MonoBehaviour
 
         EventManager.AddListener(EventType.RegisterResetPointEvent, OnRegisterResetPoint);
         EventManager.AddListener(EventType.PlayerPassRegisterResetPointEvent, OnPlayerPassRegisterResetPoint);
-
+		
+		EventManager.AddListener(EventType.EndPassLevelEvent, OnEndPassLevelEvent);
+		EventManager.AddListener(EventType.EpilogueEvent, OnEpilogueEvent);
 
     }
 
@@ -249,7 +260,10 @@ public class PlayerController : MonoBehaviour
 
         EventManager.RemoveListener(EventType.RegisterResetPointEvent, OnRegisterResetPoint);
         EventManager.RemoveListener(EventType.PlayerPassRegisterResetPointEvent, OnPlayerPassRegisterResetPoint);
-
+		
+		EventManager.RemoveListener(EventType.EndPassLevelEvent, OnEndPassLevelEvent);
+		
+		EventManager.RemoveListener(EventType.EpilogueEvent, OnEpilogueEvent);
     }
     private void Start()
     {
@@ -1084,7 +1098,20 @@ public class PlayerController : MonoBehaviour
 
         }
     }
-
+	
+	private void OnEndPassLevelEvent(EventData eventData)
+	{
+		//TODO,控制相机 和持续移动
+		SetIfCanMove(false);
+	}
+	
+	
+	private void OnEpilogueEvent(EventData eventData)
+	{
+		SetIfCanMove(false);
+	}
+	
+	
     private void OnStartLevelEvent(EventData eventData)
     {
         //OnReset();
