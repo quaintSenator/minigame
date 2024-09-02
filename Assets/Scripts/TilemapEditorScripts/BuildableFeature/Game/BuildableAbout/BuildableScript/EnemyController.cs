@@ -45,7 +45,7 @@ public class EnemyController : BuildableBase {
         }
     }
 
-    private void OnDead()
+    public virtual void OnDead()
     {
         gameObject.tag = "Safe";
         gameObject.GetComponent<Collider2D>().enabled = false;
