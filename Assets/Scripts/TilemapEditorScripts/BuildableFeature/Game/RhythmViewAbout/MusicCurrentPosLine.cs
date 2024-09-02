@@ -32,8 +32,8 @@ public class MusicCurrentPosLine : MonoBehaviour
         transform.position = new Vector3(currentPos.x, currentPos.y, 0);
         if (TilemapCameraController.MoveDirection == Direction.Right)
         {
-            lineRenderer.SetPosition(0, new Vector3(currentPos.x, 30 + currentPos.y, 0));
-            lineRenderer.SetPosition(1, new Vector3(currentPos.x, -30 + currentPos.y, 0));
+            lineRenderer.SetPosition(0, new Vector3(currentPos.x, 30 + currentPos.y+1000, 0));
+            lineRenderer.SetPosition(1, new Vector3(currentPos.x, -30 + currentPos.y-1000, 0));
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else

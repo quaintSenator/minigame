@@ -203,8 +203,13 @@ public class PlayerController : MonoBehaviour
 	private bool bHasPassLevel=false;
 	
 	private bool bHasPassEpilogueLevel=false;
-	
-	//public CinemachineVirtualCamera cinemachine=null;
+
+    //public CinemachineVirtualCamera cinemachine=null;
+
+
+    //切换方向相关
+    //是否正在向上
+    private bool isMovingTowardUp = false;
 	
 
     //为减少FixUp开销保存HeadingDir的常态，仅在事件下切换
@@ -245,6 +250,7 @@ public class PlayerController : MonoBehaviour
 		
 		EventManager.AddListener(EventType.EndPassLevelEvent, OnEndPassLevelEvent);
 		EventManager.AddListener(EventType.EpilogueEvent, OnEpilogueEvent);
+        EventManager.AddListener(EventType.ChangeDirectionEvent, OnChangeDirectionEvent);
 
     }
 
@@ -358,8 +364,13 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        //角色自动向右前进，世界坐标系
-        transform.Translate(playerHeadingDir * speed * Time.fixedDeltaTime, Space.World);
+        if(!isMovingTowardUp)
+        {
+            //角色自动向右前进，世界坐标系
+            transform.Translate(playerHeadingDir * speed * Time.fixedDeltaTime, Space.World);
+            expectedDisplacementXAxis += (playerHeadingDir * speed * Time.fixedDeltaTime).x;
+        }
+        CheckDead();
 
 
 
@@ -369,7 +380,7 @@ public class PlayerController : MonoBehaviour
             rigidBody.AddForce(Vector2.up * jumpForce);
         }
 
-        CheckDead();
+
     }
 
 
@@ -604,7 +615,7 @@ public class PlayerController : MonoBehaviour
         }
         //Check X position 
         //moveTimer += Time.fixedDeltaTime;
-        expectedDisplacementXAxis += (playerHeadingDir * speed * Time.fixedDeltaTime).x;
+
         // playerHeadingDir* speed *Time.fixedDeltaTime
         /*
                 if (resetPointIndex >=0 && resetPointIndex < resetpoints.Count)
@@ -1110,8 +1121,13 @@ public class PlayerController : MonoBehaviour
 	{
 		SetIfCanMove(false);
 	}
-	
-	
+
+
+    private void OnChangeDirectionEvent(EventData eventData)
+    {
+        isMovingTowardUp = !isMovingTowardUp;
+    }
+
     private void OnStartLevelEvent(EventData eventData)
     {
         //OnReset();

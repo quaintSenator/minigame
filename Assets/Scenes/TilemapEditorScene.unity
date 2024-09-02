@@ -4394,7 +4394,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2252913727729079448, guid: dc9dd7ea8bf023b44a8c32117b6f7d63, type: 3}
       propertyPath: LevelIndex
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2252913727729079448, guid: dc9dd7ea8bf023b44a8c32117b6f7d63, type: 3}
       propertyPath: IfPlayMusicWhenStart
@@ -9931,7 +9931,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48be1c62b3fe2d845bc6e22b8e4dd750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rhythmDataFile: {fileID: 11400000, guid: 94ebfad679c4dcc4cbd5deb422293695, type: 2}
+  rhythmDataFile: {fileID: 11400000, guid: b8e77938d3244db478e6e915aa347a97, type: 2}
   allMusicFiles:
   - {fileID: 11400000, guid: 94ebfad679c4dcc4cbd5deb422293695, type: 2}
   - {fileID: 11400000, guid: 8580907acf2a0fa4aba51836694a1dea, type: 2}
@@ -9944,22 +9944,22 @@ MonoBehaviour:
     startTime: -0.15
     endTime: -0.05
     color: {r: 0.8773585, g: 0.39315593, b: 0.39315593, a: 0.33333334}
-    height: 1
+    height: 1000
   - name: "\u5B8C\u7F8E\u533A\u95F4"
     startTime: -0.05
     endTime: -0.01
     color: {r: 1, g: 0.91517913, b: 0, a: 0.33333334}
-    height: 1.5
+    height: 1500
   - name: "\u5B8C\u7F8E\u70B9"
     startTime: -0.01
     endTime: 0.01
     color: {r: 0, g: 1, b: 0.010046244, a: 0.33333334}
-    height: 2
+    height: 2000
   - name: "\u5B8C\u7F8E\u533A\u95F4"
     startTime: 0.01
     endTime: 0.05
     color: {r: 1, g: 0.9137255, b: 0, a: 0.33333334}
-    height: 1.5
+    height: 1500
   musicController: {fileID: 1837064675}
   musicCurrentPosLine: {fileID: 2019191481}
   dynamicRhythmNodePrefab: {fileID: 1418425985313366245, guid: 220209c6f1f38494380ccec63ee0fa03, type: 3}
@@ -11564,6 +11564,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1495519563361496605, guid: d8f470708ae2222458c3467b2a542305, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4872307809240660255, guid: d8f470708ae2222458c3467b2a542305, type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6347474136023788284, guid: d8f470708ae2222458c3467b2a542305, type: 3}
