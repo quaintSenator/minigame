@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d80ddc60d60bc645b1be2970912c226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gapSpace: 13
+  gapSpace: 10
   triggerPreview: {fileID: 4378871289878122459}
   enemyPreview: {fileID: 9007275254250106626}
   linkLinePreview: {fileID: 5014918605263854477}

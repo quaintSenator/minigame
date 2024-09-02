@@ -124,9 +124,9 @@ public class BossController : MonoBehaviour
         inDOMove = true;
         float localTargetY = data.position.y - centerPoint.transform.position.y;
         
-        Vector3 bulletPos = new Vector3(transform.position.x, data.position.y, 0);
+        Vector3 bulletPos = new Vector3(transform.position.x - 1f, data.position.y, 0);
         Vector3 targetPos = new Vector3(data.position.x + data.meetTime * GameConsts.SPEED, data.position.y, 0);
-        float speed = (transform.position.x - (data.position.x + data.meetTime * GameConsts.SPEED)) / (data.meetTime - 0.2f);
+        float speed = (bulletPos.x - (data.position.x + data.meetTime * GameConsts.SPEED)) / (data.meetTime - 0.2f);
         
         transform.DOLocalMove(new Vector3(transform.localPosition.x, localTargetY, 0), 0.2f)
             .onComplete = () =>
