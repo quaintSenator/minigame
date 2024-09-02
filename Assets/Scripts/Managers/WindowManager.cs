@@ -12,7 +12,8 @@ public enum WindowType
     ConfigPage,
     PausePage,
     DeadPage,
-    TipPage
+    TipPage,
+    LevelPassPage
 }
 
 
@@ -52,6 +53,7 @@ public class WindowManager : Singleton<WindowManager>
         _type2ResourceFileNameDict[WindowType.PausePage] = "PausePage";
         _type2ResourceFileNameDict[WindowType.DeadPage] = "DeadPage";
         _type2ResourceFileNameDict[WindowType.TipPage] = "TipPage";
+        _type2ResourceFileNameDict[WindowType.LevelPassPage] = "LevelPassPage";
 
         var sceneName = SceneManager.GetActiveScene().name;
         _pausable = false;
@@ -150,16 +152,39 @@ public class WindowManager : Singleton<WindowManager>
             var pausePage = _uiStack.Peek().gameObject;
             _uiStack.Pop();
             Destroy(pausePage);
+            return;
         }
+        if (isAtLevelPassPage())
+        {
+            ResumeTimePause();
+            var top = _uiStack.Peek().gameObject;
+            _uiStack.Pop();
+            Destroy(top);
+        }
+    }
+
+    public bool isAtLevelPassPage()
+    {
+        if (_uiStack != null)
+        {
+            var top = _uiStack.Peek();
+            if (top && top.gameObject.name.Contains("LevelPass"))
+            {
+                return true;
+            }
+        }
+        return false;
     }
     private void OnEnable()
     {
         EventManager.AddListener(EventType.Ask4PauseEvent, OnEscapeDown);
+        EventManager.AddListener(EventType.EndPassLevelEvent, OnPassLevel);
     }
 
     private void OnDisable()
     {
         EventManager.RemoveListener(EventType.Ask4PauseEvent, OnEscapeDown);
+        EventManager.RemoveListener(EventType.EndPassLevelEvent, OnPassLevel);
     }
     
     public void InitWindow(WindowType windowType, Transform parent)
@@ -234,6 +259,15 @@ public class WindowManager : Singleton<WindowManager>
         }
         _shouldGiveFirstRandomLine = !_shouldGiveFirstRandomLine;
         return res;
+    }
+
+    public void OnPassLevel(EventData eventData)
+    {
+        //应该不可能发生暂停页面在上面的同时过关的情况
+        ClipUIRoot2Empty();
+        InitWindow(WindowType.LevelPassPage, _UIRoot);
+        EventManager.InvokeEvent(EventType.GamePauseEvent);
+        Time.timeScale = 0;//强停止
     }
     public void OpenTip(int clickedNum)//外部应用这个函数会频繁连点，这里要鉴定连点
     {

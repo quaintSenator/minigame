@@ -9,7 +9,6 @@ public class PausePage : Window
     public new void Start()
     {
         base.Init();
-        
     }
 
     public void OnClickRestartBtn()
@@ -22,7 +21,6 @@ public class PausePage : Window
     {
         WindowManager.Instance.ResumeGame();
     }
-    // Update is called once per frame
     protected override void onExit()
     {
         base.onExit();

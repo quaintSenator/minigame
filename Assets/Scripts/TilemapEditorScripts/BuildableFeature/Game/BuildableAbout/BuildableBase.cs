@@ -114,7 +114,18 @@ public class BuildableBase : MonoBehaviour
         {
             buildableList = Resources.Load<BuildableList>("AllBuildableList");
         }
-        GameObject obj = PoolManager.Instance.SpawnFromPool(type.ToString(), buildableList.GetPrefab(type), parent);
+
+        GameObject obj;
+        if (type.ToString().Contains("enemy"))
+        {
+            obj = Instantiate(buildableList.GetPrefab(type), parent);
+            Debug.Log(type.ToString());
+        }
+        else
+        {
+            
+            obj = PoolManager.Instance.SpawnFromPool(type.ToString(), buildableList.GetPrefab(type), parent);
+        }
         BuildableBase buildable = obj.GetComponent<BuildableBase>();
         buildable.type = type;
         buildable.index = index;
@@ -136,7 +147,14 @@ public class BuildableBase : MonoBehaviour
         buildable.Dispose();
         buildable.UnRegisterEvent();
         RemoveBuildableFromGroup(buildable);
-        PoolManager.Instance.ReturnToPool(buildable.Type.ToString(), buildable.gameObject);
+        if (buildable.Type.ToString().Contains("enemy"))
+        {
+            Destroy(buildable.gameObject);
+        }
+        else
+        {
+            PoolManager.Instance.ReturnToPool(buildable.Type.ToString(), buildable.gameObject);
+        }
     }
 
     public static BuildableBase SpawnBuildableWithoutInit(BuildableType type, Vector3Int position, Transform parent,
