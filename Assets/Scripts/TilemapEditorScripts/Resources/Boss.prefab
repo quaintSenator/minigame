@@ -70,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2071991839
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: a5b1cf52ab6a2fe4eb99cc2fd17631bc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -152,7 +152,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2071991839
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 87c6ade020336054cb0af3a622b7da75, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -777,6 +777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f1db5ba41adbef449a73d98015bbe5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossSelfRotate: {fileID: 7063725156785113405}
   spawnPosition: {x: 14.53, y: 5.25, z: 10}
   showUpPosition: {x: 7.03, y: 2.7, z: 10}
   showUpTime: 1.5

@@ -123,6 +123,11 @@ public class PoolManager : Singleton<PoolManager>
             Debug.LogWarning("Pool with tag " + key + " doesn't exist.");
             return;
         }
+
+        if (key == "BossBullet")
+        {
+            Debug.Log("ReturnToPool");
+        }
         
         objectToReturn.SetActive(false);
         objectToReturn.transform.SetParent(transform);

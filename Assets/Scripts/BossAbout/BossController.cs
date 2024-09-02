@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
+    [SerializeField] private BossSelfRotate bossSelfRotate;
     [BoxGroup("Boss出场相关设置"), Tooltip("Boss出生位置")]
     [SerializeField] private Vector3 spawnPosition;
     [BoxGroup("Boss出场相关设置"), Tooltip("Boss出场目标位置")]
@@ -25,24 +26,50 @@ public class BossController : MonoBehaviour
     public static BossController CurrentBoss;
     private static Transform centerPoint;
     private static bool inDOMove = false;
+    private float lastY = 0;
+    private List<GameObject> bulletList = new List<GameObject>();
 
     private void OnEnable()
     {
         EventManager.AddListener(EventType.StopOrPlayMusicEvent, DestroyBoss);
-        EventManager.AddListener(EventType.EndPlayerDeadEvent, DestroyBoss);
+        EventManager.AddListener(EventType.EndPlayerDeadEvent, OnPlayerDead);
         EventManager.AddListener(EventType.ReleaseLaserEvent, ReleaseLaser);
         EventManager.AddListener(EventType.ReleaseBulletEvent, ReleaseBullet);
         EventManager.AddListener(EventType.ReleaseEnemyEvent, ReleaseEnemy);
+        EventManager.AddListener(EventType.PlayerPassRegisterResetPointEvent, RegisterPosition);
+        EventManager.AddListener(EventType.StartLevelEvent, DestroyBoss);
+        EventManager.AddListener(EventType.BossEndEvent, OnBossEnd);
     }
     
     private void OnDisable()
     {
         EventManager.RemoveListener(EventType.StopOrPlayMusicEvent, DestroyBoss);
-        EventManager.RemoveListener(EventType.EndPlayerDeadEvent, DestroyBoss);
+        EventManager.RemoveListener(EventType.EndPlayerDeadEvent, OnPlayerDead);
         EventManager.RemoveListener(EventType.ReleaseLaserEvent, ReleaseLaser);
         EventManager.RemoveListener(EventType.ReleaseBulletEvent, ReleaseBullet);
         EventManager.RemoveListener(EventType.ReleaseEnemyEvent, ReleaseEnemy);
+        EventManager.RemoveListener(EventType.PlayerPassRegisterResetPointEvent, RegisterPosition);
+        EventManager.RemoveListener(EventType.StartLevelEvent, DestroyBoss);
+        EventManager.RemoveListener(EventType.BossEndEvent, OnBossEnd);
+    }
 
+    private void OnBossEnd(EventData obj)
+    {
+        GameObject mapObj = GameObject.Find("map");
+        if (mapObj)
+        {
+            transform.parent = mapObj.transform;
+        }
+        else
+        {
+            transform.parent = null;
+        }
+        bossSelfRotate.ifRotateSelf = false;
+    }
+
+    private void OnPlayerDead(EventData obj)
+    {
+        transform.DOLocalMove(new Vector3(transform.localPosition.x, lastY, 0), 0.1f);
     }
 
     private void Update()
@@ -70,8 +97,14 @@ public class BossController : MonoBehaviour
         }
     }
 
+    private void RegisterPosition(EventData obj)
+    {
+        lastY = transform.localPosition.y;
+    }
+
     private void DestroyBoss(EventData obj)
     {
+        Debug.Log("DestroyBoss");
         PoolManager.Instance.ReturnToPool("Boss", gameObject);
     }
     
