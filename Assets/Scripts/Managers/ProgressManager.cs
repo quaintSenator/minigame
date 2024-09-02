@@ -138,7 +138,6 @@ public class ProgressManager : Singleton<ProgressManager>
         levelProgressDataDic.Add(levelIndex, levelProgressData);
         levelProgressDataList.Add(levelProgressData);
     }
-    
     /// <summary>
     /// 获取当前关卡进度
     /// </summary>
