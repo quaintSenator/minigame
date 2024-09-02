@@ -11,6 +11,7 @@ public class BossBulletTrigger : BuildableBase
 {
     [SerializeField] private float meetTime = 0.5f;
     [SerializeField] private Transform previewObj;
+    [SerializeField] private Transform triggerObj;
 
     private void Start()
     {
@@ -19,10 +20,12 @@ public class BossBulletTrigger : BuildableBase
             previewObj.localPosition = new Vector3((-0.5f + meetTime * GameConsts.SPEED)/2, 0, 0);
             previewObj.localScale = new Vector3(meetTime * GameConsts.SPEED, 0.5f, 0);
             previewObj.gameObject.SetActive(true);
+            triggerObj.gameObject.SetActive(true);
         }
         else
         {
             previewObj.gameObject.SetActive(false);
+            triggerObj.gameObject.SetActive(false);
         }
     }
     protected override void TriggerThisBuildable(PlayerController player)

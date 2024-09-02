@@ -43,8 +43,8 @@ public class EnemyTrigger : MonoBehaviour
         enemyVisual.transform.DOScale(new Vector3(1, 1, 1),0.4f).onComplete = () =>
         {
             enemyVisual.transform.DOShakeScale(0.2f, 0.3f, 5, 90, true, ShakeRandomnessMode.Harmonic);
-            EventManager.InvokeEvent(EventType.ReleaseEnemyEvent);
         };
+        EventManager.InvokeEvent(EventType.ReleaseEnemyEvent, new ReleaseEnemyEventData(transform.position));
     }
 
     private void Update()
@@ -68,5 +68,14 @@ public class EnemyTrigger : MonoBehaviour
         }
         enemyVisual.SetActive(false);
         enemyVisual.transform.localScale = Vector3.zero;
+    }
+}
+
+public class ReleaseEnemyEventData : EventData
+{
+    public Vector3 position;
+    public ReleaseEnemyEventData(Vector3 position)
+    {
+        this.position = position;
     }
 }

@@ -237,6 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meetTime: 1.625
   previewObj: {fileID: 268703491}
+  triggerObj: {fileID: 6679448756449570450}
 --- !u!1 &6679448756449570461
 GameObject:
   m_ObjectHideFlags: 0

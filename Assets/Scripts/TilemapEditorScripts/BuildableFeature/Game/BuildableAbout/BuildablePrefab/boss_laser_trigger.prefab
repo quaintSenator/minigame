@@ -156,6 +156,7 @@ MonoBehaviour:
   holdTime: 0.75
   continueTime: 0.625
   previewObj: {fileID: 5166520317956381602}
+  triggerObj: {fileID: 6679448756449570450}
 --- !u!1 &6679448756449570461
 GameObject:
   m_ObjectHideFlags: 0

@@ -143,11 +143,19 @@ public class BossController : MonoBehaviour
     
     private void ReleaseEnemy(EventData obj)
     {
+        var data = obj as ReleaseEnemyEventData;
+        float localTargetY = data.position.y - centerPoint.transform.position.y;
+        Debug.Log("ReleaseEnemy" + localTargetY);
         inDOMove = true;
-        transform.DOShakeScale(0.3f, 0.3f, 4, 40, true, ShakeRandomnessMode.Harmonic).onComplete = () =>
+        transform.DOLocalMove(new Vector3(transform.localPosition.x, localTargetY, 0), 0.2f)
+            .onComplete = () =>
         {
-            inDOMove = false;
+            transform.DOShakeScale(0.3f, 0.3f, 4, 40, true, ShakeRandomnessMode.Harmonic).onComplete = () =>
+            {
+                inDOMove = false;
+            };
         };
+
     }
     
     public void ResetPosition()
