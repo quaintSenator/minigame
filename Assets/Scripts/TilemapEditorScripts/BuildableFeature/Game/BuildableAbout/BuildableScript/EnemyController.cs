@@ -64,7 +64,14 @@ public class EnemyController : BuildableBase {
         
         CleverTimerManager.Ask4Timer(2f, data =>
         {
-            Destroy(gameObject);
+            if(this != null)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                Debug.LogError("EnemyController is null");
+            }
         });
     }
 

@@ -32,6 +32,6 @@ public class AttackWave : MonoBehaviour
         m_material.SetFloat("_OnceTime", p2);
         m_material.SetFloat("_Angle2Rotate", p3);
         m_material.SetFloat("_FadeTime", p4);
-        Debug.LogError("sfsf:startTime" + p1.ToString());
+        //Debug.LogError("sfsf:startTime" + p1.ToString());
     }
 }
