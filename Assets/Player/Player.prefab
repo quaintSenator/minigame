@@ -5393,6 +5393,22 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0cd81f7ed9fa2eb4191ba7a0b85fe841, type: 3}
   - {fileID: 21300000, guid: 2ebf3f3cdd9b0dd468410c8f7dcfe88c, type: 3}
   - {fileID: 21300000, guid: 10170d3b41e2afd43b1b20214e7d13e6, type: 3}
+  octagonSprites:
+  - {fileID: 21300000, guid: d721345b0383b8a41b67182f8875df8b, type: 3}
+  - {fileID: 21300000, guid: 21bc4f2d4369553439ca14295ffa23c7, type: 3}
+  - {fileID: 21300000, guid: c4ee6fba49a7ece418f0c4749fdb73ee, type: 3}
+  - {fileID: 21300000, guid: 76ce895e13a0a02468e9d9c3fc9bac04, type: 3}
+  dodecagonSprites:
+  - {fileID: 21300000, guid: d62df4f3dc2c70a4d890b4df639cc04b, type: 3}
+  - {fileID: 21300000, guid: 1fb32b9b65ac1d243803b0c8e024fdfc, type: 3}
+  - {fileID: 21300000, guid: c379f6204e6f39e41ad521fb8f450844, type: 3}
+  - {fileID: 21300000, guid: 71005401d5fe30f45a689ab9e4d6bfd0, type: 3}
+  circleagonSprites:
+  - {fileID: 21300000, guid: c35a7a26eb989a84bb62e5a3ee610127, type: 3}
+  - {fileID: 21300000, guid: 129e247276cad2d499cb65fe0cfb7696, type: 3}
+  - {fileID: 21300000, guid: fe67b58f88ece0f4fb2fde570ecc1bb5, type: 3}
+  - {fileID: 21300000, guid: 80994b06eb55b404c89e01c513ef1fcf, type: 3}
+  ifSwitchShapeChange: 0
 --- !u!1 &4916838170570339131
 GameObject:
   m_ObjectHideFlags: 0

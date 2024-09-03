@@ -152,6 +152,8 @@ public class PlayerController : MonoBehaviour
     private float moveTimer = 0;
     //飞行时竖直速度
     private float verticalVelocity = 0;
+    //方向翻转时 水平速度
+    private float horizonVelocity = 0;
 
     //眨眼回正动画触发相关
     private bool isBlink = false;
@@ -353,24 +355,35 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        //角色一直受一个向下的重力，世界坐标系
-        if (!isFlying) {
-            //添加最大下落速度限制
-            if (!ifSwitchOnFallSpeedLimit || rigidBody.velocity.y > -maxFallSpeed)
-            {
-                rigidBody.AddForce(Vector2.down * gravityScale);//* GameConsts.GRAVITY);
-            }
-
-        }
-
-
         if(!isMovingTowardUp)
         {
+			//角色一直受一个向下的重力，世界坐标系
+			if (!isFlying) {
+				//添加最大下落速度限制
+				if (!ifSwitchOnFallSpeedLimit || rigidBody.velocity.y > -maxFallSpeed)
+				{
+					rigidBody.AddForce(Vector2.down * gravityScale);//* GameConsts.GRAVITY);
+				}
+
+			}
+
+
+
             //角色自动向右前进，世界坐标系
             transform.Translate(playerHeadingDir * speed * Time.fixedDeltaTime, Space.World);
             expectedDisplacementXAxis += (playerHeadingDir * speed * Time.fixedDeltaTime).x;
         }
-        CheckDead();
+		//if(!isMovingTowardUp)
+		else
+		{
+			transform.Translate(Vector3.up * speed * Time.fixedDeltaTime, Space.World);
+		}
+
+
+        if (!isMovingTowardUp)
+        {
+            CheckDead();
+        }
 
 
 
@@ -421,6 +434,20 @@ public class PlayerController : MonoBehaviour
             isContinueJump = false;
         }
 
+    }
+
+    public void PassLastFlyPoint(float positionX)
+    {
+        if (isFlying)
+        {
+            EndFly(positionX);
+        }
+        else
+        {
+            jumpTimer = 0;
+            isBufferActive = true;
+            isContinueJump = false;
+        }
     }
 
     private void OnMouseLeftClick(EventData data = null)
@@ -500,26 +527,54 @@ public class PlayerController : MonoBehaviour
     private void Fly()
     {
         isFlying = true;
-        rigidBody.velocity = Vector2.up * verticalVelocity;
+        if(!isMovingTowardUp)
+        {
+            rigidBody.velocity = Vector2.up * verticalVelocity;
+        }
+        else
+        {
+            rigidBody.velocity = Vector2.right * horizonVelocity;
+        }
+
     }
 
     public void ChangeFlyDir()
     {
         if(isFlying)
         {
-            rigidBody.velocity = Vector2.up * verticalVelocity;    
+            if (!isMovingTowardUp)
+            {
+                rigidBody.velocity = Vector2.up * verticalVelocity;
+            }
+            else
+            {
+                rigidBody.velocity = Vector2.right * horizonVelocity;
+            }
         }
     }
 
-    private void EndFly()
+    private void EndFly(float positionX = 0)
     {
         isFlying = false;
-        if (isFlyFinished)
+        if (isFlyFinished && !isMovingTowardUp)
         {
             TryJump(JumpType.Fly);
         }
+        else if(isMovingTowardUp)
+        {
+
+            rigidBody.velocity = new Vector2();
+            //写这段代码的诗人我直接吃，嚯嚯嚯 夸张哦
+            if(positionX !=0)
+            {
+                transform.position = new Vector3(positionX, transform.position.y, transform.position.z);
+            }
+
+        }
         else {
             rigidBody.velocity = new Vector2();
+
+
         }
     }
 
@@ -621,7 +676,7 @@ public class PlayerController : MonoBehaviour
                 if (resetPointIndex >=0 && resetPointIndex < resetpoints.Count)
                 {*/
         //if (Mathf.Abs(transform.position.x - resetpoints[resetPointIndex].position.x - moveTimer * speed) >= deadZone)
-        if (expectedDisplacementXAxis - transform.position.x >= deadZone)
+        if (expectedDisplacementXAxis - transform.position.x >= deadZone && !isMovingTowardUp)
         {
             OnDead();
         }
@@ -877,6 +932,11 @@ public class PlayerController : MonoBehaviour
         verticalVelocity = value * worldScale;
     }
 
+    public void SetHorizonVelocity(float value)
+    {
+        horizonVelocity = value * worldScale;
+    }
+
     private void Respawning()
     {
         /*        if(NearlyEqualsVector3(transform.position,nextRespawnPosition))
@@ -983,6 +1043,7 @@ public class PlayerController : MonoBehaviour
         boxCollider.enabled = true;
         moveTimer = 0;
 
+        isMovingTowardUp = false;
 
     }
 
@@ -1126,6 +1187,7 @@ public class PlayerController : MonoBehaviour
     private void OnChangeDirectionEvent(EventData eventData)
     {
         isMovingTowardUp = !isMovingTowardUp;
+        expectedDisplacementXAxis = transform.position.x;
     }
 
     private void OnStartLevelEvent(EventData eventData)

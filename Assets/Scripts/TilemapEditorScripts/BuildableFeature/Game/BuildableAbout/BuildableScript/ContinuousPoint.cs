@@ -9,7 +9,10 @@ public class ContinuousPoint : BuildableBase
     public Material lineMaterial;
     private LineRenderer lineRenderer;
     private float vVelocity;
-    
+
+    private float hVelocity = 0.0f;
+
+
     public override void Init()
     {
         ContinuousPointInit();
@@ -58,15 +61,26 @@ public class ContinuousPoint : BuildableBase
         else if(NextPoint == null)
         {
             player.SetFlyFinished(false);
-            EventManager.InvokeEvent(EventType.SpacebarUpEvent);           
+            //EventManager.InvokeEvent(EventType.SpacebarUpEvent);
+            player.PassLastFlyPoint(transform.position.x);
         }
     }
 
     private float CalVerticalVelocity()
     {
+
+		
         Vector3 startPos = transform.position;
         Vector3 endPos = NextPoint.transform.position;
         float hDistance = endPos.x - startPos.x;
+		
+		///Added by Yeniao start
+		if(hDistance==0)
+		{
+			return GameConsts.SPEED;
+		}
+		///End
+		
         float vDistance = endPos.y - startPos.y;
         float time = hDistance / GameConsts.SPEED;
         float vSpeed = vDistance / time;
@@ -74,9 +88,33 @@ public class ContinuousPoint : BuildableBase
         return vSpeed;
     }
 
+    private float CalHorizonVelocity()
+    {
+
+
+        Vector3 startPos = transform.position;
+        Vector3 endPos = NextPoint.transform.position;
+        float vDistance = endPos.y - startPos.y;
+        //float hDistance = endPos.x - startPos.x;
+
+        ///Added by Yeniao start
+/*        if (hDistance == 0)
+        {
+            return GameConsts.SPEED;
+        }*/
+        ///End
+
+        float hDistance =endPos.x - startPos.x;
+        float time = vDistance / GameConsts.SPEED;
+        float hSpeed = hDistance / time;
+        //Debug.Log("vSpeed"+vSpeed);
+        return hSpeed;
+    }
+
     private void SendVelocity(PlayerController player)
     {
         player.SetVerticalVelocity(vVelocity);
+        player.SetHorizonVelocity(hVelocity);
     }
     
     public void LinkPoint()
@@ -99,6 +137,7 @@ public class ContinuousPoint : BuildableBase
         if(NextPoint != null)
         {
             vVelocity = CalVerticalVelocity();
+            hVelocity = CalHorizonVelocity();
         }
     }
     

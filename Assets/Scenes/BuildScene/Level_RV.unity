@@ -610,9 +610,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07855be1e23f82d4f90bf3e25ac233c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedMapdata: {fileID: 11400000, guid: b953959737a190548b78e9056f057191, type: 2}
+  selectedMapdata: {fileID: 11400000, guid: ccacf7459e854b142b5eae4d893d5e36, type: 2}
   selectedMapIndex: 1
-  showAllBuildable: 1
+  buildableInfos: []
+  showAllBuildable: 0
   musicManager: {fileID: 0}
 --- !u!4 &886603822
 Transform:
@@ -858,7 +859,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 428370, guid: 2f9bffd2c7ad9da4a8548ef0d5d490f9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 250
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 428370, guid: 2f9bffd2c7ad9da4a8548ef0d5d490f9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -879,6 +880,14 @@ PrefabInstance:
     - target: {fileID: 428370, guid: 2f9bffd2c7ad9da4a8548ef0d5d490f9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 11459830, guid: 2f9bffd2c7ad9da4a8548ef0d5d490f9, type: 3}
+      propertyPath: reflectLayers.m_Bits
+      value: 1015
+      objectReference: {fileID: 0}
+    - target: {fileID: 11459830, guid: 2f9bffd2c7ad9da4a8548ef0d5d490f9, type: 3}
+      propertyPath: refractLayers.m_Bits
+      value: 1015
       objectReference: {fileID: 0}
     - target: {fileID: 82330127656035978, guid: 2f9bffd2c7ad9da4a8548ef0d5d490f9, type: 3}
       propertyPath: m_Enabled

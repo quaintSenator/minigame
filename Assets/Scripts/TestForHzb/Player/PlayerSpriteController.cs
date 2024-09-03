@@ -33,6 +33,47 @@ public class PlayerSpriteController : MonoBehaviour
 
     public List<Sprite> sprites;    //方便定位用的，顺序定死
 
+    #region Added by yeniao for modify shape
+    public List<Sprite> octagonSprites;
+    public List<Sprite> dodecagonSprites;
+    public List<Sprite> circleagonSprites;
+
+    public bool ifSwitchShapeChange=false;
+
+    public void  OnPlayerPassRegisterResetPoint(EventData eventData)
+    {
+        if(!ifSwitchShapeChange)
+        {
+            return;
+        }
+        PlayerPassRegisterResetPointEvent playerPassRegisterResetPointEvent = eventData as PlayerPassRegisterResetPointEvent;
+
+        if (playerPassRegisterResetPointEvent != null)
+        {
+            int resetPointIndex = playerPassRegisterResetPointEvent.index;
+            switch (resetPointIndex)
+            {
+                case 1:
+                    sprites = octagonSprites;
+                    break;
+                case 2:
+                    sprites = dodecagonSprites;
+                    break;
+                case 3:
+                    sprites = circleagonSprites;
+                    break;
+                default:
+                    break;
+
+            }
+            SetCorrect();
+
+        }
+    }
+
+    #endregion
+
+
     private SpriteRenderer spriteRenderer;
     private Transform visual;
 
@@ -61,6 +102,16 @@ public class PlayerSpriteController : MonoBehaviour
             selfPriority = 0;
             startclear = false;
         }
+    }
+
+    private void OnEnable()
+    {
+        EventManager.AddListener(EventType.PlayerPassRegisterResetPointEvent, OnPlayerPassRegisterResetPoint);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.RemoveListener(EventType.PlayerPassRegisterResetPointEvent, OnPlayerPassRegisterResetPoint);
     }
 
     public void SetSprite(EventData data = null)

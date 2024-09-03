@@ -1048,9 +1048,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07855be1e23f82d4f90bf3e25ac233c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedMapdata: {fileID: 11400000, guid: a7d4f8afeed2aa349a4851be9ed66027, type: 2}
+  selectedMapdata: {fileID: 11400000, guid: 6d77bc8ee1ec70046b311dc7fa729c0f, type: 2}
   selectedMapIndex: 1
+  buildableInfos: []
   showAllBuildable: 0
+  musicManager: {fileID: 0}
 --- !u!1 &1294262883
 GameObject:
   m_ObjectHideFlags: 0
@@ -1445,6 +1447,10 @@ PrefabInstance:
       propertyPath: ActionAttackEvent.WwiseObjectReference
       value: 
       objectReference: {fileID: 11400000, guid: c494294efe6ea674dbf75cc0230aefac, type: 2}
+    - target: {fileID: 7167273888532759436, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: ifSwitchShapeChange
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
 --- !u!1 &1455026147
