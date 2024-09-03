@@ -57,7 +57,7 @@ public class ProgressManager : Singleton<ProgressManager>
 
     private void OnPlayerDead(EventData obj)
     {
-        float progress = currentGameTime / levelMusicMaxTimeList[currentLevelIndex-1];
+        float progress = currentGameTime / levelMusicMaxTimeList[currentLevelIndex - 1];
         UpdateLevelProgress(currentLevelIndex, progress);
     }
 
@@ -122,7 +122,7 @@ public class ProgressManager : Singleton<ProgressManager>
         }
         levelProgressDataDic[levelIndex].dialogsShows[dialogIndex] = isShown;
         levelProgressDataList.Find(data => data.levelIndex == levelIndex).dialogsShows[dialogIndex] = isShown;
-        SaveLevelData();       
+        SaveLevelData();
     }
 
     [Button]

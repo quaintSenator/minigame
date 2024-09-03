@@ -162,7 +162,7 @@ public class RotatingCassettes : MonoBehaviour
             var image2Change = points[i].gameObject.GetComponent<Image>();
             if (i == c)
             {
-                image2Change.color = Color.yellow;
+                image2Change.color = new Color(253f/255f, 202f/255f, 206f/255f);
             }
             else
             {

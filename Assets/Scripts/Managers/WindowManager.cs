@@ -105,6 +105,11 @@ public class WindowManager : Singleton<WindowManager>
         }
     }
 
+    private void OnLevelPass()
+    {
+        //创建通关页面
+        InitWindow(WindowType.LevelPassPage, _UIRoot);
+    }
     public bool isAtPausePage()
     {
         if (_UIRoot == null)
