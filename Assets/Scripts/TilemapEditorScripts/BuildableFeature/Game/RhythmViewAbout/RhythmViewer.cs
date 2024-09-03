@@ -165,8 +165,8 @@ public class RhythmViewer : Singleton<RhythmViewer>
 
     public void UpdateChangePointDatas()
     {
-        Vector3 lastPoint = new Vector3(0, -2.19f, 0);
-        Vector3 currentPoint = Vector3.zero;
+        Vector3 lastPoint = Utils.GetStartPointPostion().position;
+        Vector3 currentPoint = lastPoint;
         float lastMax = 0;
         float currentMax = 0;
         Direction direction = Direction.Right;
@@ -187,7 +187,14 @@ public class RhythmViewer : Singleton<RhythmViewer>
                 }
             }
             currentMax = minDistance+lastMax;
-            changePointDatas.Add(new ChangePointData(lastMax, currentMax, lastPoint, direction));
+            if (changePointDatas.Count == 0)
+            {
+                changePointDatas.Add(new ChangePointData(lastMax, currentMax, lastPoint, direction));
+            }
+            else
+            {
+                changePointDatas[changePointDatas.Count - 1] = new ChangePointData(lastMax, currentMax, lastPoint, direction);
+            }
             lastPoint = currentPoint;
             lastMax = currentMax;
             direction = direction == Direction.Right ? Direction.Up : Direction.Right;
@@ -195,8 +202,27 @@ public class RhythmViewer : Singleton<RhythmViewer>
         changePointDatas.Add(new ChangePointData(lastMax, 100000, lastPoint, direction));
         UpdateVisual();
     }
-
+    
+    public class PosAndDir
+    {
+        public Vector3 pos;
+        public Direction dir;
+        public PosAndDir(Vector3 pos, Direction dir)
+        {
+            this.pos = pos;
+            this.dir = dir;
+        }
+    }
+    
     public void SetSpawnPosAndRot(Transform transform, RhythmData rhythmData)
+    {
+        PosAndDir posAndDir = GetTargetPos(rhythmData);
+        transform.position = posAndDir.pos;
+        Direction direction = posAndDir.dir;
+        transform.rotation = Quaternion.Euler(0, 0, direction == Direction.Right ? 0 : 90);
+    }
+
+    public PosAndDir GetTargetPos(RhythmData rhythmData, bool isDynamic = false)
     {
         ChangePointData belongData = null;
         foreach (var changePointData in changePointDatas)
@@ -206,21 +232,29 @@ public class RhythmViewer : Singleton<RhythmViewer>
                 belongData = changePointData;
             }
         }
-        Vector3 lastPoint = belongData != null ? belongData.startPoint : new Vector3(0, -2.19f, 0);
+        Vector3 lastPoint = belongData != null ? belongData.startPoint : Utils.GetStartPointPostion().position;
         Direction direction = belongData != null ? belongData.direction : Direction.Right;
-        float min = belongData != null ? belongData.min : 0;
+        float min = belongData != null ? belongData.min : Utils.GetStartPointPostion().position.x;
         float distance = rhythmData.perfectTime * GameConsts.SPEED - min;
         Vector3 deltaPos;
         if (direction == Direction.Right)
         {
             deltaPos = new Vector3(distance, -0.53f, 0);
+            if (isDynamic)
+            {
+                deltaPos = new Vector3(distance, 3f, 0);
+            }
         }
         else
         {
             deltaPos = new Vector3(0.47f, distance, 0);
+            if (isDynamic)
+            {
+                deltaPos = new Vector3(-3f, distance, 0);
+            }
         }
-        transform.position = lastPoint + deltaPos;
-        transform.rotation = Quaternion.Euler(0, 0, direction == Direction.Right ? 0 : 90);
+        
+        return new PosAndDir(lastPoint + deltaPos, direction);
     }
     
     private void SpawnRhythmZoneVisual()
@@ -334,11 +368,11 @@ public class RhythmViewer : Singleton<RhythmViewer>
         for(int i = 0; i < rhythmDataFile.rhythmDataList.Count; i++)
         {
             RhythmData rhythmData = rhythmDataFile.rhythmDataList[i];
-            Vector3 realPosition = new Vector3(rhythmData.perfectTime * GameConsts.SPEED + startPoint.position.x, 0, 0);
+            Vector3 realPosition = GetTargetPos(rhythmData, true).pos;
             if (IsPositionInViewport(realPosition))
             {
                 GameObject go = PoolManager.Instance.SpawnFromPool("DynamicRhythmNode", dynamicRhythmNodePrefab, transform);
-                go.transform.position = realPosition;
+                SetSpawnPosAndRot(go.transform, rhythmData);
                 VisualizedRhythmNode visualizedRhythmNode = go.GetComponent<VisualizedRhythmNode>();
                 dynamicRhythmNodes.Add(i, visualizedRhythmNode);
                 currentDynamicRhythmNodeIndex = i;
@@ -371,13 +405,13 @@ public class RhythmViewer : Singleton<RhythmViewer>
             while (rightDynamicRhythmNodeIndex < rhythmDataFile.rhythmDataList.Count)
             {
                 RhythmData rhythmData = rhythmDataFile.rhythmDataList[rightDynamicRhythmNodeIndex];
-                Vector3 realPosition = new Vector3(rhythmData.perfectTime * GameConsts.SPEED + startPoint.position.x, 0, 0);
+                Vector3 realPosition = GetTargetPos(rhythmData, true).pos;
                 
                 //存在Bug，先全部显示，后续在考虑优化
                 if (IsPositionInViewport(realPosition) || true)
                 {
                     GameObject go = PoolManager.Instance.SpawnFromPool("DynamicRhythmNode", dynamicRhythmNodePrefab, transform);
-                    go.transform.position = realPosition;
+                    SetSpawnPosAndRot(go.transform, rhythmData);
                     VisualizedRhythmNode visualizedRhythmNode = go.GetComponent<VisualizedRhythmNode>();
                     dynamicRhythmNodes.Add(rightDynamicRhythmNodeIndex, visualizedRhythmNode);
                     rightDynamicRhythmNodeIndex++;

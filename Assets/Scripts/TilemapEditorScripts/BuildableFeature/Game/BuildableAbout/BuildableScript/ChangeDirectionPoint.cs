@@ -8,6 +8,14 @@ public class ChangeDirectionPoint : BuildableBase
     
     public override void Init()
     {
+        if(Rotation == 0 || Rotation == 2)
+        {
+            GetComponent<BoxCollider2D>().offset = new Vector2(1f, 0);
+        }
+        else
+        {
+            GetComponent<BoxCollider2D>().offset = new Vector2(-1f, 0);
+        }
         if(SceneManager.GetActiveScene().name == "TilemapEditorScene")
         {
             Vector3 realPosition = Utils.GetRealPostion(Position);
