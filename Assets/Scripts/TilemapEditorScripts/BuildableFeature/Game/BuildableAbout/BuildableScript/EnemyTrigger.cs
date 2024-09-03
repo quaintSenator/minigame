@@ -62,7 +62,7 @@ public class EnemyTrigger : MonoBehaviour
 
     public void ResetTrigger()
     {
-        if (SceneManager.GetActiveScene().name != "TilemapEditorScene")
+        if (SceneManager.GetActiveScene().name == "TilemapEditorScene")
         {
             enemyPreview.SetActive(true);
         }

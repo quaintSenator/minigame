@@ -10,7 +10,7 @@ public class MapReader : Singleton<MapReader>
     [SerializeField] private int selectedMapIndex = 1;
     
     private Transform mapParent;
-    private List<BuildableInfo> buildableInfos = new List<BuildableInfo>();
+    public List<BuildableInfo> buildableInfos = new List<BuildableInfo>();
     private Dictionary<Vector3Int, BuildableBase> currentBuildableMap = new Dictionary<Vector3Int, BuildableBase>();
 
     [SerializeField] private bool showAllBuildable = false;
@@ -119,6 +119,11 @@ public class MapReader : Singleton<MapReader>
     {
         foreach (var buildableInfo in buildableInfos)
         {
+            if (currentBuildableMap.ContainsKey(buildableInfo.position) && currentBuildableMap[buildableInfo.position] == null)
+            {
+                currentBuildableMap.Remove(buildableInfo.position);
+            }
+            
             if (showAllBuildable || Utils.IsAlwaysVisible(buildableInfo.type) || Utils.IsBuildableViewport(buildableInfo.position, Camera.main))
             {
                 SpawnBuildable(buildableInfo.type, buildableInfo.position, buildableInfo.index, buildableInfo.rotation);
@@ -138,6 +143,16 @@ public class MapReader : Singleton<MapReader>
         Debug.Log(UnityEngine.QualitySettings.vSyncCount);
         Debug.Log(UnityEngine.Application.targetFrameRate);
     }
+    
+    [Button]
+    public void PrintMap()
+    {
+        foreach (var VARIABLE in currentBuildableMap)
+        {
+            Debug.Log(VARIABLE.Key + " : " + VARIABLE.Value.Type.ToString());
+        }
+    }
+         
 }
 
 public class LoadMapDataEvent : EventData
