@@ -258,7 +258,6 @@ public class LevelProgressData
         isLevelLocked = levelProgressData.isLevelLocked;
         dialogsShows = levelProgressData.dialogsShows;
     }
-    
     public void CopyData(LevelProgressData levelProgressData)
     {
         levelName = levelProgressData.levelName;

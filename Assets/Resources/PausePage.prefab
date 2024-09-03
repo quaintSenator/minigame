@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 5178792359105597029}
   - component: {fileID: 4334834898400835910}
   m_Layer: 0
-  m_Name: drag_item
+  m_Name: bgVol_item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mSlotTransform: {fileID: 3348511800889368819}
+  _mConfigPage: {fileID: 0}
 --- !u!1 &4276853537729781569
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,6 +660,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mProgressText: {fileID: 4276853537910448131}
   mProgressContent: {fileID: 4276853538968293564}
+  mCirc: {fileID: 0}
   _frameContentWidth: 0
 --- !u!1 &4276853538771788229
 GameObject:
@@ -823,7 +825,7 @@ GameObject:
   - component: {fileID: 4276853538975591460}
   - component: {fileID: 4276853538975591459}
   m_Layer: 0
-  m_Name: drag_item
+  m_Name: effectVol_item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -899,6 +901,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mSlotTransform: {fileID: 4276853538771788230}
+  _mConfigPage: {fileID: 0}
 --- !u!1 &4276853539056158044
 GameObject:
   m_ObjectHideFlags: 0
@@ -1161,7 +1164,7 @@ GameObject:
   - component: {fileID: 4276853539512157159}
   - component: {fileID: 4276853539512157176}
   m_Layer: 0
-  m_Name: drag_slide (1)
+  m_Name: drag_slide_effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1343,7 +1346,7 @@ GameObject:
   - component: {fileID: 3495626214621602413}
   - component: {fileID: 8167555652390675915}
   m_Layer: 0
-  m_Name: drag_slide
+  m_Name: drag_slide_bgm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
