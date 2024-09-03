@@ -26,7 +26,7 @@ public class BossController : MonoBehaviour
     public static BossController CurrentBoss;
     private static Transform centerPoint;
     private static bool inDOMove = false;
-    private float lastY = 0;
+    private float lastY = -10000;
     private List<GameObject> bulletList = new List<GameObject>();
 
     private void OnEnable()
@@ -69,7 +69,14 @@ public class BossController : MonoBehaviour
 
     private void OnPlayerDead(EventData obj)
     {
-        transform.DOLocalMove(new Vector3(transform.localPosition.x, lastY, 0), 0.1f);
+        if (lastY > -9000f)
+        {
+            transform.DOLocalMove(new Vector3(transform.localPosition.x, lastY, 0), 0.1f);
+        }
+        else
+        {
+            DestroyBoss(obj);
+        }
     }
 
     private void Update()
@@ -95,6 +102,8 @@ public class BossController : MonoBehaviour
             CurrentBoss.transform.localPosition = new Vector3(CurrentBoss.spawnPosition.x, CurrentBoss.spawnPosition.y, 10);
             CurrentBoss.ShowUp();
         }
+
+        CurrentBoss.lastY = -10000;
     }
 
     private void RegisterPosition(EventData obj)
