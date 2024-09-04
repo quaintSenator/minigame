@@ -100,6 +100,8 @@ MonoBehaviour:
   LastPoint: {fileID: 0}
   NextPoint: {fileID: 0}
   lineMaterial: {fileID: 2100000, guid: 8bc3371a53420c54da86b5f48faf2152, type: 2}
+  originTrackLength: 1
+  scaler: 0
 --- !u!61 &6961446974732681005
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -117,7 +119,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 0.41269842}
+    oldSize: {x: 2, y: 0.82539684}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
