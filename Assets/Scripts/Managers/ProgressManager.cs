@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ProgressManager : Singleton<ProgressManager>
 {
-    [SerializeField] List<int> levelMusicMaxTimeList;
+    private List<int> levelMusicMaxTimeList;
     private List<LevelProgressData> levelProgressDataList;
     private Dictionary<int, LevelProgressData> levelProgressDataDic;
 
@@ -20,7 +20,7 @@ public class ProgressManager : Singleton<ProgressManager>
 
     protected override void OnAwake()
     {
-        levelMusicMaxTimeList = GameConsts.MUSIC_TIME_LIST;
+        levelMusicMaxTimeList = new List<int>(GameConsts.MUSIC_TIME_LIST);
         string data = PlayerPrefs.GetString(GameConsts.PROGRESS_DATA_LIST);
         if (data != "")
         {
@@ -182,6 +182,7 @@ public class ProgressManager : Singleton<ProgressManager>
         {
             InitLevelData(levelIndex);
         }
+        Debug.Log($"GetLevelProgress {levelIndex} : {levelProgressDataDic[levelIndex].levelProgress} ");
         return levelProgressDataDic[levelIndex].levelProgress;
     }
     
