@@ -75,6 +75,7 @@ public class TilemapCameraController : Singleton<TilemapCameraController>
         virtualCamera.gameObject.SetActive(true);
         virtualCamera2.gameObject.SetActive(false);
         currentVirtualCamera = virtualCamera;
+        MoveDirection = Direction.Right;
     }
 
     private void OnMiddleScroll(EventData data)
