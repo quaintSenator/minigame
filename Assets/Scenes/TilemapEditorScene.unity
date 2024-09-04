@@ -4644,7 +4644,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9191826650520383378, guid: af01c0950bf96144284f5039557f3584, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.9733334
+      value: 4.48
       objectReference: {fileID: 0}
     - target: {fileID: 9191826650520383378, guid: af01c0950bf96144284f5039557f3584, type: 3}
       propertyPath: m_LocalPosition.y
@@ -10147,7 +10147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9309d17fe7ab9824c9fd7874f91dbe66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedMapdata: {fileID: 0}
+  selectedMapdata: {fileID: 11400000, guid: 59b8a44d1b872544aaaeea615925827b, type: 2}
   mapParent: {fileID: 1270504054}
   showAllBuildable: 0
   selectIcon: {fileID: 4123996890746995310, guid: f71b0b00f1e280045af246b3a24094e4, type: 3}

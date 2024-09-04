@@ -56,20 +56,12 @@ public class ProgressFrame : MonoBehaviour
     private float UpdateProgressContent(int i)
     {
         var progress = ProgressManager.Instance.GetLevelProgress(i);
-        if (progress <= 0.08f)
-        {
-            progress = 0f;
-        }
-
-        if (progress >= 0.9f)
-        {
-            progress = 1.0f;
-        }
         _frameContentWidth = initialFrameWidth * progress;
         //mProgressContent.rectTransform.anchoredPosition = new Vector2(_frameContentWidth / 2, 0);
         mProgressContent.rectTransform.sizeDelta = new Vector2(_frameContentWidth, initialFrameHeight);
         var oldPos = mCirc.rectTransform.anchoredPosition;
         mCirc.rectTransform.anchoredPosition = new Vector2(_frameContentWidth - 64f, oldPos.y);
+        Debug.Log("GetLevelProgress i = " + i + "progress = " + progress);
         return progress * 100;
     }
 }

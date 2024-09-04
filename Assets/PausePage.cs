@@ -24,9 +24,9 @@ public class PausePage : Window
     protected override void onExit()
     {
         base.onExit();
-        //在暂停页面，退出需回到选关界面
-        //注意，此时依然需要从暂停中改出
+        //在暂停页面，退出需回到选关界面 注意，此时依然需要从暂停中改出
         WindowManager.Instance.ResumeTimePause();
+        ProgressManager.Instance.UpdateLevelProgress(WindowManager.Instance.GetLevelIndex());
         SceneManager.LoadScene("GUIScene");
     }
 }
