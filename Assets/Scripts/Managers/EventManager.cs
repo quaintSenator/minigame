@@ -107,6 +107,28 @@ public enum EventType
     StartStory2Step11= 431,
     StartStory2Step12 = 432,
 
+    StartStory3Step1 = 441,
+    StartStory3Step2 = 442,
+    StartStory3Step3 = 443,
+    StartStory3Step4 = 444,
+    StartStory3Step5 = 445,
+    StartStory3Step6 = 446,
+    StartStory3Step7 = 447,
+    StartStory3Step8 = 448,
+    StartStory3Step9 = 449,
+    StartStory3Step10 = 450,
+    StartStory3Step11 = 451,
+    StartStory3Step12 = 452,
+    StartStory3Step13 = 453,
+    StartStory3Step14 = 454,
+    StartStory3Step15 = 455,
+    StartStory3Step16 = 456,
+    StartStory3Step17 = 457,
+    StartStory3Step18 = 458,
+    StartStory3Step19 = 459,
+    StartStory3Step20 = 460,
+    StartStory3Step21 = 461,
+
     #endregion
 
     #region 正式游戏关卡进程时间点事件
