@@ -212,7 +212,10 @@ public class PlayerController : MonoBehaviour
     //切换方向相关
     //是否正在向上
     private bool isMovingTowardUp = false;
-	
+
+    private float nextCanTriggerChangeDirectionTime = 0;
+    private float triggerChangeDirectionCD = 10;
+
 
     //为减少FixUp开销保存HeadingDir的常态，仅在事件下切换
     private Vector3 playerHeadingDir;
@@ -1044,7 +1047,7 @@ public class PlayerController : MonoBehaviour
         moveTimer = 0;
 
         isMovingTowardUp = false;
-
+        nextCanTriggerChangeDirectionTime = -1;
     }
 
     private void ResetDeacCheck()
@@ -1186,8 +1189,16 @@ public class PlayerController : MonoBehaviour
 
     private void OnChangeDirectionEvent(EventData eventData)
     {
-        isMovingTowardUp = !isMovingTowardUp;
-        expectedDisplacementXAxis = transform.position.x;
+        if (Time.time >nextCanTriggerChangeDirectionTime )
+        {
+            nextCanTriggerChangeDirectionTime = triggerChangeDirectionCD + Time.time;
+            Debug.Log("pass change");
+            isMovingTowardUp = !isMovingTowardUp;
+            expectedDisplacementXAxis = transform.position.x;
+        }
+
+
+       
     }
 
     private void OnStartLevelEvent(EventData eventData)

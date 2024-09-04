@@ -5,7 +5,7 @@
 		<SourceFilesRoot>../../.cache/Windows</SourceFilesRoot>
 		<SoundBanksRoot>.</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
-		<ExternalSourcesOutputRoot>../../../../Assets/StreamingAssets/Audio/GeneratedSoundBanks/Windows</ExternalSourcesOutputRoot>
+		<ExternalSourcesOutputRoot>E:/WorkRepository/UnityProject/SpiritDash/UnityProject/minigame/Assets/StreamingAssets/Audio/GeneratedSoundBanks/Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
 	<DialogueEvents/>
 	<SoundBanks>
@@ -175,13 +175,33 @@
 				</AcousticTexture>
 			</AcousticTextures>
 		</SoundBank>
-		<SoundBank Id="1551306167" Type="User" Language="SFX" Hash="{EBF3763D-5332-9B88-C201-A2147C001C3D}">
+		<SoundBank Id="1551306167" Type="User" Language="SFX" Hash="{F6544A6A-8D03-48DC-3657-9E03664561A6}">
 			<ShortName>UI</ShortName>
 			<Path>UI.bnk</Path>
 			<Media>
+				<File Id="148591536" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Mystery.wav</ShortName>
+					<CachePath>SFX/Mystery_33DF4BF8.wem</CachePath>
+				</File>
+				<File Id="347248024" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Dangerous_Love_120bpm.wav</ShortName>
+					<CachePath>SFX/Dangerous_Love_120bpm_D79AC98A.wem</CachePath>
+				</File>
+				<File Id="400767641" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>PauseUIBgm.wav</ShortName>
+					<CachePath>SFX/PauseUIBgm_FBC78EF0.wem</CachePath>
+				</File>
+				<File Id="760915427" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Break.wav</ShortName>
+					<CachePath>SFX/Break_CE78C22E.wem</CachePath>
+				</File>
 				<File Id="796426103" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>UI_Click_3.wav</ShortName>
 					<CachePath>SFX/UI_Click_3_818F3B66.wem</CachePath>
+				</File>
+				<File Id="916479105" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Up_withMarker.wav</ShortName>
+					<CachePath>SFX/Up_withMarker_CE78C22E.wem</CachePath>
 				</File>
 			</Media>
 			<Events>
@@ -195,6 +215,21 @@
 						</SwitchContainer>
 					</SwitchContainers>
 				</Event>
+				<Event Id="3324143387" Name="Play_MainUIBgm" DurationType="Infinite">
+					<MediaRefs>
+						<MediaRef Id="148591536"/>
+						<MediaRef Id="347248024"/>
+						<MediaRef Id="760915427"/>
+						<MediaRef Id="916479105"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2957112216" Name="Play_PauseUIBgm" DurationType="Infinite">
+					<MediaRefs>
+						<MediaRef Id="400767641"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1737667577" Name="Stop_MainUIBgm" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="2228862010" Name="Stop_PauseUIBgm" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 			</Events>
 			<SwitchGroups>
 				<SwitchGroup Id="977454165" Name="Button">
@@ -204,20 +239,20 @@
 				</SwitchGroup>
 			</SwitchGroups>
 		</SoundBank>
-		<SoundBank Id="2678230380" Type="User" Language="SFX" Hash="{25A8ACC6-DD92-1403-D5E8-4856DB9B733B}">
+		<SoundBank Id="2678230380" Type="User" Language="SFX" Hash="{E8CE2DA7-A7FC-DB75-52EA-73B1F43647CF}">
 			<ShortName>Level3</ShortName>
 			<Path>Level3.bnk</Path>
 			<Media>
-				<File Id="916479105" Language="SFX" Streaming="false" Location="Memory">
+				<File Id="334778991" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Up_withMarker.wav</ShortName>
-					<CachePath>SFX/Up_withMarker_818F3B66.wem</CachePath>
+					<CachePath>SFX/Up_withMarker_A493C4BA.wem</CachePath>
 				</File>
 			</Media>
 			<Events>
 				<Event Id="2859270421" Name="Pause_Level3" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 				<Event Id="3659125943" Name="Play_Level3" DurationType="OneShot" DurationMin="172.148" DurationMax="172.148">
 					<MediaRefs>
-						<MediaRef Id="916479105"/>
+						<MediaRef Id="334778991"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="3265051674" Name="Resume_Level3" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
@@ -244,20 +279,20 @@
 				<Event Id="3077303046" Name="StopLevel1" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 			</Events>
 		</SoundBank>
-		<SoundBank Id="2782713051" Type="User" Language="SFX" Hash="{6D2436E5-0EFB-EBF9-0328-D3E9FEFDA505}">
+		<SoundBank Id="2782713051" Type="User" Language="SFX" Hash="{B2C39B77-A73D-CAB1-1EF3-33A8B8ED6070}">
 			<ShortName>Leve2</ShortName>
 			<Path>Leve2.bnk</Path>
 			<Media>
-				<File Id="760915427" Language="SFX" Streaming="false" Location="Memory">
+				<File Id="191167789" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Break.wav</ShortName>
-					<CachePath>SFX/Break_818F3B66.wem</CachePath>
+					<CachePath>SFX/Break_828D8D2D.wem</CachePath>
 				</File>
 			</Media>
 			<Events>
 				<Event Id="2859270420" Name="Pause_Level2" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 				<Event Id="3659125942" Name="Play_Level2" DurationType="OneShot" DurationMin="182.21053" DurationMax="182.21053">
 					<MediaRefs>
-						<MediaRef Id="760915427"/>
+						<MediaRef Id="191167789"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="3265051675" Name="Resume_Level2" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
@@ -309,5 +344,5 @@
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{0488B7A4-C7F5-99DD-DDF6-BF50F8069565}</FileHash>
+	<FileHash>{8DFE4CBE-6B15-DE35-FE25-DB20EC1080FD}</FileHash>
 </SoundBanksInfo>

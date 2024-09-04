@@ -24,10 +24,14 @@ namespace AK
         static const AkUniqueID PLAY_LEVEL1 = 3659125941U;
         static const AkUniqueID PLAY_LEVEL2 = 3659125942U;
         static const AkUniqueID PLAY_LEVEL3 = 3659125943U;
+        static const AkUniqueID PLAY_MAINUIBGM = 3324143387U;
+        static const AkUniqueID PLAY_PAUSEUIBGM = 2957112216U;
         static const AkUniqueID RESUME_LEVEL1 = 3265051672U;
         static const AkUniqueID RESUME_LEVEL2 = 3265051675U;
         static const AkUniqueID RESUME_LEVEL3 = 3265051674U;
         static const AkUniqueID STOP_LEVEL3 = 1761439789U;
+        static const AkUniqueID STOP_MAINUIBGM = 1737667577U;
+        static const AkUniqueID STOP_PAUSEUIBGM = 2228862010U;
         static const AkUniqueID STOPLEVEL1 = 3077303046U;
         static const AkUniqueID STOPLEVEL2 = 3077303045U;
     } // namespace EVENTS
