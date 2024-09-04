@@ -15,14 +15,13 @@ public class DragItem : MonoBehaviour, IDragHandler, IEndDragHandler
     private float slotLeftX;
     private float allowedmin;
     private float allowedmax;
-    [SerializeField] private ConfigPage _mConfigPage;
-    public void Start()
+    public void OnEnable()
     {
         _mRectTransform = gameObject.GetComponent<RectTransform>();
         slotWidth = mSlotTransform.sizeDelta.x;
         slotLeftX = mSlotTransform.anchoredPosition.x;
-        var mPercent = _mConfigPage.GetMyPercent(gameObject.name);
-        
+        var mPercent = WindowManager.Instance.GetMyPercent(gameObject.name);
+        Debug.Log("myName = " + gameObject.name + " myPercent = " + mPercent);
         RepositionMyself(mPercent * slotWidth - slotWidth / 2);
     }
 
@@ -49,6 +48,6 @@ public class DragItem : MonoBehaviour, IDragHandler, IEndDragHandler
         currentPercent = currentPercent < 0.0f ? 0.0f : currentPercent;
         currentPercent = currentPercent > 1.0f ? 1.0f : currentPercent;
         //接口：根据此百分比发送音量
-        _mConfigPage.TellConfigPageDragged(currentPercent, gameObject.name);
+        WindowManager.Instance.TellConfigPageDragged(currentPercent, gameObject.name);
     }
 }
