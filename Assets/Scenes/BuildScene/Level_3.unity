@@ -1773,7 +1773,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b62c7ea05c119442a0606ffb9579fb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelMusicMaxTimeList: b4000000b4000000b4000000
 --- !u!1 &1309899242
 GameObject:
   m_ObjectHideFlags: 0
@@ -2108,7 +2107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c77b148cb0abac49b7f0f02142cb2bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugSkipStoryEvent: 1
+  debugSkipStoryEvent: 0
   debugSkipPlayerDeadStoryEvent: 1
   debugSkipPlayerDeadEvent: 1
 --- !u!1001 &1709242326
