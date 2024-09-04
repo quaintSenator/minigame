@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BackgroundController : MonoBehaviour
 {
@@ -47,12 +48,15 @@ public class BackgroundController : MonoBehaviour
 
     public void OnPassResetPoint(EventData eventData)
     {
-        PlayerPassRegisterResetPointEvent ed = (PlayerPassRegisterResetPointEvent)eventData;
-        var index = ed.index;
-        m_bg_SR.material.SetFloat("_StartTime", Time.timeSinceLevelLoad);
-        m_bg_SR2.material.SetFloat("_StartTime", Time.timeSinceLevelLoad);
-        m_bg_SR.material.SetInt("_Stage", index); 
-        m_bg_SR2.material.SetInt("_Stage", index);
+        if (SceneManager.GetActiveScene().name.Contains("_2"))
+        {
+            PlayerPassRegisterResetPointEvent ed = (PlayerPassRegisterResetPointEvent)eventData;
+            var index = ed.index;
+            m_bg_SR.material.SetFloat("_StartTime", Time.timeSinceLevelLoad);
+            m_bg_SR2.material.SetFloat("_StartTime", Time.timeSinceLevelLoad);
+            m_bg_SR.material.SetInt("_Stage", index); 
+            m_bg_SR2.material.SetInt("_Stage", index);
+        }
     }
     private void OnEnable()
     {

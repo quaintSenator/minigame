@@ -91,7 +91,12 @@ public class ProgressManager : Singleton<ProgressManager>
         }
         SaveLevelData();
     }
-    
+
+    public void UpdateLevelProgress(int levelIndex)
+    {
+        float progress = currentGameTime / levelMusicMaxTimeList[currentLevelIndex - 1];
+        UpdateLevelProgress(levelIndex, progress);
+    }
     public void UpdateLevelComplete(int levelIndex, bool isComplete)
     {
         if (!levelProgressDataDic.ContainsKey(levelIndex))
@@ -129,6 +134,8 @@ public class ProgressManager : Singleton<ProgressManager>
     public void DeletePlayerPrefsData()
     {
         PlayerPrefs.DeleteKey(GameConsts.PROGRESS_DATA_LIST);
+        levelProgressDataDic.Clear();
+        levelProgressDataList.Clear();
     }
 
     public void InitLevelData(int levelIndex)

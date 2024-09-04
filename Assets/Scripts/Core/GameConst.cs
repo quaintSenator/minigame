@@ -17,7 +17,7 @@ public class GameConsts
     public static readonly float TILE_SIZE = 1f;
     public static readonly float TILE_CHECK_GAP = 0.1f;
     public static readonly float SPEED = 8.0f;
-    public static readonly List<int> MUSIC_TIME_LIST = new List<int>() {180, 180, 180};
+    public static readonly List<int> MUSIC_TIME_LIST = new List<int>() {94, 120, 147};
     public static readonly string UGC_SAVE_DATA = "__ugc_save_data__";
     public static readonly string UGC_SELECTED_MAPDATA = "__current_selected_mapdata__";
 }
