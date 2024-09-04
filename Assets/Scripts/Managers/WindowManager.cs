@@ -26,7 +26,8 @@ public class WindowManager : Singleton<WindowManager>
     private bool _pausable;
     private static bool _tipPopAllowed;
     private bool _shouldGiveFirstRandomLine;
-    
+    private Dictionary<string, int> DragItemName2ID;
+    private float[] Vols;
     protected override void OnAwake()
     {
         //Get UIRoot
@@ -54,7 +55,15 @@ public class WindowManager : Singleton<WindowManager>
         _type2ResourceFileNameDict[WindowType.DeadPage] = "DeadPage";
         _type2ResourceFileNameDict[WindowType.TipPage] = "TipPage";
         _type2ResourceFileNameDict[WindowType.LevelPassPage] = "LevelPassPage";
-
+        
+        DragItemName2ID = new Dictionary<string, int>();
+        DragItemName2ID.Add("drag_slide_totalVol_item", 0);
+        DragItemName2ID.Add("drag_slide_effectVol_item", 1);
+        DragItemName2ID.Add("drag_slide_bgVol_item", 2);
+        DragItemName2ID.Add("pause_bgVol_item", 2);
+        DragItemName2ID.Add("pause_effectVol_item", 1);
+        Vols = new float[3];
+        
         var sceneName = SceneManager.GetActiveScene().name;
         _pausable = false;
         if (sceneName.Contains("Level"))
@@ -70,6 +79,8 @@ public class WindowManager : Singleton<WindowManager>
 
         _tipPopAllowed = true;
         _shouldGiveFirstRandomLine = true;
+        
+        WindowManager.Instance.ReadPrefs();
     }
     public void ClipUIRoot2Empty()//有时从游戏中返回GUIScene，可能有一些没有清理干净的页面
     {
@@ -279,7 +290,55 @@ public class WindowManager : Singleton<WindowManager>
         _shouldGiveFirstRandomLine = !_shouldGiveFirstRandomLine;
         return res;
     }
+    public float GetMyPercent(string slideName)
+    {
+        if (DragItemName2ID.ContainsKey(slideName))
+        {
+            return Vols[DragItemName2ID[slideName]];
+        }
 
+        return 0.0f;
+    }
+    public float ProgressPercent2EmitParam(float percent)
+    {
+        return 200 * percent - 100f;
+    }
+    public void TellConfigPageDragged(float percent, string dragItemName)
+    {
+        Debug.Log("itemName = " + dragItemName + " percent = " + percent);
+        //更新Vols[]
+        var itemId = RecognizeChild(dragItemName);
+        Vols[itemId - 1] = percent;
+        //写入prefs
+        WritePrefs();
+        //发送音量
+        var emittingMusicVol = ProgressPercent2EmitParam(Vols[0] * Vols[2]);
+        var emittingIntVol = ProgressPercent2EmitParam(Vols[1] * Vols[2]);
+        EmitConfiguredVolumns(emittingMusicVol, emittingIntVol);
+    }
+    private int RecognizeChild(string childItemName)
+    {
+        if (childItemName.Contains("bgVol"))
+        {
+            return 1;
+        }
+        if (childItemName.Contains("effectVol"))
+        {
+            return 2;
+        }
+        if (childItemName.Contains("totalVol"))
+        {
+            return 3;
+        }
+        return 0;
+    }
+    private void EmitConfiguredVolumns(float musicVol, float InteractVol)
+    {
+        Debug.Log("musicVol = " + musicVol);
+        Debug.Log("InteractVol = " + InteractVol);
+        MusicManager.Instance.SetLevelMusicVolume(musicVol);
+        MusicManager.Instance.SetInteractiveVolume(InteractVol);
+    }
     public void OnPassLevel(EventData eventData)
     {
         if (GetLevelIndex() != 0)
@@ -329,5 +388,26 @@ public class WindowManager : Singleton<WindowManager>
                 WindowManager.Instance.TryDestroyTip(generatedID);
             });
         }
+    }
+    
+    public void ReadPrefs()
+    {
+        var everChangedConfPref = PlayerPrefs.GetInt("everChangedConfPref", 0);
+        if (everChangedConfPref == 0)
+        {
+            PlayerPrefs.SetFloat("effectVol", 0.5f);
+            PlayerPrefs.SetFloat("musicVol", 0.5f);
+            PlayerPrefs.SetFloat("totalVol", 0.5f);
+            PlayerPrefs.SetInt("everChangedConfPref", 1);
+        }
+        Vols[0] = PlayerPrefs.GetFloat("effectVol");
+        Vols[1] = PlayerPrefs.GetFloat("musicVol");
+        Vols[2] = PlayerPrefs.GetFloat("totalVol");
+    } 
+    public void WritePrefs()
+    {
+        PlayerPrefs.SetFloat("effectVol", Vols[0]);
+        PlayerPrefs.SetFloat("musicVol", Vols[1]);
+        PlayerPrefs.SetFloat("totalVol", Vols[2]);
     }
 }
