@@ -18,6 +18,7 @@ public class ChangeDirectionPoint : BuildableBase
         }
         if(SceneManager.GetActiveScene().name == "TilemapEditorScene")
         {
+            Debug.Log("AddChangeDirectionPoint");
             Vector3 realPosition = Utils.GetRealPostion(Position);
             RhythmViewer.Instance.AddChangeDirectionPoint(realPosition);
         }
@@ -27,6 +28,7 @@ public class ChangeDirectionPoint : BuildableBase
     {
         if(SceneManager.GetActiveScene().name == "TilemapEditorScene")
         {
+            Debug.Log("RemoveChangeDirectionPoint");
             Vector3 realPosition = Utils.GetRealPostion(Position);
             RhythmViewer.Instance.RemoveChangeDirectionPoint(realPosition);
         }

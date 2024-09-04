@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ContinuousPoint : BuildableBase
 {
@@ -174,6 +175,9 @@ public class ContinuousPoint : BuildableBase
         lineRenderer.material = lineMaterial;
         lineRenderer.textureMode = LineTextureMode.Tile;
         lineRenderer.enabled = true;
+        CalLineRenderTiling();
+
+
     }
     
     public void HideLineRenderer()
@@ -183,4 +187,53 @@ public class ContinuousPoint : BuildableBase
             lineRenderer.enabled = false;
         }
     }
+
+    #region 计算轨迹长度动态修改材质Tiling scale相关 
+
+    public float originTrackLength = 1.0f;
+
+    public float scaler = 0;
+    private void CalLineRenderTiling()
+    {
+        if(originTrackLength <= 0)
+        {
+            Debug.LogWarning("illgel originTrackLength");
+            return;
+        }
+        //lineRenderer = GetComponent<LineRenderer>();
+        Material MaterialInstance = lineRenderer.material;
+        //lineRenderer.positionCount = 2;
+        //Vector3 pos2 = transform.position + Vector3.forward * 10;
+        //Vector3[] tempPoints = new Vector3[2] { transform.position, pos2 };
+        //lineRenderer.SetPositions(tempPoints);
+        if (lineRenderer.positionCount<2)
+        {
+            Debug.LogWarning("lineRender point count is less 2,please check");
+            //do nothing
+            return;
+        }
+        Vector3 startPosition = lineRenderer.GetPosition(0);
+        Vector3 endPosition = lineRenderer.GetPosition(1);
+        float length = Vector3.Distance(endPosition , startPosition);
+
+        float tilingCount = Mathf.FloorToInt(length / originTrackLength);
+
+
+        if (tilingCount == 0)
+        {
+            scaler= Mathf.Repeat(length, originTrackLength) / originTrackLength;
+            scaler = 1 / scaler;
+        }
+        else
+        {
+            scaler = (Mathf.Repeat(length, originTrackLength) / tilingCount + originTrackLength) / originTrackLength;
+            //scaler = scaler / tilingCount +1;
+        }
+        //MaterialInstance.
+        MaterialInstance.mainTextureScale =new Vector2 (MaterialInstance.mainTextureScale.x / scaler, MaterialInstance.mainTextureScale.y);
+        //lineRenderer.material.mainTextureScale = new Vector2(tileCount, 1) * tilingFactor;
+    }
+
+
+    #endregion
 }

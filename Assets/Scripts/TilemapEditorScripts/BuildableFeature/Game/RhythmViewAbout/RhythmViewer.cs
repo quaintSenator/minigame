@@ -61,10 +61,13 @@ public class RhythmViewer : Singleton<RhythmViewer>
     public static bool CurrentMusicIsPlaying => currentMusicIsPlaying;
     private static float currentMusicTime = 0f;
     public static float CurrentMusicTime => currentMusicTime;
+
+    public float musicTimeForDebug;
     
     private Transform startPoint;
     [SerializeField] private float doubleClickGap = 0.2f;
     private float doubleClickTime = 0f;
+    private ChangePointData lastChangePointData = ChangePointData.DefaultData;
     
     private void Start()
     {
@@ -144,6 +147,8 @@ public class RhythmViewer : Singleton<RhythmViewer>
         }
         
         doubleClickTime -= Time.deltaTime;
+        
+        musicTimeForDebug = currentMusicTime;
     }
 
     #region 静态节奏区域显示
@@ -165,6 +170,7 @@ public class RhythmViewer : Singleton<RhythmViewer>
 
     public void UpdateChangePointDatas()
     {
+        changePointDatas.Clear();
         Vector3 lastPoint = Utils.GetStartPointPostion().position;
         Vector3 currentPoint = lastPoint;
         float lastMax = 0;
@@ -172,19 +178,15 @@ public class RhythmViewer : Singleton<RhythmViewer>
         Direction direction = Direction.Right;
         for(int i = 0; i < changeDirectionPoints.Count; i++)
         {
-            float minDistance = -1;
-            foreach (var point in changeDirectionPoints)
+            currentPoint = changeDirectionPoints[i];
+            float minDistance;
+            if(direction == Direction.Right)
             {
-                if(point == lastPoint || point.x < lastPoint.x || point.y < lastPoint.y)
-                {
-                    continue;
-                }
-                float distance = Vector3.Distance(point, lastPoint);
-                if (minDistance == -1 || distance < minDistance)
-                {
-                    minDistance = distance;
-                    currentPoint = point;
-                }
+                minDistance = currentPoint.x - lastPoint.x;
+            }
+            else
+            {
+                minDistance = currentPoint.y - lastPoint.y;
             }
             currentMax = minDistance+lastMax;
             if (changePointDatas.Count == 0)
@@ -348,6 +350,7 @@ public class RhythmViewer : Singleton<RhythmViewer>
             musicController.StopLevelMusic();
             musicCurrentPosLine.HidePosLine();
             ClearDynamicRhythmNode();
+            lastChangePointData = ChangePointData.DefaultData;
         }
         else
         {
@@ -495,7 +498,12 @@ public class RhythmViewer : Singleton<RhythmViewer>
         {
             deltaPos = new Vector3(0, distance, 0);
         }
-        
+
+        if (lastChangePointData != ChangePointData.DefaultData && lastChangePointData != belongData)
+        {
+            EventManager.InvokeEvent(EventType.ChangeDirectionEvent);
+        }
+        lastChangePointData = belongData;
         return lastPoint + deltaPos;
     }
 }
@@ -532,4 +540,6 @@ public class ChangePointData
         this.startPoint = startPoint;
         this.direction = direction;
     }
+
+    public static ChangePointData DefaultData = new ChangePointData(-10, -10, Vector3.zero, Direction.Right);
 }
