@@ -16,6 +16,7 @@ public class ProgressManager : Singleton<ProgressManager>
     private float currentGameTime = 0;
     private bool gameStart = false;
     private int currentLevelIndex = 1;
+    private float lastRecordTime = 0;
 
     protected override void OnAwake()
     {
@@ -41,22 +42,37 @@ public class ProgressManager : Singleton<ProgressManager>
     {
         EventManager.AddListener(EventType.EndLoadMapEvent, OnLoadMap);
         EventManager.AddListener(EventType.StartLevelEvent, StartLevel);
-        EventManager.AddListener(EventType.RestartLevelEvent, StartLevel);
+        EventManager.AddListener(EventType.RestartLevelEvent, RestartLevel);
         EventManager.AddListener(EventType.GamePauseEvent, GamePause);
-        EventManager.AddListener(EventType.EndPlayerDeadEvent, OnPlayerDead);
+        EventManager.AddListener(EventType.PlayerDeadStoryEvent, OnPlayerDead);
+        EventManager.AddListener(EventType.PlayerPassRegisterResetPointEvent, OnPlayerPassRegisterResetPoint);
     }
-    
+
     private void OnDisable()
     {
         EventManager.RemoveListener(EventType.EndLoadMapEvent, OnLoadMap);
         EventManager.RemoveListener(EventType.StartLevelEvent, StartLevel);
-        EventManager.RemoveListener(EventType.RestartLevelEvent, StartLevel);
+        EventManager.RemoveListener(EventType.RestartLevelEvent, RestartLevel);
         EventManager.RemoveListener(EventType.GamePauseEvent, GamePause);
-        EventManager.RemoveListener(EventType.EndPlayerDeadEvent, OnPlayerDead);
+        EventManager.RemoveListener(EventType.PlayerDeadStoryEvent, OnPlayerDead);
+        EventManager.RemoveListener(EventType.PlayerPassRegisterResetPointEvent, OnPlayerPassRegisterResetPoint);
+    }
+
+    private void OnPlayerPassRegisterResetPoint(EventData obj)
+    {
+        lastRecordTime = currentGameTime;
+    }
+
+    private void RestartLevel(EventData obj)
+    {
+        currentGameTime = lastRecordTime;
+        gameStart = true;
     }
 
     private void OnPlayerDead(EventData obj)
     {
+        gameStart = false;
+        currentGameTime = lastRecordTime;
         float progress = currentGameTime / levelMusicMaxTimeList[currentLevelIndex - 1];
         UpdateLevelProgress(currentLevelIndex, progress);
     }
@@ -105,6 +121,7 @@ public class ProgressManager : Singleton<ProgressManager>
         }
         levelProgressDataDic[levelIndex].isLevelComplete = isComplete;
         levelProgressDataList.Find(data => data.levelIndex == levelIndex).isLevelComplete = isComplete;
+        UpdateLevelProgress(levelIndex, 1);
         SaveLevelData();
     }
     
