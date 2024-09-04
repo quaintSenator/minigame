@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class BackgroundController : MonoBehaviour
     [SerializeField]
     private GameObject child_1 = null;
 
+    [SerializeField] private SpriteRenderer m_bg_SR;
+    [SerializeField] private SpriteRenderer m_bg_SR2;
     private Vector3 firstPosition = Vector3.zero;
     private Vector3 secondPosition = Vector3.zero;
     private Vector3 diffPosition = Vector3.zero;
@@ -40,8 +43,26 @@ public class BackgroundController : MonoBehaviour
 
         diffPosition = secondPosition - firstPosition;
         firstPosition = firstPosition - (secondPosition-firstPosition);
+    }
 
+    public void OnPassResetPoint(EventData eventData)
+    {
+        PlayerPassRegisterResetPointEvent ed = (PlayerPassRegisterResetPointEvent)eventData;
+        var index = ed.index;
+        Debug.Log("sfsfsfsf:::" + index);
+        m_bg_SR.material.SetFloat("_StartTime", Time.timeSinceLevelLoad);
+        m_bg_SR2.material.SetFloat("_StartTime", Time.timeSinceLevelLoad);
+        m_bg_SR.material.SetInt("_Stage", index); 
+        m_bg_SR2.material.SetInt("_Stage", index);
+    }
+    private void OnEnable()
+    {
+        EventManager.AddListener(EventType.PlayerPassRegisterResetPointEvent, OnPassResetPoint);
+    }
 
+    private void OnDisable()
+    {
+        EventManager.RemoveListener(EventType.PlayerPassRegisterResetPointEvent, OnPassResetPoint);
     }
 
     // Update is called once per frame
@@ -53,7 +74,7 @@ public class BackgroundController : MonoBehaviour
         }
         Vector3 prarentCamPosition= parentCam.transform.position;
 
-        float step = moveSpeed * Time.deltaTime; // ¼ÆËãÃ¿Ö¡µÄÒÆ¶¯²½³¤
+        float step = moveSpeed * Time.deltaTime; // ï¿½ï¿½ï¿½ï¿½Ã¿Ö¡ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½
         child_0.transform.Translate(targetDirection * moveSpeed * Time.deltaTime, Space.World);
         child_1.transform.Translate(targetDirection * moveSpeed * Time.deltaTime, Space.World);
         if(child_0.transform.position.x <= prarentCamPosition.x - diffPosition.x)

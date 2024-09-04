@@ -1048,7 +1048,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07855be1e23f82d4f90bf3e25ac233c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedMapdata: {fileID: 11400000, guid: 6d77bc8ee1ec70046b311dc7fa729c0f, type: 2}
+  selectedMapdata: {fileID: 11400000, guid: 9915fbbf997bc594f91ac8d0e1e668fc, type: 2}
   selectedMapIndex: 1
   buildableInfos: []
   showAllBuildable: 0
@@ -1781,7 +1781,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 49e2bc280e6ab3c498f509cabb0bfe42, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1802,7 +1802,7 @@ SpriteRenderer:
   m_SortingLayerID: 1517514893
   m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3575337453dc6964bade01e0da09a1ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8c555c3b8e6b3f940bde76252ba6b7ad, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2023,7 +2023,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 49e2bc280e6ab3c498f509cabb0bfe42, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2044,7 +2044,7 @@ SpriteRenderer:
   m_SortingLayerID: 1517514893
   m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3575337453dc6964bade01e0da09a1ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8c555c3b8e6b3f940bde76252ba6b7ad, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2287,6 +2287,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   child_0: {fileID: 1680951381}
   child_1: {fileID: 1935384838}
+  m_bg_SR: {fileID: 1680951383}
+  m_bg_SR2: {fileID: 1935384840}
   moveSpeed: 0.5
 --- !u!1 &2062400692
 GameObject:
