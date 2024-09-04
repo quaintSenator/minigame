@@ -10,4 +10,14 @@ public class MainPage : Window
         base.onExit();
         Debug.Log("MainPage.onExit was called");
     }
+
+    public void Go2MusicPage()
+    {
+        //跳转音乐界面
+    }
+
+    public void ClearProgress()
+    {
+        
+    }
 }

@@ -105,10 +105,24 @@ public class WindowManager : Singleton<WindowManager>
         }
     }
 
-    private void OnLevelPass()
+    public int GetLevelIndex()
     {
-        //创建通关页面
-        InitWindow(WindowType.LevelPassPage, _UIRoot);
+        var sceneName = SceneManager.GetActiveScene().name;
+        if (sceneName.Contains("Level_"))
+        {
+            var indexNumStr = sceneName.Substring(6, 1);
+            try
+            {
+                int.Parse(indexNumStr);
+            }
+            catch (FormatException e)
+            {
+                Debug.Log(e);
+                return 0;
+            }
+        }
+        return 0;
+
     }
     public bool isAtPausePage()
     {
@@ -268,6 +282,10 @@ public class WindowManager : Singleton<WindowManager>
 
     public void OnPassLevel(EventData eventData)
     {
+        if (GetLevelIndex() != 0)
+        {
+            ProgressManager.Instance.UpdateLevelComplete(GetLevelIndex(), true);
+        }
         //应该不可能发生暂停页面在上面的同时过关的情况
         ClipUIRoot2Empty();
         InitWindow(WindowType.LevelPassPage, _UIRoot);

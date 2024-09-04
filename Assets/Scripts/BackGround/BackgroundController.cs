@@ -49,7 +49,6 @@ public class BackgroundController : MonoBehaviour
     {
         PlayerPassRegisterResetPointEvent ed = (PlayerPassRegisterResetPointEvent)eventData;
         var index = ed.index;
-        Debug.Log("sfsfsfsf:::" + index);
         m_bg_SR.material.SetFloat("_StartTime", Time.timeSinceLevelLoad);
         m_bg_SR2.material.SetFloat("_StartTime", Time.timeSinceLevelLoad);
         m_bg_SR.material.SetInt("_Stage", index); 
