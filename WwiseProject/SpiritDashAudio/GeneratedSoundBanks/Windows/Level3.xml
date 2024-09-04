@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="150">
 	<SoundBanks>
-		<SoundBank Id="2678230380" Type="User" Language="SFX" Hash="{25A8ACC6-DD92-1403-D5E8-4856DB9B733B}">
+		<SoundBank Id="2678230380" Type="User" Language="SFX" Hash="{E8CE2DA7-A7FC-DB75-52EA-73B1F43647CF}">
 			<ShortName>Level3</ShortName>
 			<Path>Level3.bnk</Path>
 			<Media>
-				<File Id="916479105" Language="SFX" Streaming="false" Location="Memory">
+				<File Id="334778991" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Up_withMarker.wav</ShortName>
-					<CachePath>SFX/Up_withMarker_818F3B66.wem</CachePath>
+					<CachePath>SFX/Up_withMarker_A493C4BA.wem</CachePath>
 				</File>
 			</Media>
 			<Events>
 				<Event Id="2859270421" Name="Pause_Level3" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 				<Event Id="3659125943" Name="Play_Level3" DurationType="OneShot" DurationMin="172.148" DurationMax="172.148">
 					<MediaRefs>
-						<MediaRef Id="916479105"/>
+						<MediaRef Id="334778991"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="3265051674" Name="Resume_Level3" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
@@ -22,5 +22,5 @@
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{6DA99F79-83C5-4826-334D-97A327F9CA35}</FileHash>
+	<FileHash>{51F3750D-04F2-8775-DEF2-43A21DA79B30}</FileHash>
 </SoundBanksInfo>

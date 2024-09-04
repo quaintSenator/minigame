@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ChangeDirectionPoint : BuildableBase
 {
-    
+    bool hasInvoke = false;
     public override void Init()
     {
         if(Rotation == 0 || Rotation == 2)
@@ -36,6 +36,11 @@ public class ChangeDirectionPoint : BuildableBase
 
     protected override void TriggerThisBuildable(PlayerController player)
     {
-        EventManager.InvokeEvent(EventType.ChangeDirectionEvent);
+        if(!hasInvoke)
+        {
+            EventManager.InvokeEvent(EventType.ChangeDirectionEvent);
+            hasInvoke = false;
+        }
+
     }
 }

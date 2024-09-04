@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 /// <summary>
@@ -15,7 +16,20 @@ public class PassLevelTrigger : BuildableBase
 {
 
 	public Renderer renderer=null;
-	
+
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().name == "TilemapEditorScene")
+        {
+
+            renderer.enabled = true;
+        }
+        else
+        {
+
+            renderer.enabled = false;
+        }
+    }
 
 
     protected override void TriggerThisBuildable(PlayerController player)

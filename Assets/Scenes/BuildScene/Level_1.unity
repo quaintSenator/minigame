@@ -1189,9 +1189,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07855be1e23f82d4f90bf3e25ac233c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedMapdata: {fileID: 11400000, guid: 2fe38875d7e20eb4a99a0c0514dc431b, type: 2}
+  selectedMapdata: {fileID: 11400000, guid: 4eeefb3ce68b65344a76a764dc2d208e, type: 2}
   selectedMapIndex: 1
+  buildableInfos: []
   showAllBuildable: 0
+  musicManager: {fileID: 0}
 --- !u!1001 &1369325266
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2486,6 +2488,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   child_0: {fileID: 1680951381}
   child_1: {fileID: 1935384838}
+  m_bg_SR: {fileID: 0}
+  m_bg_SR2: {fileID: 0}
   moveSpeed: 0.5
 --- !u!1 &2062400692
 GameObject:
