@@ -8,7 +8,7 @@ public class TwoStageController : BuildableBase
 
     public bool ifRotateSelf = true;
     public float selfRotateSpeed = 30.0f;
-
+    public float selfRotateSpeedSpecial= 60.0f;
     public Material noBlendMat = null;
     public List<int> needSpacialProcessLevelIndexs = null;
     public bool debugReplaceMat = false;
@@ -38,6 +38,8 @@ public class TwoStageController : BuildableBase
                 }
                 Renderer renderer = GetComponent<Renderer>();
                 renderer.material = noBlendMat;
+
+                selfRotateSpeed = selfRotateSpeedSpecial;
                 return;
             }
         }

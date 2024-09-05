@@ -48,6 +48,10 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 486caf84e0f5b804bbd9a47bf9552ca0, type: 2}
+  MainUIMusicFadePlayEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 8440073070a12564ba7c00e0603745a8, type: 2}
   MainUIMusicStopEvent:
     idInternal: 0
     valueGuidInternal: 
@@ -96,3 +100,77 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 75b77efcfd513cb47b9a3bd6dd6da633, type: 2}
+  LevelMusicEvents:
+  - bankName: 
+    LevelMusicPlayEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 0}
+    LevelMusicStopEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 0}
+    LevelMusicPauseEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 0}
+    LevelMusicResumeEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 0}
+    bpm: 0
+  - bankName: 
+    LevelMusicPlayEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 3c922bfaaf2cafd41815c61fc6a1df88, type: 2}
+    LevelMusicStopEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 7af31628e9a43a4488b160ca0e832395, type: 2}
+    LevelMusicPauseEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 0}
+    LevelMusicResumeEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 0}
+    bpm: 0
+  - bankName: 
+    LevelMusicPlayEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 554da5327adf7554a879f3cb11a884dd, type: 2}
+    LevelMusicStopEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 9d894e542d2641544bf4f5731d6f767a, type: 2}
+    LevelMusicPauseEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 0}
+    LevelMusicResumeEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 0}
+    bpm: 0
+  - bankName: 
+    LevelMusicPlayEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 189a6d5b95b4d6f429fd8811cef7fe86, type: 2}
+    LevelMusicStopEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 61d5e5740c95a574098030c8a407f071, type: 2}
+    LevelMusicPauseEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 0}
+    LevelMusicResumeEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 0}
+    bpm: 0
+  debugLevelIndex: 0

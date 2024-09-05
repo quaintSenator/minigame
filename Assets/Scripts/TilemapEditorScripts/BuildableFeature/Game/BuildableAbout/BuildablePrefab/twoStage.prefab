@@ -125,4 +125,5 @@ MonoBehaviour:
   ifRotateSelf: 1
   selfRotateSpeed: 30
   noBlendMat: {fileID: 2100000, guid: bcbd6e06c7e2e14489570a339788ef24, type: 2}
-  needSpacialProcessLevelIndexs: 
+  needSpacialProcessLevelIndexs: 03000000
+  debugReplaceMat: 0
