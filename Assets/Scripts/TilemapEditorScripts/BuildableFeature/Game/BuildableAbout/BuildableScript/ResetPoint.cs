@@ -18,14 +18,31 @@ public class ResetPoint : BuildableBase
     
     [SerializeField]
     [Tooltip("未激活Render实例")]
-    Renderer resetPointsOff = null;
+    SpriteRenderer resetPointsOff = null;
 
     [SerializeField]
     [Tooltip("激活Render实例")]
-    Renderer resetPointsOn = null;
+    SpriteRenderer resetPointsOn = null;
+
+    [SerializeField]
+    [Tooltip("未激活Render实例")]
+    Sprite resetPointsOffSpecial = null;
+
+    [SerializeField]
+    [Tooltip("激活Render实例")]
+    Sprite resetPointsOnSpecial = null;
+
+    public bool debugReplaceSprite = false;
+    public HashSet<int> needSpacialProcessLevelIndexs = new HashSet<int>() { 3};
 
     public override void Init()
     {
+        int currentLevelIndex = ProgressManager.Instance.GetCurrentLevelIndex();
+        if(needSpacialProcessLevelIndexs.Contains(currentLevelIndex) || debugReplaceSprite)
+        {
+            resetPointsOff.sprite = resetPointsOffSpecial;
+            resetPointsOn.sprite = resetPointsOnSpecial;
+        }
         EventManager.AddListener(EventType.RegisterResetPointCallbackEvent, OnRegisterResetPointCallback);
         RegisterResetPoint();
         //RegisterResetPoint()
@@ -103,13 +120,13 @@ public class ResetPoint : BuildableBase
             resetPointsOn.enabled = true;
         }
 
-        //应该不会出现这种状态
+/*        //应该不会出现这种状态
         if (!newState && hasBeenChecked)
         {
             hasBeenChecked = false;
             resetPointsOff.enabled = true;
             resetPointsOn.enabled = false;
-        }
+        }*/
     }
 
 }
