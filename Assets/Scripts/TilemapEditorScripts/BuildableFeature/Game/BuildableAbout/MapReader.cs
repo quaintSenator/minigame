@@ -22,6 +22,7 @@ public class MapReader : Singleton<MapReader>
         float time = Time.realtimeSinceStartup;
         
         mapParent = transform;
+        BuildableBase.BuildableGroupMap.Clear();
         LoadSelectedData();
         StartCoroutine(CheckBuildableVisibleCoroutine());
         UnityEngine.Application.targetFrameRate = 60;

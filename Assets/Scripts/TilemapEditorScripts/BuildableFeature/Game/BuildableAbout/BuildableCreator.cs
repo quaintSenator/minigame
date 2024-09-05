@@ -43,7 +43,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
     {
         //唤醒TilemapSaver
         TilemapSaver.Instance.Init();
-
+        BuildableBase.BuildableGroupMap.Clear();
 #if UNITY_EDITOR
         LoadSelectedData();
 #endif
