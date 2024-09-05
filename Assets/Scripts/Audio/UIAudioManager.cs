@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AK.Wwise;
@@ -26,9 +26,9 @@ public class UIAudioManager : Singleton<MusicManager>
     public RTPC InteractiveVolume = null;
 
 
-    #region Íâ²¿ÒôÀÖ½Ó¿Ú
+    #region å¤–éƒ¨éŸ³ä¹æ¥å£
 
-    //²¥·Å°´Å¥µã»÷ÒôĞ§
+    //æ’­æ”¾æŒ‰é’®ç‚¹å‡»éŸ³æ•ˆ
     public void PlayBtnClickAudio()
     {
 
@@ -36,24 +36,24 @@ public class UIAudioManager : Singleton<MusicManager>
 
     }
 
-    //¿ªÊ¼UI±³¾°ÒôÀÖ
+    //å¼€å§‹UIèƒŒæ™¯éŸ³ä¹
     public void PlayMainUIMusic()
     {
         MainUIMusicPlayEvent.Post(gameObject);
     }
 
-    //Í£Ö¹UI±³¾°ÒôÀÖ
+    //åœæ­¢UIèƒŒæ™¯éŸ³ä¹
     public void StopMainUIMusic()
     {
         MainUIMusicStopEvent.Post(gameObject);
     }
 
 
-    //ËùÓĞµ¯´°³öÀ´¶¼²¥Õâ¸ö£¬µ¯´°ÏûÊ§²¥ÏÂÃæÕâ¸ö
+    //æ‰€æœ‰å¼¹çª—å‡ºæ¥éƒ½æ’­è¿™ä¸ªï¼Œå¼¹çª—æ¶ˆå¤±æ’­ä¸‹é¢è¿™ä¸ª
     public void PlayUIPausePageMusic()
     {
         int currentLevelIndex = ProgressManager.Instance.GetCurrentLevelIndex();
-        //Õë¶ÔµÚÈı¹Ø²¥·ÅµÄ160BpmµÄ
+        //é’ˆå¯¹ç¬¬ä¸‰å…³æ’­æ”¾çš„160Bpmçš„
         if (currentLevelIndex != 3)
         {
             PlayPausePage120BpmMusicEvent.Post(gameObject);
@@ -69,7 +69,7 @@ public class UIAudioManager : Singleton<MusicManager>
     public void StopUIPausePageMusic()
     {
         int currentLevelIndex = ProgressManager.Instance.GetCurrentLevelIndex();
-        //Õë¶ÔµÚÈı¹Ø²¥·ÅµÄ160BpmµÄ
+        //é’ˆå¯¹ç¬¬ä¸‰å…³æ’­æ”¾çš„160Bpmçš„
         if (currentLevelIndex != 3)
         {
             StopPausePage120BpmMusicEvent.Post(gameObject);
@@ -80,13 +80,13 @@ public class UIAudioManager : Singleton<MusicManager>
         }
     }
 
-    /*    //ÔİÍ£UI±³¾°ÒôÀÖ²»Ò»¶¨ÓĞÓÃ
+    /*    //æš‚åœUIèƒŒæ™¯éŸ³ä¹ä¸ä¸€å®šæœ‰ç”¨
         public void PauseMainUIMusic()
         {
             MainUIMusicPauseEvent.Post(gameObject);
         }
 
-        //»Ö¸´UI±³¾°ÒôÀÖ ²»Ò»¶¨ÓĞÓÃ
+        //æ¢å¤UIèƒŒæ™¯éŸ³ä¹ ä¸ä¸€å®šæœ‰ç”¨
         public void ResumeMainUIMusic()
         {
             MainUIMusicResumeEvent.Post(gameObject);
