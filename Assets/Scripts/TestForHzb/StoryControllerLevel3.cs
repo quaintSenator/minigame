@@ -17,13 +17,13 @@ public class StoryControllerLevel3 : MonoBehaviour
     /*
     Step 1：方块停在原地
     Step 2：方块说第一句话
-    Step 3：boss出现
-    Step 4：boss第一句
-    Step 5：玩家第二句
-    Step 6：boss第二句
-    Step 7：玩家第三句
-    Step 8：世界上不存在第三个维度。
-    Step 9：玩家：书中记载，第三维度在最北方。球先生也请我到这里找他。
+    Step 3：boss出现 boss第一句
+    Step 4：玩家第二句
+    Step 5：boss第二句
+    Step 6：玩家第三句
+    Step 7：世界上不存在第三个维度。
+    Step 8：玩家：存在！
+    Step 9：玩家：球先生说过，第三维度在最北方
     Step 10：僧侣：哼，那个自称“球”的小人？
     Step 11：僧侣：它在雾里隐藏自己，能够变得忽大忽小
     Step 12：僧侣：但它是假的，孩子。
@@ -186,30 +186,30 @@ public class StoryControllerLevel3 : MonoBehaviour
     private void Step_4()
     {
         bossStoryController.EndBgSpeak();
-
+        bossStoryController.StartSpeak(1);
     }
 
     private void Step_5()
     {
+        bossStoryController.StartSpeak(2);
 
-        bossStoryController.StartSpeak(1);
     }
 
     private void Step_6()
     {
-        bossStoryController.StartSpeak(2);
+        bossStoryController.StartSpeak(1);
 
     }
 
     private void Step_7()
     {
-        bossStoryController.StartSpeak(1);
+        bossStoryController.StartSpeak(2);
         
     }
 
     private void Step_8()
     {
-        bossStoryController.StartSpeak(2);
+        bossStoryController.StartSpeak(1);
     }
 
     private void Step_9()
