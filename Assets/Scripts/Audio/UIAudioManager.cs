@@ -8,8 +8,8 @@ using Sirenix.OdinInspector;
 
 public class UIAudioManager : Singleton<UIAudioManager>
 {
-    public string UIBankName="";
-    public AK.Wwise.Event MainUIMusicPlayEvent=null;
+    public string UIBankName = "";
+    public AK.Wwise.Event MainUIMusicPlayEvent = null;
     public AK.Wwise.Event MainUIMusicFadePlayEvent = null;
     public AK.Wwise.Event MainUIMusicStopEvent = null;
     public AK.Wwise.Event MainUIMusicPauseEvent = null;
@@ -46,7 +46,7 @@ public class UIAudioManager : Singleton<UIAudioManager>
     //开始UI背景音乐
     public void PlayMainUIMusic()
     {
-        if(isPlayingLevelMusicBtn)
+        if (isPlayingLevelMusicBtn)
         {
             MainUIMusicFadePlayEvent.Post(gameObject);
         }
@@ -132,36 +132,34 @@ public class UIAudioManager : Singleton<UIAudioManager>
 
     public void PlayOrStopLevelMusicByBtn(int levelMusicIndex)
     {
-        if(levelMusicIndex <=0 || levelMusicIndex > LevelMusicEvents.Count)
+        AkCallbackType CallbackType = AkCallbackType.AK_EndOfEvent;
+        if (levelMusicIndex <= 0 || levelMusicIndex > LevelMusicEvents.Count)
         {
             Debug.LogError("Wrong Level Index");
             return;
         }
 
-        if(isPlayingLevelMusicBtn && levelMusicIndex == lastPlayLevelMusicIndex)
+        if (isPlayingLevelMusicBtn && levelMusicIndex == lastPlayLevelMusicIndex)
         {
 
             LevelMusicEvents[lastPlayLevelMusicIndex].LevelMusicStopEvent.Post(gameObject);
-
-
-
             lastPlayLevelMusicIndex = -1;
             isPlayingLevelMusicBtn = false;
             PlayMainUIMusic();
         }
         //if (isPlayingLevelMusicBtn && levelMusicIndex == lastPlayLevelMusicIndex)
-        else if(isPlayingLevelMusicBtn)
+        else if (isPlayingLevelMusicBtn)
         {
             LevelMusicEvents[lastPlayLevelMusicIndex].LevelMusicStopEvent.Post(gameObject);
-            LevelMusicEvents[levelMusicIndex].LevelMusicPlayEvent.Post(gameObject);
+            LevelMusicEvents[levelMusicIndex].LevelMusicPlayEvent.Post(gameObject, (uint)CallbackType, CallbackFunctionEndEvent);
             lastPlayLevelMusicIndex = levelMusicIndex;
 
         }
-        else 
+        else
         {
             StopMainUIMusic();
 
-            LevelMusicEvents[levelMusicIndex].LevelMusicPlayEvent.Post(gameObject);
+            LevelMusicEvents[levelMusicIndex].LevelMusicPlayEvent.Post(gameObject, (uint)CallbackType, CallbackFunctionEndEvent);
 
             lastPlayLevelMusicIndex = levelMusicIndex;
             isPlayingLevelMusicBtn = true;
@@ -174,7 +172,7 @@ public class UIAudioManager : Singleton<UIAudioManager>
     #endregion
 
 
-/*    #region DebugTest
+    #region DebugTest
 #if UNITY_EDITOR
     public int debugLevelIndex = 0;
 
@@ -185,7 +183,7 @@ public class UIAudioManager : Singleton<UIAudioManager>
         PlayOrStopLevelMusicByBtn(debugLevelIndex);
     }
 #endif
-    #endregion*/
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -238,5 +236,12 @@ public class UIAudioManager : Singleton<UIAudioManager>
         AkBankManager.LoadBank(UIBankName, false, false);
     }
 
-    
+
+    private void CallbackFunctionEndEvent(object InCookies, AkCallbackType InCallbackType, object InInfo)
+    {
+        LevelMusicEvents[lastPlayLevelMusicIndex].LevelMusicStopEvent.Post(gameObject);
+        lastPlayLevelMusicIndex = -1;
+        isPlayingLevelMusicBtn = false;
+        PlayMainUIMusic();
+    }
 }
