@@ -1177,7 +1177,7 @@ public class PlayerController : MonoBehaviour
 	private void OnEndPassLevelEvent(EventData eventData)
 	{
 		//TODO,控制相机 和持续移动
-		SetIfCanMove(false);
+		SetIfCanMove(false); 
 	}
 	
 	
