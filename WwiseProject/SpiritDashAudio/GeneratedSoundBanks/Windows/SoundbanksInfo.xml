@@ -5,7 +5,7 @@
 		<SourceFilesRoot>../../.cache/Windows</SourceFilesRoot>
 		<SoundBanksRoot>.</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
-		<ExternalSourcesOutputRoot>E:/WorkRepository/UnityProject/SpiritDash/UnityProject/minigame/Assets/StreamingAssets/Audio/GeneratedSoundBanks/Windows</ExternalSourcesOutputRoot>
+		<ExternalSourcesOutputRoot>../../../../Assets/StreamingAssets/Audio/GeneratedSoundBanks/Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
 	<DialogueEvents/>
 	<SoundBanks>
@@ -175,7 +175,7 @@
 				</AcousticTexture>
 			</AcousticTextures>
 		</SoundBank>
-		<SoundBank Id="1551306167" Type="User" Language="SFX" Hash="{F6544A6A-8D03-48DC-3657-9E03664561A6}">
+		<SoundBank Id="1551306167" Type="User" Language="SFX" Hash="{6FCFE3A8-6FA9-3964-04DD-4A3EB06507BB}">
 			<ShortName>UI</ShortName>
 			<Path>UI.bnk</Path>
 			<Media>
@@ -259,20 +259,20 @@
 				<Event Id="1761439789" Name="Stop_Level3" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 			</Events>
 		</SoundBank>
-		<SoundBank Id="2678230382" Type="User" Language="SFX" Hash="{72135646-CC0E-02E7-0D2A-AAD6599141F7}">
+		<SoundBank Id="2678230382" Type="User" Language="SFX" Hash="{C350EC77-BF85-8EA4-6DF9-3F5D0766CD86}">
 			<ShortName>Level1</ShortName>
 			<Path>Level1.bnk</Path>
 			<Media>
-				<File Id="187318935" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>Dangerous_Love_120bpm.wav</ShortName>
-					<CachePath>SFX/Dangerous_Love_120bpm_29F081A2.wem</CachePath>
+				<File Id="815242365" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Dangerous_Love_120bpm_withMarker.wav</ShortName>
+					<CachePath>SFX/Dangerous_Love_120bpm_withMarker_818F3B66.wem</CachePath>
 				</File>
 			</Media>
 			<Events>
 				<Event Id="2859270423" Name="Pause_Level1" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
-				<Event Id="3659125941" Name="Play_Level1" DurationType="OneShot" DurationMin="94.81698" DurationMax="94.81698">
+				<Event Id="3659125941" Name="Play_Level1" DurationType="OneShot" DurationMin="94.61698" DurationMax="94.61698">
 					<MediaRefs>
-						<MediaRef Id="187318935"/>
+						<MediaRef Id="815242365"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="3265051672" Name="Resume_Level1" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
@@ -344,5 +344,5 @@
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{8DFE4CBE-6B15-DE35-FE25-DB20EC1080FD}</FileHash>
+	<FileHash>{1A6F356F-769E-E4C2-92CE-DBC73060400A}</FileHash>
 </SoundBanksInfo>

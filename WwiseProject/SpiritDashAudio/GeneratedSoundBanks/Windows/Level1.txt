@@ -5,5 +5,5 @@ Event	ID	Name			Wwise Object Path	Notes
 	3659125941	Play_Level1			\LevelMusic\Level1\Play_Level1	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	187318935	Level1Music	E:\WorkRepository\UnityProject\SpiritDash\UnityProject\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\Dangerous_Love_120bpm_29F081A2.wem		\Actor-Mixer Hierarchy\LevelMusic\LevelMusic\Level1Music		18213292
+	815242365	Level1Music	E:\WorkRepository\UnityProject\SpiritDash\UnityProject\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\Dangerous_Love_120bpm_withMarker_818F3B66.wem		\Actor-Mixer Hierarchy\LevelMusic\LevelMusic\Level1Music		18181356
 

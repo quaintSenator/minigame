@@ -2086,9 +2086,16 @@
 										</ObjectList>
 									</ObjectLists>
 								</AudioFileSource>
+								<AudioFileSource Name="Dangerous_Love_120bpm_withMarker" ID="{E3574130-055D-49E4-B549-F283403C9347}">
+									<Language>SFX</Language>
+									<AudioFile>Dangerous_Love_120bpm_withMarker.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="815242365"/>
+									</MediaIDList>
+								</AudioFileSource>
 							</ChildrenList>
 							<ActiveSourceList>
-								<ActiveSource Name="Dangerous_Love_120bpm" ID="{85F9E41D-0F44-4AE5-8878-A2BB58812B2A}" Platform="Linked"/>
+								<ActiveSource Name="Dangerous_Love_120bpm_withMarker" ID="{E3574130-055D-49E4-B549-F283403C9347}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
 						<Sound Name="Level2Music" ID="{DDEFF4C9-D2EB-4605-B152-8495562A8FBD}" ShortID="987512216">
