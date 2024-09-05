@@ -125,5 +125,15 @@ public class BossStoryController : MonoBehaviour
         bubble.gameObject.SetActive(false);
     }
 
+    public void StartBgSpeak()
+    {
+        bgDialog.text = GetDialog(2);
+    }
+
+    public void EndBgSpeak()
+    {
+        bgDialog.text = "";
+    }
+
 
 }

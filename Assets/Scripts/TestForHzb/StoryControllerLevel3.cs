@@ -180,16 +180,18 @@ public class StoryControllerLevel3 : MonoBehaviour
     private void Step_3()
     {
         bossController.ShowUp();
+        bossStoryController.StartBgSpeak();
     }
 
     private void Step_4()
     {
-        bossStoryController.StartSpeak(2);
+        bossStoryController.EndBgSpeak();
 
     }
 
     private void Step_5()
     {
+
         bossStoryController.StartSpeak(1);
     }
 
