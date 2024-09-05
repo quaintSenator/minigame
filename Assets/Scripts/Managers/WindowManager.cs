@@ -119,20 +119,22 @@ public class WindowManager : Singleton<WindowManager>
     public int GetLevelIndex()
     {
         var sceneName = SceneManager.GetActiveScene().name;
-        if (sceneName.Contains("Level_"))
+        if (sceneName.Contains("_1"))
         {
-            var indexNumStr = sceneName.Substring(6, 1);
-            try
-            {
-                int.Parse(indexNumStr);
-            }
-            catch (FormatException e)
-            {
-                Debug.Log(e);
-                return 0;
-            }
+            return 1;
         }
-        return 0;
+        else if (sceneName.Contains("_2"))
+        {
+            return 2;
+        }
+        else if(sceneName.Contains("_3"))
+        {
+            return 3;
+        }
+        else
+        {
+            return 0;
+        }
 
     }
     public bool isAtPausePage()
@@ -341,9 +343,14 @@ public class WindowManager : Singleton<WindowManager>
     }
     public void OnPassLevel(EventData eventData)
     {
-        if (GetLevelIndex() != 0)
+        var levelIndex = GetLevelIndex();
+        if (levelIndex != 0)
         {
-            ProgressManager.Instance.UpdateLevelComplete(GetLevelIndex(), true);
+            ProgressManager.Instance.UpdateLevelComplete(levelIndex, true);
+            if (levelIndex <= 2)//第三关不会解锁下一关
+            {
+                ProgressManager.Instance.UpdateLevelLocked(levelIndex + 1, false);
+            }
         }
         //应该不可能发生暂停页面在上面的同时过关的情况
         ClipUIRoot2Empty();

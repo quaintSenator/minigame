@@ -57,7 +57,6 @@ public class LevelPassPage : Window
             SceneManager.LoadScene("Level_2");
         }
 #endif
-        
     }
     protected override void onExit()
     {
