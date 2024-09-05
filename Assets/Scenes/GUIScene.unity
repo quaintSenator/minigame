@@ -652,6 +652,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1853259903918786604, guid: 7e6a7fa6d55e7a6478041781845abcbd, type: 3}
+      propertyPath: UIVolume.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: ff7b8603e74df7b4a909183669345cdd, type: 2}
+    - target: {fileID: 1853259903918786604, guid: 7e6a7fa6d55e7a6478041781845abcbd, type: 3}
+      propertyPath: MasterVolume.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: de6afd4f4aeb6a648baab051781aeaa3, type: 2}
+    - target: {fileID: 1853259903918786604, guid: 7e6a7fa6d55e7a6478041781845abcbd, type: 3}
+      propertyPath: LevelMusicVolume.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 9d79c20244b63a545ad0db7a17b7c8a6, type: 2}
+    - target: {fileID: 1853259903918786604, guid: 7e6a7fa6d55e7a6478041781845abcbd, type: 3}
+      propertyPath: InteractiveVolume.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 75b77efcfd513cb47b9a3bd6dd6da633, type: 2}
     - target: {fileID: 1853259903918786605, guid: 7e6a7fa6d55e7a6478041781845abcbd, type: 3}
       propertyPath: m_Name
       value: UIAudio

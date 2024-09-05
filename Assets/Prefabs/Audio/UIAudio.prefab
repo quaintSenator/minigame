@@ -80,3 +80,19 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 5e74f36b2a95bfa47af49a75247254f7, type: 2}
+  MasterVolume:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: de6afd4f4aeb6a648baab051781aeaa3, type: 2}
+  LevelMusicVolume:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 9d79c20244b63a545ad0db7a17b7c8a6, type: 2}
+  UIVolume:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: ff7b8603e74df7b4a909183669345cdd, type: 2}
+  InteractiveVolume:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 75b77efcfd513cb47b9a3bd6dd6da633, type: 2}

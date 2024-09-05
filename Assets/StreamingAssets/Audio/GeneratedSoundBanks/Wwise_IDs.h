@@ -56,6 +56,7 @@ namespace AK
     {
         static const AkUniqueID INTERACTIONSFX_VOLUME = 2913660057U;
         static const AkUniqueID LEVELMUSIC_VOLUME = 978959531U;
+        static const AkUniqueID MAIN_VOLUME = 2312172015U;
         static const AkUniqueID SS_AIR_FEAR = 1351367891U;
         static const AkUniqueID SS_AIR_FREEFALL = 3002758120U;
         static const AkUniqueID SS_AIR_FURY = 1029930033U;

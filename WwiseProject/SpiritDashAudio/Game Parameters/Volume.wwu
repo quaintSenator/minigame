@@ -21,6 +21,12 @@
 						<Property Name="Min" Type="Real64" Value="-100"/>
 					</PropertyList>
 				</GameParameter>
+				<GameParameter Name="Main_Volume" ID="{878A72EF-016C-4889-81D9-891C705AC344}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="0"/>
+						<Property Name="Min" Type="Real64" Value="-100"/>
+					</PropertyList>
+				</GameParameter>
 			</ChildrenList>
 		</WorkUnit>
 	</GameParameters>

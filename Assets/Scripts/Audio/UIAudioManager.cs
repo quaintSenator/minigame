@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AK.Wwise;
+
 
 public class UIAudioManager : Singleton<MusicManager>
 {
@@ -18,6 +20,10 @@ public class UIAudioManager : Singleton<MusicManager>
 
     public AK.Wwise.Event PlayBtnClickAudioEvent = null;
 
+    public RTPC MasterVolume = null;
+    public RTPC LevelMusicVolume = null;
+    public RTPC UIVolume = null;
+    public RTPC InteractiveVolume = null;
 
 
     #region 外部音乐接口
@@ -86,11 +92,32 @@ public class UIAudioManager : Singleton<MusicManager>
             MainUIMusicResumeEvent.Post(gameObject);
         }*/
 
+    public void SetMasterVolume(float Volume)
+    {
+        MasterVolume.SetGlobalValue(Volume);
+    }
+
+    public void SetLevelMusicVolume(float Volume)
+    {
+        LevelMusicVolume.SetGlobalValue(Volume);
+    }
+
+    public void SetUIVolume(float Volume)
+    {
+        UIVolume.SetGlobalValue(Volume);
+    }
+
+    public void SetInteractiveVolume(float Volume)
+    {
+        InteractiveVolume.SetGlobalValue(Volume);
+    }
 
 
 
 
-#endregion
+
+
+    #endregion
 
 
     // Start is called before the first frame update

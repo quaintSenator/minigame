@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="150">
 	<SoundBanks>
-		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{EC117D39-FF7B-AF80-51D9-91776E258C89}">
+		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{0763D1B6-4724-0C11-5F04-581772268FC4}">
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 			<Plugins>
@@ -22,6 +22,7 @@
 				<GameParameter Id="1029930033" Name="SS_Air_Fury"/>
 				<GameParameter Id="1351367891" Name="SS_Air_Fear"/>
 				<GameParameter Id="1719345792" Name="UI_Volume"/>
+				<GameParameter Id="2312172015" Name="Main_Volume"/>
 				<GameParameter Id="2648548617" Name="SS_Air_Month"/>
 				<GameParameter Id="2913660057" Name="InteractionSFX_Volume"/>
 				<GameParameter Id="3002758120" Name="SS_Air_Freefall"/>
@@ -168,5 +169,5 @@
 			</AcousticTextures>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{FDC4AF48-BA69-58B2-4632-03FA3B90BADF}</FileHash>
+	<FileHash>{7E94B0AC-A827-5134-EFEF-3736D34359E0}</FileHash>
 </SoundBanksInfo>

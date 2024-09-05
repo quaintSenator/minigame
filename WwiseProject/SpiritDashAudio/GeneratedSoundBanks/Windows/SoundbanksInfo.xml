@@ -9,7 +9,7 @@
 	</RootPaths>
 	<DialogueEvents/>
 	<SoundBanks>
-		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{EC117D39-FF7B-AF80-51D9-91776E258C89}">
+		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{0763D1B6-4724-0C11-5F04-581772268FC4}">
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 			<Plugins>
@@ -30,6 +30,7 @@
 				<GameParameter Id="1029930033" Name="SS_Air_Fury"/>
 				<GameParameter Id="1351367891" Name="SS_Air_Fear"/>
 				<GameParameter Id="1719345792" Name="UI_Volume"/>
+				<GameParameter Id="2312172015" Name="Main_Volume"/>
 				<GameParameter Id="2648548617" Name="SS_Air_Month"/>
 				<GameParameter Id="2913660057" Name="InteractionSFX_Volume"/>
 				<GameParameter Id="3002758120" Name="SS_Air_Freefall"/>
@@ -354,5 +355,5 @@
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{71FCB9BF-1848-438B-B313-D040E6BB5797}</FileHash>
+	<FileHash>{152BB966-D79F-657A-F76C-1B1F1B77F580}</FileHash>
 </SoundBanksInfo>
