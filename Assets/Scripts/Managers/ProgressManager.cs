@@ -44,6 +44,7 @@ public class ProgressManager : Singleton<ProgressManager>
         EventManager.AddListener(EventType.StartLevelEvent, StartLevel);
         EventManager.AddListener(EventType.RestartLevelEvent, RestartLevel);
         EventManager.AddListener(EventType.GamePauseEvent, GamePause);
+        EventManager.AddListener(EventType.GameResumeEvent, GameResume);
         EventManager.AddListener(EventType.PlayerDeadStoryEvent, OnPlayerDead);
         EventManager.AddListener(EventType.PlayerPassRegisterResetPointEvent, OnPlayerPassRegisterResetPoint);
     }
@@ -54,8 +55,14 @@ public class ProgressManager : Singleton<ProgressManager>
         EventManager.RemoveListener(EventType.StartLevelEvent, StartLevel);
         EventManager.RemoveListener(EventType.RestartLevelEvent, RestartLevel);
         EventManager.RemoveListener(EventType.GamePauseEvent, GamePause);
+        EventManager.RemoveListener(EventType.GameResumeEvent, GameResume);
         EventManager.RemoveListener(EventType.PlayerDeadStoryEvent, OnPlayerDead);
         EventManager.RemoveListener(EventType.PlayerPassRegisterResetPointEvent, OnPlayerPassRegisterResetPoint);
+    }
+
+    private void GameResume(EventData obj)
+    {
+        gameStart = true;
     }
 
     private void OnPlayerPassRegisterResetPoint(EventData obj)
@@ -80,11 +87,13 @@ public class ProgressManager : Singleton<ProgressManager>
     private void OnLoadMap(EventData obj)
     {
         var data = obj as LoadMapDataEvent;
+        currentGameTime = 0;
         currentLevelIndex = data.index;
     }
 
     private void GamePause(EventData obj)
     {
+        UpdateLevelProgress(currentLevelIndex);
         gameStart = false;
     }
 
@@ -97,6 +106,8 @@ public class ProgressManager : Singleton<ProgressManager>
     
     public void UpdateLevelProgress(int levelIndex, float progress)
     {
+        progress = Mathf.Clamp(progress, 0, 1);
+        Debug.Log($"UpdateLevelComplete {levelIndex} : {progress} ");
         if (!levelProgressDataDic.ContainsKey(levelIndex))
         {
             InitLevelData(levelIndex);
@@ -116,13 +127,17 @@ public class ProgressManager : Singleton<ProgressManager>
     }
     public void UpdateLevelComplete(int levelIndex, bool isComplete)
     {
+        Debug.Log($"UpdateLevelComplete {levelIndex} : {isComplete} ");
         if (!levelProgressDataDic.ContainsKey(levelIndex))
         {
             InitLevelData(levelIndex);
         }
         levelProgressDataDic[levelIndex].isLevelComplete = isComplete;
         levelProgressDataList.Find(data => data.levelIndex == levelIndex).isLevelComplete = isComplete;
-        UpdateLevelProgress(levelIndex, 1);
+        if (isComplete)
+        {
+            UpdateLevelProgress(levelIndex, 1);
+        }
         SaveLevelData();
     }
     
@@ -184,7 +199,7 @@ public class ProgressManager : Singleton<ProgressManager>
             InitLevelData(levelIndex);
         }
         Debug.Log($"GetLevelProgress {levelIndex} : {levelProgressDataDic[levelIndex].levelProgress} ");
-        return levelProgressDataDic[levelIndex].levelProgress;
+        return Mathf.Clamp(levelProgressDataDic[levelIndex].levelProgress, 0, 1);
     }
     
     /// <summary>

@@ -303,7 +303,7 @@ MonoBehaviour:
     ParentPath: Master-Mixer Hierarchy\Default Work Unit
     guid: 7351e85e1a7fef46bb21dfdce1ba22bc
     GuidInternal: 
-    m_lastTime: -8584760761381356045
+    m_lastTime: -8584760537302385730
     List:
     - name: InteractionSFX
       guid: 351892f554378549902e3f4a738f9303
@@ -864,7 +864,7 @@ MonoBehaviour:
     ParentPath: Events\UI
     guid: e00eafbf667e434ca89ccb6e11c99451
     GuidInternal: 
-    m_lastTime: -8584760761388790135
+    m_lastTime: -8584760537304308963
     List:
     - name: Play_Button
       guid: 06dfd08023ab7244bb507841f12d437e
@@ -883,6 +883,57 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0.9979085
       minDuration: 0.9979085
+    - name: Play_Level1Music
+      guid: e8ba46b62eab9c48af282d7ac2cd3270
+      id: 3605952550
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: UI
+        ObjectType: 12
+        guid: e00eafbf667e434ca89ccb6e11c99451
+      - ElementName: Play_Level1Music
+        ObjectType: 3
+        guid: e8ba46b62eab9c48af282d7ac2cd3270
+      Path: Events\UI\Play_Level1Music
+      maxAttenuation: 0
+      maxDuration: 94.81698
+      minDuration: 94.81698
+    - name: Play_Level2Music
+      guid: 2892e7b1cdf6034d87ea1d5990b29674
+      id: 565626987
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: UI
+        ObjectType: 12
+        guid: e00eafbf667e434ca89ccb6e11c99451
+      - ElementName: Play_Level2Music
+        ObjectType: 3
+        guid: 2892e7b1cdf6034d87ea1d5990b29674
+      Path: Events\UI\Play_Level2Music
+      maxAttenuation: 0
+      maxDuration: 182.21053
+      minDuration: 182.21053
+    - name: Play_Level3Music
+      guid: d091b5a0cefb204780c57df02c74d905
+      id: 1946308780
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: UI
+        ObjectType: 12
+        guid: e00eafbf667e434ca89ccb6e11c99451
+      - ElementName: Play_Level3Music
+        ObjectType: 3
+        guid: d091b5a0cefb204780c57df02c74d905
+      Path: Events\UI\Play_Level3Music
+      maxAttenuation: 0
+      maxDuration: 172.148
+      minDuration: 172.148
     - name: Play_MainUIBgm
       guid: c4e80eec03aeef428bce7bc25bac6d85
       id: 3324143387
@@ -897,6 +948,23 @@ MonoBehaviour:
         ObjectType: 3
         guid: c4e80eec03aeef428bce7bc25bac6d85
       Path: Events\UI\Play_MainUIBgm
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Play_MainUIBgmFade
+      guid: 0228b603f2d515448548709e89d4506c
+      id: 3464843613
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: UI
+        ObjectType: 12
+        guid: e00eafbf667e434ca89ccb6e11c99451
+      - ElementName: Play_MainUIBgmFade
+        ObjectType: 3
+        guid: 0228b603f2d515448548709e89d4506c
+      Path: Events\UI\Play_MainUIBgmFade
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
@@ -934,6 +1002,57 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 2.0052154
       minDuration: 2.0052154
+    - name: Stop_Level1Music
+      guid: 536f8a790563ef48a839957f6bc6fab6
+      id: 698863348
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: UI
+        ObjectType: 12
+        guid: e00eafbf667e434ca89ccb6e11c99451
+      - ElementName: Stop_Level1Music
+        ObjectType: 3
+        guid: 536f8a790563ef48a839957f6bc6fab6
+      Path: Events\UI\Stop_Level1Music
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Stop_Level2Music
+      guid: 613705cddd2e3246b30751509ff87dde
+      id: 1432069157
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: UI
+        ObjectType: 12
+        guid: e00eafbf667e434ca89ccb6e11c99451
+      - ElementName: Stop_Level2Music
+        ObjectType: 3
+        guid: 613705cddd2e3246b30751509ff87dde
+      Path: Events\UI\Stop_Level2Music
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Stop_Level3Music
+      guid: 5e77e2f72781114aafd9115c3ac77f52
+      id: 748523342
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: UI
+        ObjectType: 12
+        guid: e00eafbf667e434ca89ccb6e11c99451
+      - ElementName: Stop_Level3Music
+        ObjectType: 3
+        guid: 5e77e2f72781114aafd9115c3ac77f52
+      Path: Events\UI\Stop_Level3Music
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: Stop_MainUIBgm
       guid: 33410fe7cbd9d547bbeee4cb3561330d
       id: 1737667577
@@ -1152,6 +1271,33 @@ MonoBehaviour:
         ObjectType: 13
         guid: 197ba8edaa73a0409f192073606db710
       Path: Game Parameters\Factory Soundseed Air Game Syncs\SS_Air_Turbulence
+  - PhysicalPath: Game Parameters\UI.wwu
+    PathAndIcons:
+    - ElementName: Game Parameters
+      ObjectType: 5
+      guid: 00000000000000000000000000000000
+    - ElementName: UI
+      ObjectType: 12
+      guid: c55208697a0f1e459a6755cbe8feab8e
+    ParentPath: Game Parameters\UI
+    guid: c55208697a0f1e459a6755cbe8feab8e
+    GuidInternal: 
+    m_lastTime: -8584760537304308963
+    List:
+    - name: MainUIBgm_intialDelay
+      guid: ae6b8254ac91144c98ab350e102b60f0
+      id: 649089707
+      PathAndIcons:
+      - ElementName: Game Parameters
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: UI
+        ObjectType: 12
+        guid: c55208697a0f1e459a6755cbe8feab8e
+      - ElementName: MainUIBgm_intialDelay
+        ObjectType: 13
+        guid: ae6b8254ac91144c98ab350e102b60f0
+      Path: Game Parameters\UI\MainUIBgm_intialDelay
   - PhysicalPath: Game Parameters\Volume.wwu
     PathAndIcons:
     - ElementName: Game Parameters
@@ -1163,7 +1309,7 @@ MonoBehaviour:
     ParentPath: Game Parameters\Volume
     guid: b1acdd4165113e4fa7eeee6a993d4213
     GuidInternal: 
-    m_lastTime: -8584760761388776133
+    m_lastTime: -8584760537304308963
     List:
     - name: InteractionSFX_Volume
       guid: 0b9194b73545d9469cfcb606a690cd5e

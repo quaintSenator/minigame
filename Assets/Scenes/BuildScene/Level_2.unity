@@ -1048,7 +1048,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedMapdata: {fileID: 11400000, guid: 9915fbbf997bc594f91ac8d0e1e668fc, type: 2}
-  selectedMapIndex: 1
+  selectedMapIndex: 2
   buildableInfos: []
   showAllBuildable: 0
   musicManager: {fileID: 0}

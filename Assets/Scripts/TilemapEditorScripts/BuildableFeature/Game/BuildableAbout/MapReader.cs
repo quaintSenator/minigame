@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class MapReader : Singleton<MapReader>
 {
     [SerializeField] private TilemapSaveLocalFile selectedMapdata;
-    [SerializeField] private int selectedMapIndex = 1;
+    [SerializeField] private int selectedMapIndex;
     
     private Transform mapParent;
     public List<BuildableInfo> buildableInfos = new List<BuildableInfo>();
@@ -20,7 +20,6 @@ public class MapReader : Singleton<MapReader>
     {
         //当前系统时间
         float time = Time.realtimeSinceStartup;
-        
         mapParent = transform;
         BuildableBase.BuildableGroupMap.Clear();
         LoadSelectedData();
