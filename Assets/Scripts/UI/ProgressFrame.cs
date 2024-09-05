@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ProgressFrame : MonoBehaviour
@@ -17,11 +18,18 @@ public class ProgressFrame : MonoBehaviour
     
     void Start()
     {
-        mProgressText.text = GetCurrentLevelProgressText(1);
+        var levelID = 1;
+        if (!SceneManager.GetActiveScene().name.Contains("GUI"))
+        {
+            //暂停页面也在使用
+            levelID = WindowManager.Instance.GetLevelIndex();
+        }
+        //否则，选关页面，levelID用1
+        mProgressText.text = GetCurrentLevelProgressText(levelID);
         var m_rect = gameObject.GetComponent<RectTransform>();
         initialFrameWidth = m_rect.sizeDelta.x;
         initialFrameHeight = m_rect.sizeDelta.y;
-        UpdateProgressContent(1);
+        UpdateProgressContent(levelID);
     }
 
     private void OnEnable()
@@ -56,6 +64,7 @@ public class ProgressFrame : MonoBehaviour
     private float UpdateProgressContent(int i)
     {
         var progress = ProgressManager.Instance.GetLevelProgress(i);
+        progress = progress > 1 ? 1 : progress;
         _frameContentWidth = initialFrameWidth * progress;
         //mProgressContent.rectTransform.anchoredPosition = new Vector2(_frameContentWidth / 2, 0);
         mProgressContent.rectTransform.sizeDelta = new Vector2(_frameContentWidth, initialFrameHeight);
