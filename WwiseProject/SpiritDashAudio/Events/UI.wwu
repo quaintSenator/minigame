@@ -8,11 +8,11 @@
 						<Action Name="" ID="{2DF1E67A-FE19-4E69-82F3-41896DEE7C1B}" ShortID="979815934">
 							<PropertyList>
 								<Property Name="FadeInCurve" Type="int16" Value="0"/>
-								<Property Name="FadeTime" Type="Real64" Value="10"/>
+								<Property Name="FadeTime" Type="Real64" Value="2.5"/>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="MainUIBgm" ID="{427EF2FA-902B-497A-B929-6CF34580D0E0}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+									<ObjectRef Name="MainUIBgm" ID="{427EF2FA-902B-497A-B929-6CF34580D0E0}" WorkUnitID="{6F4EA66B-8C2D-4FE8-A9BC-FA3F3685F0A5}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -23,11 +23,11 @@
 						<Action Name="" ID="{5F94DE72-8F67-41FC-9258-8C20B46BB103}" ShortID="1000975073">
 							<PropertyList>
 								<Property Name="FadeInCurve" Type="int16" Value="2"/>
-								<Property Name="FadeTime" Type="Real64" Value="10"/>
+								<Property Name="FadeTime" Type="Real64" Value="2"/>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="PauseUIBgm" ID="{CC439BC7-72DA-44E6-B2C0-692FBF320104}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+									<ObjectRef Name="PauseUIBgm_120bpm" ID="{CC439BC7-72DA-44E6-B2C0-692FBF320104}" WorkUnitID="{6F4EA66B-8C2D-4FE8-A9BC-FA3F3685F0A5}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -39,11 +39,10 @@
 							<PropertyList>
 								<Property Name="ActionType" Type="int16" Value="2"/>
 								<Property Name="FadeInCurve" Type="int16" Value="2"/>
-								<Property Name="FadeTime" Type="Real64" Value="10"/>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="PauseUIBgm" ID="{CC439BC7-72DA-44E6-B2C0-692FBF320104}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+									<ObjectRef Name="PauseUIBgm_120bpm" ID="{CC439BC7-72DA-44E6-B2C0-692FBF320104}" WorkUnitID="{6F4EA66B-8C2D-4FE8-A9BC-FA3F3685F0A5}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -55,11 +54,10 @@
 							<PropertyList>
 								<Property Name="ActionType" Type="int16" Value="2"/>
 								<Property Name="FadeInCurve" Type="int16" Value="0"/>
-								<Property Name="FadeTime" Type="Real64" Value="10"/>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="MainUIBgm" ID="{427EF2FA-902B-497A-B929-6CF34580D0E0}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+									<ObjectRef Name="MainUIBgm" ID="{427EF2FA-902B-497A-B929-6CF34580D0E0}" WorkUnitID="{6F4EA66B-8C2D-4FE8-A9BC-FA3F3685F0A5}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -70,7 +68,35 @@
 						<Action Name="" ID="{0BB76919-9D45-4648-A8B1-8066A719A533}" ShortID="745511047">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="Button" ID="{3FC6DE58-BA7F-4448-A812-B213A75D7262}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+									<ObjectRef Name="Button" ID="{3FC6DE58-BA7F-4448-A812-B213A75D7262}" WorkUnitID="{6F4EA66B-8C2D-4FE8-A9BC-FA3F3685F0A5}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Stop_PauseUIBgm_160bpm" ID="{CD4543A0-6B59-48EF-A6EC-081F23654234}">
+					<ChildrenList>
+						<Action Name="" ID="{7CFB9BC3-94CD-461E-B7AD-1AAE032FD09E}" ShortID="1026341374">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="PauseUIBgm_160bpm" ID="{825376DD-6E73-4F56-B15B-27E6CBC5C5DA}" WorkUnitID="{6F4EA66B-8C2D-4FE8-A9BC-FA3F3685F0A5}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_PauseUIBgm_160bpm" ID="{4641C4D5-5474-4780-B5BD-E076E5F3204E}">
+					<ChildrenList>
+						<Action Name="" ID="{7F73795B-1C73-463A-9388-9DBC851C3902}" ShortID="218856829">
+							<PropertyList>
+								<Property Name="FadeTime" Type="Real64" Value="1.5"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="PauseUIBgm_160bpm" ID="{825376DD-6E73-4F56-B15B-27E6CBC5C5DA}" WorkUnitID="{6F4EA66B-8C2D-4FE8-A9BC-FA3F3685F0A5}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>

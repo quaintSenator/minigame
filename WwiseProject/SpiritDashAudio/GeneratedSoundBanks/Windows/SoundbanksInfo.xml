@@ -5,7 +5,7 @@
 		<SourceFilesRoot>../../.cache/Windows</SourceFilesRoot>
 		<SoundBanksRoot>.</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
-		<ExternalSourcesOutputRoot>../../../../Assets/StreamingAssets/Audio/GeneratedSoundBanks/Windows</ExternalSourcesOutputRoot>
+		<ExternalSourcesOutputRoot>E:/WorkRepository/UnityProject/SpiritDash/UnityProject/minigame/Assets/StreamingAssets/Audio/GeneratedSoundBanks/Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
 	<DialogueEvents/>
 	<SoundBanks>
@@ -175,7 +175,7 @@
 				</AcousticTexture>
 			</AcousticTextures>
 		</SoundBank>
-		<SoundBank Id="1551306167" Type="User" Language="SFX" Hash="{6FCFE3A8-6FA9-3964-04DD-4A3EB06507BB}">
+		<SoundBank Id="1551306167" Type="User" Language="SFX" Hash="{BBDFA877-072D-901A-6D68-98627F9B7237}">
 			<ShortName>UI</ShortName>
 			<Path>UI.bnk</Path>
 			<Media>
@@ -187,6 +187,10 @@
 					<ShortName>Dangerous_Love_120bpm.wav</ShortName>
 					<CachePath>SFX/Dangerous_Love_120bpm_D79AC98A.wem</CachePath>
 				</File>
+				<File Id="365486786" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>PauseUIBgm_160bpm.wav</ShortName>
+					<CachePath>SFX/PauseUIBgm_160bpm_818F3B66.wem</CachePath>
+				</File>
 				<File Id="400767641" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>PauseUIBgm.wav</ShortName>
 					<CachePath>SFX/PauseUIBgm_FBC78EF0.wem</CachePath>
@@ -197,7 +201,7 @@
 				</File>
 				<File Id="796426103" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>UI_Click_3.wav</ShortName>
-					<CachePath>SFX/UI_Click_3_818F3B66.wem</CachePath>
+					<CachePath>SFX/UI_Click_3_0E35BD43.wem</CachePath>
 				</File>
 				<File Id="916479105" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Up_withMarker.wav</ShortName>
@@ -205,7 +209,7 @@
 				</File>
 			</Media>
 			<Events>
-				<Event Id="2099555730" Name="Play_Button" DurationType="OneShot" DurationMin="2.64" DurationMax="2.64">
+				<Event Id="2099555730" Name="Play_Button" DurationType="OneShot" DurationMin="0.9979085" DurationMax="0.9979085">
 					<SwitchContainers>
 						<SwitchContainer>
 							<SwitchValue GroupType="Switch" GroupId="977454165" Id="782826392" Default="true"/>
@@ -228,8 +232,14 @@
 						<MediaRef Id="400767641"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="1263577765" Name="Play_PauseUIBgm_160bpm" DurationType="OneShot" DurationMin="2.0052154" DurationMax="2.0052154">
+					<MediaRefs>
+						<MediaRef Id="365486786"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="1737667577" Name="Stop_MainUIBgm" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 				<Event Id="2228862010" Name="Stop_PauseUIBgm" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="507415775" Name="Stop_PauseUIBgm_160bpm" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 			</Events>
 			<SwitchGroups>
 				<SwitchGroup Id="977454165" Name="Button">
@@ -344,5 +354,5 @@
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{1A6F356F-769E-E4C2-92CE-DBC73060400A}</FileHash>
+	<FileHash>{71FCB9BF-1848-438B-B313-D040E6BB5797}</FileHash>
 </SoundBanksInfo>
