@@ -106,6 +106,7 @@ public class ProgressManager : Singleton<ProgressManager>
     
     public void UpdateLevelProgress(int levelIndex, float progress)
     {
+        progress = Mathf.Clamp(progress, 0, 1);
         Debug.Log($"UpdateLevelComplete {levelIndex} : {progress} ");
         if (!levelProgressDataDic.ContainsKey(levelIndex))
         {
@@ -198,7 +199,7 @@ public class ProgressManager : Singleton<ProgressManager>
             InitLevelData(levelIndex);
         }
         Debug.Log($"GetLevelProgress {levelIndex} : {levelProgressDataDic[levelIndex].levelProgress} ");
-        return levelProgressDataDic[levelIndex].levelProgress;
+        return Mathf.Clamp(levelProgressDataDic[levelIndex].levelProgress, 0, 1);
     }
     
     /// <summary>
