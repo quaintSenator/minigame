@@ -167,19 +167,14 @@ public class WindowManager : Singleton<WindowManager>
     {
         Time.timeScale = 1;
     }
-    public void ResumeMusicStop()
-    {
-        MusicManager.Instance.ResumeLevelMusic();
-    }
     public void ResumeGame()
     {
         if (isAtPausePage()) //如果目前暂停页面确实处于最上层
         {
             //恢复游戏
             //EventManager.InvokeEvent(EventType.StartLevelEvent);
-            ResumeMusicStop();
             ResumeTimePause();
-            
+            EventManager.InvokeEvent( EventType.GameResumeEvent, null);
             //关闭暂停页面
             var pausePage = _uiStack.Peek().gameObject;
             _uiStack.Pop();
