@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1188884074886832321}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8163170337579024031}
@@ -269,3 +269,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resetPointsOff: {fileID: 7144235392596392884}
   resetPointsOn: {fileID: 1366434576763789603}
+  resetPointsOffSpecial: {fileID: 21300000, guid: 66bad1eb0fc87704bad19b88a6d7f614, type: 3}
+  resetPointsOnSpecial: {fileID: 21300000, guid: 965ff8338c5210348be744a4f0bd8c37, type: 3}
+  debugReplaceSprite: 0

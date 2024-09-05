@@ -360,6 +360,8 @@ public class RhythmViewer : Singleton<RhythmViewer>
             musicController.PlayLevelMusic();
             musicCurrentPosLine.ShowPosLine();
             InitCurrentDynamicRhythmNode();
+
+            EventManager.InvokeEvent(EventType.MusicStartEvent);
         }
     }
 

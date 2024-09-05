@@ -8,7 +8,7 @@ public class FlyChangeDirPoint : MonoBehaviour
     {
         if(other.TryGetComponent(out PlayerController player))
         {
-            player.ChangeFlyDir();
+            player.ChangeFlyDir(transform.position.x);
         }
     }
 }

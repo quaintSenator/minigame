@@ -43,6 +43,12 @@ public class ContinuousPoint : BuildableBase
             SendVelocity(player);
         }
 
+        //中间节点重塑下位置
+        if(NextPoint!=null && LastPoint != null)
+        {
+            player.TrySetPositionXWhenFlyAndDirectionUp(transform.position.x);
+        }
+
         if(LastPoint == null)
         {
             player.SetCanFly(true);
@@ -99,10 +105,10 @@ public class ContinuousPoint : BuildableBase
         //float hDistance = endPos.x - startPos.x;
 
         ///Added by Yeniao start
-/*        if (hDistance == 0)
+        if (vDistance == 0)
         {
             return GameConsts.SPEED;
-        }*/
+        }
         ///End
 
         float hDistance =endPos.x - startPos.x;
@@ -116,6 +122,8 @@ public class ContinuousPoint : BuildableBase
     {
         player.SetVerticalVelocity(vVelocity);
         player.SetHorizonVelocity(hVelocity);
+
+
     }
     
     public void LinkPoint()

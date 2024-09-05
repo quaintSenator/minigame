@@ -541,7 +541,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void ChangeFlyDir()
+    public void ChangeFlyDir(float positionX)
     {
         if(isFlying)
         {
@@ -551,9 +551,20 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
+                transform.position = new Vector3(positionX, transform.position.y, transform.position.z);
                 rigidBody.velocity = Vector2.right * horizonVelocity;
             }
         }
+    }
+
+    public void TrySetPositionXWhenFlyAndDirectionUp(float positionX)
+    {
+        if(isFlying && !isFlyFinished && isMovingTowardUp)
+        {
+            transform.position = new Vector3(positionX, transform.position.y, transform.position.z);
+            rigidBody.velocity = new Vector2();
+        }
+
     }
 
     private void EndFly(float positionX = 0)
@@ -1195,6 +1206,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("pass change");
             isMovingTowardUp = !isMovingTowardUp;
             expectedDisplacementXAxis = transform.position.x;
+            rigidBody.velocity = new Vector2();
         }
 
 
