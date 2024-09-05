@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b67d56301ae048488b1446769bd94dd, type: 3}
+  m_Name: 03B62802-D5F2-4415-8548-709E89D4506C
+  m_EditorClassIdentifier: 
+  objectName: Play_MainUIBgmFade
+  id: 3464843613
+  guid: 03B62802-D5F2-4415-8548-709E89D4506C
