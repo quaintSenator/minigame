@@ -303,7 +303,7 @@ MonoBehaviour:
     ParentPath: Master-Mixer Hierarchy\Default Work Unit
     guid: 7351e85e1a7fef46bb21dfdce1ba22bc
     GuidInternal: 
-    m_lastTime: -8584763452832195059
+    m_lastTime: -8584760761381356045
     List:
     - name: InteractionSFX
       guid: 351892f554378549902e3f4a738f9303
@@ -691,8 +691,8 @@ MonoBehaviour:
         guid: edb5d16a56be2747adc231da02390146
       Path: Events\LevelMusic\Level1\Play_Level1
       maxAttenuation: 0
-      maxDuration: 94.81698
-      minDuration: 94.81698
+      maxDuration: 94.61698
+      minDuration: 94.61698
     - name: Play_Level2
       guid: a19098ae6077c74d8a08ba2ae5d72009
       id: 3659125942
@@ -864,7 +864,7 @@ MonoBehaviour:
     ParentPath: Events\UI
     guid: e00eafbf667e434ca89ccb6e11c99451
     GuidInternal: 
-    m_lastTime: -8584761373182169655
+    m_lastTime: -8584760761388790135
     List:
     - name: Play_Button
       guid: 06dfd08023ab7244bb507841f12d437e
@@ -881,8 +881,8 @@ MonoBehaviour:
         guid: 06dfd08023ab7244bb507841f12d437e
       Path: Events\UI\Play_Button
       maxAttenuation: 0
-      maxDuration: 2.64
-      minDuration: 2.64
+      maxDuration: 0.9979085
+      minDuration: 0.9979085
     - name: Play_MainUIBgm
       guid: c4e80eec03aeef428bce7bc25bac6d85
       id: 3324143387
@@ -917,6 +917,23 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
+    - name: Play_PauseUIBgm_160bpm
+      guid: d5c4414674548047b5bde076e5f3204e
+      id: 1263577765
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: UI
+        ObjectType: 12
+        guid: e00eafbf667e434ca89ccb6e11c99451
+      - ElementName: Play_PauseUIBgm_160bpm
+        ObjectType: 3
+        guid: d5c4414674548047b5bde076e5f3204e
+      Path: Events\UI\Play_PauseUIBgm_160bpm
+      maxAttenuation: 0
+      maxDuration: 2.0052154
+      minDuration: 2.0052154
     - name: Stop_MainUIBgm
       guid: 33410fe7cbd9d547bbeee4cb3561330d
       id: 1737667577
@@ -932,8 +949,8 @@ MonoBehaviour:
         guid: 33410fe7cbd9d547bbeee4cb3561330d
       Path: Events\UI\Stop_MainUIBgm
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0
+      minDuration: 0
     - name: Stop_PauseUIBgm
       guid: 9c48dd3235f64e47bc527675a747724c
       id: 2228862010
@@ -949,8 +966,25 @@ MonoBehaviour:
         guid: 9c48dd3235f64e47bc527675a747724c
       Path: Events\UI\Stop_PauseUIBgm
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0
+      minDuration: 0
+    - name: Stop_PauseUIBgm_160bpm
+      guid: a04345cd596bef48a6ec081f23654234
+      id: 507415775
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: UI
+        ObjectType: 12
+        guid: e00eafbf667e434ca89ccb6e11c99451
+      - ElementName: Stop_PauseUIBgm_160bpm
+        ObjectType: 3
+        guid: a04345cd596bef48a6ec081f23654234
+      Path: Events\UI\Stop_PauseUIBgm_160bpm
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
   RtpcWwu:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     PathAndIcons:
@@ -1129,7 +1163,7 @@ MonoBehaviour:
     ParentPath: Game Parameters\Volume
     guid: b1acdd4165113e4fa7eeee6a993d4213
     GuidInternal: 
-    m_lastTime: -8584763452839145381
+    m_lastTime: -8584760761388776133
     List:
     - name: InteractionSFX_Volume
       guid: 0b9194b73545d9469cfcb606a690cd5e
@@ -1159,6 +1193,20 @@ MonoBehaviour:
         ObjectType: 13
         guid: 561326921b994d4a9eb871794b61ef6c
       Path: Game Parameters\Volume\LevelMusic_Volume
+    - name: Main_Volume
+      guid: ef728a876c01894881d9891c705ac344
+      id: 2312172015
+      PathAndIcons:
+      - ElementName: Game Parameters
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Volume
+        ObjectType: 12
+        guid: b1acdd4165113e4fa7eeee6a993d4213
+      - ElementName: Main_Volume
+        ObjectType: 13
+        guid: ef728a876c01894881d9891c705ac344
+      Path: Game Parameters\Volume\Main_Volume
     - name: UI_Volume
       guid: cfe5bba74d6f8943ab581dd168d233a4
       id: 1719345792

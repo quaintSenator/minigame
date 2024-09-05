@@ -2,12 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelPassPage : Window
 {
+    [SerializeField] private Text m_text;
     public new void Start()
     {
         base.Init();
+        var currentLevel = WindowManager.Instance.GetLevelIndex();
+        if (currentLevel == 1)
+        {
+            m_text.text = "学会了飞跃，可以到更远的地方去了";
+        }
+        else if (currentLevel == 2)
+        {
+            m_text.text = "成功闯过了僧侣的宫殿，但是这个世界真的到此为止了吗？";
+        }
+        else
+        {
+            m_text.text = "";
+        }
     }
     public void OnClickRestartBtn()
     {

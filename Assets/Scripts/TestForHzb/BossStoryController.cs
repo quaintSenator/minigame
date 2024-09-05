@@ -41,7 +41,8 @@ public class BossStoryController : MonoBehaviour
         "球先生！这就是最北方吗？为什么这么黑呢？",
         "僧侣大人……？",
         "但我不想要宫殿，我想见见第三个维度。",
-        "书中记载，第三维度在最北方。球先生也请我到这里找他。",
+        "存在！",
+        "球先生说过，第三维度在最北方。",
         "僧侣大人，对于你而言，说谎可能是轻而易举的事。",
         "可我就是相信着球先生和三次方的存在。",
         "如果你坚信它们都是假的，就请连同我——",
@@ -123,6 +124,16 @@ public class BossStoryController : MonoBehaviour
     private void EndSpeak(EventData data = null)
     {
         bubble.gameObject.SetActive(false);
+    }
+
+    public void StartBgSpeak()
+    {
+        bgDialog.text = GetDialog(2);
+    }
+
+    public void EndBgSpeak()
+    {
+        bgDialog.text = "";
     }
 
 

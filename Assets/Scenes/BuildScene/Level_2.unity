@@ -554,7 +554,7 @@ MonoBehaviour:
   player: {fileID: 159296282}
   xOffset: 200
   yOffset: -50
-  dialogDuringTime: 0.8
+  dialogDuringTime: 1.7
 --- !u!4 &650765339
 Transform:
   m_ObjectHideFlags: 0
@@ -794,7 +794,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b62c7ea05c119442a0606ffb9579fb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelMusicMaxTimeList: b4000000b4000000b4000000
 --- !u!1 &857507856
 GameObject:
   m_ObjectHideFlags: 0
@@ -1658,18 +1657,18 @@ MonoBehaviour:
   cubeIdleSpeed: 0
   cubeRunSpeed: 8
   stepTimes:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
   autoPlay: 1
 --- !u!4 &1630421849
 Transform:
