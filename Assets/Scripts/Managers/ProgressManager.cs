@@ -91,6 +91,7 @@ public class ProgressManager : Singleton<ProgressManager>
     private void StartLevel(EventData obj)
     {
         currentGameTime = 0;
+        lastRecordTime = 0;
         gameStart = true;
     }
     

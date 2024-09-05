@@ -28,8 +28,9 @@ public class HelpUI : MonoBehaviour
 
     private void OnBgMaskClick()
     {
-        gameObject.SetActive(false);
+        gameObject.SetActive(true);
         helpPage.SetActive(false);
+        InHelpUI = false;
     }
 
     private void OnRightButtonClick()
