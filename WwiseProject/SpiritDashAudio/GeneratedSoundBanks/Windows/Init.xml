@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="150">
 	<SoundBanks>
-		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{0763D1B6-4724-0C11-5F04-581772268FC4}">
+		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{7E0EB1BE-EC94-29DB-B41A-F9D01FD81A9A}">
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 			<Plugins>
@@ -17,6 +17,7 @@
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
 			</Busses>
 			<GameParameters>
+				<GameParameter Id="649089707" Name="MainUIBgm_intialDelay"/>
 				<GameParameter Id="822163944" Name="SS_Air_RPM"/>
 				<GameParameter Id="978959531" Name="LevelMusic_Volume"/>
 				<GameParameter Id="1029930033" Name="SS_Air_Fury"/>
@@ -169,5 +170,5 @@
 			</AcousticTextures>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{7E94B0AC-A827-5134-EFEF-3736D34359E0}</FileHash>
+	<FileHash>{DC95A442-40C2-F05A-7C71-8A58BC80B81F}</FileHash>
 </SoundBanksInfo>

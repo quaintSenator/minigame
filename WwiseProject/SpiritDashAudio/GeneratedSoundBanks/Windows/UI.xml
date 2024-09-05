@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="150">
 	<SoundBanks>
-		<SoundBank Id="1551306167" Type="User" Language="SFX" Hash="{BBDFA877-072D-901A-6D68-98627F9B7237}">
+		<SoundBank Id="1551306167" Type="User" Language="SFX" Hash="{7B689C1D-2B5E-2124-4A4A-03501D52B5E4}">
 			<ShortName>UI</ShortName>
 			<Path>UI.bnk</Path>
 			<Media>
 				<File Id="148591536" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Mystery.wav</ShortName>
 					<CachePath>SFX/Mystery_33DF4BF8.wem</CachePath>
+				</File>
+				<File Id="239392948" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Destination_Unknown_100bpm.wav</ShortName>
+					<CachePath>SFX/Destination_Unknown_100bpm_CE78C22E.wem</CachePath>
 				</File>
 				<File Id="347248024" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Dangerous_Love_120bpm.wav</ShortName>
@@ -45,12 +49,31 @@
 						</SwitchContainer>
 					</SwitchContainers>
 				</Event>
+				<Event Id="3605952550" Name="Play_Level1Music" DurationType="OneShot" DurationMin="94.81698" DurationMax="94.81698">
+					<MediaRefs>
+						<MediaRef Id="347248024"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="565626987" Name="Play_Level2Music" DurationType="OneShot" DurationMin="182.21053" DurationMax="182.21053">
+					<MediaRefs>
+						<MediaRef Id="760915427"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1946308780" Name="Play_Level3Music" DurationType="OneShot" DurationMin="172.148" DurationMax="172.148">
+					<MediaRefs>
+						<MediaRef Id="916479105"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="3324143387" Name="Play_MainUIBgm" DurationType="Infinite">
 					<MediaRefs>
 						<MediaRef Id="148591536"/>
-						<MediaRef Id="347248024"/>
-						<MediaRef Id="760915427"/>
-						<MediaRef Id="916479105"/>
+						<MediaRef Id="239392948"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3464843613" Name="Play_MainUIBgmFade" DurationType="Infinite">
+					<MediaRefs>
+						<MediaRef Id="148591536"/>
+						<MediaRef Id="239392948"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="2957112216" Name="Play_PauseUIBgm" DurationType="Infinite">
@@ -63,10 +86,16 @@
 						<MediaRef Id="365486786"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="698863348" Name="Stop_Level1Music" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="1432069157" Name="Stop_Level2Music" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="748523342" Name="Stop_Level3Music" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 				<Event Id="1737667577" Name="Stop_MainUIBgm" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 				<Event Id="2228862010" Name="Stop_PauseUIBgm" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 				<Event Id="507415775" Name="Stop_PauseUIBgm_160bpm" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 			</Events>
+			<GameParameters>
+				<GameParameter Id="649089707" Name="MainUIBgm_intialDelay"/>
+			</GameParameters>
 			<SwitchGroups>
 				<SwitchGroup Id="977454165" Name="Button">
 					<Switches>
@@ -76,5 +105,5 @@
 			</SwitchGroups>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{23D5BD76-BC2D-7DE4-726F-5680ED8C1099}</FileHash>
+	<FileHash>{30AC8D7B-10C1-DE32-6800-7AE040EFBB1A}</FileHash>
 </SoundBanksInfo>
