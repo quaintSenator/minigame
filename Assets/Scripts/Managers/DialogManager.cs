@@ -24,28 +24,44 @@ public class DialogManager : Singleton<DialogManager>
     private int listIndex = 0;
     private int dialogIndex;
 
+    private List<List<int>> resetListIndex =new List<List<int>>{  //神必数字，简单的重置解决办法
+        new List<int>{0,0,0,0,0,0},
+        new List<int>{0,1,1,2,2,2},
+        new List<int>{0,0,0,0,0},
+    };
+
     private List<string> nowDialogList ;
 
     protected override void OnAwake()
     {
-        dialogs.Add(0, levelDialogs1);
-        dialogs.Add(1, levelDialogs2);
+        dialogs.Add(1, levelDialogs1);
+        dialogs.Add(2, levelDialogs2);
     }
 
     private void OnEnable()
     {
         EventManager.AddListener(EventType.EndLoadMapEvent, OnLoadMap);
+        EventManager.AddListener(EventType.PlayerDeadStoryEvent, OnDead);
     }
 
     private void OnDisable()
     {
         EventManager.RemoveListener(EventType.EndLoadMapEvent, OnLoadMap);
+        EventManager.RemoveListener(EventType.PlayerDeadStoryEvent, OnDead);
     }
 
     private void OnLoadMap(EventData data)
     {
         var mapData = data as LoadMapDataEvent;
         levelIndex = mapData.index;
+    }
+
+    private void OnDead(EventData data)
+    {
+        LevelEventData levelData = data as LevelEventData;
+        int resetIndex = levelData.LevelResetPointIndex;
+        Debug.Log("resetIndex"+resetIndex);
+        listIndex = resetListIndex[levelIndex - 1][resetIndex];
     }
 
     private List<string> GetDialogList()
@@ -56,7 +72,9 @@ public class DialogManager : Singleton<DialogManager>
 
     public void TryShowDialogs()
     {
-        bool hasShown = ProgressManager.Instance.GetDialogShow(levelIndex, listIndex);
+        Debug.Log("LevelIndex"+levelIndex);
+        Debug.Log("listIndex"+listIndex);
+        bool hasShown = ProgressManager.Instance.GetDialogShow(levelIndex, listIndex+1);
         if(hasShown){
             listIndex++;
             return;

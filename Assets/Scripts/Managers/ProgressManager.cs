@@ -10,8 +10,8 @@ public class ProgressManager : Singleton<ProgressManager>
     private List<LevelProgressData> levelProgressDataList;
     private Dictionary<int, LevelProgressData> levelProgressDataDic;
 
-    //储存台词触发点个数，初始化ProgressData中的List用
-    static public int[] dialogNums = {4, 3, 1};
+    //储存台词触发点个数，初始化ProgressData中的List用, 0用来占位
+    static public int[] dialogNums = {0, 4, 3, 1};
     
     private float currentGameTime = 0;
     private bool gameStart = false;
@@ -266,7 +266,7 @@ public class ProgressManager : Singleton<ProgressManager>
 public class LevelProgressData
 {
     public string levelName;
-    public int levelIndex;  //使用说明：从0开始计数，通过LoadMapEndEvent由LoadMapDataEvent赋值来
+    public int levelIndex;  //使用说明：从1开始计数，通过LoadMapEndEvent由LoadMapDataEvent赋值来
     public float levelProgress;
     public bool isLevelComplete;
     public bool isLevelLocked;
@@ -281,9 +281,10 @@ public class LevelProgressData
         this.isLevelComplete = isLevelComplete;
         this.isLevelLocked = isLevelLocked;
 
-        if(levelIndex >= 0 && levelIndex < 3)
+        if(levelIndex >= 0 && levelIndex <= 3)
         {
             int length = ProgressManager.dialogNums[levelIndex];
+            Debug.Log("length"+length);
             for(int i = 0; i < length; i++){
                 dialogsShows.Add(false);
             }
