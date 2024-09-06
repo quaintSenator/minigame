@@ -189,6 +189,7 @@ public class StoryControllerLevel2 : MonoBehaviour
 
     private void Step_8()
     {
+        enemyStoryController.EndBgSpeak();
         enemyStoryController.StartSpeak();
     }
 
