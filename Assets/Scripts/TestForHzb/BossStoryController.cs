@@ -7,8 +7,8 @@ using DG.Tweening;
 public class BossStoryController : MonoBehaviour
 {
 
-    public RectTransform textRect;
     public RectTransform bubbleRect;
+    public RectTransform bubbleBossRect;
     public Transform boss;
     public Transform player;
 
@@ -34,7 +34,9 @@ public class BossStoryController : MonoBehaviour
 
     public Transform canvasTrans;
     private Transform bubble;
+    private Transform bubbleBoss;
     private Text dialog;
+    private Text bossDialog;
     private Text bgDialog;
 
     private string[] playerDialogs = {
@@ -64,7 +66,9 @@ public class BossStoryController : MonoBehaviour
     private void Awake()
     {
         bubble = canvasTrans.Find("StoryCanvas").Find("bubble");
+        bubbleBoss = canvasTrans.Find("StoryCanvas").Find("bubbleBoss");
         dialog = bubble.Find("Text").GetComponent<Text>();
+        bossDialog = bubbleBoss.Find("Text").GetComponent<Text>();
         bgDialog = canvasTrans.Find("StoryCanvas").Find("bg_dialog").GetComponent<Text>();
     }
 
@@ -83,23 +87,28 @@ public class BossStoryController : MonoBehaviour
     private void ResetTextPos(int index)
     {
         Transform trans;
+        RectTransform rect;
         if(index == 1)
         {
             trans = player;
             xOffset = playerXOffset;
             yOffset = playerYOffset;
+            bubble.gameObject.SetActive(true);
+            rect = bubbleRect;
         }
         else
         {
             trans = boss;
             xOffset = bossXOffset;
             yOffset = bossYOffset;
+            bubbleBoss.gameObject.SetActive(true);
+            rect = bubbleBossRect;
         }
-        bubble.gameObject.SetActive(true);
         Vector3 screenPos = Camera.main.WorldToScreenPoint(trans.position);
+
         //Debug.Log("screenPos"+screenPos);
         //RectTransformUtility.ScreenPointToLocalPointInRectangle(bubbleRect.parent.GetComponent<RectTransform>(), screenPos, null, out Vector2 localPos);
-        bubbleRect.anchoredPosition = new Vector2(screenPos.x + xOffset, screenPos.y + yOffset);
+        rect.anchoredPosition = new Vector2(screenPos.x + xOffset, screenPos.y + yOffset);
     }
 
     private string GetDialog(int index = 1)
@@ -117,13 +126,17 @@ public class BossStoryController : MonoBehaviour
     public void StartSpeak(int index)
     {
         ResetTextPos(index);
-        dialog.text = GetDialog(index);
+        if(index == 1)
+            dialog.text = GetDialog(index);
+        else 
+            bossDialog.text = GetDialog(index);
         CleverTimerManager.Ask4Timer(dialogDuringTime, EndSpeak);
     }
 
     private void EndSpeak(EventData data = null)
     {
         bubble.gameObject.SetActive(false);
+        bubbleBoss.gameObject.SetActive(false);
     }
 
     public void StartBgSpeak()
