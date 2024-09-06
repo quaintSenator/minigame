@@ -365,6 +365,17 @@ public class RhythmViewer : Singleton<RhythmViewer>
         }
     }
 
+    public void StopMusic()
+    {
+        currentMusicTime = 0f;
+        currentMusicIsPlaying = false;
+        NoStart = true;
+        musicController.StopLevelMusic();
+        musicCurrentPosLine.HidePosLine();
+        ClearDynamicRhythmNode();
+        lastChangePointData = ChangePointData.DefaultData;
+    }
+
     private void InitCurrentDynamicRhythmNode()
     {
         currentDynamicRhythmNodeIndex = 0;

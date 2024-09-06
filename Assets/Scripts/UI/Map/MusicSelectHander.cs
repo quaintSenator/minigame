@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,7 @@ public class MusicSelectHander : MonoBehaviour
 
     void OnDropdownValueChanged(int value)
     {
+        RhythmViewer.Instance.StopMusic();
         EventManager.InvokeEvent(EventType.SelectMusicEvent, new SelectMusicEventData(value));
         EventSystem.current.SetSelectedGameObject(null);
     }
@@ -30,6 +32,11 @@ public class MusicSelectHander : MonoBehaviour
         {
             dropdown.onValueChanged.RemoveListener(OnDropdownValueChanged);
         }
+    }
+
+    private void Update()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
     }
 }
 

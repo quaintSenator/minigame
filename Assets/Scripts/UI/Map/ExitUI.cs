@@ -17,5 +17,6 @@ public class ExitUI : MonoBehaviour
     private void OnExitButtonClick()
     {
         Utils.AddMaskAndLoadScene(transform, "GUIScene");
+        RhythmViewer.Instance.StopMusic();
     }
 }

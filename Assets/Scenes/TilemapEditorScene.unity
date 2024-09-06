@@ -10184,7 +10184,7 @@ MonoBehaviour:
   allMusicFiles:
   - {fileID: 11400000, guid: 94ebfad679c4dcc4cbd5deb422293695, type: 2}
   - {fileID: 11400000, guid: 8580907acf2a0fa4aba51836694a1dea, type: 2}
-  - {fileID: 11400000, guid: 143b023c9dbfec7489c64f7cc87e1d8a, type: 2}
+  - {fileID: 11400000, guid: b8e77938d3244db478e6e915aa347a97, type: 2}
   MusicName: 
   showRhythmZone: 1
   rhythmOffset: 0
