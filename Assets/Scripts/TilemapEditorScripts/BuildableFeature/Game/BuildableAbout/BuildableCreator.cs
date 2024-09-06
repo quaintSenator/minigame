@@ -684,7 +684,7 @@ public class BuildableCreator : Singleton<BuildableCreator>
     {
         foreach (var buildableInfo in buildableInfos)
         {
-            if (showAllBuildable || Utils.IsAlwaysVisible(buildableInfo.type) || Utils.IsBuildableViewport(buildableInfo.position, Camera.main))
+            if (showAllBuildable || Utils.IsAlwaysVisible(buildableInfo.type) || Utils.IsBuildableViewportByV3Int(buildableInfo.position, Camera.main))
             {
                 SpawnBuildable(buildableInfo.type, buildableInfo.position, buildableInfo.index, buildableInfo.rotation);
             }

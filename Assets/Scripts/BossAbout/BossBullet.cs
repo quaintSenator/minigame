@@ -7,12 +7,10 @@ public class BossBullet : MonoBehaviour
 {
     private float speed = 0f;
     private bool isMoving = false;
-    private float lifeTime = 0f;
     
-    public void Init(Vector3 position, float speed, float lifeTime)
+    public void Init(Vector3 position, float speed)
     {
         this.speed = speed;
-        this.lifeTime = lifeTime;
         transform.position = position;
         isMoving = true;
     }
@@ -33,9 +31,8 @@ public class BossBullet : MonoBehaviour
         EventManager.RemoveListener(EventType.PlayerDeadStoryEvent, DestroySelf);
     }
 
-    private void DestroySelf(EventData obj)
+    private void DestroySelf(EventData obj = null)
     {
-        lifeTime = 0;
         isMoving = false;
         PoolManager.Instance.ReturnToPool("BossBullet", gameObject);
     }
@@ -45,12 +42,11 @@ public class BossBullet : MonoBehaviour
         if (isMoving)
         {
             transform.position += -transform.right * speed * Time.deltaTime;
-            lifeTime -= Time.deltaTime;
-            if (lifeTime <= 0)
+            if (!Utils.IsBuildableViewportByV3(transform.position, Camera.main))
             {
-                isMoving = false;
-                PoolManager.Instance.ReturnToPool("BossBullet", gameObject);
+                DestroySelf();
             }
         }
     }
+    
 }

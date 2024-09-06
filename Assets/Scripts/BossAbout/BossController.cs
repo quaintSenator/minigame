@@ -175,7 +175,7 @@ public class BossController : MonoBehaviour
         {
             transform.DOShakeScale(1, 0.6f, 7, 90, true, ShakeRandomnessMode.Harmonic);
             BossBullet newBullet = PoolManager.Instance.SpawnFromPool("BossBullet", bullet).GetComponent<BossBullet>();
-            newBullet.Init(bulletPos, speed, 5f);
+            newBullet.Init(bulletPos, speed);
             
             inDOMove = false;
         };

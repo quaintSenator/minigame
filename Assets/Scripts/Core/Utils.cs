@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class Utils
 {
-    public static bool IsBuildableViewport(Vector3Int position, Camera camera)
+    public static bool IsBuildableViewportByV3Int(Vector3Int position, Camera camera)
     {
         Vector3 realPosition = GetRealPostion(position);
-        Vector3 viewportPos = camera.WorldToViewportPoint(realPosition);
+        return IsBuildableViewportByV3(realPosition, camera);
+    }
+    
+    public static bool IsBuildableViewportByV3(Vector3 position, Camera camera)
+    {
+        Vector3 viewportPos = camera.WorldToViewportPoint(position);
         if (viewportPos.x < -0.5f || viewportPos.x > 1.5f || viewportPos.y < -0.5f || viewportPos.y > 1.5f)
         {
             return false;

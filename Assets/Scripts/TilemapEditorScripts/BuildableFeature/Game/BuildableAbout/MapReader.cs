@@ -124,7 +124,7 @@ public class MapReader : Singleton<MapReader>
                 currentBuildableMap.Remove(buildableInfo.position);
             }
             
-            if (showAllBuildable || Utils.IsAlwaysVisible(buildableInfo.type) || Utils.IsBuildableViewport(buildableInfo.position, Camera.main))
+            if (showAllBuildable || Utils.IsAlwaysVisible(buildableInfo.type) || Utils.IsBuildableViewportByV3Int(buildableInfo.position, Camera.main))
             {
                 SpawnBuildable(buildableInfo.type, buildableInfo.position, buildableInfo.index, buildableInfo.rotation);
             }
