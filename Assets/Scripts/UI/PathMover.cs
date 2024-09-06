@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Core.PathCore;
+using DG.Tweening.Plugins.Options;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -13,7 +15,8 @@ public class PathMover : MonoBehaviour
     public bool EditorMode = false;
     private GameObject pointPrefab; // 用于生成路径点的预制体
     public string savekey = "__pathData__";
-
+    private TweenerCore<Vector3, Path, PathOptions> tween;
+    
     private void Awake()
     {
         pointPrefab = Resources.Load<GameObject>("PathPoint");
@@ -25,15 +28,20 @@ public class PathMover : MonoBehaviour
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = 0; // 确保路径点在2D平面上
-
             GameObject newPoint = Instantiate(pointPrefab, mousePos, Quaternion.identity);
+            // 转换到父物体的局部坐标
+            Transform parent = transform.parent;
+            if (parent != null)
+            {
+                mousePos = parent.InverseTransformPoint(mousePos);
+            }
             pointTransforms.Add(newPoint.transform);
             points.Add(mousePos);
         }
     }
-
+    
     [Button]
-    public void MoveByPath()
+    public void GetTween(float duration)
     {
         Vector3[] positions = new Vector3[points.Count + 1];
         for (int i = 0; i < points.Count; i++)
@@ -41,7 +49,22 @@ public class PathMover : MonoBehaviour
             positions[i] = points[i];
         }
         positions[points.Count] = points[0];
-        transform.DOPath(positions, 5f, PathType.Linear, PathMode.TopDown2D).SetEase( Ease.Linear);
+        bool doneOnce = true;
+        
+        tween = transform.DOLocalPath(positions, duration, PathType.Linear, PathMode.TopDown2D).SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart).Pause();
+    }
+    
+
+    [Button]
+    public void StopMove()
+    {
+        tween.Pause();
+    }
+    
+    [Button]
+    public void PlayMove()
+    {
+        tween.Play();
     }
 
     
