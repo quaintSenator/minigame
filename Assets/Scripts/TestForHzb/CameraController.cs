@@ -79,7 +79,7 @@ public class CameraController : MonoBehaviour
         if (isMovingTowardUp && cinemachineFraming != null)
         {
             cinemachineFraming.m_ScreenX = 0.5f;
-            cinemachineFraming.m_DeadZoneWidth = 0;
+            cinemachineFraming.m_DeadZoneWidth = 0.2f;
 
         }
         else

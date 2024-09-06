@@ -834,7 +834,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b62c7ea05c119442a0606ffb9579fb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelMusicMaxTimeList: b4000000b4000000b4000000
 --- !u!1 &857507856
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,7 +1188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07855be1e23f82d4f90bf3e25ac233c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedMapdata: {fileID: 11400000, guid: 4eeefb3ce68b65344a76a764dc2d208e, type: 2}
+  selectedMapdata: {fileID: 11400000, guid: 19a193349742deb4ba49de84daecce83, type: 2}
   selectedMapIndex: 1
   buildableInfos: []
   showAllBuildable: 0
