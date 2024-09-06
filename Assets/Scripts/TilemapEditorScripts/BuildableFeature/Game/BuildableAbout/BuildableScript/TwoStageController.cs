@@ -12,6 +12,8 @@ public class TwoStageController : BuildableBase
     public Material noBlendMat = null;
     public List<int> needSpacialProcessLevelIndexs = null;
     public bool debugReplaceMat = false;
+
+    public Renderer renderer=null;
     //private int Index = 0;
 
     public override void Init()
@@ -48,7 +50,7 @@ public class TwoStageController : BuildableBase
 
      private void SelfRotateSD()
     {
-        transform.Rotate(Vector3.forward, selfRotateSpeed * Time.deltaTime);
+        renderer.transform.Rotate(Vector3.forward, selfRotateSpeed * Time.deltaTime);
     }
 
     protected override void TriggerThisBuildable(PlayerController player)
