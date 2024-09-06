@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class ExitUI : MonoBehaviour
 {
     [SerializeField] private GameObject exitButton;
-    [SerializeField] private Image exitPage;
 
     private void Awake()
     {
@@ -17,11 +16,6 @@ public class ExitUI : MonoBehaviour
 
     private void OnExitButtonClick()
     {
-        exitPage.gameObject.SetActive(true);
-        exitPage.DOColor(new Color(0, 0, 0, 1f), 0.5f).onComplete = () =>
-        {
-            SceneManager.LoadScene("GUIScene");
-        };
-        
+        Utils.AddMaskAndLoadScene(transform, "GUIScene");
     }
 }

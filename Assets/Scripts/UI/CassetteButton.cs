@@ -69,6 +69,6 @@ public class CassetteButton : MonoBehaviour
     public void EnterLevel(int i)
     {
         var sceneName = "Level_" + i;
-        SceneManager.LoadScene(sceneName);
+        Utils.AddMaskAndLoadScene(transform.parent, sceneName);
     }
 }

@@ -9019,7 +9019,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   exitButton: {fileID: 1376209764}
-  exitPage: {fileID: 1253499684}
 --- !u!1 &1733387082
 GameObject:
   m_ObjectHideFlags: 0

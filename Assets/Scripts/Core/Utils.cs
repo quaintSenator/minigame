@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Utils
 {
@@ -53,6 +56,20 @@ public class Utils
         
         return false;
     }
-    
-    
+
+    public static void AddMaskAndLoadScene(Transform parent, string sceneName)
+    {
+        GameObject exitPage = Resources.Load<GameObject>("mask_page");
+        if(exitPage == null)
+        {
+            Debug.LogError("mask_page is null");
+            return;
+        }
+        exitPage = GameObject.Instantiate(exitPage, parent);
+        exitPage.SetActive(true);
+        exitPage.GetComponent<Image>().DOColor(new Color(0, 0, 0, 1f), 0.5f).onComplete = () =>
+        {
+            SceneManager.LoadScene(sceneName);
+        };
+    }
 }

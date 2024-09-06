@@ -27,6 +27,6 @@ public class PausePage : Window
         //在暂停页面，退出需回到选关界面 注意，此时依然需要从暂停中改出
         WindowManager.Instance.ResumeTimePause();
         ProgressManager.Instance.UpdateLevelProgress(WindowManager.Instance.GetLevelIndex());
-        SceneManager.LoadScene("GUIScene");
+        Utils.AddMaskAndLoadScene(transform.parent, "GUIScene");
     }
 }

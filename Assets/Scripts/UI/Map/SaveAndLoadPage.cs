@@ -96,7 +96,7 @@ public class SaveAndLoadPage : SaveUIBase
                 Debug.Log("LoadData : " + index);
                 PlayerPrefs.SetString(GameConsts.UGC_SELECTED_MAPDATA, JsonUtility.ToJson(mapDatas[index]));
                 Debug.Log("LoadData : " + PlayerPrefs.GetString(GameConsts.UGC_SELECTED_MAPDATA));
-                SceneManager.LoadScene("LevelForMapEditor");
+                Utils.AddMaskAndLoadScene(transform.parent, "LevelForMapEditor");
             };
         
             savePopUp.OpenPopUp("Cover Or Load?", confirmFun, cancelFun, "Cover", "Load");

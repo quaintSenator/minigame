@@ -49,7 +49,7 @@ public class DeadPage : Window
     {
         base.onExit();
         //在暂停页面，退出需回到选关界面
-        SceneManager.LoadScene("GUIScene");
+        Utils.AddMaskAndLoadScene(transform.parent, "GUIScene");
     }
 
 }

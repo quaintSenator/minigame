@@ -23,6 +23,6 @@ public class MainPage : Window
     
     public void Go2UGCScene()
     {
-        SceneManager.LoadScene("TilemapEditorScene");
+        Utils.AddMaskAndLoadScene(transform, "TilemapEditorScene");
     }
 }

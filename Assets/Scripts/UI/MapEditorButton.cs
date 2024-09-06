@@ -9,6 +9,6 @@ public class MapEditorButton : MonoBehaviour
     //for test
     public void MapEditorButtonWasClicked()
     {
-        SceneManager.LoadScene("TilemapEditorScene");
+        Utils.AddMaskAndLoadScene(transform.parent, "TilemapEditorScene");
     }
 }

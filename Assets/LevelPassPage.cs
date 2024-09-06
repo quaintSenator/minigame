@@ -38,12 +38,12 @@ public class LevelPassPage : Window
         if (currentSceneName.Contains("Level_1"))
         {
             //去第二关
-            SceneManager.LoadScene("Level_2");
+            Utils.AddMaskAndLoadScene(transform.parent, "Level_2");
         }
         else if (currentSceneName.Contains("Level_2"))
         {
             //去第三关
-            SceneManager.LoadScene("Level_3");
+            Utils.AddMaskAndLoadScene(transform.parent, "Level_3");
         }
         else if(currentSceneName.Contains("Level_3"))
         {
@@ -54,7 +54,7 @@ public class LevelPassPage : Window
         if (currentSceneName.Contains("Level_TestPassLevel"))
         {
             //去第二关
-            SceneManager.LoadScene("Level_2");
+            Utils.AddMaskAndLoadScene(transform.parent, "Level_2");
         }
 #endif
     }
@@ -66,6 +66,6 @@ public class LevelPassPage : Window
         WindowManager.Instance.ClipUIRoot2Empty();
         //无需担心自己删自己的问题，Destroy总是在当帧结束后才执行
         WindowManager.Instance.ResumeTimePause();
-        SceneManager.LoadScene("GUIScene");
+        Utils.AddMaskAndLoadScene(transform.parent, "GUIScene");
     }
 }
