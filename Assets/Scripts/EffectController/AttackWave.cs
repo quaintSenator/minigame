@@ -22,12 +22,16 @@ public class AttackWave : MonoBehaviour
     }
     
     [Button]
-    public void Init(float p1, float p2, float p3, float p4)
+    public void Init(float p1 =-1, float p2 = 0.125f, float p3 = 260, float p4=0.375f)
     {
-        p1 = Time.timeSinceLevelLoad;
-        p2 = 0.125f;
+        if(p1 == -1)
+        {
+            p1 = Time.timeSinceLevelLoad;
+        }
+
+/*        p2 = 0.125f;
         p3 = 260;
-        p4 = 0.375f;
+        p4 = 0.375f;*/
         m_material.SetFloat("_StartTime", p1);
         m_material.SetFloat("_OnceTime", p2);
         m_material.SetFloat("_Angle2Rotate", p3);

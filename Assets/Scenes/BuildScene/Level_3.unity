@@ -240,6 +240,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a49083e9a8eca8469935c7c27821fb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upScreenX: 0.5
+  upDeadZoneWidth: 0.2
+  changeToUpDirectionDuration: 1.5
+  changeToRightDirectionDuration: 0.5
 --- !u!114 &118477954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2494,6 +2498,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3076662434505560679, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: angle2Rotate
+      value: 260
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076662434505560679, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: angle2RotateUp
+      value: 325
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076662434505560679, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: rightPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076662434505560679, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: rightPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076662434505560679, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: rightPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076662434505560679, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
+      propertyPath: angle2RotateRight
       value: 260
       objectReference: {fileID: 0}
     - target: {fileID: 3153166391016765087, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}

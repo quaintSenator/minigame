@@ -15,10 +15,24 @@ public class CameraController : MonoBehaviour
     private float normalScreenX = 0;
     private float normalDeadZoneWidth = 0;
 
+    public float upScreenX = 0.5f;
+    public float upDeadZoneWidth = 0.2f;
+    public float changeToUpDirectionDuration = 1.50f;
+    public float changeToRightDirectionDuration = 0.50f;
+    private bool isChangingDircetion = false;
+
+    private float lastTriggerChangeTime = -1;
+
     private bool isMovingTowardUp = false;
     private float nextCanTriggerChangeDirectionTime = 0;
     private float triggerChangeDirectionCD = 10;
 
+
+
+    private void Update()
+    {
+        UpdateCamera();
+    }
     private void Awake()
     {
         //cinemachineBrain = GetComponent<CinemachineBrain>();
@@ -67,8 +81,10 @@ public class CameraController : MonoBehaviour
         if (Time.time > nextCanTriggerChangeDirectionTime)
         {
             nextCanTriggerChangeDirectionTime = triggerChangeDirectionCD + Time.time;
-            Debug.Log("pass change");
+            // Debug.Log("pass change");
             isMovingTowardUp = !isMovingTowardUp;
+            isChangingDircetion = true;
+            lastTriggerChangeTime = Time.time ;
         }
         else
         {
@@ -76,7 +92,7 @@ public class CameraController : MonoBehaviour
         }
 
 
-        if (isMovingTowardUp && cinemachineFraming != null)
+/*        if (isMovingTowardUp && cinemachineFraming != null)
         {
             cinemachineFraming.m_ScreenX = 0.5f;
             cinemachineFraming.m_DeadZoneWidth = 0.2f;
@@ -85,7 +101,7 @@ public class CameraController : MonoBehaviour
         else
         {
             GoBackToNormal();
-        }
+        }*/
     }
 
     private void GoBackToNormal()
@@ -99,5 +115,61 @@ public class CameraController : MonoBehaviour
     private void OnRestartLevelEvent(EventData data)
     {
         GoBackToNormal();
+    }
+
+
+    private void UpdateCamera()
+    {
+        if(!isChangingDircetion)
+        {
+            return; 
+        }
+        if (isMovingTowardUp)
+        {
+            if (NearlyEqualsFloat(cinemachineFraming.m_ScreenX, upScreenX, 0.01f) && NearlyEqualsFloat(cinemachineFraming.m_DeadZoneWidth, upDeadZoneWidth, 0.01f))
+            {
+                isChangingDircetion = false;
+                cinemachineFraming.m_ScreenX = upScreenX;
+                cinemachineFraming.m_DeadZoneWidth = upDeadZoneWidth;
+                return;
+            }
+            else
+            {
+                float elapsedTime = Time.time - lastTriggerChangeTime; // 已经经过的时间
+                float t = Mathf.Clamp01(elapsedTime / changeToRightDirectionDuration); // 计算插值因子，确保在0和1之间
+
+                cinemachineFraming.m_ScreenX = Mathf.Lerp(normalScreenX, upScreenX, t);
+                cinemachineFraming.m_DeadZoneWidth = Mathf.Lerp(normalDeadZoneWidth, upDeadZoneWidth, t);
+            }
+        }
+
+        // if (isMovingTowardUp)
+        else
+        {
+            if (NearlyEqualsFloat(cinemachineFraming.m_ScreenX, normalScreenX, 0.01f) && NearlyEqualsFloat(cinemachineFraming.m_DeadZoneWidth, normalDeadZoneWidth, 0.01f))
+            {
+                isChangingDircetion = false;
+                cinemachineFraming.m_ScreenX = normalScreenX;
+                cinemachineFraming.m_DeadZoneWidth = normalDeadZoneWidth;
+                return;
+            }
+            else
+            {
+
+                float elapsedTime = Time.time - lastTriggerChangeTime; // 已经经过的时间
+                float t = Mathf.Clamp01(elapsedTime / changeToRightDirectionDuration); // 计算插值因子，确保在0和1之间
+
+                cinemachineFraming.m_ScreenX = Mathf.Lerp(upScreenX, normalScreenX, t);
+                cinemachineFraming.m_DeadZoneWidth = Mathf.Lerp(upDeadZoneWidth, normalDeadZoneWidth, t);
+
+            }
+
+        }
+
+    }
+
+    public static bool NearlyEqualsFloat(float float1, float float2, float tolerance = 0.01f)
+    {
+        return Mathf.Abs(float1 - float2)< tolerance;
     }
 }

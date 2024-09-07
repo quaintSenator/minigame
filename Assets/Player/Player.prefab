@@ -4972,7 +4972,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackWaveEffectPrefab: {fileID: 2036516620808823156, guid: e1a06826aae73bb4aa08e0b92386294c, type: 3}
   onceTime: 0.45
-  angle2Rotate: 30
+  rightPosition: {x: 1, y: 0, z: 0}
+  upPosition: {x: 0.5, y: 1, z: -1}
+  angle2RotateUp: 0
+  angle2RotateRight: 325
   fadeTime: 0.45
   bg: {fileID: 0}
 --- !u!1 &3832072421744281556
@@ -5576,7 +5579,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.5, y: 0.125}
+  m_Offset: {x: 0.5, y: 0.46904868}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -5587,7 +5590,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 1.5}
+  m_Size: {x: 2, y: 2.188097}
   m_EdgeRadius: 0
 --- !u!212 &1433576563816030983
 SpriteRenderer:
