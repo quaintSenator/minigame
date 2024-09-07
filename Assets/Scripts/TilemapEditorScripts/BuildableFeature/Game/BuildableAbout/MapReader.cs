@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
@@ -18,10 +19,14 @@ public class MapReader : Singleton<MapReader>
     
     protected override void OnAwake()
     {
-        //当前系统时间
-        float time = Time.realtimeSinceStartup;
         mapParent = transform;
         BuildableBase.BuildableGroupMap.Clear();
+    }
+
+    private void Start()
+    {
+        //当前系统时间
+        float time = Time.realtimeSinceStartup;
         LoadSelectedData();
         StartCoroutine(CheckBuildableVisibleCoroutine());
         UnityEngine.Application.targetFrameRate = 60;
@@ -66,6 +71,7 @@ public class MapReader : Singleton<MapReader>
             
             //待删除，放到角色初始化中
             //EventManager.InvokeEvent(EventType.StartLevelEvent, new EventData());
+            Debug.Log("selectedMapIndex : " + selectedMapIndex);
             EventManager.InvokeEvent(EventType.EndLoadMapEvent, new LoadMapDataEvent(selectedMapIndex));
             
             Debug.Log("Mapdata loaded!");

@@ -280,9 +280,9 @@ public class EventManager : Singleton<EventManager>
     public static void InvokeEvent(EventType eventType, EventData eventData = null)
     {
         Instance.CheckNeedClear();
-        if (eventType.GetHashCode() >= 500 && eventType.GetHashCode() < 600)
+        if (eventType == EventType.EndLoadMapEvent)
         {
-            Debug.Log("Flow Event:" + eventType.ToString());
+            Debug.Log("EndLoadMapEvent");
         }
         Action<EventData> thisEvent = null;
         if (Instance.eventDictionary.TryGetValue(eventType, out thisEvent))

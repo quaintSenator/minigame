@@ -86,6 +86,7 @@ public class ProgressManager : Singleton<ProgressManager>
 
     private void OnLoadMap(EventData obj)
     {
+        Debug.Log("currentLevelIndex" + currentLevelIndex);
         var data = obj as LoadMapDataEvent;
         currentGameTime = 0;
         currentLevelIndex = data.index;
