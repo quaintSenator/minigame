@@ -33,6 +33,7 @@ public enum BuildableType
     change_direction_trigger = 24,
 	pass_level_trigger = 25,
     boss_end_trigger = 26,
+    boss_move_trigger = 27,
 }
 
 [CreateAssetMenu(fileName = "BuildableList", menuName = "Buildable/Create BuildableList")]

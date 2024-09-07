@@ -1110,7 +1110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07855be1e23f82d4f90bf3e25ac233c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedMapdata: {fileID: 11400000, guid: 2ed1070ff80f0614aa4fdc216ec02c21, type: 2}
+  selectedMapdata: {fileID: 11400000, guid: 4b9fe6f0b51e3e14c9a3c920c390dd45, type: 2}
   selectedMapIndex: 3
   buildableInfos: []
   showAllBuildable: 0
@@ -2312,22 +2312,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 368977363481154082, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
-      propertyPath: m_Size.x
-      value: 2.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 368977363481154082, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
-      propertyPath: m_Size.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 368977363481154082, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
-      propertyPath: m_Offset.x
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 368977363481154082, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.125
-      objectReference: {fileID: 0}
     - target: {fileID: 1119376711556738691, guid: 0408c9b99d55ff246b91fd5c0ce5c8ac, type: 3}
       propertyPath: _delayBe4Show
       value: 0

@@ -606,6 +606,7 @@ public class PlayerController : MonoBehaviour
         {
             PlayNormalJumpAudio();
             Jump();
+            isGrounded = false;
         }
         else if (jumpType == JumpType.Spring || jumpType == JumpType.Fly)
         {
@@ -1230,10 +1231,10 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void OnStartDeadEvent(EventData eventData)
+/*    private void OnStartDeadEvent(EventData eventData)
     {
         OnReset();
-    }
+    }*/
 
 
     private void OnStartPlayerDeadEvent(EventData eventData)

@@ -41,6 +41,7 @@ public class BossBullet : MonoBehaviour
     {
         if (isMoving)
         {
+            SelfRotateSD();
             transform.position += -transform.right * speed * Time.deltaTime;
             if (!Utils.IsBuildableViewportByV3(transform.position, Camera.main))
             {
@@ -48,5 +49,15 @@ public class BossBullet : MonoBehaviour
             }
         }
     }
-    
+
+    public bool ifRotateSelf = true;
+    public float selfRotateSpeed = 30.0f;
+    public Renderer renderer = null;
+
+
+    private void SelfRotateSD()
+    {
+        renderer.transform.Rotate(Vector3.forward, selfRotateSpeed * Time.deltaTime);
+    }
+
 }

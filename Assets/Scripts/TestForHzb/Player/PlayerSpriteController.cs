@@ -34,6 +34,8 @@ public class PlayerSpriteController : MonoBehaviour
     public List<Sprite> sprites;    //方便定位用的，顺序定死
 
     #region Added by yeniao for modify shape
+    public List<Sprite> defaultSprites;
+
     public List<Sprite> octagonSprites;
     public List<Sprite> dodecagonSprites;
     public List<Sprite> circleagonSprites;
@@ -71,6 +73,11 @@ public class PlayerSpriteController : MonoBehaviour
         }
     }
 
+    private void  OnStartLevelEvent(EventData eventData)
+    {
+        sprites = defaultSprites;
+    }
+
     #endregion
 
 
@@ -88,6 +95,7 @@ public class PlayerSpriteController : MonoBehaviour
     {
         spriteRenderer = transform.GetComponent<SpriteRenderer>();
         visual = transform.parent;
+        defaultSprites = sprites;
     }
 
     private void Update()
@@ -107,11 +115,14 @@ public class PlayerSpriteController : MonoBehaviour
     private void OnEnable()
     {
         EventManager.AddListener(EventType.PlayerPassRegisterResetPointEvent, OnPlayerPassRegisterResetPoint);
+
+        EventManager.AddListener(EventType.StartLevelEvent, OnStartLevelEvent);
     }
 
     private void OnDisable()
     {
         EventManager.RemoveListener(EventType.PlayerPassRegisterResetPointEvent, OnPlayerPassRegisterResetPoint);
+        EventManager.RemoveListener(EventType.StartLevelEvent, OnStartLevelEvent);
     }
 
     public void SetSprite(EventData data = null)

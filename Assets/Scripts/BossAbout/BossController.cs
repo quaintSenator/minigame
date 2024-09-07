@@ -39,6 +39,8 @@ public class BossController : MonoBehaviour
         EventManager.AddListener(EventType.PlayerPassRegisterResetPointEvent, RegisterPosition);
         EventManager.AddListener(EventType.StartLevelEvent, DestroyBoss);
         EventManager.AddListener(EventType.BossEndEvent, OnBossEnd);
+
+        EventManager.AddListener(EventType.BossMoveEvent, OnBossMove);
     }
     
     private void OnDisable()
@@ -51,6 +53,8 @@ public class BossController : MonoBehaviour
         EventManager.RemoveListener(EventType.PlayerPassRegisterResetPointEvent, RegisterPosition);
         EventManager.RemoveListener(EventType.StartLevelEvent, DestroyBoss);
         EventManager.RemoveListener(EventType.BossEndEvent, OnBossEnd);
+
+        EventManager.RemoveListener(EventType.BossMoveEvent, OnBossMove);
     }
 
     private void OnBossEnd(EventData obj)
@@ -216,5 +220,16 @@ public class BossController : MonoBehaviour
             inDOMove = false;
             transform.DOScale(Vector3.one, 0.2f);
         }
+    }
+
+
+    private  void OnBossMove(EventData obj)
+    {
+        var data = obj as BossMoveEventData;
+
+        inDOMove = true;
+        float localTargetY = data.position.y - centerPoint.transform.position.y;
+
+        transform.DOLocalMove(new Vector3(transform.localPosition.x, localTargetY, 0), 0.2f);
     }
 }

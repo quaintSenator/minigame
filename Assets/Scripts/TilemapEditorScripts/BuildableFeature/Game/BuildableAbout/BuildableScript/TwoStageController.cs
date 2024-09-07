@@ -18,27 +18,28 @@ public class TwoStageController : BuildableBase
 
     public override void Init()
     {
-        if(debugReplaceMat)
+        if (debugReplaceMat)
         {
             if (!noBlendMat)
             {
                 return;
             }
-            Renderer renderer = GetComponent<Renderer>();
+            //Renderer renderer = GetComponent<Renderer>();
             renderer.material = noBlendMat;
             return;
         }
 
         int currentLevelIndex = ProgressManager.Instance.GetCurrentLevelIndex();
-        foreach(int needSpacialProcessLevelIndex in needSpacialProcessLevelIndexs)
+        //int currentLevelIndex = MapReader.Instance.GetSelectedMapIndex();
+        foreach (int needSpacialProcessLevelIndex in needSpacialProcessLevelIndexs)
         {
-            if(needSpacialProcessLevelIndex == currentLevelIndex )
+            if (needSpacialProcessLevelIndex == currentLevelIndex)
             {
-                if(!noBlendMat)
+                if (!noBlendMat)
                 {
                     return;
                 }
-                Renderer renderer = GetComponent<Renderer>();
+                //Renderer renderer = GetComponent<Renderer>();
                 renderer.material = noBlendMat;
 
                 selfRotateSpeed = selfRotateSpeedSpecial;
@@ -48,7 +49,12 @@ public class TwoStageController : BuildableBase
 
     }
 
-     private void SelfRotateSD()
+    private void Start()
+    {
+
+    }
+
+    private void SelfRotateSD()
     {
         renderer.transform.Rotate(Vector3.forward, selfRotateSpeed * Time.deltaTime);
     }

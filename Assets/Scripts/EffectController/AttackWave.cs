@@ -24,10 +24,9 @@ public class AttackWave : MonoBehaviour
     [Button]
     public void Init(float p1 =-1, float p2 = 0.125f, float p3 = 260, float p4=0.375f)
     {
-        if(p1 == -1)
-        {
+
             p1 = Time.timeSinceLevelLoad;
-        }
+       
 
 /*        p2 = 0.125f;
         p3 = 260;

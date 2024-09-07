@@ -162,10 +162,12 @@ public enum EventType
     ReleaseEnemyEvent = 602,
     BossEndEvent = 603,
 
+    BossMoveEvent = 604,
+
     #endregion
 
     #region UI事件
-    
+
     SwitchLevelAnimEndEvent = 1001,
     #endregion
 }
