@@ -25,7 +25,7 @@ public class DialogManager : Singleton<DialogManager>
     private int dialogIndex;
 
     private List<List<int>> resetListIndex =new List<List<int>>{  //神必数字，简单的重置解决办法
-        new List<int>{0,0,0,0,0,0},
+        new List<int>{1,2,3,3,3,3},
         new List<int>{0,0,1,1,2,2},
         new List<int>{0,0,0,0,0},
     };
