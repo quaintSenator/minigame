@@ -60,6 +60,10 @@
 							</ReferenceList>
 							<ChildrenList>
 								<AudioFileSource Name="jump_1" ID="{80235512-5E64-49E7-80AD-22CBF0DED069}">
+									<PropertyList>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+										<Property Name="TrimBegin" Type="Real64" Value="0.0862958857664472"/>
+									</PropertyList>
 									<Language>SFX</Language>
 									<AudioFile>jump_1.wav</AudioFile>
 									<MediaIDList>
