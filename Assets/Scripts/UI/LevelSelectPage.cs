@@ -8,6 +8,10 @@ public class LevelSelectPage : Window
     {
         base.Init();
     }
+    public void PlayClickAudio()
+    {
+        UIAudioManager.Instance.PlayBtnClickAudio();
+    }
     protected override void onExit()
     {
         base.onExit();

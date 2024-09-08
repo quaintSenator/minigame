@@ -13,6 +13,11 @@ public class DeadPage : Window
     private string[] s2 = new[] { "向上还是向北？" };
     private string[] s3 = new[] { "看到顶点了吗？" };
     [SerializeField] private Text m_txt;
+
+    public void PlayClickAudio()
+    {
+        UIAudioManager.Instance.PlayBtnClickAudio();
+    }
     public void OnClickRestart()
     {
         Debug.LogWarning("OnclickRestart");

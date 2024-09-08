@@ -68,4 +68,9 @@ public class LevelPassPage : Window
         WindowManager.Instance.ResumeTimePause();
         Utils.AddMaskAndLoadScene(transform.parent, "GUIScene");
     }
+    public void PlayClickAudio()
+    {
+        UIAudioManager.Instance.PlayBtnClickAudio();
+    }
+    
 }

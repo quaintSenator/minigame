@@ -10,7 +10,6 @@ public class PausePage : Window
     {
         base.Init();
     }
-
     public void OnClickRestartBtn()
     {
         WindowManager.Instance.ResumeTimePause();
@@ -20,6 +19,11 @@ public class PausePage : Window
     public void OnClickResumeBtn()
     {
         WindowManager.Instance.ResumeGame();
+    }
+
+    public void PlayClickAudio()
+    {
+        UIAudioManager.Instance.PlayBtnClickAudio();
     }
     protected override void onExit()
     {
