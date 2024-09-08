@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{FC59A731-E14A-4464-A59B-A41632CFE679}" SchemaVersion="119">
 	<Modulators>
-		<WorkUnit Name="Default Work Unit" ID="{FC59A731-E14A-4464-A59B-A41632CFE679}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{FC59A731-E14A-4464-A59B-A41632CFE679}" PersistMode="Standalone">
+			<ChildrenList>
+				<ModulatorTime Name="StoryTime" ID="{012B7C37-9742-428F-A223-CEF5C13758B4}" ShortID="541646750">
+					<PropertyList>
+						<Property Name="TimeModDuration" Type="Real64" Value="100"/>
+					</PropertyList>
+				</ModulatorTime>
+			</ChildrenList>
+		</WorkUnit>
 	</Modulators>
 </WwiseDocument>

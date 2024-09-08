@@ -24,12 +24,12 @@ Game Parameter	ID	Name			Wwise Object Path	Notes
 	649089707	MainUIBgm_intialDelay			\UI\MainUIBgm_intialDelay	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	148591536	Mystery	D:\PersonalData\UnityProject\SpiritDash\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\Mystery_33DF4BF8.wem		\Actor-Mixer Hierarchy\UI\UIBackgroudMusic\MainUIBgm\Mystery		3869514
-	239392948	Destination_Unknown_100bpm	D:\PersonalData\UnityProject\SpiritDash\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\Destination_Unknown_100bpm_CE78C22E.wem		\Actor-Mixer Hierarchy\UI\UIBackgroudMusic\MainUIBgm\Destination_Unknown_100bpm		2307851
-	347248024	Level1Music	D:\PersonalData\UnityProject\SpiritDash\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\Dangerous_Love_120bpm_D79AC98A.wem		\Actor-Mixer Hierarchy\UI\UIBackgroudMusic\MusicPlayPage\Level1Music		1456627
-	365486786	PauseUIBgm_160bpm	D:\PersonalData\UnityProject\SpiritDash\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\PauseUIBgm_160bpm_818F3B66.wem		\Actor-Mixer Hierarchy\UI\UIBackgroudMusic\PauseUIBgm_160bpm		353944
-	400767641	PauseUIBgm_120bpm	D:\PersonalData\UnityProject\SpiritDash\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\PauseUIBgm_FBC78EF0.wem		\Actor-Mixer Hierarchy\UI\UIBackgroudMusic\PauseUIBgm_120bpm		353864
-	760915427	Level2Music	D:\PersonalData\UnityProject\SpiritDash\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\Break_CE78C22E.wem		\Actor-Mixer Hierarchy\UI\UIBackgroudMusic\MusicPlayPage\Level2Music		2902714
-	796426103	UI_Click_3	D:\PersonalData\UnityProject\SpiritDash\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\UI_Click_3_0E35BD43.wem		\Actor-Mixer Hierarchy\UI\UIBackgroudMusic\Button\UI_Click_3		95896
-	916479105	Level3Music	D:\PersonalData\UnityProject\SpiritDash\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\Up_withMarker_CE78C22E.wem		\Actor-Mixer Hierarchy\UI\UIBackgroudMusic\MusicPlayPage\Level3Music		2866890
+	148591536	Mystery	E:\WorkRepository\UnityProject\SpiritDash\UnityProject\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\Mystery_33DF4BF8.wem		\Actor-Mixer Hierarchy\UI\UIBackgroudMusic\MainUIBgm\Mystery		3869514
+	239392948	Destination_Unknown_100bpm	E:\WorkRepository\UnityProject\SpiritDash\UnityProject\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\Destination_Unknown_100bpm_CE78C22E.wem		\Actor-Mixer Hierarchy\UI\UIBackgroudMusic\MainUIBgm\Destination_Unknown_100bpm		2307851
+	347248024	Level1Music	E:\WorkRepository\UnityProject\SpiritDash\UnityProject\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\Dangerous_Love_120bpm_D79AC98A.wem		\Actor-Mixer Hierarchy\UI\UIBackgroudMusic\MusicPlayPage\Level1Music		1456627
+	365486786	PauseUIBgm_160bpm	E:\WorkRepository\UnityProject\SpiritDash\UnityProject\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\PauseUIBgm_160bpm_818F3B66.wem		\Actor-Mixer Hierarchy\UI\UIBackgroudMusic\PauseUIBgm_160bpm		353944
+	400767641	PauseUIBgm_120bpm	E:\WorkRepository\UnityProject\SpiritDash\UnityProject\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\PauseUIBgm_FBC78EF0.wem		\Actor-Mixer Hierarchy\UI\UIBackgroudMusic\PauseUIBgm_120bpm		353864
+	760915427	Level2Music	E:\WorkRepository\UnityProject\SpiritDash\UnityProject\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\Break_CE78C22E.wem		\Actor-Mixer Hierarchy\UI\UIBackgroudMusic\MusicPlayPage\Level2Music		2902714
+	796426103	UI_Click_3	E:\WorkRepository\UnityProject\SpiritDash\UnityProject\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\UI_Click_3_0E35BD43.wem		\Actor-Mixer Hierarchy\UI\UIBackgroudMusic\Button\UI_Click_3		95896
+	916479105	Level3Music	E:\WorkRepository\UnityProject\SpiritDash\UnityProject\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\Up_withMarker_CE78C22E.wem		\Actor-Mixer Hierarchy\UI\UIBackgroudMusic\MusicPlayPage\Level3Music		2866890
 

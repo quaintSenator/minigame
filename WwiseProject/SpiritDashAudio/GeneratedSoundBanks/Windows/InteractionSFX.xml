@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="150">
 	<SoundBanks>
-		<SoundBank Id="3060922364" Type="User" Language="SFX" Hash="{DB623E24-B576-50AE-AF3C-13EFCFF5C033}">
+		<SoundBank Id="3060922364" Type="User" Language="SFX" Hash="{066019DE-1938-EEDE-21DB-DE5E7615E5D7}">
 			<ShortName>InteractionSFX</ShortName>
 			<Path>InteractionSFX.bnk</Path>
 			<Media>
@@ -11,7 +11,7 @@
 				</File>
 				<File Id="346481716" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>jump_1.wav</ShortName>
-					<CachePath>SFX/jump_1_818F3B66.wem</CachePath>
+					<CachePath>SFX/jump_1_E92665E2.wem</CachePath>
 				</File>
 				<File Id="398724365" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Attack_1.wav</ShortName>
@@ -28,7 +28,7 @@
 						<MediaRef Id="398724365"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="3833651337" Name="Jump" DurationType="OneShot" DurationMin="1.1493877" DurationMax="1.1493877">
+				<Event Id="3833651337" Name="Jump" DurationType="OneShot" DurationMin="1.0630919" DurationMax="1.0630919">
 					<MediaRefs>
 						<MediaRef Id="346481716"/>
 					</MediaRefs>
@@ -46,5 +46,5 @@
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{EA60E958-5FA2-024B-3C3A-B655E01A96A8}</FileHash>
+	<FileHash>{844A3203-9F86-4C27-9B89-B998F4432E9D}</FileHash>
 </SoundBanksInfo>

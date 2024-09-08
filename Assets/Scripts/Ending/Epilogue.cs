@@ -211,7 +211,7 @@ public class Epilogue : MonoBehaviour
 
     void Step8_ShowEndDialog2()
     {
-        currentDialogIndex = 0;
+        dialogEnd[currentDialogIndex - 1].SetActive(false);
         dialogEnd[currentDialogIndex].SetActive(true);
         currentDialogIndex++;
         //currentDialogIndex = 0;

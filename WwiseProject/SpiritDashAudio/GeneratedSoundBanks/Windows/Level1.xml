@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="150">
 	<SoundBanks>
-		<SoundBank Id="2678230382" Type="User" Language="SFX" Hash="{C350EC77-BF85-8EA4-6DF9-3F5D0766CD86}">
+		<SoundBank Id="2678230382" Type="User" Language="SFX" Hash="{9AC5EDE8-F952-7C6D-7CC0-5323AC25CA3C}">
 			<ShortName>Level1</ShortName>
 			<Path>Level1.bnk</Path>
 			<Media>
+				<File Id="187345950" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>l1_MeetByChance.wav</ShortName>
+					<CachePath>SFX/l1_MeetByChance_57E387F4.wem</CachePath>
+				</File>
 				<File Id="815242365" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Dangerous_Love_120bpm_withMarker.wav</ShortName>
 					<CachePath>SFX/Dangerous_Love_120bpm_withMarker_818F3B66.wem</CachePath>
@@ -12,6 +16,11 @@
 			</Media>
 			<Events>
 				<Event Id="2859270423" Name="Pause_Level1" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="2350025720" Name="Play_l1_MeetByChance" DurationType="OneShot" DurationMin="20.090292" DurationMax="20.090292">
+					<MediaRefs>
+						<MediaRef Id="187345950"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="3659125941" Name="Play_Level1" DurationType="OneShot" DurationMin="94.61698" DurationMax="94.61698">
 					<MediaRefs>
 						<MediaRef Id="815242365"/>
@@ -22,5 +31,5 @@
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{9F69083F-84EE-579E-0898-FE21FF231B4B}</FileHash>
+	<FileHash>{3891C6E6-07A0-893C-29E5-7E52E0E16CCA}</FileHash>
 </SoundBanksInfo>

@@ -6,7 +6,7 @@
 		<SourceFilesRoot>../../.cache/Windows</SourceFilesRoot>
 		<SoundBanksRoot>.</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
-		<ExternalSourcesOutputRoot>E:/WorkRepository/UnityProject/SpiritDash/UnityProject/minigame/Assets/StreamingAssets/Audio/GeneratedSoundBanks/Windows</ExternalSourcesOutputRoot>
+		<ExternalSourcesOutputRoot>../../../../Assets/StreamingAssets/Audio/GeneratedSoundBanks/Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
 	<DefaultAlign>16</DefaultAlign>
 	<Settings>
@@ -28,5 +28,5 @@
 		<PrintObjectGuid>false</PrintObjectGuid>
 		<PrintObjectPath>false</PrintObjectPath>
 	</Settings>
-	<FileHash>{6C21F7CD-D8E9-797F-8C4D-8939F7C9B09E}</FileHash>
+	<FileHash>{9324A92C-6298-E6FE-7B77-04562D39FB54}</FileHash>
 </PlatformInfo>

@@ -62,6 +62,18 @@ MonoBehaviour:
       idInternal: 0
       valueGuidInternal: 
       WwiseObjectReference: {fileID: 11400000, guid: 2c048faf3f7111d46a10955144817e45, type: 2}
+    LevelBeginStoryEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 0}
+    PlayLevelEndStoryEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 0}
+    StopLevelEndStoryEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 0}
     bpm: 100
   - bankName: Level1
     LevelMusicPlayEvent:
@@ -80,6 +92,18 @@ MonoBehaviour:
       idInternal: 0
       valueGuidInternal: 
       WwiseObjectReference: {fileID: 11400000, guid: faa8d6785cc088d49855ff14d273737b, type: 2}
+    LevelBeginStoryEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 2109a5a5ecfccc84e9c623cf90947786, type: 2}
+    PlayLevelEndStoryEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 0}
+    StopLevelEndStoryEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 0}
     bpm: 120
   - bankName: Leve2
     LevelMusicPlayEvent:
@@ -98,6 +122,18 @@ MonoBehaviour:
       idInternal: 0
       valueGuidInternal: 
       WwiseObjectReference: {fileID: 11400000, guid: 081ccdfca94db574f8ce4b1191557cf7, type: 2}
+    LevelBeginStoryEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: b382dfad720d8fe43bcd96f1b8940967, type: 2}
+    PlayLevelEndStoryEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 0}
+    StopLevelEndStoryEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 0}
     bpm: 120
   - bankName: Level3
     LevelMusicPlayEvent:
@@ -116,6 +152,18 @@ MonoBehaviour:
       idInternal: 0
       valueGuidInternal: 
       WwiseObjectReference: {fileID: 11400000, guid: 17660e50be9560847baf7b9606cca897, type: 2}
+    LevelBeginStoryEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: fa831a074aa51e144a4957b15049f298, type: 2}
+    PlayLevelEndStoryEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 4bade8f23a841b644bc3fd2abcb31090, type: 2}
+    StopLevelEndStoryEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 50b40d51c1b157b40970229884882220, type: 2}
     bpm: 160
   LevelIndex: 1
   CallbackType: 4

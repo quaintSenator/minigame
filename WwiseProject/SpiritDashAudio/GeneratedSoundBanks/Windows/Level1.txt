@@ -1,9 +1,14 @@
 Event	ID	Name			Wwise Object Path	Notes
+	2350025720	Play_l1_MeetByChance			\LevelMusic\Level1\Play_l1_MeetByChance	
 	2859270423	Pause_Level1			\LevelMusic\Level1\Pause_Level1	
 	3077303046	StopLevel1			\LevelMusic\Level1\StopLevel1	
 	3265051672	Resume_Level1			\LevelMusic\Level1\Resume_Level1	
 	3659125941	Play_Level1			\LevelMusic\Level1\Play_Level1	
 
+Modulator Time	ID	Name			Wwise Object Path	Notes
+	541646750	StoryTime			\Default Work Unit\StoryTime	
+
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	187345950	l1_MeetByChance	E:\WorkRepository\UnityProject\SpiritDash\UnityProject\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\l1_MeetByChance_57E387F4.wem		\Actor-Mixer Hierarchy\LevelMusic\StoryMusic\l1_MeetByChance		315073
 	815242365	Level1Music	E:\WorkRepository\UnityProject\SpiritDash\UnityProject\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\Dangerous_Love_120bpm_withMarker_818F3B66.wem		\Actor-Mixer Hierarchy\LevelMusic\LevelMusic\Level1Music		18181356
 
