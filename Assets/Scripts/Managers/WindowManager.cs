@@ -86,8 +86,11 @@ public class WindowManager : Singleton<WindowManager>
     {
         foreach (Transform child in _UIRoot.transform)
         {
-            Debug.LogWarning("Deleting..." + child.gameObject.name);
-            Destroy(child.gameObject);
+            if (!child.gameObject.name.Contains("dia_"))
+            {
+                Debug.LogWarning("Deleting..." + child.gameObject.name);
+                Destroy(child.gameObject);
+            }
         }
         _uiStack.Clear();
     }
