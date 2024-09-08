@@ -78,33 +78,46 @@ public class UIAudioManager : Singleton<UIAudioManager>
 
 
     //所有弹窗出来都播这个，弹窗消失播下面这个
-    public void PlayUIPausePageMusic()
+    public void PlayUIPausePageMusic(GameObject in_gameObject = null)
     {
+        GameObject localGameObject = in_gameObject;
+        if (localGameObject == null)
+        {
+            localGameObject = this.gameObject;
+        }
+
         int currentLevelIndex = ProgressManager.Instance.GetCurrentLevelIndex();
         //针对第三关播放的160Bpm的
         if (currentLevelIndex != 3)
         {
-            PlayPausePage120BpmMusicEvent.Post(gameObject);
+            PlayPausePage120BpmMusicEvent.Post(localGameObject);
         }
         else
         {
-            PlayPausePage160BpmMusicEvent.Post(gameObject);
+            PlayPausePage160BpmMusicEvent.Post(localGameObject);
         }
 
 
     }
 
-    public void StopUIPausePageMusic()
+    public void StopUIPausePageMusic(GameObject in_gameObject = null)
     {
+        GameObject localGameObject = in_gameObject;
+        if (localGameObject == null)
+        {
+            localGameObject = this.gameObject;
+        }
+
         int currentLevelIndex = ProgressManager.Instance.GetCurrentLevelIndex();
         //针对第三关播放的160Bpm的
         if (currentLevelIndex != 3)
         {
-            StopPausePage120BpmMusicEvent.Post(gameObject);
+            //StopPausePage120BpmMusicEvent.Stop
+            StopPausePage120BpmMusicEvent.Post(localGameObject);
         }
         else
         {
-            StopPausePage160BpmMusicEvent.Post(gameObject);
+            StopPausePage160BpmMusicEvent.Post(localGameObject);
         }
     }
 

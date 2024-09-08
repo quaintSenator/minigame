@@ -295,12 +295,13 @@ public class MusicManager : Singleton<MusicManager>
     {
 
         //May be add more audio play state check ,but seem no necessary
-/*        GameAudioEventData localGameAudioEventData = gameAudioEventData as GameAudioEventData;
-        if (localGameAudioEventData == null)
-        {
-            Debug.LogWarning("invoke PlayLevelMusic wrongly");
-            return;
-        }*/
+        /*        GameAudioEventData localGameAudioEventData = gameAudioEventData as GameAudioEventData;
+                if (localGameAudioEventData == null)
+                {
+                    Debug.LogWarning("invoke PlayLevelMusic wrongly");
+                    return;
+                }*/
+        UIAudioManager.Instance.StopUIPausePageMusic();
         StopLevelMusic();
         PlayLevelMusic();
 
@@ -328,12 +329,14 @@ public class MusicManager : Singleton<MusicManager>
     {
         //TODO: add more sound to make this process more interesting
         PauseLevelMusic();
+        UIAudioManager.Instance.PlayUIPausePageMusic();
     }
 
     private void OnGameResumeEvent(EventData gameAudioEventData = null)
     {
         //TODO: add more sound to make this process more interesting
         ResumeLevelMusic();
+        UIAudioManager.Instance.StopUIPausePageMusic();
     }
 
 
