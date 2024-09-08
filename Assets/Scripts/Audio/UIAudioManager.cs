@@ -48,7 +48,7 @@ public class UIAudioManager : Singleton<UIAudioManager>
     //开始UI背景音乐
     public void PlayMainUIMusic()
     {
-        if(!isPlayMainUIMusic)
+        if(isPlayMainUIMusic)
         {
             return;
         }
