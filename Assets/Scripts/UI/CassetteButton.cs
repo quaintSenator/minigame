@@ -31,6 +31,7 @@ public class CassetteButton : MonoBehaviour
     public void OnSwitch(EventData eventData)
     {
         var clickedLevelNum = ((SwitchLevelEventData)eventData).switchingIntoLevel;
+        //选关复用
         if (gameObject.name.Contains(clickedLevelNum.ToString()))//我被点了吗
         {
             //后台的
@@ -38,6 +39,7 @@ public class CassetteButton : MonoBehaviour
             m_img.color = meLocked ? Color.gray : Color.white;
             m_lockIcon.SetActive(meLocked && m_id == RotatingCassettes.GetMidCassetteId());
         }
+        
     }
     public void OnCassetteClick()
     {
@@ -69,6 +71,7 @@ public class CassetteButton : MonoBehaviour
     public void EnterLevel(int i)
     {
         var sceneName = "Level_" + i;
+        UIAudioManager.Instance.StopMainUIMusic();
         Utils.AddMaskAndLoadScene(transform.parent, sceneName);
     }
 }

@@ -13,7 +13,8 @@ public enum WindowType
     PausePage,
     DeadPage,
     TipPage,
-    LevelPassPage
+    LevelPassPage,
+    MusicPlayPage
 }
 
 
@@ -55,6 +56,7 @@ public class WindowManager : Singleton<WindowManager>
         _type2ResourceFileNameDict[WindowType.DeadPage] = "DeadPage";
         _type2ResourceFileNameDict[WindowType.TipPage] = "TipPage";
         _type2ResourceFileNameDict[WindowType.LevelPassPage] = "LevelPassPage";
+        _type2ResourceFileNameDict[WindowType.MusicPlayPage] = "MusicPage";
         
         DragItemName2ID = new Dictionary<string, int>();
         DragItemName2ID.Add("drag_slide_totalVol_item", 0);
@@ -225,7 +227,12 @@ public class WindowManager : Singleton<WindowManager>
         
         if (_uiStack.Count > 0)
         {
-            _uiStack.Peek().SetActive(false);
+            var lastPage = _uiStack.Peek();
+            if (lastPage.gameObject.name.Contains("mainPage"))
+            {
+                _uiStack.Peek().SetActive(false);//如果从主界面前来，跳转到music页面，需要延续背景音乐播放状态
+            }
+            
         }
         _uiStack.Push(generatedObjectRef);
         if (generatedObjectRef.name.Contains("Select"))
@@ -414,5 +421,10 @@ public class WindowManager : Singleton<WindowManager>
         PlayerPrefs.SetFloat("effectVol", Vols[0]);
         PlayerPrefs.SetFloat("musicVol", Vols[1]);
         PlayerPrefs.SetFloat("totalVol", Vols[2]);
+    }
+
+    public void Go2MusicPage()
+    {
+        InitWindow(WindowType.MusicPlayPage, _UIRoot);
     }
 }

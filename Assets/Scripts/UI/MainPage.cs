@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,10 +11,17 @@ public class MainPage : Window
         base.onExit();
         Debug.Log("MainPage.onExit was called");
     }
+    
+    public void OnEnable()
+    {
+        UIAudioManager.Instance.PlayMainUIMusic();
+        //isPlayingMusic = true;
+    }
 
     public void Go2MusicPage()
     {
         //跳转音乐界面
+        WindowManager.Instance.Go2MusicPage();
     }
     public void ClearProgress()
     {

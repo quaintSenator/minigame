@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +21,8 @@ public class RotatingCassettes : MonoBehaviour
     [SerializeField] private Button _rightScrollBtn;
     [SerializeField] private Button _leftScrollBtn;
     [SerializeField] private Transform[] points;
-
+    [SerializeField] private List<string> musicNames;
+    [SerializeField] private Text musicName;
     void Start()
     {
         currentMiddleCassette = 1;
@@ -49,6 +51,22 @@ public class RotatingCassettes : MonoBehaviour
         m_Animator = gameObject.GetComponent<Animator>();
         m_Animator.enabled = false;
         UpdateSelectingPoints(currentMiddleCassette);
+        
+        
+    }
+
+    public void OnEnable()
+    {
+        musicNames = new List<string>();
+        musicNames.Add("Lovely Road");
+        musicNames.Add("Breakthrough");
+        musicNames.Add("Up");
+        if (gameObject.name.Contains("MusicPlay"))
+        {
+            Debug.Log("UI asks play: " + 1);
+            musicName.text = musicNames[0];
+            UIAudioManager.Instance.PlayOrStopLevelMusicByBtn(1);
+        }
     }
 
     public static int GetMidCassetteId()
@@ -120,6 +138,12 @@ public class RotatingCassettes : MonoBehaviour
         lockScrollAndCassetteClick(currentMiddleCassette);
         m_Animator.Play(anim2Play);
         UpdateSelectingPoints(currentMiddleCassette);
+        if (gameObject.name.Contains("MusicPlay"))
+        {
+            Debug.Log("UI asks play: " + currentMiddleCassette);
+            UIAudioManager.Instance.PlayOrStopLevelMusicByBtn(currentMiddleCassette);
+            musicName.text = musicNames[currentMiddleCassette - 1];
+        }
     }
     public void OnLeftScroll()
     {
@@ -154,6 +178,12 @@ public class RotatingCassettes : MonoBehaviour
         lockScrollAndCassetteClick(currentMiddleCassette);
         m_Animator.Play(anim2Play);
         UpdateSelectingPoints(currentMiddleCassette);
+        if (gameObject.name.Contains("MusicPlay"))
+        {
+            Debug.Log("UI asks play: " + currentMiddleCassette);
+            UIAudioManager.Instance.PlayOrStopLevelMusicByBtn(currentMiddleCassette);
+            musicName.text = musicNames[currentMiddleCassette - 1];
+        }
     }
     private void UpdateSelectingPoints(int c)
     {
