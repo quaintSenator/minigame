@@ -22,10 +22,10 @@
 						<Value Platform="Windows">E:\WorkRepository\UnityProject\SpiritDash\UnityProject\minigame\Assets\StreamingAssets\Audio\GeneratedSoundBanks\Windows</Value>
 					</ValueList>
 				</Property>
-				<Property Name="GenerateMultipleBanks" Type="bool" Value="True"/>
+				<Property Name="GenerateMainSoundBank" Type="bool" Value="False"/>
 				<Property Name="MediaAutoBankSubFolders" Type="bool" Value="True"/>
+				<Property Name="SoundBankGenerateDefinitionFile" Type="bool" Value="False"/>
 				<Property Name="SoundBankGenerateEstimatedDuration" Type="bool" Value="True"/>
-				<Property Name="SoundBankGenerateHeaderFile" Type="bool" Value="True"/>
 				<Property Name="SoundBankHeaderFilePath" Type="string" Value="..\..\Assets\StreamingAssets\Audio\GeneratedSoundBanks"/>
 				<Property Name="SoundBankPaths" Type="string">
 					<ValueList>
