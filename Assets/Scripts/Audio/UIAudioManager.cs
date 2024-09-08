@@ -37,6 +37,8 @@ public class UIAudioManager : Singleton<UIAudioManager>
 
     private bool bShouldPlayFadeMainUIMusic = true;
 
+    private bool ifManualEnd = false;
+
     #region 外部音乐接口
 
     //播放按钮点击音效
@@ -141,7 +143,7 @@ public class UIAudioManager : Singleton<UIAudioManager>
 
     public void PlayOrStopLevelMusicByBtn(int levelMusicIndex)
     {
-        AkCallbackType CallbackType = AkCallbackType.AK_EndOfEvent;
+        AkCallbackType CallbackType = AkCallbackType.AK_EndOfEvent; //AkCallbackType.
         if (levelMusicIndex <= 0 || levelMusicIndex > LevelMusicEvents.Count)
         {
             Debug.LogError("Wrong Level Index");
@@ -150,17 +152,20 @@ public class UIAudioManager : Singleton<UIAudioManager>
 
         if (isPlayingLevelMusicBtn && levelMusicIndex == lastPlayLevelMusicIndex)
         {
-
+            ifManualEnd = true;
             LevelMusicEvents[lastPlayLevelMusicIndex].LevelMusicStopEvent.Post(gameObject);
+
             lastPlayLevelMusicIndex = -1;
             bShouldPlayFadeMainUIMusic = true;
-            PlayMainUIMusic();
             isPlayingLevelMusicBtn = false;
+            PlayMainUIMusic();
+
 
         }
         //if (isPlayingLevelMusicBtn && levelMusicIndex == lastPlayLevelMusicIndex)
         else if (isPlayingLevelMusicBtn)
         {
+            ifManualEnd = true;
             LevelMusicEvents[lastPlayLevelMusicIndex].LevelMusicStopEvent.Post(gameObject);
             LevelMusicEvents[levelMusicIndex].LevelMusicPlayEvent.Post(gameObject, (uint)CallbackType, CallbackFunctionEndEvent);
             lastPlayLevelMusicIndex = levelMusicIndex;
@@ -254,11 +259,18 @@ public class UIAudioManager : Singleton<UIAudioManager>
                 lastPlayLevelMusicIndex = -1;
                 isPlayingLevelMusicBtn = false;
                 PlayMainUIMusic();*/
-
+        if (!ifManualEnd)
+        {
+            ifManualEnd = true;
+            return;
+        }
         LevelMusicEvents[lastPlayLevelMusicIndex].LevelMusicStopEvent.Post(gameObject);
         lastPlayLevelMusicIndex = -1;
         bShouldPlayFadeMainUIMusic = true;
-        PlayMainUIMusic();
         isPlayingLevelMusicBtn = false;
+        PlayMainUIMusic();
+        ifManualEnd = true;
+        //ifManualEnd = true;
+
     }
 }
