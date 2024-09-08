@@ -49,8 +49,18 @@ namespace UnityEngine.PostProcessing
         DitheringComponent m_Dithering;
         FxaaComponent m_Fxaa;
 
+        #region Added by yeniao for dynamic modify postprocess
+        public void SetBloomThreshold(float inThreshold)
+        {
+            m_Bloom.SetModelThreshold(inThreshold);
+        }    
+        #endregion
+
+
         void OnEnable()
         {
+
+            //profile.bloomThreshold =
             m_CommandBuffers = new Dictionary<Type, KeyValuePair<CameraEvent, CommandBuffer>>();
             m_MaterialFactory = new MaterialFactory();
             m_RenderTextureFactory = new RenderTextureFactory();

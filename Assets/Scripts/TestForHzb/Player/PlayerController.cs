@@ -254,7 +254,7 @@ public class PlayerController : MonoBehaviour
         EventManager.AddListener(EventType.PlayerPassRegisterResetPointEvent, OnPlayerPassRegisterResetPoint);
 		
 		EventManager.AddListener(EventType.EndPassLevelEvent, OnEndPassLevelEvent);
-		EventManager.AddListener(EventType.EpilogueEvent, OnEpilogueEvent);
+		EventManager.AddListener(EventType.StartEpilogueEvent, OnStartEpilogueEvent);
         EventManager.AddListener(EventType.ChangeDirectionEvent, OnChangeDirectionEvent);
 
     }
@@ -273,8 +273,9 @@ public class PlayerController : MonoBehaviour
         EventManager.RemoveListener(EventType.PlayerPassRegisterResetPointEvent, OnPlayerPassRegisterResetPoint);
 		
 		EventManager.RemoveListener(EventType.EndPassLevelEvent, OnEndPassLevelEvent);
-		
-		EventManager.RemoveListener(EventType.EpilogueEvent, OnEpilogueEvent);
+        EventManager.RemoveListener(EventType.StartEpilogueEvent, OnStartEpilogueEvent);
+
+        //EventManager.RemoveListener(EventType.EpilogueEvent, OnEpilogueEvent);
     }
     private void Start()
     {
@@ -1193,7 +1194,7 @@ public class PlayerController : MonoBehaviour
 	}
 	
 	
-	private void OnEpilogueEvent(EventData eventData)
+	private void OnStartEpilogueEvent(EventData eventData)
 	{
 		SetIfCanMove(false);
 	}

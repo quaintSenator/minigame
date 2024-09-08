@@ -1,3 +1,5 @@
+using static UnityEngine.PostProcessing.BloomModel;
+
 namespace UnityEngine.PostProcessing
 {
     public sealed class BloomComponent : PostProcessingComponentRenderTexture<BloomModel>
@@ -139,5 +141,24 @@ namespace UnityEngine.PostProcessing
                 uberMaterial.EnableKeyword("BLOOM");
             }
         }
+
+        public void SetModelThreshold(float inThreshold)
+        {
+            model.settings = BloomModel.Settings.defaultSettings;
+
+            BloomModel.BloomSettings newBloomSettings = model.settings.bloom;
+            newBloomSettings.threshold = inThreshold;
+
+            BloomModel.LensDirtSettings newLensDirtSettings = model.settings.lensDirt;
+
+            BloomModel.Settings newSetting= new BloomModel.Settings();
+            newSetting.lensDirt= newLensDirtSettings; ;
+            newSetting.bloom= newBloomSettings;
+
+            model.settings= newSetting;
+        }
     }
+
+
+
 }

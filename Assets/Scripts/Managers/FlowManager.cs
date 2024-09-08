@@ -83,6 +83,8 @@ public class FlowManager : Singleton<FlowManager>
         EventManager.AddListener(EventType.EndRespawnEvent, OnEndRespawnEvent);
 		
 		EventManager.AddListener(EventType.StartPassLevelEvent, OnStartPassLevelEvent);
+        EventManager.AddListener(EventType.EndEpilogueEvent, OnEndEpilogueEvent);
+
 
         EventManager.AddListener(EventType.EndLoadMapEvent, OnLoadMap);
 
@@ -100,6 +102,7 @@ public class FlowManager : Singleton<FlowManager>
         EventManager.RemoveListener(EventType.EndRespawnEvent, OnEndRespawnEvent);
 		
 		EventManager.RemoveListener(EventType.StartPassLevelEvent, OnStartPassLevelEvent);
+        EventManager.AddListener(EventType.EndEpilogueEvent, OnEndEpilogueEvent);
 
         EventManager.RemoveListener(EventType.EndLoadMapEvent, OnLoadMap);
 
@@ -201,7 +204,7 @@ public class FlowManager : Singleton<FlowManager>
 		
 		if(ProgressManager.Instance.GetCurrentLevelIndex()==endLevelIndex)
 		{
-			EventManager.InvokeEvent(EventType.EpilogueEvent);
+			EventManager.InvokeEvent(EventType.StartEpilogueEvent);
 		}
 		else
 		{
@@ -209,6 +212,12 @@ public class FlowManager : Singleton<FlowManager>
 		}
 		
 	}
+
+
+    private void OnEndEpilogueEvent(EventData eventData)
+    {
+        EventManager.InvokeEvent(EventType.EndPassLevelEvent);
+    }
 
     private void OnLoadMap(EventData data)
     {
