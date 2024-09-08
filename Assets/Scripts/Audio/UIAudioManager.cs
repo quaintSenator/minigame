@@ -33,6 +33,8 @@ public class UIAudioManager : Singleton<UIAudioManager>
     private int lastPlayLevelMusicIndex = -1;
     private bool isPlayingLevelMusicBtn = false;
 
+    private bool isPlayMainUIMusic = false;
+
     #region 外部音乐接口
 
     //播放按钮点击音效
@@ -46,15 +48,19 @@ public class UIAudioManager : Singleton<UIAudioManager>
     //开始UI背景音乐
     public void PlayMainUIMusic()
     {
+        if(!isPlayMainUIMusic)
+        {
+            return;
+        }
         if (isPlayingLevelMusicBtn)
         {
             MainUIMusicFadePlayEvent.Post(gameObject);
         }
-        else
+        else 
         {
             MainUIMusicPlayEvent.Post(gameObject);
         }
-
+        isPlayMainUIMusic = true;
 
 
     }
@@ -63,6 +69,7 @@ public class UIAudioManager : Singleton<UIAudioManager>
     public void StopMainUIMusic()
     {
         MainUIMusicStopEvent.Post(gameObject);
+        isPlayMainUIMusic = false;
     }
 
 
