@@ -26,13 +26,19 @@ public class LevelPassPage : Window
     }
     public void OnClickRestartBtn()
     {
+        UIAudioManager.Instance.StopUIPausePageMusic();
+
         //在过关页面场景下，必须改出强停止
         WindowManager.Instance.ResumeGame();
         WindowManager.Instance.ClipUIRoot2Empty();
         EventManager.InvokeEvent(EventType.StartLevelEvent);
+
+
     }
     public void OnClickNextLevelBtn()
     {
+        UIAudioManager.Instance.StopUIPausePageMusic();
+
         WindowManager.Instance.ResumeTimePause();
         var currentSceneName = SceneManager.GetActiveScene().name;
         if (currentSceneName.Contains("Level_1"))
@@ -60,6 +66,7 @@ public class LevelPassPage : Window
     }
     protected override void onExit()
     {
+        UIAudioManager.Instance.StopUIPausePageMusic();
         base.onExit();
         //退出需回到选关界面
         //注意，此时依然需要从暂停中改出
