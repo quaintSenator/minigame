@@ -71,11 +71,15 @@ public class BossStoryController : MonoBehaviour
         bossDialog = bubbleBoss.Find("Text").GetComponent<Text>();
         bgDialog = canvasTrans.Find("StoryCanvas").Find("bg_dialog").GetComponent<Text>();
     }
-
-    // Start is called before the first frame update
-    void Start()
+    
+    
+    private void Start()
     {
-        //ResetTextPos();
+        Debug.Log("ProgressManager.Instance.GetDialogShow(3, 1): " + ProgressManager.Instance.GetDialogShow(3, 1));
+        if (ProgressManager.Instance.GetDialogShow(3, 0))
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame
