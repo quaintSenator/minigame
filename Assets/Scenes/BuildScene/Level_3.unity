@@ -567,7 +567,7 @@ GameObject:
   - component: {fileID: 360633001}
   - component: {fileID: 360633000}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: dia_mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -617,8 +617,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dbdce0d97ab4bd468c552ca5dfd0499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mask: {fileID: 360633002}
-  alphaCutoff: 0
 --- !u!114 &360633002
 MonoBehaviour:
   m_ObjectHideFlags: 0
