@@ -116,6 +116,7 @@ public class WindowManager : Singleton<WindowManager>
                 InitWindow(WindowType.PausePage, _UIRoot);
                 //游戏暂停
                 EventManager.InvokeEvent(EventType.GamePauseEvent);
+                UIAudioManager.Instance.PlayUIPausePageMusic();
                 Time.timeScale = 0;
             }
         }
@@ -182,6 +183,7 @@ public class WindowManager : Singleton<WindowManager>
             EventManager.InvokeEvent( EventType.GameResumeEvent, null);
             //关闭暂停页面
             var pausePage = _uiStack.Peek().gameObject;
+            UIAudioManager.Instance.StopUIPausePageMusic();
             _uiStack.Pop();
             Destroy(pausePage);
             return;
