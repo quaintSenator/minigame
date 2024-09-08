@@ -35,6 +35,8 @@ public class UIAudioManager : Singleton<UIAudioManager>
 
     private bool isPlayMainUIMusic = false;
 
+    private bool bShouldPlayFadeMainUIMusic = true;
+
     #region 外部音乐接口
 
     //播放按钮点击音效
@@ -48,11 +50,11 @@ public class UIAudioManager : Singleton<UIAudioManager>
     //开始UI背景音乐
     public void PlayMainUIMusic()
     {
-        if(isPlayMainUIMusic)
+        if (isPlayMainUIMusic || isPlayingLevelMusicBtn)
         {
             return;
         }
-        if (isPlayingLevelMusicBtn)
+        if (bShouldPlayFadeMainUIMusic)
         {
             MainUIMusicFadePlayEvent.Post(gameObject);
         }
@@ -151,8 +153,10 @@ public class UIAudioManager : Singleton<UIAudioManager>
 
             LevelMusicEvents[lastPlayLevelMusicIndex].LevelMusicStopEvent.Post(gameObject);
             lastPlayLevelMusicIndex = -1;
-            isPlayingLevelMusicBtn = false;
+            bShouldPlayFadeMainUIMusic = true;
             PlayMainUIMusic();
+            isPlayingLevelMusicBtn = false;
+
         }
         //if (isPlayingLevelMusicBtn && levelMusicIndex == lastPlayLevelMusicIndex)
         else if (isPlayingLevelMusicBtn)
@@ -246,9 +250,15 @@ public class UIAudioManager : Singleton<UIAudioManager>
 
     private void CallbackFunctionEndEvent(object InCookies, AkCallbackType InCallbackType, object InInfo)
     {
+        /*        LevelMusicEvents[lastPlayLevelMusicIndex].LevelMusicStopEvent.Post(gameObject);
+                lastPlayLevelMusicIndex = -1;
+                isPlayingLevelMusicBtn = false;
+                PlayMainUIMusic();*/
+
         LevelMusicEvents[lastPlayLevelMusicIndex].LevelMusicStopEvent.Post(gameObject);
         lastPlayLevelMusicIndex = -1;
-        isPlayingLevelMusicBtn = false;
+        bShouldPlayFadeMainUIMusic = true;
         PlayMainUIMusic();
+        isPlayingLevelMusicBtn = false;
     }
 }
