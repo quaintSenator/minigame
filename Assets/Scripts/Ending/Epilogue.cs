@@ -81,7 +81,8 @@ public class Epilogue : MonoBehaviour
         step.Add(Step6_EnableMask);
         step.Add(Step7_ShowEndDialog1);
         step.Add(Step8_ShowEndDialog2);
-        step.Add(Step9_EndEpilogue);
+        step.Add(Step9_ShowEndDialog3);
+        step.Add(Step10_EndEpilogue);
     }
 
     // Update is called once per frame
@@ -210,12 +211,20 @@ public class Epilogue : MonoBehaviour
 
     void Step8_ShowEndDialog2()
     {
+        currentDialogIndex = 0;
+        dialogEnd[currentDialogIndex].SetActive(true);
+        currentDialogIndex++;
+        //currentDialogIndex = 0;
+    }
+
+    void Step9_ShowEndDialog3()
+    {
         dialogEnd[currentDialogIndex - 1].SetActive(false);
         dialogEnd[currentDialogIndex].SetActive(true);
         //currentDialogIndex = 0;
     }
 
-    void Step9_EndEpilogue()
+    void Step10_EndEpilogue()
     {
         dialogEnd[currentDialogIndex].SetActive(false);
         EventManager.InvokeEvent(EventType.EndEpilogueEvent);
