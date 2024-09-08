@@ -4,7 +4,7 @@ Shader "Unlit/BackgroundColorSwitchShader"
     {
         _MainTex ("Texture", 2D) = "white" {}
         _Stage("Stage", Int) = 2
-        _StartTime("StartTime", Float) = 999
+        _StartTime("StartTime", Float) = 0
         _OnceChangeTime("OnceChangeTime", Float) = 3.0
     }
     SubShader
@@ -67,10 +67,10 @@ Shader "Unlit/BackgroundColorSwitchShader"
             }
             float get_switch_col_sharp_return(float percent, float y1, float y2)
             {
-                float b = -y1;
-                float a = y2 + y1;
+                float b = 2 - y1;
+                float a = y2 + y1 - 2;
                 float res = a * percent + b;
-                res = step(res, 0) * (-res) + step(0, res) * res; 
+                res = step(res, 1) * res + step(1, res) * (2 - res); 
                 return res;
             }
             float4 get_switch_col(float percent, float4 y1, float4 y2)
