@@ -20,7 +20,11 @@ public class MainPage : Window
         //重置进度按钮
         ProgressManager.Instance.DeletePlayerPrefsData();
     }
-    
+
+    public void PlayClickAudio()
+    {
+        UIAudioManager.Instance.PlayBtnClickAudio();
+    }
     public void Go2UGCScene()
     {
         Utils.AddMaskAndLoadScene(transform, "TilemapEditorScene");

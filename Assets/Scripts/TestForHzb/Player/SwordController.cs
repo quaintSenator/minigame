@@ -69,7 +69,10 @@ public class SwordController : MonoBehaviour
         if(other.gameObject.CompareTag("Enemy"))
         {
             enemy = other.GetComponent<EnemyController>();
-            enemy.TakeAttack(damage);
+            if(enemy != null)
+            {
+                enemy.TakeAttack(damage);
+            }
         }
     }
 
