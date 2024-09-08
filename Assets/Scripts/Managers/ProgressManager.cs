@@ -7,7 +7,7 @@ using UnityEngine;
 public class ProgressManager : Singleton<ProgressManager>
 {
     private List<int> levelMusicMaxTimeList;
-    private List<LevelProgressData> levelProgressDataList;
+    public List<LevelProgressData> levelProgressDataList;
     private Dictionary<int, LevelProgressData> levelProgressDataDic;
 
     //储存台词触发点个数，初始化ProgressData中的List用, 0用来占位
@@ -159,6 +159,12 @@ public class ProgressManager : Singleton<ProgressManager>
         {
             InitLevelData(levelIndex);
         }
+
+        for(int i = levelProgressDataDic[levelIndex].dialogsShows.Count; i <= dialogIndex; i++)
+        {
+            levelProgressDataDic[levelIndex].dialogsShows.Add(false);
+        }
+        
         levelProgressDataDic[levelIndex].dialogsShows[dialogIndex] = isShown;
         levelProgressDataList.Find(data => data.levelIndex == levelIndex).dialogsShows[dialogIndex] = isShown;
         SaveLevelData();
@@ -237,7 +243,12 @@ public class ProgressManager : Singleton<ProgressManager>
         {
             InitLevelData(levelIndex);
         }
-        return levelProgressDataDic[levelIndex].dialogsShows[dialogIndex];        
+
+        if (levelProgressDataDic[levelIndex].dialogsShows.Count <= dialogIndex)
+        {
+            return false;
+        }
+        return levelProgressDataDic[levelIndex].dialogsShows[dialogIndex];
     }
 
     private void SaveLevelData()
@@ -258,6 +269,15 @@ public class ProgressManager : Singleton<ProgressManager>
     public int GetCurrentLevelIndex()
     {
         return this.currentLevelIndex;
+    }
+
+    [Button]
+    public void GetdialogNums()
+    {
+        foreach (var VARIABLE in dialogNums)
+        {
+            Debug.Log($"GetdialogNums + {VARIABLE}");
+        }
     }
     #endregion
 }
