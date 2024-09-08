@@ -26,7 +26,7 @@ public class DialogManager : Singleton<DialogManager>
 
     private List<List<int>> resetListIndex =new List<List<int>>{  //神必数字，简单的重置解决办法
         new List<int>{0,0,0,0,0,0},
-        new List<int>{0,1,1,2,2,2},
+        new List<int>{0,0,1,1,2,2},
         new List<int>{0,0,0,0,0},
     };
 
@@ -74,7 +74,7 @@ public class DialogManager : Singleton<DialogManager>
     {
         Debug.Log("LevelIndex"+levelIndex);
         Debug.Log("listIndex"+listIndex);
-        bool hasShown = ProgressManager.Instance.GetDialogShow(levelIndex, listIndex+1);
+        bool hasShown = ProgressManager.Instance.GetDialogShow(levelIndex, listIndex + 1);
         if(hasShown){
             listIndex++;
             return;
