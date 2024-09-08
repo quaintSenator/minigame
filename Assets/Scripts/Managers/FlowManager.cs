@@ -37,6 +37,9 @@ public class FlowManager : Singleton<FlowManager>
 	//终章关卡序号
 	private int endLevelIndex=3;
 
+    //关卡序号
+    private int levelIndex = 1;
+
     //EnterGameEvent
     //StartStoryEvent
     //EndStoryEvent
@@ -81,6 +84,8 @@ public class FlowManager : Singleton<FlowManager>
 		
 		EventManager.AddListener(EventType.StartPassLevelEvent, OnStartPassLevelEvent);
 
+        EventManager.AddListener(EventType.EndLoadMapEvent, OnLoadMap);
+
     }
 
     private void UnregisterEvents()
@@ -96,6 +101,8 @@ public class FlowManager : Singleton<FlowManager>
 		
 		EventManager.RemoveListener(EventType.StartPassLevelEvent, OnStartPassLevelEvent);
 
+        EventManager.RemoveListener(EventType.EndLoadMapEvent, OnLoadMap);
+
     }
 
     private void InitFlowSetting()
@@ -109,7 +116,9 @@ public class FlowManager : Singleton<FlowManager>
         //额外信息：是否是第一次打开关卡
         if(ProgressManager.Instance != null)
         {
-            ifFirstEnterLevel = true;//TODO
+            bool hasShown = ProgressManager.Instance.GetDialogShow(levelIndex, 0);
+            //ifFirstEnterLevel = true;//TODO
+            ifFirstEnterLevel = !hasShown;
         }
 
         shouldPlayStory = ifFirstEnterLevel;
@@ -137,6 +146,7 @@ public class FlowManager : Singleton<FlowManager>
 
     private void OnEndStoryEvent(EventData eventData)
     {
+        ProgressManager.Instance.UpdateDialogShow(levelIndex, 0, true);
         EventManager.InvokeEvent(EventType.StartLevelEvent);
     }
 
@@ -199,6 +209,12 @@ public class FlowManager : Singleton<FlowManager>
 		}
 		
 	}
+
+    private void OnLoadMap(EventData data)
+    {
+        var mapData = data as LoadMapDataEvent;
+        levelIndex = mapData.index;
+    }
 
 
 
