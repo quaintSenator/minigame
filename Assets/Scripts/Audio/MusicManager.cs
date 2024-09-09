@@ -99,6 +99,11 @@ struct LevelMusic
     public AK.Wwise.Event LevelMusicStopEvent;
     public AK.Wwise.Event LevelMusicPauseEvent;
     public AK.Wwise.Event LevelMusicResumeEvent;
+
+    public AK.Wwise.Event LevelBeginStoryEvent;
+
+    public AK.Wwise.Event PlayLevelEndStoryEvent;
+    public AK.Wwise.Event StopLevelEndStoryEvent;
     public float bpm;
 }
 
@@ -246,6 +251,12 @@ public class MusicManager : Singleton<MusicManager>
         EventManager.AddListener(EventType.GameResumeEvent, OnGameResumeEvent);
 
         EventManager.AddListener(EventType.PlayerDeadStoryEvent, OnPlayerDeadStoryEvent);
+
+        EventManager.AddListener(EventType.StartStoryEvent, OnStartStoryEvent);
+
+        EventManager.AddListener(EventType.StartEpilogueEvent, OnStartEpilogueEvent);
+        EventManager.AddListener(EventType.EndEpilogueEvent, OnEndEpilogueEvent);
+        //StartStoryEvent
         /*        EventManager.AddListener(EventType.GameStartForAudioEvent, OnGameStartForAudio);
 
                 EventManager.AddListener(EventType.GameRestartEvent, OnGameRestartForAudio);*/
@@ -260,6 +271,11 @@ public class MusicManager : Singleton<MusicManager>
         EventManager.RemoveListener(EventType.GamePauseEvent, OnGamePauseEvent);
         EventManager.RemoveListener(EventType.GameResumeEvent, OnGameResumeEvent);
         EventManager.RemoveListener(EventType.PlayerDeadStoryEvent, OnPlayerDeadStoryEvent);
+
+        EventManager.RemoveListener(EventType.StartStoryEvent, OnStartStoryEvent);
+
+        EventManager.RemoveListener(EventType.StartEpilogueEvent, OnStartEpilogueEvent);
+        EventManager.AddListener(EventType.EndEpilogueEvent, OnEndEpilogueEvent);
     }
 
     private void GetPlayerControllerSpeed()
@@ -301,10 +317,13 @@ public class MusicManager : Singleton<MusicManager>
                     Debug.LogWarning("invoke PlayLevelMusic wrongly");
                     return;
                 }*/
-        UIAudioManager.Instance.StopUIPausePageMusic();
+
         StopLevelMusic();
         PlayLevelMusic();
-
+        if (UIAudioManager.Instance != null)
+        {
+            UIAudioManager.Instance.StopUIPausePageMusic();
+        }
     }
 
     private void OnRestartLevelEvent(EventData gameAudioEventData = null)
@@ -325,18 +344,42 @@ public class MusicManager : Singleton<MusicManager>
         SeekLevelMusicByTimeMS(SeekTimeInMS);
     }
 
+
+    private void OnStartStoryEvent(EventData gameAudioEventData = null)
+    {
+        PlayLevelBeginStoryEvent();
+    }
+
+    private void OnStartEpilogueEvent(EventData gameAudioEventData = null)
+    {
+        StopLevelMusic();
+        PlayLevelEndStoryEvent();
+    }
+
+    private void OnEndEpilogueEvent(EventData gameAudioEventData = null)
+    {
+        StopLevelEndStoryEvent();
+    }
+
     private void OnGamePauseEvent(EventData gameAudioEventData = null)
     {
         //TODO: add more sound to make this process more interesting
         PauseLevelMusic();
-        UIAudioManager.Instance.PlayUIPausePageMusic();
+        if(UIAudioManager.Instance !=null)
+        {
+            UIAudioManager.Instance.PlayUIPausePageMusic();
+        }
+
     }
 
     private void OnGameResumeEvent(EventData gameAudioEventData = null)
     {
         //TODO: add more sound to make this process more interesting
         ResumeLevelMusic();
-        UIAudioManager.Instance.StopUIPausePageMusic();
+        if (UIAudioManager.Instance != null)
+        {
+            UIAudioManager.Instance.StopUIPausePageMusic();
+        }
     }
 
 
@@ -561,6 +604,40 @@ public class MusicManager : Singleton<MusicManager>
     }
 
 
+    public void PlayLevelBeginStoryEvent()
+    {
+
+        if (!(LevelIndex < LevelMusicEvents.Count))
+        {
+            Debug.LogWarning("The LevelIndex out of length of LevelMusicPlayEvent or LevelMusicPlayEvent");
+            return;
+        }
+
+         LevelMusicEvents[LevelIndex].LevelBeginStoryEvent.Post(gameObject);
+
+
+    }
+    public void PlayLevelEndStoryEvent()
+    {
+
+        if (!(LevelIndex < LevelMusicEvents.Count))
+        {
+            Debug.LogWarning("The LevelIndex out of length of LevelMusicPlayEvent or LevelMusicPlayEvent");
+            return;
+        }
+
+        LevelMusicEvents[LevelIndex].PlayLevelEndStoryEvent.Post(gameObject);
+
+
+    }
+
+    public void StopLevelEndStoryEvent()
+    {
+        LevelMusicEvents[LevelIndex].StopLevelEndStoryEvent.Post(gameObject);
+    }
+
+
+
     public void PlayLevelMusic()
     {
         
@@ -583,6 +660,8 @@ public class MusicManager : Singleton<MusicManager>
         }
 
     }
+
+
 
     public void StopLevelMusic()
     {

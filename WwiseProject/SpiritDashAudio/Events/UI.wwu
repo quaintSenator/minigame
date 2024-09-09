@@ -22,7 +22,7 @@
 						<Action Name="" ID="{5F94DE72-8F67-41FC-9258-8C20B46BB103}" ShortID="1000975073">
 							<PropertyList>
 								<Property Name="FadeInCurve" Type="int16" Value="2"/>
-								<Property Name="FadeTime" Type="Real64" Value="2"/>
+								<Property Name="FadeTime" Type="Real64" Value="6"/>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
@@ -91,7 +91,8 @@
 					<ChildrenList>
 						<Action Name="" ID="{7F73795B-1C73-463A-9388-9DBC851C3902}" ShortID="218856829">
 							<PropertyList>
-								<Property Name="FadeTime" Type="Real64" Value="1.5"/>
+								<Property Name="FadeInCurve" Type="int16" Value="2"/>
+								<Property Name="FadeTime" Type="Real64" Value="4.5"/>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">

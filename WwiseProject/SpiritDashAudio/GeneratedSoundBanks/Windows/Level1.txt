@@ -1,9 +1,0 @@
-Event	ID	Name			Wwise Object Path	Notes
-	2859270423	Pause_Level1			\LevelMusic\Level1\Pause_Level1	
-	3077303046	StopLevel1			\LevelMusic\Level1\StopLevel1	
-	3265051672	Resume_Level1			\LevelMusic\Level1\Resume_Level1	
-	3659125941	Play_Level1			\LevelMusic\Level1\Play_Level1	
-
-In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	815242365	Level1Music	E:\WorkRepository\UnityProject\SpiritDash\UnityProject\minigame\WwiseProject\SpiritDashAudio\.cache\Windows\SFX\Dangerous_Love_120bpm_withMarker_818F3B66.wem		\Actor-Mixer Hierarchy\LevelMusic\LevelMusic\Level1Music		18181356
-

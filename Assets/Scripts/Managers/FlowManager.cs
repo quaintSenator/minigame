@@ -102,7 +102,7 @@ public class FlowManager : Singleton<FlowManager>
         EventManager.RemoveListener(EventType.EndRespawnEvent, OnEndRespawnEvent);
 		
 		EventManager.RemoveListener(EventType.StartPassLevelEvent, OnStartPassLevelEvent);
-        EventManager.AddListener(EventType.EndEpilogueEvent, OnEndEpilogueEvent);
+        EventManager.RemoveListener(EventType.EndEpilogueEvent, OnEndEpilogueEvent);
 
         EventManager.RemoveListener(EventType.EndLoadMapEvent, OnLoadMap);
 
@@ -112,7 +112,7 @@ public class FlowManager : Singleton<FlowManager>
     {
         //TODO: now seem nothing will init here
     }
-
+    //private bool debug = true;
     private void StartFlow()
     {
         //TODO：从其他地方获取到额外信息
@@ -128,7 +128,7 @@ public class FlowManager : Singleton<FlowManager>
         shouldPlayStory |= (!ifFirstEnterLevel && ifFirstEnterLevel);
 
 
-        if (shouldPlayStory && !debugSkipStoryEvent)
+        if (shouldPlayStory && !debugSkipStoryEvent) //|| debug)
         {
             EventManager.InvokeEvent(EventType.StartStoryEvent);
             return;

@@ -27,7 +27,10 @@ public class PausePage : Window
     }
     protected override void onExit()
     {
-        UIAudioManager.Instance.StopUIPausePageMusic();
+        if (UIAudioManager.Instance != null)
+        {
+            UIAudioManager.Instance.StopUIPausePageMusic();
+        }
         base.onExit();
 
         //在暂停页面，退出需回到选关界面 注意，此时依然需要从暂停中改出

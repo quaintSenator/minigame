@@ -8,7 +8,7 @@ using Sirenix.OdinInspector;
 
 public class UIAudioManager : Singleton<UIAudioManager>
 {
-    public string UIBankName = "";
+    public string UIBankName = "UI";
     public AK.Wwise.Event MainUIMusicPlayEvent = null;
     public AK.Wwise.Event MainUIMusicFadePlayEvent = null;
     public AK.Wwise.Event MainUIMusicStopEvent = null;
@@ -38,6 +38,8 @@ public class UIAudioManager : Singleton<UIAudioManager>
     private bool bShouldPlayFadeMainUIMusic = true;
 
     private bool ifManualEnd = false;
+
+    private bool hasLoadBank = false;
 
     #region 外部音乐接口
 
@@ -80,6 +82,16 @@ public class UIAudioManager : Singleton<UIAudioManager>
     //所有弹窗出来都播这个，弹窗消失播下面这个
     public void PlayUIPausePageMusic(GameObject in_gameObject = null)
     {
+        if(!hasLoadBank)
+        {
+            return;
+        }
+        if (PlayPausePage120BpmMusicEvent == null || PlayPausePage160BpmMusicEvent == null)
+        {
+            return;
+        }
+
+
         GameObject localGameObject = in_gameObject;
         if (localGameObject == null)
         {
@@ -102,6 +114,15 @@ public class UIAudioManager : Singleton<UIAudioManager>
 
     public void StopUIPausePageMusic(GameObject in_gameObject = null)
     {
+
+        if (!hasLoadBank )
+        {
+            return;
+        }
+        if(StopPausePage120BpmMusicEvent == null || StopPausePage160BpmMusicEvent ==null)
+        {
+            return;
+        }
         GameObject localGameObject = in_gameObject;
         if (localGameObject == null)
         {
@@ -263,6 +284,7 @@ public class UIAudioManager : Singleton<UIAudioManager>
     private void LoadUIBank()
     {
         AkBankManager.LoadBank(UIBankName, false, false);
+        hasLoadBank = true;
     }
 
 

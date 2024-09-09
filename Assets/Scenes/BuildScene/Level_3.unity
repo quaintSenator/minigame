@@ -678,16 +678,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayingEpligue: 0
   durationTime:
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
+  - 3.33
+  - 3.33
+  - 3.33
+  - 3.33
+  - 3.33
+  - 3.33
   - 15
   - 4
   - 4
   - 4
+  - 8
   - 2
   durationMaskTime: 2
   mask: {fileID: 1741646292}
