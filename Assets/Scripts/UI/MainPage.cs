@@ -14,10 +14,15 @@ public class MainPage : Window
     
     public void OnEnable()
     {
-        UIAudioManager.Instance.PlayMainUIMusic();
+        //UIAudioManager.Instance.PlayMainUIMusic();
         //isPlayingMusic = true;
     }
 
+
+    private void Start()
+    {
+        UIAudioManager.Instance.PlayMainUIMusic();
+    }
     public void Go2MusicPage()
     {
         //跳转音乐界面
