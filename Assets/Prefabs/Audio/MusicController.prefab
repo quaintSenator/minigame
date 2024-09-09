@@ -66,6 +66,18 @@ MonoBehaviour:
       idInternal: 0
       valueGuidInternal: 
       WwiseObjectReference: {fileID: 0}
+    StopLevelBeginStoryEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 0}
+    PauseLevelBeginStoryEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 0}
+    ResumeLevelBeginStoryEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 0}
     PlayLevelEndStoryEvent:
       idInternal: 0
       valueGuidInternal: 
@@ -96,6 +108,18 @@ MonoBehaviour:
       idInternal: 0
       valueGuidInternal: 
       WwiseObjectReference: {fileID: 11400000, guid: 2109a5a5ecfccc84e9c623cf90947786, type: 2}
+    StopLevelBeginStoryEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 254e119f269d75a4f8aeb90665cece06, type: 2}
+    PauseLevelBeginStoryEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 5e7a003a07e636b4ea25404fe85721d2, type: 2}
+    ResumeLevelBeginStoryEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: b0095446b60cff94fb661a6c3951ed68, type: 2}
     PlayLevelEndStoryEvent:
       idInternal: 0
       valueGuidInternal: 
@@ -126,6 +150,18 @@ MonoBehaviour:
       idInternal: 0
       valueGuidInternal: 
       WwiseObjectReference: {fileID: 11400000, guid: b382dfad720d8fe43bcd96f1b8940967, type: 2}
+    StopLevelBeginStoryEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 6160f9b33dc981a40baac025a6d7f4bd, type: 2}
+    PauseLevelBeginStoryEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: caf7dddadb0a0274ca150c5968fb9302, type: 2}
+    ResumeLevelBeginStoryEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 31765a598d92705408fde9366eb4042c, type: 2}
     PlayLevelEndStoryEvent:
       idInternal: 0
       valueGuidInternal: 
@@ -156,6 +192,18 @@ MonoBehaviour:
       idInternal: 0
       valueGuidInternal: 
       WwiseObjectReference: {fileID: 11400000, guid: fa831a074aa51e144a4957b15049f298, type: 2}
+    StopLevelBeginStoryEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: abeec2525be595b4f9f80edf06c5ddb2, type: 2}
+    PauseLevelBeginStoryEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 4b124b5220b55874ea2c8d3deaab00a6, type: 2}
+    ResumeLevelBeginStoryEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: e61342ac807380f4c88a3d29144090da, type: 2}
     PlayLevelEndStoryEvent:
       idInternal: 0
       valueGuidInternal: 

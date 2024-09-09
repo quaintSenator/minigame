@@ -73,6 +73,48 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="Pause_l1_MeetByChance" ID="{C367248D-BC0F-4DC4-9CCD-C6CF57879170}">
+							<ChildrenList>
+								<Action Name="" ID="{9C4EA9AD-DF9A-42BD-9565-DF3E1EF70D12}" ShortID="551200104">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="7"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="l1_MeetByChance" ID="{BABFD41F-2658-41C3-9635-D99F1B408A47}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Resume_l1_MeetByChance" ID="{2EA609E9-179C-4E3C-8616-3F674657727F}">
+							<ChildrenList>
+								<Action Name="" ID="{0EFB0856-3A0F-4EBA-8F73-F74F04622753}" ShortID="84975186">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="9"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="l1_MeetByChance" ID="{BABFD41F-2658-41C3-9635-D99F1B408A47}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Stop_l1_MeetByChance" ID="{57C95A36-14C0-4ABC-88ED-31AD4CC208A1}">
+							<ChildrenList>
+								<Action Name="" ID="{183F7B4D-5E5C-476E-8CF5-B9A7A42B14F4}" ShortID="547270481">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="l1_MeetByChance" ID="{BABFD41F-2658-41C3-9635-D99F1B408A47}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Level2" ID="{F3B23B97-DF34-4459-9E6C-A80009C4473D}" ShortID="755561510">
@@ -137,6 +179,48 @@
 						<Event Name="Play_l2_Fly" ID="{599C7BAF-BA54-4A0D-ACE3-30DAF9BB0F97}">
 							<ChildrenList>
 								<Action Name="" ID="{FA1E8369-E170-4263-9BDC-11F2EAD1C126}" ShortID="832612941">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="l2_Fly" ID="{9B7A02C7-9F88-474B-8278-3574F4E07988}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Pause_l2_Fly" ID="{8DC88ADC-3C3E-48E7-AE89-5EBEC7A00C48}">
+							<ChildrenList>
+								<Action Name="" ID="{D2E3E71F-D1D4-4B6A-892B-7F3C02125387}" ShortID="216753659">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="7"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="l2_Fly" ID="{9B7A02C7-9F88-474B-8278-3574F4E07988}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Resume_l2_Fly" ID="{7D4B79DF-4481-4C1B-9F44-839202EEC005}">
+							<ChildrenList>
+								<Action Name="" ID="{BA90EFFE-E800-4F89-9043-7476A1BC2732}" ShortID="838776149">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="9"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="l2_Fly" ID="{9B7A02C7-9F88-474B-8278-3574F4E07988}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Stop_l2_Fly" ID="{258817E3-F952-488A-A854-FC301FEACC0D}">
+							<ChildrenList>
+								<Action Name="" ID="{BDC8BF36-FB71-4A62-9AFC-55133B02F641}" ShortID="31742649">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="l2_Fly" ID="{9B7A02C7-9F88-474B-8278-3574F4E07988}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
@@ -243,6 +327,90 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="l3_end_newLife" ID="{EBF2FFD6-B08D-4B5A-A1CA-FD1CD329958B}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Pause_l3_end_newLife" ID="{04D367F6-FA63-4347-939C-4FBD8A6F7886}">
+							<ChildrenList>
+								<Action Name="" ID="{16177CEF-ED6E-4A3F-AE0A-6A287093FC9D}" ShortID="590508470">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="7"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="l3_end_newLife" ID="{EBF2FFD6-B08D-4B5A-A1CA-FD1CD329958B}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Pause_l3_start_Truth" ID="{2F4E1C9B-3B0F-429E-B9D4-04EF4FF15052}">
+							<ChildrenList>
+								<Action Name="" ID="{344F1645-DE4C-480F-92E5-573C7ADD63EF}" ShortID="279952737">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="7"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="l3_start_Truth" ID="{E7DE09E4-EA1C-4860-925F-FD217A08F207}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Resume_l3_end_newLife" ID="{E2C7F952-2307-4870-8096-F493B8E74304}">
+							<ChildrenList>
+								<Action Name="" ID="{B39FEFF3-B430-46D8-8BCC-9A91189CABCD}" ShortID="757919332">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="9"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="l3_end_newLife" ID="{EBF2FFD6-B08D-4B5A-A1CA-FD1CD329958B}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Resume_l3_start_Truth" ID="{CD1F3C01-BC70-4776-A403-1145662DD538}">
+							<ChildrenList>
+								<Action Name="" ID="{8E0F248A-66F0-433F-948E-8C1D42687506}" ShortID="227241607">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="9"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="l3_start_Truth" ID="{E7DE09E4-EA1C-4860-925F-FD217A08F207}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Stop_l3_end_newLife_01" ID="{F7D77D24-1190-4832-86C4-0381FFCD84B0}">
+							<ChildrenList>
+								<Action Name="" ID="{5C51A537-DDDD-48D2-9FC2-B3BA750DDAA1}" ShortID="639600749">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="l3_end_newLife" ID="{EBF2FFD6-B08D-4B5A-A1CA-FD1CD329958B}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Stop_l3_start_Truth" ID="{446032E2-BB66-4A46-9B0A-4D5DCEBF91EE}">
+							<ChildrenList>
+								<Action Name="" ID="{B949FFB7-71AF-4ED4-9459-C98CC53C25EE}" ShortID="986093492">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="l3_start_Truth" ID="{E7DE09E4-EA1C-4860-925F-FD217A08F207}" WorkUnitID="{903956BF-E21B-4AD0-9468-94FE93B583E3}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
