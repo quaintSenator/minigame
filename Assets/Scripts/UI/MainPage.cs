@@ -35,6 +35,7 @@ public class MainPage : Window
     }
     public void Go2UGCScene()
     {
+        UIAudioManager.Instance.StopMainUIMusic();
         Utils.AddMaskAndLoadScene(transform, "TilemapEditorScene");
     }
 }
