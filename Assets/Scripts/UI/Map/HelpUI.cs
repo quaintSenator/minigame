@@ -24,6 +24,7 @@ public class HelpUI : MonoBehaviour
         bgMask.GetComponent<Button>().onClick.AddListener(OnBgMaskClick);
         
         tutorialImage.sprite = tutorialSprites[currentTutorialIndex];
+        InHelpUI = false;
     }
 
     private void OnBgMaskClick()

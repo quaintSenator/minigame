@@ -15,6 +15,7 @@ public class MapEditorSaveAndLoadUI : MonoBehaviour
     private void Awake()
     {
         saveAndLoadButton.onClick.AddListener(OnSaveAndLoadButtonClick);
+        InSaveAndLoadUI = false;
     }
 
     private void Update()
